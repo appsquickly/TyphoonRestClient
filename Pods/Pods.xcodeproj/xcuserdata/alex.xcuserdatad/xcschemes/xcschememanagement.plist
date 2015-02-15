@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>Pods-HttpWebService-AFNetworking.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-HttpWebService.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-HttpWebServiceTests-ZZAutoDescription.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-HttpWebServiceTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>800B68DED0D342E2976051F7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BCC2EBC9929943659D61D58A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D18892E8793F4FF3B60B2B6B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EBECC1CFBD5F4C488A9D0B6E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

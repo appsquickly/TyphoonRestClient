@@ -1,0 +1,24 @@
+{
+    "order":
+    {
+        "id": "NSString",
+        "created_at": "NSDate",
+        "currency": "NSString",
+        "display_order": 0,
+        "suitable_packing_materials": [
+            "NSString"
+        ],
+        "products": [
+            {
+                "id": "NSString",
+                "price": "NSNumber",
+                "image_url": "NSURL",
+                "description": "NSString",
+                "size": "NSString",
+                "color": "NSString",
+                "brand": "NSString",
+                "display_order": 0
+            }
+        ]
+    }
+}

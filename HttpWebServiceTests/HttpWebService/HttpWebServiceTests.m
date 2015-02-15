@@ -1,0 +1,559 @@
+//
+//  HttpWebServiceTests.m
+//  Iconic
+//
+//  Created by Aleksey Garbarev on 20.09.14.
+//  Copyright (c) 2014 Code Monastery. All rights reserved.
+//
+
+#import <XCTest/XCTest.h>
+#import "HttpWebService.h"
+#import "HttpWebServiceConnectionStub.h"
+#import "HttpRequestSpy.h"
+#import "HttpResponseErrorParserSpy.h"
+#import "HWSSchema.h"
+#import "HWSUtils.h"
+#import "HWSValueConverter.h"
+#import <objc/runtime.h>
+#import "NSObject+AutoDescription.h"
+
+@interface NumberToStringConverter : NSObject <HWSValueConverter>
+
+@end
+
+@implementation NumberToStringConverter
+
+- (id)objectFromResponseValue:(id)value error:(NSError **)error
+{
+    return [NSString stringWithFormat:@"%@",value];
+}
+
+
+- (id)requestValueFromObject:(id)object error:(NSError **)error
+{
+    return object;
+}
+
+- (HWSValueConverterType)types
+{
+    return HWSValueConverterTypeNumber;
+}
+
+@end
+
+@interface HWSSchema (TestApi)
+
+- (instancetype)initWithSchemeObject:(id)object name:(NSString *)name;
+
+@end
+
+@interface HttpWebService(TestApi)
+
+- (id)parseResponse:(id)response withRequest:(id<HWSRequest>)request schema:(HWSSchema *)scheme error:(NSError **)parseError;
+
+- (NSDictionary *)convertValuesDictionary:(NSDictionary *)dataDict withSchemeObject:(id)schemeObject error:(NSError **)error;
+- (NSArray *)convertValuesInArray:(NSArray *)dataArray withSchemeItem:(HWSSchema *)scheme error:(NSError **)error;
+
+@end
+
+@interface HttpWebServiceTests : XCTestCase
+
+@end
+
+@implementation HttpWebServiceTests {
+    HttpWebService *webService;
+    HttpWebServiceConnectionStub *connectionStub;
+}
+
+id(*originalImp)(id, SEL, NSString *);
+
++ (void)load
+{
+    Method m1 = class_getClassMethod([self class], @selector(schemaWithName:));
+    Method m2 = class_getClassMethod([HWSSchema class], @selector(schemaWithName:));
+    originalImp = (id(*)(id, SEL, NSString *))method_getImplementation(m2);
+    method_exchangeImplementations(m1, m2);
+}
+
+
+- (void)setUp
+{
+    [super setUp];
+    webService = [[HttpWebService alloc] init];
+    [webService registerValueConverter:[NumberToStringConverter new] forTag:@"number-as-string"];
+    connectionStub = [[HttpWebServiceConnectionStub alloc] init];
+    webService.connection = connectionStub;
+
+}
+
+- (void)tearDown
+{
+    [super tearDown];
+//    extern void __gcov_flush(void);
+//    __gcov_flush();
+}
+
++ (id)schemaWithName:(NSString *)name
+{
+    if ([name isEqualToString:@"ErrorSchema"]) {
+        return [[HWSSchema alloc] initWithSchemeObject:@{@"code": @1, @"message": @"", @"reason_url?": @"NSURL"} name:name];
+    }
+    if ([name isEqualToString:@"SimpleDictionary"]) {
+        return [[HWSSchema alloc] initWithSchemeObject:@{
+                @"number": @1,
+                @"string": @"NSString",
+                @"url?": @"NSURL"
+        } name:name];
+    }
+    if ([name isEqualToString:@"SimpleRequest"]) {
+        return [[HWSSchema alloc] initWithSchemeObject:@{
+                @"key": @"NSURL",
+        } name:name];
+    }
+    if ([name isEqualToString:@"SimpleArray"]) {
+        return [[HWSSchema alloc] initWithSchemeObject:@[
+                @"NSURL",
+        ] name:name];
+    }
+    if ([name isEqualToString:@"ArrayOfObjects"]) {
+        return [[HWSSchema alloc] initWithSchemeObject:@[@{
+                @"number" : @1,
+                @"string" : @"NSString",
+                @"url?" : @"NSURL"
+        }] name:name];
+    }
+    if ([name isEqualToString:@"ArrayOfArray"]) {
+        return [[HWSSchema alloc] initWithSchemeObject:@[@[@"number-as-string"]] name:name];
+    }
+
+    return originalImp(self, _cmd, name);
+}
+
+- (void)test_plain_dictionary_request
+{
+    [connectionStub setResponseObject:@{ @"key": @"value" } responseError:nil];
+    
+    HttpRequestSpy *request = [HttpRequestSpy new];
+    request.parseResult = @"result";
+
+    [webService sendRequest:request completion:^(id result, NSError *error) {
+        XCTAssertTrue(request.parseResponseObjectCalled);
+        XCTAssertEqualObjects(result, @"result");
+        XCTAssertNil(error, @"Error: %@", error.localizedDescription);
+    }];
+}
+
+- (void)test_plain_dictionary_request_with_request_schema
+{
+    [connectionStub setResponseObject:@{ @"key": @"value" } responseError:nil];
+
+    HttpRequestSpy *request = [HttpRequestSpy new];
+    request.requestSchemeName = @"SimpleRequest";
+    request.requestParams = @{ @"key": @"123"};
+    request.parseResult = @"result";
+
+    [webService sendRequest:request completion:^(id result, NSError *error) {
+        XCTAssertTrue(request.parseResponseObjectCalled);
+        XCTAssertEqualObjects(result, @"result");
+        XCTAssertNil(error, @"Error: %@", error.localizedDescription);
+    }];
+}
+
+- (void)test_plain_dictionary_request_with_request_schema_convert_error
+{
+    [connectionStub setResponseObject:@{ @"key": @"value" } responseError:nil];
+
+    HttpRequestSpy *request = [HttpRequestSpy new];
+    request.requestSchemeName = @"SimpleRequest";
+    request.requestParams = @{ @"key": @123};
+    request.parseResult = @"result";
+
+    [webService sendRequest:request completion:^(id result, NSError *error) {
+        NSLog(@"** %@",error.localizedDescription);
+        XCTAssertNotNil(error, @"Error: %@", error.localizedDescription);
+    }];
+}
+
+- (void)test_plain_dictionary_request_with_request_schema_error
+{
+    [connectionStub setResponseObject:@{ @"key": @"value" } responseError:nil];
+
+    HttpRequestSpy *request = [HttpRequestSpy new];
+    request.requestSchemeName = @"SimpleRequest";
+    request.requestParams = @{ @"key2": @123};
+    request.parseResult = @"result";
+
+    [webService sendRequest:request completion:^(id result, NSError *error) {
+        NSLog(@"** %@",error.localizedDescription);
+        XCTAssertNotNil(error, @"Error: %@", error.localizedDescription);
+    }];
+}
+
+- (void)test_plain_dictionary_request_with_error
+{
+    [connectionStub setResponseObject:@{ @"key": @"value" } responseError:nil];
+    
+    HttpRequestSpy *request = [HttpRequestSpy new];
+    request.parseResult = @"result";
+    request.parseError = [NSError errorWithDomain:@"" code:0 userInfo:@{NSLocalizedDescriptionKey:@"123"}];
+    
+
+    [webService sendRequest:request completion:^(id result, NSError *error) {
+        XCTAssertTrue(request.parseResponseObjectCalled);
+        XCTAssertNil(result);
+        XCTAssertNotNil(error, @"Error: %@", error.localizedDescription);
+        XCTAssertEqualObjects(error.localizedDescription, @"123");
+    }];
+}
+
+- (void)test_plain_dictionary_request_with_network_error
+{
+    NSError *networkError = [[NSError alloc] initWithDomain:@"" code:0 userInfo:@{ NSLocalizedDescriptionKey: @"Network Error!"}];
+
+    [connectionStub setResponseObject:@{ @"key": @"value" } responseError:networkError];
+
+    HttpRequestSpy *request = [HttpRequestSpy new];
+    request.parseResult = @"result";
+
+    [webService sendRequest:request completion:^(id result, NSError *error) {
+        XCTAssertFalse(request.parseResponseObjectCalled);
+        XCTAssertNil(result);
+        XCTAssertNotNil(error);
+        XCTAssertEqualObjects(error.localizedDescription, @"Network Error!");
+    }];
+}
+
+- (void)test_plain_dictionary_request_with_network_error_parse
+{
+    NSError *parsedNetworkError = [[NSError alloc] initWithDomain:@"" code:0 userInfo:@{NSLocalizedDescriptionKey: @"Parsed network error"}];
+
+    HttpResponseErrorParserSpy *errorParserSpy = [HttpResponseErrorParserSpy new];
+    errorParserSpy.parsedError = parsedNetworkError;
+
+    NSError *networkError = [[NSError alloc] initWithDomain:@"" code:0 userInfo:@{ NSLocalizedDescriptionKey: @"Network Error!"}];
+
+    [connectionStub setResponseObject:@{ @"message": @"Unknown error happens" } responseError:networkError];
+
+    webService.errorParser = errorParserSpy;
+
+    HttpRequestSpy *request = [HttpRequestSpy new];
+    request.parseResult = @"result";
+
+    [webService sendRequest:request completion:^(id result, NSError *error) {
+        XCTAssertFalse(request.parseResponseObjectCalled);
+        XCTAssertNil(result);
+        XCTAssertNotNil(error);
+        XCTAssertEqualObjects(error.localizedDescription, @"Parsed network error");
+    }];
+}
+
+- (void)test_plain_dictionary_request_with_network_error_parse_with_error
+{
+    NSError *parsedNetworkError = [[NSError alloc] initWithDomain:@"" code:0 userInfo:@{NSLocalizedDescriptionKey: @"Parsing error"}];
+
+    HttpResponseErrorParserSpy *errorParserSpy = [HttpResponseErrorParserSpy new];
+    errorParserSpy.errorParsingError = parsedNetworkError;
+
+    NSError *networkError = [[NSError alloc] initWithDomain:@"" code:0 userInfo:@{ NSLocalizedDescriptionKey: @"Network Error!"}];
+
+    [connectionStub setResponseObject:@{ @"message": @"Unknown error happens" } responseError:networkError];
+
+    webService.errorParser = errorParserSpy;
+
+    HttpRequestSpy *request = [HttpRequestSpy new];
+    request.parseResult = @"result";
+
+    [webService sendRequest:request completion:^(id result, NSError *error) {
+        XCTAssertFalse(request.parseResponseObjectCalled);
+        XCTAssertNil(result);
+        XCTAssertNotNil(error);
+        XCTAssertEqualObjects(error.localizedDescription, @"Network Error!");
+    }];
+}
+
+- (void)test_plain_dictionary_request_with_network_error_parse_with_schema_error
+{
+
+    HttpResponseErrorParserSpy *errorParserSpy = [HttpResponseErrorParserSpy new];
+    errorParserSpy.schemaName = @"ErrorSchema";
+
+    NSError *networkError = [[NSError alloc] initWithDomain:@"" code:0 userInfo:@{ NSLocalizedDescriptionKey: @"Network Error!"}];
+
+    [connectionStub setResponseObject:@{ @"code": @"string", @"message": @"Unknown error happens" } responseError:networkError];
+
+    webService.errorParser = errorParserSpy;
+
+    HttpRequestSpy *request = [HttpRequestSpy new];
+    request.parseResult = @"result";
+
+    [webService sendRequest:request completion:^(id result, NSError *error) {
+        XCTAssertFalse(request.parseResponseObjectCalled);
+        XCTAssertNil(result);
+        XCTAssertNotNil(error);
+        XCTAssertEqualObjects(error.localizedDescription, @"Network Error!");
+    }];
+}
+
+- (void)test_plain_dictionary_request_with_network_error_parse_with_schema_success
+{
+
+    HttpResponseErrorParserSpy *errorParserSpy = [HttpResponseErrorParserSpy new];
+    errorParserSpy.schemaName = @"ErrorSchema";
+
+    NSError *networkError = [[NSError alloc] initWithDomain:@"" code:0 userInfo:@{ NSLocalizedDescriptionKey: @"Network Error!"}];
+
+    [connectionStub setResponseObject:@{ @"code": @123, @"message": @"Unknown error happens", @"reason_url": @"http://google.com/"} responseError:networkError];
+
+    webService.errorParser = errorParserSpy;
+
+    HttpRequestSpy *request = [HttpRequestSpy new];
+    request.parseResult = @"result";
+
+    [webService sendRequest:request completion:^(id result, NSError *error) {
+        XCTAssertFalse(request.parseResponseObjectCalled);
+        XCTAssertNil(result);
+        XCTAssertNotNil(error);
+        XCTAssertEqualObjects(error.localizedDescription, @"Unknown error happens");
+        XCTAssertEqualObjects(error.userInfo[@"url"], [[NSURL alloc] initWithString:@"http://google.com/"]);
+    }];
+}
+
+- (void)test_nsobject_pass_though
+{
+    [connectionStub setResponseObject:[NSObject new] responseError:nil];
+
+    HttpRequestSpy *request = [HttpRequestSpy new];
+    request.parseObjectImplemented = NO;
+
+    [webService sendRequest:request completion:^(id result, NSError *error) {
+        XCTAssertFalse(request.parseResponseObjectCalled);
+        XCTAssertNil(error);
+        XCTAssertTrue([result isMemberOfClass:[NSObject class]]);
+    }];
+}
+
+- (void)test_dictionary_with_scheme_and_parsing
+{
+    HttpRequestSpy *request = [HttpRequestSpy new];
+    request.responseSchemeName = @"SimpleDictionary";
+
+    [connectionStub setResponseObject:@{ @"number": @2, @"string": @"123", @"url": @"http://google.com"} responseError:nil];
+
+    request.parseResult = [NSObject new];
+
+    [webService sendRequest:request completion:^(id result, NSError *error) {
+        XCTAssertTrue(request.parseResponseObjectCalled);
+        XCTAssertTrue([result isMemberOfClass:[NSObject class]]);
+        XCTAssertNil(error);
+    }];
+}
+
+- (void)test_dictionary_with_scheme_and_validation_error
+{
+    HttpRequestSpy *request = [HttpRequestSpy new];
+    request.responseSchemeName = @"SimpleDictionary";
+
+    [connectionStub setResponseObject:@{ @"number": @"string_value", @"string": @"123", @"url": @"http://google.com"} responseError:nil];
+
+    request.parseResult = [NSObject new];
+
+    [webService sendRequest:request completion:^(id result, NSError *error) {
+        XCTAssertFalse(request.parseResponseObjectCalled);
+        XCTAssertNil(result);
+        XCTAssertNotNil(error);
+        XCTAssertTrue([error.localizedDescription hasPrefix:@"Validation error"]);
+    }];
+}
+
+- (void)test_dictionary_with_scheme_and_converting
+{
+    HttpRequestSpy *request = [HttpRequestSpy new];
+    request.responseSchemeName = @"SimpleDictionary";
+
+    [connectionStub setResponseObject:@{ @"number": @1, @"string": @"123", @"url": @"http://google.com"} responseError:nil];
+
+    request.parseResult = [NSObject new];
+    request.parseObjectImplemented = NO;
+
+    [webService sendRequest:request completion:^(id result, NSError *error) {
+        XCTAssertFalse(request.parseResponseObjectCalled);
+        XCTAssertNil(error);
+        NSDictionary *expect = @{ @"number": @1, @"string": @"123", @"url": [[NSURL alloc] initWithString:@"http://google.com"]};
+        XCTAssertEqualObjects(result, expect);
+    }];
+}
+
+- (void)test_dictionary_with_scheme_and_converting_error
+{
+    HttpRequestSpy *request = [HttpRequestSpy new];
+    request.responseSchemeName = @"SimpleDictionary";
+
+    [connectionStub setResponseObject:@{ @"number": @1, @"string": @"123", @"url": @"not an url at all.\n"} responseError:nil];
+
+    request.parseResult = [NSObject new];
+    request.parseObjectImplemented = NO;
+
+    [webService sendRequest:request completion:^(id result, NSError *error) {
+        XCTAssertFalse(request.parseResponseObjectCalled);
+        XCTAssertNil(result);
+        XCTAssertNotNil(error);
+    }];
+}
+
+- (void)test_dictionary_without_scheme_and_converting_error
+{
+    HttpRequestSpy *request = [HttpRequestSpy new];
+
+    [connectionStub setResponseObject:@{ @"number": @1, @"string": @"123", @"url": @"http://google.com"} responseError:nil];
+
+    request.parseResult = [NSObject new];
+    request.parseObjectImplemented = NO;
+
+    [webService sendRequest:request completion:^(id result, NSError *error) {
+        XCTAssertFalse(request.parseResponseObjectCalled);
+        XCTAssertNil(error);
+        NSDictionary *expect = @{ @"number": @1, @"string": @"123", @"url": @"http://google.com"};
+        XCTAssertEqualObjects(result, expect);
+    }];
+}
+
+- (void)test_array_without_scheme_and_parsing
+{
+    HttpRequestSpy *request = [HttpRequestSpy new];
+
+    [connectionStub setResponseObject:@[ @{@"number":@1, @"string":@"2", @"url": @"3"} ] responseError:nil];
+
+    request.parseResult = [NSObject new];
+
+    [webService sendRequest:request completion:^(id result, NSError *error) {
+        XCTAssertTrue(request.parseResponseObjectCalled);
+        XCTAssertNil(error);
+        XCTAssertTrue([result isMemberOfClass:[NSObject class]]);
+    }];
+}
+
+- (void)test_array_without_scheme_and_converting
+{
+    HttpRequestSpy *request = [HttpRequestSpy new];
+
+    [connectionStub setResponseObject:@[ @{@"number":@1, @"string":@"2", @"url": @"3"} ] responseError:nil];
+
+    request.parseResult = [NSObject new];
+
+    request.parseObjectImplemented = NO;
+
+    [webService sendRequest:request completion:^(id result, NSError *error) {
+        XCTAssertFalse(request.parseResponseObjectCalled);
+        XCTAssertNil(error);
+        NSArray *expect = @[@{@"number":@1, @"string":@"2", @"url": @"3"}];
+        XCTAssertEqualObjects(expect, result);
+    }];
+}
+
+- (void)test_array_without_scheme_and_parsing_error
+{
+    HttpRequestSpy *request = [HttpRequestSpy new];
+
+    [connectionStub setResponseObject:@[ @{@"number":@1, @"string":@"2", @"url": @"3"} ] responseError:nil];
+
+    request.parseResult = [NSObject new];
+    NSError *parseError = [NSError new];
+    request.parseError = parseError;
+
+    [webService sendRequest:request completion:^(id result, NSError *error) {
+        XCTAssertTrue(request.parseResponseObjectCalled);
+        XCTAssertEqualObjects(error, parseError);
+        XCTAssertTrue(result == nil);
+    }];
+}
+
+- (void)test_array_without_scheme_and_without_parsing
+{
+    HttpRequestSpy *request = [HttpRequestSpy new];
+
+    [connectionStub setResponseObject:@[ @1, @2, @3] responseError:nil];
+
+    request.parseObjectImplemented = NO;
+
+    [webService sendRequest:request completion:^(id result, NSError *error) {
+        XCTAssertFalse(request.parseResponseObjectCalled);
+        XCTAssertNil(error);
+        NSArray *expected = @[ @1, @2, @3];
+        XCTAssertEqualObjects(expected, result);
+    }];
+}
+
+- (void)test_array_with_scheme_and_converting
+{
+    HttpRequestSpy *request = [HttpRequestSpy new];
+
+    [connectionStub setResponseObject:@[ @{@"number":@1, @"string":@"2", @"url": @"3"} ] responseError:nil];
+
+    request.parseResult = [NSObject new];
+    request.responseSchemeName = @"ArrayOfObjects";
+    request.parseObjectImplemented = NO;
+
+    [webService sendRequest:request completion:^(id result, NSError *error) {
+        XCTAssertFalse(request.parseResponseObjectCalled);
+        XCTAssertNil(error);
+        NSArray *expect = @[@{@"number":@1, @"string":@"2", @"url": [[NSURL alloc] initWithString:@"3"]}];
+        XCTAssertEqualObjects(expect, result);
+        NSLog(@"expect: %@", [expect autoDescription]);
+        NSLog(@"got: %@", [result autoDescription]);
+    }];
+}
+
+- (void)test_array_with_scheme_2_and_converting
+{
+    HttpRequestSpy *request = [HttpRequestSpy new];
+
+    [connectionStub setResponseObject:@[ @"1", @"2", @"3" ] responseError:nil];
+
+    request.parseResult = [NSObject new];
+    request.responseSchemeName = @"SimpleArray";
+    request.parseObjectImplemented = NO;
+
+    [webService sendRequest:request completion:^(id result, NSError *error) {
+        XCTAssertFalse(request.parseResponseObjectCalled);
+        XCTAssertNil(error);
+        NSArray *expect = @[ [[NSURL alloc] initWithString:@"1"],[[NSURL alloc] initWithString:@"2"],[[NSURL alloc] initWithString:@"3"] ];
+        XCTAssertEqualObjects(expect, result);
+    }];
+}
+
+- (void)test_array_with_scheme_2_and_converting_with_fail
+{
+    HttpRequestSpy *request = [HttpRequestSpy new];
+
+    [connectionStub setResponseObject:@[ @"1", @"2", @"3\n" ] responseError:nil];
+
+    request.parseResult = [NSObject new];
+    request.responseSchemeName = @"SimpleArray";
+    request.parseObjectImplemented = NO;
+
+    [webService sendRequest:request completion:^(id result, NSError *error) {
+        XCTAssertFalse(request.parseResponseObjectCalled);
+        XCTAssertNotNil(error);
+        XCTAssertNil(result);
+    }];
+}
+
+
+- (void)test_array_of_arrays
+{
+    HttpRequestSpy *request = [HttpRequestSpy new];
+
+    [connectionStub setResponseObject:@[ @[ @1, @2, @3], @[@1, @2, @3], @[@1, @2, @3]] responseError:nil];
+
+    request.parseObjectImplemented = NO;
+    request.responseSchemeName = @"ArrayOfArray";
+
+    [webService sendRequest:request completion:^(id result, NSError *error) {
+        XCTAssertNil(error);
+        XCTAssertNotNil(result);
+        NSArray *expectedResult = @[ @[ @"1", @"2", @"3"], @[ @"1", @"2", @"3"], @[ @"1", @"2", @"3"]];
+        XCTAssertEqualObjects(expectedResult, result);
+    }];
+}
+
+@end
