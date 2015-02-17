@@ -184,8 +184,10 @@
     TRCValidationOptions optionToCheck = _convertingForRequest ? TRCValidationOptionsRemoveValuesMissedInSchemeForRequests : TRCValidationOptionsRemoveValuesMissedInSchemeForResponses;
 
     if (!(self.options & optionToCheck)) {
-
-        NSSet *schemeKeys = [NSSet setWithArray:[schemaDict allKeys]];
+        NSMutableSet *schemeKeys = [NSMutableSet new];
+        for (NSString *key in [schemaDict allKeys]) {
+            [schemeKeys addObject:TRCKeyFromOptionalKey(key, NULL)];
+        }
         NSMutableSet *dictionaryKeys = [NSMutableSet setWithArray:[dictionary allKeys]];
         [dictionaryKeys minusSet:schemeKeys];
 

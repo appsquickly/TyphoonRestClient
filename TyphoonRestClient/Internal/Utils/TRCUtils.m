@@ -27,9 +27,12 @@ NSError *NSErrorWithFormat(NSString *format, ...)
 
 NSString *TRCKeyFromOptionalKey(NSString *key, BOOL *isOptional)
 {
-    *isOptional = [key hasSuffix:@"{?}"];
-    if (*isOptional) {
+    BOOL _isOptional = [key hasSuffix:@"{?}"];
+    if (_isOptional) {
         key = [key substringToIndex:[key length]-3];
+    }
+    if (isOptional) {
+        *isOptional = _isOptional;
     }
     return key;
 }
