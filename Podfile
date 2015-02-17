@@ -3,12 +3,12 @@
 
 inhibit_all_warnings!
 
-target "HttpWebService" do
+target "TyphoonRestClient" do
     pod 'AFNetworking'
 
 end
 
-target "HttpWebServiceTests" do
+target "TyphoonRestClientTests" do
     pod 'ZZAutoDescription'
 end
 
