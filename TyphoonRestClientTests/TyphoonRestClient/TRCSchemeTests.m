@@ -1,5 +1,5 @@
 //
-//  RequestSchemeTests.m
+//  TRCSchemeTests.m
 //  Iconic
 //
 //  Created by Aleksey Garbarev on 19.09.14.
@@ -12,11 +12,12 @@
 #import "TRCValueConverter.h"
 #import "TRCValueConverterStub.h"
 
-@interface RequestSchemeTests : XCTestCase<TRCValueConverterRegistry>
+@interface TRCSchemeTests : XCTestCase<TRCValueConverterRegistry>
 
 @end
 
-@implementation RequestSchemeTests {
+@implementation TRCSchemeTests
+{
     TRCSchema *scheme;
     TRCSchema *stringsArrayScheme;
     TRCSchema *numbersArrayScheme;
@@ -48,7 +49,7 @@
 
 - (TRCSchema *)schemeWithName:(NSString *)name
 {
-    NSBundle *bundle = [NSBundle bundleForClass:[RequestSchemeTests class]];
+    NSBundle *bundle = [NSBundle bundleForClass:[TRCSchemeTests class]];
     NSString *schemePath = [bundle pathForResource:name ofType:nil];
     TRCSchema *aScheme = [[TRCSchema alloc] initWithFilePath:schemePath];
     aScheme.converterRegistry = self;

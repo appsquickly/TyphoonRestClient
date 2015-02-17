@@ -1,5 +1,5 @@
 //
-//  RequestSchemeTests.m
+//  TRCSchemeTests.m
 //  Iconic
 //
 //  Created by Aleksey Garbarev on 19.09.14.
@@ -15,11 +15,13 @@
 #import "TRCValueConverter.h"
 #import "TRCValueConverterStub.h"
 
-@interface ResponseObjectTests : XCTestCase<TRCValueConverterRegistry>
+@interface TRCConverterTests : XCTestCase<TRCValueConverterRegistry>
 
 @end
 
-@implementation ResponseObjectTests
+@implementation TRCConverterTests
+
+TRCValidationOptions validationOptions;
 
 - (id<TRCValueConverter>)valueConverterForTag:(NSString *)type
 {
@@ -38,6 +40,13 @@
     return stub;
 }
 
++ (void)setUp
+{
+    validationOptions = TRCValidationOptionsTreatEmptyDictionaryAsNilInResponsesForOptional | TRCValidationOptionsTreatEmptyDictionaryAsNilInRequestsForOptional;
+    [super setUp];
+}
+
+
 - (void)tearDown
 {
     [super tearDown];
@@ -45,22 +54,24 @@
 
 - (id)convertResponseObject:(id)data schema:(id)schemaArrayOrDictionary errors:(NSOrderedSet **)errorsSet
 {
-    TRCConverter *object = [[TRCConverter alloc] initWithResponseValue:data schemaValue:schemaArrayOrDictionary schemaName:@"test"];
-    object.registry = self;
+    TRCConverter *converter = [[TRCConverter alloc] initWithResponseValue:data schemaValue:schemaArrayOrDictionary schemaName:@"test"];
+    converter.options = validationOptions;
+    converter.registry = self;
     if (errorsSet) {
-        *errorsSet = object.conversionErrorSet;
+        *errorsSet = converter.conversionErrorSet;
     }
-    return [object convertValues];
+    return [converter convertValues];
 }
 
 - (id)convertRequestObject:(id)data schema:(id)schemaArrayOrDictionary errors:(NSOrderedSet **)errorsSet
 {
-    TRCConverter *object = [[TRCConverter alloc] initWithRequestValue:data schemaValue:schemaArrayOrDictionary schemaName:@"test"];
-    object.registry = self;
+    TRCConverter *converter = [[TRCConverter alloc] initWithRequestValue:data schemaValue:schemaArrayOrDictionary schemaName:@"test"];
+    converter.options = validationOptions;
+    converter.registry = self;
     if (errorsSet) {
-        *errorsSet = object.conversionErrorSet;
+        *errorsSet = converter.conversionErrorSet;
     }
-    return [object convertValues];
+    return [converter convertValues];
 }
 
 - (void)test_request_with_conversion
@@ -200,6 +211,54 @@
     XCTAssertEqualObjects(nestedObject[@"date"], @"Date");
 
     XCTAssertTrue([errors count] == 0, @"Error: %@", errors);
+}
+
+- (void)test_object_with_values_missed_in_scheme_response
+{
+    NSDictionary *data = @{@"value1" : @1, @"value2": @2};
+    NSDictionary *schema = @{ @"value1" : @1 };
+
+    NSOrderedSet *errors = nil;
+    NSDictionary *object = [self convertResponseObject:data schema:schema errors:&errors];
+    XCTAssertNotNil(object[@"value1"]);
+    XCTAssertNotNil(object[@"value2"]);
+}
+
+- (void)test_object_with_values_missed_in_scheme_response_with_option_to_skip
+{
+    validationOptions |= TRCValidationOptionsRemoveValuesMissedInSchemeForResponses;
+
+    NSDictionary *data = @{@"value1" : @1, @"value2": @2};
+    NSDictionary *schema = @{ @"value1" : @1 };
+
+    NSOrderedSet *errors = nil;
+    NSDictionary *object = [self convertResponseObject:data schema:schema errors:&errors];
+    XCTAssertNotNil(object[@"value1"]);
+    XCTAssertNil(object[@"value2"]);
+}
+
+- (void)test_object_with_values_missed_in_scheme_request
+{
+    NSDictionary *data = @{@"value1" : @1, @"value2": @2};
+    NSDictionary *schema = @{ @"value1" : @1 };
+
+    NSOrderedSet *errors = nil;
+    NSDictionary *object = [self convertRequestObject:data schema:schema errors:&errors];
+    XCTAssertNotNil(object[@"value1"]);
+    XCTAssertNotNil(object[@"value2"]);
+}
+
+- (void)test_object_with_values_missed_in_scheme_request_with_option_to_skip
+{
+    validationOptions |= TRCValidationOptionsRemoveValuesMissedInSchemeForRequests;
+
+    NSDictionary *data = @{@"value1" : @1, @"value2": @2};
+    NSDictionary *schema = @{ @"value1" : @1 };
+
+    NSOrderedSet *errors = nil;
+    NSDictionary *object = [self convertRequestObject:data schema:schema errors:&errors];
+    XCTAssertNotNil(object[@"value1"]);
+    XCTAssertNil(object[@"value2"]);
 }
 
 - (void)test_nested_object_without_schema

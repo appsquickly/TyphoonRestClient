@@ -25,7 +25,9 @@ typedef NS_OPTIONS(NSInteger , TRCValidationOptions)
     TRCValidationOptionsTreatEmptyDictionaryAsNilInResponsesForOptional = 1 << 0,
     TRCValidationOptionsTreatEmptyDictionaryAsNilInResponsesForRequired = 1 << 1,
     TRCValidationOptionsTreatEmptyDictionaryAsNilInRequestsForOptional = 1 << 2,
-    TRCValidationOptionsTreatEmptyDictionaryAsNilInRequestsForRequired = 1 << 3
+    TRCValidationOptionsTreatEmptyDictionaryAsNilInRequestsForRequired = 1 << 3,
+    TRCValidationOptionsRemoveValuesMissedInSchemeForRequests  = 1 << 4,
+    TRCValidationOptionsRemoveValuesMissedInSchemeForResponses = 1 << 5
 };
 
 @interface TyphoonRestClient : NSObject

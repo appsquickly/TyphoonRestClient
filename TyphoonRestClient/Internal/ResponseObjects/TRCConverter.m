@@ -146,7 +146,29 @@
         }
     }];
 
+    [result addEntriesFromDictionary:[self entriesFromDictionary:dictionary missedInScheme:schemaDict]];
+    
     return result;
+}
+
+- (NSDictionary *)entriesFromDictionary:(NSDictionary *)dictionary missedInScheme:(NSDictionary *)schemaDict
+{
+    TRCValidationOptions optionToCheck = convertingForRequest ? TRCValidationOptionsRemoveValuesMissedInSchemeForRequests : TRCValidationOptionsRemoveValuesMissedInSchemeForResponses;
+
+    if (!(self.options & optionToCheck)) {
+
+        NSSet *schemeKeys = [NSSet setWithArray:[schemaDict allKeys]];
+        NSMutableSet *dictionaryKeys = [NSMutableSet setWithArray:[dictionary allKeys]];
+        [dictionaryKeys minusSet:schemeKeys];
+
+        NSMutableDictionary *entries = [[NSMutableDictionary alloc] initWithCapacity:[dictionaryKeys count]];
+        for (id key in dictionaryKeys) {
+            entries[key] = dictionary[key];
+        }
+        return entries;
+    } else {
+        return @{};
+    }
 }
 
 @end

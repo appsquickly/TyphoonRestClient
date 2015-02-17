@@ -97,13 +97,13 @@ id(*originalImp)(id, SEL, NSString *);
 + (id)schemaWithName:(NSString *)name
 {
     if ([name isEqualToString:@"ErrorSchema"]) {
-        return [[TRCSchema alloc] initWithSchemeObject:@{@"code": @1, @"message": @"", @"reason_url?": @"NSURL"} name:name];
+        return [[TRCSchema alloc] initWithSchemeObject:@{@"code": @1, @"message": @"", @"reason_url{?}": @"NSURL"} name:name];
     }
     if ([name isEqualToString:@"SimpleDictionary"]) {
         return [[TRCSchema alloc] initWithSchemeObject:@{
                 @"number": @1,
                 @"string": @"NSString",
-                @"url?": @"NSURL"
+                @"url{?}": @"NSURL"
         } name:name];
     }
     if ([name isEqualToString:@"SimpleRequest"]) {
@@ -120,7 +120,7 @@ id(*originalImp)(id, SEL, NSString *);
         return [[TRCSchema alloc] initWithSchemeObject:@[@{
                 @"number" : @1,
                 @"string" : @"NSString",
-                @"url?" : @"NSURL"
+                @"url{?}" : @"NSURL"
         }] name:name];
     }
     if ([name isEqualToString:@"ArrayOfArray"]) {
