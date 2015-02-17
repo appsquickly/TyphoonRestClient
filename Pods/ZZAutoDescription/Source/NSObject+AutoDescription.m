@@ -8,6 +8,7 @@
 
 @interface NSObject ()
 - (BOOL) shouldAutoDescribeProperty:(NSString *)propertyName;
+- (BOOL) shouldAutoDescribePropertiesOfSuperClass:(Class)superClass;
 - (BOOL) autoDescriptionEnabled;
 @end
 
@@ -18,16 +19,21 @@
     Class class = [self class];
     
     BOOL respondsToShouldAutoDescribeProperty = [self respondsToSelector:@selector(shouldAutoDescribeProperty:)];
+    BOOL respondsToShouldAutoDescribeSuperClassProperties = [self respondsToSelector:@selector(shouldAutoDescribePropertiesOfSuperClass:)];
 
     NSMutableArray *names = [NSMutableArray new];
 
-    if ([class superclass] != [NSObject class]) {
-        NSArray *superPropertiesNames = [[class superclass] autoDescriptionPropertiesNames];
-        for (NSString *propertyName in superPropertiesNames) {
-            if ([self defaultShouldAutoDescribeProperty:propertyName] &&
-                (!respondsToShouldAutoDescribeProperty || [self shouldAutoDescribeProperty:propertyName]))
-            {
-                [names addObject:propertyName];
+    Class superClass = [class superclass];
+
+    if (superClass != [NSObject class]) {
+        if (!respondsToShouldAutoDescribeSuperClassProperties || [self shouldAutoDescribePropertiesOfSuperClass:superClass]) {
+            NSArray *superPropertiesNames = [superClass autoDescriptionPropertiesNames];
+            for (NSString *propertyName in superPropertiesNames) {
+                if ([self defaultShouldAutoDescribeProperty:propertyName] &&
+                    (!respondsToShouldAutoDescribeProperty || [self shouldAutoDescribeProperty:propertyName]))
+                {
+                    [names addObject:propertyName];
+                }
             }
         }
     }

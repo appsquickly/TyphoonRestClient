@@ -9,7 +9,11 @@
 - (NSString *) autoDescription;
 
 /// Implement the following method to fine-control which properties should be printed:
-//- (BOOL) shouldAutoDescribeProperty:(NSString *)propertyName;
+///- (BOOL) shouldAutoDescribeProperty:(NSString *)propertyName;
+
+/// Implement the following method to control whether properties of super class(es)
+/// should be printed:
+//- (BOOL) shouldAutoDescribePropertiesOfSuperClass:(Class)superClass;
 
 @end
 
@@ -22,4 +26,3 @@
 {                                   \
     return YES;                     \
 }
-

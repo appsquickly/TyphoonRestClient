@@ -1,699 +1,1880 @@
-// !$*UTF8*$!
-{
-	archiveVersion = 1;
-	classes = {
-	};
-	objectVersion = 46;
-	objects = {
-
-/* Begin PBXBuildFile section */
-		0CD547296C6748538A605828 /* libPods-HttpWebServiceTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 11A77D6930D24E1BA5797E0E /* libPods-HttpWebServiceTests.a */; };
-		8BF497574D5F4B34A1A1A601 /* libPods-HttpWebService.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A14BA2DE857D4EC58948A253 /* libPods-HttpWebService.a */; };
-		FA55918119E69A4E00E00570 /* ResponseObjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC9166219E697A60009D824 /* ResponseObjectTests.m */; };
-		FA55918219E69A4E00E00570 /* TRCValueConverterNumberTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC9166319E697A60009D824 /* TRCValueConverterNumberTests.m */; };
-		FA55918319E69A4E00E00570 /* TyphoonRestClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC9166419E697A60009D824 /* TyphoonRestClientTests.m */; };
-		FA55918419E69A4E00E00570 /* RequestSchemeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC9166519E697A60009D824 /* RequestSchemeTests.m */; };
-		FA55918519E69A5B00E00570 /* TRCRequestSpy.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC9166F19E697A60009D824 /* TRCRequestSpy.m */; };
-		FA55918619E69A5B00E00570 /* TRCErrorParserSpy.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC9167119E697A60009D824 /* TRCErrorParserSpy.m */; };
-		FA55918719E69A5B00E00570 /* TRCConnectionStub.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC9167319E697A60009D824 /* TRCConnectionStub.m */; };
-		FA55918819E69A5B00E00570 /* TRCValueConverterStub.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC9167519E697A60009D824 /* TRCValueConverterStub.m */; };
-		FAC9161719E693370009D824 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAC9161619E693370009D824 /* Foundation.framework */; };
-		FAC9161C19E693370009D824 /* TyphoonRestClient.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = FAC9161B19E693370009D824 /* TyphoonRestClient.h */; };
-		FAC9161E19E693370009D824 /* TyphoonRestClient.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC9161D19E693370009D824 /* TyphoonRestClient.m */; };
-		FAC9162519E693370009D824 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAC9162419E693370009D824 /* XCTest.framework */; };
-		FAC9162619E693370009D824 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAC9161619E693370009D824 /* Foundation.framework */; };
-		FAC9162819E693370009D824 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAC9162719E693370009D824 /* UIKit.framework */; };
-		FAC9162B19E693370009D824 /* libTyphoonRestClient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FAC9161319E693370009D824 /* libTyphoonRestClient.a */; };
-		FAC9163119E693370009D824 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FAC9162F19E693370009D824 /* InfoPlist.strings */; };
-		FAC9165319E694FA0009D824 /* TRCConnectionAFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC9163F19E694FA0009D824 /* TRCConnectionAFNetworking.m */; };
-		FAC9165419E694FA0009D824 /* TRCValueConverterNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC9164219E694FA0009D824 /* TRCValueConverterNumber.m */; };
-		FAC9165519E694FA0009D824 /* TRCValueConverterString.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC9164419E694FA0009D824 /* TRCValueConverterString.m */; };
-		FAC9165619E694FA0009D824 /* TRCValueConverterUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC9164619E694FA0009D824 /* TRCValueConverterUrl.m */; };
-		FAC9165719E694FA0009D824 /* TRCConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC9164919E694FA0009D824 /* TRCConverter.m */; };
-		FAC9165919E694FA0009D824 /* TRCSchema.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC9164F19E694FA0009D824 /* TRCSchema.m */; };
-		FAC9165A19E694FA0009D824 /* TRCUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC9165219E694FA0009D824 /* TRCUtils.m */; };
-		FAC9167A19E697A60009D824 /* DictionaryArray.json in Resources */ = {isa = PBXBuildFile; fileRef = FAC9166719E697A60009D824 /* DictionaryArray.json */; };
-		FAC9167B19E697A60009D824 /* GetOrderScheme.json in Resources */ = {isa = PBXBuildFile; fileRef = FAC9166819E697A60009D824 /* GetOrderScheme.json */; };
-		FAC9167C19E697A60009D824 /* NumbersArray.json in Resources */ = {isa = PBXBuildFile; fileRef = FAC9166919E697A60009D824 /* NumbersArray.json */; };
-		FAC9167D19E697A60009D824 /* StringsArray.json in Resources */ = {isa = PBXBuildFile; fileRef = FAC9166A19E697A60009D824 /* StringsArray.json */; };
-		FAC9167E19E697A60009D824 /* TestScheme.json in Resources */ = {isa = PBXBuildFile; fileRef = FAC9166B19E697A60009D824 /* TestScheme.json */; };
-		FAC9167F19E697A60009D824 /* TestSchemeOptionals.json in Resources */ = {isa = PBXBuildFile; fileRef = FAC9166C19E697A60009D824 /* TestSchemeOptionals.json */; };
-/* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		FAC9162919E693370009D824 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = FAC9160B19E693370009D824 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = FAC9161219E693370009D824;
-			remoteInfo = HttpWebService;
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		FAC9161119E693370009D824 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "include/$(PRODUCT_NAME)";
-			dstSubfolderSpec = 16;
-			files = (
-				FAC9161C19E693370009D824 /* TyphoonRestClient.h in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
-/* Begin PBXFileReference section */
-		11A77D6930D24E1BA5797E0E /* libPods-HttpWebServiceTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HttpWebServiceTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A14BA2DE857D4EC58948A253 /* libPods-HttpWebService.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HttpWebService.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C9ED6421940848759E548CF4 /* Pods-HttpWebService.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HttpWebService.xcconfig"; path = "Pods/Pods-HttpWebService.xcconfig"; sourceTree = "<group>"; };
-		FAC9161319E693370009D824 /* libTyphoonRestClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTyphoonRestClient.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		FAC9161619E693370009D824 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		FAC9161A19E693370009D824 /* TyphoonRestClient-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TyphoonRestClient-Prefix.pch"; sourceTree = "<group>"; };
-		FAC9161B19E693370009D824 /* TyphoonRestClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TyphoonRestClient.h; sourceTree = "<group>"; };
-		FAC9161D19E693370009D824 /* TyphoonRestClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TyphoonRestClient.m; sourceTree = "<group>"; };
-		FAC9162319E693370009D824 /* TyphoonRestClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TyphoonRestClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FAC9162419E693370009D824 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		FAC9162719E693370009D824 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		FAC9162E19E693370009D824 /* TyphoonRestClientTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = "TyphoonRestClientTests-Info.plist"; sourceTree = "<group>"; };
-		FAC9163019E693370009D824 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		FAC9163E19E694FA0009D824 /* TRCConnectionAFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCConnectionAFNetworking.h; sourceTree = "<group>"; };
-		FAC9163F19E694FA0009D824 /* TRCConnectionAFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCConnectionAFNetworking.m; sourceTree = "<group>"; };
-		FAC9164119E694FA0009D824 /* TRCValueConverterNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCValueConverterNumber.h; sourceTree = "<group>"; };
-		FAC9164219E694FA0009D824 /* TRCValueConverterNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCValueConverterNumber.m; sourceTree = "<group>"; };
-		FAC9164319E694FA0009D824 /* TRCValueConverterString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCValueConverterString.h; sourceTree = "<group>"; };
-		FAC9164419E694FA0009D824 /* TRCValueConverterString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCValueConverterString.m; sourceTree = "<group>"; };
-		FAC9164519E694FA0009D824 /* TRCValueConverterUrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCValueConverterUrl.h; sourceTree = "<group>"; };
-		FAC9164619E694FA0009D824 /* TRCValueConverterUrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCValueConverterUrl.m; sourceTree = "<group>"; };
-		FAC9164819E694FA0009D824 /* TRCConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCConverter.h; sourceTree = "<group>"; };
-		FAC9164919E694FA0009D824 /* TRCConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCConverter.m; sourceTree = "<group>"; };
-		FAC9164C19E694FA0009D824 /* TRCValueConverterRegistry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCValueConverterRegistry.h; sourceTree = "<group>"; };
-		FAC9164E19E694FA0009D824 /* TRCSchema.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSchema.h; sourceTree = "<group>"; };
-		FAC9164F19E694FA0009D824 /* TRCSchema.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSchema.m; sourceTree = "<group>"; };
-		FAC9165119E694FA0009D824 /* TRCUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCUtils.h; sourceTree = "<group>"; };
-		FAC9165219E694FA0009D824 /* TRCUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCUtils.m; sourceTree = "<group>"; };
-		FAC9165C19E695020009D824 /* TRCRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCRequest.h; sourceTree = "<group>"; };
-		FAC9165E19E695020009D824 /* TRCValueConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCValueConverter.h; sourceTree = "<group>"; };
-		FAC9165F19E695020009D824 /* TRCConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCConnection.h; sourceTree = "<group>"; };
-		FAC9166019E695020009D824 /* TRCErrorParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCErrorParser.h; sourceTree = "<group>"; };
-		FAC9166219E697A60009D824 /* ResponseObjectTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResponseObjectTests.m; sourceTree = "<group>"; };
-		FAC9166319E697A60009D824 /* TRCValueConverterNumberTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCValueConverterNumberTests.m; sourceTree = "<group>"; };
-		FAC9166419E697A60009D824 /* TyphoonRestClientTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TyphoonRestClientTests.m; sourceTree = "<group>"; };
-		FAC9166519E697A60009D824 /* RequestSchemeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestSchemeTests.m; sourceTree = "<group>"; };
-		FAC9166719E697A60009D824 /* DictionaryArray.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DictionaryArray.json; sourceTree = "<group>"; };
-		FAC9166819E697A60009D824 /* GetOrderScheme.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetOrderScheme.json; sourceTree = "<group>"; };
-		FAC9166919E697A60009D824 /* NumbersArray.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = NumbersArray.json; sourceTree = "<group>"; };
-		FAC9166A19E697A60009D824 /* StringsArray.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = StringsArray.json; sourceTree = "<group>"; };
-		FAC9166B19E697A60009D824 /* TestScheme.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TestScheme.json; sourceTree = "<group>"; };
-		FAC9166C19E697A60009D824 /* TestSchemeOptionals.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TestSchemeOptionals.json; sourceTree = "<group>"; };
-		FAC9166E19E697A60009D824 /* TRCRequestSpy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCRequestSpy.h; sourceTree = "<group>"; };
-		FAC9166F19E697A60009D824 /* TRCRequestSpy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCRequestSpy.m; sourceTree = "<group>"; };
-		FAC9167019E697A60009D824 /* TRCErrorParserSpy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCErrorParserSpy.h; sourceTree = "<group>"; };
-		FAC9167119E697A60009D824 /* TRCErrorParserSpy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCErrorParserSpy.m; sourceTree = "<group>"; };
-		FAC9167219E697A60009D824 /* TRCConnectionStub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCConnectionStub.h; sourceTree = "<group>"; };
-		FAC9167319E697A60009D824 /* TRCConnectionStub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCConnectionStub.m; sourceTree = "<group>"; };
-		FAC9167419E697A60009D824 /* TRCValueConverterStub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCValueConverterStub.h; sourceTree = "<group>"; };
-		FAC9167519E697A60009D824 /* TRCValueConverterStub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCValueConverterStub.m; sourceTree = "<group>"; };
-		FD6F7E11CCD6425EA5D28538 /* Pods-HttpWebServiceTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HttpWebServiceTests.xcconfig"; path = "Pods/Pods-HttpWebServiceTests.xcconfig"; sourceTree = "<group>"; };
-/* End PBXFileReference section */
-
-/* Begin PBXFrameworksBuildPhase section */
-		FAC9161019E693370009D824 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FAC9161719E693370009D824 /* Foundation.framework in Frameworks */,
-				8BF497574D5F4B34A1A1A601 /* libPods-HttpWebService.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FAC9162019E693370009D824 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FAC9162B19E693370009D824 /* libTyphoonRestClient.a in Frameworks */,
-				FAC9162519E693370009D824 /* XCTest.framework in Frameworks */,
-				FAC9162819E693370009D824 /* UIKit.framework in Frameworks */,
-				FAC9162619E693370009D824 /* Foundation.framework in Frameworks */,
-				0CD547296C6748538A605828 /* libPods-HttpWebServiceTests.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXFrameworksBuildPhase section */
-
-/* Begin PBXGroup section */
-		FAC9160A19E693370009D824 = {
-			isa = PBXGroup;
-			children = (
-				FAC9161819E693370009D824 /* TyphoonRestClient */,
-				FAC9162C19E693370009D824 /* TyphoonRestClientTests */,
-				FAC9161519E693370009D824 /* Frameworks */,
-				FAC9161419E693370009D824 /* Products */,
-				C9ED6421940848759E548CF4 /* Pods-HttpWebService.xcconfig */,
-				FD6F7E11CCD6425EA5D28538 /* Pods-HttpWebServiceTests.xcconfig */,
-			);
-			sourceTree = "<group>";
-		};
-		FAC9161419E693370009D824 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				FAC9161319E693370009D824 /* libTyphoonRestClient.a */,
-				FAC9162319E693370009D824 /* TyphoonRestClientTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		FAC9161519E693370009D824 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				FAC9161619E693370009D824 /* Foundation.framework */,
-				FAC9162419E693370009D824 /* XCTest.framework */,
-				FAC9162719E693370009D824 /* UIKit.framework */,
-				A14BA2DE857D4EC58948A253 /* libPods-HttpWebService.a */,
-				11A77D6930D24E1BA5797E0E /* libPods-HttpWebServiceTests.a */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		FAC9161819E693370009D824 /* TyphoonRestClient */ = {
-			isa = PBXGroup;
-			children = (
-				FAC9165B19E695020009D824 /* Protocols */,
-				FAC9163C19E694FA0009D824 /* Internal */,
-				FAC9161B19E693370009D824 /* TyphoonRestClient.h */,
-				FAC9161D19E693370009D824 /* TyphoonRestClient.m */,
-				FAC9161919E693370009D824 /* Supporting Files */,
-			);
-			path = TyphoonRestClient;
-			sourceTree = "<group>";
-		};
-		FAC9161919E693370009D824 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				FAC9161A19E693370009D824 /* TyphoonRestClient-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		FAC9162C19E693370009D824 /* TyphoonRestClientTests */ = {
-			isa = PBXGroup;
-			children = (
-				FAC9166119E697A60009D824 /* TyphoonRestClient */,
-				FAC9162D19E693370009D824 /* Supporting Files */,
-			);
-			path = TyphoonRestClientTests;
-			sourceTree = "<group>";
-		};
-		FAC9162D19E693370009D824 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				FAC9162E19E693370009D824 /* TyphoonRestClientTests-Info.plist */,
-				FAC9162F19E693370009D824 /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		FAC9163C19E694FA0009D824 /* Internal */ = {
-			isa = PBXGroup;
-			children = (
-				FAC9163D19E694FA0009D824 /* Connection */,
-				FAC9164019E694FA0009D824 /* DataConverters */,
-				FAC9164719E694FA0009D824 /* ResponseObjects */,
-				FAC9164D19E694FA0009D824 /* Scheme */,
-				FAC9165019E694FA0009D824 /* Utils */,
-			);
-			path = Internal;
-			sourceTree = "<group>";
-		};
-		FAC9163D19E694FA0009D824 /* Connection */ = {
-			isa = PBXGroup;
-			children = (
-				FAC9163E19E694FA0009D824 /* TRCConnectionAFNetworking.h */,
-				FAC9163F19E694FA0009D824 /* TRCConnectionAFNetworking.m */,
-			);
-			path = Connection;
-			sourceTree = "<group>";
-		};
-		FAC9164019E694FA0009D824 /* DataConverters */ = {
-			isa = PBXGroup;
-			children = (
-				FAC9164119E694FA0009D824 /* TRCValueConverterNumber.h */,
-				FAC9164219E694FA0009D824 /* TRCValueConverterNumber.m */,
-				FAC9164319E694FA0009D824 /* TRCValueConverterString.h */,
-				FAC9164419E694FA0009D824 /* TRCValueConverterString.m */,
-				FAC9164519E694FA0009D824 /* TRCValueConverterUrl.h */,
-				FAC9164619E694FA0009D824 /* TRCValueConverterUrl.m */,
-			);
-			path = DataConverters;
-			sourceTree = "<group>";
-		};
-		FAC9164719E694FA0009D824 /* ResponseObjects */ = {
-			isa = PBXGroup;
-			children = (
-				FAC9164819E694FA0009D824 /* TRCConverter.h */,
-				FAC9164919E694FA0009D824 /* TRCConverter.m */,
-				FAC9164C19E694FA0009D824 /* TRCValueConverterRegistry.h */,
-			);
-			path = ResponseObjects;
-			sourceTree = "<group>";
-		};
-		FAC9164D19E694FA0009D824 /* Scheme */ = {
-			isa = PBXGroup;
-			children = (
-				FAC9164E19E694FA0009D824 /* TRCSchema.h */,
-				FAC9164F19E694FA0009D824 /* TRCSchema.m */,
-			);
-			path = Scheme;
-			sourceTree = "<group>";
-		};
-		FAC9165019E694FA0009D824 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				FAC9165119E694FA0009D824 /* TRCUtils.h */,
-				FAC9165219E694FA0009D824 /* TRCUtils.m */,
-			);
-			path = Utils;
-			sourceTree = "<group>";
-		};
-		FAC9165B19E695020009D824 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				FAC9165C19E695020009D824 /* TRCRequest.h */,
-				FAC9165E19E695020009D824 /* TRCValueConverter.h */,
-				FAC9165F19E695020009D824 /* TRCConnection.h */,
-				FAC9166019E695020009D824 /* TRCErrorParser.h */,
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
-		FAC9166119E697A60009D824 /* TyphoonRestClient */ = {
-			isa = PBXGroup;
-			children = (
-				FAC9166219E697A60009D824 /* ResponseObjectTests.m */,
-				FAC9166319E697A60009D824 /* TRCValueConverterNumberTests.m */,
-				FAC9166419E697A60009D824 /* TyphoonRestClientTests.m */,
-				FAC9166519E697A60009D824 /* RequestSchemeTests.m */,
-				FAC9166619E697A60009D824 /* Schemes */,
-				FAC9166D19E697A60009D824 /* TestObjects */,
-			);
-			path = TyphoonRestClient;
-			sourceTree = "<group>";
-		};
-		FAC9166619E697A60009D824 /* Schemes */ = {
-			isa = PBXGroup;
-			children = (
-				FAC9166719E697A60009D824 /* DictionaryArray.json */,
-				FAC9166819E697A60009D824 /* GetOrderScheme.json */,
-				FAC9166919E697A60009D824 /* NumbersArray.json */,
-				FAC9166A19E697A60009D824 /* StringsArray.json */,
-				FAC9166B19E697A60009D824 /* TestScheme.json */,
-				FAC9166C19E697A60009D824 /* TestSchemeOptionals.json */,
-			);
-			path = Schemes;
-			sourceTree = "<group>";
-		};
-		FAC9166D19E697A60009D824 /* TestObjects */ = {
-			isa = PBXGroup;
-			children = (
-				FAC9166E19E697A60009D824 /* TRCRequestSpy.h */,
-				FAC9166F19E697A60009D824 /* TRCRequestSpy.m */,
-				FAC9167019E697A60009D824 /* TRCErrorParserSpy.h */,
-				FAC9167119E697A60009D824 /* TRCErrorParserSpy.m */,
-				FAC9167219E697A60009D824 /* TRCConnectionStub.h */,
-				FAC9167319E697A60009D824 /* TRCConnectionStub.m */,
-				FAC9167419E697A60009D824 /* TRCValueConverterStub.h */,
-				FAC9167519E697A60009D824 /* TRCValueConverterStub.m */,
-			);
-			path = TestObjects;
-			sourceTree = "<group>";
-		};
-/* End PBXGroup section */
-
-/* Begin PBXNativeTarget section */
-		FAC9161219E693370009D824 /* TyphoonRestClient */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = FAC9163619E693370009D824 /* Build configuration list for PBXNativeTarget "TyphoonRestClient" */;
-			buildPhases = (
-				2E2BC18F023847BC9BFD0560 /* Check Pods Manifest.lock */,
-				FAC9160F19E693370009D824 /* Sources */,
-				FAC9161019E693370009D824 /* Frameworks */,
-				FAC9161119E693370009D824 /* CopyFiles */,
-				E5DCA20FFA584F6CA9163160 /* Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = TyphoonRestClient;
-			productName = HttpWebService;
-			productReference = FAC9161319E693370009D824 /* libTyphoonRestClient.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		FAC9162219E693370009D824 /* TyphoonRestClientTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = FAC9163919E693370009D824 /* Build configuration list for PBXNativeTarget "TyphoonRestClientTests" */;
-			buildPhases = (
-				E407C851B2E240178A0F2548 /* Check Pods Manifest.lock */,
-				FAC9161F19E693370009D824 /* Sources */,
-				FAC9162019E693370009D824 /* Frameworks */,
-				FAC9162119E693370009D824 /* Resources */,
-				0B69D321109B4FEE83B24C2F /* Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				FAC9162A19E693370009D824 /* PBXTargetDependency */,
-			);
-			name = TyphoonRestClientTests;
-			productName = HttpWebServiceTests;
-			productReference = FAC9162319E693370009D824 /* TyphoonRestClientTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-/* End PBXNativeTarget section */
-
-/* Begin PBXProject section */
-		FAC9160B19E693370009D824 /* Project object */ = {
-			isa = PBXProject;
-			attributes = {
-				LastUpgradeCheck = 0510;
-				ORGANIZATIONNAME = "Code Monastery";
-			};
-			buildConfigurationList = FAC9160E19E693370009D824 /* Build configuration list for PBXProject "TyphoonRestClient" */;
-			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
-			hasScannedForEncodings = 0;
-			knownRegions = (
-				en,
-			);
-			mainGroup = FAC9160A19E693370009D824;
-			productRefGroup = FAC9161419E693370009D824 /* Products */;
-			projectDirPath = "";
-			projectRoot = "";
-			targets = (
-				FAC9161219E693370009D824 /* TyphoonRestClient */,
-				FAC9162219E693370009D824 /* TyphoonRestClientTests */,
-			);
-		};
-/* End PBXProject section */
-
-/* Begin PBXResourcesBuildPhase section */
-		FAC9162119E693370009D824 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FAC9167C19E697A60009D824 /* NumbersArray.json in Resources */,
-				FAC9167D19E697A60009D824 /* StringsArray.json in Resources */,
-				FAC9167E19E697A60009D824 /* TestScheme.json in Resources */,
-				FAC9167B19E697A60009D824 /* GetOrderScheme.json in Resources */,
-				FAC9163119E693370009D824 /* InfoPlist.strings in Resources */,
-				FAC9167F19E697A60009D824 /* TestSchemeOptionals.json in Resources */,
-				FAC9167A19E697A60009D824 /* DictionaryArray.json in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		0B69D321109B4FEE83B24C2F /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-HttpWebServiceTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2E2BC18F023847BC9BFD0560 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		E407C851B2E240178A0F2548 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		E5DCA20FFA584F6CA9163160 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-HttpWebService-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
-/* Begin PBXSourcesBuildPhase section */
-		FAC9160F19E693370009D824 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FAC9165619E694FA0009D824 /* TRCValueConverterUrl.m in Sources */,
-				FAC9165A19E694FA0009D824 /* TRCUtils.m in Sources */,
-				FAC9165519E694FA0009D824 /* TRCValueConverterString.m in Sources */,
-				FAC9161E19E693370009D824 /* TyphoonRestClient.m in Sources */,
-				FAC9165419E694FA0009D824 /* TRCValueConverterNumber.m in Sources */,
-				FAC9165319E694FA0009D824 /* TRCConnectionAFNetworking.m in Sources */,
-				FAC9165719E694FA0009D824 /* TRCConverter.m in Sources */,
-				FAC9165919E694FA0009D824 /* TRCSchema.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FAC9161F19E693370009D824 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FA55918819E69A5B00E00570 /* TRCValueConverterStub.m in Sources */,
-				FA55918519E69A5B00E00570 /* TRCRequestSpy.m in Sources */,
-				FA55918119E69A4E00E00570 /* ResponseObjectTests.m in Sources */,
-				FA55918319E69A4E00E00570 /* TyphoonRestClientTests.m in Sources */,
-				FA55918219E69A4E00E00570 /* TRCValueConverterNumberTests.m in Sources */,
-				FA55918619E69A5B00E00570 /* TRCErrorParserSpy.m in Sources */,
-				FA55918719E69A5B00E00570 /* TRCConnectionStub.m in Sources */,
-				FA55918419E69A4E00E00570 /* RequestSchemeTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		FAC9162A19E693370009D824 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = FAC9161219E693370009D824 /* TyphoonRestClient */;
-			targetProxy = FAC9162919E693370009D824 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		FAC9162F19E693370009D824 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FAC9163019E693370009D824 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
-/* Begin XCBuildConfiguration section */
-		FAC9163419E693370009D824 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
-			};
-			name = Debug;
-		};
-		FAC9163519E693370009D824 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				SDKROOT = iphoneos;
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		FAC9163719E693370009D824 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = C9ED6421940848759E548CF4 /* Pods-HttpWebService.xcconfig */;
-			buildSettings = {
-				DSTROOT = /tmp/TyphoonRestClient.dst;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TyphoonRestClient/TyphoonRestClient-Prefix.pch";
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = TyphoonRestClient;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		FAC9163819E693370009D824 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = C9ED6421940848759E548CF4 /* Pods-HttpWebService.xcconfig */;
-			buildSettings = {
-				DSTROOT = /tmp/TyphoonRestClient.dst;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TyphoonRestClient/TyphoonRestClient-Prefix.pch";
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = TyphoonRestClient;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		FAC9163A19E693370009D824 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = FD6F7E11CCD6425EA5D28538 /* Pods-HttpWebServiceTests.xcconfig */;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_GENERATE_TEST_COVERAGE_FILES = NO;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TyphoonRestClient/TyphoonRestClient-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "TyphoonRestClientTests/TyphoonRestClientTests-Info.plist";
-				PRODUCT_NAME = TyphoonRestClientTests;
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		FAC9163B19E693370009D824 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = FD6F7E11CCD6425EA5D28538 /* Pods-HttpWebServiceTests.xcconfig */;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_GENERATE_TEST_COVERAGE_FILES = NO;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TyphoonRestClient/TyphoonRestClient-Prefix.pch";
-				INFOPLIST_FILE = "TyphoonRestClientTests/TyphoonRestClientTests-Info.plist";
-				PRODUCT_NAME = TyphoonRestClientTests;
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
-/* End XCBuildConfiguration section */
-
-/* Begin XCConfigurationList section */
-		FAC9160E19E693370009D824 /* Build configuration list for PBXProject "TyphoonRestClient" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				FAC9163419E693370009D824 /* Debug */,
-				FAC9163519E693370009D824 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		FAC9163619E693370009D824 /* Build configuration list for PBXNativeTarget "TyphoonRestClient" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				FAC9163719E693370009D824 /* Debug */,
-				FAC9163819E693370009D824 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		FAC9163919E693370009D824 /* Build configuration list for PBXNativeTarget "TyphoonRestClientTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				FAC9163A19E693370009D824 /* Debug */,
-				FAC9163B19E693370009D824 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-/* End XCConfigurationList section */
-	};
-	rootObject = FAC9160B19E693370009D824 /* Project object */;
-}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>archiveVersion</key>
+	<string>1</string>
+	<key>classes</key>
+	<dict/>
+	<key>objectVersion</key>
+	<string>46</string>
+	<key>objects</key>
+	<dict>
+		<key>0B69D321109B4FEE83B24C2F</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>Copy Pods Resources</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>"${SRCROOT}/Pods/Target Support Files/Pods-TyphoonRestClientTests/Pods-TyphoonRestClientTests-resources.sh"
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+		<key>0CD547296C6748538A605828</key>
+		<dict>
+			<key>fileRef</key>
+			<string>11A77D6930D24E1BA5797E0E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>11A77D6930D24E1BA5797E0E</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>libPods-HttpWebServiceTests.a</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>2E2BC18F023847BC9BFD0560</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>Check Pods Manifest.lock</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>diff "${PODS_ROOT}/../Podfile.lock" "${PODS_ROOT}/Manifest.lock" &gt; /dev/null
+if [[ $? != 0 ]] ; then
+    cat &lt;&lt; EOM
+error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.
+EOM
+    exit 1
+fi
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+		<key>469D3C7EB63CCF077674B274</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>libPods-TyphoonRestClientTests.a</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>4B9B9EE0664B5BFAE99143BD</key>
+		<dict>
+			<key>fileRef</key>
+			<string>469D3C7EB63CCF077674B274</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>5C84882D07B06327E8D9BB26</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>libPods-TyphoonRestClient.a</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>7C7F52DF2A50096085E5149B</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>93FA6ECC5717FCE840EBCF80</string>
+				<string>F8613C05EF83E714D7879F6B</string>
+				<string>F1EDD576B14E9A7FECB30060</string>
+				<string>E5C31D38C3F64129E2DA415E</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Pods</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>8BF497574D5F4B34A1A1A601</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A14BA2DE857D4EC58948A253</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>93FA6ECC5717FCE840EBCF80</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods-TyphoonRestClient.debug.xcconfig</string>
+			<key>path</key>
+			<string>Pods/Target Support Files/Pods-TyphoonRestClient/Pods-TyphoonRestClient.debug.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A14BA2DE857D4EC58948A253</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>libPods-HttpWebService.a</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>A7FEE1DF57D124A4374EFCCC</key>
+		<dict>
+			<key>fileRef</key>
+			<string>5C84882D07B06327E8D9BB26</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>E407C851B2E240178A0F2548</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>Check Pods Manifest.lock</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>diff "${PODS_ROOT}/../Podfile.lock" "${PODS_ROOT}/Manifest.lock" &gt; /dev/null
+if [[ $? != 0 ]] ; then
+    cat &lt;&lt; EOM
+error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.
+EOM
+    exit 1
+fi
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+		<key>E5C31D38C3F64129E2DA415E</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods-TyphoonRestClientTests.release.xcconfig</string>
+			<key>path</key>
+			<string>Pods/Target Support Files/Pods-TyphoonRestClientTests/Pods-TyphoonRestClientTests.release.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>E5DCA20FFA584F6CA9163160</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>Copy Pods Resources</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>"${SRCROOT}/Pods/Target Support Files/Pods-TyphoonRestClient/Pods-TyphoonRestClient-resources.sh"
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+		<key>F1EDD576B14E9A7FECB30060</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods-TyphoonRestClientTests.debug.xcconfig</string>
+			<key>path</key>
+			<string>Pods/Target Support Files/Pods-TyphoonRestClientTests/Pods-TyphoonRestClientTests.debug.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>F8613C05EF83E714D7879F6B</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods-TyphoonRestClient.release.xcconfig</string>
+			<key>path</key>
+			<string>Pods/Target Support Files/Pods-TyphoonRestClient/Pods-TyphoonRestClient.release.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FA55918119E69A4E00E00570</key>
+		<dict>
+			<key>fileRef</key>
+			<string>FAC9166219E697A60009D824</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>FA55918219E69A4E00E00570</key>
+		<dict>
+			<key>fileRef</key>
+			<string>FAC9166319E697A60009D824</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>FA55918319E69A4E00E00570</key>
+		<dict>
+			<key>fileRef</key>
+			<string>FAC9166419E697A60009D824</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>FA55918419E69A4E00E00570</key>
+		<dict>
+			<key>fileRef</key>
+			<string>FAC9166519E697A60009D824</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>FA55918519E69A5B00E00570</key>
+		<dict>
+			<key>fileRef</key>
+			<string>FAC9166F19E697A60009D824</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>FA55918619E69A5B00E00570</key>
+		<dict>
+			<key>fileRef</key>
+			<string>FAC9167119E697A60009D824</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>FA55918719E69A5B00E00570</key>
+		<dict>
+			<key>fileRef</key>
+			<string>FAC9167319E697A60009D824</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>FA55918819E69A5B00E00570</key>
+		<dict>
+			<key>fileRef</key>
+			<string>FAC9167519E697A60009D824</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>FAC9160A19E693370009D824</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>FAC9161819E693370009D824</string>
+				<string>FAC9162C19E693370009D824</string>
+				<string>FAC9161519E693370009D824</string>
+				<string>FAC9161419E693370009D824</string>
+				<string>7C7F52DF2A50096085E5149B</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9160B19E693370009D824</key>
+		<dict>
+			<key>attributes</key>
+			<dict>
+				<key>LastUpgradeCheck</key>
+				<string>0510</string>
+				<key>ORGANIZATIONNAME</key>
+				<string>Code Monastery</string>
+			</dict>
+			<key>buildConfigurationList</key>
+			<string>FAC9160E19E693370009D824</string>
+			<key>compatibilityVersion</key>
+			<string>Xcode 3.2</string>
+			<key>developmentRegion</key>
+			<string>English</string>
+			<key>hasScannedForEncodings</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXProject</string>
+			<key>knownRegions</key>
+			<array>
+				<string>en</string>
+			</array>
+			<key>mainGroup</key>
+			<string>FAC9160A19E693370009D824</string>
+			<key>productRefGroup</key>
+			<string>FAC9161419E693370009D824</string>
+			<key>projectDirPath</key>
+			<string></string>
+			<key>projectReferences</key>
+			<array/>
+			<key>projectRoot</key>
+			<string></string>
+			<key>targets</key>
+			<array>
+				<string>FAC9161219E693370009D824</string>
+				<string>FAC9162219E693370009D824</string>
+			</array>
+		</dict>
+		<key>FAC9160E19E693370009D824</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>FAC9163419E693370009D824</string>
+				<string>FAC9163519E693370009D824</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>FAC9160F19E693370009D824</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>FAC9165619E694FA0009D824</string>
+				<string>FAC9165A19E694FA0009D824</string>
+				<string>FAC9165519E694FA0009D824</string>
+				<string>FAC9161E19E693370009D824</string>
+				<string>FAC9165419E694FA0009D824</string>
+				<string>FAC9165319E694FA0009D824</string>
+				<string>FAC9165719E694FA0009D824</string>
+				<string>FAC9165919E694FA0009D824</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>FAC9161019E693370009D824</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>FAC9161719E693370009D824</string>
+				<string>8BF497574D5F4B34A1A1A601</string>
+				<string>A7FEE1DF57D124A4374EFCCC</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>FAC9161119E693370009D824</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>dstPath</key>
+			<string>include/$(PRODUCT_NAME)</string>
+			<key>dstSubfolderSpec</key>
+			<string>16</string>
+			<key>files</key>
+			<array>
+				<string>FAC9161C19E693370009D824</string>
+			</array>
+			<key>isa</key>
+			<string>PBXCopyFilesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>FAC9161219E693370009D824</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>FAC9163619E693370009D824</string>
+			<key>buildPhases</key>
+			<array>
+				<string>2E2BC18F023847BC9BFD0560</string>
+				<string>FAC9160F19E693370009D824</string>
+				<string>FAC9161019E693370009D824</string>
+				<string>FAC9161119E693370009D824</string>
+				<string>E5DCA20FFA584F6CA9163160</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>TyphoonRestClient</string>
+			<key>productName</key>
+			<string>HttpWebService</string>
+			<key>productReference</key>
+			<string>FAC9161319E693370009D824</string>
+			<key>productType</key>
+			<string>com.apple.product-type.library.static</string>
+		</dict>
+		<key>FAC9161319E693370009D824</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>libTyphoonRestClient.a</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>FAC9161419E693370009D824</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>FAC9161319E693370009D824</string>
+				<string>FAC9162319E693370009D824</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Products</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9161519E693370009D824</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>FAC9161619E693370009D824</string>
+				<string>FAC9162419E693370009D824</string>
+				<string>FAC9162719E693370009D824</string>
+				<string>A14BA2DE857D4EC58948A253</string>
+				<string>11A77D6930D24E1BA5797E0E</string>
+				<string>5C84882D07B06327E8D9BB26</string>
+				<string>469D3C7EB63CCF077674B274</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Frameworks</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9161619E693370009D824</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>Foundation.framework</string>
+			<key>path</key>
+			<string>System/Library/Frameworks/Foundation.framework</string>
+			<key>sourceTree</key>
+			<string>SDKROOT</string>
+		</dict>
+		<key>FAC9161719E693370009D824</key>
+		<dict>
+			<key>fileRef</key>
+			<string>FAC9161619E693370009D824</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>FAC9161819E693370009D824</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>FAC9165B19E695020009D824</string>
+				<string>FAC9163C19E694FA0009D824</string>
+				<string>FAC9161B19E693370009D824</string>
+				<string>FAC9161D19E693370009D824</string>
+				<string>FAC9161919E693370009D824</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>TyphoonRestClient</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9161919E693370009D824</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>FAC9161A19E693370009D824</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Supporting Files</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9161A19E693370009D824</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>TyphoonRestClient-Prefix.pch</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9161B19E693370009D824</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>TyphoonRestClient.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9161C19E693370009D824</key>
+		<dict>
+			<key>fileRef</key>
+			<string>FAC9161B19E693370009D824</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>FAC9161D19E693370009D824</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>TyphoonRestClient.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9161E19E693370009D824</key>
+		<dict>
+			<key>fileRef</key>
+			<string>FAC9161D19E693370009D824</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>FAC9161F19E693370009D824</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>FA55918819E69A5B00E00570</string>
+				<string>FA55918519E69A5B00E00570</string>
+				<string>FA55918119E69A4E00E00570</string>
+				<string>FA55918319E69A4E00E00570</string>
+				<string>FA55918219E69A4E00E00570</string>
+				<string>FA55918619E69A5B00E00570</string>
+				<string>FA55918719E69A5B00E00570</string>
+				<string>FA55918419E69A4E00E00570</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>FAC9162019E693370009D824</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>FAC9162B19E693370009D824</string>
+				<string>FAC9162519E693370009D824</string>
+				<string>FAC9162819E693370009D824</string>
+				<string>FAC9162619E693370009D824</string>
+				<string>0CD547296C6748538A605828</string>
+				<string>4B9B9EE0664B5BFAE99143BD</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>FAC9162119E693370009D824</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>FAC9167C19E697A60009D824</string>
+				<string>FAC9167D19E697A60009D824</string>
+				<string>FAC9167E19E697A60009D824</string>
+				<string>FAC9167B19E697A60009D824</string>
+				<string>FAC9163119E693370009D824</string>
+				<string>FAC9167F19E697A60009D824</string>
+				<string>FAC9167A19E697A60009D824</string>
+			</array>
+			<key>isa</key>
+			<string>PBXResourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>FAC9162219E693370009D824</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>FAC9163919E693370009D824</string>
+			<key>buildPhases</key>
+			<array>
+				<string>E407C851B2E240178A0F2548</string>
+				<string>FAC9161F19E693370009D824</string>
+				<string>FAC9162019E693370009D824</string>
+				<string>FAC9162119E693370009D824</string>
+				<string>0B69D321109B4FEE83B24C2F</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array>
+				<string>FAC9162A19E693370009D824</string>
+			</array>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>TyphoonRestClientTests</string>
+			<key>productName</key>
+			<string>HttpWebServiceTests</string>
+			<key>productReference</key>
+			<string>FAC9162319E693370009D824</string>
+			<key>productType</key>
+			<string>com.apple.product-type.bundle.unit-test</string>
+		</dict>
+		<key>FAC9162319E693370009D824</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.cfbundle</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>TyphoonRestClientTests.xctest</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>FAC9162419E693370009D824</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>XCTest.framework</string>
+			<key>path</key>
+			<string>Library/Frameworks/XCTest.framework</string>
+			<key>sourceTree</key>
+			<string>DEVELOPER_DIR</string>
+		</dict>
+		<key>FAC9162519E693370009D824</key>
+		<dict>
+			<key>fileRef</key>
+			<string>FAC9162419E693370009D824</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>FAC9162619E693370009D824</key>
+		<dict>
+			<key>fileRef</key>
+			<string>FAC9161619E693370009D824</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>FAC9162719E693370009D824</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>UIKit.framework</string>
+			<key>path</key>
+			<string>Library/Frameworks/UIKit.framework</string>
+			<key>sourceTree</key>
+			<string>DEVELOPER_DIR</string>
+		</dict>
+		<key>FAC9162819E693370009D824</key>
+		<dict>
+			<key>fileRef</key>
+			<string>FAC9162719E693370009D824</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>FAC9162919E693370009D824</key>
+		<dict>
+			<key>containerPortal</key>
+			<string>FAC9160B19E693370009D824</string>
+			<key>isa</key>
+			<string>PBXContainerItemProxy</string>
+			<key>proxyType</key>
+			<string>1</string>
+			<key>remoteGlobalIDString</key>
+			<string>FAC9161219E693370009D824</string>
+			<key>remoteInfo</key>
+			<string>HttpWebService</string>
+		</dict>
+		<key>FAC9162A19E693370009D824</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXTargetDependency</string>
+			<key>target</key>
+			<string>FAC9161219E693370009D824</string>
+			<key>targetProxy</key>
+			<string>FAC9162919E693370009D824</string>
+		</dict>
+		<key>FAC9162B19E693370009D824</key>
+		<dict>
+			<key>fileRef</key>
+			<string>FAC9161319E693370009D824</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>FAC9162C19E693370009D824</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>FAC9166119E697A60009D824</string>
+				<string>FAC9162D19E693370009D824</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>TyphoonRestClientTests</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9162D19E693370009D824</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>FAC9162E19E693370009D824</string>
+				<string>FAC9162F19E693370009D824</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Supporting Files</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9162E19E693370009D824</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.info</string>
+			<key>path</key>
+			<string>TyphoonRestClientTests-Info.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9162F19E693370009D824</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>FAC9163019E693370009D824</string>
+			</array>
+			<key>isa</key>
+			<string>PBXVariantGroup</string>
+			<key>name</key>
+			<string>InfoPlist.strings</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9163019E693370009D824</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.strings</string>
+			<key>name</key>
+			<string>en</string>
+			<key>path</key>
+			<string>en.lproj/InfoPlist.strings</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9163119E693370009D824</key>
+		<dict>
+			<key>fileRef</key>
+			<string>FAC9162F19E693370009D824</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>FAC9163419E693370009D824</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_SEARCH_USER_PATHS</key>
+				<string>NO</string>
+				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
+				<string>gnu++0x</string>
+				<key>CLANG_CXX_LIBRARY</key>
+				<string>libc++</string>
+				<key>CLANG_ENABLE_MODULES</key>
+				<string>YES</string>
+				<key>CLANG_ENABLE_OBJC_ARC</key>
+				<string>YES</string>
+				<key>CLANG_WARN_BOOL_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN_EMPTY_BODY</key>
+				<string>YES</string>
+				<key>CLANG_WARN_ENUM_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_INT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
+				<string>YES</string>
+				<key>COPY_PHASE_STRIP</key>
+				<string>NO</string>
+				<key>GCC_C_LANGUAGE_STANDARD</key>
+				<string>gnu99</string>
+				<key>GCC_DYNAMIC_NO_PIC</key>
+				<string>NO</string>
+				<key>GCC_OPTIMIZATION_LEVEL</key>
+				<string>0</string>
+				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
+				<array>
+					<string>DEBUG=1</string>
+					<string>$(inherited)</string>
+				</array>
+				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
+				<string>NO</string>
+				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
+				<string>YES</string>
+				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
+				<string>YES_ERROR</string>
+				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
+				<string>YES_AGGRESSIVE</string>
+				<key>GCC_WARN_UNUSED_FUNCTION</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_VARIABLE</key>
+				<string>YES</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>7.1</string>
+				<key>ONLY_ACTIVE_ARCH</key>
+				<string>YES</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>FAC9163519E693370009D824</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_SEARCH_USER_PATHS</key>
+				<string>NO</string>
+				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
+				<string>gnu++0x</string>
+				<key>CLANG_CXX_LIBRARY</key>
+				<string>libc++</string>
+				<key>CLANG_ENABLE_MODULES</key>
+				<string>YES</string>
+				<key>CLANG_ENABLE_OBJC_ARC</key>
+				<string>YES</string>
+				<key>CLANG_WARN_BOOL_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN_EMPTY_BODY</key>
+				<string>YES</string>
+				<key>CLANG_WARN_ENUM_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_INT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
+				<string>YES</string>
+				<key>COPY_PHASE_STRIP</key>
+				<string>YES</string>
+				<key>ENABLE_NS_ASSERTIONS</key>
+				<string>NO</string>
+				<key>GCC_C_LANGUAGE_STANDARD</key>
+				<string>gnu99</string>
+				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
+				<string>YES</string>
+				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
+				<string>YES_ERROR</string>
+				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
+				<string>YES_AGGRESSIVE</string>
+				<key>GCC_WARN_UNUSED_FUNCTION</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_VARIABLE</key>
+				<string>YES</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>7.1</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>VALIDATE_PRODUCT</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>FAC9163619E693370009D824</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>FAC9163719E693370009D824</string>
+				<string>FAC9163819E693370009D824</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>FAC9163719E693370009D824</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>93FA6ECC5717FCE840EBCF80</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>DSTROOT</key>
+				<string>/tmp/TyphoonRestClient.dst</string>
+				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>TyphoonRestClient/TyphoonRestClient-Prefix.pch</string>
+				<key>OTHER_LDFLAGS</key>
+				<string>-ObjC</string>
+				<key>PRODUCT_NAME</key>
+				<string>TyphoonRestClient</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>FAC9163819E693370009D824</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>F8613C05EF83E714D7879F6B</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>DSTROOT</key>
+				<string>/tmp/TyphoonRestClient.dst</string>
+				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>TyphoonRestClient/TyphoonRestClient-Prefix.pch</string>
+				<key>OTHER_LDFLAGS</key>
+				<string>-ObjC</string>
+				<key>PRODUCT_NAME</key>
+				<string>TyphoonRestClient</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>FAC9163919E693370009D824</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>FAC9163A19E693370009D824</string>
+				<string>FAC9163B19E693370009D824</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>FAC9163A19E693370009D824</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>F1EDD576B14E9A7FECB30060</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>FRAMEWORK_SEARCH_PATHS</key>
+				<array>
+					<string>$(SDKROOT)/Developer/Library/Frameworks</string>
+					<string>$(inherited)</string>
+					<string>$(DEVELOPER_FRAMEWORKS_DIR)</string>
+				</array>
+				<key>GCC_GENERATE_TEST_COVERAGE_FILES</key>
+				<string>NO</string>
+				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>TyphoonRestClient/TyphoonRestClient-Prefix.pch</string>
+				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
+				<array>
+					<string>DEBUG=1</string>
+					<string>$(inherited)</string>
+				</array>
+				<key>INFOPLIST_FILE</key>
+				<string>TyphoonRestClientTests/TyphoonRestClientTests-Info.plist</string>
+				<key>PRODUCT_NAME</key>
+				<string>TyphoonRestClientTests</string>
+				<key>WRAPPER_EXTENSION</key>
+				<string>xctest</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>FAC9163B19E693370009D824</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>E5C31D38C3F64129E2DA415E</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>FRAMEWORK_SEARCH_PATHS</key>
+				<array>
+					<string>$(SDKROOT)/Developer/Library/Frameworks</string>
+					<string>$(inherited)</string>
+					<string>$(DEVELOPER_FRAMEWORKS_DIR)</string>
+				</array>
+				<key>GCC_GENERATE_TEST_COVERAGE_FILES</key>
+				<string>NO</string>
+				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>TyphoonRestClient/TyphoonRestClient-Prefix.pch</string>
+				<key>INFOPLIST_FILE</key>
+				<string>TyphoonRestClientTests/TyphoonRestClientTests-Info.plist</string>
+				<key>PRODUCT_NAME</key>
+				<string>TyphoonRestClientTests</string>
+				<key>WRAPPER_EXTENSION</key>
+				<string>xctest</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>FAC9163C19E694FA0009D824</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>FAC9163D19E694FA0009D824</string>
+				<string>FAC9164019E694FA0009D824</string>
+				<string>FAC9164719E694FA0009D824</string>
+				<string>FAC9164D19E694FA0009D824</string>
+				<string>FAC9165019E694FA0009D824</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>Internal</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9163D19E694FA0009D824</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>FAC9163E19E694FA0009D824</string>
+				<string>FAC9163F19E694FA0009D824</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>Connection</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9163E19E694FA0009D824</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>TRCConnectionAFNetworking.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9163F19E694FA0009D824</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>TRCConnectionAFNetworking.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9164019E694FA0009D824</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>FAC9164119E694FA0009D824</string>
+				<string>FAC9164219E694FA0009D824</string>
+				<string>FAC9164319E694FA0009D824</string>
+				<string>FAC9164419E694FA0009D824</string>
+				<string>FAC9164519E694FA0009D824</string>
+				<string>FAC9164619E694FA0009D824</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>DataConverters</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9164119E694FA0009D824</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>TRCValueConverterNumber.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9164219E694FA0009D824</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>TRCValueConverterNumber.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9164319E694FA0009D824</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>TRCValueConverterString.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9164419E694FA0009D824</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>TRCValueConverterString.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9164519E694FA0009D824</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>TRCValueConverterUrl.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9164619E694FA0009D824</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>TRCValueConverterUrl.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9164719E694FA0009D824</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>FAC9164819E694FA0009D824</string>
+				<string>FAC9164919E694FA0009D824</string>
+				<string>FAC9164C19E694FA0009D824</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>ResponseObjects</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9164819E694FA0009D824</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>TRCConverter.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9164919E694FA0009D824</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>TRCConverter.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9164C19E694FA0009D824</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>TRCValueConverterRegistry.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9164D19E694FA0009D824</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>FAC9164E19E694FA0009D824</string>
+				<string>FAC9164F19E694FA0009D824</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>Scheme</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9164E19E694FA0009D824</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>TRCSchema.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9164F19E694FA0009D824</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>TRCSchema.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9165019E694FA0009D824</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>FAC9165119E694FA0009D824</string>
+				<string>FAC9165219E694FA0009D824</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>Utils</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9165119E694FA0009D824</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>TRCUtils.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9165219E694FA0009D824</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>TRCUtils.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9165319E694FA0009D824</key>
+		<dict>
+			<key>fileRef</key>
+			<string>FAC9163F19E694FA0009D824</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>FAC9165419E694FA0009D824</key>
+		<dict>
+			<key>fileRef</key>
+			<string>FAC9164219E694FA0009D824</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>FAC9165519E694FA0009D824</key>
+		<dict>
+			<key>fileRef</key>
+			<string>FAC9164419E694FA0009D824</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>FAC9165619E694FA0009D824</key>
+		<dict>
+			<key>fileRef</key>
+			<string>FAC9164619E694FA0009D824</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>FAC9165719E694FA0009D824</key>
+		<dict>
+			<key>fileRef</key>
+			<string>FAC9164919E694FA0009D824</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>FAC9165919E694FA0009D824</key>
+		<dict>
+			<key>fileRef</key>
+			<string>FAC9164F19E694FA0009D824</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>FAC9165A19E694FA0009D824</key>
+		<dict>
+			<key>fileRef</key>
+			<string>FAC9165219E694FA0009D824</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>FAC9165B19E695020009D824</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>FAC9165C19E695020009D824</string>
+				<string>FAC9165E19E695020009D824</string>
+				<string>FAC9165F19E695020009D824</string>
+				<string>FAC9166019E695020009D824</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>Protocols</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9165C19E695020009D824</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>TRCRequest.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9165E19E695020009D824</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>TRCValueConverter.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9165F19E695020009D824</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>TRCConnection.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9166019E695020009D824</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>TRCErrorParser.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9166119E697A60009D824</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>FAC9166219E697A60009D824</string>
+				<string>FAC9166319E697A60009D824</string>
+				<string>FAC9166419E697A60009D824</string>
+				<string>FAC9166519E697A60009D824</string>
+				<string>FAC9166619E697A60009D824</string>
+				<string>FAC9166D19E697A60009D824</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>TyphoonRestClient</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9166219E697A60009D824</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>ResponseObjectTests.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9166319E697A60009D824</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>TRCValueConverterNumberTests.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9166419E697A60009D824</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>TyphoonRestClientTests.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9166519E697A60009D824</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>RequestSchemeTests.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9166619E697A60009D824</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>FAC9166719E697A60009D824</string>
+				<string>FAC9166819E697A60009D824</string>
+				<string>FAC9166919E697A60009D824</string>
+				<string>FAC9166A19E697A60009D824</string>
+				<string>FAC9166B19E697A60009D824</string>
+				<string>FAC9166C19E697A60009D824</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>Schemes</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9166719E697A60009D824</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.json</string>
+			<key>path</key>
+			<string>DictionaryArray.json</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9166819E697A60009D824</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.json</string>
+			<key>path</key>
+			<string>GetOrderScheme.json</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9166919E697A60009D824</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.json</string>
+			<key>path</key>
+			<string>NumbersArray.json</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9166A19E697A60009D824</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.json</string>
+			<key>path</key>
+			<string>StringsArray.json</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9166B19E697A60009D824</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.json</string>
+			<key>path</key>
+			<string>TestScheme.json</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9166C19E697A60009D824</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.json</string>
+			<key>path</key>
+			<string>TestSchemeOptionals.json</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9166D19E697A60009D824</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>FAC9166E19E697A60009D824</string>
+				<string>FAC9166F19E697A60009D824</string>
+				<string>FAC9167019E697A60009D824</string>
+				<string>FAC9167119E697A60009D824</string>
+				<string>FAC9167219E697A60009D824</string>
+				<string>FAC9167319E697A60009D824</string>
+				<string>FAC9167419E697A60009D824</string>
+				<string>FAC9167519E697A60009D824</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>TestObjects</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9166E19E697A60009D824</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>TRCRequestSpy.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9166F19E697A60009D824</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>TRCRequestSpy.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9167019E697A60009D824</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>TRCErrorParserSpy.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9167119E697A60009D824</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>TRCErrorParserSpy.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9167219E697A60009D824</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>TRCConnectionStub.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9167319E697A60009D824</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>TRCConnectionStub.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9167419E697A60009D824</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>TRCValueConverterStub.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9167519E697A60009D824</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>TRCValueConverterStub.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAC9167A19E697A60009D824</key>
+		<dict>
+			<key>fileRef</key>
+			<string>FAC9166719E697A60009D824</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>FAC9167B19E697A60009D824</key>
+		<dict>
+			<key>fileRef</key>
+			<string>FAC9166819E697A60009D824</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>FAC9167C19E697A60009D824</key>
+		<dict>
+			<key>fileRef</key>
+			<string>FAC9166919E697A60009D824</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>FAC9167D19E697A60009D824</key>
+		<dict>
+			<key>fileRef</key>
+			<string>FAC9166A19E697A60009D824</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>FAC9167E19E697A60009D824</key>
+		<dict>
+			<key>fileRef</key>
+			<string>FAC9166B19E697A60009D824</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>FAC9167F19E697A60009D824</key>
+		<dict>
+			<key>fileRef</key>
+			<string>FAC9166C19E697A60009D824</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+	</dict>
+	<key>rootObject</key>
+	<string>FAC9160B19E693370009D824</string>
+</dict>
+</plist>
