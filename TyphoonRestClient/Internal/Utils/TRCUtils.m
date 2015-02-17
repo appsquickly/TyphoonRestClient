@@ -29,7 +29,7 @@ NSString *TRCKeyFromOptionalKey(NSString *key, BOOL *isOptional)
 {
     *isOptional = [key hasSuffix:@"{?}"];
     if (*isOptional) {
-        key = [key substringToIndex:[key length]-1];
+        key = [key substringToIndex:[key length]-3];
     }
     return key;
 }
