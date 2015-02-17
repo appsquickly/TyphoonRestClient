@@ -10,7 +10,7 @@
 	<string>46</string>
 	<key>objects</key>
 	<dict>
-		<key>0B69D321109B4FEE83B24C2F</key>
+		<key>04CC283EB507C466145160C9</key>
 		<dict>
 			<key>buildActionMask</key>
 			<string>2147483647</string>
@@ -21,7 +21,7 @@
 			<key>isa</key>
 			<string>PBXShellScriptBuildPhase</string>
 			<key>name</key>
-			<string>Copy Pods Resources</string>
+			<string>Check Pods Manifest.lock</string>
 			<key>outputPaths</key>
 			<array/>
 			<key>runOnlyForDeploymentPostprocessing</key>
@@ -29,17 +29,16 @@
 			<key>shellPath</key>
 			<string>/bin/sh</string>
 			<key>shellScript</key>
-			<string>"${SRCROOT}/Pods/Target Support Files/Pods-TyphoonRestClientTests/Pods-TyphoonRestClientTests-resources.sh"
+			<string>diff "${PODS_ROOT}/../Podfile.lock" "${PODS_ROOT}/Manifest.lock" &gt; /dev/null
+if [[ $? != 0 ]] ; then
+    cat &lt;&lt; EOM
+error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.
+EOM
+    exit 1
+fi
 </string>
 			<key>showEnvVarsInLog</key>
 			<string>0</string>
-		</dict>
-		<key>0CD547296C6748538A605828</key>
-		<dict>
-			<key>fileRef</key>
-			<string>11A77D6930D24E1BA5797E0E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
 		</dict>
 		<key>11A77D6930D24E1BA5797E0E</key>
 		<dict>
@@ -54,173 +53,7 @@
 			<key>sourceTree</key>
 			<string>BUILT_PRODUCTS_DIR</string>
 		</dict>
-		<key>2E2BC18F023847BC9BFD0560</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>Check Pods Manifest.lock</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>diff "${PODS_ROOT}/../Podfile.lock" "${PODS_ROOT}/Manifest.lock" &gt; /dev/null
-if [[ $? != 0 ]] ; then
-    cat &lt;&lt; EOM
-error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.
-EOM
-    exit 1
-fi
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>469D3C7EB63CCF077674B274</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>archive.ar</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>libPods-TyphoonRestClientTests.a</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>4B9B9EE0664B5BFAE99143BD</key>
-		<dict>
-			<key>fileRef</key>
-			<string>469D3C7EB63CCF077674B274</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5C84882D07B06327E8D9BB26</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>archive.ar</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>libPods-TyphoonRestClient.a</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>7C7F52DF2A50096085E5149B</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>93FA6ECC5717FCE840EBCF80</string>
-				<string>F8613C05EF83E714D7879F6B</string>
-				<string>F1EDD576B14E9A7FECB30060</string>
-				<string>E5C31D38C3F64129E2DA415E</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Pods</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8BF497574D5F4B34A1A1A601</key>
-		<dict>
-			<key>fileRef</key>
-			<string>A14BA2DE857D4EC58948A253</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>93FA6ECC5717FCE840EBCF80</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods-TyphoonRestClient.debug.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Target Support Files/Pods-TyphoonRestClient/Pods-TyphoonRestClient.debug.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>A14BA2DE857D4EC58948A253</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>archive.ar</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>libPods-HttpWebService.a</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>A7FEE1DF57D124A4374EFCCC</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5C84882D07B06327E8D9BB26</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>E407C851B2E240178A0F2548</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>Check Pods Manifest.lock</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>diff "${PODS_ROOT}/../Podfile.lock" "${PODS_ROOT}/Manifest.lock" &gt; /dev/null
-if [[ $? != 0 ]] ; then
-    cat &lt;&lt; EOM
-error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.
-EOM
-    exit 1
-fi
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>E5C31D38C3F64129E2DA415E</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods-TyphoonRestClientTests.release.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Target Support Files/Pods-TyphoonRestClientTests/Pods-TyphoonRestClientTests.release.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>E5DCA20FFA584F6CA9163160</key>
+		<key>36031CF4AA19312055B79A4C</key>
 		<dict>
 			<key>buildActionMask</key>
 			<string>2147483647</string>
@@ -244,7 +77,20 @@ fi
 			<key>showEnvVarsInLog</key>
 			<string>0</string>
 		</dict>
-		<key>F1EDD576B14E9A7FECB30060</key>
+		<key>469D3C7EB63CCF077674B274</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>libPods-TyphoonRestClientTests.a</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>48F28F705C352E4073F55876</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -253,13 +99,87 @@ fi
 			<key>lastKnownFileType</key>
 			<string>text.xcconfig</string>
 			<key>name</key>
-			<string>Pods-TyphoonRestClientTests.debug.xcconfig</string>
+			<string>Pods-TyphoonRestClient.debug.xcconfig</string>
 			<key>path</key>
-			<string>Pods/Target Support Files/Pods-TyphoonRestClientTests/Pods-TyphoonRestClientTests.debug.xcconfig</string>
+			<string>Pods/Target Support Files/Pods-TyphoonRestClient/Pods-TyphoonRestClient.debug.xcconfig</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>F8613C05EF83E714D7879F6B</key>
+		<key>4EA244112427BF0621D67139</key>
+		<dict>
+			<key>fileRef</key>
+			<string>5C84882D07B06327E8D9BB26</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>5C84882D07B06327E8D9BB26</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>libPods-TyphoonRestClient.a</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>5F6F230CDD29EFAA5F60EAEA</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>Copy Pods Resources</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>"${SRCROOT}/Pods/Target Support Files/Pods-TyphoonRestClientTests/Pods-TyphoonRestClientTests-resources.sh"
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+		<key>60C7D97060CDCEF2A6DA8AC7</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>Check Pods Manifest.lock</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>diff "${PODS_ROOT}/../Podfile.lock" "${PODS_ROOT}/Manifest.lock" &gt; /dev/null
+if [[ $? != 0 ]] ; then
+    cat &lt;&lt; EOM
+error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.
+EOM
+    exit 1
+fi
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+		<key>76720616CF1D2D7E284DA0D3</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -271,6 +191,65 @@ fi
 			<string>Pods-TyphoonRestClient.release.xcconfig</string>
 			<key>path</key>
 			<string>Pods/Target Support Files/Pods-TyphoonRestClient/Pods-TyphoonRestClient.release.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>7C7F52DF2A50096085E5149B</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>48F28F705C352E4073F55876</string>
+				<string>76720616CF1D2D7E284DA0D3</string>
+				<string>EB1AF3E3BAD71ED13F222739</string>
+				<string>95F03988170F5DD45005F3EE</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Pods</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>95F03988170F5DD45005F3EE</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods-TyphoonRestClientTests.release.xcconfig</string>
+			<key>path</key>
+			<string>Pods/Target Support Files/Pods-TyphoonRestClientTests/Pods-TyphoonRestClientTests.release.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A14BA2DE857D4EC58948A253</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>libPods-HttpWebService.a</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>EB1AF3E3BAD71ED13F222739</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods-TyphoonRestClientTests.debug.xcconfig</string>
+			<key>path</key>
+			<string>Pods/Target Support Files/Pods-TyphoonRestClientTests/Pods-TyphoonRestClientTests.debug.xcconfig</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -425,8 +404,7 @@ fi
 			<key>files</key>
 			<array>
 				<string>FAC9161719E693370009D824</string>
-				<string>8BF497574D5F4B34A1A1A601</string>
-				<string>A7FEE1DF57D124A4374EFCCC</string>
+				<string>4EA244112427BF0621D67139</string>
 			</array>
 			<key>isa</key>
 			<string>PBXFrameworksBuildPhase</string>
@@ -456,11 +434,11 @@ fi
 			<string>FAC9163619E693370009D824</string>
 			<key>buildPhases</key>
 			<array>
-				<string>2E2BC18F023847BC9BFD0560</string>
+				<string>60C7D97060CDCEF2A6DA8AC7</string>
 				<string>FAC9160F19E693370009D824</string>
 				<string>FAC9161019E693370009D824</string>
 				<string>FAC9161119E693370009D824</string>
-				<string>E5DCA20FFA584F6CA9163160</string>
+				<string>36031CF4AA19312055B79A4C</string>
 			</array>
 			<key>buildRules</key>
 			<array/>
@@ -650,8 +628,7 @@ fi
 				<string>FAC9162519E693370009D824</string>
 				<string>FAC9162819E693370009D824</string>
 				<string>FAC9162619E693370009D824</string>
-				<string>0CD547296C6748538A605828</string>
-				<string>4B9B9EE0664B5BFAE99143BD</string>
+				<string>FC76D0CEC351728B7DD89E31</string>
 			</array>
 			<key>isa</key>
 			<string>PBXFrameworksBuildPhase</string>
@@ -683,11 +660,11 @@ fi
 			<string>FAC9163919E693370009D824</string>
 			<key>buildPhases</key>
 			<array>
-				<string>E407C851B2E240178A0F2548</string>
+				<string>04CC283EB507C466145160C9</string>
 				<string>FAC9161F19E693370009D824</string>
 				<string>FAC9162019E693370009D824</string>
 				<string>FAC9162119E693370009D824</string>
-				<string>0B69D321109B4FEE83B24C2F</string>
+				<string>5F6F230CDD29EFAA5F60EAEA</string>
 			</array>
 			<key>buildRules</key>
 			<array/>
@@ -1013,7 +990,7 @@ fi
 		<key>FAC9163719E693370009D824</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>93FA6ECC5717FCE840EBCF80</string>
+			<string>48F28F705C352E4073F55876</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>DSTROOT</key>
@@ -1022,8 +999,6 @@ fi
 				<string>YES</string>
 				<key>GCC_PREFIX_HEADER</key>
 				<string>TyphoonRestClient/TyphoonRestClient-Prefix.pch</string>
-				<key>OTHER_LDFLAGS</key>
-				<string>-ObjC</string>
 				<key>PRODUCT_NAME</key>
 				<string>TyphoonRestClient</string>
 				<key>SKIP_INSTALL</key>
@@ -1037,7 +1012,7 @@ fi
 		<key>FAC9163819E693370009D824</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>F8613C05EF83E714D7879F6B</string>
+			<string>76720616CF1D2D7E284DA0D3</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>DSTROOT</key>
@@ -1046,8 +1021,6 @@ fi
 				<string>YES</string>
 				<key>GCC_PREFIX_HEADER</key>
 				<string>TyphoonRestClient/TyphoonRestClient-Prefix.pch</string>
-				<key>OTHER_LDFLAGS</key>
-				<string>-ObjC</string>
 				<key>PRODUCT_NAME</key>
 				<string>TyphoonRestClient</string>
 				<key>SKIP_INSTALL</key>
@@ -1075,7 +1048,7 @@ fi
 		<key>FAC9163A19E693370009D824</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>F1EDD576B14E9A7FECB30060</string>
+			<string>EB1AF3E3BAD71ED13F222739</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>FRAMEWORK_SEARCH_PATHS</key>
@@ -1110,7 +1083,7 @@ fi
 		<key>FAC9163B19E693370009D824</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>E5C31D38C3F64129E2DA415E</string>
+			<string>95F03988170F5DD45005F3EE</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>FRAMEWORK_SEARCH_PATHS</key>
@@ -1870,6 +1843,13 @@ fi
 		<dict>
 			<key>fileRef</key>
 			<string>FAC9166C19E697A60009D824</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>FC76D0CEC351728B7DD89E31</key>
+		<dict>
+			<key>fileRef</key>
+			<string>469D3C7EB63CCF077674B274</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>

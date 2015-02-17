@@ -341,7 +341,7 @@
 - (void)test_nested_object_with_schema_and_errors
 {
     NSDictionary *data = @{@"key" : @"value", @"object" : @{@"key" : @"value", @"date" : @"date", @"array" : @[@{@"another_array" : @[@"1", @"2"]}]}};
-    NSDictionary *schema = @{@"key" : @"value", @"object" : @{@"key" : @"value", @"date" : @"date", @"array" : @[@{@"key" : @"value", @"key2?" : @"value2", @"another_array" : @[@"NSObject"]}]}};
+    NSDictionary *schema = @{@"key" : @"value", @"object" : @{@"key" : @"value", @"date" : @"date", @"array" : @[@{@"key" : @"value", @"key2{?}" : @"value2", @"another_array" : @[@"NSObject"]}]}};
 
     NSOrderedSet *errors = nil;
     __unused NSDictionary *object = [self convertResponseObject:data schema:schema errors:&errors];

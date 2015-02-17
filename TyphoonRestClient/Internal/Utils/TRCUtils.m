@@ -25,7 +25,7 @@ NSError *NSErrorWithFormat(NSString *format, ...)
 
 NSString *KeyFromOptionalKey(NSString *key, BOOL *isOptional)
 {
-    *isOptional = [key hasSuffix:@"?"];
+    *isOptional = [key hasSuffix:@"{?}"];
     if (*isOptional) {
         key = [key substringToIndex:[key length]-1];
     }

@@ -17,6 +17,7 @@
 
 NSError *NSErrorWithFormat(NSString *format, ...) NS_FORMAT_FUNCTION(1,2);
 NSString *KeyFromOptionalKey(NSString *key, BOOL *isOptional);
+
 NSError *NSErrorFromErrorSet(NSOrderedSet *errors, NSString *action);
 
 id ValueAfterApplyingOptions(id value, TRCValidationOptions options, BOOL isRequest, BOOL isOptional);

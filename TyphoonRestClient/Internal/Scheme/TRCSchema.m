@@ -17,7 +17,7 @@
 #import "TRCValueConverterRegistry.h"
 #import "TRCValueConverter.h"
 
-@interface HttpResponseSchemeStackTrace : NSObject
+@interface TRCResponseSchemeStackTrace : NSObject
 
 @property (nonatomic, strong) id originalObject;
 
@@ -29,7 +29,7 @@
 
 @end
 
-@implementation HttpResponseSchemeStackTrace
+@implementation TRCResponseSchemeStackTrace
 {
     NSMutableArray *_stack;
 }
@@ -142,9 +142,9 @@
 
 - (BOOL)validateResponse:(id)response error:(NSError **)error
 {
-    HttpResponseSchemeStackTrace *stackTrace = nil;
+    TRCResponseSchemeStackTrace *stackTrace = nil;
 #if DEBUG
-    stackTrace = [HttpResponseSchemeStackTrace new];
+    stackTrace = [TRCResponseSchemeStackTrace new];
     [stackTrace pushSymbol:@"root"];
     stackTrace.originalObject = response;
 #endif
@@ -158,9 +158,9 @@
 - (BOOL)validateRequest:(id)request error:(NSError **)error
 {
     isRequestValidation = YES;
-    HttpResponseSchemeStackTrace *stackTrace = nil;
+    TRCResponseSchemeStackTrace *stackTrace = nil;
 #if DEBUG
-    stackTrace = [HttpResponseSchemeStackTrace new];
+    stackTrace = [TRCResponseSchemeStackTrace new];
     [stackTrace pushSymbol:@"root"];
     stackTrace.originalObject = request;
 #endif
@@ -187,7 +187,7 @@
 }
 
 
-- (NSError *)validateReceivedValue:(id)value withSchemaValue:(id)schemeValue stackTrace:(HttpResponseSchemeStackTrace *)stack
+- (NSError *)validateReceivedValue:(id)value withSchemaValue:(id)schemeValue stackTrace:(TRCResponseSchemeStackTrace *)stack
 {
     //1. Check that types are same
     if (![self isTypeOfValue:value validForSchemeValue:schemeValue]) {
@@ -203,7 +203,7 @@
     }
 }
 
-- (NSError *)validateArray:(NSArray *)array withSchemeArrayValue:(id)schemeValue stackTrace:(HttpResponseSchemeStackTrace *)stack
+- (NSError *)validateArray:(NSArray *)array withSchemeArrayValue:(id)schemeValue stackTrace:(TRCResponseSchemeStackTrace *)stack
 {
     __block NSError *error = nil;
 
@@ -219,7 +219,7 @@
     return error;
 }
 
-- (NSError *)validateDictionary:(NSDictionary *)dictionary withSchemaDictionary:(NSDictionary *)scheme stackTrace:(HttpResponseSchemeStackTrace *)stack
+- (NSError *)validateDictionary:(NSDictionary *)dictionary withSchemaDictionary:(NSDictionary *)scheme stackTrace:(TRCResponseSchemeStackTrace *)stack
 {
     __block NSError *error = nil;
 

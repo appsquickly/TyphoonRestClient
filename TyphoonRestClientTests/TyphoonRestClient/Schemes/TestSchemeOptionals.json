@@ -1,6 +1,6 @@
 {
     "string": "NSString",
-    "string_by_default?": "some unknown class",
+    "string_by_default{?}": "some unknown class",
     "number": 2,
-    "number_float?": 2.0
+    "number_float{?}": 2.0
 }
