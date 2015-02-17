@@ -10,6 +10,8 @@
 	<string>HttpWebService</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>D169195DAD804F1DA2CEE37E7B481CA7D9D21CC3</key>
+		<string>git.appsquick.ly:typhoon/typhoonrestclient.git</string>
 		<key>DEFAEAE0F2F5CFD60C1DE5A95DBDB2062EF779F7</key>
 		<string>gitlab.com:codemonastery/vanilla.git</string>
 	</dict>
@@ -17,15 +19,17 @@
 	<string>HttpWebService.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>DEFAEAE0F2F5CFD60C1DE5A95DBDB2062EF779F7</key>
+		<key>D169195DAD804F1DA2CEE37E7B481CA7D9D21CC3</key>
 		<string>..</string>
+		<key>DEFAEAE0F2F5CFD60C1DE5A95DBDB2062EF779F7</key>
+		<string>../../HttpWebService</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>gitlab.com:codemonastery/vanilla.git</string>
+	<string>git.appsquick.ly:typhoon/typhoonrestclient.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>DEFAEAE0F2F5CFD60C1DE5A95DBDB2062EF779F7</string>
+	<string>D169195DAD804F1DA2CEE37E7B481CA7D9D21CC3</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
@@ -35,6 +39,14 @@
 			<string>DEFAEAE0F2F5CFD60C1DE5A95DBDB2062EF779F7</string>
 			<key>IDESourceControlWCCName</key>
 			<string>HttpWebService</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D169195DAD804F1DA2CEE37E7B481CA7D9D21CC3</string>
+			<key>IDESourceControlWCCName</key>
+			<string>TyphoonRestClient</string>
 		</dict>
 	</array>
 </dict>
