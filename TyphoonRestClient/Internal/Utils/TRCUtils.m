@@ -14,6 +14,8 @@
 
 #import "TRCUtils.h"
 
+NSString *TRCConverterNameKey = @"{parser}";
+
 NSError *NSErrorWithFormat(NSString *format, ...)
 {
     va_list args;
@@ -23,7 +25,7 @@ NSError *NSErrorWithFormat(NSString *format, ...)
     return [NSError errorWithDomain:@"" code:0 userInfo:@{ NSLocalizedDescriptionKey : description}];
 }
 
-NSString *KeyFromOptionalKey(NSString *key, BOOL *isOptional)
+NSString *TRCKeyFromOptionalKey(NSString *key, BOOL *isOptional)
 {
     *isOptional = [key hasSuffix:@"{?}"];
     if (*isOptional) {
@@ -45,7 +47,7 @@ NSError *NSErrorFromErrorSet(NSOrderedSet *errors, NSString *action)
     }
 }
 
-id ValueAfterApplyingOptions(id value, TRCValidationOptions options, BOOL isRequest, BOOL isOptional)
+id TRCValueAfterApplyingOptions(id value, TRCValidationOptions options, BOOL isRequest, BOOL isOptional)
 {
     id result = value;
     BOOL isEmptyDictionary = [result isKindOfClass:[NSDictionary class]] && [result count] == 0;

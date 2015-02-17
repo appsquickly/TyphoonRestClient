@@ -16,8 +16,10 @@
 
 @protocol TRCValueConverter;
 
-@protocol TRCValueConverterRegistry<NSObject>
+@protocol TRCConvertersRegistry<NSObject>
 
-- (id<TRCValueConverter>)valueConverterForTag:(NSString *)type;
+- (id<TRCValueConverter>)valueConverterForTag:(NSString *)tag;
+
+- (id<TRCObjectConverter>)objectConverterForTag:(NSString *)tag;
 
 @end

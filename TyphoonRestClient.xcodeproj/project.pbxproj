@@ -65,6 +65,7 @@
 
 /* Begin PBXFileReference section */
 		11A77D6930D24E1BA5797E0E /* libPods-HttpWebServiceTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HttpWebServiceTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2DBA1B8033DA8D5FA5B63C8B /* TRCObjectConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCObjectConverter.h; sourceTree = "<group>"; };
 		469D3C7EB63CCF077674B274 /* libPods-TyphoonRestClientTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TyphoonRestClientTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		48F28F705C352E4073F55876 /* Pods-TyphoonRestClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TyphoonRestClient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TyphoonRestClient/Pods-TyphoonRestClient.debug.xcconfig"; sourceTree = "<group>"; };
 		5C84882D07B06327E8D9BB26 /* libPods-TyphoonRestClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TyphoonRestClient.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,7 +93,7 @@
 		FAC9164619E694FA0009D824 /* TRCValueConverterUrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCValueConverterUrl.m; sourceTree = "<group>"; };
 		FAC9164819E694FA0009D824 /* TRCConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCConverter.h; sourceTree = "<group>"; };
 		FAC9164919E694FA0009D824 /* TRCConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCConverter.m; sourceTree = "<group>"; };
-		FAC9164C19E694FA0009D824 /* TRCValueConverterRegistry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCValueConverterRegistry.h; sourceTree = "<group>"; };
+		FAC9164C19E694FA0009D824 /* TRCConvertersRegistry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCConvertersRegistry.h; sourceTree = "<group>"; };
 		FAC9164E19E694FA0009D824 /* TRCSchema.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSchema.h; sourceTree = "<group>"; };
 		FAC9164F19E694FA0009D824 /* TRCSchema.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSchema.m; sourceTree = "<group>"; };
 		FAC9165119E694FA0009D824 /* TRCUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCUtils.h; sourceTree = "<group>"; };
@@ -268,7 +269,7 @@
 			children = (
 				FAC9164819E694FA0009D824 /* TRCConverter.h */,
 				FAC9164919E694FA0009D824 /* TRCConverter.m */,
-				FAC9164C19E694FA0009D824 /* TRCValueConverterRegistry.h */,
+				FAC9164C19E694FA0009D824 /* TRCConvertersRegistry.h */,
 			);
 			path = ResponseObjects;
 			sourceTree = "<group>";
@@ -298,6 +299,7 @@
 				FAC9165E19E695020009D824 /* TRCValueConverter.h */,
 				FAC9165F19E695020009D824 /* TRCConnection.h */,
 				FAC9166019E695020009D824 /* TRCErrorParser.h */,
+				2DBA1B8033DA8D5FA5B63C8B /* TRCObjectConverter.h */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";

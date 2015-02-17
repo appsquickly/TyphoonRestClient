@@ -9,13 +9,13 @@
 #import <XCTest/XCTest.h>
 #import "TRCSchema.h"
 #import "TRCRequest.h"
-#import "TRCValueConverterRegistry.h"
+#import "TRCConvertersRegistry.h"
 #import "TRCUtils.h"
 #import "TRCConverter.h"
 #import "TRCValueConverter.h"
 #import "TRCValueConverterStub.h"
 
-@interface TRCConverterTests : XCTestCase<TRCValueConverterRegistry>
+@interface TRCConverterTests : XCTestCase<TRCConvertersRegistry>
 
 @end
 

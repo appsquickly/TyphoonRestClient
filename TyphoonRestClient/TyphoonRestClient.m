@@ -18,26 +18,29 @@
 #import "TRCUtils.h"
 #import "TRCConverter.h"
 #import "TRCValueConverter.h"
-#import "TRCValueConverterRegistry.h"
+#import "TRCConvertersRegistry.h"
 #import "TRCErrorParser.h"
 #import "TRCConnection.h"
 #import "TRCValueConverterUrl.h"
 #import "TRCValueConverterString.h"
 #import "TRCValueConverterNumber.h"
+#import "TRCObjectConverter.h"
 
-@interface TyphoonRestClient ()<TRCValueConverterRegistry>
+@interface TyphoonRestClient ()<TRCConvertersRegistry>
 @end
 
 @implementation TyphoonRestClient
 {
-    NSMutableDictionary *typeConverterRegistry;
+    NSMutableDictionary *_typeConverterRegistry;
+    NSMutableDictionary *_objectConverterRegistry;
 }
 
 - (instancetype)init
 {
     self = [super init];
     if (self) {
-        typeConverterRegistry = [NSMutableDictionary new];
+        _typeConverterRegistry = [NSMutableDictionary new];
+        _objectConverterRegistry = [NSMutableDictionary new];
         [self registerDefaultTypeConverters];
         self.defaultRequestSerialization = TRCRequestSerializationJson;
         self.defaultResponseSerialization = TRCResponseSerializationJson;
@@ -398,15 +401,30 @@
 {
     NSParameterAssert(tag);
     if (valueConverter) {
-        typeConverterRegistry[tag] = valueConverter;
+        _typeConverterRegistry[tag] = valueConverter;
     } else {
-        [typeConverterRegistry removeObjectForKey:tag];
+        [_typeConverterRegistry removeObjectForKey:tag];
     }
 }
 
-- (id<TRCValueConverter>)valueConverterForTag:(NSString *)type
+- (void)registerObjectConverter:(id<TRCObjectConverter>)objectConverter forTag:(NSString *)tag
 {
-    return typeConverterRegistry[type];
+    NSParameterAssert(tag);
+    if (objectConverter) {
+        _objectConverterRegistry[tag] = objectConverter;
+    } else {
+        [_objectConverterRegistry removeObjectForKey:tag];
+    }
+}
+
+- (id<TRCObjectConverter>)objectConverterForTag:(NSString *)tag
+{
+    return _objectConverterRegistry[tag];
+}
+
+- (id<TRCValueConverter>)valueConverterForTag:(NSString *)tag
+{
+    return _typeConverterRegistry[tag];
 }
 
 #pragma mark - Log warning

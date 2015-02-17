@@ -10,17 +10,12 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 
-
-
 #import <Foundation/Foundation.h>
-#import "TyphoonRestClient.h"
 
-NSError *NSErrorWithFormat(NSString *format, ...) NS_FORMAT_FUNCTION(1,2);
+@protocol TRCObjectConverter<NSObject>
 
-NSString *TRCKeyFromOptionalKey(NSString *key, BOOL *isOptional);
+- (id)objectFromDictionary:(NSDictionary *)dictionary error:(NSError **)error;
 
-NSError *NSErrorFromErrorSet(NSOrderedSet *errors, NSString *action);
+- (NSDictionary *)dictionaryFromObject:(id)object error:(NSError **)error;
 
-id TRCValueAfterApplyingOptions(id value, TRCValidationOptions options, BOOL isRequest, BOOL isOptional);
-
-extern NSString *TRCConverterNameKey;
+@end

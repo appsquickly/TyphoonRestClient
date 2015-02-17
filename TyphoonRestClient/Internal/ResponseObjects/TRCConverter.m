@@ -14,9 +14,9 @@
 
 #import "TRCConverter.h"
 #import "TRCUtils.h"
-#import "TRCValueConverterRegistry.h"
+#import "TRCConvertersRegistry.h"
 #import "TRCValueConverter.h"
-#import "TyphoonRestClient.h"
+#import "TRCObjectConverter.h"
 
 @interface TRCConverter ()
 @property (nonatomic, strong) NSMutableOrderedSet *internalErrors;
@@ -24,21 +24,21 @@
 
 @implementation TRCConverter
 {
-    id schema;
-    id data;
-    BOOL convertingForRequest;
-    NSString *schemaName;
+    id _schema;
+    id _data;
+    BOOL _convertingForRequest;
+    NSString *_schemaName;
 }
 
 - (instancetype)initWithResponseValue:(id)arrayOrDictionary schemaValue:(id)schemaArrayOrDictionary schemaName:(NSString *)name
 {
     self = [super init];
     if (self) {
-        data = arrayOrDictionary;
-        schema = schemaArrayOrDictionary;
+        _data = arrayOrDictionary;
+        _schema = schemaArrayOrDictionary;
         self.internalErrors = [NSMutableOrderedSet new];
-        convertingForRequest = NO;
-        schemaName = name;
+        _convertingForRequest = NO;
+        _schemaName = name;
     }
     return self;
 }
@@ -47,18 +47,18 @@
 {
     self = [super init];
     if (self) {
-        data = arrayOrDictionary;
-        schema = schemaArrayOrDictionary;
+        _data = arrayOrDictionary;
+        _schema = schemaArrayOrDictionary;
         self.internalErrors = [NSMutableOrderedSet new];
-        convertingForRequest = YES;
-        schemaName = name;
+        _convertingForRequest = YES;
+        _schemaName = name;
     }
     return self;
 }
 
 - (id)convertValues
 {
-    return [self parseValue:data withSchemaValue:schema];
+    return [self parseValue:_data withSchemaValue:_schema];
 }
 
 - (NSError *)conversionError
@@ -74,7 +74,7 @@
 - (id)parseValue:(id)dataValue withSchemaValue:(id)schemeValue
 {
     if ([schemeValue isKindOfClass:[NSDictionary class]]) {
-        return [self parseDictionary:dataValue withSchemaDictionary:schemeValue];
+        return [self parseObject:dataValue withSchemaDictionary:schemeValue];
     } else if ([schemeValue isKindOfClass:[NSArray class]]) {
         return [self parseArray:dataValue withItemSchema:[schemeValue firstObject]];
     } else if (self.registry && [schemeValue isKindOfClass:[NSString class]]) {
@@ -93,7 +93,7 @@
     id<TRCValueConverter>typeConverter = [self.registry valueConverterForTag:typeName];
 
     if (typeConverter) {
-        if (convertingForRequest) {
+        if (_convertingForRequest) {
             result = [typeConverter requestValueFromObject:dataValue error:&convertError];
         } else {
             result = [typeConverter objectFromResponseValue:dataValue error:&convertError];
@@ -120,40 +120,71 @@
     return result;
 }
 
+- (id)parseObject:(id)object withSchemaDictionary:(NSDictionary *)schemeDict
+{
+    NSDictionary *dictionary = nil;
+
+    if (_convertingForRequest) {
+        NSString *converterTag = schemeDict[TRCConverterNameKey];
+        if (converterTag) {
+            dictionary = [self convertObject:object usingConverter:converterTag];
+        } else if ([object isKindOfClass:[NSDictionary class]]) {
+            dictionary = object;
+        } else {
+            dictionary = @{};
+            [self.internalErrors addObject:NSErrorWithFormat(@"Object Convertion Error: Can't compose dictionary from %@, converter tag missing. Schema: %@.", [object class], _schemaName)];
+        }
+    }
+
+    NSDictionary *convertedDictionary = [self parseDictionary:dictionary withSchemaDictionary:schemeDict];
+    id result = convertedDictionary;
+
+    if (!_convertingForRequest) {
+        NSString *converterTag = schemeDict[TRCConverterNameKey];
+        if (converterTag) {
+            result = [self convertDictionary:convertedDictionary usingConverter:converterTag];
+        }
+    }
+
+    return result;
+}
+
 - (id)parseDictionary:(NSDictionary *)dictionary withSchemaDictionary:(NSDictionary *)schemaDict
 {
     NSMutableDictionary *result = [[NSMutableDictionary alloc] initWithCapacity:[dictionary count]];
 
     [schemaDict enumerateKeysAndObjectsUsingBlock:^(NSString *schemaKey, id schemaValue, BOOL *stop) {
-        BOOL isOptional;
-        NSString *key = KeyFromOptionalKey(schemaKey, &isOptional);
-        id dataValue = dictionary[key];
+        if (![schemaKey isEqualToString:TRCConverterNameKey]) {
+            BOOL isOptional;
+            NSString *key = TRCKeyFromOptionalKey(schemaKey, &isOptional);
+            id dataValue = dictionary[key];
 
-        //Handle NSNull case
-        if ([dataValue isKindOfClass:[NSNull class]]) {
-            dataValue = nil;
-        }
-
-        dataValue = ValueAfterApplyingOptions(dataValue, self.options, convertingForRequest, isOptional);
-
-        if (dataValue) {
-            id converted = [self parseValue:dataValue withSchemaValue:schemaValue];
-            if (converted) {
-                result[key] = converted;
+            //Handle NSNull case
+            if ([dataValue isKindOfClass:[NSNull class]]) {
+                dataValue = nil;
             }
-        } else if (!isOptional) {
-            [self.internalErrors addObject:NSErrorWithFormat(@"ValidationError: Can't find value for key '%@'. Schema: %@, Original object: %@", key, schemaName, dictionary)];
+
+            dataValue = TRCValueAfterApplyingOptions(dataValue, self.options, _convertingForRequest, isOptional);
+
+            if (dataValue) {
+                id converted = [self parseValue:dataValue withSchemaValue:schemaValue];
+                if (converted) {
+                    result[key] = converted;
+                }
+            } else if (!isOptional) {
+                [self.internalErrors addObject:NSErrorWithFormat(@"ValidationError: Can't find value for key '%@'. Schema: %@, Original object: %@", key, _schemaName, dictionary)];
+            }
         }
     }];
 
     [result addEntriesFromDictionary:[self entriesFromDictionary:dictionary missedInScheme:schemaDict]];
-    
+
     return result;
 }
 
 - (NSDictionary *)entriesFromDictionary:(NSDictionary *)dictionary missedInScheme:(NSDictionary *)schemaDict
 {
-    TRCValidationOptions optionToCheck = convertingForRequest ? TRCValidationOptionsRemoveValuesMissedInSchemeForRequests : TRCValidationOptionsRemoveValuesMissedInSchemeForResponses;
+    TRCValidationOptions optionToCheck = _convertingForRequest ? TRCValidationOptionsRemoveValuesMissedInSchemeForRequests : TRCValidationOptionsRemoveValuesMissedInSchemeForResponses;
 
     if (!(self.options & optionToCheck)) {
 
@@ -169,6 +200,42 @@
     } else {
         return @{};
     }
+}
+
+- (id)convertDictionary:(NSDictionary *)dictionary usingConverter:(NSString *)tag
+{
+    NSParameterAssert(tag);
+    NSParameterAssert(self.registry);
+    id <TRCObjectConverter>converter = [self.registry objectConverterForTag:tag];
+    if (!converter) {
+        [self.internalErrors addObject:NSErrorWithFormat(@"Can't find converter for tag '%@'", tag)];
+        return nil;
+    }
+    NSError *error = nil;
+    id result = [converter objectFromDictionary:dictionary error:&error];
+    if (error) {
+        [self.internalErrors addObject:error];
+        result = nil;
+    }
+    return result;
+}
+
+- (NSDictionary *)convertObject:(id)object usingConverter:(NSString *)tag
+{
+    NSParameterAssert(tag);
+    NSParameterAssert(self.registry);
+    id <TRCObjectConverter>converter = [self.registry objectConverterForTag:tag];
+    if (!converter) {
+        [self.internalErrors addObject:NSErrorWithFormat(@"Can't find converter for tag '%@'", tag)];
+        return nil;
+    }
+    NSError *error = nil;
+    NSDictionary *result = [converter dictionaryFromObject:object error:&error];
+    if (error) {
+        [self.internalErrors addObject:error];
+        result = nil;
+    }
+    return result;
 }
 
 @end

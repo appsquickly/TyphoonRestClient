@@ -15,12 +15,12 @@
 
 #import "TyphoonRestClient.h"
 
-@protocol TRCValueConverterRegistry;
+@protocol TRCConvertersRegistry;
 
 @interface TRCSchema : NSObject
 
 @property (nonatomic, strong, readonly) NSString *name;
-@property (nonatomic, strong) id<TRCValueConverterRegistry>converterRegistry;
+@property (nonatomic, strong) id<TRCConvertersRegistry>converterRegistry;
 @property (nonatomic) TRCValidationOptions options;
 
 + (instancetype)schemaWithName:(NSString *)name;

@@ -10,8 +10,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 
-
-
 #import <Foundation/Foundation.h>
 
 typedef NS_OPTIONS(NSInteger, TRCValueConverterType)  {

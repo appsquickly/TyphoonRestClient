@@ -16,13 +16,13 @@
 #import "TRCRequest.h"
 #import "TyphoonRestClient.h"
 
-@protocol TRCValueConverterRegistry;
+@protocol TRCConvertersRegistry;
 
 /** TRCConverter converts whole responses or requests using TRCValueConverter from registry */
 
 @interface TRCConverter : NSObject
 
-@property (nonatomic, strong) id<TRCValueConverterRegistry> registry;
+@property (nonatomic, strong) id<TRCConvertersRegistry> registry;
 @property (nonatomic) TRCValidationOptions options;
 
 #pragma mark - Initialization

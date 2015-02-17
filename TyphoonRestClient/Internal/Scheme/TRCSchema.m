@@ -14,7 +14,7 @@
 
 #import "TRCSchema.h"
 #import "TRCUtils.h"
-#import "TRCValueConverterRegistry.h"
+#import "TRCConvertersRegistry.h"
 #import "TRCValueConverter.h"
 
 @interface TRCResponseSchemeStackTrace : NSObject
@@ -225,34 +225,37 @@
 
     [scheme enumerateKeysAndObjectsUsingBlock:^(NSString *key, id schemeValue, BOOL *stop) {
 
-        BOOL isOptional = NO;
-        key = KeyFromOptionalKey(key, &isOptional);
+        if (![key isEqualToString:TRCConverterNameKey]) {
 
-        [stack pushSymbol:key];
+            BOOL isOptional = NO;
+            key = TRCKeyFromOptionalKey(key, &isOptional);
 
-        id givenValue = dictionary[key];
+            [stack pushSymbol:key];
 
-        //0. Handle NSNull case
-        if ([givenValue isKindOfClass:[NSNull class]]) {
-            givenValue = nil;
-        }
+            id givenValue = dictionary[key];
 
-        givenValue = ValueAfterApplyingOptions(givenValue, self.options, isRequestValidation, isOptional);
+            //0. Handle NSNull case
+            if ([givenValue isKindOfClass:[NSNull class]]) {
+                givenValue = nil;
+            }
 
-        //1. Check value exists
-        if (!isOptional && !givenValue) {
-            error = NSErrorWithFormat(@"ValidationError: Can't find value for key '%@'. Schema: %@, Original object: %@", [stack stringRepresentation], _name, stack.originalObject);
-            *stop = YES;
-        }
-        //2. Check value correct
-        else if (givenValue) {
-            error = [self validateReceivedValue:givenValue withSchemaValue:schemeValue stackTrace:stack];
-            if (error) {
+            givenValue = TRCValueAfterApplyingOptions(givenValue, self.options, isRequestValidation, isOptional);
+
+            //1. Check value exists
+            if (!isOptional && !givenValue) {
+                error = NSErrorWithFormat(@"ValidationError: Can't find value for key '%@'. Schema: %@, Original object: %@", [stack stringRepresentation], _name, stack.originalObject);
                 *stop = YES;
             }
-        }
+                //2. Check value correct
+            else if (givenValue) {
+                error = [self validateReceivedValue:givenValue withSchemaValue:schemeValue stackTrace:stack];
+                if (error) {
+                    *stop = YES;
+                }
+            }
 
-        [stack pop];
+            [stack pop];
+        }
     }];
 
     return error;
