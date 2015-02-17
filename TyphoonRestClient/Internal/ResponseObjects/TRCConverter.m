@@ -122,27 +122,24 @@
 
 - (id)parseObject:(id)object withSchemaDictionary:(NSDictionary *)schemeDict
 {
-    NSDictionary *dictionary = nil;
+    NSDictionary *dictionary = object;
 
     if (_convertingForRequest) {
         NSString *converterTag = schemeDict[TRCConverterNameKey];
         if (converterTag) {
             dictionary = [self convertObject:object usingConverter:converterTag];
-        } else if ([object isKindOfClass:[NSDictionary class]]) {
-            dictionary = object;
-        } else {
+        } else if (![object isKindOfClass:[NSDictionary class]]) {
             dictionary = @{};
             [self.internalErrors addObject:NSErrorWithFormat(@"Object Convertion Error: Can't compose dictionary from %@, converter tag missing. Schema: %@.", [object class], _schemaName)];
         }
     }
 
-    NSDictionary *convertedDictionary = [self parseDictionary:dictionary withSchemaDictionary:schemeDict];
-    id result = convertedDictionary;
+    id result = [self parseDictionary:dictionary withSchemaDictionary:schemeDict];
 
     if (!_convertingForRequest) {
         NSString *converterTag = schemeDict[TRCConverterNameKey];
         if (converterTag) {
-            result = [self convertDictionary:convertedDictionary usingConverter:converterTag];
+            result = [self convertDictionary:result usingConverter:converterTag];
         }
     }
 

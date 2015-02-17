@@ -3,7 +3,7 @@
 //  Iconic
 //
 //  Created by Aleksey Garbarev on 19.09.14.
-//  Copyright (c) 2014 Code Monastery. All rights reserved.
+//  Copyright (c) 2014 Apps Quickly. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
@@ -14,6 +14,8 @@
 #import "TRCConverter.h"
 #import "TRCValueConverter.h"
 #import "TRCValueConverterStub.h"
+#import "TRCModelObjectConverter.h"
+#import "TestModelObject.h"
 
 @interface TRCConverterTests : XCTestCase<TRCConvertersRegistry>
 
@@ -30,6 +32,9 @@ TRCValidationOptions validationOptions;
     if ([type isEqualToString:@"NSURL"]) {
         stub.object = @"Url";
         stub.value = @"Url";
+    } else if ([type isEqualToString:@"{url}"]) {
+        stub.object = [[NSURL alloc] initWithString:@"http://appsquick.ly"];
+        stub.value = [[NSURL alloc] initWithString:@"http://appsquick.ly"];
     } else if ([type isEqualToString:@"NSDate"]) {
         stub.object = @"Date";
     } else if ([type isEqualToString:@"NSObject"]) {
@@ -38,6 +43,15 @@ TRCValidationOptions validationOptions;
         return nil;
     }
     return stub;
+}
+
+- (id<TRCObjectConverter>)objectConverterForTag:(NSString *)tag
+{
+    if ([tag isEqualToString:@"test"]) {
+        return [TRCModelObjectConverter new];
+    } else {
+        return nil;
+    };
 }
 
 + (void)setUp
@@ -407,6 +421,66 @@ TRCValidationOptions validationOptions;
 
 
     XCTAssertTrue(errors.count == 2, @"Error: %@", errors);
+}
+
+- (void)test_model_object_response_parsing
+{
+    NSDictionary *data = @{ @"first_name": @"Ivan", @"last_name": @"Ivanov", @"avatar_url": @"some_url"};
+    NSDictionary *schema = @{ @"first_name": @"Ivan", @"last_name": @"Ivanov", @"avatar_url": @"{url}", @"{converter}": @"test"};
+
+    NSOrderedSet *errors = nil;
+    TestModelObject *object = [self convertResponseObject:data schema:schema errors:&errors];
+
+    XCTAssertEqualObjects(object.firstName, @"Ivan");
+    XCTAssertEqualObjects(object.lastName, @"Ivanov");
+    XCTAssertEqualObjects(object.avatarUrl, [NSURL URLWithString:@"http://appsquick.ly"]);
+    XCTAssertTrue([errors count] == 0);
+}
+
+- (void)test_model_object_request_composing
+{
+    TestModelObject *test = [TestModelObject new];
+    test.firstName = @"Ivan";
+    test.lastName = @"Ivanov";
+    test.avatarUrl = [NSURL URLWithString:@"http://google.com"];
+
+    NSDictionary *schema = @{ @"first_name": @"Ivan", @"last_name": @"Ivanov", @"avatar_url": @"{url}", @"{converter}": @"test"};
+
+    NSOrderedSet *errors = nil;
+    NSDictionary *object = [self convertRequestObject:test schema:schema errors:&errors];
+
+    XCTAssertEqualObjects(object[@"first_name"], @"Ivan");
+    XCTAssertEqualObjects(object[@"last_name"], @"Ivanov");
+    XCTAssertEqualObjects(object[@"avatar_url"], [NSURL URLWithString:@"http://appsquick.ly"]);
+    XCTAssertTrue([errors count] == 0);
+}
+
+- (void)test_model_object_response_parsing_error
+{
+    NSDictionary *data = @{ @"first_name": @"i", @"last_name": @"Ivanov", @"avatar_url": @"some_url"};
+    NSDictionary *schema = @{ @"first_name": @"Ivan", @"last_name": @"Ivanov", @"avatar_url": @"{url}", @"{converter}": @"test"};
+
+    NSOrderedSet *errors = nil;
+    TestModelObject *object = [self convertResponseObject:data schema:schema errors:&errors];
+
+    XCTAssertNil(object);
+    XCTAssertTrue([errors count] >= 1);
+}
+
+- (void)test_model_object_request_composing_error
+{
+    TestModelObject *test = [TestModelObject new];
+    test.firstName = @"i";
+    test.lastName = @"Ivanov";
+    test.avatarUrl = [NSURL URLWithString:@"http://google.com"];
+
+    NSDictionary *schema = @{ @"first_name": @"Ivan", @"last_name": @"Ivanov", @"avatar_url": @"{url}", @"{converter}": @"test"};
+
+    NSOrderedSet *errors = nil;
+    NSDictionary *object = [self convertRequestObject:test schema:schema errors:&errors];
+
+    XCTAssertEqualObjects(object, @{});
+    XCTAssertTrue([errors count] >= 1);
 }
 
 @end

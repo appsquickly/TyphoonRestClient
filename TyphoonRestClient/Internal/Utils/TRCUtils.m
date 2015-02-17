@@ -14,7 +14,7 @@
 
 #import "TRCUtils.h"
 
-NSString *TRCConverterNameKey = @"{parser}";
+NSString *TRCConverterNameKey = @"{converter}";
 
 NSError *NSErrorWithFormat(NSString *format, ...)
 {
