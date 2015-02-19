@@ -130,7 +130,7 @@
             dictionary = [self convertObject:object usingConverter:converterTag];
         } else if (![object isKindOfClass:[NSDictionary class]]) {
             dictionary = @{};
-            [self.internalErrors addObject:NSErrorWithFormat(@"Object Convertion Error: Can't compose dictionary from %@, converter tag missing. Schema: %@.", [object class], _schemaName)];
+            [self.internalErrors addObject:TRCConversionErrorForObject([NSString stringWithFormat:@"Can't compose dictionary from %@, converter tag missing", [object class]], _data, _schemaName, !_convertingForRequest)];
         }
     }
 
@@ -169,7 +169,7 @@
                     result[key] = converted;
                 }
             } else if (!isOptional) {
-                [self.internalErrors addObject:NSErrorWithFormat(@"ValidationError: Can't find value for key '%@'. Schema: %@, Original object: %@", key, _schemaName, dictionary)];
+                [self.internalErrors addObject:TRCConversionErrorForObject([NSString stringWithFormat:@"Can't find value for key '%@'", key], _data, _schemaName, !_convertingForRequest)];
             }
         }
     }];
@@ -207,7 +207,7 @@
     NSParameterAssert(self.registry);
     id <TRCObjectConverter>converter = [self.registry objectConverterForTag:tag];
     if (!converter) {
-        [self.internalErrors addObject:NSErrorWithFormat(@"Can't find converter for tag '%@'", tag)];
+        [self.internalErrors addObject:TRCConversionErrorForObject([NSString stringWithFormat:@"Can't find converter for tag '%@'", tag], _data, _schemaName, !_convertingForRequest)];
         return nil;
     }
     NSError *error = nil;
@@ -225,7 +225,7 @@
     NSParameterAssert(self.registry);
     id <TRCObjectConverter>converter = [self.registry objectConverterForTag:tag];
     if (!converter) {
-        [self.internalErrors addObject:NSErrorWithFormat(@"Can't find converter for tag '%@'", tag)];
+        [self.internalErrors addObject:TRCConversionErrorForObject([NSString stringWithFormat:@"Can't find converter for tag '%@'", tag], _data, _schemaName, !_convertingForRequest)];
         return nil;
     }
     NSError *error = nil;

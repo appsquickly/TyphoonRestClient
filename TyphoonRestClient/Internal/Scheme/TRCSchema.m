@@ -10,61 +10,12 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 
-
-
 #import "TRCSchema.h"
 #import "TRCUtils.h"
 #import "TRCConvertersRegistry.h"
 #import "TRCValueConverter.h"
-
-@interface TRCResponseSchemeStackTrace : NSObject
-
-@property (nonatomic, strong) id originalObject;
-
-- (void)pushSymbol:(NSString *)symbol;
-- (void)pushSymbolWithArrayIndex:(NSUInteger)index;
-- (void)pop;
-
-- (NSString *)stringRepresentation;
-
-@end
-
-@implementation TRCResponseSchemeStackTrace
-{
-    NSMutableArray *_stack;
-}
-
-- (id)init
-{
-    self = [super init];
-    if (self) {
-        _stack = [NSMutableArray new];
-    }
-    return self;
-}
-
-- (void)pushSymbol:(NSString *)symbol
-{
-    [_stack addObject:symbol];
-}
-
-- (void)pushSymbolWithArrayIndex:(NSUInteger)index
-{
-    [self pushSymbol:[NSString stringWithFormat:@"(%d)", (int)index]];
-}
-
-
-- (void)pop
-{
-    [_stack removeLastObject];
-}
-
-- (NSString *)stringRepresentation
-{
-    return [_stack componentsJoinedByString:@"."];
-}
-
-@end
+#import "TRCSchemeStackTrace.h"
+#import "TyphoonRestClientErrors.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -142,10 +93,10 @@
 
 - (BOOL)validateResponse:(id)response error:(NSError **)error
 {
-    TRCResponseSchemeStackTrace *stackTrace = nil;
+    TRCSchemeStackTrace *stackTrace = nil;
 #if DEBUG
-    stackTrace = [TRCResponseSchemeStackTrace new];
-    [stackTrace pushSymbol:@"root"];
+    stackTrace = [TRCSchemeStackTrace new];
+//    [stackTrace pushSymbol:@"root"];
     stackTrace.originalObject = response;
 #endif
     NSError *validationError = [self validateReceivedValue:response withSchemaValue:self.schemeObject stackTrace:stackTrace];
@@ -158,10 +109,10 @@
 - (BOOL)validateRequest:(id)request error:(NSError **)error
 {
     isRequestValidation = YES;
-    TRCResponseSchemeStackTrace *stackTrace = nil;
+    TRCSchemeStackTrace *stackTrace = nil;
 #if DEBUG
-    stackTrace = [TRCResponseSchemeStackTrace new];
-    [stackTrace pushSymbol:@"root"];
+    stackTrace = [TRCSchemeStackTrace new];
+//    [stackTrace pushSymbol:@"root"];
     stackTrace.originalObject = request;
 #endif
     NSError *validationError = [self validateReceivedValue:request withSchemaValue:self.schemeObject stackTrace:stackTrace];
@@ -187,11 +138,11 @@
 }
 
 
-- (NSError *)validateReceivedValue:(id)value withSchemaValue:(id)schemeValue stackTrace:(TRCResponseSchemeStackTrace *)stack
+- (NSError *)validateReceivedValue:(id)value withSchemaValue:(id)schemeValue stackTrace:(TRCSchemeStackTrace *)stack
 {
     //1. Check that types are same
     if (![self isTypeOfValue:value validForSchemeValue:schemeValue]) {
-        return NSErrorWithFormat(@"Validation error: Type mismatch for %@ (Must be %@, but '%@' given). Schema: %@, Original object: %@", [stack stringRepresentation], [self typeRepresentationForSchemeValue:schemeValue], [value class], _name, stack.originalObject);
+        return [self errorForIncorrectType:[[value class] description] correctType:[self typeRepresentationForSchemeValue:schemeValue] stack:stack];
     }
     //2. Check if collection type - call recurrent function
     if ([schemeValue isKindOfClass:[NSArray class]]) {
@@ -203,7 +154,7 @@
     }
 }
 
-- (NSError *)validateArray:(NSArray *)array withSchemeArrayValue:(id)schemeValue stackTrace:(TRCResponseSchemeStackTrace *)stack
+- (NSError *)validateArray:(NSArray *)array withSchemeArrayValue:(id)schemeValue stackTrace:(TRCSchemeStackTrace *)stack
 {
     __block NSError *error = nil;
 
@@ -219,7 +170,7 @@
     return error;
 }
 
-- (NSError *)validateDictionary:(NSDictionary *)dictionary withSchemaDictionary:(NSDictionary *)scheme stackTrace:(TRCResponseSchemeStackTrace *)stack
+- (NSError *)validateDictionary:(NSDictionary *)dictionary withSchemaDictionary:(NSDictionary *)scheme stackTrace:(TRCSchemeStackTrace *)stack
 {
     __block NSError *error = nil;
 
@@ -229,8 +180,6 @@
 
             BOOL isOptional = NO;
             key = TRCKeyFromOptionalKey(key, &isOptional);
-
-            [stack pushSymbol:key];
 
             id givenValue = dictionary[key];
 
@@ -243,18 +192,20 @@
 
             //1. Check value exists
             if (!isOptional && !givenValue) {
-                error = NSErrorWithFormat(@"ValidationError: Can't find value for key '%@'. Schema: %@, Original object: %@", [stack stringRepresentation], _name, stack.originalObject);
+                error = [self errorForMissedKey:key withStack:stack];
                 *stop = YES;
             }
                 //2. Check value correct
             else if (givenValue) {
+                [stack pushSymbol:key];
+
                 error = [self validateReceivedValue:givenValue withSchemaValue:schemeValue stackTrace:stack];
                 if (error) {
                     *stop = YES;
                 }
-            }
 
-            [stack pop];
+                [stack pop];
+            }
         }
     }];
 
@@ -294,7 +245,10 @@
     if ([schemeValue isKindOfClass:[NSString class]]) {
         id<TRCValueConverter>converter = [self.converterRegistry valueConverterForTag:schemeValue];
         if (converter) {
-            TRCValueConverterType types = [converter types];
+            TRCValueConverterType types = TRCValueConverterTypeString;
+            if ([converter respondsToSelector:@selector(types)]) {
+                types = [converter types];
+            }
             NSMutableArray *supportedTypes = [NSMutableArray new];
             if (types & TRCValueConverterTypeNumber) {
                 [supportedTypes addObject:@"'NSNumber'"];
@@ -307,6 +261,26 @@
     }
 
     return [NSString stringWithFormat:@"'%@'",NSStringFromClass([schemeValue class])];
+}
+
+- (NSError *)errorForMissedKey:(NSString *)key withStack:(TRCSchemeStackTrace *)stack
+{
+    NSString *fullDescriptionErrorMessage = [NSString stringWithFormat:@"Can't find value for key '%@' in this dictionary", key];
+    NSMutableDictionary *userInfo = [NSMutableDictionary new];
+    userInfo[TyphoonRestClientErrorKeyFullDescription] = [stack fullDescriptionWithErrorMessage:fullDescriptionErrorMessage];
+    userInfo[TyphoonRestClientErrorKeySchemaName] = _name;
+    userInfo[NSLocalizedDescriptionKey] = [NSString stringWithFormat:@"Can't find value for key '%@' in '%@' dictionary", key, [stack shortDescription]];
+    return [NSError errorWithDomain:@"TyphoonRestClientErrors" code:TyphoonRestClientErrorCodeValidation userInfo:userInfo];
+}
+
+- (NSError *)errorForIncorrectType:(NSString *)incorrectType correctType:(NSString *)correctType stack:(TRCSchemeStackTrace *)stack
+{
+    NSString *fullDescriptionErrorMessage = [NSString stringWithFormat:@"Type mismatch: must be %@, but '%@' has given", correctType, incorrectType];
+    NSMutableDictionary *userInfo = [NSMutableDictionary new];
+    userInfo[TyphoonRestClientErrorKeyFullDescription] = [stack fullDescriptionWithErrorMessage:fullDescriptionErrorMessage];
+    userInfo[TyphoonRestClientErrorKeySchemaName] = _name;
+    userInfo[NSLocalizedDescriptionKey] = [NSString stringWithFormat:@"Type mismatch for '%@' (Must be %@, but '%@' has given)", [stack shortDescription], correctType, incorrectType];
+    return [NSError errorWithDomain:@"TyphoonRestClientErrors" code:TyphoonRestClientErrorCodeValidation userInfo:userInfo];
 }
 
 @end

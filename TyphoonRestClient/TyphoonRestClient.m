@@ -200,7 +200,7 @@
     NSError *validationError = nil;
     if (![self validateResponse:object withSchema:scheme error:&validationError]) {
         if (!validationError) {
-            validationError = NSErrorWithFormat(@"Unknown validation error while executing response: %@", object);
+            validationError = TRCUnknownValidationErrorForObject(object, [scheme name], YES);
         }
 
         if (validationError && error) {
@@ -242,7 +242,7 @@
     NSError *validationError = nil;
     if (![self validateRequest:converted withSchema:scheme error:&validationError]) {
         if (!validationError) {
-            validationError = NSErrorWithFormat(@"Unknown validation error while executing response: %@", object);
+            validationError = TRCUnknownValidationErrorForObject(converted, [scheme name], NO);
         }
         if (validationError && error) {
             *error = validationError;

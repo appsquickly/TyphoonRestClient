@@ -13,6 +13,8 @@
 
 
 #import "TRCUtils.h"
+#import "TyphoonRestClientErrors.h"
+#import "TRCSchemeStackTrace.h"
 
 NSString *TRCConverterNameKey = @"{converter}";
 
@@ -68,4 +70,24 @@ id TRCValueAfterApplyingOptions(id value, TRCValidationOptions options, BOOL isR
         }
     }
     return result;
+}
+
+NSError *TRCUnknownValidationErrorForObject(id object, NSString *schemaName, BOOL isResponse)
+{
+    NSString *errorMessage = [NSString stringWithFormat:@"Unknown error while %@ validation", isResponse?@"response":@"request"];
+    NSMutableDictionary *userInfo = [NSMutableDictionary new];
+    userInfo[TyphoonRestClientErrorKeyFullDescription] = [NSString stringWithFormat:@"Origianl object: %@", [TRCSchemeStackTrace descriptionOfObject:object]];
+    userInfo[TyphoonRestClientErrorKeySchemaName] = schemaName;
+    userInfo[NSLocalizedDescriptionKey] = errorMessage;
+    return [NSError errorWithDomain:TyphoonRestClientErrors code:TyphoonRestClientErrorCodeValidation userInfo:userInfo];
+}
+
+NSError *TRCConversionErrorForObject(NSString *errorMessage, id object, NSString *schemaName, BOOL isResponse)
+{
+    NSString *message = errorMessage ?: [NSString stringWithFormat:@"Unknown error while %@ conversion", isResponse?@"response":@"request"];
+    NSMutableDictionary *userInfo = [NSMutableDictionary new];
+    userInfo[TyphoonRestClientErrorKeyFullDescription] = [NSString stringWithFormat:@"Origianl object: %@", [TRCSchemeStackTrace descriptionOfObject:object]];
+    userInfo[TyphoonRestClientErrorKeySchemaName] = schemaName;
+    userInfo[NSLocalizedDescriptionKey] = message;
+    return [NSError errorWithDomain:TyphoonRestClientErrors code:TyphoonRestClientErrorCodeConversion userInfo:userInfo];
 }
