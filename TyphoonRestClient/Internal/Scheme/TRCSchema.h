@@ -9,9 +9,9 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-
-
-
+#ifndef TRCSchemaTrackErrorTrace
+    #define TRCSchemaTrackErrorTrace 1
+#endif
 
 #import "TyphoonRestClient.h"
 

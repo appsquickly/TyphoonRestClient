@@ -94,9 +94,8 @@
 - (BOOL)validateResponse:(id)response error:(NSError **)error
 {
     TRCSchemeStackTrace *stackTrace = nil;
-#if DEBUG
+#if TRCSchemaTrackErrorTrace
     stackTrace = [TRCSchemeStackTrace new];
-//    [stackTrace pushSymbol:@"root"];
     stackTrace.originalObject = response;
 #endif
     NSError *validationError = [self validateReceivedValue:response withSchemaValue:self.schemeObject stackTrace:stackTrace];
@@ -110,9 +109,8 @@
 {
     isRequestValidation = YES;
     TRCSchemeStackTrace *stackTrace = nil;
-#if DEBUG
+#if TRCSchemaTrackErrorTrace
     stackTrace = [TRCSchemeStackTrace new];
-//    [stackTrace pushSymbol:@"root"];
     stackTrace.originalObject = request;
 #endif
     NSError *validationError = [self validateReceivedValue:request withSchemaValue:self.schemeObject stackTrace:stackTrace];
@@ -267,7 +265,9 @@
 {
     NSString *fullDescriptionErrorMessage = [NSString stringWithFormat:@"Can't find value for key '%@' in this dictionary", key];
     NSMutableDictionary *userInfo = [NSMutableDictionary new];
-    userInfo[TyphoonRestClientErrorKeyFullDescription] = [stack fullDescriptionWithErrorMessage:fullDescriptionErrorMessage];
+    if (stack) {
+        userInfo[TyphoonRestClientErrorKeyFullDescription] = [stack fullDescriptionWithErrorMessage:fullDescriptionErrorMessage];
+    }
     userInfo[TyphoonRestClientErrorKeySchemaName] = _name;
     userInfo[NSLocalizedDescriptionKey] = [NSString stringWithFormat:@"Can't find value for key '%@' in '%@' dictionary", key, [stack shortDescription]];
     return [NSError errorWithDomain:@"TyphoonRestClientErrors" code:TyphoonRestClientErrorCodeValidation userInfo:userInfo];
@@ -277,7 +277,9 @@
 {
     NSString *fullDescriptionErrorMessage = [NSString stringWithFormat:@"Type mismatch: must be %@, but '%@' has given", correctType, incorrectType];
     NSMutableDictionary *userInfo = [NSMutableDictionary new];
-    userInfo[TyphoonRestClientErrorKeyFullDescription] = [stack fullDescriptionWithErrorMessage:fullDescriptionErrorMessage];
+    if (stack) {
+        userInfo[TyphoonRestClientErrorKeyFullDescription] = [stack fullDescriptionWithErrorMessage:fullDescriptionErrorMessage];
+    }
     userInfo[TyphoonRestClientErrorKeySchemaName] = _name;
     userInfo[NSLocalizedDescriptionKey] = [NSString stringWithFormat:@"Type mismatch for '%@' (Must be %@, but '%@' has given)", [stack shortDescription], correctType, incorrectType];
     return [NSError errorWithDomain:@"TyphoonRestClientErrors" code:TyphoonRestClientErrorCodeValidation userInfo:userInfo];
