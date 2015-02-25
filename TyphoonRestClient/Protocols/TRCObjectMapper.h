@@ -12,7 +12,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol TRCObjectConverter<NSObject>
+@protocol TRCObjectMapper<NSObject>
 
 - (id)objectFromDictionary:(NSDictionary *)dictionary error:(NSError **)error;
 

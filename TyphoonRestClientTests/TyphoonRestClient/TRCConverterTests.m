@@ -45,7 +45,7 @@ TRCValidationOptions validationOptions;
     return stub;
 }
 
-- (id<TRCObjectConverter>)objectConverterForTag:(NSString *)tag
+- (id<TRCObjectMapper>)objectMapperForTag:(NSString *)tag
 {
     if ([tag isEqualToString:@"test"]) {
         return [TRCModelObjectConverter new];
@@ -426,7 +426,7 @@ TRCValidationOptions validationOptions;
 - (void)test_model_object_response_parsing
 {
     NSDictionary *data = @{ @"first_name": @"Ivan", @"last_name": @"Ivanov", @"avatar_url": @"some_url"};
-    NSDictionary *schema = @{ @"first_name": @"Ivan", @"last_name": @"Ivanov", @"avatar_url": @"{url}", @"{converter}": @"test"};
+    NSDictionary *schema = @{ @"first_name": @"Ivan", @"last_name": @"Ivanov", @"avatar_url": @"{url}", @"{mapper}": @"test"};
 
     NSOrderedSet *errors = nil;
     TestModelObject *object = [self convertResponseObject:data schema:schema errors:&errors];
@@ -444,7 +444,7 @@ TRCValidationOptions validationOptions;
     test.lastName = @"Ivanov";
     test.avatarUrl = [NSURL URLWithString:@"http://google.com"];
 
-    NSDictionary *schema = @{ @"first_name": @"Ivan", @"last_name": @"Ivanov", @"avatar_url": @"{url}", @"{converter}": @"test"};
+    NSDictionary *schema = @{ @"first_name": @"Ivan", @"last_name": @"Ivanov", @"avatar_url": @"{url}", @"{mapper}": @"test"};
 
     NSOrderedSet *errors = nil;
     NSDictionary *object = [self convertRequestObject:test schema:schema errors:&errors];
@@ -458,7 +458,7 @@ TRCValidationOptions validationOptions;
 - (void)test_model_object_response_parsing_error
 {
     NSDictionary *data = @{ @"first_name": @"i", @"last_name": @"Ivanov", @"avatar_url": @"some_url"};
-    NSDictionary *schema = @{ @"first_name": @"Ivan", @"last_name": @"Ivanov", @"avatar_url": @"{url}", @"{converter}": @"test"};
+    NSDictionary *schema = @{ @"first_name": @"Ivan", @"last_name": @"Ivanov", @"avatar_url": @"{url}", @"{mapper}": @"test"};
 
     NSOrderedSet *errors = nil;
     TestModelObject *object = [self convertResponseObject:data schema:schema errors:&errors];
@@ -474,7 +474,7 @@ TRCValidationOptions validationOptions;
     test.lastName = @"Ivanov";
     test.avatarUrl = [NSURL URLWithString:@"http://google.com"];
 
-    NSDictionary *schema = @{ @"first_name": @"Ivan", @"last_name": @"Ivanov", @"avatar_url": @"{url}", @"{converter}": @"test"};
+    NSDictionary *schema = @{ @"first_name": @"Ivan", @"last_name": @"Ivanov", @"avatar_url": @"{url}", @"{mapper}": @"test"};
 
     NSOrderedSet *errors = nil;
     NSDictionary *object = [self convertRequestObject:test schema:schema errors:&errors];

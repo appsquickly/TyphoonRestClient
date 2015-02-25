@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TRCObjectConverter.h"
+#import "TRCObjectMapper.h"
 
-@interface TRCModelObjectConverter : NSObject <TRCObjectConverter>
+@interface TRCModelObjectConverter : NSObject <TRCObjectMapper>
 
 @end

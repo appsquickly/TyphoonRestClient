@@ -18,7 +18,7 @@
 @protocol TRCValueConverter;
 @class TRCSchema;
 @protocol TRCProgressHandler;
-@protocol TRCObjectConverter;
+@protocol TRCObjectMapper;
 
 typedef NS_OPTIONS(NSInteger , TRCValidationOptions)
 {
@@ -52,6 +52,6 @@ typedef NS_OPTIONS(NSInteger , TRCValidationOptions)
 
 - (void)registerValueConverter:(id<TRCValueConverter>)valueConverter forTag:(NSString *)tag;
 
-- (void)registerObjectConverter:(id<TRCObjectConverter>)objectConverter forTag:(NSString *)tag;
+- (void)registerObjectMapper:(id<TRCObjectMapper>)objectConverter forTag:(NSString *)tag;
 
 @end

@@ -20,6 +20,6 @@
 
 - (id<TRCValueConverter>)valueConverterForTag:(NSString *)tag;
 
-- (id<TRCObjectConverter>)objectConverterForTag:(NSString *)tag;
+- (id<TRCObjectMapper>)objectMapperForTag:(NSString *)tag;
 
 @end

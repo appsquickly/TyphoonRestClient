@@ -24,7 +24,7 @@
 #import "TRCValueConverterUrl.h"
 #import "TRCValueConverterString.h"
 #import "TRCValueConverterNumber.h"
-#import "TRCObjectConverter.h"
+#import "TRCObjectMapper.h"
 
 @interface TyphoonRestClient ()<TRCConvertersRegistry>
 @end
@@ -32,7 +32,7 @@
 @implementation TyphoonRestClient
 {
     NSMutableDictionary *_typeConverterRegistry;
-    NSMutableDictionary *_objectConverterRegistry;
+    NSMutableDictionary *_objectMapperRegistry;
 }
 
 - (instancetype)init
@@ -40,7 +40,7 @@
     self = [super init];
     if (self) {
         _typeConverterRegistry = [NSMutableDictionary new];
-        _objectConverterRegistry = [NSMutableDictionary new];
+        _objectMapperRegistry = [NSMutableDictionary new];
         [self registerDefaultTypeConverters];
         self.defaultRequestSerialization = TRCRequestSerializationJson;
         self.defaultResponseSerialization = TRCResponseSerializationJson;
@@ -407,19 +407,19 @@
     }
 }
 
-- (void)registerObjectConverter:(id<TRCObjectConverter>)objectConverter forTag:(NSString *)tag
+- (void)registerObjectMapper:(id<TRCObjectMapper>)objectConverter forTag:(NSString *)tag
 {
     NSParameterAssert(tag);
     if (objectConverter) {
-        _objectConverterRegistry[tag] = objectConverter;
+        _objectMapperRegistry[tag] = objectConverter;
     } else {
-        [_objectConverterRegistry removeObjectForKey:tag];
+        [_objectMapperRegistry removeObjectForKey:tag];
     }
 }
 
-- (id<TRCObjectConverter>)objectConverterForTag:(NSString *)tag
+- (id<TRCObjectMapper>)objectMapperForTag:(NSString *)tag
 {
-    return _objectConverterRegistry[tag];
+    return _objectMapperRegistry[tag];
 }
 
 - (id<TRCValueConverter>)valueConverterForTag:(NSString *)tag

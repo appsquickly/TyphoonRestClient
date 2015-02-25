@@ -69,7 +69,7 @@
 
 /* Begin PBXFileReference section */
 		11A77D6930D24E1BA5797E0E /* libPods-HttpWebServiceTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HttpWebServiceTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2DBA1B8033DA8D5FA5B63C8B /* TRCObjectConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCObjectConverter.h; sourceTree = "<group>"; };
+		2DBA1B8033DA8D5FA5B63C8B /* TRCObjectMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCObjectMapper.h; sourceTree = "<group>"; };
 		2DBA1D5D6A4F1CD450673422 /* TRCUtilsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCUtilsTests.m; sourceTree = "<group>"; };
 		469D3C7EB63CCF077674B274 /* libPods-TyphoonRestClientTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TyphoonRestClientTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		48F28F705C352E4073F55876 /* Pods-TyphoonRestClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TyphoonRestClient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TyphoonRestClient/Pods-TyphoonRestClient.debug.xcconfig"; sourceTree = "<group>"; };
@@ -314,7 +314,7 @@
 				FAC9165E19E695020009D824 /* TRCValueConverter.h */,
 				FAC9165F19E695020009D824 /* TRCConnection.h */,
 				FAC9166019E695020009D824 /* TRCErrorParser.h */,
-				2DBA1B8033DA8D5FA5B63C8B /* TRCObjectConverter.h */,
+				2DBA1B8033DA8D5FA5B63C8B /* TRCObjectMapper.h */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";

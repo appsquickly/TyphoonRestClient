@@ -16,7 +16,7 @@
 #import "TyphoonRestClientErrors.h"
 #import "TRCSchemeStackTrace.h"
 
-NSString *TRCConverterNameKey = @"{converter}";
+NSString *TRCConverterNameKey = @"{mapper}";
 
 NSError *NSErrorWithFormat(NSString *format, ...)
 {

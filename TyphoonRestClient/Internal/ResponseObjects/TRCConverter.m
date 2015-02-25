@@ -16,7 +16,7 @@
 #import "TRCUtils.h"
 #import "TRCConvertersRegistry.h"
 #import "TRCValueConverter.h"
-#import "TRCObjectConverter.h"
+#import "TRCObjectMapper.h"
 
 @interface TRCConverter ()
 @property (nonatomic, strong) NSMutableOrderedSet *internalErrors;
@@ -127,7 +127,7 @@
     if (_convertingForRequest) {
         NSString *converterTag = schemeDict[TRCConverterNameKey];
         if (converterTag) {
-            dictionary = [self convertObject:object usingConverter:converterTag];
+            dictionary = [self mapObject:object usingMapperTag:converterTag];
         } else if (![object isKindOfClass:[NSDictionary class]]) {
             dictionary = @{};
             [self.internalErrors addObject:TRCConversionErrorForObject([NSString stringWithFormat:@"Can't compose dictionary from %@, converter tag missing", [object class]], _data, _schemaName, !_convertingForRequest)];
@@ -139,7 +139,7 @@
     if (!_convertingForRequest) {
         NSString *converterTag = schemeDict[TRCConverterNameKey];
         if (converterTag) {
-            result = [self convertDictionary:result usingConverter:converterTag];
+            result = [self mapDictionary:result intoObjectUsingTag:converterTag];
         }
     }
 
@@ -201,11 +201,11 @@
     }
 }
 
-- (id)convertDictionary:(NSDictionary *)dictionary usingConverter:(NSString *)tag
+- (id)mapDictionary:(NSDictionary *)dictionary intoObjectUsingTag:(NSString *)tag
 {
     NSParameterAssert(tag);
     NSParameterAssert(self.registry);
-    id <TRCObjectConverter>converter = [self.registry objectConverterForTag:tag];
+    id <TRCObjectMapper>converter = [self.registry objectMapperForTag:tag];
     if (!converter) {
         [self.internalErrors addObject:TRCConversionErrorForObject([NSString stringWithFormat:@"Can't find converter for tag '%@'", tag], _data, _schemaName, !_convertingForRequest)];
         return nil;
@@ -219,11 +219,11 @@
     return result;
 }
 
-- (NSDictionary *)convertObject:(id)object usingConverter:(NSString *)tag
+- (NSDictionary *)mapObject:(id)object usingMapperTag:(NSString *)tag
 {
     NSParameterAssert(tag);
     NSParameterAssert(self.registry);
-    id <TRCObjectConverter>converter = [self.registry objectConverterForTag:tag];
+    id <TRCObjectMapper>converter = [self.registry objectMapperForTag:tag];
     if (!converter) {
         [self.internalErrors addObject:TRCConversionErrorForObject([NSString stringWithFormat:@"Can't find converter for tag '%@'", tag], _data, _schemaName, !_convertingForRequest)];
         return nil;
