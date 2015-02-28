@@ -6,11 +6,31 @@
 //  Copyright (c) 2015 Apps Quickly. All rights reserved.
 //
 
-#import "TRCModelObjectConverter.h"
+#import "TRCModelObjectMapper.h"
 #import "TestModelObject.h"
 #import "TRCUtils.h"
 
-@implementation TRCModelObjectConverter
+@implementation TRCModelObjectMapper
+
+- (BOOL)respondsToSelector:(SEL)aSelector
+{
+    if (aSelector == @selector(objectFromDictionary:error:)) {
+        return self.responseParsingImplemented;
+    } else if (aSelector == @selector(dictionaryFromObject:error:)) {
+        return self.requestParsingImplemented;
+    }
+    return [super respondsToSelector:aSelector];
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.requestParsingImplemented = YES;
+        self.responseParsingImplemented=  YES;
+    }
+    return self;
+}
 
 - (id)objectFromDictionary:(NSDictionary *)dictionary error:(NSError **)error
 {

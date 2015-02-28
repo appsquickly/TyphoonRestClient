@@ -9,6 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "TRCObjectMapper.h"
 
-@interface TRCModelObjectConverter : NSObject <TRCObjectMapper>
+@interface TRCModelObjectMapper : NSObject <TRCObjectMapper>
+
+@property (nonatomic) BOOL requestParsingImplemented;
+@property (nonatomic) BOOL responseParsingImplemented;
+
 
 @end

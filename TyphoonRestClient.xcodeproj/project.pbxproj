@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		2DBA10F6D20316CBD2233306 /* TRCUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1D5D6A4F1CD450673422 /* TRCUtilsTests.m */; };
 		4EA244112427BF0621D67139 /* libPods-TyphoonRestClient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C84882D07B06327E8D9BB26 /* libPods-TyphoonRestClient.a */; };
-		FA4695601A938782004036A5 /* TRCModelObjectConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA46955F1A938782004036A5 /* TRCModelObjectConverter.m */; };
+		FA4695601A938782004036A5 /* TRCModelObjectMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = FA46955F1A938782004036A5 /* TRCModelObjectMapper.m */; };
 		FA4695631A9387FF004036A5 /* TestModelObject.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4695621A9387FF004036A5 /* TestModelObject.m */; };
 		FA5126691A96000F00EAF902 /* TRCSchemeStackTrace.m in Sources */ = {isa = PBXBuildFile; fileRef = FA5126681A96000F00EAF902 /* TRCSchemeStackTrace.m */; };
 		FA55918119E69A4E00E00570 /* TRCConverterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC9166219E697A60009D824 /* TRCConverterTests.m */; };
@@ -78,8 +78,8 @@
 		95F03988170F5DD45005F3EE /* Pods-TyphoonRestClientTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TyphoonRestClientTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TyphoonRestClientTests/Pods-TyphoonRestClientTests.release.xcconfig"; sourceTree = "<group>"; };
 		A14BA2DE857D4EC58948A253 /* libPods-HttpWebService.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HttpWebService.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB1AF3E3BAD71ED13F222739 /* Pods-TyphoonRestClientTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TyphoonRestClientTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TyphoonRestClientTests/Pods-TyphoonRestClientTests.debug.xcconfig"; sourceTree = "<group>"; };
-		FA46955E1A938782004036A5 /* TRCModelObjectConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCModelObjectConverter.h; sourceTree = "<group>"; };
-		FA46955F1A938782004036A5 /* TRCModelObjectConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCModelObjectConverter.m; sourceTree = "<group>"; };
+		FA46955E1A938782004036A5 /* TRCModelObjectMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCModelObjectMapper.h; sourceTree = "<group>"; };
+		FA46955F1A938782004036A5 /* TRCModelObjectMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCModelObjectMapper.m; sourceTree = "<group>"; };
 		FA4695611A9387FF004036A5 /* TestModelObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestModelObject.h; sourceTree = "<group>"; };
 		FA4695621A9387FF004036A5 /* TestModelObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestModelObject.m; sourceTree = "<group>"; };
 		FA5126671A96000F00EAF902 /* TRCSchemeStackTrace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSchemeStackTrace.h; sourceTree = "<group>"; };
@@ -357,8 +357,8 @@
 				FAC9167319E697A60009D824 /* TRCConnectionStub.m */,
 				FAC9167419E697A60009D824 /* TRCValueConverterStub.h */,
 				FAC9167519E697A60009D824 /* TRCValueConverterStub.m */,
-				FA46955E1A938782004036A5 /* TRCModelObjectConverter.h */,
-				FA46955F1A938782004036A5 /* TRCModelObjectConverter.m */,
+				FA46955E1A938782004036A5 /* TRCModelObjectMapper.h */,
+				FA46955F1A938782004036A5 /* TRCModelObjectMapper.m */,
 				FA4695611A9387FF004036A5 /* TestModelObject.h */,
 				FA4695621A9387FF004036A5 /* TestModelObject.m */,
 			);
@@ -542,7 +542,7 @@
 				FA55918219E69A4E00E00570 /* TRCValueConverterNumberTests.m in Sources */,
 				FA55918619E69A5B00E00570 /* TRCErrorParserSpy.m in Sources */,
 				FA4695631A9387FF004036A5 /* TestModelObject.m in Sources */,
-				FA4695601A938782004036A5 /* TRCModelObjectConverter.m in Sources */,
+				FA4695601A938782004036A5 /* TRCModelObjectMapper.m in Sources */,
 				FA55918719E69A5B00E00570 /* TRCConnectionStub.m in Sources */,
 				FA55918419E69A4E00E00570 /* TRCSchemeTests.m in Sources */,
 				2DBA10F6D20316CBD2233306 /* TRCUtilsTests.m in Sources */,

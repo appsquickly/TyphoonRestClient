@@ -14,6 +14,7 @@
 
 @protocol TRCObjectMapper<NSObject>
 
+@optional
 - (id)objectFromDictionary:(NSDictionary *)dictionary error:(NSError **)error;
 
 - (NSDictionary *)dictionaryFromObject:(id)object error:(NSError **)error;

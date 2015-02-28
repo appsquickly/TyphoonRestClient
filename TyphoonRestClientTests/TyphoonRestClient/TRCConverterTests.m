@@ -14,7 +14,7 @@
 #import "TRCConverter.h"
 #import "TRCValueConverter.h"
 #import "TRCValueConverterStub.h"
-#import "TRCModelObjectConverter.h"
+#import "TRCModelObjectMapper.h"
 #import "TestModelObject.h"
 
 @interface TRCConverterTests : XCTestCase<TRCConvertersRegistry>
@@ -48,7 +48,15 @@ TRCValidationOptions validationOptions;
 - (id<TRCObjectMapper>)objectMapperForTag:(NSString *)tag
 {
     if ([tag isEqualToString:@"test"]) {
-        return [TRCModelObjectConverter new];
+        return [TRCModelObjectMapper new];
+    } else if ([tag isEqualToString:@"test_without_response"]) {
+        TRCModelObjectMapper *mapper = [TRCModelObjectMapper new];
+        mapper.responseParsingImplemented = NO;
+        return mapper;
+    } else if ([tag isEqualToString:@"test_without_request"]) {
+        TRCModelObjectMapper *mapper = [TRCModelObjectMapper new];
+        mapper.requestParsingImplemented = NO;
+        return mapper;
     } else {
         return nil;
     };
@@ -481,6 +489,33 @@ TRCValidationOptions validationOptions;
 
     XCTAssertEqualObjects(object, @{});
     XCTAssertTrue([errors count] >= 1);
+}
+
+- (void)test_mapper_request_not_implemented
+{
+    TestModelObject *test = [TestModelObject new];
+    test.firstName = @"Ivan";
+    test.lastName = @"Ivanov";
+    test.avatarUrl = [NSURL URLWithString:@"http://google.com"];
+
+    NSDictionary *schema = @{ @"first_name": @"Ivan", @"last_name": @"Ivanov", @"avatar_url": @"{url}", @"{mapper}": @"test_without_request"};
+
+    NSOrderedSet *errors = nil;
+    [self convertRequestObject:test schema:schema errors:&errors];
+
+    XCTAssertTrue([errors count] >= 1);
+}
+
+
+- (void)test_mapper_response_not_implemented
+{
+    NSDictionary *data = @{ @"first_name": @"Ivan", @"last_name": @"Ivanov", @"avatar_url": @"some_url"};
+    NSDictionary *schema = @{ @"first_name": @"Ivan", @"last_name": @"Ivanov", @"avatar_url": @"{url}", @"{mapper}": @"test_without_response"};
+
+    NSOrderedSet *errors = nil;
+    [self convertResponseObject:data schema:schema errors:&errors];
+
+    XCTAssertTrue([errors count] > 0);
 }
 
 @end

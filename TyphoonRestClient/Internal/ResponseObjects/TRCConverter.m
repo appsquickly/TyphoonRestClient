@@ -211,11 +211,18 @@
         return nil;
     }
     NSError *error = nil;
-    id result = [converter objectFromDictionary:dictionary error:&error];
-    if (error) {
-        [self.internalErrors addObject:error];
-        result = nil;
+    id result = nil;
+
+    if ([converter respondsToSelector:@selector(objectFromDictionary:error:)]) {
+        result = [converter objectFromDictionary:dictionary error:&error];
+        if (error) {
+            [self.internalErrors addObject:error];
+            result = nil;
+        }
+    } else {
+        [self.internalErrors addObject:TRCConversionErrorForObject([NSString stringWithFormat:@"Converter for tag '%@' (Class: %@) not responds to 'objectFromDictionary:error:'", tag, [converter class]], _data, _schemaName, !_convertingForRequest)];
     }
+
     return result;
 }
 
@@ -229,11 +236,17 @@
         return nil;
     }
     NSError *error = nil;
-    NSDictionary *result = [converter dictionaryFromObject:object error:&error];
-    if (error) {
-        [self.internalErrors addObject:error];
-        result = nil;
+    NSDictionary *result = nil;
+    if ([converter respondsToSelector:@selector(dictionaryFromObject:error:)]) {
+        result = [converter dictionaryFromObject:object error:&error];
+        if (error) {
+            [self.internalErrors addObject:error];
+            result = nil;
+        }
+    } else {
+        [self.internalErrors addObject:TRCConversionErrorForObject([NSString stringWithFormat:@"Converter for tag '%@' (Class: %@) not responds to 'dictionaryFromObject:error:'", tag, [converter class]], _data, _schemaName, !_convertingForRequest)];
     }
+
     return result;
 }
 
