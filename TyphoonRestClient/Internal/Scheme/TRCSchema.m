@@ -27,7 +27,7 @@
 
 @implementation TRCSchema
 {
-    BOOL isRequestValidation;
+    BOOL _isRequestValidation;
 }
 
 + (instancetype)schemaWithName:(NSString *)name
@@ -107,7 +107,7 @@
 
 - (BOOL)validateRequest:(id)request error:(NSError **)error
 {
-    isRequestValidation = YES;
+    _isRequestValidation = YES;
     TRCSchemeStackTrace *stackTrace = nil;
 #if TRCSchemaTrackErrorTrace
     stackTrace = [TRCSchemeStackTrace new];
@@ -117,7 +117,7 @@
     if (validationError && error) {
         *error = validationError;
     }
-    isRequestValidation = NO;
+    _isRequestValidation = NO;
     return validationError == nil;
 }
 
@@ -140,7 +140,12 @@
 {
     //1. Check that types are same
     if (![self isTypeOfValue:value validForSchemeValue:schemeValue]) {
-        return [self errorForIncorrectType:[[value class] description] correctType:[self typeRepresentationForSchemeValue:schemeValue] stack:stack];
+        //1.1 Check if schemeValue is mapper tag
+        if ([self isMapperTagValue:schemeValue]) {
+            return [self validateReceivedValue:value withMapperTag:schemeValue stackTrace:stack];
+        } else {
+            return [self errorForIncorrectType:[[value class] description] correctType:[self typeRepresentationForSchemeValue:schemeValue] stack:stack];
+        }
     }
     //2. Check if collection type - call recurrent function
     if ([schemeValue isKindOfClass:[NSArray class]]) {
@@ -150,6 +155,24 @@
     } else {
         return nil;
     }
+}
+
+- (BOOL)isMapperTagValue:(id)value
+{
+    return [value isKindOfClass:[NSString class]] && [self.converterRegistry objectMapperForTag:value];
+}
+
+- (NSError *)validateReceivedValue:(id)value withMapperTag:(NSString *)mapperTag stackTrace:(TRCSchemeStackTrace *)stack
+{
+    TRCSchema *schema;
+    if (_isRequestValidation) {
+        schema = [self.converterRegistry requestSchemaForMapperWithTag:mapperTag];
+    } else {
+        schema = [self.converterRegistry responseSchemaForMapperWithTag:mapperTag];
+    }
+
+    schema->_isRequestValidation = _isRequestValidation;
+    return [schema validateReceivedValue:value withSchemaValue:schema.schemeObject stackTrace:stack];
 }
 
 - (NSError *)validateArray:(NSArray *)array withSchemeArrayValue:(id)schemeValue stackTrace:(TRCSchemeStackTrace *)stack
@@ -186,7 +209,7 @@
                 givenValue = nil;
             }
 
-            givenValue = TRCValueAfterApplyingOptions(givenValue, self.options, isRequestValidation, isOptional);
+            givenValue = TRCValueAfterApplyingOptions(givenValue, self.options, _isRequestValidation, isOptional);
 
             //1. Check value exists
             if (!isOptional && !givenValue) {
