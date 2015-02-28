@@ -6,11 +6,11 @@
 //  Copyright (c) 2015 Apps Quickly. All rights reserved.
 //
 
-#import "TRCModelObjectMapper.h"
-#import "TestModelObject.h"
+#import "TRCPersonMapper.h"
+#import "Person.h"
 #import "TRCUtils.h"
 
-@implementation TRCModelObjectMapper
+@implementation TRCPersonMapper
 
 - (BOOL)respondsToSelector:(SEL)aSelector
 {
@@ -27,7 +27,7 @@
     self = [super init];
     if (self) {
         self.requestParsingImplemented = YES;
-        self.responseParsingImplemented=  YES;
+        self.responseParsingImplemented =  YES;
     }
     return self;
 }
@@ -41,14 +41,14 @@
         return nil;
     }
 
-    TestModelObject *object = [TestModelObject new];
+    Person *object = [Person new];
     object.firstName = dictionary[@"first_name"];
     object.lastName = dictionary[@"last_name"];
     object.avatarUrl = dictionary[@"avatar_url"];
     return object;
 }
 
-- (NSDictionary *)dictionaryFromObject:(TestModelObject *)object error:(NSError **)error
+- (NSDictionary *)dictionaryFromObject:(Person *)object error:(NSError **)error
 {
     if ([object.firstName length] < 2) {
         if (error) {

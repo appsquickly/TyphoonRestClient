@@ -11,6 +11,7 @@
 #import "TRCConvertersRegistry.h"
 #import "TRCValueConverter.h"
 #import "TRCValueConverterStub.h"
+#import "TRCPersonMapper.h"
 
 @interface TRCSchemeTests : XCTestCase<TRCConvertersRegistry>
 
@@ -46,6 +47,46 @@
 
     return nil;
 }
+
+- (id<TRCObjectMapper>)objectMapperForTag:(NSString *)tag
+{
+    if ([tag isEqualToString:@"{person}"]) {
+        return [TRCPersonMapper new];
+    } else {
+        return nil;
+    }
+}
+
+- (id)convertValuesInResponse:(id)arrayOrDictionary schema:(TRCSchema *)scheme1 error:(NSError **)parseError
+{
+    return nil;
+}
+
+- (id)convertValuesInRequest:(id)arrayOrDictionary schema:(TRCSchema *)scheme1 error:(NSError **)parseError
+{
+    return nil;
+}
+
+- (TRCSchema *)requestSchemaForMapperWithTag:(NSString *)tag
+{
+    if ([tag isEqualToString:@"{person}"]) {
+        TRCSchema *schema = [TRCSchema schemaWithName:@"TRCPersonMapper.json"];
+        schema.converterRegistry = self;
+        return schema;
+    } else {
+        return nil;
+    }
+}
+
+- (TRCSchema *)responseSchemaForMapperWithTag:(NSString *)tag
+{
+    if ([tag isEqualToString:@"{person}"]) {
+        return [TRCSchema schemaWithName:@"TRCPersonMapper.json"];
+    } else {
+        return nil;
+    }
+}
+
 
 - (TRCSchema *)schemeWithName:(NSString *)name
 {
@@ -310,5 +351,48 @@
     NSLog(@"Error: %@",error.localizedDescription);
 }
 
+- (void)test_embed_subscheme
+{
+    TRCSchema *listSchema = [TRCSchema schemaWithName:@"PersonsList.json"];
+
+
+    NSDictionary *input = @{
+            @"count": @1,
+            @"content": @[
+                    @{
+                            @"first_name" : @"123",
+                            @"last_name" : @"123"
+                    }
+            ]
+    };
+
+    NSError *error = nil;
+    XCTAssertFalse([listSchema validateResponse:input error:&error]);
+    XCTAssertNotNil(error);
+
+}
+
+- (void)test_embed_subscheme_correct
+{
+    TRCSchema *listSchema = [TRCSchema schemaWithName:@"PersonsList.json"];
+    listSchema.converterRegistry = self;
+
+
+    NSDictionary *input = @{
+            @"count": @1,
+            @"content": @[
+                    @{
+                            @"first_name" : @"123",
+                            @"last_name" : @"",
+                            @"avatar_url" : @"123"
+                    }
+            ]
+    };
+
+    NSError *error = nil;
+    XCTAssertTrue([listSchema validateResponse:input error:&error]);
+    XCTAssertNil(error);
+
+}
 
 @end

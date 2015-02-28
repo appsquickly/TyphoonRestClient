@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "TRCObjectMapper.h"
 
-@interface TRCModelObjectMapper : NSObject <TRCObjectMapper>
+@interface TRCPersonMapper : NSObject <TRCObjectMapper>
 
 @property (nonatomic) BOOL requestParsingImplemented;
 @property (nonatomic) BOOL responseParsingImplemented;

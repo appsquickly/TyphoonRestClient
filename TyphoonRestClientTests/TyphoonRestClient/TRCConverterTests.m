@@ -14,8 +14,8 @@
 #import "TRCConverter.h"
 #import "TRCValueConverter.h"
 #import "TRCValueConverterStub.h"
-#import "TRCModelObjectMapper.h"
-#import "TestModelObject.h"
+#import "TRCPersonMapper.h"
+#import "Person.h"
 
 @interface TRCConverterTests : XCTestCase<TRCConvertersRegistry>
 
@@ -48,13 +48,13 @@ TRCValidationOptions validationOptions;
 - (id<TRCObjectMapper>)objectMapperForTag:(NSString *)tag
 {
     if ([tag isEqualToString:@"test"]) {
-        return [TRCModelObjectMapper new];
+        return [TRCPersonMapper new];
     } else if ([tag isEqualToString:@"test_without_response"]) {
-        TRCModelObjectMapper *mapper = [TRCModelObjectMapper new];
+        TRCPersonMapper *mapper = [TRCPersonMapper new];
         mapper.responseParsingImplemented = NO;
         return mapper;
     } else if ([tag isEqualToString:@"test_without_request"]) {
-        TRCModelObjectMapper *mapper = [TRCModelObjectMapper new];
+        TRCPersonMapper *mapper = [TRCPersonMapper new];
         mapper.requestParsingImplemented = NO;
         return mapper;
     } else {
@@ -458,7 +458,7 @@ TRCValidationOptions validationOptions;
     NSDictionary *schema = @{ @"first_name": @"Ivan", @"last_name": @"Ivanov", @"avatar_url": @"{url}", @"{mapper}": @"test"};
 
     NSOrderedSet *errors = nil;
-    TestModelObject *object = [self convertResponseObject:data schema:schema errors:&errors];
+    Person *object = [self convertResponseObject:data schema:schema errors:&errors];
 
     XCTAssertEqualObjects(object.firstName, @"Ivan");
     XCTAssertEqualObjects(object.lastName, @"Ivanov");
@@ -468,7 +468,7 @@ TRCValidationOptions validationOptions;
 
 - (void)test_model_object_request_composing
 {
-    TestModelObject *test = [TestModelObject new];
+    Person *test = [Person new];
     test.firstName = @"Ivan";
     test.lastName = @"Ivanov";
     test.avatarUrl = [NSURL URLWithString:@"http://google.com"];
@@ -490,7 +490,7 @@ TRCValidationOptions validationOptions;
     NSDictionary *schema = @{ @"first_name": @"Ivan", @"last_name": @"Ivanov", @"avatar_url": @"{url}", @"{mapper}": @"test"};
 
     NSOrderedSet *errors = nil;
-    TestModelObject *object = [self convertResponseObject:data schema:schema errors:&errors];
+    Person *object = [self convertResponseObject:data schema:schema errors:&errors];
 
     XCTAssertNil(object);
     XCTAssertTrue([errors count] >= 1);
@@ -498,7 +498,7 @@ TRCValidationOptions validationOptions;
 
 - (void)test_model_object_request_composing_error
 {
-    TestModelObject *test = [TestModelObject new];
+    Person *test = [Person new];
     test.firstName = @"i";
     test.lastName = @"Ivanov";
     test.avatarUrl = [NSURL URLWithString:@"http://google.com"];
@@ -514,7 +514,7 @@ TRCValidationOptions validationOptions;
 
 - (void)test_mapper_request_not_implemented
 {
-    TestModelObject *test = [TestModelObject new];
+    Person *test = [Person new];
     test.firstName = @"Ivan";
     test.lastName = @"Ivanov";
     test.avatarUrl = [NSURL URLWithString:@"http://google.com"];

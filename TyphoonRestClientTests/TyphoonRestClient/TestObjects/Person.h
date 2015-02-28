@@ -1,5 +1,5 @@
 //
-//  TestModelObject.h
+//  Person.h
 //  TyphoonRestClient
 //
 //  Created by Aleksey Garbarev on 17.02.15.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface TestModelObject : NSObject
+@interface Person : NSObject
 
 @property (nonatomic, strong) NSString *firstName;
 @property (nonatomic, strong) NSString *lastName;
