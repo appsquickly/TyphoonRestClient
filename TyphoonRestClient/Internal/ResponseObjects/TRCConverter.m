@@ -100,6 +100,31 @@
             result = [typeConverter objectFromResponseValue:dataValue error:&convertError];
         }
     }
+
+    //TODO: Cleanup
+    id<TRCObjectMapper> mapper = [self.registry objectMapperForTag:typeName];
+    if (mapper) {
+        if (_convertingForRequest) {
+            TRCSchema *schema = [self.registry requestSchemaForMapperWithTag:typeName];
+            if (schema) {
+                result = [self mapObject:dataValue intoDictionaryUsingMapperTag:typeName];
+                result = [self.registry convertValuesInRequest:result schema:schema error:&convertError];
+            } else {
+                result = nil;
+                convertError = NSErrorWithFormat(@"Can't find schema file for mapper tag %@", typeName);
+            }
+        } else {
+            TRCSchema *schema = [self.registry responseSchemaForMapperWithTag:typeName];
+            if (schema) {
+                result = [self.registry convertValuesInResponse:dataValue schema:schema error:&convertError];
+                result = [self mapDictionary:result intoObjectUsingTag:typeName];
+            } else {
+                result = nil;
+                convertError = NSErrorWithFormat(@"Can't find schema file for mapper tag %@", typeName);
+            }
+        }
+    }
+
     if (convertError) {
         [self.internalErrors addObject:convertError];
         result = nil;
