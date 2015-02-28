@@ -62,6 +62,27 @@ TRCValidationOptions validationOptions;
     };
 }
 
+- (id)convertValuesInResponse:(id)arrayOrDictionary schema:(TRCSchema *)scheme error:(NSError **)parseError
+{
+    return nil;
+}
+
+- (id)convertValuesInRequest:(id)arrayOrDictionary schema:(TRCSchema *)scheme error:(NSError **)parseError
+{
+    return nil;
+}
+
+- (TRCSchema *)requestSchemaForMapperWithTag:(NSString *)tag
+{
+    return nil;
+}
+
+- (TRCSchema *)responseSchemaForMapperWithTag:(NSString *)tag
+{
+    return nil;
+}
+
+
 + (void)setUp
 {
     validationOptions = TRCValidationOptionsTreatEmptyDictionaryAsNilInResponsesForOptional | TRCValidationOptionsTreatEmptyDictionaryAsNilInRequestsForOptional;

@@ -101,7 +101,7 @@
         if ([body isKindOfClass:[NSArray class]] || [body isKindOfClass:[NSDictionary class]]) {
             NSError *validationOrConversionError = nil;
             TRCSchema *schema = [self schemeForRequest:request];
-            body = [self convertAndValidateObject:body withScheme:schema error:&validationOrConversionError];
+            body = [self convertThenValidateObject:body withScheme:schema error:&validationOrConversionError];
             if (validationOrConversionError) {
                 if (error) {
                     *error = validationOrConversionError;
@@ -124,7 +124,7 @@
         pathParams = [request pathParameters];
         NSError *validationOrConversionError = nil;
         TRCSchema *schema = [self schemeForPathParametersWithRequest:request];
-        pathParams = [self convertAndValidateObject:pathParams withScheme:schema error:&validationOrConversionError];
+        pathParams = [self convertThenValidateObject:pathParams withScheme:schema error:&validationOrConversionError];
         if (validationOrConversionError) {
             if (error) {
                 *error = validationOrConversionError;
@@ -160,7 +160,7 @@
     TRCSchema *scheme = [self schemeForResponseWithRequest:request];
 
     NSError *validationOrConversionError = nil;
-    id converted = [self validateAndConvertObject:responseObject withScheme:scheme error:&validationOrConversionError];
+    id converted = [self validateThenConvertObject:responseObject withScheme:scheme error:&validationOrConversionError];
 
     if (validationOrConversionError) {
         completion(nil, validationOrConversionError);
@@ -186,7 +186,7 @@
     }
 }
 
-- (id)validateAndConvertObject:(id)object withScheme:(TRCSchema *)scheme error:(NSError **)error
+- (id)validateThenConvertObject:(id)object withScheme:(TRCSchema *)scheme error:(NSError **)error
 {
     BOOL isObjectCanBeValidated = [object isKindOfClass:[NSArray class]] || [object isKindOfClass:[NSDictionary class]];
     if (!isObjectCanBeValidated) {
@@ -218,7 +218,7 @@
     return converted;
 }
 
-- (id)convertAndValidateObject:(id)object withScheme:(TRCSchema *)scheme error:(NSError **)error
+- (id)convertThenValidateObject:(id)object withScheme:(TRCSchema *)scheme error:(NSError **)error
 {
     BOOL isObjectCanBeValidated = [object isKindOfClass:[NSArray class]] || [object isKindOfClass:[NSDictionary class]];
     if (!isObjectCanBeValidated) {
@@ -259,7 +259,7 @@
     if (self.errorParser && response) {
         TRCSchema *scheme = [self schemeForErrorParser:self.errorParser];
         NSError *convertError = nil;
-        id converted = [self validateAndConvertObject:response withScheme:scheme error:&convertError];
+        id converted = [self validateThenConvertObject:response withScheme:scheme error:&convertError];
 
         if (convertError) {
             [self logWarning:@"Error schema validation/conversion error: \"%@\". Will return ordinary network error", convertError.localizedDescription];
@@ -337,6 +337,16 @@
 }
 
 #pragma mark - Scheme fetching
+
+- (TRCSchema *)requestSchemaForMapperWithTag:(NSString *)tag
+{
+    return nil;
+}
+
+- (TRCSchema *)responseSchemaForMapperWithTag:(NSString *)tag
+{
+    return nil;
+}
 
 - (TRCSchema *)schemeForErrorParser:(id<TRCErrorParser>)parser
 {

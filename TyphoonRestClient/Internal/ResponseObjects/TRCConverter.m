@@ -17,6 +17,7 @@
 #import "TRCConvertersRegistry.h"
 #import "TRCValueConverter.h"
 #import "TRCObjectMapper.h"
+#import "TRCSchema.h"
 
 @interface TRCConverter ()
 @property (nonatomic, strong) NSMutableOrderedSet *internalErrors;
@@ -122,25 +123,64 @@
 
 - (id)parseObject:(id)object withSchemaDictionary:(NSDictionary *)schemeDict
 {
+    if (_convertingForRequest) {
+        return [self composeRequestDictionary:object withSchemaDictionary:schemeDict];
+    } else {
+        return [self parseResponseDictionary:object withSchemaDictionary:schemeDict];
+    }
+}
+
+- (id)composeRequestDictionary:(id)object withSchemaDictionary:(NSDictionary *)schemeDict
+{
     NSDictionary *dictionary = object;
 
-    if (_convertingForRequest) {
-        NSString *converterTag = schemeDict[TRCConverterNameKey];
-        if (converterTag) {
-            dictionary = [self mapObject:object usingMapperTag:converterTag];
-        } else if (![object isKindOfClass:[NSDictionary class]]) {
-            dictionary = @{};
-            [self.internalErrors addObject:TRCConversionErrorForObject([NSString stringWithFormat:@"Can't compose dictionary from %@, converter tag missing", [object class]], _data, _schemaName, !_convertingForRequest)];
-        }
+    NSString *converterTag = schemeDict[TRCConverterNameKey];
+    TRCSchema *customSchema = [_registry requestSchemaForMapperWithTag:converterTag];
+
+    id result = nil;
+
+    if (converterTag) {
+        dictionary = [self mapObject:object intoDictionaryUsingMapperTag:converterTag];
+    } else if (![object isKindOfClass:[NSDictionary class]]) {
+        dictionary = @{};
+        [self.internalErrors addObject:TRCConversionErrorForObject([NSString stringWithFormat:@"Can't compose dictionary from %@, {mapper} tag missing", [object class]], _data, _schemaName, !_convertingForRequest)];
     }
 
-    id result = [self parseDictionary:dictionary withSchemaDictionary:schemeDict];
-
-    if (!_convertingForRequest) {
-        NSString *converterTag = schemeDict[TRCConverterNameKey];
-        if (converterTag) {
-            result = [self mapDictionary:result intoObjectUsingTag:converterTag];
+    if (converterTag && customSchema) {
+        NSError *error = nil;
+        result = [_registry convertValuesInRequest:dictionary schema:customSchema error:&error];
+        if (error) {
+            [self.internalErrors addObject:error];
+            result = nil;
         }
+    } else {
+        result = [self parseDictionary:dictionary withSchemaDictionary:schemeDict];
+    }
+
+    return result;
+}
+
+- (id)parseResponseDictionary:(id)object withSchemaDictionary:(NSDictionary *)schemeDict
+{
+    NSDictionary *dictionary = object;
+    NSString *converterTag = schemeDict[TRCConverterNameKey];
+    TRCSchema *customSchema = [_registry requestSchemaForMapperWithTag:converterTag];
+
+    id result = nil;
+
+    if (converterTag && customSchema) {
+        NSError *convertError = nil;
+        result = [_registry convertValuesInResponse:dictionary schema:customSchema error:&convertError];
+        if (convertError) {
+            [self.internalErrors addObject:convertError];
+            result = nil;
+        }
+    } else {
+        result = [self parseDictionary:dictionary withSchemaDictionary:schemeDict];
+    }
+
+    if (converterTag) {
+        result = [self mapDictionary:result intoObjectUsingTag:converterTag];
     }
 
     return result;
@@ -226,7 +266,7 @@
     return result;
 }
 
-- (NSDictionary *)mapObject:(id)object usingMapperTag:(NSString *)tag
+- (NSDictionary *)mapObject:(id)object intoDictionaryUsingMapperTag:(NSString *)tag
 {
     NSParameterAssert(tag);
     NSParameterAssert(self.registry);

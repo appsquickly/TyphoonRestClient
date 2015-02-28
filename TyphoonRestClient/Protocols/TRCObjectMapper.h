@@ -15,7 +15,20 @@
 @protocol TRCObjectMapper<NSObject>
 
 @optional
+
+//-------------------------------------------------------------------------------------------
+#pragma mark - Parsing from Request
+//-------------------------------------------------------------------------------------------
+
+- (NSString *)responseValidationSchemaName;
+
 - (id)objectFromDictionary:(NSDictionary *)dictionary error:(NSError **)error;
+
+//-------------------------------------------------------------------------------------------
+#pragma mark - Composing for Request
+//-------------------------------------------------------------------------------------------
+
+- (NSString *)requestValidationSchemaName;
 
 - (NSDictionary *)dictionaryFromObject:(id)object error:(NSError **)error;
 
