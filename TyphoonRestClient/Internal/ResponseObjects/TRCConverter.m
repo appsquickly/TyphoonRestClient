@@ -105,22 +105,18 @@
     id<TRCObjectMapper> mapper = [self.registry objectMapperForTag:typeName];
     if (mapper) {
         if (_convertingForRequest) {
+            result = [self mapObject:dataValue intoDictionaryUsingMapperTag:typeName];
             TRCSchema *schema = [self.registry requestSchemaForMapperWithTag:typeName];
-            if (schema) {
-                result = [self mapObject:dataValue intoDictionaryUsingMapperTag:typeName];
+            if (schema && result) {
                 result = [self.registry convertValuesInRequest:result schema:schema error:&convertError];
-            } else {
-                result = nil;
-                convertError = NSErrorWithFormat(@"Can't find schema file for mapper tag %@", typeName);
             }
         } else {
             TRCSchema *schema = [self.registry responseSchemaForMapperWithTag:typeName];
             if (schema) {
                 result = [self.registry convertValuesInResponse:dataValue schema:schema error:&convertError];
+            }
+            if (result) {
                 result = [self mapDictionary:result intoObjectUsingTag:typeName];
-            } else {
-                result = nil;
-                convertError = NSErrorWithFormat(@"Can't find schema file for mapper tag %@", typeName);
             }
         }
     }

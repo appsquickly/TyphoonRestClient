@@ -142,7 +142,6 @@
     if ([self isMapperTagValue:schemeValue]) {
         return [self validateReceivedValue:value withMapperTag:schemeValue stackTrace:stack];
     }
-
     //1. Check that types are same
     if (![self isTypeOfValue:value validForSchemeValue:schemeValue]) {
         return [self errorForIncorrectType:[[value class] description] correctType:[self typeRepresentationForSchemeValue:schemeValue] stack:stack];
