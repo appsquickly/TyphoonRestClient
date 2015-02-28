@@ -52,6 +52,8 @@
 {
     if ([tag isEqualToString:@"{person}"]) {
         return [TRCPersonMapper new];
+    } else if ([tag isEqualToString:@"{person-2}"]) {
+        return [TRCPersonMapper new];
     } else {
         return nil;
     }
@@ -393,6 +395,54 @@
     XCTAssertTrue([listSchema validateResponse:input error:&error]);
     XCTAssertNil(error);
 
+}
+
+- (void)test_mapper_without_schema_incorrect
+{
+    TRCSchema *listSchema = [TRCSchema schemaWithName:@"PersonsList.json"];
+    listSchema.converterRegistry = self;
+
+
+    NSDictionary *input = @{
+            @"count": @1,
+            @"content": @[
+                    @{
+                            @"first_name" : @"123",
+                            @"last_name" : @"",
+                            @"avatar_url" : @"123"
+                    }
+            ],
+            @"observer": @"string"
+    };
+
+    NSError *error = nil;
+    XCTAssertFalse([listSchema validateResponse:input error:&error]);
+    XCTAssertNotNil(error);
+}
+
+- (void)test_mapper_without_schema_correct
+{
+    TRCSchema *listSchema = [TRCSchema schemaWithName:@"PersonsList.json"];
+    listSchema.converterRegistry = self;
+
+
+    NSDictionary *input = @{
+            @"count": @1,
+            @"content": @[
+                    @{
+                            @"first_name" : @"123",
+                            @"last_name" : @"",
+                            @"avatar_url" : @"123"
+                    }
+            ],
+            @"observer": @{
+             @"name": @""
+            }
+    };
+
+    NSError *error = nil;
+    XCTAssertTrue([listSchema validateResponse:input error:&error]);
+    XCTAssertNil(error);
 }
 
 @end

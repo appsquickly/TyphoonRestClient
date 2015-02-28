@@ -138,14 +138,14 @@
 
 - (NSError *)validateReceivedValue:(id)value withSchemaValue:(id)schemeValue stackTrace:(TRCSchemeStackTrace *)stack
 {
+    //0. Check if value is mapper tag
+    if ([self isMapperTagValue:schemeValue]) {
+        return [self validateReceivedValue:value withMapperTag:schemeValue stackTrace:stack];
+    }
+
     //1. Check that types are same
     if (![self isTypeOfValue:value validForSchemeValue:schemeValue]) {
-        //1.1 Check if schemeValue is mapper tag
-        if ([self isMapperTagValue:schemeValue]) {
-            return [self validateReceivedValue:value withMapperTag:schemeValue stackTrace:stack];
-        } else {
-            return [self errorForIncorrectType:[[value class] description] correctType:[self typeRepresentationForSchemeValue:schemeValue] stack:stack];
-        }
+        return [self errorForIncorrectType:[[value class] description] correctType:[self typeRepresentationForSchemeValue:schemeValue] stack:stack];
     }
     //2. Check if collection type - call recurrent function
     if ([schemeValue isKindOfClass:[NSArray class]]) {
@@ -170,9 +170,18 @@
     } else {
         schema = [self.converterRegistry responseSchemaForMapperWithTag:mapperTag];
     }
+    if (schema) {
+        schema->_isRequestValidation = _isRequestValidation;
+        return [schema validateReceivedValue:value withSchemaValue:schema.schemeObject stackTrace:stack];
+    } else {
+        NSDictionary *correctTypedValue = [NSDictionary new];
+        if (![self isTypeOfValue:value validForSchemeValue:correctTypedValue]) {
+           return [self errorForIncorrectType:[[value class] description] correctType:[self typeRepresentationForSchemeValue:correctTypedValue] stack:stack];
+        } else {
+            return nil;
+        }
+    }
 
-    schema->_isRequestValidation = _isRequestValidation;
-    return [schema validateReceivedValue:value withSchemaValue:schema.schemeObject stackTrace:stack];
 }
 
 - (NSError *)validateArray:(NSArray *)array withSchemeArrayValue:(id)schemeValue stackTrace:(TRCSchemeStackTrace *)stack

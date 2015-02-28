@@ -2,5 +2,6 @@
   "count": 1,
   "content": [
     "{person}"
-  ]
+  ],
+  "observer{?}": "{person-2}"
 }
