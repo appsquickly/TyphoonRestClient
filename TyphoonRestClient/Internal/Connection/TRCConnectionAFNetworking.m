@@ -105,7 +105,6 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
     NSCache *responseSerializersCache;
 
     AFHTTPRequestOperationManager *operationManager;
-    NSRegularExpression *catchUrlArgumentsRegexp;
 }
 
 - (instancetype)initWithBaseUrl:(NSURL *)baseUrl
@@ -116,7 +115,6 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
         operationManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseUrl];
         responseSerializersCache = [NSCache new];
         requestSerializersCache = [NSCache new];
-        catchUrlArgumentsRegexp = [[NSRegularExpression alloc] initWithPattern:@"\\{.*?\\}" options:0 error:nil];
     }
     return self;
 }
@@ -128,8 +126,10 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
     NSError *urlComposingError = nil;
     NSURL *url = [self urlFromPath:path parameters:pathParams error:&urlComposingError];
 
-    if (urlComposingError && requestComposingError) {
-        *requestComposingError = urlComposingError;
+    if (urlComposingError) {
+        if(requestComposingError) {
+            *requestComposingError = urlComposingError;
+        }
         return nil;
     }
 
@@ -196,38 +196,7 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
 {
     NSURL *result = nil;
 
-    NSArray *arguments = [catchUrlArgumentsRegexp matchesInString:path options:0 range:NSMakeRange(0, [path length])];
-
     NSMutableDictionary *mutableParams = [parameters mutableCopy];
-
-    // Applying arguments
-    if ([arguments count] > 0) {
-        if ([mutableParams count] == 0) {
-            if (error) {
-                *error = NSErrorWithFormat(@"Can't process path '%@', since it has arguments (%@) but no parameters specified ", path, [arguments componentsJoinedByString:@", "]);
-            }
-            return nil;
-        }
-        NSMutableString *mutablePath = [path mutableCopy];
-
-        for (NSTextCheckingResult *argumentMatch in arguments) {
-            NSString *argument = [path substringWithRange:argumentMatch.range];
-            NSString *argumentKey = [argument substringWithRange:NSMakeRange(1, argument.length-2)];
-            id value = mutableParams[argumentKey];
-            if (![self isValidPathArgumentValue:value]) {
-                if (error) {
-                    *error = NSErrorWithFormat(@"Can't process path '%@', since value for argument %@ missing or invalid (must be NSNumber or non-empty NSString)", path, argument);
-                }
-                return nil;
-            }
-            if ([value isKindOfClass:[NSNumber class]]) {
-                value = [value description];
-            }
-            [mutablePath replaceOccurrencesOfString:argument withString:value options:0 range:NSMakeRange(0, [mutablePath length])];
-            [mutableParams removeObjectForKey:argumentKey];
-        }
-        path = mutablePath;
-    }
 
     if ([mutableParams count] > 0) {
         //Applying variables
@@ -247,11 +216,6 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
     }
 
     return result;
-}
-
-- (BOOL)isValidPathArgumentValue:(id)value
-{
-    return [value isKindOfClass:[NSNumber class]] || ([value isKindOfClass:[NSString class]] && [value length] > 0);
 }
 
 - (NSURL *)absoluteUrlFromPath:(NSString *)path

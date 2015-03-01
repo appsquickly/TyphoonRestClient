@@ -28,3 +28,5 @@ extern NSString *TRCConverterNameKey;
 NSError *TRCUnknownValidationErrorForObject(id object, NSString *schemaName, BOOL isResponse);
 
 NSError *TRCConversionErrorForObject(NSString *errorMessage, id object, NSString *schemaName, BOOL isResponse);
+
+NSString *TRCUrlPathFromPathByApplyingArguments(NSString *path, NSMutableDictionary *arguments, NSError **error);

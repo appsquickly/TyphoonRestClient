@@ -26,6 +26,8 @@
 #import "TRCValueConverterNumber.h"
 #import "TRCObjectMapper.h"
 
+#define TRCSetError(errorPointer, error) if (errorPointer) { *errorPointer = error; }
+
 @interface TyphoonRestClient ()<TRCConvertersRegistry>
 @end
 
@@ -93,7 +95,51 @@
     }];
 }
 
+//-------------------------------------------------------------------------------------------
+#pragma mark - Request composing
+//-------------------------------------------------------------------------------------------
+
 - (NSMutableURLRequest *)requestFromRequest:(id<TRCRequest>)request error:(NSError **)error
+{
+    NSError *composingError = nil;
+
+    id body = [self requestBodyFromRequest:request error:&composingError];
+
+    if (composingError) {
+        TRCSetError(error, composingError);
+        return nil;
+    }
+
+    TRCRequestSerialization serialization = [self requestSerializationFromRequest:request body:body];
+
+    NSMutableDictionary *pathParams = [[self requestPathParametersFromRequest:request error:&composingError] mutableCopy];
+
+    if (composingError) {
+        TRCSetError(error, composingError);
+        return nil;
+    }
+
+    NSDictionary *customHeaders = nil;
+    if ([request respondsToSelector:@selector(requestHeaders)]) {
+        customHeaders = [request requestHeaders];
+    }
+
+
+    NSString *path = [self requestPathFromRequest:request params:pathParams error:&composingError];
+    if (composingError) {
+        TRCSetError(error, composingError);
+        return nil;
+    }
+
+    NSMutableURLRequest *result = [self.connection requestWithMethod:[request method] path:path pathParams:pathParams body:body serialization:serialization headers:customHeaders error:&composingError];
+    if (composingError) {
+        TRCSetError(error, composingError)
+        return nil;
+    }
+    return result;
+}
+
+- (id)requestBodyFromRequest:(<TRCRequest>)request error:(NSError **)error
 {
     id body = nil;
     if ([request respondsToSelector:@selector(requestBody)]) {
@@ -103,14 +149,16 @@
             TRCSchema *schema = [self schemeForRequest:request];
             body = [self convertThenValidateObject:body withScheme:schema error:&validationOrConversionError];
             if (validationOrConversionError) {
-                if (error) {
-                    *error = validationOrConversionError;
-                }
+                TRCSetError(error, validationOrConversionError);
                 return nil;
             }
         }
     }
+    return body;
+}
 
+- (TRCRequestSerialization)requestSerializationFromRequest:(<TRCRequest>)request body:(id)body
+{
     TRCRequestSerialization serialization = self.defaultRequestSerialization;
     if ([request respondsToSelector:@selector(requestSerialization)]) {
         serialization = [request requestSerialization];
@@ -118,7 +166,11 @@
             [self logWarning:@"Body object of type '%@' can't be serialized, but you implemented 'requestSerialization' method in %@ request. Specified serialization will be ignored.", [body class], [request class]];
         }
     }
+    return serialization;
+}
 
+- (NSDictionary *)requestPathParametersFromRequest:(<TRCRequest>)request error:(NSError **)error
+{
     NSDictionary *pathParams = nil;
     if ([request respondsToSelector:@selector(pathParameters)]) {
         pathParams = [request pathParameters];
@@ -126,20 +178,29 @@
         TRCSchema *schema = [self schemeForPathParametersWithRequest:request];
         pathParams = [self convertThenValidateObject:pathParams withScheme:schema error:&validationOrConversionError];
         if (validationOrConversionError) {
-            if (error) {
-                *error = validationOrConversionError;
-            }
+            TRCSetError(error, validationOrConversionError);
             return nil;
         }
     }
-
-    NSDictionary *customHeaders = nil;
-    if ([request respondsToSelector:@selector(requestHeaders)]) {
-        customHeaders = [request requestHeaders];
-    }
-
-    return [self.connection requestWithMethod:[request method] path:[request path] pathParams:pathParams body:body serialization:serialization headers:customHeaders error:NULL];
+    return pathParams;
 }
+
+- (NSString *)requestPathFromRequest:(<TRCRequest>)request params:(NSMutableDictionary *)params error:(NSError **)error
+{
+    NSString *path = [request path];
+    if (path && params.count > 0) {
+        NSError *argumentsApplyingError = nil;
+        path = TRCUrlPathFromPathByApplyingArguments(path, params, &argumentsApplyingError);
+        if (argumentsApplyingError) {
+            TRCSetError(error, argumentsApplyingError);
+            return nil;
+        }
+    }
+    return path;
+}
+//-------------------------------------------------------------------------------------------
+#pragma mark - Response handling
+//-------------------------------------------------------------------------------------------
 
 - (void)handleResponse:(id)responseObject withError:(NSError *)error info:(id<TRCResponseInfo>)responseInfo forRequest:(id<TRCRequest>)request completion:(void (^)(id result, NSError *error))completion
 {
@@ -278,7 +339,9 @@
     return result;
 }
 
+//-------------------------------------------------------------------------------------------
 #pragma mark - Validation
+//-------------------------------------------------------------------------------------------
 
 - (BOOL)validateResponse:(id)response withSchema:(TRCSchema *)schema error:(NSError **)error
 {
@@ -298,7 +361,9 @@
     return [schema validateRequest:request error:error];
 }
 
+//-------------------------------------------------------------------------------------------
 #pragma mark - Conversion
+//-------------------------------------------------------------------------------------------
 
 - (id)convertValuesInResponse:(id)arrayOrDictionary schema:(TRCSchema *)scheme error:(NSError **)parseError
 {
@@ -336,7 +401,9 @@
     return result;
 }
 
-#pragma mark - Scheme fetching
+//-------------------------------------------------------------------------------------------
+#pragma mark - Scheme fetches
+//-------------------------------------------------------------------------------------------
 
 - (TRCSchema *)requestSchemaForMapperWithTag:(NSString *)tag
 {
@@ -420,7 +487,9 @@
     return scheme;
 }
 
-#pragma mark - TypeConverter
+//-------------------------------------------------------------------------------------------
+#pragma mark - Value converters
+//-------------------------------------------------------------------------------------------
 
 - (void)registerDefaultTypeConverters
 {
@@ -439,6 +508,10 @@
         [_typeConverterRegistry removeObjectForKey:tag];
     }
 }
+
+//-------------------------------------------------------------------------------------------
+#pragma mark - Object Mappers
+//-------------------------------------------------------------------------------------------
 
 - (void)registerObjectMapper:(id<TRCObjectMapper>)objectConverter forTag:(NSString *)tag
 {
@@ -461,7 +534,9 @@
     return _typeConverterRegistry[tag];
 }
 
-#pragma mark - Log warning
+//-------------------------------------------------------------------------------------------
+#pragma mark - Warnings
+//-------------------------------------------------------------------------------------------
 
 - (void)logWarning:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2)
 {

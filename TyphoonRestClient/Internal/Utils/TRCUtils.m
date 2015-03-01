@@ -91,3 +91,55 @@ NSError *TRCConversionErrorForObject(NSString *errorMessage, id object, NSString
     userInfo[NSLocalizedDescriptionKey] = message;
     return [NSError errorWithDomain:TyphoonRestClientErrors code:TyphoonRestClientErrorCodeConversion userInfo:userInfo];
 }
+
+
+BOOL IsValidPathArgumentValue(id value)
+{
+    return [value isKindOfClass:[NSNumber class]] || ([value isKindOfClass:[NSString class]] && [value length] > 0);
+}
+
+static NSRegularExpression *catchUrlArgumentsRegexp;
+
+NSString *TRCUrlPathFromPathByApplyingArguments(NSString *path, NSMutableDictionary *mutableParams, NSError **error)
+{
+    if (!mutableParams) {
+        return path;
+    }
+
+    if (!catchUrlArgumentsRegexp) {
+        catchUrlArgumentsRegexp = [[NSRegularExpression alloc] initWithPattern:@"\\{.*?\\}" options:0 error:nil];
+    }
+
+    NSArray *arguments = [catchUrlArgumentsRegexp matchesInString:path options:0 range:NSMakeRange(0, [path length])];
+
+    // Applying arguments
+    if ([arguments count] > 0) {
+        if ([mutableParams count] == 0) {
+            if (error) {
+                *error = NSErrorWithFormat(@"Can't process path '%@', since it has arguments (%@) but no parameters specified ", path, [arguments componentsJoinedByString:@", "]);
+            }
+            return nil;
+        }
+        NSMutableString *mutablePath = [path mutableCopy];
+
+        for (NSTextCheckingResult *argumentMatch in arguments) {
+            NSString *argument = [path substringWithRange:argumentMatch.range];
+            NSString *argumentKey = [argument substringWithRange:NSMakeRange(1, argument.length-2)];
+            id value = mutableParams[argumentKey];
+            if (!IsValidPathArgumentValue(value)) {
+                if (error) {
+                    *error = NSErrorWithFormat(@"Can't process path '%@', since value for argument %@ missing or invalid (must be NSNumber or non-empty NSString)", path, argument);
+                }
+                return nil;
+            }
+            if ([value isKindOfClass:[NSNumber class]]) {
+                value = [value description];
+            }
+            [mutablePath replaceOccurrencesOfString:argument withString:value options:0 range:NSMakeRange(0, [mutablePath length])];
+            [mutableParams removeObjectForKey:argumentKey];
+        }
+        path = mutablePath;
+    }
+
+    return path;
+}
