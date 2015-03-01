@@ -23,7 +23,7 @@
 @property (nonatomic, strong) id<TRCConvertersRegistry>converterRegistry;
 @property (nonatomic) TRCValidationOptions options;
 
-+ (instancetype)schemaWithName:(NSString *)name;
++ (instancetype)schemaWithName:(NSString *)name extensionsToTry:(NSArray *)extensions;
 
 - (instancetype)initWithFilePath:(NSString *)filePath;
 

@@ -72,7 +72,7 @@
 - (TRCSchema *)requestSchemaForMapperWithTag:(NSString *)tag
 {
     if ([tag isEqualToString:@"{person}"]) {
-        TRCSchema *schema = [TRCSchema schemaWithName:@"TRCMapperPerson.json"];
+        TRCSchema *schema = [TRCSchema schemaWithName:@"TRCMapperPerson.json" extensionsToTry:nil];
         schema.converterRegistry = self;
         return schema;
     } else {
@@ -83,7 +83,7 @@
 - (TRCSchema *)responseSchemaForMapperWithTag:(NSString *)tag
 {
     if ([tag isEqualToString:@"{person}"]) {
-        TRCSchema *schema = [TRCSchema schemaWithName:@"TRCMapperPerson.json"];
+        TRCSchema *schema = [TRCSchema schemaWithName:@"TRCMapperPerson.json" extensionsToTry:nil];
         schema.converterRegistry = self;
         return schema;
     } else {
@@ -125,7 +125,7 @@
 
 - (void)test_scheme_not_exist_at_path
 {
-    XCTAssertNil([TRCSchema schemaWithName:@"123"]);
+    XCTAssertNil([TRCSchema schemaWithName:@"123" extensionsToTry:nil]);
     XCTAssertNil([[TRCSchema alloc] initWithFilePath:@"23"]);
 }
 
@@ -357,7 +357,7 @@
 
 - (void)test_embed_subscheme
 {
-    TRCSchema *listSchema = [TRCSchema schemaWithName:@"PersonsList.json"];
+    TRCSchema *listSchema = [TRCSchema schemaWithName:@"PersonsList.json" extensionsToTry:nil];
 
 
     NSDictionary *input = @{
@@ -378,7 +378,7 @@
 
 - (void)test_embed_subscheme_correct
 {
-    TRCSchema *listSchema = [TRCSchema schemaWithName:@"PersonsList.json"];
+    TRCSchema *listSchema = [TRCSchema schemaWithName:@"PersonsList.json" extensionsToTry:nil];
     listSchema.converterRegistry = self;
 
 
@@ -401,7 +401,7 @@
 
 - (void)test_mapper_without_schema_incorrect
 {
-    TRCSchema *listSchema = [TRCSchema schemaWithName:@"PersonsList.json"];
+    TRCSchema *listSchema = [TRCSchema schemaWithName:@"PersonsList.json" extensionsToTry:nil];
     listSchema.converterRegistry = self;
 
 
@@ -424,7 +424,7 @@
 
 - (void)test_mapper_without_schema_correct
 {
-    TRCSchema *listSchema = [TRCSchema schemaWithName:@"PersonsList.json"];
+    TRCSchema *listSchema = [TRCSchema schemaWithName:@"PersonsList.json" extensionsToTry:nil];
     listSchema.converterRegistry = self;
 
 

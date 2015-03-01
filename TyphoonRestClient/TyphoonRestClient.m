@@ -340,12 +340,34 @@
 
 - (TRCSchema *)requestSchemaForMapperWithTag:(NSString *)tag
 {
-    return nil;
+    id<TRCObjectMapper>mapper = [self objectMapperForTag:tag];
+    if (!mapper) {
+        return nil;
+    } else {
+        NSString *name = NSStringFromClass([mapper class]);
+
+        if ([mapper respondsToSelector:@selector(requestValidationSchemaName)]) {
+            name = [mapper requestValidationSchemaName];
+        }
+
+        return [self schemeWithName:name extensionsToTry:@[@"request", @"json", @"schema"]];
+    }
 }
 
 - (TRCSchema *)responseSchemaForMapperWithTag:(NSString *)tag
 {
-    return nil;
+    id<TRCObjectMapper>mapper = [self objectMapperForTag:tag];
+    if (!mapper) {
+        return nil;
+    } else {
+        NSString *name = NSStringFromClass([mapper class]);
+
+        if ([mapper respondsToSelector:@selector(responseValidationSchemaName)]) {
+            name = [mapper responseValidationSchemaName];
+        }
+
+        return [self schemeWithName:name extensionsToTry:@[@"response", @"json", @"schema"]];
+    }
 }
 
 - (TRCSchema *)schemeForErrorParser:(id<TRCErrorParser>)parser
@@ -356,7 +378,7 @@
         schemaName = [parser errorValidationSchemaName];
     }
 
-    return [self schemeWithName:schemaName];
+    return [self schemeWithName:schemaName extensionsToTry:nil];
 }
 
 - (TRCSchema *)schemeForResponseWithRequest:(id<TRCRequest>)request
@@ -367,7 +389,7 @@
        schemaName = [request responseBodyValidationSchemaName];
     }
 
-    return [self schemeWithName:schemaName];
+    return [self schemeWithName:schemaName extensionsToTry:nil];
 }
 
 - (TRCSchema *)schemeForPathParametersWithRequest:(id<TRCRequest>)request
@@ -377,7 +399,7 @@
     if ([request respondsToSelector:@selector(requestPathParametersValidationSchemaName)]) {
         schemaName = [request requestPathParametersValidationSchemaName];
     }
-    return [self schemeWithName:schemaName];
+    return [self schemeWithName:schemaName extensionsToTry:nil];
 }
 
 - (TRCSchema *)schemeForRequest:(id<TRCRequest>)request
@@ -387,12 +409,12 @@
     if ([request respondsToSelector:@selector(requestBodyValidationSchemaName)]) {
         schemaName = [request requestBodyValidationSchemaName];
     }
-    return [self schemeWithName:schemaName];
+    return [self schemeWithName:schemaName extensionsToTry:nil];
 }
 
-- (TRCSchema *)schemeWithName:(NSString *)name
+- (TRCSchema *)schemeWithName:(NSString *)name extensionsToTry:(NSArray *)extensions
 {
-    TRCSchema *scheme = [TRCSchema schemaWithName:name];
+    TRCSchema *scheme = [TRCSchema schemaWithName:name extensionsToTry:extensions];
     scheme.converterRegistry = self;
     scheme.options = self.validationOptions;
     return scheme;
@@ -410,6 +432,7 @@
 - (void)registerValueConverter:(id<TRCValueConverter>)valueConverter forTag:(NSString *)tag
 {
     NSParameterAssert(tag);
+    NSAssert(_objectMapperRegistry[tag] == nil, @"This tag already used as ObjectMapper");
     if (valueConverter) {
         _typeConverterRegistry[tag] = valueConverter;
     } else {
@@ -420,6 +443,7 @@
 - (void)registerObjectMapper:(id<TRCObjectMapper>)objectConverter forTag:(NSString *)tag
 {
     NSParameterAssert(tag);
+    NSAssert(_typeConverterRegistry[tag] == nil, @"This tag already used as ValueConverter");
     if (objectConverter) {
         _objectMapperRegistry[tag] = objectConverter;
     } else {

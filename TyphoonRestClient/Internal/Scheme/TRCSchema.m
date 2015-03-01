@@ -30,7 +30,7 @@
     BOOL _isRequestValidation;
 }
 
-+ (instancetype)schemaWithName:(NSString *)name
++ (instancetype)schemaWithName:(NSString *)name extensionsToTry:(NSArray *)extensions
 {
     if (!name) {
         return nil;
@@ -41,7 +41,7 @@
     if ([name pathExtension].length > 0) {
         path = [[NSBundle bundleForClass:[self class]] pathForResource:name ofType:nil];
     } else {
-        NSArray *extensionsToTry = @[@"json", @"schema"];
+        NSArray *extensionsToTry = extensions?:@[@"json", @"schema"];
 
         for (NSString *extension in extensionsToTry) {
             path = [[NSBundle bundleForClass:[self class]] pathForResource:name ofType:extension];

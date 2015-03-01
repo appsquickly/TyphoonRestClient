@@ -81,11 +81,11 @@ TRCValidationOptions validationOptions;
 - (TRCSchema *)requestSchemaForMapperWithTag:(NSString *)tag
 {
     if ([tag isEqualToString:@"{person}"]) {
-        TRCSchema *schema = [TRCSchema schemaWithName:@"TRCMapperPerson.json"];
+        TRCSchema *schema = [TRCSchema schemaWithName:@"TRCMapperPerson.json" extensionsToTry:nil];
         schema.converterRegistry = self;
         return schema;
     } else if ([tag isEqualToString:@"{phone}"]) {
-        TRCSchema *schema = [TRCSchema schemaWithName:@"TRCMapperPhone.json"];
+        TRCSchema *schema = [TRCSchema schemaWithName:@"TRCMapperPhone.json" extensionsToTry:nil];
         schema.converterRegistry = self;
         return schema;
     }  else {

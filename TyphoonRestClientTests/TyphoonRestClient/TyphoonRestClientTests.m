@@ -70,8 +70,8 @@ id(*originalImp)(id, SEL, NSString *);
 
 + (void)load
 {
-    Method m1 = class_getClassMethod([self class], @selector(schemaWithName:));
-    Method m2 = class_getClassMethod([TRCSchema class], @selector(schemaWithName:));
+    Method m1 = class_getClassMethod([self class], @selector(schemaWithName:extensionsToTry:));
+    Method m2 = class_getClassMethod([TRCSchema class], @selector(schemaWithName:extensionsToTry:));
     originalImp = (id(*)(id, SEL, NSString *))method_getImplementation(m2);
     method_exchangeImplementations(m1, m2);
 }
