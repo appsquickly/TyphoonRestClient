@@ -14,8 +14,10 @@
 #import "TRCConverter.h"
 #import "TRCValueConverter.h"
 #import "TRCValueConverterStub.h"
-#import "TRCPersonMapper.h"
+#import "TRCMapperPerson.h"
 #import "Person.h"
+#import "Phone.h"
+#import "TRCMapperPhone.h"
 
 @interface TRCConverterTests : XCTestCase<TRCConvertersRegistry>
 
@@ -48,40 +50,53 @@ TRCValidationOptions validationOptions;
 - (id<TRCObjectMapper>)objectMapperForTag:(NSString *)tag
 {
     if ([tag isEqualToString:@"test"]) {
-        return [TRCPersonMapper new];
+        return [TRCMapperPerson new];
     } else if ([tag isEqualToString:@"test_without_response"]) {
-        TRCPersonMapper *mapper = [TRCPersonMapper new];
+        TRCMapperPerson *mapper = [TRCMapperPerson new];
         mapper.responseParsingImplemented = NO;
         return mapper;
     } else if ([tag isEqualToString:@"test_without_request"]) {
-        TRCPersonMapper *mapper = [TRCPersonMapper new];
+        TRCMapperPerson *mapper = [TRCMapperPerson new];
         mapper.requestParsingImplemented = NO;
         return mapper;
+    } else if ([tag isEqualToString:@"{person}"]) {
+        return [TRCMapperPerson new];
+    } else if ([tag isEqualToString:@"{phone}"]) {
+        return [TRCMapperPhone new];
     } else {
         return nil;
     };
 }
 
-- (id)convertValuesInResponse:(id)arrayOrDictionary schema:(TRCSchema *)scheme error:(NSError **)parseError
+- (id)convertValuesInResponse:(id)arrayOrDictionary schema:(TRCSchema *)scheme1 error:(NSError **)parseError
 {
-    return nil;
+    return [self convertResponseObject:arrayOrDictionary schema:scheme1.schemeArrayOrDictionary errors:nil];
 }
 
-- (id)convertValuesInRequest:(id)arrayOrDictionary schema:(TRCSchema *)scheme error:(NSError **)parseError
+- (id)convertValuesInRequest:(id)arrayOrDictionary schema:(TRCSchema *)scheme1 error:(NSError **)parseError
 {
-    return nil;
+    return [self convertRequestObject:arrayOrDictionary schema:scheme1.schemeArrayOrDictionary errors:nil];
 }
 
 - (TRCSchema *)requestSchemaForMapperWithTag:(NSString *)tag
 {
-    return nil;
+    if ([tag isEqualToString:@"{person}"]) {
+        TRCSchema *schema = [TRCSchema schemaWithName:@"TRCMapperPerson.json"];
+        schema.converterRegistry = self;
+        return schema;
+    } else if ([tag isEqualToString:@"{phone}"]) {
+        TRCSchema *schema = [TRCSchema schemaWithName:@"TRCMapperPhone.json"];
+        schema.converterRegistry = self;
+        return schema;
+    }  else {
+        return nil;
+    }
 }
 
 - (TRCSchema *)responseSchemaForMapperWithTag:(NSString *)tag
 {
-    return nil;
+    return [self requestSchemaForMapperWithTag:tag];
 }
-
 
 + (void)setUp
 {
@@ -537,6 +552,54 @@ TRCValidationOptions validationOptions;
     [self convertResponseObject:data schema:schema errors:&errors];
 
     XCTAssertTrue([errors count] > 0);
+}
+
+- (void)test_model_object_request_composing_external_scheme
+{
+    Person *test = [Person new];
+    test.firstName = @"Ivan";
+    test.lastName = @"Ivanov";
+    test.avatarUrl = [NSURL URLWithString:@"http://google.com"];
+
+    NSDictionary *schema = @{ @"person": @"{person}"};
+
+    NSOrderedSet *errors = nil;
+    NSDictionary *object = [self convertRequestObject:@{ @"person" : test } schema:schema errors:&errors];
+
+    XCTAssertEqualObjects(object[@"person"][@"first_name"], @"Ivan");
+    XCTAssertEqualObjects(object[@"person"][@"last_name"], @"Ivanov");
+    XCTAssertEqualObjects(object[@"person"][@"avatar_url"], [NSURL URLWithString:@"http://appsquick.ly"]);
+    XCTAssertTrue([errors count] == 0);
+}
+
+- (void)test_model_object_response_parsing_external_scheme
+{
+    NSDictionary *data = @{ @"person": @{@"first_name": @"Ivan", @"last_name": @"Ivanov", @"avatar_url": @"some_url"}};
+    NSDictionary *schema = @{ @"person": @"{person}"};
+
+    NSOrderedSet *errors = nil;
+    Person *object = [self convertResponseObject:data schema:schema errors:&errors][@"person"];
+
+    XCTAssertEqualObjects(object.firstName, @"Ivan");
+    XCTAssertEqualObjects(object.lastName, @"Ivanov");
+    XCTAssertEqualObjects(object.avatarUrl, [NSURL URLWithString:@"http://appsquick.ly"]);
+    XCTAssertTrue([errors count] == 0);
+}
+
+- (void)test_model_object_response_parsing_external_scheme_sub_scheme
+{
+    NSDictionary *data = @{ @"person": @{@"first_name": @"Ivan", @"last_name": @"Ivanov", @"avatar_url": @"some_url", @"phone": @{ @"mobile":@"123", @"work":@"321"}}};
+    NSDictionary *schema = @{ @"person": @"{person}"};
+
+    NSOrderedSet *errors = nil;
+    Person *object = [self convertResponseObject:data schema:schema errors:&errors][@"person"];
+
+    XCTAssertEqualObjects(object.firstName, @"Ivan");
+    XCTAssertEqualObjects(object.lastName, @"Ivanov");
+    XCTAssertEqualObjects(object.avatarUrl, [NSURL URLWithString:@"http://appsquick.ly"]);
+    XCTAssertEqualObjects(object.phone.work, @"321");
+    XCTAssertEqualObjects(object.phone.mobile, @"123");
+    XCTAssertTrue([errors count] == 0);
 }
 
 @end

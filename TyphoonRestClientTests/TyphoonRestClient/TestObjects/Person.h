@@ -8,10 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+@class Phone;
+
 @interface Person : NSObject
 
 @property (nonatomic, strong) NSString *firstName;
 @property (nonatomic, strong) NSString *lastName;
 @property (nonatomic, strong) NSURL *avatarUrl;
+@property (nonatomic, strong) Phone *phone;
 
 @end

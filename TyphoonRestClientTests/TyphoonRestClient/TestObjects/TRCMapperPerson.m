@@ -6,11 +6,11 @@
 //  Copyright (c) 2015 Apps Quickly. All rights reserved.
 //
 
-#import "TRCPersonMapper.h"
+#import "TRCMapperPerson.h"
 #import "Person.h"
 #import "TRCUtils.h"
 
-@implementation TRCPersonMapper
+@implementation TRCMapperPerson
 
 - (BOOL)respondsToSelector:(SEL)aSelector
 {
@@ -45,6 +45,7 @@
     object.firstName = dictionary[@"first_name"];
     object.lastName = dictionary[@"last_name"];
     object.avatarUrl = dictionary[@"avatar_url"];
+    object.phone = dictionary[@"phone"];
     return object;
 }
 
@@ -61,6 +62,7 @@
     dictionary[@"first_name"] = object.firstName;
     dictionary[@"last_name"] = object.lastName;
     dictionary[@"avatar_url"] = object.avatarUrl;
+    dictionary[@"phone"] = ValueOrNull(object.phone);
     return dictionary;
 }
 

@@ -11,7 +11,7 @@
 #import "TRCConvertersRegistry.h"
 #import "TRCValueConverter.h"
 #import "TRCValueConverterStub.h"
-#import "TRCPersonMapper.h"
+#import "TRCMapperPerson.h"
 
 @interface TRCSchemeTests : XCTestCase<TRCConvertersRegistry>
 
@@ -51,9 +51,9 @@
 - (id<TRCObjectMapper>)objectMapperForTag:(NSString *)tag
 {
     if ([tag isEqualToString:@"{person}"]) {
-        return [TRCPersonMapper new];
+        return [TRCMapperPerson new];
     } else if ([tag isEqualToString:@"{person-2}"]) {
-        return [TRCPersonMapper new];
+        return [TRCMapperPerson new];
     } else {
         return nil;
     }
@@ -72,7 +72,7 @@
 - (TRCSchema *)requestSchemaForMapperWithTag:(NSString *)tag
 {
     if ([tag isEqualToString:@"{person}"]) {
-        TRCSchema *schema = [TRCSchema schemaWithName:@"TRCPersonMapper.json"];
+        TRCSchema *schema = [TRCSchema schemaWithName:@"TRCMapperPerson.json"];
         schema.converterRegistry = self;
         return schema;
     } else {
@@ -83,7 +83,9 @@
 - (TRCSchema *)responseSchemaForMapperWithTag:(NSString *)tag
 {
     if ([tag isEqualToString:@"{person}"]) {
-        return [TRCSchema schemaWithName:@"TRCPersonMapper.json"];
+        TRCSchema *schema = [TRCSchema schemaWithName:@"TRCMapperPerson.json"];
+        schema.converterRegistry = self;
+        return schema;
     } else {
         return nil;
     }

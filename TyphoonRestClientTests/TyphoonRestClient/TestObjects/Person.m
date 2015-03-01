@@ -7,6 +7,7 @@
 //
 
 #import "Person.h"
+#import "Phone.h"
 
 @implementation Person
 
