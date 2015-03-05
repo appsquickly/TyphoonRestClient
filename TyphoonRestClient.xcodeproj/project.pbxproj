@@ -705,6 +705,7 @@
 				);
 				INFOPLIST_FILE = "TyphoonRestClientTests/TyphoonRestClientTests-Info.plist";
 				PRODUCT_NAME = TyphoonRestClientTests;
+				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
@@ -723,6 +724,7 @@
 				GCC_PREFIX_HEADER = "TyphoonRestClient/TyphoonRestClient-Prefix.pch";
 				INFOPLIST_FILE = "TyphoonRestClientTests/TyphoonRestClientTests-Info.plist";
 				PRODUCT_NAME = TyphoonRestClientTests;
+				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;

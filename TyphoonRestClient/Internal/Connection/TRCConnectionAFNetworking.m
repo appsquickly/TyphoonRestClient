@@ -9,13 +9,10 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-
-
 #import "TRCConnectionAFNetworking.h"
 #import "AFURLRequestSerialization.h"
 #import "AFURLResponseSerialization.h"
-#import "AFHTTPRequestOperationManager.h"
-#import "TRCUtils.h"
+#import "AFHTTPRequestOperationManager.h"#import "AFNetworkReachabilityManager.h"
 
 
 NSError *NSErrorWithDictionaryUnion(NSError *error, NSDictionary *dictionary);
@@ -101,10 +98,10 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
 
 @implementation TRCConnectionAFNetworking
 {
-    NSCache *requestSerializersCache;
-    NSCache *responseSerializersCache;
+    NSCache *_requestSerializersCache;
+    NSCache *_responseSerializersCache;
 
-    AFHTTPRequestOperationManager *operationManager;
+    AFHTTPRequestOperationManager *_operationManager;
 }
 
 - (instancetype)initWithBaseUrl:(NSURL *)baseUrl
@@ -112,11 +109,16 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
     self = [super init];
     if (self) {
         _baseUrl = baseUrl;
-        operationManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseUrl];
-        responseSerializersCache = [NSCache new];
-        requestSerializersCache = [NSCache new];
+        _operationManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseUrl];
+        _responseSerializersCache = [NSCache new];
+        _requestSerializersCache = [NSCache new];
     }
     return self;
+}
+
+- (AFNetworkReachabilityManager *)reachabilityManager
+{
+    return _operationManager.reachabilityManager;
 }
 
 #pragma mark - HttpWebServiceConnection protocol
@@ -185,7 +187,7 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
     TRCAFNetworkingConnectionProgressHandler *progressHandler = [TRCAFNetworkingConnectionProgressHandler new];
     progressHandler.operation = requestOperation;
 
-    [operationManager.operationQueue addOperation:requestOperation];
+    [_operationManager.operationQueue addOperation:requestOperation];
 
     return progressHandler;
 }
@@ -234,10 +236,10 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
 {
     Class serializerClass = ClassFromHttpRequestSerialization(serialization);
     NSString *key = NSStringFromClass(serializerClass);
-    id<AFURLRequestSerialization> cached = [requestSerializersCache objectForKey:key];
+    id<AFURLRequestSerialization> cached = [_requestSerializersCache objectForKey:key];
     if (!cached) {
         cached = (id<AFURLRequestSerialization>)[serializerClass new];
-        [requestSerializersCache setObject:cached forKey:key];
+        [_requestSerializersCache setObject:cached forKey:key];
     }
     return cached;
 }
@@ -246,10 +248,10 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
 {
     Class serializerClass = ClassFromHttpResponseSerialization(serialization);
     NSString *key = NSStringFromClass(serializerClass);
-    id<AFURLResponseSerialization> cached = [responseSerializersCache objectForKey:key];
+    id<AFURLResponseSerialization> cached = [_responseSerializersCache objectForKey:key];
     if (!cached) {
         cached = (id<AFURLResponseSerialization>)[serializerClass new];
-        [responseSerializersCache setObject:cached forKey:key];
+        [_responseSerializersCache setObject:cached forKey:key];
     }
     return cached;
 }

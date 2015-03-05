@@ -9,13 +9,14 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-
-
 #import <Foundation/Foundation.h>
 #import "TRCConnection.h"
 
+@class AFNetworkReachabilityManager;
 
 @interface TRCConnectionAFNetworking : NSObject <TRCConnection>
+
+@property (nonatomic, strong, readonly) AFNetworkReachabilityManager *reachabilityManager;
 
 @property (nonatomic, strong, readonly) NSURL *baseUrl;
 
