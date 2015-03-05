@@ -12,8 +12,7 @@
 #import "TRCConnectionAFNetworking.h"
 #import "AFURLRequestSerialization.h"
 #import "AFURLResponseSerialization.h"
-#import "AFHTTPRequestOperationManager.h"#import "AFNetworkReachabilityManager.h"
-
+#import "AFHTTPRequestOperationManager.h"
 
 NSError *NSErrorWithDictionaryUnion(NSError *error, NSDictionary *dictionary);
 NSString *NSStringFromHttpRequestMethod(TRCRequestMethod method);
