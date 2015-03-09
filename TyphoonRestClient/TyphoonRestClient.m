@@ -139,7 +139,7 @@
     return result;
 }
 
-- (id)requestBodyFromRequest:(<TRCRequest>)request error:(NSError **)error
+- (id)requestBodyFromRequest:(id<TRCRequest>)request error:(NSError **)error
 {
     id body = nil;
     if ([request respondsToSelector:@selector(requestBody)]) {
@@ -157,7 +157,7 @@
     return body;
 }
 
-- (TRCRequestSerialization)requestSerializationFromRequest:(<TRCRequest>)request body:(id)body
+- (TRCRequestSerialization)requestSerializationFromRequest:(id<TRCRequest>)request body:(id)body
 {
     TRCRequestSerialization serialization = self.defaultRequestSerialization;
     if ([request respondsToSelector:@selector(requestSerialization)]) {
@@ -169,7 +169,7 @@
     return serialization;
 }
 
-- (NSDictionary *)requestPathParametersFromRequest:(<TRCRequest>)request error:(NSError **)error
+- (NSDictionary *)requestPathParametersFromRequest:(id<TRCRequest>)request error:(NSError **)error
 {
     NSDictionary *pathParams = nil;
     if ([request respondsToSelector:@selector(pathParameters)]) {
@@ -185,7 +185,7 @@
     return pathParams;
 }
 
-- (NSString *)requestPathFromRequest:(<TRCRequest>)request params:(NSMutableDictionary *)params error:(NSError **)error
+- (NSString *)requestPathFromRequest:(id<TRCRequest>)request params:(NSMutableDictionary *)params error:(NSError **)error
 {
     NSString *path = [request path];
     if (path && params.count > 0) {

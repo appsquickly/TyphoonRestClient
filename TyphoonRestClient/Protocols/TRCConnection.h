@@ -65,3 +65,28 @@ typedef void (^TRCDownloadProgressBlock)(NSUInteger bytesRead, long long totalBy
 - (NSData *)responseData;
 
 @end
+
+//-------------------------------------------------------------------------------------------
+#pragma mark - Request Context
+//-------------------------------------------------------------------------------------------
+
+@protocol TRCConnectionRequestCreationOptions <NSObject>
+
+@property (nonatomic, assign) TRCRequestMethod method;
+@property (nonatomic, strong) NSString *path;
+@property (nonatomic, strong) NSDictionary *pathParameters;
+@property (nonatomic, strong) id body;
+@property (nonatomic, strong) NSDictionary *headers;
+@property (nonatomic, assign) TRCRequestSerialization serialization;
+@property (nonatomic, strong) NSDictionary *customProperties;
+
+@end
+
+
+@protocol TRCConnectionRequestSendingOptions <NSObject>
+
+@property (nonatomic, strong) NSOutputStream *outputStream;
+@property (nonatomic, assign) TRCResponseSerialization responseSerialization;
+@property (nonatomic, strong) NSDictionary *customProperties;
+
+@end

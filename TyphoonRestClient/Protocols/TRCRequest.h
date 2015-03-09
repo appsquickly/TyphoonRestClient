@@ -10,7 +10,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 
-#define ValueOrNull(value) (value?:[NSNull null])
+#define ValueOrNull(value) (value?:(__typeof(value))[NSNull null])
 
 
 typedef NSInteger TRCHttpStatusCode;
