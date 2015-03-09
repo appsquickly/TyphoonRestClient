@@ -16,6 +16,7 @@
 #import "TRCValueConverter.h"
 #import <objc/runtime.h>
 #import "NSObject+AutoDescription.h"
+#import "TyphoonRestClientErrors.h"
 
 @interface NumberToStringConverter : NSObject <TRCValueConverter>
 
@@ -44,15 +45,6 @@
 @interface TRCSchema (TestApi)
 
 - (instancetype)initWithSchemeObject:(id)object name:(NSString *)name;
-
-@end
-
-@interface TyphoonRestClient (TestApi)
-
-- (id)parseResponse:(id)response withRequest:(id<TRCRequest>)request schema:(TRCSchema *)scheme error:(NSError **)parseError;
-
-- (NSDictionary *)convertValuesDictionary:(NSDictionary *)dataDict withSchemeObject:(id)schemeObject error:(NSError **)error;
-- (NSArray *)convertValuesInArray:(NSArray *)dataArray withSchemeItem:(TRCSchema *)scheme error:(NSError **)error;
 
 @end
 
@@ -94,33 +86,33 @@ id(*originalImp)(id, SEL, NSString *);
 //    __gcov_flush();
 }
 
-+ (id)schemaWithName:(NSString *)name
++ (id)schemaWithName:(NSString *)name extensionsToTry:(NSArray *)extensions
 {
     if ([name isEqualToString:@"ErrorSchema"]) {
-        return [[TRCSchema alloc] initWithSchemeObject:@{@"code": @1, @"message": @"", @"reason_url{?}": @"NSURL"} name:name];
+        return [[TRCSchema alloc] initWithSchemeObject:@{@"code": @1, @"message": @"", @"reason_url{?}": @"{url}"} name:name];
     }
     if ([name isEqualToString:@"SimpleDictionary"]) {
         return [[TRCSchema alloc] initWithSchemeObject:@{
                 @"number": @1,
                 @"string": @"NSString",
-                @"url{?}": @"NSURL"
+                @"url{?}": @"{url}"
         } name:name];
     }
     if ([name isEqualToString:@"SimpleRequest"]) {
         return [[TRCSchema alloc] initWithSchemeObject:@{
-                @"key": @"NSURL",
+                @"key": @"{url}",
         } name:name];
     }
     if ([name isEqualToString:@"SimpleArray"]) {
         return [[TRCSchema alloc] initWithSchemeObject:@[
-                @"NSURL",
+                @"{url}",
         ] name:name];
     }
     if ([name isEqualToString:@"ArrayOfObjects"]) {
         return [[TRCSchema alloc] initWithSchemeObject:@[@{
                 @"number" : @1,
                 @"string" : @"NSString",
-                @"url{?}" : @"NSURL"
+                @"url{?}" : @"{url}"
         }] name:name];
     }
     if ([name isEqualToString:@"ArrayOfArray"]) {
@@ -362,7 +354,7 @@ id(*originalImp)(id, SEL, NSString *);
         XCTAssertFalse(request.parseResponseObjectCalled);
         XCTAssertNil(result);
         XCTAssertNotNil(error);
-        XCTAssertTrue([error.localizedDescription hasPrefix:@"Validation error"]);
+        XCTAssertTrue(error.code == TyphoonRestClientErrorCodeValidation);
     }];
 }
 

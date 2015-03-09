@@ -33,16 +33,17 @@
     return self;
 }
 
-- (NSMutableURLRequest *)requestWithMethod:(TRCRequestMethod)httpMethod path:(NSString *)path pathParams:(NSDictionary *)pathParams body:(id)bodyObject serialization:(TRCRequestSerialization)serialization headers:(NSDictionary *)headers error:(NSError **)requestComposingError
+- (NSMutableURLRequest *)requestWithOptions:(id<TRCConnectionRequestCreationOptions>)options error:(NSError **)requestComposingError
 {
-    if (path.length > 0) {
-        return [super requestWithMethod:httpMethod path:path pathParams:pathParams body:bodyObject serialization:serialization headers:headers error:requestComposingError];
+    if (options.path.length > 0) {
+        return [super requestWithOptions:options error:requestComposingError];
     } else {
         return [NSMutableURLRequest new];
     }
 }
 
-- (id<TRCProgressHandler>)sendRequest:(NSURLRequest *)request responseSerialization:(TRCResponseSerialization)serialization completion:(void (^)(id arrayOrDictionary, NSError *error, id<TRCResponseInfo> responseInfo))completion
+
+- (id<TRCProgressHandler>)sendRequest:(NSURLRequest *)request withOptions:(id<TRCConnectionRequestSendingOptions>)options completion:(TRCConnectionCompletion)completion
 {
     __block id response = responseObject;
     __block NSError *error = responseError;
