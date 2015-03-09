@@ -169,4 +169,15 @@ typedef NS_ENUM(NSInteger, TRCResponseSerialization) {
 * */
 - (void)respondedWithError:(NSError *)networkError headers:(NSDictionary *)responseHeaders status:(TRCHttpStatusCode)statusCode;
 
+//-------------------------------------------------------------------------------------------
+#pragma mark - Custom context
+//-------------------------------------------------------------------------------------------
+
+@optional
+/**
+* Use custom properties dictionary to pass parameters into your own
+* TRCConnection implementation (to handle specific per-request cases)
+* */
+- (NSDictionary *)customProperties;
+
 @end

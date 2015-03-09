@@ -22,6 +22,10 @@
 
 - (instancetype)initWithBaseUrl:(NSURL *)baseUrl;
 
+- (void)startReachabilityMonitoring;
+
+- (void)stopReachabilityMonitoring;
+
 @end
 
 @interface NSError(HttpStatusCode)

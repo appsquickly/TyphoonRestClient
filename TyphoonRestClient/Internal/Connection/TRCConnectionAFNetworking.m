@@ -120,6 +120,16 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
     return _operationManager.reachabilityManager;
 }
 
+- (void)startReachabilityMonitoring
+{
+    [self.reachabilityManager startMonitoring];
+}
+
+- (void)stopReachabilityMonitoring
+{
+    [self.reachabilityManager stopMonitoring];
+}
+
 #pragma mark - HttpWebServiceConnection protocol
 
 - (NSMutableURLRequest *)requestWithMethod:(TRCRequestMethod)httpMethod path:(NSString *)path pathParams:(NSDictionary *)pathParams body:(id)bodyObject serialization:(TRCRequestSerialization)serialization headers:(NSDictionary *)headers error:(NSError **)requestComposingError
