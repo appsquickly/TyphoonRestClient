@@ -27,37 +27,30 @@
     return self;
 }
 
-- (NSMutableURLRequest *)requestWithMethod:(TRCRequestMethod)httpMethod path:(NSString *)path
-    pathParams:(NSDictionary *)pathParams body:(id)bodyObject serialization:(TRCRequestSerialization)serialization
-    headers:(NSDictionary *)headers error:(NSError **)requestComposingError
+- (NSMutableURLRequest *)requestWithOptions:(id<TRCConnectionRequestCreationOptions>)options error:(NSError **)requestComposingError
 {
-    return [self.connection requestWithMethod:httpMethod path:path pathParams:pathParams body:bodyObject
-                                serialization:serialization headers:headers error:requestComposingError];
+    return [self.connection requestWithOptions:options error:requestComposingError];
 }
 
-- (id <TRCProgressHandler>)sendRequest:(NSURLRequest *)request
-    responseSerialization:(TRCResponseSerialization)serialization outputStream:(NSOutputStream *)outputStream
-    completion:(TRCConnectionCompletion)completion
+- (id<TRCProgressHandler>)sendRequest:(NSURLRequest *)request withOptions:(id<TRCConnectionRequestSendingOptions>)options completion:(TRCConnectionCompletion)completion
 {
     [self printRequest:request];
 
     CFAbsoluteTime time = CFAbsoluteTimeGetCurrent();
 
-    id <TRCProgressHandler> progressHandler =
-        [self.connection sendRequest:request responseSerialization:serialization outputStream:outputStream
-                          completion:^(id responseObject, NSError *error, id<TRCResponseInfo> responseInfo) {
-                              [self printResponseInfo:responseInfo withObject:nil error:error forRequest:request
-                                             duration:CFAbsoluteTimeGetCurrent() - time];
-                              if (completion) {
-                                  completion(responseObject, error, responseInfo);
-                              }
-                          }];
+    id <TRCProgressHandler> progressHandler = [self.connection sendRequest:request withOptions:options completion:^(id responseObject, NSError *error, id<TRCResponseInfo> responseInfo) {
+        CFAbsoluteTime responseTime = CFAbsoluteTimeGetCurrent() - time;
+        [self printResponseInfo:responseInfo withObject:nil error:error forRequest:request duration:responseTime];
+        if (completion) {
+            completion(responseObject, error, responseInfo);
+        }
+    }];
 
     if (request.HTTPBodyStream && self.shouldLogUploadProgress) {
         [self printUploadingProgress:progressHandler forRequest:request];
     }
 
-    if (outputStream && self.shouldLogDownloadProgress) {
+    if (options.outputStream && self.shouldLogDownloadProgress) {
         [self printDownloadingProgress:progressHandler forRequest:request];
     }
 

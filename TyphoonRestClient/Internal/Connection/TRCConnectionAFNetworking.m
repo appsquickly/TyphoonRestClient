@@ -132,10 +132,10 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
 
 #pragma mark - HttpWebServiceConnection protocol
 
-- (NSMutableURLRequest *)requestWithMethod:(TRCRequestMethod)httpMethod path:(NSString *)path pathParams:(NSDictionary *)pathParams body:(id)bodyObject serialization:(TRCRequestSerialization)serialization headers:(NSDictionary *)headers error:(NSError **)requestComposingError
+- (NSMutableURLRequest *)requestWithOptions:(id<TRCConnectionRequestCreationOptions>)options error:(NSError **)requestComposingError
 {
     NSError *urlComposingError = nil;
-    NSURL *url = [self urlFromPath:path parameters:pathParams error:&urlComposingError];
+    NSURL *url = [self urlFromPath:options.path parameters:options.pathParameters error:&urlComposingError];
 
     if (urlComposingError) {
         if(requestComposingError) {
@@ -145,9 +145,11 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
     }
 
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    request.HTTPMethod = NSStringFromHttpRequestMethod(httpMethod);
+    request.HTTPMethod = NSStringFromHttpRequestMethod(options.method);
 
-    if (!IsBodyAllowedInHttpMethod(httpMethod)) {
+    id bodyObject = options.body;
+
+    if (!IsBodyAllowedInHttpMethod(options.method)) {
         bodyObject = nil;
     }
 
@@ -158,11 +160,11 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
     } else if ([bodyObject isKindOfClass:[NSInputStream class]]) {
         [request setHTTPBodyStream:bodyObject];
     } else if ([bodyObject isKindOfClass:[NSArray class]] || [bodyObject isKindOfClass:[NSDictionary class]]) {
-        id<AFURLRequestSerialization> serializer = [self requestSerializerForType:serialization];
+        id<AFURLRequestSerialization> serializer = [self requestSerializerForType:options.serialization];
         request = [[serializer requestBySerializingRequest:request withParameters:bodyObject error:requestComposingError] mutableCopy];
     }
 
-    [headers enumerateKeysAndObjectsUsingBlock:^(NSString *field, NSString *value, BOOL *stop) {
+    [options.headers enumerateKeysAndObjectsUsingBlock:^(NSString *field, NSString *value, BOOL *stop) {
         if ([value isKindOfClass:[NSString class]] && [value length] > 0) {
             [request setValue:value forHTTPHeaderField:field];
         }
@@ -171,13 +173,13 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
     return request;
 }
 
-- (id<TRCProgressHandler>)sendRequest:(NSURLRequest *)request responseSerialization:(TRCResponseSerialization)serialization outputStream:(NSOutputStream *)outputStream completion:(TRCConnectionCompletion)completion
+- (id<TRCProgressHandler>)sendRequest:(NSURLRequest *)request withOptions:(id<TRCConnectionRequestSendingOptions>)options completion:(TRCConnectionCompletion)completion
 {
     AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
 
-    requestOperation.responseSerializer = [self responseSerializerForType:serialization];
+    requestOperation.responseSerializer = [self responseSerializerForType:options.responseSerialization];
 
-    requestOperation.outputStream = outputStream;
+    requestOperation.outputStream = options.outputStream;
 
     [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (completion) {

@@ -21,14 +21,16 @@
 
 @protocol TRCProgressHandler;
 @protocol TRCResponseInfo;
+@protocol TRCConnectionRequestCreationOptions;
+@protocol TRCConnectionRequestSendingOptions;
 
 typedef void (^TRCConnectionCompletion)(id responseObject, NSError *error, id<TRCResponseInfo> responseInfo);
 
 @protocol TRCConnection
 
-- (NSMutableURLRequest *)requestWithMethod:(TRCRequestMethod)httpMethod path:(NSString *)path pathParams:(NSDictionary *)pathParams body:(id)bodyObject serialization:(TRCRequestSerialization)serialization headers:(NSDictionary *)headers error:(NSError **)requestComposingError;
+- (NSMutableURLRequest *)requestWithOptions:(id<TRCConnectionRequestCreationOptions>)options error:(NSError **)requestComposingError;
 
-- (id<TRCProgressHandler>)sendRequest:(NSURLRequest *)request responseSerialization:(TRCResponseSerialization)serialization outputStream:(NSOutputStream *)outputStream completion:(TRCConnectionCompletion)completion;
+- (id<TRCProgressHandler>)sendRequest:(NSURLRequest *)request withOptions:(id<TRCConnectionRequestSendingOptions>)options completion:(TRCConnectionCompletion)completion;
 
 @end
 

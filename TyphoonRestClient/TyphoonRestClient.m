@@ -26,7 +26,21 @@
 #import "TRCValueConverterNumber.h"
 #import "TRCObjectMapper.h"
 
+@interface TRCRequestCreateOptions : NSObject <TRCConnectionRequestCreationOptions>
+@end
+@implementation TRCRequestCreateOptions
+@synthesize method, path, pathParameters, body, headers, serialization, customProperties;
+@end
+
+@interface TRCRequestSendOptions : NSObject <TRCConnectionRequestSendingOptions>
+@end
+@implementation TRCRequestSendOptions
+@synthesize outputStream, responseSerialization, customProperties;
+@end
+
+
 #define TRCSetError(errorPointer, error) if (errorPointer) { *errorPointer = error; }
+#define TRCCompleteWithError(completion, error) if (completion) { completion(nil, error); }
 
 @interface TyphoonRestClient ()<TRCConvertersRegistry>
 @end
@@ -56,40 +70,31 @@
 {
     NSParameterAssert(self.connection);
 
-    NSError *requestComposingError = nil;
-    NSMutableURLRequest *httpRequest = [self requestFromRequest:request error:&requestComposingError];
-
-    if (requestComposingError) {
-        if (completion) {
-            completion(nil, requestComposingError);
-        }
+    NSError *error = nil;
+    TRCRequestCreateOptions *createOptions = [self requestCreateOptionsFromRequest:request error:&error];
+    if (error) {
+        TRCCompleteWithError(completion, error);
         return nil;
     }
+
+    NSMutableURLRequest *httpRequest = [self.connection requestWithOptions:createOptions error:&error];
+    if (error) {
+        TRCCompleteWithError(completion, error);
+        return nil;
+    }
+
     NSParameterAssert(httpRequest);
 
-    NSOutputStream *output = nil;
-    if ([request respondsToSelector:@selector(responseBodyOutputStream)]) {
-        output = [request responseBodyOutputStream];
+    TRCRequestSendOptions *sendOptions = [self requestSendOptionsFromRequest:request error:&error];
+    if (error) {
+        TRCCompleteWithError(completion, error);
+        return nil;
     }
 
-    TRCResponseSerialization responseSerialization = self.defaultResponseSerialization;
-    if ([request respondsToSelector:@selector(responseSerialization)]) {
-        responseSerialization = [request responseSerialization];
-        if (output && responseSerialization != TRCResponseSerializationData) {
-            [self logWarning:@"Both 'responseSerialization' and 'responseBodyOutputStream' methods implemented in '%@' request. "
-                                     "Value returned by 'responseSerialization' method will be ignored. To avoid this warning please remove"
-                                     " 'responseSerialization' implementation or change returned value to TRCResponseSerializationData", [request class]];
-        }
-    }
-
-    if (output) {
-        responseSerialization = TRCResponseSerializationData;
-    }
-
-    return [self.connection sendRequest:httpRequest responseSerialization:responseSerialization outputStream:output completion:^(id responseObject, NSError *networkError, id<TRCResponseInfo> responseInfo) {
-        [self handleResponse:responseObject withError:networkError info:responseInfo forRequest:request completion:^(id result, NSError *error) {
+    return [self.connection sendRequest:httpRequest withOptions:sendOptions completion:^(id responseObject, NSError *networkError, id<TRCResponseInfo> responseInfo) {
+        [self handleResponse:responseObject withError:networkError info:responseInfo forRequest:request completion:^(id result, NSError *handleError) {
             if (completion) {
-                completion(result, error);
+                completion(result, handleError);
             }
         }];
     }];
@@ -99,44 +104,74 @@
 #pragma mark - Request composing
 //-------------------------------------------------------------------------------------------
 
-- (NSMutableURLRequest *)requestFromRequest:(id<TRCRequest>)request error:(NSError **)error
+- (TRCRequestSendOptions *)requestSendOptionsFromRequest:(id<TRCRequest>)request error:(NSError **)error
 {
+    TRCRequestSendOptions *options = [TRCRequestSendOptions new];
+    options.outputStream = nil;
+    if ([request respondsToSelector:@selector(responseBodyOutputStream)]) {
+        options.outputStream = [request responseBodyOutputStream];
+    }
+
+    options.responseSerialization = self.defaultResponseSerialization;
+    if ([request respondsToSelector:@selector(responseSerialization)]) {
+        options.responseSerialization = [request responseSerialization];
+        if (options.outputStream && options.responseSerialization != TRCResponseSerializationData) {
+            [self logWarning:@"Both 'responseSerialization' and 'responseBodyOutputStream' methods implemented in '%@' request. "
+                                     "Value returned by 'responseSerialization' method will be ignored. To avoid this warning please remove"
+                                     " 'responseSerialization' implementation or change returned value to TRCResponseSerializationData", [request class]];
+        }
+    }
+
+    if (options.outputStream) {
+        options.responseSerialization = TRCResponseSerializationData;
+    }
+
+    if ([request respondsToSelector:@selector(customProperties)]) {
+        options.customProperties = [request customProperties];
+    }
+
+    return options;
+}
+
+- (TRCRequestCreateOptions *)requestCreateOptionsFromRequest:(id<TRCRequest>)request error:(NSError **)error
+{
+    TRCRequestCreateOptions *options = [TRCRequestCreateOptions new];
+
     NSError *composingError = nil;
 
-    id body = [self requestBodyFromRequest:request error:&composingError];
+    options.body = [self requestBodyFromRequest:request error:&composingError];
 
     if (composingError) {
         TRCSetError(error, composingError);
         return nil;
     }
 
-    TRCRequestSerialization serialization = [self requestSerializationFromRequest:request body:body];
+    options.serialization = [self requestSerializationFromRequest:request body:options.body];
 
     NSMutableDictionary *pathParams = [[self requestPathParametersFromRequest:request error:&composingError] mutableCopy];
-
     if (composingError) {
         TRCSetError(error, composingError);
         return nil;
     }
 
-    NSDictionary *customHeaders = nil;
+    options.path = [self requestPathFromRequest:request params:pathParams error:&composingError];
+    options.pathParameters = pathParams;
+    options.method = [request method];
+    options.headers = nil;
     if ([request respondsToSelector:@selector(requestHeaders)]) {
-        customHeaders = [request requestHeaders];
+        options.headers = [request requestHeaders];
     }
 
+    if ([request respondsToSelector:@selector(customProperties)]) {
+        options.customProperties = [request customProperties];
+    }
 
-    NSString *path = [self requestPathFromRequest:request params:pathParams error:&composingError];
     if (composingError) {
         TRCSetError(error, composingError);
         return nil;
     }
 
-    NSMutableURLRequest *result = [self.connection requestWithMethod:[request method] path:path pathParams:pathParams body:body serialization:serialization headers:customHeaders error:&composingError];
-    if (composingError) {
-        TRCSetError(error, composingError)
-        return nil;
-    }
-    return result;
+    return options;
 }
 
 - (id)requestBodyFromRequest:(id<TRCRequest>)request error:(NSError **)error
