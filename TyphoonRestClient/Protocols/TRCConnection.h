@@ -90,5 +90,6 @@ typedef void (^TRCDownloadProgressBlock)(NSUInteger bytesRead, long long totalBy
 @property (nonatomic, strong) NSOutputStream *outputStream;
 @property (nonatomic, assign) TRCResponseSerialization responseSerialization;
 @property (nonatomic, strong) NSDictionary *customProperties;
+@property (nonatomic, assign) NSOperationQueuePriority queuePriority;
 
 @end

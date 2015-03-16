@@ -180,4 +180,6 @@ typedef NS_ENUM(NSInteger, TRCResponseSerialization) {
 * */
 - (NSDictionary *)customProperties;
 
+- (NSOperationQueuePriority)queuePriority;
+
 @end

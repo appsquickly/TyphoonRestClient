@@ -35,7 +35,7 @@
 @interface TRCRequestSendOptions : NSObject <TRCConnectionRequestSendingOptions>
 @end
 @implementation TRCRequestSendOptions
-@synthesize outputStream, responseSerialization, customProperties;
+@synthesize outputStream, responseSerialization, customProperties, queuePriority;
 @end
 
 
@@ -124,6 +124,12 @@
 
     if (options.outputStream) {
         options.responseSerialization = TRCResponseSerializationData;
+    }
+
+    if ([request respondsToSelector:@selector(queuePriority)]) {
+        options.queuePriority = [request queuePriority];
+    } else {
+        options.queuePriority = NSOperationQueuePriorityNormal;
     }
 
     if ([request respondsToSelector:@selector(customProperties)]) {

@@ -195,6 +195,8 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
         }
     }];
 
+    requestOperation.queuePriority = options.queuePriority;
+
     TRCAFNetworkingConnectionProgressHandler *progressHandler = [TRCAFNetworkingConnectionProgressHandler new];
     progressHandler.operation = requestOperation;
 
