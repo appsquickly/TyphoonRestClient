@@ -12,32 +12,28 @@
 
 #define ValueOrNull(value) (value?:(__typeof(value))[NSNull null])
 
-
 typedef NSInteger TRCHttpStatusCode;
 
-typedef NS_ENUM(NSInteger, TRCRequestMethod) {
-    TRCRequestMethodPost,
-    TRCRequestMethodGet,
-    TRCRequestMethodPut,
-    TRCRequestMethodDelete,
-    TRCRequestMethodPatch,
-    TRCRequestMethodHead
-};
+typedef NSString * TRCRequestMethod;
+extern TRCRequestMethod TRCRequestMethodPost;
+extern TRCRequestMethod TRCRequestMethodGet;
+extern TRCRequestMethod TRCRequestMethodPut;
+extern TRCRequestMethod TRCRequestMethodDelete;
+extern TRCRequestMethod TRCRequestMethodPatch;
+extern TRCRequestMethod TRCRequestMethodHead;
 
-typedef NS_ENUM(NSInteger, TRCRequestSerialization) {
-    TRCRequestSerializationJson,
-    TRCRequestSerializationHttp,
-    TRCRequestSerializationPlist
-};
+typedef NSString * TRCRequestSerialization;
+extern TRCRequestSerialization TRCRequestSerializationJson;
+extern TRCRequestSerialization TRCRequestSerializationHttp;
+extern TRCRequestSerialization TRCRequestSerializationPlist;
 
-typedef NS_ENUM(NSInteger, TRCResponseSerialization) {
-    TRCResponseSerializationJson,
-    TRCResponseSerializationXml,   /* not tested yet */
-    TRCResponseSerializationPlist, /* not tested yet */
-    TRCResponseSerializationData,
-    TRCResponseSerializationString,
-    TRCResponseSerializationImage,
-};
+typedef NSString * TRCResponseSerialization;
+extern TRCResponseSerialization TRCResponseSerializationJson;
+extern TRCResponseSerialization TRCResponseSerializationXml; /* not tested yet */
+extern TRCResponseSerialization TRCResponseSerializationPlist; /* not tested yet */
+extern TRCResponseSerialization TRCResponseSerializationData;
+extern TRCResponseSerialization TRCResponseSerializationString;
+extern TRCResponseSerialization TRCResponseSerializationImage;
 
 @protocol TRCRequest<NSObject>
 
@@ -180,6 +176,9 @@ typedef NS_ENUM(NSInteger, TRCResponseSerialization) {
 * */
 - (NSDictionary *)customProperties;
 
+/**
+* Use queue priority for your custom TRCConnection implementation
+**/
 - (NSOperationQueuePriority)queuePriority;
 
 @end

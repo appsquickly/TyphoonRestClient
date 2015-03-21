@@ -14,8 +14,25 @@
 #import "AFURLResponseSerialization.h"
 #import "AFHTTPRequestOperationManager.h"
 
+TRCRequestSerialization TRCRequestSerializationJson = @"TRCRequestSerializationJson";
+TRCRequestSerialization TRCRequestSerializationHttp = @"TRCRequestSerializationHttp";
+TRCRequestSerialization TRCRequestSerializationPlist = @"TRCRequestSerializationPlist";
+
+TRCResponseSerialization TRCResponseSerializationJson = @"TRCResponseSerializationJson";
+TRCResponseSerialization TRCResponseSerializationXml = @"TRCResponseSerializationXml";
+TRCResponseSerialization TRCResponseSerializationPlist = @"TRCResponseSerializationPlist";
+TRCResponseSerialization TRCResponseSerializationData = @"TRCResponseSerializationData";
+TRCResponseSerialization TRCResponseSerializationString = @"TRCResponseSerializationString";
+TRCResponseSerialization TRCResponseSerializationImage = @"TRCResponseSerializationImage";
+
+TRCRequestMethod TRCRequestMethodPost = @"POST";
+TRCRequestMethod TRCRequestMethodGet = @"GET";
+TRCRequestMethod TRCRequestMethodPut = @"PUT";
+TRCRequestMethod TRCRequestMethodDelete = @"DELETE";
+TRCRequestMethod TRCRequestMethodPatch = @"PATCH";
+TRCRequestMethod TRCRequestMethodHead = @"HEAD";
+
 NSError *NSErrorWithDictionaryUnion(NSError *error, NSDictionary *dictionary);
-NSString *NSStringFromHttpRequestMethod(TRCRequestMethod method);
 Class ClassFromHttpRequestSerialization(TRCRequestSerialization serialization);
 Class ClassFromHttpResponseSerialization(TRCResponseSerialization serialization);
 BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
@@ -145,7 +162,8 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
     }
 
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    request.HTTPMethod = NSStringFromHttpRequestMethod(options.method);
+    request.HTTPMethod = options.method;
+    NSAssert([request.HTTPMethod length] > 0, @"Incorrect HTTP method ('%@') for request with options: %@", options.method, options);
 
     id bodyObject = options.body;
 
@@ -269,20 +287,6 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
     return cached;
 }
 
-NSString *NSStringFromHttpRequestMethod(TRCRequestMethod method)
-{
-    switch (method) {
-        case TRCRequestMethodDelete: return @"DELETE";
-        case TRCRequestMethodGet: return @"GET";
-        case TRCRequestMethodHead: return @"HEAD";
-        case TRCRequestMethodPatch: return @"PATCH";
-        case TRCRequestMethodPost: return @"POST";
-        case TRCRequestMethodPut: return @"PUT";
-    }
-    NSCAssert(NO, @"Unknown TRCRequestMethod: %d", (int)method);
-    return @"";
-}
-
 BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method)
 {
     return method == TRCRequestMethodPost || method == TRCRequestMethodPut || method == TRCRequestMethodPatch;
@@ -290,27 +294,37 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method)
 
 Class ClassFromHttpRequestSerialization(TRCRequestSerialization serialization)
 {
-    switch (serialization) {
-        case TRCRequestSerializationJson: return [AFJSONRequestSerializer class];
-        case TRCRequestSerializationHttp: return [AFHTTPRequestSerializer class];
-        case TRCRequestSerializationPlist: return [AFPropertyListRequestSerializer class];
-    }
-    NSCAssert(NO, @"Unknown TRCRequestSerialization: %d", (int)serialization);
-    return nil;
+    static NSDictionary *ClassPerRequestSerialization = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        ClassPerRequestSerialization = @{
+                TRCRequestSerializationJson : [AFJSONRequestSerializer class],
+                TRCRequestSerializationHttp : [AFHTTPRequestSerializer class],
+                TRCRequestSerializationPlist : [AFPropertyListRequestSerializer class],
+        };
+    });
+    Class clazz = ClassPerRequestSerialization[serialization];
+    NSCAssert(clazz, @"Unknown TRCRequestSerialization: %@", serialization);
+    return clazz;
 }
 
 Class ClassFromHttpResponseSerialization(TRCResponseSerialization serialization)
 {
-    switch (serialization) {
-        case TRCResponseSerializationJson: return [AFJSONResponseSerializer class];
-        case TRCResponseSerializationData: return [AFHTTPResponseSerializer class];
-        case TRCResponseSerializationImage: return [AFImageResponseSerializer class];
-        case TRCResponseSerializationPlist: return [AFPropertyListResponseSerializer class];
-        case TRCResponseSerializationXml: return [AFXMLParserResponseSerializer class];
-        case TRCResponseSerializationString: return [AFStringResponseSerializer class];
-    }
-    NSCAssert(NO, @"Unknown TRCResponseSerialization: %d", (int)serialization);
-    return nil;
+    static NSDictionary *ClassPerResponseSerialization = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        ClassPerResponseSerialization = @{
+                TRCResponseSerializationJson : [AFJSONResponseSerializer class],
+                TRCResponseSerializationData : [AFHTTPResponseSerializer class],
+                TRCResponseSerializationImage : [AFImageResponseSerializer class],
+                TRCResponseSerializationPlist : [AFPropertyListResponseSerializer class],
+                TRCResponseSerializationXml : [AFXMLParserResponseSerializer class],
+                TRCResponseSerializationString : [AFStringResponseSerializer class],
+        };
+    });
+    Class clazz = ClassPerResponseSerialization[serialization];
+    NSCAssert(clazz, @"Unknown TRCResponseSerialization: %@", serialization);
+    return clazz;
 }
 
 NSError *NSErrorWithDictionaryUnion(NSError *error, NSDictionary *dictionary)
