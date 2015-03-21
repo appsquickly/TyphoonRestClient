@@ -12,7 +12,7 @@
 #import "TRCConvertersRegistry.h"
 #import "TRCUtils.h"
 #import "TRCConverter.h"
-#import "TRCValueConverter.h"
+#import "TRCValueTransformer.h"
 #import "TRCValueConverterStub.h"
 #import "TRCMapperPerson.h"
 #import "Person.h"
@@ -27,7 +27,7 @@
 
 TRCValidationOptions validationOptions;
 
-- (id<TRCValueConverter>)valueConverterForTag:(NSString *)type
+- (id<TRCValueTransformer>)valueConverterForTag:(NSString *)type
 {
     TRCValueConverterStub *stub = [TRCValueConverterStub new];
 

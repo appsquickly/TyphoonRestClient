@@ -7,7 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "TRCValueConverterNumber.h"
+#import "TRCValueTransformerNumber.h"
 
 @interface TRCValueConverterNumberTests : XCTestCase
 
@@ -15,14 +15,14 @@
 
 @implementation TRCValueConverterNumberTests
 {
-    TRCValueConverterNumber *converter;
+    TRCValueTransformerNumber *converter;
 }
 
 - (void)setUp
 {
     [super setUp];
 
-    converter = [TRCValueConverterNumber new];
+    converter = [TRCValueTransformerNumber new];
 }
 
 - (void)tearDown

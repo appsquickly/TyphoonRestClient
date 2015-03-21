@@ -13,12 +13,12 @@
 #import "TRCErrorParserSpy.h"
 #import "TRCSchema.h"
 #import "TRCUtils.h"
-#import "TRCValueConverter.h"
+#import "TRCValueTransformer.h"
 #import <objc/runtime.h>
 #import "NSObject+AutoDescription.h"
 #import "TyphoonRestClientErrors.h"
 
-@interface NumberToStringConverter : NSObject <TRCValueConverter>
+@interface NumberToStringConverter : NSObject <TRCValueTransformer>
 
 @end
 
@@ -35,9 +35,9 @@
     return object;
 }
 
-- (TRCValueConverterType)types
+- (TRCValueTransformerType)externalTypes
 {
-    return TRCValueConverterTypeNumber;
+    return TRCValueTransformerTypeNumber;
 }
 
 @end

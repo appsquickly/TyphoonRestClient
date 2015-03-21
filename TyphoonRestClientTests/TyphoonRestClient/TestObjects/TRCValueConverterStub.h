@@ -4,12 +4,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TRCValueConverter.h"
+#import "TRCValueTransformer.h"
 
 
-@interface TRCValueConverterStub : NSObject <TRCValueConverter>
+@interface TRCValueConverterStub : NSObject <TRCValueTransformer>
 
-@property (nonatomic) TRCValueConverterType supportedTypes;
+@property (nonatomic) TRCValueTransformerType supportedTypes;
 @property (nonatomic, strong) id object;
 @property (nonatomic, strong) id value;
 @property (nonatomic, strong) NSError *error;

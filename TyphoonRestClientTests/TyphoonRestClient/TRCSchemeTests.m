@@ -9,7 +9,7 @@
 #import <XCTest/XCTest.h>
 #import "TRCSchema.h"
 #import "TRCConvertersRegistry.h"
-#import "TRCValueConverter.h"
+#import "TRCValueTransformer.h"
 #import "TRCValueConverterStub.h"
 #import "TRCMapperPerson.h"
 
@@ -28,20 +28,20 @@
 }
 
 
-- (id<TRCValueConverter>)valueConverterForTag:(NSString *)type
+- (id<TRCValueTransformer>)valueConverterForTag:(NSString *)type
 {
     TRCValueConverterStub *stub = [TRCValueConverterStub new];
     if ([type isEqualToString:@"NSURL"]) {
-        stub.supportedTypes = TRCValueConverterTypeString;
+        stub.supportedTypes = TRCValueTransformerTypeString;
         return stub;
     } else if ([type isEqualToString:@"NSNumber"]) {
-        stub.supportedTypes = TRCValueConverterTypeString | TRCValueConverterTypeNumber;
+        stub.supportedTypes = TRCValueTransformerTypeString | TRCValueTransformerTypeNumber;
         return stub;
     } else if ([type isEqualToString:@"NSDate"]) {
-        stub.supportedTypes = TRCValueConverterTypeString | TRCValueConverterTypeNumber;
+        stub.supportedTypes = TRCValueTransformerTypeString | TRCValueTransformerTypeNumber;
         return stub;
     } else if ([type isEqualToString:@"NSString"]) {
-        stub.supportedTypes = TRCValueConverterTypeString;
+        stub.supportedTypes = TRCValueTransformerTypeString;
         return stub;
     }
 

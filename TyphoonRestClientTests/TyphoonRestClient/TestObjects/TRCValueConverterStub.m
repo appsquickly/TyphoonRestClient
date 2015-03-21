@@ -31,7 +31,7 @@
     return self.value;
 }
 
-- (TRCValueConverterType)types
+- (TRCValueTransformerType)externalTypes
 {
     return self.supportedTypes;
 }

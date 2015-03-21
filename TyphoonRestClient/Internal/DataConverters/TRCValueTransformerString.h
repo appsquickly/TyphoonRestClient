@@ -12,9 +12,10 @@
 
 
 
+
 #import <Foundation/Foundation.h>
-#import "TRCValueConverter.h"
+#import "TRCValueTransformer.h"
 
 
-@interface TRCValueConverterUrl : NSObject <TRCValueConverter>
+@interface TRCValueTransformerString : NSObject <TRCValueTransformer>
 @end

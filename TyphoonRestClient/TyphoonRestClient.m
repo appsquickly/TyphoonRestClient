@@ -17,13 +17,13 @@
 #import "TRCSchema.h"
 #import "TRCUtils.h"
 #import "TRCConverter.h"
-#import "TRCValueConverter.h"
+#import "TRCValueTransformer.h"
 #import "TRCConvertersRegistry.h"
 #import "TRCErrorParser.h"
 #import "TRCConnection.h"
-#import "TRCValueConverterUrl.h"
-#import "TRCValueConverterString.h"
-#import "TRCValueConverterNumber.h"
+#import "TRCValueTransformerUrl.h"
+#import "TRCValueTransformerString.h"
+#import "TRCValueTransformerNumber.h"
 #import "TRCObjectMapper.h"
 
 @interface TRCRequestCreateOptions : NSObject <TRCConnectionRequestCreationOptions>
@@ -534,12 +534,12 @@
 
 - (void)registerDefaultTypeConverters
 {
-    [self registerValueConverter:[TRCValueConverterUrl new] forTag:@"{url}"];
-    [self registerValueConverter:[TRCValueConverterString new] forTag:@"{string}"];
-    [self registerValueConverter:[TRCValueConverterNumber new] forTag:@"{number}"];
+    [self registerValueConverter:[TRCValueTransformerUrl new] forTag:@"{url}"];
+    [self registerValueConverter:[TRCValueTransformerString new] forTag:@"{string}"];
+    [self registerValueConverter:[TRCValueTransformerNumber new] forTag:@"{number}"];
 }
 
-- (void)registerValueConverter:(id<TRCValueConverter>)valueConverter forTag:(NSString *)tag
+- (void)registerValueConverter:(id<TRCValueTransformer>)valueConverter forTag:(NSString *)tag
 {
     NSParameterAssert(tag);
     NSAssert(_objectMapperRegistry[tag] == nil, @"This tag already used as ObjectMapper");
@@ -570,7 +570,7 @@
     return _objectMapperRegistry[tag];
 }
 
-- (id<TRCValueConverter>)valueConverterForTag:(NSString *)tag
+- (id<TRCValueTransformer>)valueConverterForTag:(NSString *)tag
 {
     return _typeConverterRegistry[tag];
 }

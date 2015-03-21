@@ -13,7 +13,7 @@
 #import "TRCSchema.h"
 #import "TRCUtils.h"
 #import "TRCConvertersRegistry.h"
-#import "TRCValueConverter.h"
+#import "TRCValueTransformer.h"
 #import "TRCSchemeStackTrace.h"
 #import "TyphoonRestClientErrors.h"
 
@@ -247,15 +247,15 @@
 {
     if ([schemeValue isKindOfClass:[NSString class]]) {
         
-        id<TRCValueConverter>converter = [self.converterRegistry valueConverterForTag:schemeValue];
-        if (!converter || ![converter respondsToSelector:@selector(types)]) {
+        id<TRCValueTransformer>converter = [self.converterRegistry valueConverterForTag:schemeValue];
+        if (!converter || ![converter respondsToSelector:@selector(externalTypes)]) {
             return [dataValue isKindOfClass:[NSString class]];
         }
-        TRCValueConverterType types = [converter types];
+        TRCValueTransformerType types = [converter externalTypes];
         BOOL isNumber = [dataValue isKindOfClass:[NSNumber class]];
         BOOL isString = [dataValue isKindOfClass:[NSString class]];
-        BOOL supportNumbers = (types & TRCValueConverterTypeNumber);
-        BOOL supportStrings = (types & TRCValueConverterTypeString);
+        BOOL supportNumbers = (types & TRCValueTransformerTypeNumber);
+        BOOL supportStrings = (types & TRCValueTransformerTypeString);
 
         return (isNumber && supportNumbers) || (isString && supportStrings);
     }
@@ -272,17 +272,17 @@
 - (NSString *)typeRepresentationForSchemeValue:(id)schemeValue
 {
     if ([schemeValue isKindOfClass:[NSString class]]) {
-        id<TRCValueConverter>converter = [self.converterRegistry valueConverterForTag:schemeValue];
+        id<TRCValueTransformer>converter = [self.converterRegistry valueConverterForTag:schemeValue];
         if (converter) {
-            TRCValueConverterType types = TRCValueConverterTypeString;
-            if ([converter respondsToSelector:@selector(types)]) {
-                types = [converter types];
+            TRCValueTransformerType types = TRCValueTransformerTypeString;
+            if ([converter respondsToSelector:@selector(externalTypes)]) {
+                types = [converter externalTypes];
             }
             NSMutableArray *supportedTypes = [NSMutableArray new];
-            if (types & TRCValueConverterTypeNumber) {
+            if (types & TRCValueTransformerTypeNumber) {
                 [supportedTypes addObject:@"'NSNumber'"];
             }
-            if (types & TRCValueConverterTypeString) {
+            if (types & TRCValueTransformerTypeString) {
                 [supportedTypes addObject:@"'NSString'"];
             }
             return [supportedTypes componentsJoinedByString:@" or "];

@@ -18,7 +18,7 @@
 
 @protocol TRCConvertersRegistry;
 
-/** TRCConverter converts whole responses or requests using TRCValueConverter from registry */
+/** TRCConverter converts whole responses or requests using TRCValueTransformer from registry */
 
 @interface TRCConverter : NSObject
 

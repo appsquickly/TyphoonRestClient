@@ -13,11 +13,11 @@
 
 
 
-#import "TRCValueConverterNumber.h"
+#import "TRCValueTransformerNumber.h"
 #import "TRCUtils.h"
 
 
-@implementation TRCValueConverterNumber
+@implementation TRCValueTransformerNumber
 
 - (NSNumberFormatter *)sharedNumberFormatter
 {
@@ -62,9 +62,9 @@
     }
 }
 
-- (TRCValueConverterType)types
+- (TRCValueTransformerType)externalTypes
 {
-    return TRCValueConverterTypeNumber | TRCValueConverterTypeString;
+    return TRCValueTransformerTypeNumber | TRCValueTransformerTypeString;
 }
 
 

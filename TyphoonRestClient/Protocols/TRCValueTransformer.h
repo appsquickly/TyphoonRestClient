@@ -12,12 +12,12 @@
 
 #import <Foundation/Foundation.h>
 
-typedef NS_OPTIONS(NSInteger, TRCValueConverterType)  {
-    TRCValueConverterTypeString = 1 << 0,
-    TRCValueConverterTypeNumber = 1 << 1,
+typedef NS_OPTIONS(NSInteger, TRCValueTransformerType)  {
+    TRCValueTransformerTypeString = 1 << 0,
+    TRCValueTransformerTypeNumber = 1 << 1,
 };
 
-@protocol TRCValueConverter<NSObject>
+@protocol TRCValueTransformer<NSObject>
 
 /**
 * Converts received value into custom object.
@@ -36,9 +36,15 @@ typedef NS_OPTIONS(NSInteger, TRCValueConverterType)  {
 @optional
 
 /**
-* BitMask of value types in request and response. Used for validation purpose
-* Default value is TRCValueConverterTypeString
-* */
-- (TRCValueConverterType)types;
+* BitMask of value types in request and response. Used for validation purpose.
+* Default value is TRCValueTransformerTypeString
+*
+* Examples
+* If external type is TRCValueTransformerTypeString but received response value is not string, that will cause
+* validation error.
+* If external type is TRCValueTransformerTypeString but request value after transforming is not string, that also
+* will cause a validation error.
+**/
+- (TRCValueTransformerType)externalTypes;
 
 @end

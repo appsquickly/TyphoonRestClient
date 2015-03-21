@@ -14,7 +14,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol TRCValueConverter;
+@protocol TRCValueTransformer;
 
 @protocol TRCConvertersRegistry<NSObject>
 
@@ -22,7 +22,7 @@
 #pragma mark - Value Converters
 //-------------------------------------------------------------------------------------------
 
-- (id<TRCValueConverter>)valueConverterForTag:(NSString *)tag;
+- (id<TRCValueTransformer>)valueConverterForTag:(NSString *)tag;
 
 //-------------------------------------------------------------------------------------------
 #pragma mark - Object Mappers

@@ -14,8 +14,8 @@
 
 
 #import <Foundation/Foundation.h>
-#import "TRCValueConverter.h"
+#import "TRCValueTransformer.h"
 
 
-@interface TRCValueConverterString : NSObject <TRCValueConverter>
+@interface TRCValueTransformerNumber : NSObject <TRCValueTransformer>
 @end

@@ -10,35 +10,26 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 
-
-
-#import "TRCValueConverterUrl.h"
+#import "TRCValueTransformerString.h"
 #import "TRCUtils.h"
 
 
-@implementation TRCValueConverterUrl
+@implementation TRCValueTransformerString
 
 - (id)objectFromResponseValue:(id)value error:(NSError **)error
 {
-    NSURL *url = [[NSURL alloc] initWithString:value];
-    if (!url && error) {
-        *error = NSErrorWithFormat(@"Can't create URL from string '%@'", value);
-    }
-    return url;
+    return value;
 }
 
 - (id)requestValueFromObject:(id)object error:(NSError **)error
 {
-    if ([object isKindOfClass:[NSURL class]]) {
-        return [object absoluteString];
-    } else if ([object isKindOfClass:[NSString class]]) {
-        return object;
-    } else {
+    if (![object isKindOfClass:[NSString class]]) {
         if (error) {
-            *error = NSErrorWithFormat(@"Can't convert type '%@' to url string", [object class]);
+            *error = NSErrorWithFormat(@"Can't convert '%@' into string", [object class]);
         }
         return nil;
     }
+    return object;
 }
 
 @end

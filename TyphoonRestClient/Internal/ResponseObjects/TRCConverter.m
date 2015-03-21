@@ -15,7 +15,7 @@
 #import "TRCConverter.h"
 #import "TRCUtils.h"
 #import "TRCConvertersRegistry.h"
-#import "TRCValueConverter.h"
+#import "TRCValueTransformer.h"
 #import "TRCObjectMapper.h"
 #import "TRCSchema.h"
 
@@ -91,7 +91,7 @@
 
     NSError *convertError = nil;
     id result = dataValue;
-    id<TRCValueConverter>typeConverter = [self.registry valueConverterForTag:typeName];
+    id<TRCValueTransformer>typeConverter = [self.registry valueConverterForTag:typeName];
 
     if (typeConverter) {
         if (_convertingForRequest) {
