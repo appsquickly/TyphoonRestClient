@@ -22,7 +22,7 @@
 #pragma mark - Value Converters
 //-------------------------------------------------------------------------------------------
 
-- (id<TRCValueTransformer>)valueConverterForTag:(NSString *)tag;
+- (id<TRCValueTransformer>)valueTransformerForTag:(NSString *)tag;
 
 //-------------------------------------------------------------------------------------------
 #pragma mark - Object Mappers

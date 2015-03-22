@@ -247,7 +247,7 @@
 {
     if ([schemeValue isKindOfClass:[NSString class]]) {
         
-        id<TRCValueTransformer>converter = [self.converterRegistry valueConverterForTag:schemeValue];
+        id<TRCValueTransformer>converter = [self.converterRegistry valueTransformerForTag:schemeValue];
         if (!converter || ![converter respondsToSelector:@selector(externalTypes)]) {
             return [dataValue isKindOfClass:[NSString class]];
         }
@@ -272,7 +272,7 @@
 - (NSString *)typeRepresentationForSchemeValue:(id)schemeValue
 {
     if ([schemeValue isKindOfClass:[NSString class]]) {
-        id<TRCValueTransformer>converter = [self.converterRegistry valueConverterForTag:schemeValue];
+        id<TRCValueTransformer>converter = [self.converterRegistry valueTransformerForTag:schemeValue];
         if (converter) {
             TRCValueTransformerType types = TRCValueTransformerTypeString;
             if ([converter respondsToSelector:@selector(externalTypes)]) {

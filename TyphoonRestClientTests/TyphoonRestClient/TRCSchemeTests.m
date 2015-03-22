@@ -10,7 +10,7 @@
 #import "TRCSchema.h"
 #import "TRCConvertersRegistry.h"
 #import "TRCValueTransformer.h"
-#import "TRCValueConverterStub.h"
+#import "TRCValueTransformerStub.h"
 #import "TRCMapperPerson.h"
 
 @interface TRCSchemeTests : XCTestCase<TRCConvertersRegistry>
@@ -28,9 +28,9 @@
 }
 
 
-- (id<TRCValueTransformer>)valueConverterForTag:(NSString *)type
+- (id<TRCValueTransformer>)valueTransformerForTag:(NSString *)type
 {
-    TRCValueConverterStub *stub = [TRCValueConverterStub new];
+    TRCValueTransformerStub *stub = [TRCValueTransformerStub new];
     if ([type isEqualToString:@"NSURL"]) {
         stub.supportedTypes = TRCValueTransformerTypeString;
         return stub;

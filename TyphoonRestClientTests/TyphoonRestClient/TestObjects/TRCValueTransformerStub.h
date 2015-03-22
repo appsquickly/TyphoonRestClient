@@ -7,7 +7,7 @@
 #import "TRCValueTransformer.h"
 
 
-@interface TRCValueConverterStub : NSObject <TRCValueTransformer>
+@interface TRCValueTransformerStub : NSObject <TRCValueTransformer>
 
 @property (nonatomic) TRCValueTransformerType supportedTypes;
 @property (nonatomic, strong) id object;

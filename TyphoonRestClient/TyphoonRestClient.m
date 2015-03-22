@@ -539,12 +539,12 @@
     [self registerValueTransformer:[TRCValueTransformerNumber new] forTag:@"{number}"];
 }
 
-- (void)registerValueTransformer:(id<TRCValueTransformer>)valueConverter forTag:(NSString *)tag
+- (void)registerValueTransformer:(id<TRCValueTransformer>)valueTransformer forTag:(NSString *)tag
 {
     NSParameterAssert(tag);
-    NSAssert(_objectMapperRegistry[tag] == nil, @"This tag already used as ObjectMapper");
-    if (valueConverter) {
-        _typeTransformerRegistry[tag] = valueConverter;
+    NSAssert(_objectMapperRegistry[tag] == nil, @"This tag already used as TRCObjectMapper. Call [registerObjectMapper:nil forTag:%@] before registering value transformer ", tag);
+    if (valueTransformer) {
+        _typeTransformerRegistry[tag] = valueTransformer;
     } else {
         [_typeTransformerRegistry removeObjectForKey:tag];
     }
@@ -557,7 +557,7 @@
 - (void)registerObjectMapper:(id<TRCObjectMapper>)objectConverter forTag:(NSString *)tag
 {
     NSParameterAssert(tag);
-    NSAssert(_typeTransformerRegistry[tag] == nil, @"This tag already used as ValueConverter");
+    NSAssert(_typeTransformerRegistry[tag] == nil, @"This tag already used as TRCValueTransformer. Call [registerValueTransformer:nil forTag:%@] before registering object mapper ", tag);
     if (objectConverter) {
         _objectMapperRegistry[tag] = objectConverter;
     } else {
@@ -570,7 +570,7 @@
     return _objectMapperRegistry[tag];
 }
 
-- (id<TRCValueTransformer>)valueConverterForTag:(NSString *)tag
+- (id<TRCValueTransformer>)valueTransformerForTag:(NSString *)tag
 {
     return _typeTransformerRegistry[tag];
 }

@@ -91,7 +91,7 @@
 
     NSError *convertError = nil;
     id result = dataValue;
-    id<TRCValueTransformer>typeConverter = [self.registry valueConverterForTag:typeName];
+    id<TRCValueTransformer>typeConverter = [self.registry valueTransformerForTag:typeName];
 
     if (typeConverter) {
         if (_convertingForRequest) {

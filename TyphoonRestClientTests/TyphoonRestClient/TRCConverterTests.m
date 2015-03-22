@@ -13,7 +13,7 @@
 #import "TRCUtils.h"
 #import "TRCConverter.h"
 #import "TRCValueTransformer.h"
-#import "TRCValueConverterStub.h"
+#import "TRCValueTransformerStub.h"
 #import "TRCMapperPerson.h"
 #import "Person.h"
 #import "Phone.h"
@@ -27,9 +27,9 @@
 
 TRCValidationOptions validationOptions;
 
-- (id<TRCValueTransformer>)valueConverterForTag:(NSString *)type
+- (id<TRCValueTransformer>)valueTransformerForTag:(NSString *)type
 {
-    TRCValueConverterStub *stub = [TRCValueConverterStub new];
+    TRCValueTransformerStub *stub = [TRCValueTransformerStub new];
 
     if ([type isEqualToString:@"NSURL"]) {
         stub.object = @"Url";

@@ -3,9 +3,9 @@
 // Copyright (c) 2014 Apps Quickly. All rights reserved.
 //
 
-#import "TRCValueConverterStub.h"
+#import "TRCValueTransformerStub.h"
 
-@implementation TRCValueConverterStub
+@implementation TRCValueTransformerStub
 
 - (id)objectFromResponseValue:(id)value error:(NSError **)error
 {

@@ -1,5 +1,5 @@
 //
-//  TRCValueConverterNumberTests.m
+//  TRCValueTransformerNumberTests.m
 //  Iconic
 //
 //  Created by Aleksey Garbarev on 21.09.14.
@@ -9,11 +9,11 @@
 #import <XCTest/XCTest.h>
 #import "TRCValueTransformerNumber.h"
 
-@interface TRCValueConverterNumberTests : XCTestCase
+@interface TRCValueTransformerNumberTests : XCTestCase
 
 @end
 
-@implementation TRCValueConverterNumberTests
+@implementation TRCValueTransformerNumberTests
 {
     TRCValueTransformerNumber *converter;
 }
