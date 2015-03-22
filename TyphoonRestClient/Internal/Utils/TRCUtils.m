@@ -102,10 +102,6 @@ static NSRegularExpression *catchUrlArgumentsRegexp;
 
 NSString *TRCUrlPathFromPathByApplyingArguments(NSString *path, NSMutableDictionary *mutableParams, NSError **error)
 {
-    if (!mutableParams) {
-        return path;
-    }
-
     if (!catchUrlArgumentsRegexp) {
         catchUrlArgumentsRegexp = [[NSRegularExpression alloc] initWithPattern:@"\\{.*?\\}" options:0 error:nil];
     }
@@ -124,6 +120,9 @@ NSString *TRCUrlPathFromPathByApplyingArguments(NSString *path, NSMutableDiction
 
         for (NSTextCheckingResult *argumentMatch in arguments) {
             NSString *argument = [path substringWithRange:argumentMatch.range];
+            if ([mutablePath rangeOfString:argument].location == NSNotFound) {
+                continue;
+            }
             NSString *argumentKey = [argument substringWithRange:NSMakeRange(1, argument.length-2)];
             id value = mutableParams[argumentKey];
             if (!IsValidPathArgumentValue(value)) {

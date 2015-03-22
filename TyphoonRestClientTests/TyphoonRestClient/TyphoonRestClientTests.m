@@ -17,6 +17,8 @@
 #import <objc/runtime.h>
 #import "NSObject+AutoDescription.h"
 #import "TyphoonRestClientErrors.h"
+#import "TRCMapperPerson.h"
+#import "Person.h"
 
 @interface NumberToStringConverter : NSObject <TRCValueTransformer>
 
@@ -74,6 +76,7 @@ id(*originalImp)(id, SEL, NSString *, NSArray *);
     [super setUp];
     webService = [[TyphoonRestClient alloc] init];
     [webService registerValueTransformer:[NumberToStringConverter new] forTag:@"number-as-string"];
+    [webService registerObjectMapper:[TRCMapperPerson new] forTag:@"{person}"];
     connectionStub = [[TRCConnectionStub alloc] init];
     webService.connection = connectionStub;
 
@@ -117,6 +120,10 @@ id(*originalImp)(id, SEL, NSString *, NSArray *);
     }
     if ([name isEqualToString:@"ArrayOfArray"]) {
         return [[TRCSchema alloc] initWithSchemeObject:@[@[@"number-as-string"]] name:name];
+    }
+
+    if ([name isEqualToString:@"Person"]) {
+        return [[TRCSchema alloc] initWithSchemeObject:@"{person}" name:name];
     }
 
     return originalImp(self, _cmd, name, extensions);
@@ -546,6 +553,28 @@ id(*originalImp)(id, SEL, NSString *, NSArray *);
         XCTAssertNotNil(result);
         NSArray *expectedResult = @[ @[ @"1", @"2", @"3"], @[ @"1", @"2", @"3"], @[ @"1", @"2", @"3"]];
         XCTAssertEqualObjects(expectedResult, result);
+    }];
+}
+
+- (void)test_person_mapper_response
+{
+    TRCRequestSpy *request = [TRCRequestSpy new];
+
+    [connectionStub setResponseObject:@{@"first_name" : @"Ivan",
+            @"last_name" : @"Ivanov",
+            @"avatar_url" : @"http://google.com"} responseError:nil];
+
+    request.parseObjectImplemented = NO;
+    request.responseSchemeName = @"Person";
+
+    [webService sendRequest:request completion:^(id result, NSError *error) {
+        XCTAssertNil(error);
+        XCTAssertNotNil(result);
+        Person *expected = [Person new];
+        expected.firstName = @"Ivan";
+        expected.lastName = @"Ivanov";
+        expected.avatarUrl = [NSURL URLWithString:@"http://google.com"];
+        XCTAssertEqualObjects(expected, result);
     }];
 }
 

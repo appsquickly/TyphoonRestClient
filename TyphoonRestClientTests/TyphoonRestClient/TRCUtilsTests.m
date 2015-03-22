@@ -59,4 +59,88 @@
     XCTAssertEqualObjects(data, @{@"key1": @"1" });
 }
 
+- (void)test_path_without_param
+{
+    NSString *path = @"path/to/request";
+    NSMutableDictionary *params = nil;
+    NSError *error = nil;
+
+    NSString *result = TRCUrlPathFromPathByApplyingArguments(path, params, &error);
+
+    XCTAssertNil(error);
+    XCTAssertNil(params);
+    XCTAssertEqualObjects(result, path);
+}
+
+- (void)test_path_with_one_param
+{
+    NSString *path = @"path/to/request/{param}";
+    NSMutableDictionary *params = [@{@"param" : @1} mutableCopy];
+    NSError *error = nil;
+
+    NSString *result = TRCUrlPathFromPathByApplyingArguments(path, params, &error);
+
+    XCTAssertNil(error);
+    XCTAssertTrue([params count] == 0);
+    XCTAssertEqualObjects(result, @"path/to/request/1");
+}
+
+- (void)test_path_with_incorrect_param
+{
+    NSString *path = @"path/to/request/{param2}";
+    NSMutableDictionary *params = [@{@"param" : @1} mutableCopy];
+    NSError *error = nil;
+
+    NSString *result = TRCUrlPathFromPathByApplyingArguments(path, params, &error);
+
+    XCTAssertNotNil(error);
+    XCTAssertTrue([params count] == 1);
+    XCTAssertNil(result);
+}
+
+- (void)test_path_with_multiple_params
+{
+    NSString *path = @"path/to/{param}/request/{param}";
+    NSMutableDictionary *params = [@{@"param" : @1} mutableCopy];
+    NSError *error = nil;
+
+    NSString *result = TRCUrlPathFromPathByApplyingArguments(path, params, &error);
+
+    XCTAssertNil(error);
+    XCTAssertTrue([params count] == 0);
+    XCTAssertEqualObjects(result, @"path/to/1/request/1");
+}
+
+- (void)test_path_used_params_removed
+{
+    NSString *path = @"path/to/request/{param}";
+    NSMutableDictionary *params = [@{@"param" : @1, @"param2": @2} mutableCopy];
+    NSError *error = nil;
+
+    NSString *result = TRCUrlPathFromPathByApplyingArguments(path, params, &error);
+
+    XCTAssertNil(error);
+    XCTAssertTrue([params count] == 1);
+    XCTAssertEqualObjects(params, [@{@"param2": @2} mutableCopy]);
+    XCTAssertEqualObjects(result, @"path/to/request/1");
+}
+
+- (void)test_path_without_parameters_dict
+{
+    NSString *path = @"path/to/request/{param}";
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    NSError *error = nil;
+
+    NSString *result = TRCUrlPathFromPathByApplyingArguments(path, params, &error);
+
+    XCTAssertNotNil(error);
+    XCTAssertNil(result);
+
+    result = TRCUrlPathFromPathByApplyingArguments(path, nil, &error);
+
+    XCTAssertNotNil(error);
+    XCTAssertNil(result);
+}
+
+
 @end

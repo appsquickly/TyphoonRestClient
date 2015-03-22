@@ -453,13 +453,7 @@
     if (!mapper) {
         return nil;
     } else {
-        NSString *name = NSStringFromClass([mapper class]);
-
-        if ([mapper respondsToSelector:@selector(requestValidationSchemaName)]) {
-            name = [mapper requestValidationSchemaName];
-        }
-
-        return [self schemeWithName:name extensionsToTry:@[@"request", @"json", @"schema"]];
+        return [self schemeForObject:mapper nameSelector:@selector(requestValidationSchemaName) extensionsToTry:@[@"response", @"json"]];
     }
 }
 
@@ -469,56 +463,40 @@
     if (!mapper) {
         return nil;
     } else {
-        NSString *name = NSStringFromClass([mapper class]);
-
-        if ([mapper respondsToSelector:@selector(responseValidationSchemaName)]) {
-            name = [mapper responseValidationSchemaName];
-        }
-
-        return [self schemeWithName:name extensionsToTry:@[@"response", @"json", @"schema"]];
+        return [self schemeForObject:mapper nameSelector:@selector(responseValidationSchemaName) extensionsToTry:@[@"response", @"json"]];
     }
 }
 
 - (TRCSchema *)schemeForErrorParser:(id<TRCErrorParser>)parser
 {
-    NSString *schemaName = NSStringFromClass([parser class]);
-
-    if ([parser respondsToSelector:@selector(errorValidationSchemaName)]) {
-        schemaName = [parser errorValidationSchemaName];
-    }
-
-    return [self schemeWithName:schemaName extensionsToTry:nil];
+    return [self schemeForObject:parser nameSelector:@selector(errorValidationSchemaName) extensionsToTry:@[@"response", @"error", @"json"]];
 }
 
 - (TRCSchema *)schemeForResponseWithRequest:(id<TRCRequest>)request
 {
-    NSString *schemaName = [NSStringFromClass([request class]) stringByAppendingPathExtension:@"response"];
-
-    if ([request respondsToSelector:@selector(responseBodyValidationSchemaName)]) {
-       schemaName = [request responseBodyValidationSchemaName];
-    }
-
-    return [self schemeWithName:schemaName extensionsToTry:nil];
+    return [self schemeForObject:request nameSelector:@selector(responseBodyValidationSchemaName) extensionsToTry:@[@"response"]];
 }
 
 - (TRCSchema *)schemeForPathParametersWithRequest:(id<TRCRequest>)request
 {
-    NSString *schemaName = [NSStringFromClass([request class]) stringByAppendingPathExtension:@"url"];
-
-    if ([request respondsToSelector:@selector(requestPathParametersValidationSchemaName)]) {
-        schemaName = [request requestPathParametersValidationSchemaName];
-    }
-    return [self schemeWithName:schemaName extensionsToTry:nil];
+    return [self schemeForObject:request nameSelector:@selector(requestPathParametersValidationSchemaName) extensionsToTry:@[@"url", @"path"]];
 }
 
 - (TRCSchema *)schemeForRequest:(id<TRCRequest>)request
 {
-    NSString *schemaName = [NSStringFromClass([request class]) stringByAppendingPathExtension:@"request"];
+    return [self schemeForObject:request nameSelector:@selector(requestBodyValidationSchemaName) extensionsToTry:@[@"request"]];
+}
 
-    if ([request respondsToSelector:@selector(requestBodyValidationSchemaName)]) {
-        schemaName = [request requestBodyValidationSchemaName];
+- (TRCSchema *)schemeForObject:(id)object nameSelector:(SEL)sel extensionsToTry:(NSArray *)extensions
+{
+    NSString *schemaName = NSStringFromClass([object class]);
+
+    if ([object respondsToSelector:sel]) {
+        NSString *(*impl)(id, SEL) = (NSString*(*)(id, SEL))[object methodForSelector:sel];
+        schemaName = impl(object, sel);
     }
-    return [self schemeWithName:schemaName extensionsToTry:nil];
+
+    return [self schemeWithName:schemaName extensionsToTry:extensions];
 }
 
 - (TRCSchema *)schemeWithName:(NSString *)name extensionsToTry:(NSArray *)extensions

@@ -17,4 +17,10 @@
 @property (nonatomic, strong) NSURL *avatarUrl;
 @property (nonatomic, strong) Phone *phone;
 
+- (BOOL)isEqual:(id)other;
+
+- (BOOL)isEqualToPerson:(Person *)person;
+
+- (NSUInteger)hash;
+
 @end
