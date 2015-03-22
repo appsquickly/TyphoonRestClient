@@ -100,6 +100,7 @@
 		FA5126671A96000F00EAF902 /* TRCSchemeStackTrace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSchemeStackTrace.h; sourceTree = "<group>"; };
 		FA5126681A96000F00EAF902 /* TRCSchemeStackTrace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSchemeStackTrace.m; sourceTree = "<group>"; };
 		FA51266A1A96004600EAF902 /* TyphoonRestClientErrors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TyphoonRestClientErrors.h; sourceTree = "<group>"; };
+		FAA684901ABF077300EF4CB6 /* TRCBuiltInObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCBuiltInObjects.h; sourceTree = "<group>"; };
 		FAC9161319E693370009D824 /* libTyphoonRestClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTyphoonRestClient.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAC9161619E693370009D824 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FAC9161A19E693370009D824 /* TyphoonRestClient-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TyphoonRestClient-Prefix.pch"; sourceTree = "<group>"; };
@@ -317,6 +318,7 @@
 		FAC9165019E694FA0009D824 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				FAA684901ABF077300EF4CB6 /* TRCBuiltInObjects.h */,
 				FA51266A1A96004600EAF902 /* TyphoonRestClientErrors.h */,
 				FAC9165119E694FA0009D824 /* TRCUtils.h */,
 				FAC9165219E694FA0009D824 /* TRCUtils.m */,
@@ -674,6 +676,8 @@
 			baseConfigurationReference = 48F28F705C352E4073F55876 /* Pods-TyphoonRestClient.debug.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/TyphoonRestClient.dst;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TyphoonRestClient/TyphoonRestClient-Prefix.pch";
 				PRODUCT_NAME = TyphoonRestClient;
@@ -702,7 +706,8 @@
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
-				GCC_GENERATE_TEST_COVERAGE_FILES = NO;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TyphoonRestClient/TyphoonRestClient-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -725,7 +730,8 @@
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
-				GCC_GENERATE_TEST_COVERAGE_FILES = NO;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TyphoonRestClient/TyphoonRestClient-Prefix.pch";
 				INFOPLIST_FILE = "TyphoonRestClientTests/TyphoonRestClientTests-Info.plist";

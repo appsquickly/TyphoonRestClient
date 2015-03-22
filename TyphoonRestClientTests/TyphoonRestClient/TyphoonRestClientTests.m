@@ -58,13 +58,13 @@
     TRCConnectionStub *connectionStub;
 }
 
-id(*originalImp)(id, SEL, NSString *);
+id(*originalImp)(id, SEL, NSString *, NSArray *);
 
 + (void)load
 {
     Method m1 = class_getClassMethod([self class], @selector(schemaWithName:extensionsToTry:));
     Method m2 = class_getClassMethod([TRCSchema class], @selector(schemaWithName:extensionsToTry:));
-    originalImp = (id(*)(id, SEL, NSString *))method_getImplementation(m2);
+    originalImp = (id(*)(id, SEL, NSString *, NSArray *))method_getImplementation(m2);
     method_exchangeImplementations(m1, m2);
 }
 
@@ -119,7 +119,7 @@ id(*originalImp)(id, SEL, NSString *);
         return [[TRCSchema alloc] initWithSchemeObject:@[@[@"number-as-string"]] name:name];
     }
 
-    return originalImp(self, _cmd, name);
+    return originalImp(self, _cmd, name, extensions);
 }
 
 - (void)test_plain_dictionary_request

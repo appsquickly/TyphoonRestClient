@@ -50,4 +50,13 @@
     XCTAssertEqualObjects(key, @"key");
 }
 
+- (void)test_null_value_skipped_in_url_parameter
+{
+    NSMutableDictionary *data = [@{ @"key1": @"1", @"key2" : [NSNull null]} mutableCopy];
+    
+    TRCUrlPathParamsByRemovingNull(data);
+    
+    XCTAssertEqualObjects(data, @{@"key1": @"1" });
+}
+
 @end

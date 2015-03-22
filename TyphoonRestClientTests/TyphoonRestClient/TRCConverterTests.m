@@ -602,4 +602,16 @@ TRCValidationOptions validationOptions;
     XCTAssertTrue([errors count] == 0);
 }
 
+- (void)test_null_value_skipped
+{
+    
+    NSDictionary *data = @{ @"key1": @"1", @"key2" : [NSNull null]};
+    
+    NSDictionary *schema = @{ @"key1": @"1", @"key2{?}": @"2"};
+    
+    NSDictionary *result = [self convertResponseObject:data schema:schema  errors:nil];
+    
+    XCTAssertEqualObjects(result, @{@"key1": @"1" });
+}
+
 @end
