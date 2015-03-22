@@ -50,7 +50,7 @@ typedef NS_OPTIONS(NSInteger , TRCValidationOptions)
 
 - (id<TRCProgressHandler>)sendRequest:(id<TRCRequest>)request completion:(void(^)(id result, NSError *error))completion;
 
-- (void)registerValueConverter:(id<TRCValueTransformer>)valueConverter forTag:(NSString *)tag;
+- (void)registerValueTransformer:(id<TRCValueTransformer>)valueTransformer forTag:(NSString *)tag;
 
 - (void)registerObjectMapper:(id<TRCObjectMapper>)objectConverter forTag:(NSString *)tag;
 

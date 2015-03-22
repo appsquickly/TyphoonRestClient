@@ -47,7 +47,7 @@
 
 @implementation TyphoonRestClient
 {
-    NSMutableDictionary *_typeConverterRegistry;
+    NSMutableDictionary *_typeTransformerRegistry;
     NSMutableDictionary *_objectMapperRegistry;
 }
 
@@ -55,7 +55,7 @@
 {
     self = [super init];
     if (self) {
-        _typeConverterRegistry = [NSMutableDictionary new];
+        _typeTransformerRegistry = [NSMutableDictionary new];
         _objectMapperRegistry = [NSMutableDictionary new];
         [self registerDefaultTypeConverters];
         self.defaultRequestSerialization = TRCRequestSerializationJson;
@@ -534,19 +534,19 @@
 
 - (void)registerDefaultTypeConverters
 {
-    [self registerValueConverter:[TRCValueTransformerUrl new] forTag:@"{url}"];
-    [self registerValueConverter:[TRCValueTransformerString new] forTag:@"{string}"];
-    [self registerValueConverter:[TRCValueTransformerNumber new] forTag:@"{number}"];
+    [self registerValueTransformer:[TRCValueTransformerUrl new] forTag:@"{url}"];
+    [self registerValueTransformer:[TRCValueTransformerString new] forTag:@"{string}"];
+    [self registerValueTransformer:[TRCValueTransformerNumber new] forTag:@"{number}"];
 }
 
-- (void)registerValueConverter:(id<TRCValueTransformer>)valueConverter forTag:(NSString *)tag
+- (void)registerValueTransformer:(id<TRCValueTransformer>)valueConverter forTag:(NSString *)tag
 {
     NSParameterAssert(tag);
     NSAssert(_objectMapperRegistry[tag] == nil, @"This tag already used as ObjectMapper");
     if (valueConverter) {
-        _typeConverterRegistry[tag] = valueConverter;
+        _typeTransformerRegistry[tag] = valueConverter;
     } else {
-        [_typeConverterRegistry removeObjectForKey:tag];
+        [_typeTransformerRegistry removeObjectForKey:tag];
     }
 }
 
@@ -557,7 +557,7 @@
 - (void)registerObjectMapper:(id<TRCObjectMapper>)objectConverter forTag:(NSString *)tag
 {
     NSParameterAssert(tag);
-    NSAssert(_typeConverterRegistry[tag] == nil, @"This tag already used as ValueConverter");
+    NSAssert(_typeTransformerRegistry[tag] == nil, @"This tag already used as ValueConverter");
     if (objectConverter) {
         _objectMapperRegistry[tag] = objectConverter;
     } else {
@@ -572,7 +572,7 @@
 
 - (id<TRCValueTransformer>)valueConverterForTag:(NSString *)tag
 {
-    return _typeConverterRegistry[tag];
+    return _typeTransformerRegistry[tag];
 }
 
 //-------------------------------------------------------------------------------------------

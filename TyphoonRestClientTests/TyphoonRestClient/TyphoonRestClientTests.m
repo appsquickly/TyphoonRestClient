@@ -73,7 +73,7 @@ id(*originalImp)(id, SEL, NSString *);
 {
     [super setUp];
     webService = [[TyphoonRestClient alloc] init];
-    [webService registerValueConverter:[NumberToStringConverter new] forTag:@"number-as-string"];
+    [webService registerValueTransformer:[NumberToStringConverter new] forTag:@"number-as-string"];
     connectionStub = [[TRCConnectionStub alloc] init];
     webService.connection = connectionStub;
 

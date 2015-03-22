@@ -274,8 +274,8 @@
 			children = (
 				FAC9163E19E694FA0009D824 /* TRCConnectionAFNetworking.h */,
 				FAC9163F19E694FA0009D824 /* TRCConnectionAFNetworking.m */,
-				2DBA124E62BE34E0A5539F39 /* TRCConnectionLogger.m */,
 				2DBA18BF346770A2DA8D1B56 /* TRCConnectionLogger.h */,
+				2DBA124E62BE34E0A5539F39 /* TRCConnectionLogger.m */,
 			);
 			path = Connection;
 			sourceTree = "<group>";
