@@ -9,6 +9,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#import <Foundation/Foundation.h>
 
 #define ValueOrNull(value) (value?:(__typeof(value))[NSNull null])
 

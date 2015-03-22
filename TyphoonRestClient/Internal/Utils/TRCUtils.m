@@ -89,7 +89,7 @@ NSError *TRCConversionErrorForObject(NSString *errorMessage, id object, NSString
     userInfo[TyphoonRestClientErrorKeyFullDescription] = [NSString stringWithFormat:@"Origianl object: %@", [TRCSchemeStackTrace descriptionOfObject:object]];
     userInfo[TyphoonRestClientErrorKeySchemaName] = schemaName;
     userInfo[NSLocalizedDescriptionKey] = message;
-    return [NSError errorWithDomain:TyphoonRestClientErrors code:TyphoonRestClientErrorCodeConversion userInfo:userInfo];
+    return [NSError errorWithDomain:TyphoonRestClientErrors code:TyphoonRestClientErrorCodeTransformation userInfo:userInfo];
 }
 
 
@@ -142,4 +142,13 @@ NSString *TRCUrlPathFromPathByApplyingArguments(NSString *path, NSMutableDiction
     }
 
     return path;
+}
+
+void TRCUrlPathParamsByRemovingNull(NSMutableDictionary *arguments)
+{
+    for (NSString *key in [arguments allKeys]) {
+        if ([arguments[key] isKindOfClass:[NSNull class]]) {
+            [arguments removeObjectForKey:key];
+        }
+    }
 }

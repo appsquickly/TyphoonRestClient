@@ -19,11 +19,13 @@
 
 @interface TRCConnectionLogger : NSObject <TRCConnection>
 
-@property(nonatomic, strong) id <TRCConnection> connection;
-@property(nonatomic, strong) id <TRCConnectionLoggerWriter> writer;
+@property(nonatomic, strong) id<TRCConnection> connection;
+@property(nonatomic, strong) id<TRCConnectionLoggerWriter> writer;
 
 @property(nonatomic) BOOL shouldLogUploadProgress;
 @property(nonatomic) BOOL shouldLogDownloadProgress;
+
+- (instancetype)initWithConnection:(id<TRCConnection>)connection;
 
 @end
 

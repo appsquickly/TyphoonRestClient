@@ -10,15 +10,12 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 
-#import <Foundation/Foundation.h>
 #import "TRCRequest.h"
-
-@protocol TRCErrorParser;
-@protocol TRCConnection;
-@protocol TRCValueTransformer;
-@class TRCSchema;
-@protocol TRCProgressHandler;
-@protocol TRCObjectMapper;
+#import "TRCObjectMapper.h"
+#import "TRCValueTransformer.h"
+#import "TRCConnection.h"
+#import "TRCErrorParser.h"
+#import "TRCBuiltInObjects.h"
 
 typedef NS_OPTIONS(NSInteger , TRCValidationOptions)
 {

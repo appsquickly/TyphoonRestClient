@@ -228,6 +228,7 @@
 
 - (NSString *)requestPathFromRequest:(id<TRCRequest>)request params:(NSMutableDictionary *)params error:(NSError **)error
 {
+    TRCUrlPathParamsByRemovingNull(params);
     NSString *path = [request path];
     if (path && params.count > 0) {
         NSError *argumentsApplyingError = nil;

@@ -17,14 +17,29 @@
     dispatch_queue_t printing_queue;
 }
 
+- (instancetype)initWithConnection:(id<TRCConnection>)connection
+{
+    self = [super init];
+    if (self) {
+        [self setupLogger];
+        self.connection = connection;
+    }
+    return self;
+}
+
 - (instancetype)init
 {
     self = [super init];
     if (self) {
-        printing_queue = dispatch_queue_create("TRCConnectionLogger", DISPATCH_QUEUE_SERIAL);
-        dispatch_set_target_queue(printing_queue, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0));
+        [self setupLogger];
     }
     return self;
+}
+
+- (void)setupLogger
+{
+    printing_queue = dispatch_queue_create("TRCConnectionLogger", DISPATCH_QUEUE_SERIAL);
+    dispatch_set_target_queue(printing_queue, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0));
 }
 
 - (NSMutableURLRequest *)requestWithOptions:(id<TRCConnectionRequestCreationOptions>)options error:(NSError **)requestComposingError

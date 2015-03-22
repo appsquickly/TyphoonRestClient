@@ -30,3 +30,5 @@ NSError *TRCUnknownValidationErrorForObject(id object, NSString *schemaName, BOO
 NSError *TRCConversionErrorForObject(NSString *errorMessage, id object, NSString *schemaName, BOOL isResponse);
 
 NSString *TRCUrlPathFromPathByApplyingArguments(NSString *path, NSMutableDictionary *arguments, NSError **error);
+
+void TRCUrlPathParamsByRemovingNull(NSMutableDictionary *arguments);

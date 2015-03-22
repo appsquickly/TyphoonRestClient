@@ -14,6 +14,7 @@
 
 #import <Foundation/Foundation.h>
 
+@class TRCSchema;
 @protocol TRCValueTransformer;
 
 @protocol TRCConvertersRegistry<NSObject>
