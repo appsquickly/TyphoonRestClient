@@ -6,7 +6,6 @@
 #import "TRCObjectMapperIssue.h"
 #import "RequestToGetIssue.h"
 #import "Issue.h"
-#import "RequestToDownloadFile.h"
 
 @interface ViewController ()
 

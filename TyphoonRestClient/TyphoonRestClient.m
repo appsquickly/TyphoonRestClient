@@ -453,7 +453,7 @@
     if (!mapper) {
         return nil;
     } else {
-        return [self schemeForObject:mapper nameSelector:@selector(requestValidationSchemaName) extensionsToTry:@[@"response", @"json"]];
+        return [self schemeForObject:mapper nameSelector:@selector(requestValidationSchemaName) extensionsToTry:@[@"request.json", @"json"]];
     }
 }
 
@@ -463,28 +463,28 @@
     if (!mapper) {
         return nil;
     } else {
-        return [self schemeForObject:mapper nameSelector:@selector(responseValidationSchemaName) extensionsToTry:@[@"response", @"json"]];
+        return [self schemeForObject:mapper nameSelector:@selector(responseValidationSchemaName) extensionsToTry:@[@"response.json", @"json"]];
     }
 }
 
 - (TRCSchema *)schemeForErrorParser:(id<TRCErrorParser>)parser
 {
-    return [self schemeForObject:parser nameSelector:@selector(errorValidationSchemaName) extensionsToTry:@[@"response", @"error", @"json"]];
+    return [self schemeForObject:parser nameSelector:@selector(errorValidationSchemaName) extensionsToTry:@[@"json", @"response.json"]];
 }
 
 - (TRCSchema *)schemeForResponseWithRequest:(id<TRCRequest>)request
 {
-    return [self schemeForObject:request nameSelector:@selector(responseBodyValidationSchemaName) extensionsToTry:@[@"response"]];
+    return [self schemeForObject:request nameSelector:@selector(responseBodyValidationSchemaName) extensionsToTry:@[@"response.json"]];
 }
 
 - (TRCSchema *)schemeForPathParametersWithRequest:(id<TRCRequest>)request
 {
-    return [self schemeForObject:request nameSelector:@selector(requestPathParametersValidationSchemaName) extensionsToTry:@[@"url", @"path"]];
+    return [self schemeForObject:request nameSelector:@selector(requestPathParametersValidationSchemaName) extensionsToTry:@[@"path.json"]];
 }
 
 - (TRCSchema *)schemeForRequest:(id<TRCRequest>)request
 {
-    return [self schemeForObject:request nameSelector:@selector(requestBodyValidationSchemaName) extensionsToTry:@[@"request"]];
+    return [self schemeForObject:request nameSelector:@selector(requestBodyValidationSchemaName) extensionsToTry:@[@"request.json"]];
 }
 
 - (TRCSchema *)schemeForObject:(id)object nameSelector:(SEL)sel extensionsToTry:(NSArray *)extensions
