@@ -13,6 +13,8 @@
 #import "TRCConnection.h"
 
 @class AFNetworkReachabilityManager;
+@protocol AFURLRequestSerialization;
+@protocol AFURLResponseSerialization;
 
 @interface TRCConnectionAFNetworking : NSObject <TRCConnection>
 
@@ -25,6 +27,10 @@
 - (void)startReachabilityMonitoring;
 
 - (void)stopReachabilityMonitoring;
+
+// Custom serializers
++ (void)registerResponseSerializer:(id<AFURLResponseSerialization>)serialization forType:(TRCRequestSerialization)type;
++ (void)registerRequestSerializer:(id<AFURLRequestSerialization>)serialization forType:(TRCResponseSerialization)type;
 
 @end
 
