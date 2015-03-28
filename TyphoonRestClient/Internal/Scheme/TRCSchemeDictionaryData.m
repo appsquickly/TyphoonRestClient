@@ -48,6 +48,10 @@
 
 - (void)enumerateObject:(id)object withSchemeObject:(id)schemeObject result:(id *)result
 {
+    if (_isStopped) {
+        return;
+    }
+
     if ([schemeObject isKindOfClass:[NSArray class]]) {
         [self enumerateArray:object withSchemeArray:schemeObject result:result];
     } else if ([schemeObject isKindOfClass:[NSDictionary class]]) {
@@ -101,11 +105,16 @@
         *result = resultDictionary;
     }
 
-    NSMutableSet *allKeys = [NSMutableSet setWithArray:[dictionary allKeys]];
+    NSMutableSet *keysToEnumerate = [NSMutableSet setWithArray:[schemeDictionary allKeys]];
+    NSMutableSet *keysMissingInScheme = [NSMutableSet setWithArray:[dictionary allKeys]];
+    for (NSString *schemaKey in keysToEnumerate) {
+        [keysMissingInScheme removeObject:TRCKeyFromOptionalKey(schemaKey, NULL)];
+    }
+    [keysToEnumerate unionSet:keysMissingInScheme];
 
     [self notifyCollectionStart:dictionary];
 
-    for (NSString *schemaKey in [schemeDictionary allKeys]) {
+    for (NSString *schemaKey in keysToEnumerate) {
         if (_isStopped) {
             break;
         }
@@ -114,7 +123,6 @@
         NSString *unwrappedKey = TRCKeyFromOptionalKey(schemaKey, NULL);
         id schemaObject = schemeDictionary[schemaKey];
         id object = dictionary[unwrappedKey];
-        [allKeys removeObject:unwrappedKey];
 
         if (resultDictionary) {
             id itemResult = nil;
@@ -126,30 +134,7 @@
             [self enumerateObject:object withSchemeObject:schemaObject result:NULL];
         }
 
-
         [self notifyEnumeratingItemEnd:schemaKey];
-    }
-
-    for (NSString *missingKey in allKeys) {
-        if (_isStopped) {
-            break;
-        }
-        [self notifyEnumeratingItemStart:missingKey];
-
-        id schemaObject = nil;
-        id object = dictionary[missingKey];
-
-        if (resultDictionary) {
-            id itemResult = nil;
-            [self enumerateObject:object withSchemeObject:schemaObject result:&itemResult];
-            if (itemResult) {
-                resultDictionary[missingKey] = itemResult;
-            }
-        } else {
-            [self enumerateObject:object withSchemeObject:schemaObject result:NULL];
-        }
-
-        [self notifyEnumeratingItemEnd:missingKey];
     }
 
     [self notifyCollectionEnd:dictionary];
