@@ -15,8 +15,8 @@
 
 @interface TRCSchemeDictionaryData : NSObject <TRCSchemaData>
 
+@property (nonatomic, weak) id<TRCSchemaDataProvider> dataProvider;
+
 - (instancetype)initWithArrayOrDictionary:(id)arrayOrDictionary;
-
-
 
 @end

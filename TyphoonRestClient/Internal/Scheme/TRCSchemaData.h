@@ -15,7 +15,9 @@
 
 - (void)process:(id)object into:(id *)result withDelegate:(id)delegate;
 
-- (void)stop;
+- (void)cancel;
+
+- (BOOL)isCancelled;
 
 @end
 
@@ -30,5 +32,13 @@
 - (void)schemaData:(id<TRCSchemaData>)data didEnumerateItemAtIndentifier:(id)itemIdentifier;
 
 - (void)schemaData:(id<TRCSchemaData>)data didEnumerateCollection:(id)collection;
+
+@end
+
+@protocol TRCSchemaDataProvider <NSObject>
+
+- (BOOL)schemaData:(id<TRCSchemaData>)data hasSchemaForName:(NSString *)schemaName;
+
+- (id<TRCSchemaData>)schemaData:(id<TRCSchemaData>)data schemaForName:(NSString *)schemaName;
 
 @end

@@ -16,7 +16,7 @@
 @implementation TRCSchemeDictionaryData
 {
     id _schemeValue;
-    BOOL _isStopped;
+    BOOL _isCancelled;
     id _delegate;
 }
 
@@ -32,33 +32,47 @@
 - (void)process:(id)object into:(id *)result withDelegate:(id)delegate
 {
     @synchronized (self) {
-        _isStopped = NO;
+        _isCancelled = NO;
         _delegate = delegate;
         [self enumerateObject:object withSchemeObject:_schemeValue result:result];
     }
 }
 
-- (void)stop
+- (void)cancel
 {
     @synchronized (self) {
-        _isStopped = YES;
         _delegate = nil;
+        _isCancelled = YES;
     }
+}
+
+- (BOOL)isCancelled
+{
+    return _isCancelled;
 }
 
 - (void)enumerateObject:(id)object withSchemeObject:(id)schemeObject result:(id *)result
 {
-    if (_isStopped) {
+    if (_isCancelled) {
         return;
     }
 
-    if ([schemeObject isKindOfClass:[NSArray class]]) {
+    if ([self isSubSchemaName:schemeObject]) {
+        id<TRCSchemaData> child = [self.dataProvider schemaData:self schemaForName:schemeObject];
+        [child process:object into:result withDelegate:_delegate];
+        _isCancelled = [child isCancelled];
+    } else if ([schemeObject isKindOfClass:[NSArray class]]) {
         [self enumerateArray:object withSchemeArray:schemeObject result:result];
     } else if ([schemeObject isKindOfClass:[NSDictionary class]]) {
         [self enumerateDictionary:object withSchemeDictionary:schemeObject result:result];
     } else {
         [self notifyObject:object withSchemeObject:schemeObject replacement:result];
     };
+}
+
+- (BOOL)isSubSchemaName:(id)object
+{
+    return [object isKindOfClass:[NSString class]] && [self.dataProvider schemaData:self hasSchemaForName:object];
 }
 
 - (void)enumerateArray:(NSArray *)array withSchemeArray:(NSArray *)schemeArray result:(id *)result
@@ -74,7 +88,7 @@
     [self notifyCollectionStart:array];
 
     [array enumerateObjectsUsingBlock:^(id object, NSUInteger idx, BOOL *stop) {
-        if (_isStopped) {
+        if (_isCancelled) {
             *stop = YES;
         } else {
             NSNumber *index = @(idx);
@@ -115,7 +129,7 @@
     [self notifyCollectionStart:dictionary];
 
     for (NSString *schemaKey in keysToEnumerate) {
-        if (_isStopped) {
+        if (_isCancelled) {
             break;
         }
         [self notifyEnumeratingItemStart:schemaKey];
@@ -168,6 +182,5 @@
         *replacement = result;
     }
 }
-
 
 @end
