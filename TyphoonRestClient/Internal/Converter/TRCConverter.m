@@ -9,9 +9,6 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #import "TRCConverter.h"
 #import "TRCUtils.h"
 #import "TRCConvertersRegistry.h"
@@ -34,6 +31,7 @@
 
 - (instancetype)initWithSchema:(TRCSchema *)schema
 {
+    NSParameterAssert(schema);
     self = [super init];
     if (self) {
         self.schema = schema;
@@ -274,6 +272,23 @@
 
 - (id)schemaData:(id<TRCSchemaData>)data replacementForValue:(id)object withOptions:(TRCSchemaDataValueOptions *)options withSchemeValue:(id)schemeValue
 {
+    //Handle NSNull case
+    if ([object isKindOfClass:[NSNull class]]) {
+        object = nil;
+    }
+
+    //Handle object missing in scheme
+    if (!schemeValue) {
+        if (_convertingForRequest && (self.options & TRCValidationOptionsRemoveValuesMissedInSchemeForRequests)) {
+            object = nil;
+        }
+        else if (!_convertingForRequest && (self.options & TRCValidationOptionsRemoveValuesMissedInSchemeForResponses)) {
+            object = nil;
+        }
+    }
+
+    object = TRCValueAfterApplyingOptions(object, self.options, _convertingForRequest, options.isOptional);
+
     if (object && self.registry && [schemeValue isKindOfClass:[NSString class]]) {
         return [self convertValue:object toType:schemeValue];
     } else {

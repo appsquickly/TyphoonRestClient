@@ -136,10 +136,14 @@
 
 + (instancetype)schemaWithData:(id<TRCSchemaData>)data name:(NSString *)name
 {
-    TRCSchema *schema = [[self alloc] init];
-    schema.data = data;
-    schema.name = name;
-    return schema;
+    if (!data) {
+        return nil;
+    } else {
+        TRCSchema *schema = [[self alloc] init];
+        schema.data = data;
+        schema.name = name;
+        return schema;
+    }
 }
 
 //-------------------------------------------------------------------------------------------

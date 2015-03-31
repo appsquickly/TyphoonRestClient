@@ -160,6 +160,9 @@ TRCValidationOptions validationOptions;
     TRCSchemaDictionaryData *schemeData = [[TRCSchemaDictionaryData alloc] initWithArrayOrDictionary:schemaArrayOrDictionary];
     schemeData.dataProvider = self;
     TRCSchema *schema = [TRCSchema schemaWithData:schemeData name:@"test"];
+    if (!schema) {
+        return data;
+    }
     TRCConverter *converter = [[TRCConverter alloc] initWithSchema:schema];
     converter.options = validationOptions;
     converter.registry = self;
@@ -175,6 +178,9 @@ TRCValidationOptions validationOptions;
     schemeData.requestData = YES;
     schemeData.dataProvider = self;
     TRCSchema *schema = [TRCSchema schemaWithData:schemeData name:@"test"];
+    if (!schema) {
+        return data;
+    }
     TRCConverter *converter = [[TRCConverter alloc] initWithSchema:schema];
     converter.options = validationOptions;
     converter.registry = self;
@@ -507,16 +513,17 @@ TRCValidationOptions validationOptions;
     XCTAssertTrue([errors count] == 0, @"Error: %@", errors);
 }
 
-- (void)test_nested_object_with_schema_and_errors
+- (void)test_nested_object_with_schema_and_error
 {
-    NSDictionary *data = @{@"key" : @"value", @"object" : @{@"key" : @"value", @"date" : @"date", @"array" : @[@{@"another_array" : @[@"1", @"2"]}]}};
-    NSDictionary *schema = @{@"key" : @"value", @"object" : @{@"key" : @"value", @"date" : @"date", @"array" : @[@{@"key" : @"value", @"key2{?}" : @"value2", @"another_array" : @[@"NSObject"]}]}};
+    NSDictionary *data =   @{@"key" : @"value", @"object" : @{@"key" : @"value", @"date" : @"date", @"array" : @[@{@"another_array" : @[@"1", @"2"]}]}};
+    NSDictionary *schema = @{@"key" : @"value", @"object" : @{@"key" : @"value", @"date" : @"date", @"array" : @[@{@"another_array" : @[@"NSObject"], @"key" : @"value", @"key2{?}" : @"value2",}]}};
 
     NSOrderedSet *errors = nil;
     __unused NSDictionary *object = [self convertResponseObject:data schema:schema errors:&errors];
 
+    //Only one conversion error: can't convert "1" and "2" into NSObject
 
-    XCTAssertTrue(errors.count == 2, @"Error: %@", errors);
+    XCTAssertTrue(errors.count == 1, @"Error: %@", errors);
 }
 
 //TODO: Fix

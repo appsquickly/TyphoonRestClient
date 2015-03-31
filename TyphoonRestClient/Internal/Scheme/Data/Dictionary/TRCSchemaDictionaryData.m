@@ -23,11 +23,15 @@
 
 - (instancetype)initWithArrayOrDictionary:(id)arrayOrDictionary
 {
-    self = [super init];
-    if (self) {
-        _schemeValue = arrayOrDictionary;
+    if (!arrayOrDictionary) {
+        return nil;
+    } else {
+        self = [super init];
+        if (self) {
+            _schemeValue = arrayOrDictionary;
+        }
+        return self;
     }
-    return self;
 }
 
 //-------------------------------------------------------------------------------------------
@@ -76,7 +80,7 @@
         return;
     }
 
-    if (!object) {
+    if (!object || [object isKindOfClass:[NSNull class]]) {
         [self notifyObject:object withIdentifier:identifier withSchemeObject:schemeObject replacement:result];
     } else if ([self isMapperName:schemeObject]) {
         [self enumerateObject:object withMapperName:schemeObject result:result];
