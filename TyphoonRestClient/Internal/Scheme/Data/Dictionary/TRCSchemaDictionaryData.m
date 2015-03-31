@@ -143,11 +143,8 @@
 
 - (void)enumerateArray:(NSArray *)array withSchemeArray:(NSArray *)schemeArray result:(id *)result
 {
-    [self notifyCollectionStart:array];
-
     if (![array isKindOfClass:[NSArray class]]) {
         [self notifyFail:array withSchemaObject:schemeArray];
-        [self notifyCollectionEnd:array];
         [self cancel];
         return;
     }
@@ -181,16 +178,12 @@
         }
     }];
 
-    [self notifyCollectionEnd:array];
 }
 
 - (void)enumerateDictionary:(NSDictionary *)dictionary withSchemeDictionary:(NSDictionary *)schemeDictionary result:(id *)result
 {
-    [self notifyCollectionStart:dictionary];
-
     if (![dictionary isKindOfClass:[NSDictionary class]]) {
         [self notifyFail:dictionary withSchemaObject:schemeDictionary];
-        [self notifyCollectionEnd:dictionary];
         [self cancel];
         return;
     }
@@ -233,27 +226,11 @@
 
         [self notifyEnumeratingItemEnd:unwrappedKey];
     }
-
-    [self notifyCollectionEnd:dictionary];
 }
 
 //-------------------------------------------------------------------------------------------
 #pragma mark - Notifying
 //-------------------------------------------------------------------------------------------
-
-- (void)notifyCollectionStart:(id)collection
-{
-    if ([_enumerator respondsToSelector:@selector(schemaData:willEnumerateCollection:)]) {
-        [_enumerator schemaData:self willEnumerateCollection:collection];
-    }
-}
-
-- (void)notifyCollectionEnd:(id)collection
-{
-    if ([_enumerator respondsToSelector:@selector(schemaData:didEnumerateCollection:)]) {
-        [_enumerator schemaData:self didEnumerateCollection:collection];
-    }
-}
 
 - (void)notifyEnumeratingItemStart:(id)itemId
 {

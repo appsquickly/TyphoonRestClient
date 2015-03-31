@@ -41,9 +41,6 @@
 
 @optional
 
-- (void)schemaData:(id<TRCSchemaData>)data willEnumerateCollection:(id)collection;
-- (void)schemaData:(id<TRCSchemaData>)data didEnumerateCollection:(id)collection;
-
 - (void)schemaData:(id<TRCSchemaData>)data willEnumerateItemAtIndentifier:(id)itemIdentifier;
 - (void)schemaData:(id<TRCSchemaData>)data didEnumerateItemAtIndentifier:(id)itemIdentifier;
 
