@@ -177,7 +177,6 @@ typedef NS_ENUM(NSInteger, TRCSchemeStackTraceSymbolType) {
 
 + (NSString *)stringFromDictionary:(NSDictionary *)dictionary context:(TRCSchemeStackTraceContext *)context
 {
-
     NSMutableString *buffer = [NSMutableString new];
     [buffer appendString:@"{"];
 

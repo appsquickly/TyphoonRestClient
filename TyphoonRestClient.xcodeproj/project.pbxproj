@@ -9,10 +9,10 @@
 /* Begin PBXBuildFile section */
 		2DBA10F6D20316CBD2233306 /* TRCUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1D5D6A4F1CD450673422 /* TRCUtilsTests.m */; };
 		2DBA120634800EF8507024AD /* PersonsList.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA104BA4D6F38FB51EC684 /* PersonsList.json */; };
-		2DBA153A68BA1FCB57C38FFE /* TRCSchemaDataValueOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1DB639948DF2423C7FCB /* TRCSchemaDataValueOptions.m */; };
+		2DBA1229572A727F2F37BB27 /* TRCSchemeDictionaryData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA13C94FF38532A31D5CFF /* TRCSchemeDictionaryData.m */; };
+		2DBA14CB7D8DE86DEA7D44E7 /* TRCSchemaDataValueOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA123B3A97A2B227BB3C5F /* TRCSchemaDataValueOptions.m */; };
 		2DBA178CC76E21D9C1C6DCBE /* TRCMapperPerson.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA1A63E0B2BDDB5D227E95 /* TRCMapperPerson.json */; };
 		2DBA17F737835F7EDA40FA64 /* TRCMapperPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA10AE04851CC3BDE7480A /* TRCMapperPhone.m */; };
-		2DBA1BC29D7D8D5827B9584B /* TRCSchemeDictionaryData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA19497F9BA28BF102FDF6 /* TRCSchemeDictionaryData.m */; };
 		2DBA1D2D9A36B17788C70C55 /* TRCConnectionLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA124E62BE34E0A5539F39 /* TRCConnectionLogger.m */; };
 		2DBA1D4B061007D83FEBC57C /* Phone.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1942EBD89F99FB0149DC /* Phone.m */; };
 		2DBA1EDFD218B24F2C14C317 /* TRCMapperPhone.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA11C1B532C921805BEC2F /* TRCMapperPhone.json */; };
@@ -80,20 +80,20 @@
 		2DBA104BA4D6F38FB51EC684 /* PersonsList.json */ = {isa = PBXFileReference; lastKnownFileType = file.json; path = PersonsList.json; sourceTree = "<group>"; };
 		2DBA10AE04851CC3BDE7480A /* TRCMapperPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCMapperPhone.m; sourceTree = "<group>"; };
 		2DBA11C1B532C921805BEC2F /* TRCMapperPhone.json */ = {isa = PBXFileReference; lastKnownFileType = file.json; path = TRCMapperPhone.json; sourceTree = "<group>"; };
-		2DBA11D3632953D777430227 /* TRCSchemaDataValueOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSchemaDataValueOptions.h; sourceTree = "<group>"; };
+		2DBA123B3A97A2B227BB3C5F /* TRCSchemaDataValueOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSchemaDataValueOptions.m; sourceTree = "<group>"; };
 		2DBA124E62BE34E0A5539F39 /* TRCConnectionLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCConnectionLogger.m; sourceTree = "<group>"; };
-		2DBA1359B34216649C4ACBD4 /* TRCSchemaData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSchemaData.h; sourceTree = "<group>"; };
 		2DBA136E3AFB4B0F07B7C5AC /* TRCSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSerialization.h; sourceTree = "<group>"; };
+		2DBA13C94FF38532A31D5CFF /* TRCSchemeDictionaryData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSchemeDictionaryData.m; sourceTree = "<group>"; };
+		2DBA161429FAAF8C959F4B7F /* TRCSchemaDataValueOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSchemaDataValueOptions.h; sourceTree = "<group>"; };
 		2DBA18BF346770A2DA8D1B56 /* TRCConnectionLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCConnectionLogger.h; sourceTree = "<group>"; };
 		2DBA1942EBD89F99FB0149DC /* Phone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Phone.m; sourceTree = "<group>"; };
-		2DBA19497F9BA28BF102FDF6 /* TRCSchemeDictionaryData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSchemeDictionaryData.m; sourceTree = "<group>"; };
 		2DBA19CDB29AAD3C4F65D42B /* Phone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Phone.h; sourceTree = "<group>"; };
 		2DBA1A63E0B2BDDB5D227E95 /* TRCMapperPerson.json */ = {isa = PBXFileReference; lastKnownFileType = file.request; path = TRCMapperPerson.json; sourceTree = "<group>"; };
 		2DBA1B8033DA8D5FA5B63C8B /* TRCObjectMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCObjectMapper.h; sourceTree = "<group>"; };
+		2DBA1C1ACE5CC5E232C97C4E /* TRCSchemaData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSchemaData.h; sourceTree = "<group>"; };
 		2DBA1D5D6A4F1CD450673422 /* TRCUtilsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCUtilsTests.m; sourceTree = "<group>"; };
 		2DBA1D63DF19AC301D0604A5 /* TRCMapperPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCMapperPhone.h; sourceTree = "<group>"; };
-		2DBA1DB639948DF2423C7FCB /* TRCSchemaDataValueOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSchemaDataValueOptions.m; sourceTree = "<group>"; };
-		2DBA1EF58B646419D63ABEB3 /* TRCSchemeDictionaryData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSchemeDictionaryData.h; sourceTree = "<group>"; };
+		2DBA1DB3005342F413FE7AF2 /* TRCSchemeDictionaryData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSchemeDictionaryData.h; sourceTree = "<group>"; };
 		469D3C7EB63CCF077674B274 /* libPods-TyphoonRestClientTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TyphoonRestClientTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		48F28F705C352E4073F55876 /* Pods-TyphoonRestClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TyphoonRestClient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TyphoonRestClient/Pods-TyphoonRestClient.debug.xcconfig"; sourceTree = "<group>"; };
 		5C84882D07B06327E8D9BB26 /* libPods-TyphoonRestClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TyphoonRestClient.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -183,6 +183,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2DBA175FA9C3FB261C0DBAF9 /* Dictionary */ = {
+			isa = PBXGroup;
+			children = (
+				2DBA1DB3005342F413FE7AF2 /* TRCSchemeDictionaryData.h */,
+				2DBA13C94FF38532A31D5CFF /* TRCSchemeDictionaryData.m */,
+			);
+			path = Dictionary;
+			sourceTree = "<group>";
+		};
+		2DBA17EA20F50B557220E3D1 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				2DBA1C1ACE5CC5E232C97C4E /* TRCSchemaData.h */,
+				2DBA161429FAAF8C959F4B7F /* TRCSchemaDataValueOptions.h */,
+				2DBA123B3A97A2B227BB3C5F /* TRCSchemaDataValueOptions.m */,
+				2DBA175FA9C3FB261C0DBAF9 /* Dictionary */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		7C7F52DF2A50096085E5149B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -271,7 +291,7 @@
 			children = (
 				FAC9163D19E694FA0009D824 /* Connection */,
 				FAC9164019E694FA0009D824 /* DataConverters */,
-				FAC9164719E694FA0009D824 /* ResponseObjects */,
+				FAC9164719E694FA0009D824 /* Converter */,
 				FAC9164D19E694FA0009D824 /* Scheme */,
 				FAC9165019E694FA0009D824 /* Utils */,
 			);
@@ -302,14 +322,14 @@
 			path = DataConverters;
 			sourceTree = "<group>";
 		};
-		FAC9164719E694FA0009D824 /* ResponseObjects */ = {
+		FAC9164719E694FA0009D824 /* Converter */ = {
 			isa = PBXGroup;
 			children = (
 				FAC9164819E694FA0009D824 /* TRCConverter.h */,
 				FAC9164919E694FA0009D824 /* TRCConverter.m */,
 				FAC9164C19E694FA0009D824 /* TRCConvertersRegistry.h */,
 			);
-			path = ResponseObjects;
+			path = Converter;
 			sourceTree = "<group>";
 		};
 		FAC9164D19E694FA0009D824 /* Scheme */ = {
@@ -319,11 +339,7 @@
 				FA5126681A96000F00EAF902 /* TRCSchemeStackTrace.m */,
 				FAC9164E19E694FA0009D824 /* TRCSchema.h */,
 				FAC9164F19E694FA0009D824 /* TRCSchema.m */,
-				2DBA1359B34216649C4ACBD4 /* TRCSchemaData.h */,
-				2DBA19497F9BA28BF102FDF6 /* TRCSchemeDictionaryData.m */,
-				2DBA1EF58B646419D63ABEB3 /* TRCSchemeDictionaryData.h */,
-				2DBA1DB639948DF2423C7FCB /* TRCSchemaDataValueOptions.m */,
-				2DBA11D3632953D777430227 /* TRCSchemaDataValueOptions.h */,
+				2DBA17EA20F50B557220E3D1 /* Data */,
 			);
 			path = Scheme;
 			sourceTree = "<group>";
@@ -572,8 +588,8 @@
 				FAC9165719E694FA0009D824 /* TRCConverter.m in Sources */,
 				FAC9165919E694FA0009D824 /* TRCSchema.m in Sources */,
 				2DBA1D2D9A36B17788C70C55 /* TRCConnectionLogger.m in Sources */,
-				2DBA1BC29D7D8D5827B9584B /* TRCSchemeDictionaryData.m in Sources */,
-				2DBA153A68BA1FCB57C38FFE /* TRCSchemaDataValueOptions.m in Sources */,
+				2DBA14CB7D8DE86DEA7D44E7 /* TRCSchemaDataValueOptions.m in Sources */,
+				2DBA1229572A727F2F37BB27 /* TRCSchemeDictionaryData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

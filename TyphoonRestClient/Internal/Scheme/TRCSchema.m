@@ -25,6 +25,8 @@
 
 @property (nonatomic, strong) id schemeObject;
 
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) id<TRCSchemaData> data;
 @end
 
 @implementation TRCSchema
@@ -142,6 +144,18 @@
 }
 
 //-------------------------------------------------------------------------------------------
+#pragma mark - Init
+//-------------------------------------------------------------------------------------------
+
++ (instancetype)schemaWithData:(id<TRCSchemaData>)data name:(NSString *)name
+{
+    TRCSchema *schema = [[self alloc] init];
+    schema.data = data;
+    schema.name = name;
+    return schema;
+}
+
+//-------------------------------------------------------------------------------------------
 #pragma mark - TRCSchemaData Enumeration
 //-------------------------------------------------------------------------------------------
 
@@ -181,16 +195,6 @@
 - (void)schemaData:(id<TRCSchemaData>)data didEnumerateItemAtIndentifier:(id)itemIdentifier
 {
     [_stack pop];
-}
-
-- (void)schemaData:(id<TRCSchemaData>)data willEnumerateCollection:(id)collection
-{
-
-}
-
-- (void)schemaData:(id<TRCSchemaData>)data didEnumerateCollection:(id)collection
-{
-
 }
 
 - (void)schemaData:(id<TRCSchemaData>)data typeMismatchForValue:(id)value withSchemaValue:(id)schemaValue

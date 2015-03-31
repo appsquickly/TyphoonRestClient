@@ -20,15 +20,17 @@
 
 @interface TRCSchema : NSObject
 
-@property (nonatomic, strong) id<TRCSchemaData> data;
-
 @property (nonatomic, strong, readonly) NSString *name;
-@property (nonatomic, strong) id<TRCConvertersRegistry>converterRegistry;
+@property (nonatomic, strong, readonly) id<TRCSchemaData> data;
+
+@property (nonatomic, weak) id<TRCConvertersRegistry>converterRegistry;
 @property (nonatomic) TRCValidationOptions options;
 
-+ (instancetype)schemaWithName:(NSString *)name extensionsToTry:(NSArray *)extensions;
++ (instancetype)schemaWithData:(id<TRCSchemaData>)data name:(NSString *)name;
 
-- (instancetype)initWithFilePath:(NSString *)filePath;
++ (instancetype)schemaWithName:(NSString *)name extensionsToTry:(NSArray *)extensions DEPRECATED_ATTRIBUTE;
+
+- (instancetype)initWithFilePath:(NSString *)filePath DEPRECATED_ATTRIBUTE;
 
 - (BOOL)validateRequest:(id)request error:(NSError **)error;
 
