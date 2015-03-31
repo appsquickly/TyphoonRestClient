@@ -21,7 +21,7 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
-@interface TRCSchema () <TRCSchemaDataDelegate, TRCSchemaDataProvider>
+@interface TRCSchema () <TRCSchemaDataEnumerator, TRCSchemaDataProvider>
 
 @property (nonatomic, strong) id schemeObject;
 
@@ -32,10 +32,6 @@
 @implementation TRCSchema
 {
     BOOL _isRequestValidation;
-
-    id _currentIdentifier;
-
-    NSMutableArray *_identifiersStack;
 
     NSError *_error;
     TRCSchemeStackTrace *_stack;
@@ -96,7 +92,6 @@
     if (self) {
         self.data = [[TRCSchemeDictionaryData alloc] initWithArrayOrDictionary:object];
         ((TRCSchemeDictionaryData *)self.data).dataProvider = self;
-        _identifiersStack = [NSMutableArray new];
 
         NSParameterAssert(object);
         NSParameterAssert(name);
@@ -108,13 +103,14 @@
 
 - (BOOL)validateResponse:(id)response error:(NSError **)error
 {
-    TRCSchemeStackTrace *stackTrace = nil;
+    _stack = nil;
 #if TRCSchemaTrackErrorTrace
-    stackTrace = [TRCSchemeStackTrace new];
-    stackTrace.originalObject = response;
+    _stack = [TRCSchemeStackTrace new];
+    _stack.originalObject = response;
 #endif
 
-    [self.data process:response into:NULL withDelegate:self];
+    ((TRCSchemeDictionaryData *)self.data).requestData = NO;
+    [self.data enumerate:response withEnumerator:self];
 
 
     NSError *validationError = _error;//[self validateReceivedValue:response withSchemaValue:self.schemeObject stackTrace:stackTrace];
@@ -127,12 +123,13 @@
 - (BOOL)validateRequest:(id)request error:(NSError **)error
 {
     _isRequestValidation = YES;
-    TRCSchemeStackTrace *stackTrace = nil;
+    _stack = nil;
 #if TRCSchemaTrackErrorTrace
-    stackTrace = [TRCSchemeStackTrace new];
-    stackTrace.originalObject = request;
+    _stack = [TRCSchemeStackTrace new];
+    _stack.originalObject = request;
 #endif
-    [self.data process:request into:NULL withDelegate:self];
+    ((TRCSchemeDictionaryData *)self.data).requestData = YES;
+    [self.data enumerate:request withEnumerator:self];
     NSError *validationError = _error;//[self validateReceivedValue:request withSchemaValue:self.schemeObject stackTrace:stackTrace];
     if (validationError && error) {
         *error = validationError;
@@ -340,11 +337,6 @@
     return [NSError errorWithDomain:@"TyphoonRestClientErrors" code:TyphoonRestClientErrorCodeValidation userInfo:userInfo];
 }
 
-- (id)currentIdentifier
-{
-    return [_identifiersStack lastObject];
-}
-
 //-------------------------------------------------------------------------------------------
 #pragma mark - TRCSchemaData
 //-------------------------------------------------------------------------------------------
@@ -356,28 +348,26 @@
 
 - (void)schemaData:(id<TRCSchemaData>)data willEnumerateItemAtIndentifier:(id)itemIdentifier
 {
-    [_identifiersStack addObject:itemIdentifier];
+    if ([itemIdentifier isKindOfClass:[NSNumber class]]) {
+        [_stack pushSymbolWithArrayIndex:itemIdentifier];
+    } else if ([itemIdentifier isKindOfClass:[NSString class]]) {
+        [_stack pushSymbol:itemIdentifier];
+    } else {
+        NSAssert(NO, @"Unsupported identifier type: %@", itemIdentifier);
+    }
 }
 
-- (void)schemaData:(id<TRCSchemaData>)data foundValue:(id)value withSchemeValue:(id)schemeValue replacement:(id *)replacement
+- (void)schemaData:(id<TRCSchemaData>)data foundValue:(id)value withOptions:(TRCSchemaDataValueOptions *)options withSchemeValue:(id)schemeValue
 {
-
-    BOOL isOptional = NO;
-
-    NSString *currentKey = [self currentIdentifier];
-    if ([currentKey isKindOfClass:[NSString class]]) {
-        TRCKeyFromOptionalKey(currentKey, &isOptional);
-    }
-
     if ([value isKindOfClass:[NSNull class]]) {
         value = nil;
     }
 
-    value = TRCValueAfterApplyingOptions(value, self.options, _isRequestValidation, isOptional);
+    value = TRCValueAfterApplyingOptions(value, self.options, _isRequestValidation, [options isOptional]);
 
     //1. Check value exists
-    if (!isOptional && !value) {
-        _error = [self errorForMissedKey:currentKey withStack:_stack];
+    if (![options isOptional] && !value) {
+        _error = [self errorForMissedKey:options.identifier withStack:_stack];
         [data cancel];
     }
     else if (value) {
@@ -387,23 +377,11 @@
             [data cancel];
         }
     }
-
 }
-
-- (void)schemaData:(id<TRCSchemaData>)data preprocessObject:(id)value withMapperTag:(NSString *)name replacement:(id *)replacement
-{
-
-}
-
-- (void)schemaData:(id<TRCSchemaData>)data postprocessObject:(id)value withMapperTag:(NSString *)name replacement:(id *)replacement
-{
-
-}
-
 
 - (void)schemaData:(id<TRCSchemaData>)data didEnumerateItemAtIndentifier:(id)itemIdentifier
 {
-    [_identifiersStack removeLastObject];
+    [_stack pop];
 }
 
 - (void)schemaData:(id<TRCSchemaData>)data didEnumerateCollection:(id)collection
@@ -411,11 +389,10 @@
 
 }
 
-- (void)schemaData:(id<TRCSchemaData>)data failPorcessingValue:(id)value withSchemaValue:(id)schemaValue
+- (void)schemaData:(id<TRCSchemaData>)data typeMismatchForValue:(id)value withSchemaValue:(id)schemaValue
 {
     _error = [self errorForIncorrectType:[[value class] description] correctType:[self typeRepresentationForSchemeValue:schemaValue] stack:_stack];
 }
-
 
 //-------------------------------------------------------------------------------------------
 #pragma mark - TRCSchemaData Provider
@@ -426,16 +403,14 @@
     return [self.converterRegistry objectMapperForTag:schemaName] != nil;
 }
 
-- (id<TRCSchemaData>)schemaData:(id<TRCSchemaData>)data schemaForMapperWithTag:(NSString *)schemaName
+- (id<TRCSchemaData>)schemaData:(id<TRCSchemaData>)data requestSchemaForMapperWithTag:(NSString *)schemaName
 {
-    TRCSchema *schema = nil;
-    if (_isRequestValidation) {
-        schema = [self.converterRegistry requestSchemaForMapperWithTag:schemaName];
-    } else {
-        schema = [self.converterRegistry responseSchemaForMapperWithTag:schemaName];
-    }
-    return schema.data;
+    return [self.converterRegistry requestSchemaForMapperWithTag:schemaName].data;
 }
 
+- (id<TRCSchemaData>)schemaData:(id<TRCSchemaData>)data responseSchemaForMapperWithTag:(NSString *)schemaName
+{
+    return [self.converterRegistry responseSchemaForMapperWithTag:schemaName].data;
+}
 
 @end

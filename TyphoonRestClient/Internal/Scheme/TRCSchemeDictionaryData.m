@@ -30,30 +30,23 @@
     return self;
 }
 
-- (void)process:(id)object into:(id *)result withDelegate:(id)delegate
-{
-    @synchronized (self) {
-        _isCancelled = NO;
-        _enumerator = delegate;
-        [self enumerateObject:object withSchemeObject:_schemeValue result:result];
-    }
-}
-
 //-------------------------------------------------------------------------------------------
 #pragma mark - Main API
 //-------------------------------------------------------------------------------------------
 
 - (void)enumerate:(id)object withEnumerator:(id<TRCSchemaDataEnumerator>)enumerator
 {
-
+    //TODO: Test multi threading access
+    _enumerator = enumerator;
+    [self enumerateObject:object withIdentifier:nil withSchemeObject:_schemeValue result:NULL];
 }
 
 - (id)modify:(id)object withModifier:(id<TRCSchemaDataModifier>)modifier
 {
     _modifier = modifier;
-
-
-    return nil;
+    id result = nil;
+    [self enumerateObject:object withIdentifier:nil withSchemeObject:_schemeValue result:&result];
+    return result;
 }
 
 //-------------------------------------------------------------------------------------------
@@ -77,20 +70,22 @@
 #pragma mark - Enumeration
 //-------------------------------------------------------------------------------------------
 
-- (void)enumerateObject:(id)object withSchemeObject:(id)schemeObject result:(id *)result
+- (void)enumerateObject:(id)object withIdentifier:(id)identifier withSchemeObject:(id)schemeObject result:(id *)result
 {
     if (_isCancelled) {
         return;
     }
 
-    if ([self isSubSchemaName:schemeObject]) {
+    if (!object) {
+        [self notifyObject:object withIdentifier:identifier withSchemeObject:schemeObject replacement:result];
+    } else if ([self isSubSchemaName:schemeObject]) {
         [self enumerateObject:object withSchemaName:schemeObject result:result];
     } else if ([schemeObject isKindOfClass:[NSArray class]]) {
         [self enumerateArray:object withSchemeArray:schemeObject result:result];
     } else if ([schemeObject isKindOfClass:[NSDictionary class]]) {
         [self enumerateDictionary:object withSchemeDictionary:schemeObject result:result];
     } else {
-        [self notifyObject:object withSchemeObject:schemeObject replacement:result];
+        [self notifyObject:object withIdentifier:identifier withSchemeObject:schemeObject replacement:result];
     }
 }
 
@@ -108,6 +103,7 @@
     //Map Request Model Objects in NSDictionary
     if ([self isRequestData] && _modifier && result) {
         *result = [_modifier schemaData:self unmapObject:*result withMapperTag:name];
+        object = *result;
     }
 
     //Only NSDictionary can be used for mappers
@@ -128,7 +124,8 @@
     if (child) {
         if (result && _modifier) {
             *result = [child modify:*result withModifier:_modifier];
-        } else {
+        }
+        if (_enumerator) {
             [child enumerate:object withEnumerator:_enumerator];
         }
         _isCancelled = [child isCancelled];
@@ -168,12 +165,12 @@
 
             if (resultArray) {
                 id itemResult = nil;
-                [self enumerateObject:object withSchemeObject:schemeObject result:&itemResult];
+                [self enumerateObject:object withIdentifier:index withSchemeObject:schemeObject result:&itemResult];
                 if (itemResult) {
                     [resultArray addObject:itemResult];
                 }
             } else {
-                [self enumerateObject:object withSchemeObject:schemeObject result:NULL];
+                [self enumerateObject:object withIdentifier:index withSchemeObject:schemeObject result:NULL];
             }
 
             [self notifyEnumeratingItemEnd:index];
@@ -186,7 +183,6 @@
 - (void)enumerateDictionary:(NSDictionary *)dictionary withSchemeDictionary:(NSDictionary *)schemeDictionary result:(id *)result
 {
     [self notifyCollectionStart:dictionary];
-
 
     if (![dictionary isKindOfClass:[NSDictionary class]]) {
         [self notifyFail:dictionary withSchemaObject:schemeDictionary];
@@ -208,33 +204,37 @@
     }
     [keysToEnumerate unionSet:keysMissingInScheme];
 
-
-
     for (NSString *schemaKey in keysToEnumerate) {
         if (_isCancelled) {
             break;
         }
-        [self notifyEnumeratingItemStart:schemaKey];
 
         NSString *unwrappedKey = TRCKeyFromOptionalKey(schemaKey, NULL);
         id schemaObject = schemeDictionary[schemaKey];
         id object = dictionary[unwrappedKey];
 
+        [self notifyEnumeratingItemStart:unwrappedKey];
+
+
         if (resultDictionary) {
             id itemResult = nil;
-            [self enumerateObject:object withSchemeObject:schemaObject result:&itemResult];
+            [self enumerateObject:object withIdentifier:schemaKey withSchemeObject:schemaObject result:&itemResult];
             if (itemResult) {
                 resultDictionary[unwrappedKey] = itemResult;
             }
         } else {
-            [self enumerateObject:object withSchemeObject:schemaObject result:NULL];
+            [self enumerateObject:object withIdentifier:schemaKey withSchemeObject:schemaObject result:NULL];
         }
 
-        [self notifyEnumeratingItemEnd:schemaKey];
+        [self notifyEnumeratingItemEnd:unwrappedKey];
     }
 
     [self notifyCollectionEnd:dictionary];
 }
+
+//-------------------------------------------------------------------------------------------
+#pragma mark - Notifying
+//-------------------------------------------------------------------------------------------
 
 - (void)notifyCollectionStart:(id)collection
 {
@@ -258,15 +258,25 @@
 
 - (void)notifyFail:(id)object withSchemaObject:(id)schemaObject
 {
-    [_enumerator schemaData:self failPorcessingValue:object withSchemaValue:schemaObject];
+    [_enumerator schemaData:self typeMismatchForValue:object withSchemaValue:schemaObject];
 }
 
-- (void)notifyObject:(id)object withSchemeObject:(id)schemeObject replacement:(id *)replacement
+- (void)notifyObject:(id)object withIdentifier:(id)identifier withSchemeObject:(id)schemeObject replacement:(id *)replacement
 {
-    id result = object;
-    [_enumerator schemaData:self foundValue:object withSchemeValue:schemeObject replacement:&result];
-    if (replacement) {
-        *replacement = result;
+    BOOL isOptional = NO;
+    if ([identifier isKindOfClass:[NSString class]]) {
+        identifier = TRCKeyFromOptionalKey(identifier, &isOptional);
+    }
+
+    TRCSchemaDataValueOptions *options = [TRCSchemaDataValueOptions new];
+    options.identifier = identifier;
+    options.optional = isOptional;
+
+    if (_enumerator) {
+        [_enumerator schemaData:self foundValue:object withOptions:options withSchemeValue:schemeObject];
+    }
+    if (replacement && _modifier) {
+        *replacement = [_modifier schemaData:self replacementForValue:object withOptions:options withSchemeValue:schemeObject];
     }
 }
 

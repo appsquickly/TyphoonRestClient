@@ -112,11 +112,11 @@ typedef NS_ENUM(NSInteger, TRCSchemeStackTraceSymbolType) {
     [_stack addObject:stackItem];
 }
 
-- (void)pushSymbolWithArrayIndex:(NSUInteger)index
+- (void)pushSymbolWithArrayIndex:(NSNumber *)index
 {
     TRCSchemeStackTraceSymbol *stackItem = [TRCSchemeStackTraceSymbol new];
     stackItem.type = TRCSchemeStackTraceSymbolTypeIndex;
-    stackItem.value = @(index);
+    stackItem.value = index;
     [_stack addObject:stackItem];
 }
 
@@ -230,7 +230,7 @@ typedef NS_ENUM(NSInteger, TRCSchemeStackTraceSymbolType) {
     NSUInteger count = [array count];
     [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
 
-        [context.printingStack pushSymbolWithArrayIndex:idx];
+        [context.printingStack pushSymbolWithArrayIndex:@(idx)];
 
         [buffer appendString:indent];
         [buffer appendString:[self stringFromObject:obj context:context]];

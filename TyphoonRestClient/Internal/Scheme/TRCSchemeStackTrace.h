@@ -17,7 +17,7 @@
 @property (nonatomic, strong) id originalObject;
 
 - (void)pushSymbol:(NSString *)symbol;
-- (void)pushSymbolWithArrayIndex:(NSUInteger)index;
+- (void)pushSymbolWithArrayIndex:(NSNumber *)index;
 - (void)pop;
 
 - (NSString *)shortDescription;
