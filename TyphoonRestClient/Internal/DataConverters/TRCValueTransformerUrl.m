@@ -20,11 +20,21 @@
 
 - (id)objectFromResponseValue:(id)value error:(NSError **)error
 {
-    NSURL *url = [[NSURL alloc] initWithString:value];
-    if (!url && error) {
-        *error = NSErrorWithFormat(@"Can't create URL from string '%@'", value);
+    NSAssert([value isKindOfClass:[NSString class]], @"");
+    if ([value isKindOfClass:[NSURL class]]) {
+        return value;
+    } else if ([value isKindOfClass:[NSString class]]) {
+        NSURL *url = [[NSURL alloc] initWithString:value];
+        if (!url && error) {
+            *error = NSErrorWithFormat(@"Can't create URL from string '%@'", value);
+        }
+        return url;
+    } else {
+        if (error) {
+            *error = NSErrorWithFormat(@"Can't convert type '%@' to url", [value class]);
+        }
+        return nil;
     }
-    return url;
 }
 
 - (id)requestValueFromObject:(id)object error:(NSError **)error

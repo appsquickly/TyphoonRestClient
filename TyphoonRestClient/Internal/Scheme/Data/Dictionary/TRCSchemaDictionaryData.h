@@ -13,7 +13,7 @@
 #import "TRCSchemaData.h"
 
 
-@interface TRCSchemeDictionaryData : NSObject <TRCSchemaData>
+@interface TRCSchemaDictionaryData : NSObject <TRCSchemaData>
 
 @property (nonatomic, getter=isRequestData) BOOL requestData;
 

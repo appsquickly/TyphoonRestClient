@@ -25,6 +25,7 @@
 #import "TRCValueTransformerString.h"
 #import "TRCValueTransformerNumber.h"
 #import "TRCObjectMapper.h"
+#import "TRCSchemaDictionaryData.h"
 
 @interface TRCRequestCreateOptions : NSObject <TRCConnectionRequestCreationOptions>
 @end
@@ -413,11 +414,11 @@
         return arrayOrDictionary;
     }
 
-    TRCConverter *converter = [[TRCConverter alloc] initWithResponseValue:arrayOrDictionary schemaValue:[scheme schemeArrayOrDictionary] schemaName:[scheme name]];
+    TRCConverter *converter = [[TRCConverter alloc] initWithSchema:scheme];
     converter.registry = self;
     converter.options = self.validationOptions;
-    id result = [converter convertValues];
-    NSError *error = [converter conversionError];
+    NSError *error = nil;
+    id result = [converter convertResponseValue:arrayOrDictionary error:&error];
     if (error && parseError) {
         *parseError = error;
     }
@@ -431,11 +432,11 @@
         return arrayOrDictionary;
     }
 
-    TRCConverter *converter = [[TRCConverter alloc] initWithRequestValue:arrayOrDictionary schemaValue:[scheme schemeArrayOrDictionary] schemaName:[scheme name]];
+    TRCConverter *converter = [[TRCConverter alloc] initWithSchema:scheme];
     converter.registry = self;
     converter.options = self.validationOptions;
-    id result = [converter convertValues];
-    NSError *error = [converter conversionError];
+    NSError *error = nil;
+    id result = [converter convertRequestValue:arrayOrDictionary error:&error];
     if (error && parseError) {
         *parseError = error;
     }
@@ -453,7 +454,7 @@
     if (!mapper) {
         return nil;
     } else {
-        return [self schemeForObject:mapper nameSelector:@selector(requestValidationSchemaName) extensionsToTry:@[@"request.json", @"json"]];
+        return [self schemeForObject:mapper nameSelector:@selector(requestValidationSchemaName) extensionsToTry:@[@"request.json", @"json"] isRequest:YES];
     }
 }
 
@@ -463,31 +464,31 @@
     if (!mapper) {
         return nil;
     } else {
-        return [self schemeForObject:mapper nameSelector:@selector(responseValidationSchemaName) extensionsToTry:@[@"response.json", @"json"]];
+        return [self schemeForObject:mapper nameSelector:@selector(responseValidationSchemaName) extensionsToTry:@[@"response.json", @"json"] isRequest:NO];
     }
 }
 
 - (TRCSchema *)schemeForErrorParser:(id<TRCErrorParser>)parser
 {
-    return [self schemeForObject:parser nameSelector:@selector(errorValidationSchemaName) extensionsToTry:@[@"json", @"response.json"]];
+    return [self schemeForObject:parser nameSelector:@selector(errorValidationSchemaName) extensionsToTry:@[@"json", @"response.json"] isRequest:NO];
 }
 
 - (TRCSchema *)schemeForResponseWithRequest:(id<TRCRequest>)request
 {
-    return [self schemeForObject:request nameSelector:@selector(responseBodyValidationSchemaName) extensionsToTry:@[@"response.json"]];
+    return [self schemeForObject:request nameSelector:@selector(responseBodyValidationSchemaName) extensionsToTry:@[@"response.json"] isRequest:NO];
 }
 
 - (TRCSchema *)schemeForPathParametersWithRequest:(id<TRCRequest>)request
 {
-    return [self schemeForObject:request nameSelector:@selector(requestPathParametersValidationSchemaName) extensionsToTry:@[@"path.json"]];
+    return [self schemeForObject:request nameSelector:@selector(requestPathParametersValidationSchemaName) extensionsToTry:@[@"path.json"] isRequest:YES];
 }
 
 - (TRCSchema *)schemeForRequest:(id<TRCRequest>)request
 {
-    return [self schemeForObject:request nameSelector:@selector(requestBodyValidationSchemaName) extensionsToTry:@[@"request.json"]];
+    return [self schemeForObject:request nameSelector:@selector(requestBodyValidationSchemaName) extensionsToTry:@[@"request.json"] isRequest:YES];
 }
 
-- (TRCSchema *)schemeForObject:(id)object nameSelector:(SEL)sel extensionsToTry:(NSArray *)extensions
+- (TRCSchema *)schemeForObject:(id)object nameSelector:(SEL)sel extensionsToTry:(NSArray *)extensions isRequest:(BOOL)request
 {
     NSString *schemaName = NSStringFromClass([object class]);
 
@@ -496,7 +497,10 @@
         schemaName = impl(object, sel);
     }
 
-    return [self schemeWithName:schemaName extensionsToTry:extensions];
+    TRCSchema *schema = [self schemeWithName:schemaName extensionsToTry:extensions];
+    TRCSchemaDictionaryData *data = schema.data;
+    data.requestData = request;
+    return schema;
 }
 
 - (TRCSchema *)schemeWithName:(NSString *)name extensionsToTry:(NSArray *)extensions

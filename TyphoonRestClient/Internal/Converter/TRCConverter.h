@@ -17,6 +17,7 @@
 #import "TyphoonRestClient.h"
 
 @protocol TRCConvertersRegistry;
+@class TRCSchema;
 
 /** TRCConverter converts whole responses or requests using TRCValueTransformer from registry */
 
@@ -27,13 +28,13 @@
 
 #pragma mark - Initialization
 
-- (instancetype)initWithResponseValue:(id)arrayOrDictionary schemaValue:(id)schemaArrayOrDictionary schemaName:(NSString *)schemaName;
-
-- (instancetype)initWithRequestValue:(id)arrayOrDictionary schemaValue:(id)schemaArrayOrDictionary schemaName:(NSString *)schemaName;
+- (instancetype)initWithSchema:(TRCSchema *)schema;
 
 #pragma mark - Instance methods
 
-- (id)convertValues;
+- (id)convertResponseValue:(id)value error:(NSError **)error;
+
+- (id)convertRequestValue:(id)value error:(NSError **)error;
 
 #pragma mark - Errors
 

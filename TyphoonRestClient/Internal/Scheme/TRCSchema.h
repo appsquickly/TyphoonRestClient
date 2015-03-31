@@ -36,7 +36,4 @@
 
 - (BOOL)validateResponse:(id)response error:(NSError **)error;
 
-- (id)schemeArrayOrDictionary;
-
-
 @end

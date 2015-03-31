@@ -9,11 +9,11 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#import "TRCSchemeDictionaryData.h"
+#import "TRCSchemaDictionaryData.h"
 #import "TRCUtils.h"
 
 
-@implementation TRCSchemeDictionaryData
+@implementation TRCSchemaDictionaryData
 {
     id _schemeValue;
     BOOL _isCancelled;
@@ -78,8 +78,8 @@
 
     if (!object) {
         [self notifyObject:object withIdentifier:identifier withSchemeObject:schemeObject replacement:result];
-    } else if ([self isSubSchemaName:schemeObject]) {
-        [self enumerateObject:object withSchemaName:schemeObject result:result];
+    } else if ([self isMapperName:schemeObject]) {
+        [self enumerateObject:object withMapperName:schemeObject result:result];
     } else if ([schemeObject isKindOfClass:[NSArray class]]) {
         [self enumerateArray:object withSchemeArray:schemeObject result:result];
     } else if ([schemeObject isKindOfClass:[NSDictionary class]]) {
@@ -89,12 +89,12 @@
     }
 }
 
-- (BOOL)isSubSchemaName:(id)object
+- (BOOL)isMapperName:(id)object
 {
     return [object isKindOfClass:[NSString class]] && [self.dataProvider schemaData:self hasObjectMapperForTag:object];
 }
 
-- (void)enumerateObject:(id)object withSchemaName:(NSString *)name result:(id *)result
+- (void)enumerateObject:(id)object withMapperName:(NSString *)name result:(id *)result
 {
     if (result) {
         *result = object;
@@ -102,7 +102,7 @@
 
     //Map Request Model Objects in NSDictionary
     if ([self isRequestData] && _modifier && result) {
-        *result = [_modifier schemaData:self unmapObject:*result withMapperTag:name];
+        *result = [_modifier schemaData:self requestFromObject:*result withMapperTag:name];
         object = *result;
     }
 
@@ -133,7 +133,7 @@
 
     //Map Response NSDictionary into Model Objects
     if (![self isRequestData] && _modifier && result) {
-        *result = [_modifier schemaData:self mapObject:*result withMapperTag:name];
+        *result = [_modifier schemaData:self objectFromResponse:*result withMapperTag:name];
     }
 }
 
@@ -219,6 +219,7 @@
         if (resultDictionary) {
             id itemResult = nil;
             [self enumerateObject:object withIdentifier:schemaKey withSchemeObject:schemaObject result:&itemResult];
+            //Check NSNull case
             if (itemResult) {
                 resultDictionary[unwrappedKey] = itemResult;
             }

@@ -55,9 +55,9 @@
 /** Returns replacement for value. Used for TRCValueTransformers. */
 - (id)schemaData:(id<TRCSchemaData>)data replacementForValue:(id)object withOptions:(TRCSchemaDataValueOptions *)options withSchemeValue:(id)schemeValue;
 
-- (id)schemaData:(id<TRCSchemaData>)data mapObject:(id)object withMapperTag:(NSString *)tag;
+- (id)schemaData:(id<TRCSchemaData>)data objectFromResponse:(id)object withMapperTag:(NSString *)tag;
 
-- (id)schemaData:(id<TRCSchemaData>)data unmapObject:(id)object withMapperTag:(NSString *)tag;
+- (id)schemaData:(id<TRCSchemaData>)data requestFromObject:(id)object withMapperTag:(NSString *)tag;
 
 @end
 

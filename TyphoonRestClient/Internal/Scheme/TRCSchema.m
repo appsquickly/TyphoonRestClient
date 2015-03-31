@@ -17,16 +17,15 @@
 #import "TRCSchemeStackTrace.h"
 #import "TyphoonRestClientErrors.h"
 #import "TRCSchemaData.h"
-#import "TRCSchemeDictionaryData.h"
+#import "TRCSchemaDictionaryData.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
 @interface TRCSchema () <TRCSchemaDataEnumerator, TRCSchemaDataProvider>
 
-@property (nonatomic, strong) id schemeObject;
-
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) id<TRCSchemaData> data;
+
 @end
 
 @implementation TRCSchema
@@ -88,17 +87,10 @@
 
 - (instancetype)initWithSchemeObject:(id)object name:(NSString *)name
 {
-    self = [super init];
-    if (self) {
-        self.data = [[TRCSchemeDictionaryData alloc] initWithArrayOrDictionary:object];
-        ((TRCSchemeDictionaryData *)self.data).dataProvider = self;
-
-        NSParameterAssert(object);
-        NSParameterAssert(name);
-        _name = name;
-        _schemeObject = object;
-    }
-    return self;
+    TRCSchemaDictionaryData *data = [[TRCSchemaDictionaryData alloc] initWithArrayOrDictionary:object];
+    TRCSchema *schema = [[self class] schemaWithData:data name:name];
+    data.dataProvider = schema;
+    return schema;
 }
 
 - (BOOL)validateResponse:(id)response error:(NSError **)error
@@ -109,7 +101,7 @@
     _stack.originalObject = response;
 #endif
 
-    ((TRCSchemeDictionaryData *)self.data).requestData = NO;
+    ((TRCSchemaDictionaryData *)self.data).requestData = NO;
     [self.data enumerate:response withEnumerator:self];
 
 
@@ -128,7 +120,7 @@
     _stack = [TRCSchemeStackTrace new];
     _stack.originalObject = request;
 #endif
-    ((TRCSchemeDictionaryData *)self.data).requestData = YES;
+    ((TRCSchemaDictionaryData *)self.data).requestData = YES;
     [self.data enumerate:request withEnumerator:self];
     NSError *validationError = _error;//[self validateReceivedValue:request withSchemaValue:self.schemeObject stackTrace:stackTrace];
     if (validationError && error) {
@@ -136,11 +128,6 @@
     }
     _isRequestValidation = NO;
     return validationError == nil;
-}
-
-- (id)schemeArrayOrDictionary
-{
-    return self.schemeObject;
 }
 
 //-------------------------------------------------------------------------------------------
