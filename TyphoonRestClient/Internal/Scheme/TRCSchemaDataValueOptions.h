@@ -10,15 +10,13 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #import <Foundation/Foundation.h>
-#import "TRCSchemaData.h"
 
+@interface TRCSchemaDataValueOptions : NSObject
 
-@interface TRCSchemeDictionaryData : NSObject <TRCSchemaData>
+/// Array index or dictionary key
+@property (nonatomic, strong) id identifier;
 
-@property (nonatomic, getter=isRequestData) BOOL requestData;
-
-@property (nonatomic, weak) id<TRCSchemaDataProvider> dataProvider;
-
-- (instancetype)initWithArrayOrDictionary:(id)arrayOrDictionary;
+/// Shows if value is optional or required
+@property (nonatomic, getter=isOptional) BOOL optional;
 
 @end

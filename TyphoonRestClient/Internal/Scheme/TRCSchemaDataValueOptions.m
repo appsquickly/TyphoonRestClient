@@ -9,16 +9,11 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#import <Foundation/Foundation.h>
-#import "TRCSchemaData.h"
+#import "TRCSchemaDataValueOptions.h"
 
 
-@interface TRCSchemeDictionaryData : NSObject <TRCSchemaData>
+@implementation TRCSchemaDataValueOptions
+{
 
-@property (nonatomic, getter=isRequestData) BOOL requestData;
-
-@property (nonatomic, weak) id<TRCSchemaDataProvider> dataProvider;
-
-- (instancetype)initWithArrayOrDictionary:(id)arrayOrDictionary;
-
+}
 @end

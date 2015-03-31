@@ -10,35 +10,63 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #import <Foundation/Foundation.h>
+#import "TRCSchemaDataValueOptions.h"
+
+@protocol TRCSchemaDataModifier;
+@protocol TRCSchemaDataDelegate;
+@protocol TRCSchemaDataEnumerator;
 
 @protocol TRCSchemaData <NSObject>
 
-- (void)process:(id)object into:(id *)result withDelegate:(id)delegate;
-
 - (void)cancel;
-
 - (BOOL)isCancelled;
+
+- (void)enumerate:(id)object withEnumerator:(id<TRCSchemaDataEnumerator>)enumerator;
+
+- (id)modify:(id)object withModifier:(id<TRCSchemaDataModifier>)modifier;
 
 @end
 
+
 @protocol TRCSchemaDataDelegate <NSObject>
 
+- (void)schemaData:(id<TRCSchemaData>)data typeMismatchForValue:(id)value withSchemaValue:(id)schemaValue;
+
+@end
+
+@protocol TRCSchemaDataEnumerator <TRCSchemaDataDelegate>
+
+/** Calls for each value in object. You can match 'value' with 'schemeValue'. Identifier could be array index or dictionary key   */
+- (void)schemaData:(id<TRCSchemaData>)data foundValue:(id)value withOptions:(TRCSchemaDataValueOptions *)options withSchemeValue:(id)schemeValue;
+
+@optional
+
 - (void)schemaData:(id<TRCSchemaData>)data willEnumerateCollection:(id)collection;
+- (void)schemaData:(id<TRCSchemaData>)data didEnumerateCollection:(id)collection;
 
 - (void)schemaData:(id<TRCSchemaData>)data willEnumerateItemAtIndentifier:(id)itemIdentifier;
-
-- (void)schemaData:(id<TRCSchemaData>)data foundValue:(id)value withSchemeValue:(id)schemeValue replacement:(id *)replacement;
-
 - (void)schemaData:(id<TRCSchemaData>)data didEnumerateItemAtIndentifier:(id)itemIdentifier;
 
-- (void)schemaData:(id<TRCSchemaData>)data didEnumerateCollection:(id)collection;
+@end
+
+
+@protocol TRCSchemaDataModifier <TRCSchemaDataDelegate>
+
+/** Returns replacement for value. Used for TRCValueTransformers. */
+- (id)schemaData:(id<TRCSchemaData>)data replacementForValue:(id)object withOptions:(TRCSchemaDataValueOptions *)options withSchemeValue:(id)schemeValue;
+
+- (id)schemaData:(id<TRCSchemaData>)data mapObject:(id)object withMapperTag:(NSString *)tag;
+
+- (id)schemaData:(id<TRCSchemaData>)data unmapObject:(id)object withMapperTag:(NSString *)tag;
 
 @end
 
 @protocol TRCSchemaDataProvider <NSObject>
 
-- (BOOL)schemaData:(id<TRCSchemaData>)data hasSchemaForName:(NSString *)schemaName;
+- (BOOL)schemaData:(id<TRCSchemaData>)data hasObjectMapperForTag:(NSString *)schemaName;
 
-- (id<TRCSchemaData>)schemaData:(id<TRCSchemaData>)data schemaForName:(NSString *)schemaName;
+- (id<TRCSchemaData>)schemaData:(id<TRCSchemaData>)data requestSchemaForMapperWithTag:(NSString *)schemaName;
+
+- (id<TRCSchemaData>)schemaData:(id<TRCSchemaData>)data responseSchemaForMapperWithTag:(NSString *)schemaName;
 
 @end
