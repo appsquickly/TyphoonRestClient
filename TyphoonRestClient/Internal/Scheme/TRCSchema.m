@@ -25,8 +25,6 @@
 
 @property (nonatomic, strong) id schemeObject;
 
-@property (nonatomic, strong) id<TRCSchemaData> data;
-
 @end
 
 @implementation TRCSchema
@@ -143,219 +141,9 @@
     return self.schemeObject;
 }
 
-- (id)schemeObjectOrArrayItem
-{
-    return nil;
-}
-
-//- (id)schemeObjectOrArrayItem
-//{
-//    if ([self.schemeObject isKindOfClass:[NSArray class]]) {
-//        return [self.schemeObject firstObject];
-//    } else {
-//        return self.schemeObject;
-//    }
-//}
-
-
-//- (NSError *)validateReceivedValue:(id)value withSchemaValue:(id)schemeValue stackTrace:(TRCSchemeStackTrace *)stack
-//{
-//    //0. Check if value is mapper tag
-//    if ([self isMapperTagValue:schemeValue]) {
-//        return [self validateReceivedValue:value withMapperTag:schemeValue stackTrace:stack];
-//    }
-//    //1. Check that types are same
-//    if (![self isTypeOfValue:value validForSchemeValue:schemeValue]) {
-//        return [self errorForIncorrectType:[[value class] description] correctType:[self typeRepresentationForSchemeValue:schemeValue] stack:stack];
-//    }
-//    //2. Check if collection type - call recurrent function
-//    if ([schemeValue isKindOfClass:[NSArray class]]) {
-//        return [self validateArray:value withSchemeArrayValue:[schemeValue firstObject] stackTrace:stack];
-//    } else if ([schemeValue isKindOfClass:[NSDictionary class]]) {
-//        return [self validateDictionary:value withSchemaDictionary:schemeValue stackTrace:stack];
-//    } else {
-//        return nil;
-//    }
-//}
-
-//- (BOOL)isMapperTagValue:(id)value
-//{
-//    return [value isKindOfClass:[NSString class]] && [self.converterRegistry objectMapperForTag:value];
-//}
-
-//- (NSError *)validateReceivedValue:(id)value withMapperTag:(NSString *)mapperTag stackTrace:(TRCSchemeStackTrace *)stack
-//{
-//    TRCSchema *schema;
-//    if (_isRequestValidation) {
-//        schema = [self.converterRegistry requestSchemaForMapperWithTag:mapperTag];
-//    } else {
-//        schema = [self.converterRegistry responseSchemaForMapperWithTag:mapperTag];
-//    }
-//    if (schema) {
-//        schema->_isRequestValidation = _isRequestValidation;
-//        return [schema validateReceivedValue:value withSchemaValue:schema.schemeObject stackTrace:stack];
-//    } else {
-//        NSDictionary *correctTypedValue = [NSDictionary new];
-//        if (![self isTypeOfValue:value validForSchemeValue:correctTypedValue]) {
-//           return [self errorForIncorrectType:[[value class] description] correctType:[self typeRepresentationForSchemeValue:correctTypedValue] stack:stack];
-//        } else {
-//            return nil;
-//        }
-//    }
-//}
-
-//- (NSError *)validateArray:(NSArray *)array withSchemeArrayValue:(id)schemeValue stackTrace:(TRCSchemeStackTrace *)stack
-//{
-//    __block NSError *error = nil;
-//
-//    [array enumerateObjectsUsingBlock:^(id givenValue, NSUInteger idx, BOOL *stop) {
-//        [stack pushSymbolWithArrayIndex:idx];
-//        error = [self validateReceivedValue:givenValue withSchemaValue:schemeValue stackTrace:stack];
-//        if (error) {
-//            *stop = YES;
-//        }
-//        [stack pop];
-//    }];
-//
-//    return error;
-//}
-
-//- (NSError *)validateDictionary:(NSDictionary *)dictionary withSchemaDictionary:(NSDictionary *)scheme stackTrace:(TRCSchemeStackTrace *)stack
-//{
-//    __block NSError *error = nil;
-//
-//    [scheme enumerateKeysAndObjectsUsingBlock:^(NSString *key, id schemeValue, BOOL *stop) {
-//
-//        if (![key isEqualToString:TRCConverterNameKey]) {
-//
-//            BOOL isOptional = NO;
-//            key = TRCKeyFromOptionalKey(key, &isOptional);
-//
-//            id givenValue = dictionary[key];
-//
-//            //0. Handle NSNull case
-//            if ([givenValue isKindOfClass:[NSNull class]]) {
-//                givenValue = nil;
-//            }
-//
-//            givenValue = TRCValueAfterApplyingOptions(givenValue, self.options, _isRequestValidation, isOptional);
-//
-//            //1. Check value exists
-//            if (!isOptional && !givenValue) {
-//                error = [self errorForMissedKey:key withStack:stack];
-//                *stop = YES;
-//            }
-//                //2. Check value correct
-//            else if (givenValue) {
-//                [stack pushSymbol:key];
-//
-//                error = [self validateReceivedValue:givenValue withSchemaValue:schemeValue stackTrace:stack];
-//                if (error) {
-//                    *stop = YES;
-//                }
-//
-//                [stack pop];
-//            }
-//        }
-//    }];
-//
-//    return error;
-//}
-
-#define IsSameParent(value1, value2, parent) ([value1 isKindOfClass:[parent class]] && [value2 isKindOfClass:[parent class]])
-
-- (BOOL)isTypeOfValue:(id)dataValue validForSchemeValue:(id)schemeValue
-{
-    if ([schemeValue isKindOfClass:[NSString class]]) {
-        
-        id<TRCValueTransformer>converter = [self.converterRegistry valueTransformerForTag:schemeValue];
-        if (!converter || ![converter respondsToSelector:@selector(externalTypes)]) {
-            return [dataValue isKindOfClass:[NSString class]];
-        }
-        TRCValueTransformerType types = [converter externalTypes];
-        BOOL isNumber = [dataValue isKindOfClass:[NSNumber class]];
-        BOOL isString = [dataValue isKindOfClass:[NSString class]];
-        BOOL supportNumbers = (types & TRCValueTransformerTypeNumber);
-        BOOL supportStrings = (types & TRCValueTransformerTypeString);
-
-        return (isNumber && supportNumbers) || (isString && supportStrings);
-    }
-    else {
-        BOOL isBothNumbers = IsSameParent(dataValue, schemeValue, NSValue);
-        BOOL isBothDictionaries = IsSameParent(dataValue, schemeValue, NSDictionary);
-        BOOL isBothArray = IsSameParent(dataValue, schemeValue, NSArray);
-
-        return isBothNumbers || isBothDictionaries || isBothArray;
-    }
-}
-
-
-- (NSString *)typeRepresentationForSchemeValue:(id)schemeValue
-{
-    if ([schemeValue isKindOfClass:[NSString class]]) {
-        id<TRCValueTransformer>converter = [self.converterRegistry valueTransformerForTag:schemeValue];
-        if (converter) {
-            TRCValueTransformerType types = TRCValueTransformerTypeString;
-            if ([converter respondsToSelector:@selector(externalTypes)]) {
-                types = [converter externalTypes];
-            }
-            NSMutableArray *supportedTypes = [NSMutableArray new];
-            if (types & TRCValueTransformerTypeNumber) {
-                [supportedTypes addObject:@"'NSNumber'"];
-            }
-            if (types & TRCValueTransformerTypeString) {
-                [supportedTypes addObject:@"'NSString'"];
-            }
-            return [supportedTypes componentsJoinedByString:@" or "];
-        }
-    }
-
-    return [NSString stringWithFormat:@"'%@'",NSStringFromClass([schemeValue class])];
-}
-
-- (NSError *)errorForMissedKey:(NSString *)key withStack:(TRCSchemeStackTrace *)stack
-{
-    NSString *fullDescriptionErrorMessage = [NSString stringWithFormat:@"Can't find value for key '%@' in this dictionary", key];
-    NSMutableDictionary *userInfo = [NSMutableDictionary new];
-    if (stack) {
-        userInfo[TyphoonRestClientErrorKeyFullDescription] = [stack fullDescriptionWithErrorMessage:fullDescriptionErrorMessage];
-    }
-    userInfo[TyphoonRestClientErrorKeySchemaName] = _name;
-    userInfo[NSLocalizedDescriptionKey] = [NSString stringWithFormat:@"Can't find value for key '%@' in '%@' dictionary", key, [stack shortDescription]];
-    return [NSError errorWithDomain:@"TyphoonRestClientErrors" code:TyphoonRestClientErrorCodeValidation userInfo:userInfo];
-}
-
-- (NSError *)errorForIncorrectType:(NSString *)incorrectType correctType:(NSString *)correctType stack:(TRCSchemeStackTrace *)stack
-{
-    NSString *fullDescriptionErrorMessage = [NSString stringWithFormat:@"Type mismatch: must be %@, but '%@' has given", correctType, incorrectType];
-    NSMutableDictionary *userInfo = [NSMutableDictionary new];
-    if (stack) {
-        userInfo[TyphoonRestClientErrorKeyFullDescription] = [stack fullDescriptionWithErrorMessage:fullDescriptionErrorMessage];
-    }
-    userInfo[TyphoonRestClientErrorKeySchemaName] = _name;
-    userInfo[NSLocalizedDescriptionKey] = [NSString stringWithFormat:@"Type mismatch for '%@' (Must be %@, but '%@' has given)", [stack shortDescription], correctType, incorrectType];
-    return [NSError errorWithDomain:@"TyphoonRestClientErrors" code:TyphoonRestClientErrorCodeValidation userInfo:userInfo];
-}
-
 //-------------------------------------------------------------------------------------------
-#pragma mark - TRCSchemaData
+#pragma mark - TRCSchemaData Enumeration
 //-------------------------------------------------------------------------------------------
-
-- (void)schemaData:(id<TRCSchemaData>)data willEnumerateCollection:(id)collection
-{
-
-}
-
-- (void)schemaData:(id<TRCSchemaData>)data willEnumerateItemAtIndentifier:(id)itemIdentifier
-{
-    if ([itemIdentifier isKindOfClass:[NSNumber class]]) {
-        [_stack pushSymbolWithArrayIndex:itemIdentifier];
-    } else if ([itemIdentifier isKindOfClass:[NSString class]]) {
-        [_stack pushSymbol:itemIdentifier];
-    } else {
-        NSAssert(NO, @"Unsupported identifier type: %@", itemIdentifier);
-    }
-}
 
 - (void)schemaData:(id<TRCSchemaData>)data foundValue:(id)value withOptions:(TRCSchemaDataValueOptions *)options withSchemeValue:(id)schemeValue
 {
@@ -379,9 +167,25 @@
     }
 }
 
+- (void)schemaData:(id<TRCSchemaData>)data willEnumerateItemAtIndentifier:(id)itemIdentifier
+{
+    if ([itemIdentifier isKindOfClass:[NSNumber class]]) {
+        [_stack pushSymbolWithArrayIndex:itemIdentifier];
+    } else if ([itemIdentifier isKindOfClass:[NSString class]]) {
+        [_stack pushSymbol:itemIdentifier];
+    } else {
+        NSAssert(NO, @"Unsupported identifier type: %@", itemIdentifier);
+    }
+}
+
 - (void)schemaData:(id<TRCSchemaData>)data didEnumerateItemAtIndentifier:(id)itemIdentifier
 {
     [_stack pop];
+}
+
+- (void)schemaData:(id<TRCSchemaData>)data willEnumerateCollection:(id)collection
+{
+
 }
 
 - (void)schemaData:(id<TRCSchemaData>)data didEnumerateCollection:(id)collection
@@ -411,6 +215,88 @@
 - (id<TRCSchemaData>)schemaData:(id<TRCSchemaData>)data responseSchemaForMapperWithTag:(NSString *)schemaName
 {
     return [self.converterRegistry responseSchemaForMapperWithTag:schemaName].data;
+}
+
+//-------------------------------------------------------------------------------------------
+#pragma mark - Utils
+//-------------------------------------------------------------------------------------------
+
+#define IsSameParent(value1, value2, parent) ([value1 isKindOfClass:[parent class]] && [value2 isKindOfClass:[parent class]])
+
+- (BOOL)isTypeOfValue:(id)dataValue validForSchemeValue:(id)schemeValue
+{
+    if ([schemeValue isKindOfClass:[NSString class]]) {
+
+        id<TRCValueTransformer>converter = [self.converterRegistry valueTransformerForTag:schemeValue];
+        if (!converter || ![converter respondsToSelector:@selector(externalTypes)]) {
+            return [dataValue isKindOfClass:[NSString class]];
+        }
+        TRCValueTransformerType types = [converter externalTypes];
+        BOOL isNumber = [dataValue isKindOfClass:[NSNumber class]];
+        BOOL isString = [dataValue isKindOfClass:[NSString class]];
+        BOOL supportNumbers = (types & TRCValueTransformerTypeNumber);
+        BOOL supportStrings = (types & TRCValueTransformerTypeString);
+
+        return (isNumber && supportNumbers) || (isString && supportStrings);
+    }
+    else {
+        BOOL isBothNumbers = IsSameParent(dataValue, schemeValue, NSValue);
+        BOOL isBothDictionaries = IsSameParent(dataValue, schemeValue, NSDictionary);
+        BOOL isBothArray = IsSameParent(dataValue, schemeValue, NSArray);
+
+        return isBothNumbers || isBothDictionaries || isBothArray;
+    }
+}
+
+//-------------------------------------------------------------------------------------------
+#pragma mark - Error Composing
+//-------------------------------------------------------------------------------------------
+
+- (NSError *)errorForMissedKey:(NSString *)key withStack:(TRCSchemeStackTrace *)stack
+{
+    NSString *fullDescriptionErrorMessage = [NSString stringWithFormat:@"Can't find value for key '%@' in this dictionary", key];
+    NSMutableDictionary *userInfo = [NSMutableDictionary new];
+    if (stack) {
+        userInfo[TyphoonRestClientErrorKeyFullDescription] = [stack fullDescriptionWithErrorMessage:fullDescriptionErrorMessage];
+    }
+    userInfo[TyphoonRestClientErrorKeySchemaName] = _name;
+    userInfo[NSLocalizedDescriptionKey] = [NSString stringWithFormat:@"Can't find value for key '%@' in '%@' dictionary", key, [stack shortDescription]];
+    return [NSError errorWithDomain:@"TyphoonRestClientErrors" code:TyphoonRestClientErrorCodeValidation userInfo:userInfo];
+}
+
+- (NSError *)errorForIncorrectType:(NSString *)incorrectType correctType:(NSString *)correctType stack:(TRCSchemeStackTrace *)stack
+{
+    NSString *fullDescriptionErrorMessage = [NSString stringWithFormat:@"Type mismatch: must be %@, but '%@' has given", correctType, incorrectType];
+    NSMutableDictionary *userInfo = [NSMutableDictionary new];
+    if (stack) {
+        userInfo[TyphoonRestClientErrorKeyFullDescription] = [stack fullDescriptionWithErrorMessage:fullDescriptionErrorMessage];
+    }
+    userInfo[TyphoonRestClientErrorKeySchemaName] = _name;
+    userInfo[NSLocalizedDescriptionKey] = [NSString stringWithFormat:@"Type mismatch for '%@' (Must be %@, but '%@' has given)", [stack shortDescription], correctType, incorrectType];
+    return [NSError errorWithDomain:@"TyphoonRestClientErrors" code:TyphoonRestClientErrorCodeValidation userInfo:userInfo];
+}
+
+- (NSString *)typeRepresentationForSchemeValue:(id)schemeValue
+{
+    if ([schemeValue isKindOfClass:[NSString class]]) {
+        id<TRCValueTransformer>converter = [self.converterRegistry valueTransformerForTag:schemeValue];
+        if (converter) {
+            TRCValueTransformerType types = TRCValueTransformerTypeString;
+            if ([converter respondsToSelector:@selector(externalTypes)]) {
+                types = [converter externalTypes];
+            }
+            NSMutableArray *supportedTypes = [NSMutableArray new];
+            if (types & TRCValueTransformerTypeNumber) {
+                [supportedTypes addObject:@"'NSNumber'"];
+            }
+            if (types & TRCValueTransformerTypeString) {
+                [supportedTypes addObject:@"'NSString'"];
+            }
+            return [supportedTypes componentsJoinedByString:@" or "];
+        }
+    }
+
+    return [NSString stringWithFormat:@"'%@'",NSStringFromClass([schemeValue class])];
 }
 
 @end

@@ -16,8 +16,11 @@
 #import "TyphoonRestClient.h"
 
 @protocol TRCConvertersRegistry;
+@protocol TRCSchemaData;
 
 @interface TRCSchema : NSObject
+
+@property (nonatomic, strong) id<TRCSchemaData> data;
 
 @property (nonatomic, strong, readonly) NSString *name;
 @property (nonatomic, strong) id<TRCConvertersRegistry>converterRegistry;
@@ -33,6 +36,5 @@
 
 - (id)schemeArrayOrDictionary;
 
-- (id)schemeObjectOrArrayItem;
 
 @end

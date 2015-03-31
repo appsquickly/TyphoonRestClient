@@ -238,22 +238,30 @@
 
 - (void)notifyCollectionStart:(id)collection
 {
-    [_enumerator schemaData:self willEnumerateCollection:collection];
+    if ([_enumerator respondsToSelector:@selector(schemaData:willEnumerateCollection:)]) {
+        [_enumerator schemaData:self willEnumerateCollection:collection];
+    }
 }
 
 - (void)notifyCollectionEnd:(id)collection
 {
-    [_enumerator schemaData:self didEnumerateCollection:collection];
+    if ([_enumerator respondsToSelector:@selector(schemaData:didEnumerateCollection:)]) {
+        [_enumerator schemaData:self didEnumerateCollection:collection];
+    }
 }
 
 - (void)notifyEnumeratingItemStart:(id)itemId
 {
-    [_enumerator schemaData:self willEnumerateItemAtIndentifier:itemId];
+    if ([_enumerator respondsToSelector:@selector(schemaData:willEnumerateItemAtIndentifier:)]) {
+        [_enumerator schemaData:self willEnumerateItemAtIndentifier:itemId];
+    }
 }
 
 - (void)notifyEnumeratingItemEnd:(id)itemId
 {
-    [_enumerator schemaData:self didEnumerateItemAtIndentifier:itemId];
+    if ([_enumerator respondsToSelector:@selector(schemaData:didEnumerateItemAtIndentifier:)]) {
+        [_enumerator schemaData:self didEnumerateItemAtIndentifier:itemId];
+    }
 }
 
 - (void)notifyFail:(id)object withSchemaObject:(id)schemaObject
