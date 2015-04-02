@@ -14,9 +14,9 @@
 
 - (BOOL)respondsToSelector:(SEL)aSelector
 {
-    if (aSelector == @selector(objectFromDictionary:error:)) {
+    if (aSelector == @selector(objectFromResponseObject:error:)) {
         return self.responseParsingImplemented;
-    } else if (aSelector == @selector(dictionaryFromObject:error:)) {
+    } else if (aSelector == @selector(requestObjectFromObject:error:)) {
         return self.requestParsingImplemented;
     }
     return [super respondsToSelector:aSelector];
@@ -32,9 +32,9 @@
     return self;
 }
 
-- (id)objectFromDictionary:(NSDictionary *)dictionary error:(NSError **)error
+- (id)objectFromResponseObject:(NSDictionary *)responseObject error:(NSError **)error
 {
-    if ([dictionary[@"first_name"] length] < 2) {
+    if ([responseObject[@"first_name"] length] < 2) {
         if (error) {
             *error = NSErrorWithFormat(@"first name can't be less than 2 symbols");
         }
@@ -42,14 +42,14 @@
     }
 
     Person *object = [Person new];
-    object.firstName = dictionary[@"first_name"];
-    object.lastName = dictionary[@"last_name"];
-    object.avatarUrl = dictionary[@"avatar_url"];
-    object.phone = dictionary[@"phone"];
+    object.firstName = responseObject[@"first_name"];
+    object.lastName = responseObject[@"last_name"];
+    object.avatarUrl = responseObject[@"avatar_url"];
+    object.phone = responseObject[@"phone"];
     return object;
 }
 
-- (NSDictionary *)dictionaryFromObject:(Person *)object error:(NSError **)error
+- (id)requestObjectFromObject:(Person *)object error:(NSError **)error
 {
     if ([object.firstName length] < 2) {
         if (error) {

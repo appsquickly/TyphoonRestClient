@@ -22,7 +22,7 @@
 
 - (NSString *)responseValidationSchemaName;
 
-- (id)objectFromDictionary:(NSDictionary *)dictionary error:(NSError **)error;
+- (id)objectFromResponseObject:(id)responseObject error:(NSError **)error;
 
 //-------------------------------------------------------------------------------------------
 #pragma mark - Composing for Request
@@ -30,6 +30,6 @@
 
 - (NSString *)requestValidationSchemaName;
 
-- (NSDictionary *)dictionaryFromObject:(id)object error:(NSError **)error;
+- (id)requestObjectFromObject:(id)object error:(NSError **)error;
 
 @end

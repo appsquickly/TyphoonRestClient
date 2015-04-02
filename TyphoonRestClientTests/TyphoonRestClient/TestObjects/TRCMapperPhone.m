@@ -15,15 +15,15 @@
 
 @implementation TRCMapperPhone
 
-- (id)objectFromDictionary:(NSDictionary *)dictionary error:(NSError **)error
+- (id)objectFromResponseObject:(NSDictionary *)responseObject error:(NSError **)error
 {
     Phone *phone = [Phone new];
-    phone.mobile = dictionary[@"mobile"];
-    phone.work = dictionary[@"work"];
+    phone.mobile = responseObject[@"mobile"];
+    phone.work = responseObject[@"work"];
     return phone;
 }
 
-- (NSDictionary *)dictionaryFromObject:(Phone *)object error:(NSError **)error
+- (id)requestObjectFromObject:(Phone *)object error:(NSError **)error
 {
     NSMutableDictionary *result = [NSMutableDictionary new];
     result[@"mobile"] = object.mobile?:@"";

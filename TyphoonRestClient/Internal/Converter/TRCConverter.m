@@ -102,12 +102,12 @@
 
 - (id)schemaData:(id<TRCSchemaData>)data objectFromResponse:(id)object withMapperTag:(NSString *)tag
 {
-    return [self convertObject:object withMapperTag:tag usingSelector:@selector(objectFromDictionary:error:)];
+    return [self convertObject:object withMapperTag:tag usingSelector:@selector(objectFromResponseObject:error:)];
 }
 
 - (id)schemaData:(id<TRCSchemaData>)data requestFromObject:(id)object withMapperTag:(NSString *)tag
 {
-    return [self convertObject:object withMapperTag:tag usingSelector:@selector(dictionaryFromObject:error:)];
+    return [self convertObject:object withMapperTag:tag usingSelector:@selector(requestObjectFromObject:error:)];
 }
 
 - (void)schemaData:(id<TRCSchemaData>)data typeMismatchForValue:(id)value withSchemaValue:(id)schemaValue
