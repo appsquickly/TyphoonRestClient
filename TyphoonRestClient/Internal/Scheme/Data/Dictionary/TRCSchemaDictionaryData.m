@@ -40,17 +40,20 @@
 
 - (void)enumerate:(id)object withEnumerator:(id<TRCSchemaDataEnumerator>)enumerator
 {
-    //TODO: Test multi threading access
-    _enumerator = enumerator;
-    [self enumerateObject:object withIdentifier:nil withSchemeObject:_schemeValue result:NULL];
+    @synchronized (self) {
+        _enumerator = enumerator;
+        [self enumerateObject:object withIdentifier:nil withSchemeObject:_schemeValue result:NULL];
+    }
 }
 
 - (id)modify:(id)object withModifier:(id<TRCSchemaDataModifier>)modifier
 {
-    _modifier = modifier;
-    id result = nil;
-    [self enumerateObject:object withIdentifier:nil withSchemeObject:_schemeValue result:&result];
-    return result;
+    @synchronized (self) {
+        _modifier = modifier;
+        id result = nil;
+        [self enumerateObject:object withIdentifier:nil withSchemeObject:_schemeValue result:&result];
+        return result;
+    }
 }
 
 //-------------------------------------------------------------------------------------------

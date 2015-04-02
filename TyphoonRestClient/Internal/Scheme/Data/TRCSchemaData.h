@@ -18,12 +18,11 @@
 
 @protocol TRCSchemaData <NSObject>
 
-- (void)cancel;
-- (BOOL)isCancelled;
-
 - (void)enumerate:(id)object withEnumerator:(id<TRCSchemaDataEnumerator>)enumerator;
 
 - (id)modify:(id)object withModifier:(id<TRCSchemaDataModifier>)modifier;
+
+- (void)cancel;
 
 @end
 
@@ -42,6 +41,7 @@
 @optional
 
 - (void)schemaData:(id<TRCSchemaData>)data willEnumerateItemAtIndentifier:(id)itemIdentifier;
+
 - (void)schemaData:(id<TRCSchemaData>)data didEnumerateItemAtIndentifier:(id)itemIdentifier;
 
 @end
