@@ -16,5 +16,6 @@
 @interface TRCSerializerJson : NSObject <TRCRequestSerializer, TRCResponseSerializer, TRCSchemaFormat>
 
 @property (nonatomic, assign) NSJSONReadingOptions readingOptions;
+@property (nonatomic, assign) NSJSONWritingOptions writingOptions;
 
 @end

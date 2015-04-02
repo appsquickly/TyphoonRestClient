@@ -54,6 +54,9 @@
     NSMutableDictionary *_objectMapperRegistry;
 
     TRCSchemeFactory *_schemeFactory;
+
+    NSMutableDictionary *_responseSerializers;
+    NSMutableDictionary *_requestSerializers;
 }
 
 - (instancetype)init
@@ -68,6 +71,8 @@
                 TRCValidationOptionsTreatEmptyDictionaryAsNilInRequestsForOptional;
         _schemeFactory = [TRCSchemeFactory new];
         _schemeFactory.owner = self;
+        _responseSerializers = [NSMutableDictionary new];
+        _requestSerializers = [NSMutableDictionary new];
 
         [self registerDefaultTypeConverters];
         [self registerDefaultSchemeFormats];
@@ -77,7 +82,12 @@
 
 - (void)registerDefaultSchemeFormats
 {
-    [self registerSchemeFormat:[TRCSerializerJson new] forFileExtension:@"json"];
+    TRCSerializerJson *json = [TRCSerializerJson new];
+    [self registerSchemeFormat:json forFileExtension:@"json"];
+    [self registerRequestSerializer:json forName:TRCRequestSerializationJson];
+    [self registerResponseSerializer:json forName:TRCResponseSerializationJson];
+
+
 }
 
 - (id<TRCProgressHandler>)sendRequest:(id<TRCRequest>)request completion:(void (^)(id result, NSError *error))completion
@@ -126,10 +136,10 @@
         options.outputStream = [request responseBodyOutputStream];
     }
 
-    options.responseSerialization = self.defaultResponseSerialization;
+    TRCResponseSerialization serializationName = self.defaultResponseSerialization;
     if ([request respondsToSelector:@selector(responseSerialization)]) {
-        options.responseSerialization = [request responseSerialization];
-        if (options.outputStream && options.responseSerialization != TRCResponseSerializationData) {
+        serializationName = [request responseSerialization];
+        if (options.outputStream && serializationName != TRCResponseSerializationData) {
             [self logWarning:@"Both 'responseSerialization' and 'responseBodyOutputStream' methods implemented in '%@' request. "
                                      "Value returned by 'responseSerialization' method will be ignored. To avoid this warning please remove"
                                      " 'responseSerialization' implementation or change returned value to TRCResponseSerializationData", [request class]];
@@ -137,7 +147,13 @@
     }
 
     if (options.outputStream) {
-        options.responseSerialization = TRCResponseSerializationData;
+        serializationName = TRCResponseSerializationData;
+    }
+
+    options.responseSerialization = _responseSerializers[serializationName];
+    if (!options.responseSerialization) {
+        TRCSetError(error, NSErrorWithFormat(@"Can't find serialization for name '%@'", serializationName));
+        return nil;
     }
 
     if ([request respondsToSelector:@selector(queuePriority)]) {
@@ -166,7 +182,12 @@
         return nil;
     }
 
-    options.serialization = [self requestSerializationFromRequest:request body:options.body];
+    TRCRequestSerialization serializationName = [self requestSerializationFromRequest:request body:options.body];
+    options.serialization = _requestSerializers[serializationName];
+    if (!options.serialization) {
+        TRCSetError(error, NSErrorWithFormat(@"Can't find serialization for name '%@'", serializationName));
+        return nil;
+    }
 
     NSMutableDictionary *pathParams = [[self requestPathParametersFromRequest:request error:&composingError] mutableCopy];
     if (composingError) {
@@ -554,12 +575,22 @@
 
 - (void)registerRequestSerializer:(id<TRCRequestSerializer>)serializer forName:(NSString *)serializerName
 {
-
+    NSParameterAssert(serializerName);
+    if (serializer) {
+        _requestSerializers[serializerName] = serializer;
+    } else {
+        [_requestSerializers removeObjectForKey:serializerName];
+    }
 }
 
 - (void)registerResponseSerializer:(id<TRCResponseSerializer>)serializer forName:(NSString *)serializerName
 {
-
+    NSParameterAssert(serializerName);
+    if (serializer) {
+        _responseSerializers[serializerName] = serializer;
+    } else {
+        [_responseSerializers removeObjectForKey:serializerName];
+    }
 }
 
 - (void)registerSchemeFormat:(id<TRCSchemaFormat>)schemeFormat forFileExtension:(NSString *)extension

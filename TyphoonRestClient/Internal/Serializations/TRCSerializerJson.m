@@ -14,26 +14,39 @@
 #import "TRCSchemaData.h"
 #import "TRCSchemaDictionaryData.h"
 
+@interface TRCSerializerJson ()
+@property (nonatomic, strong) NSSet *acceptableContentTypes;
+@end
+
 @implementation TRCSerializerJson
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", nil];
+    }
+    return self;
+}
 
 - (NSData *)dataFromRequestObject:(id)requestObject error:(NSError **)error
 {
-    return nil;
+    return [NSJSONSerialization dataWithJSONObject:requestObject options:self.writingOptions error:error];
 }
 
 - (NSString *)contentType
 {
-    return nil;
+    return @"application/json";
 }
 
 - (id)objectFromResponseData:(NSData *)data error:(NSError **)error
 {
-    return nil;
+    return [NSJSONSerialization JSONObjectWithData:data options:self.readingOptions error:error];
 }
 
 - (BOOL)isCorrectContentType:(NSString *)responseContentType
 {
-    return NO;
+    return [self.acceptableContentTypes containsObject:responseContentType];
 }
 
 - (id<TRCSchemaData>)requestSchemaDataFromData:(NSData *)data dataProvider:(id<TRCSchemaDataProvider>)dataProvider error:(NSError **)error

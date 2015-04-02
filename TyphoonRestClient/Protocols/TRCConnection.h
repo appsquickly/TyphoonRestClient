@@ -23,6 +23,8 @@
 @protocol TRCResponseInfo;
 @protocol TRCConnectionRequestCreationOptions;
 @protocol TRCConnectionRequestSendingOptions;
+@protocol TRCRequestSerializer;
+@protocol TRCResponseSerializer;
 
 typedef void (^TRCConnectionCompletion)(id responseObject, NSError *error, id<TRCResponseInfo> responseInfo);
 
@@ -79,7 +81,7 @@ typedef void (^TRCDownloadProgressBlock)(NSUInteger bytesRead, long long totalBy
 @property (nonatomic, strong) NSDictionary *pathParameters;
 @property (nonatomic, strong) id body;
 @property (nonatomic, strong) NSDictionary *headers;
-@property (nonatomic, assign) TRCRequestSerialization serialization;
+@property (nonatomic, assign) id<TRCRequestSerializer> serialization;
 @property (nonatomic, strong) NSDictionary *customProperties;
 
 @end
@@ -88,7 +90,7 @@ typedef void (^TRCDownloadProgressBlock)(NSUInteger bytesRead, long long totalBy
 @protocol TRCConnectionRequestSendingOptions <NSObject>
 
 @property (nonatomic, strong) NSOutputStream *outputStream;
-@property (nonatomic, assign) TRCResponseSerialization responseSerialization;
+@property (nonatomic, assign) id<TRCResponseSerializer> responseSerialization;
 @property (nonatomic, strong) NSDictionary *customProperties;
 @property (nonatomic, assign) NSOperationQueuePriority queuePriority;
 

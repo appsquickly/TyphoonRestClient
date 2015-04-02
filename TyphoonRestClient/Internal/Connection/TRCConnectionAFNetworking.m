@@ -13,6 +13,8 @@
 #import "AFURLRequestSerialization.h"
 #import "AFURLResponseSerialization.h"
 #import "AFHTTPRequestOperationManager.h"
+#import "TRCSerialization.h"
+#import "TRCUtils.h"
 
 TRCRequestSerialization TRCRequestSerializationJson = @"TRCRequestSerializationJson";
 TRCRequestSerialization TRCRequestSerializationHttp = @"TRCRequestSerializationHttp";
@@ -46,6 +48,69 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
     data = [super responseObjectForResponse:response data:data error:error];
     return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 }
+@end
+
+//=============================================================================================================================
+
+
+@interface AFTRCResponseSerializer : AFHTTPResponseSerializer
+@property (nonatomic, strong) id<TRCResponseSerializer> serializer;
+@end
+
+@implementation AFTRCResponseSerializer
+
+- (id)responseObjectForResponse:(NSURLResponse *)response data:(NSData *)data error:(NSError *__autoreleasing *)error
+{
+    if (![self.serializer isCorrectContentType:[response MIMEType]]) {
+        if (error) {
+            *error = NSErrorWithFormat(@"Request failed: unacceptable content-type: %@", [response MIMEType]);
+        }
+        return nil;
+    } else {
+        return [self.serializer objectFromResponseData:data error:error];
+    }
+}
+
+@end
+
+@interface AFTRCRequestSerializer : AFHTTPRequestSerializer
+@property (nonatomic, strong) id<TRCRequestSerializer> serializer;
+@end
+
+@implementation AFTRCRequestSerializer
+
+- (NSURLRequest *)requestBySerializingRequest:(NSURLRequest *)request
+                               withParameters:(id)parameters
+                                        error:(NSError *__autoreleasing *)error
+{
+    NSParameterAssert(request);
+
+    if ([self.HTTPMethodsEncodingParametersInURI containsObject:[[request HTTPMethod] uppercaseString]]) {
+        return [super requestBySerializingRequest:request withParameters:parameters error:error];
+    }
+
+    NSMutableURLRequest *mutableRequest = [request mutableCopy];
+
+    [self.HTTPRequestHeaders enumerateKeysAndObjectsUsingBlock:^(id field, id value, BOOL * __unused stop) {
+        if (![request valueForHTTPHeaderField:field]) {
+            [mutableRequest setValue:value forHTTPHeaderField:field];
+        }
+    }];
+
+    if (parameters) {
+        if (![mutableRequest valueForHTTPHeaderField:@"Content-Type"]) {
+            [mutableRequest setValue:[self.serializer contentType] forHTTPHeaderField:@"Content-Type"];
+        }
+
+        NSData *data = [self.serializer dataFromRequestObject:parameters error:error];
+        if (data) {
+            [mutableRequest setHTTPBody:data];
+        }
+    }
+
+    return mutableRequest;
+}
+
 @end
 
 //=============================================================================================================================
@@ -113,6 +178,7 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
 @implementation TRCConnectionAFNetworking
 {
     AFHTTPRequestOperationManager *_operationManager;
+    NSCache *_serializersCache;
 }
 
 - (instancetype)initWithBaseUrl:(NSURL *)baseUrl
@@ -121,6 +187,7 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
     if (self) {
         _baseUrl = baseUrl;
         _operationManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseUrl];
+        _serializersCache = [NSCache new];
     }
     return self;
 }
@@ -192,7 +259,7 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
     } else if ([bodyObject isKindOfClass:[NSInputStream class]]) {
         [request setHTTPBodyStream:bodyObject];
     } else if ([bodyObject isKindOfClass:[NSArray class]] || [bodyObject isKindOfClass:[NSDictionary class]]) {
-        id<AFURLRequestSerialization> serializer = [[self class] requestSerializationForType:options.serialization];
+        id<AFURLRequestSerialization> serializer = [self requestSerializationForTRCSerializer:options.serialization];
         request = [[serializer requestBySerializingRequest:request withParameters:bodyObject error:requestComposingError] mutableCopy];
     }
 
@@ -209,7 +276,7 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
 {
     AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
 
-    requestOperation.responseSerializer = [[self class] responseSerializationForType:options.responseSerialization];
+    requestOperation.responseSerializer = [self responseSerializationForTRCSerializer:options.responseSerialization];
 
     requestOperation.outputStream = options.outputStream;
 
@@ -247,13 +314,13 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
 
     if ([mutableParams count] > 0) {
         //Applying variables
-        id<AFURLRequestSerialization> serializer = [[self class] requestSerializationForType:TRCRequestSerializationHttp];
-
+        static id<AFURLRequestSerialization> serializer;
         static NSMutableURLRequest *request;
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
             request = [[NSMutableURLRequest alloc] init];
             request.HTTPMethod = @"GET";
+            serializer = [AFHTTPRequestSerializer new];
         });
 
         request.URL = [self absoluteUrlFromPath:path];
@@ -290,65 +357,30 @@ NSError *NSErrorWithDictionaryUnion(NSError *error, NSDictionary *dictionary)
 }
 
 //-------------------------------------------------------------------------------------------
-#pragma mark - Response Serialization Registry
+#pragma mark - Serializers Cache
 //-------------------------------------------------------------------------------------------
 
-+ (void)registerResponseSerializer:(id<AFURLResponseSerialization>)serialization forType:(TRCRequestSerialization)type
+
+- (id<AFURLResponseSerialization>)responseSerializationForTRCSerializer:(id<TRCResponseSerializer>)serializer
 {
-    @synchronized (self) {
-        NSParameterAssert(serialization);
-        NSParameterAssert(type);
-        [self responseSerializationRegistry][type] = serialization;
+    AFTRCResponseSerializer *result = [_serializersCache objectForKey:serializer];
+    if (!result) {
+        result = [AFTRCResponseSerializer new];
+        result.serializer = serializer;
+        [_serializersCache setObject:result forKey:serializer];
     }
+    return result;
 }
 
-+ (id<AFURLResponseSerialization>)responseSerializationForType:(TRCResponseSerialization)type
+- (id<AFURLRequestSerialization>)requestSerializationForTRCSerializer:(id<TRCRequestSerializer>)serializer
 {
-    @synchronized (self) {
-        id result = [self responseSerializationRegistry][type];
-        NSAssert(result, @"Can't find serializer for type '%@'", type);
-        return result;
+    AFTRCRequestSerializer *result = [_serializersCache objectForKey:serializer];
+    if (!result) {
+        result = [AFTRCRequestSerializer new];
+        result.serializer = serializer;
+        [_serializersCache setObject:result forKey:serializer];
     }
-}
-
-+ (NSMutableDictionary *)responseSerializationRegistry
-{
-    static NSMutableDictionary *registry = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        registry = [NSMutableDictionary new];
-    });
-    return registry;
-}
-
-//-------------------------------------------------------------------------------------------
-#pragma mark - Request Serialization Registry
-//-------------------------------------------------------------------------------------------
-
-+ (void)registerRequestSerializer:(id<AFURLRequestSerialization>)serialization forType:(TRCResponseSerialization)type
-{
-    @synchronized (self) {
-        NSParameterAssert(serialization);
-        NSParameterAssert(type);
-        [self requestSerializationRegistry][type] = serialization;
-    }
-}
-
-+ (id<AFURLRequestSerialization>)requestSerializationForType:(TRCResponseSerialization)type
-{
-    @synchronized (self) {
-        return [self requestSerializationRegistry][type];
-    }
-}
-
-+ (NSMutableDictionary *)requestSerializationRegistry
-{
-    static NSMutableDictionary *registry = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        registry = [NSMutableDictionary new];
-    });
-    return registry;
+    return result;
 }
 
 @end
