@@ -19,6 +19,7 @@
 #import "Phone.h"
 #import "TRCMapperPhone.h"
 #import "TRCSchemaDictionaryData.h"
+#import "TRCSerializerJson.h"
 
 @interface TRCConverterTests : XCTestCase<TRCConvertersRegistry>
 
@@ -79,12 +80,26 @@ TRCValidationOptions validationOptions;
 
 - (id<TRCSchemaData>)schemaData:(id<TRCSchemaData>)data requestSchemaForMapperWithTag:(NSString *)schemaName
 {
-    return [self requestSchemaForMapperWithTag:schemaName].data;
+    id<TRCSchemaData>result = nil;
+    NSString *name = nil;
+
+    if ([schemaName isEqualToString:@"{person}"]) {
+        name = @"TRCMapperPerson.json";
+    } else if ([schemaName isEqualToString:@"{phone}"]) {
+        name = @"TRCMapperPhone.json";
+    }
+
+    if (name) {
+        TRCSerializerJson *jsonSerializer = [TRCSerializerJson new];
+        NSString *path = [[NSBundle bundleForClass:[self class]] pathForResource:name ofType:nil];
+        result = [jsonSerializer responseSchemaDataFromData:[NSData dataWithContentsOfFile:path] dataProvider:self error:nil];
+    }
+    return result;
 }
 
 - (id<TRCSchemaData>)schemaData:(id<TRCSchemaData>)data responseSchemaForMapperWithTag:(NSString *)schemaName
 {
-    return [self responseSchemaForMapperWithTag:schemaName].data;
+    return [self schemaData:data requestSchemaForMapperWithTag:schemaName];
 }
 
 - (id)convertValuesInResponse:(id)arrayOrDictionary schema:(TRCSchema *)scheme error:(NSError **)parseError
@@ -121,26 +136,6 @@ TRCValidationOptions validationOptions;
     }
 
     return result;
-}
-
-- (TRCSchema *)requestSchemaForMapperWithTag:(NSString *)tag
-{
-    if ([tag isEqualToString:@"{person}"]) {
-        TRCSchema *schema = [TRCSchema schemaWithName:@"TRCMapperPerson.json" extensionsToTry:nil];
-        schema.converterRegistry = self;
-        return schema;
-    } else if ([tag isEqualToString:@"{phone}"]) {
-        TRCSchema *schema = [TRCSchema schemaWithName:@"TRCMapperPhone.json" extensionsToTry:nil];
-        schema.converterRegistry = self;
-        return schema;
-    }  else {
-        return nil;
-    }
-}
-
-- (TRCSchema *)responseSchemaForMapperWithTag:(NSString *)tag
-{
-    return [self requestSchemaForMapperWithTag:tag];
 }
 
 + (void)setUp

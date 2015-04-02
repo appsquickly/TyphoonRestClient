@@ -12,8 +12,11 @@
 #import "TRCValueTransformer.h"
 #import "TRCValueTransformerStub.h"
 #import "TRCMapperPerson.h"
+#import "TRCSchemaData.h"
+#import "TRCSchemaDictionaryData.h"
+#import "TRCSerializerJson.h"
 
-@interface TRCSchemeTests : XCTestCase<TRCConvertersRegistry>
+@interface TRCSchemeTests : XCTestCase<TRCConvertersRegistry, TRCSchemaDataProvider>
 
 @end
 
@@ -25,6 +28,26 @@
     TRCSchema *dictionariesArrayScheme;
     TRCSchema *optionalsScheme;
     TRCSchema *getOrderScheme;
+}
+
+- (TRCSchema *)schemaWithName:(NSString *)name forRequest:(BOOL)request
+{
+    NSBundle *bundle = [NSBundle bundleForClass:[TRCSchemeTests class]];
+    NSString *schemePath = [bundle pathForResource:name ofType:nil];
+
+
+    TRCSerializerJson *jsonSerializer = [TRCSerializerJson new];
+    NSData *data = [NSData dataWithContentsOfFile:schemePath];
+    id<TRCSchemaData> schemaData = nil;
+    if (request) {
+        schemaData = [jsonSerializer requestSchemaDataFromData:data dataProvider:self error:NULL];
+    } else {
+        schemaData = [jsonSerializer responseSchemaDataFromData:data dataProvider:self error:NULL];
+    }
+    TRCSchema *schema = [TRCSchema schemaWithData:schemaData name:name];
+    schema.converterRegistry = self;
+
+    return schema;
 }
 
 
@@ -48,6 +71,32 @@
     return nil;
 }
 
+- (BOOL)schemaData:(id<TRCSchemaData>)data hasObjectMapperForTag:(NSString *)schemaName
+{
+    return [self objectMapperForTag:schemaName] != nil;
+}
+
+- (id<TRCSchemaData>)schemaData:(id<TRCSchemaData>)data requestSchemaForMapperWithTag:(NSString *)schemaName
+{
+    if ([schemaName isEqualToString:@"{person}"]) {
+        TRCSchema *schema = [self schemaWithName:@"TRCMapperPerson.json" forRequest:YES];
+        schema.converterRegistry = self;
+        return schema.data;
+    } else {
+        return nil;
+    }
+}
+
+- (id<TRCSchemaData>)schemaData:(id<TRCSchemaData>)data responseSchemaForMapperWithTag:(NSString *)schemaName
+{
+    if ([schemaName isEqualToString:@"{person}"]) {
+        TRCSchema *schema = [self schemaWithName:@"TRCMapperPerson.json" forRequest:NO];
+        schema.converterRegistry = self;
+        return schema.data;
+    } else {
+        return nil;
+    }}
+
 - (id<TRCObjectMapper>)objectMapperForTag:(NSString *)tag
 {
     if ([tag isEqualToString:@"{person}"]) {
@@ -69,46 +118,14 @@
     return nil;
 }
 
-- (TRCSchema *)requestSchemaForMapperWithTag:(NSString *)tag
-{
-    if ([tag isEqualToString:@"{person}"]) {
-        TRCSchema *schema = [TRCSchema schemaWithName:@"TRCMapperPerson.json" extensionsToTry:nil];
-        schema.converterRegistry = self;
-        return schema;
-    } else {
-        return nil;
-    }
-}
-
-- (TRCSchema *)responseSchemaForMapperWithTag:(NSString *)tag
-{
-    if ([tag isEqualToString:@"{person}"]) {
-        TRCSchema *schema = [TRCSchema schemaWithName:@"TRCMapperPerson.json" extensionsToTry:nil];
-        schema.converterRegistry = self;
-        return schema;
-    } else {
-        return nil;
-    }
-}
-
-
-- (TRCSchema *)schemeWithName:(NSString *)name
-{
-    NSBundle *bundle = [NSBundle bundleForClass:[TRCSchemeTests class]];
-    NSString *schemePath = [bundle pathForResource:name ofType:nil];
-    TRCSchema *aScheme = [[TRCSchema alloc] initWithFilePath:schemePath];
-    aScheme.converterRegistry = self;
-    return aScheme;
-}
-
 - (void)setUp
 {
-    scheme = [self schemeWithName:@"TestScheme.json"];
-    stringsArrayScheme = [self schemeWithName:@"StringsArray.json"];
-    dictionariesArrayScheme = [self schemeWithName:@"DictionaryArray.json"];
-    numbersArrayScheme = [self schemeWithName:@"NumbersArray.json"];
-    optionalsScheme = [self schemeWithName:@"TestSchemeOptionals.json"];
-    getOrderScheme = [self schemeWithName:@"GetOrderScheme.json"];
+    scheme = [self schemaWithName:@"TestScheme.json" forRequest:NO];
+    stringsArrayScheme = [self schemaWithName:@"StringsArray.json" forRequest:NO];
+    dictionariesArrayScheme = [self schemaWithName:@"DictionaryArray.json" forRequest:NO];
+    numbersArrayScheme = [self schemaWithName:@"NumbersArray.json" forRequest:NO];
+    optionalsScheme = [self schemaWithName:@"TestSchemeOptionals.json" forRequest:NO];
+    getOrderScheme = [self schemaWithName:@"GetOrderScheme.json" forRequest:NO];
 
     [super setUp];
 }
@@ -125,8 +142,7 @@
 
 - (void)test_scheme_not_exist_at_path
 {
-    XCTAssertNil([TRCSchema schemaWithName:@"123" extensionsToTry:nil]);
-    XCTAssertNil([[TRCSchema alloc] initWithFilePath:@"23"]);
+    XCTAssertNil([TRCSchema schemaWithData:nil name:@""]);
 }
 
 - (void)test_correct_plain_dict
@@ -357,7 +373,7 @@
 
 - (void)test_embed_subscheme
 {
-    TRCSchema *listSchema = [TRCSchema schemaWithName:@"PersonsList.json" extensionsToTry:nil];
+    TRCSchema *listSchema = [self schemaWithName:@"PersonsList.json" forRequest:NO];
 
 
     NSDictionary *input = @{
@@ -378,7 +394,7 @@
 
 - (void)test_embed_subscheme_correct
 {
-    TRCSchema *listSchema = [TRCSchema schemaWithName:@"PersonsList.json" extensionsToTry:nil];
+    TRCSchema *listSchema = [self schemaWithName:@"PersonsList.json" forRequest:NO];
     listSchema.converterRegistry = self;
 
 
@@ -401,7 +417,7 @@
 
 - (void)test_mapper_without_schema_incorrect
 {
-    TRCSchema *listSchema = [TRCSchema schemaWithName:@"PersonsList.json" extensionsToTry:nil];
+    TRCSchema *listSchema = [self schemaWithName:@"PersonsList.json" forRequest:NO];
     listSchema.converterRegistry = self;
 
 
@@ -424,7 +440,7 @@
 
 - (void)test_mapper_without_schema_correct
 {
-    TRCSchema *listSchema = [TRCSchema schemaWithName:@"PersonsList.json" extensionsToTry:nil];
+    TRCSchema *listSchema = [self schemaWithName:@"PersonsList.json" forRequest:NO];
     listSchema.converterRegistry = self;
 
 

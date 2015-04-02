@@ -19,6 +19,8 @@
 #import "TyphoonRestClientErrors.h"
 #import "TRCMapperPerson.h"
 #import "Person.h"
+#import "TRCSchemeFactory.h"
+#import "TRCSchemaDictionaryData.h"
 
 @interface NumberToStringConverter : NSObject <TRCValueTransformer>
 
@@ -44,14 +46,11 @@
 
 @end
 
-@interface TRCSchema (TestApi)
-
-- (instancetype)initWithSchemeObject:(id)object name:(NSString *)name;
+@interface TyphoonRestClientTests : XCTestCase
 
 @end
 
-@interface TyphoonRestClientTests : XCTestCase
-
+@interface TyphoonRestClientTests ()
 @end
 
 @implementation TyphoonRestClientTests
@@ -60,13 +59,13 @@
     TRCConnectionStub *connectionStub;
 }
 
-id(*originalImp)(id, SEL, NSString *, NSArray *);
+id(*originalImp)(id, SEL, NSString *, BOOL);
 
 + (void)load
 {
-    Method m1 = class_getClassMethod([self class], @selector(schemaWithName:extensionsToTry:));
-    Method m2 = class_getClassMethod([TRCSchema class], @selector(schemaWithName:extensionsToTry:));
-    originalImp = (id(*)(id, SEL, NSString *, NSArray *))method_getImplementation(m2);
+    Method m1 = class_getInstanceMethod([self class], @selector(schemeForName:isRequest:));
+    Method m2 = class_getInstanceMethod([TRCSchemeFactory class], @selector(schemeForName:isRequest:));
+    originalImp = (id(*)(id, SEL, NSString *, BOOL))method_getImplementation(m2);
     method_exchangeImplementations(m1, m2);
 }
 
@@ -89,44 +88,54 @@ id(*originalImp)(id, SEL, NSString *, NSArray *);
 //    __gcov_flush();
 }
 
-+ (id)schemaWithName:(NSString *)name extensionsToTry:(NSArray *)extensions
+- (TRCSchema *)schemeForName:(NSString *)name isRequest:(BOOL)isRequest
 {
+    id schemeObject = nil;
     if ([name isEqualToString:@"ErrorSchema"]) {
-        return [[TRCSchema alloc] initWithSchemeObject:@{@"code": @1, @"message": @"", @"reason_url{?}": @"{url}"} name:name];
+        schemeObject = @{@"code": @1, @"message": @"", @"reason_url{?}": @"{url}"};
     }
     if ([name isEqualToString:@"SimpleDictionary"]) {
-        return [[TRCSchema alloc] initWithSchemeObject:@{
+        schemeObject = @{
                 @"number": @1,
                 @"string": @"NSString",
                 @"url{?}": @"{url}"
-        } name:name];
+        };
     }
     if ([name isEqualToString:@"SimpleRequest"]) {
-        return [[TRCSchema alloc] initWithSchemeObject:@{
+        schemeObject = @{
                 @"key": @"{url}",
-        } name:name];
+        };
     }
     if ([name isEqualToString:@"SimpleArray"]) {
-        return [[TRCSchema alloc] initWithSchemeObject:@[
+        schemeObject = @[
                 @"{url}",
-        ] name:name];
+        ];
     }
     if ([name isEqualToString:@"ArrayOfObjects"]) {
-        return [[TRCSchema alloc] initWithSchemeObject:@[@{
+        schemeObject = @[@{
                 @"number" : @1,
                 @"string" : @"NSString",
                 @"url{?}" : @"{url}"
-        }] name:name];
+        }];
     }
     if ([name isEqualToString:@"ArrayOfArray"]) {
-        return [[TRCSchema alloc] initWithSchemeObject:@[@[@"number-as-string"]] name:name];
+        schemeObject = @[@[@"number-as-string"]];
     }
 
     if ([name isEqualToString:@"Person"]) {
-        return [[TRCSchema alloc] initWithSchemeObject:@"{person}" name:name];
+        schemeObject = @"{person}";
     }
 
-    return originalImp(self, _cmd, name, extensions);
+    if (schemeObject) {
+        TRCSchemaDictionaryData *data = [[TRCSchemaDictionaryData alloc] initWithArrayOrDictionary:schemeObject];
+        data.requestData = isRequest;
+        data.dataProvider = (id<TRCSchemaDataProvider>)webService;
+        TRCSchema *schema = [TRCSchema schemaWithData:data name:name];
+        schema.converterRegistry = (id<TRCConvertersRegistry>)webService;
+        return schema;
+    } else {
+        return originalImp(self, _cmd, name, isRequest);
+    }
 }
 
 - (void)test_plain_dictionary_request

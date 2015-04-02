@@ -23,14 +23,10 @@
 @property (nonatomic, strong, readonly) NSString *name;
 @property (nonatomic, strong, readonly) id<TRCSchemaData> data;
 
-@property (nonatomic, weak) id<TRCConvertersRegistry>converterRegistry;
+@property (nonatomic, weak) id<TRCConvertersRegistry> converterRegistry;
 @property (nonatomic) TRCValidationOptions options;
 
 + (instancetype)schemaWithData:(id<TRCSchemaData>)data name:(NSString *)name;
-
-+ (instancetype)schemaWithName:(NSString *)name extensionsToTry:(NSArray *)extensions DEPRECATED_ATTRIBUTE;
-
-- (instancetype)initWithFilePath:(NSString *)filePath DEPRECATED_ATTRIBUTE;
 
 - (BOOL)validateRequest:(id)request error:(NSError **)error;
 

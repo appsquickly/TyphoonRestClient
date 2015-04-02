@@ -12,10 +12,12 @@
 #import <Foundation/Foundation.h>
 
 @class TRCSchema;
+@protocol TRCSchemaData;
+@protocol TRCSchemaDataProvider;
 
 @protocol TRCRequestSerializer <NSObject>
 
-- (NSData *)dataFromRequestObject:(id)requestObject;
+- (NSData *)dataFromRequestObject:(id)requestObject error:(NSError **)error;
 
 - (NSString *)contentType;
 
@@ -23,7 +25,7 @@
 
 @protocol TRCResponseSerializer <NSObject>
 
-- (id)objectFromResponseData:(NSData *)data;
+- (id)objectFromResponseData:(NSData *)data error:(NSError **)error;
 
 - (BOOL)isCorrectContentType:(NSString *)responseContentType;
 
@@ -32,8 +34,8 @@
 
 @protocol TRCSchemaFormat <NSObject>
 
-- (NSString *)extension;
+- (id<TRCSchemaData>)requestSchemaDataFromData:(NSData *)data dataProvider:(id<TRCSchemaDataProvider>)dataProvider error:(NSError **)error;
 
-- (TRCSchema *)schemaFromData:(NSData *)data;
+- (id<TRCSchemaData>)responseSchemaDataFromData:(NSData *)data dataProvider:(id<TRCSchemaDataProvider>)dataProvider error:(NSError **)error;
 
 @end

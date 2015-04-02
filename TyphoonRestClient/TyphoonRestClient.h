@@ -16,6 +16,7 @@
 #import "TRCConnection.h"
 #import "TRCErrorParser.h"
 #import "TRCBuiltInObjects.h"
+#import "TRCSerialization.h"
 
 typedef NS_OPTIONS(NSInteger , TRCValidationOptions)
 {
@@ -47,8 +48,22 @@ typedef NS_OPTIONS(NSInteger , TRCValidationOptions)
 
 - (id<TRCProgressHandler>)sendRequest:(id<TRCRequest>)request completion:(void(^)(id result, NSError *error))completion;
 
+//-------------------------------------------------------------------------------------------
+#pragma mark - Registry
+//-------------------------------------------------------------------------------------------
+
 - (void)registerValueTransformer:(id<TRCValueTransformer>)valueTransformer forTag:(NSString *)tag;
 
 - (void)registerObjectMapper:(id<TRCObjectMapper>)objectConverter forTag:(NSString *)tag;
+
+@end
+
+@interface TyphoonRestClient (Infrastructure)
+
+- (void)registerRequestSerializer:(id<TRCRequestSerializer>)serializer forName:(NSString *)serializerName;
+
+- (void)registerResponseSerializer:(id<TRCResponseSerializer>)serializer forName:(NSString *)serializerName;
+
+- (void)registerSchemeFormat:(id<TRCSchemaFormat>)schemeFormat forFileExtension:(NSString *)extension;
 
 @end

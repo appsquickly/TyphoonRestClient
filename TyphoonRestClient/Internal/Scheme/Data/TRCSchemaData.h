@@ -24,6 +24,8 @@
 
 - (void)cancel;
 
+- (BOOL)isCancelled;
+
 @end
 
 

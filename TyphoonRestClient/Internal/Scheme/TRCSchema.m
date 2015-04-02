@@ -21,7 +21,7 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
-@interface TRCSchema () <TRCSchemaDataEnumerator, TRCSchemaDataProvider>
+@interface TRCSchema () <TRCSchemaDataEnumerator>
 
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) id<TRCSchemaData> data;
@@ -36,62 +36,25 @@
     TRCSchemeStackTrace *_stack;
 }
 
-+ (instancetype)schemaWithName:(NSString *)name extensionsToTry:(NSArray *)extensions
+//-------------------------------------------------------------------------------------------
+#pragma mark - Init
+//-------------------------------------------------------------------------------------------
+
++ (instancetype)schemaWithData:(id<TRCSchemaData>)data name:(NSString *)name
 {
-    if (!name) {
-        return nil;
-    }
-    
-    NSString *path = nil;
-
-    if ([name pathExtension].length > 0) {
-        path = [[NSBundle bundleForClass:[self class]] pathForResource:name ofType:nil];
-    } else {
-        NSArray *extensionsToTry = extensions?:@[@"json", @"schema"];
-
-        for (NSString *extension in extensionsToTry) {
-            path = [[NSBundle bundleForClass:[self class]] pathForResource:name ofType:extension];
-            if (path) {
-                break;
-            }
-        }
-    }
-
-    if (path.length == 0) {
+    if (!data) {
         return nil;
     } else {
-        return [[self alloc] initWithFilePath:path];
+        TRCSchema *schema = [[self alloc] init];
+        schema.data = data;
+        schema.name = name;
+        return schema;
     }
 }
 
-- (instancetype)initWithFilePath:(NSString *)filePath
-{
-    id schemeObject = nil;
-
-    NSData *fileContent = [[NSData alloc] initWithContentsOfFile:filePath];
-    if (fileContent) {
-        NSError *jsonParsingError = nil;
-        schemeObject = [NSJSONSerialization JSONObjectWithData:fileContent options:NSJSONReadingAllowFragments error:&jsonParsingError];
-        if (jsonParsingError || !schemeObject) {
-            NSLog(@"Error: can't parse JSON at path: %@. %@", filePath, jsonParsingError ? jsonParsingError.localizedDescription : @"");
-            return nil;
-        }
-    } else {
-        NSLog(@"Error: can't open scheme at path: %@.", filePath);
-        return nil;
-    }
-
-    return [self initWithSchemeObject:schemeObject name:[filePath lastPathComponent]];
-}
-
-
-- (instancetype)initWithSchemeObject:(id)object name:(NSString *)name
-{
-    TRCSchemaDictionaryData *data = [[TRCSchemaDictionaryData alloc] initWithArrayOrDictionary:object];
-    TRCSchema *schema = [[self class] schemaWithData:data name:name];
-    data.dataProvider = schema;
-    return schema;
-}
+//-------------------------------------------------------------------------------------------
+#pragma mark -
+//-------------------------------------------------------------------------------------------
 
 - (BOOL)validateResponse:(id)response error:(NSError **)error
 {
@@ -128,22 +91,6 @@
     }
     _isRequestValidation = NO;
     return validationError == nil;
-}
-
-//-------------------------------------------------------------------------------------------
-#pragma mark - Init
-//-------------------------------------------------------------------------------------------
-
-+ (instancetype)schemaWithData:(id<TRCSchemaData>)data name:(NSString *)name
-{
-    if (!data) {
-        return nil;
-    } else {
-        TRCSchema *schema = [[self alloc] init];
-        schema.data = data;
-        schema.name = name;
-        return schema;
-    }
 }
 
 //-------------------------------------------------------------------------------------------
@@ -191,25 +138,6 @@
 - (void)schemaData:(id<TRCSchemaData>)data typeMismatchForValue:(id)value withSchemaValue:(id)schemaValue
 {
     _error = [self errorForIncorrectType:[[value class] description] correctType:[self typeRepresentationForSchemeValue:schemaValue] stack:_stack];
-}
-
-//-------------------------------------------------------------------------------------------
-#pragma mark - TRCSchemaData Provider
-//-------------------------------------------------------------------------------------------
-
-- (BOOL)schemaData:(id<TRCSchemaData>)data hasObjectMapperForTag:(NSString *)schemaName
-{
-    return [self.converterRegistry objectMapperForTag:schemaName] != nil;
-}
-
-- (id<TRCSchemaData>)schemaData:(id<TRCSchemaData>)data requestSchemaForMapperWithTag:(NSString *)schemaName
-{
-    return [self.converterRegistry requestSchemaForMapperWithTag:schemaName].data;
-}
-
-- (id<TRCSchemaData>)schemaData:(id<TRCSchemaData>)data responseSchemaForMapperWithTag:(NSString *)schemaName
-{
-    return [self.converterRegistry responseSchemaForMapperWithTag:schemaName].data;
 }
 
 //-------------------------------------------------------------------------------------------
