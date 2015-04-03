@@ -20,8 +20,8 @@
     [super viewDidLoad];
     [self setupRestClient];
     
-    [self onGetIssues];
-//    [self onGetIssueWithId:@1];
+//    [self onGetIssues];
+    [self onGetIssueWithId:@1];
 }
 
 - (void)setupRestClient

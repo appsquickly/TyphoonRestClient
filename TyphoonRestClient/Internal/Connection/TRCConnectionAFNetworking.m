@@ -171,7 +171,8 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
 @implementation TRCConnectionAFNetworking
 {
     AFHTTPRequestOperationManager *_operationManager;
-    NSCache *_serializersCache;
+    NSCache *_responseSerializersCache;
+    NSCache *_requestSerializersCache;
 }
 
 - (instancetype)initWithBaseUrl:(NSURL *)baseUrl
@@ -180,7 +181,8 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
     if (self) {
         _baseUrl = baseUrl;
         _operationManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseUrl];
-        _serializersCache = [NSCache new];
+        _responseSerializersCache = [NSCache new];
+        _requestSerializersCache = [NSCache new];
     }
     return self;
 }
@@ -313,22 +315,22 @@ NSError *NSErrorWithDictionaryUnion(NSError *error, NSDictionary *dictionary)
 
 - (id<AFURLResponseSerialization>)responseSerializationForTRCSerializer:(id<TRCResponseSerializer>)serializer
 {
-    AFTRCResponseSerializer *result = [_serializersCache objectForKey:serializer];
+    AFTRCResponseSerializer *result = [_responseSerializersCache objectForKey:serializer];
     if (!result) {
         result = [AFTRCResponseSerializer new];
         result.serializer = serializer;
-        [_serializersCache setObject:result forKey:serializer];
+        [_responseSerializersCache setObject:result forKey:serializer];
     }
     return result;
 }
 
 - (id<AFURLRequestSerialization>)requestSerializationForTRCSerializer:(id<TRCRequestSerializer>)serializer
 {
-    AFTRCRequestSerializer *result = [_serializersCache objectForKey:serializer];
+    AFTRCRequestSerializer *result = [_requestSerializersCache objectForKey:serializer];
     if (!result) {
         result = [AFTRCRequestSerializer new];
         result.serializer = serializer;
-        [_serializersCache setObject:result forKey:serializer];
+        [_requestSerializersCache setObject:result forKey:serializer];
     }
     return result;
 }
