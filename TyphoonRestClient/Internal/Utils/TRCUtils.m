@@ -25,6 +25,16 @@ NSError *NSErrorWithFormat(NSString *format, ...)
     return [NSError errorWithDomain:@"" code:0 userInfo:@{ NSLocalizedDescriptionKey : description}];
 }
 
+NSError *TRCRequestSerializationErrorWithFormat(NSString *format, ...)
+{
+    va_list args;
+    va_start(args, format);
+    NSString *description = [[NSString alloc] initWithFormat:format arguments:args];
+    va_end(args);
+    return [NSError errorWithDomain:TyphoonRestClientErrors code:TyphoonRestClientErrorCodeRequestSerialization userInfo:@{ NSLocalizedDescriptionKey : description}];
+
+}
+
 NSString *TRCKeyFromOptionalKey(NSString *key, BOOL *isOptional)
 {
     BOOL _isOptional = [key hasSuffix:@"{?}"];

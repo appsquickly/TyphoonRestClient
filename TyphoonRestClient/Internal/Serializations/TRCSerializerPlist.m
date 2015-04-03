@@ -12,6 +12,7 @@
 #import "TRCSerializerPlist.h"
 #import "TRCSchemaDictionaryData.h"
 #import "TRCRequest.h"
+#import "TRCUtils.h"
 
 TRCSerialization TRCSerializationPlist = @"TRCSerializationPlist";
 
@@ -28,7 +29,14 @@ TRCSerialization TRCSerializationPlist = @"TRCSerializationPlist";
 
 - (NSData *)dataFromRequestObject:(id)requestObject error:(NSError **)error
 {
-    return [NSPropertyListSerialization dataWithPropertyList:requestObject format:self.format options:self.writeOptions error:error];
+    if ([requestObject isKindOfClass:[NSArray class]] || [requestObject isKindOfClass:[NSDictionary class]]) {
+        return [NSPropertyListSerialization dataWithPropertyList:requestObject format:self.format options:self.writeOptions error:error];
+    } else {
+        if (error) {
+            *error = TRCRequestSerializationErrorWithFormat(@"Can't create Plist string from '%@'. Must be NSArray or NSDictionary", requestObject);
+        }
+        return nil;
+    }
 }
 
 - (id)objectFromResponseData:(NSData *)data error:(NSError **)error

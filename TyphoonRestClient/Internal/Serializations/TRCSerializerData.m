@@ -11,6 +11,7 @@
 
 #import "TRCSerializerData.h"
 #import "TRCRequest.h"
+#import "TRCUtils.h"
 
 TRCSerialization TRCSerializationData = @"TRCSerializationData";
 
@@ -18,7 +19,14 @@ TRCSerialization TRCSerializationData = @"TRCSerializationData";
 
 - (NSData *)dataFromRequestObject:(id)requestObject error:(NSError **)error
 {
-    return requestObject;
+    if (![requestObject isKindOfClass:[NSData class]]) {
+        if (error) {
+            *error = TRCRequestSerializationErrorWithFormat(@"Can't use '%@' object in TRCSerializerData. Must be NSData", requestObject);
+        }
+        return nil;
+    } else {
+        return requestObject;
+    }
 }
 
 - (NSString *)contentType

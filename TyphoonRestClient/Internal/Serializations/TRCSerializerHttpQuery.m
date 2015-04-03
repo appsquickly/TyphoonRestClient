@@ -18,7 +18,14 @@ TRCSerialization TRCSerializationRequestHttp = @"TRCSerializationRequestHttp";
 
 - (NSData *)dataFromRequestObject:(id)requestObject error:(NSError **)error
 {
-    return [TRCQueryStringFromParametersWithEncoding(requestObject, NSUTF8StringEncoding) dataUsingEncoding:NSUTF8StringEncoding];
+    if (![requestObject isKindOfClass:[NSDictionary class]]) {
+        if (error) {
+            *error = TRCRequestSerializationErrorWithFormat(@"Can't use '%@' object in TRCSerializerHttpQuery. Must be NSDictionary.", requestObject);
+        }
+        return nil;
+    } else {
+        return [TRCQueryStringFromParametersWithEncoding(requestObject, NSUTF8StringEncoding) dataUsingEncoding:NSUTF8StringEncoding];
+    }
 }
 
 - (NSString *)contentType

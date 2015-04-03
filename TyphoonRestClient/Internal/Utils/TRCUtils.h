@@ -17,6 +17,8 @@
 
 NSError *NSErrorWithFormat(NSString *format, ...) NS_FORMAT_FUNCTION(1,2);
 
+NSError *TRCRequestSerializationErrorWithFormat(NSString *format, ...) NS_FORMAT_FUNCTION(1,2);
+
 NSString *TRCKeyFromOptionalKey(NSString *key, BOOL *isOptional);
 
 NSError *NSErrorFromErrorSet(NSOrderedSet *errors, NSString *action);

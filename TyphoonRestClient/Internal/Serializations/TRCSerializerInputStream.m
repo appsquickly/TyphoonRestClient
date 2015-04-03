@@ -24,7 +24,7 @@ TRCSerialization TRCSerializationRequestInputStream = @"TRCSerializationRequestI
     } else if ([requestObject isKindOfClass:[NSString class]]) {
         return [[NSInputStream alloc] initWithFileAtPath:requestObject];
     } else if (error) {
-        *error = NSErrorWithFormat(@"Can't create NSInputStream from '%@'", requestObject);
+        *error = TRCRequestSerializationErrorWithFormat(@"Can't use '%@' object in TRCSerializerInputStream. Must be NSInputStream or NSString file path.", requestObject);
     }
     return nil;
 }

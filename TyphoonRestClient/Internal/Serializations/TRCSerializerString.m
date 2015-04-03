@@ -11,6 +11,7 @@
 
 #import "TRCSerializerString.h"
 #import "TRCRequest.h"
+#import "TRCUtils.h"
 
 TRCSerialization TRCSerializationString = @"TRCSerializationString";
 
@@ -27,7 +28,14 @@ TRCSerialization TRCSerializationString = @"TRCSerializationString";
 
 - (NSData *)dataFromRequestObject:(NSString *)requestObject error:(NSError **)error
 {
-    return [requestObject dataUsingEncoding:self.encoding];
+    if ([requestObject isKindOfClass:[NSString class]]) {
+        return [requestObject dataUsingEncoding:self.encoding];
+    } else {
+        if (error) {
+            *error = TRCRequestSerializationErrorWithFormat(@"Can't use '%@' object in TRCSerializerString. Must be NSString.", requestObject);
+        }
+        return nil;
+    }
 }
 
 - (id)objectFromResponseData:(NSData *)data error:(NSError **)error

@@ -13,6 +13,7 @@
 #import "TRCSchema.h"
 #import "TRCSchemaData.h"
 #import "TRCSchemaDictionaryData.h"
+#import "TRCUtils.h"
 
 TRCSerialization TRCSerializationJson = @"TRCSerializationJson";
 
@@ -34,7 +35,14 @@ TRCSerialization TRCSerializationJson = @"TRCSerializationJson";
 
 - (NSData *)dataFromRequestObject:(id)requestObject error:(NSError **)error
 {
-    return [NSJSONSerialization dataWithJSONObject:requestObject options:self.writingOptions error:error];
+    if ([NSJSONSerialization isValidJSONObject:requestObject]) {
+        return [NSJSONSerialization dataWithJSONObject:requestObject options:self.writingOptions error:error];
+    } else {
+        if (error) {
+            *error = TRCRequestSerializationErrorWithFormat(@"Can't create JSON string from '%@'. Object is invalid.", requestObject);
+        }
+        return nil;
+    }
 }
 
 - (NSString *)contentType
