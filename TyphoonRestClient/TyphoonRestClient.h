@@ -64,9 +64,9 @@ typedef NS_OPTIONS(NSInteger , TRCValidationOptions)
 
 @interface TyphoonRestClient (Infrastructure)
 
-- (void)registerRequestSerializer:(id<TRCRequestSerializer>)serializer forName:(NSString *)serializerName;
+- (void)registerRequestSerializer:(id<TRCRequestSerializer>)serializer forName:(TRCSerialization)serializerName;
 
-- (void)registerResponseSerializer:(id<TRCResponseSerializer>)serializer forName:(NSString *)serializerName;
+- (void)registerResponseSerializer:(id<TRCResponseSerializer>)serializer forName:(TRCSerialization)serializerName;
 
 - (void)registerSchemeFormat:(id<TRCSchemaFormat>)schemeFormat forFileExtension:(NSString *)extension;
 

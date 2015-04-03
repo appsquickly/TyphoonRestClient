@@ -602,7 +602,7 @@
 
 @implementation TyphoonRestClient (Infrastructure)
 
-- (void)registerRequestSerializer:(id<TRCRequestSerializer>)serializer forName:(NSString *)serializerName
+- (void)registerRequestSerializer:(id<TRCRequestSerializer>)serializer forName:(TRCSerialization)serializerName
 {
     NSParameterAssert(serializerName);
     if (serializer) {
@@ -612,7 +612,7 @@
     }
 }
 
-- (void)registerResponseSerializer:(id<TRCResponseSerializer>)serializer forName:(NSString *)serializerName
+- (void)registerResponseSerializer:(id<TRCResponseSerializer>)serializer forName:(TRCSerialization)serializerName
 {
     NSParameterAssert(serializerName);
     if (serializer) {

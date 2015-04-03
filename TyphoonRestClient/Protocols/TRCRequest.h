@@ -92,6 +92,7 @@ extern TRCSerialization TRCSerializationResponseImage;
 * - NSData - will be passed as is into request body
 * - NSString - will be converted into NSData using UTF-8 encoding
 * - NSInputStream - mostly used to specify file for uploading
+* - Any object, for custom serializer (check registerRequestSerializer:forName: method in TyphoonRestClient)
 * */
 - (id)requestBody;
 
@@ -102,18 +103,18 @@ extern TRCSerialization TRCSerializationResponseImage;
 
 /**
 * Specify name of schema file. This file must be included into application bundle.
-* If this method not implement then ClassName.request name assumed
+* If this method not implement then ClassName.request.{format} name assumed
 * */
 - (NSString *)requestBodyValidationSchemaName;
 
 /**
 * Specify name of schema file. This file must be included into application bundle.
-* If this method not implement then ClassName.url name assumed
+* If this method not implement then ClassName.path.{format} name assumed
 * */
 - (NSString *)requestPathParametersValidationSchemaName;
 
 /**
-* Specify kind of request to send here. Using that type NSArray or NSDictionary request body will be converted to NSData.
+* Specify body serialization here. Using that type NSArray or NSDictionary request body will be converted to NSData.
 * If 'requestBody' is NSData, NSString or NSInputStream this method will be ignored (And warning appears in the console).
 * */
 - (TRCSerialization)requestSerialization;
@@ -125,7 +126,7 @@ extern TRCSerialization TRCSerializationResponseImage;
 @optional
 /**
 * Specify name of schema file. This file must be included into application bundle.
-* If this method not implement then ClassName.response name assumed
+* If this method not implement then ClassName.response.{format} name assumed
 * */
 - (NSString *)responseBodyValidationSchemaName;
 
@@ -154,8 +155,8 @@ extern TRCSerialization TRCSerializationResponseImage;
 *
 * bodyObject can be:
 *  - NSArray or NSDictionary (depending on content) when responseSerialization is TRCSerialization(Json/Xml/Plist)
-*  - NSData when responseSerialization is TRCSerializationResponseImage
-*  - UIImage when responseSerialization is TRCSerializationData
+*  - NSData when responseSerialization is TRCSerializationData
+*  - UIImage when responseSerialization is TRCSerializationResponseImage
 *  - NSString when responseSerialization is TRCSerializationString
 *  - nil when responseBodyOutputStream specified (you can hold path to file based OutputStream and post-process result here)
 * */
