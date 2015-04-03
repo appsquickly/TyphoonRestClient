@@ -32,6 +32,7 @@
 - (id)objectFromResponseData:(NSData *)data error:(NSError **)error;
 
 @optional
+
 - (BOOL)isCorrectContentType:(NSString *)responseContentType;
 
 @end

@@ -23,20 +23,16 @@ extern TRCRequestMethod TRCRequestMethodDelete;
 extern TRCRequestMethod TRCRequestMethodPatch;
 extern TRCRequestMethod TRCRequestMethodHead;
 
-
 typedef NSString *TRCSerialization;
 extern TRCSerialization TRCSerializationJson;
 extern TRCSerialization TRCSerializationPlist;
 extern TRCSerialization TRCSerializationData;
 extern TRCSerialization TRCSerializationString;
-
 //Request Only Serializations
 extern TRCSerialization TRCSerializationRequestHttp;
 extern TRCSerialization TRCSerializationRequestInputStream;
-
 //Response Only Serializations
 extern TRCSerialization TRCSerializationResponseImage;
-
 
 
 

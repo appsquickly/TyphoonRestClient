@@ -17,6 +17,7 @@
 #import "TRCSerialization.h"
 #import "TyphoonRestClient.h"
 #import "TRCSchemaData.h"
+#import "TRCConvertersRegistry.h"
 
 @interface TyphoonRestClient (Private) <TRCConvertersRegistry, TRCSchemaDataProvider>
 
