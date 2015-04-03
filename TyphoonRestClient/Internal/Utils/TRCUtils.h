@@ -23,8 +23,6 @@ NSError *NSErrorFromErrorSet(NSOrderedSet *errors, NSString *action);
 
 id TRCValueAfterApplyingOptions(id value, TRCValidationOptions options, BOOL isRequest, BOOL isOptional);
 
-extern NSString *TRCConverterNameKey;
-
 NSError *TRCUnknownValidationErrorForObject(id object, NSString *schemaName, BOOL isResponse);
 
 NSError *TRCConversionErrorForObject(NSString *errorMessage, id object, NSString *schemaName, BOOL isResponse);
@@ -32,3 +30,5 @@ NSError *TRCConversionErrorForObject(NSString *errorMessage, id object, NSString
 NSString *TRCUrlPathFromPathByApplyingArguments(NSString *path, NSMutableDictionary *arguments, NSError **error);
 
 void TRCUrlPathParamsByRemovingNull(NSMutableDictionary *arguments);
+
+NSString * TRCQueryStringFromParametersWithEncoding(NSDictionary *parameters, NSStringEncoding stringEncoding);

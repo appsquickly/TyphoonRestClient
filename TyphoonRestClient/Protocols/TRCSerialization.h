@@ -17,7 +17,11 @@
 
 @protocol TRCRequestSerializer <NSObject>
 
+@optional
+
 - (NSData *)dataFromRequestObject:(id)requestObject error:(NSError **)error;
+
+- (NSInputStream *)dataStreamFromRequestObject:(id)requestObject error:(NSError **)error;
 
 - (NSString *)contentType;
 
@@ -27,6 +31,7 @@
 
 - (id)objectFromResponseData:(NSData *)data error:(NSError **)error;
 
+@optional
 - (BOOL)isCorrectContentType:(NSString *)responseContentType;
 
 @end

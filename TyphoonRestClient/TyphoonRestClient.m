@@ -28,6 +28,12 @@
 #import "TRCSchemaDictionaryData.h"
 #import "TRCSchemeFactory.h"
 #import "TRCSerializerJson.h"
+#import "TRCSerializerPlist.h"
+#import "TRCSerializerData.h"
+#import "TRCSerializerHttpQuery.h"
+#import "TRCSerializerImage.h"
+#import "TRCSerializerInputStream.h"
+#import "TRCSerializerString.h"
 
 @interface TRCRequestCreateOptions : NSObject <TRCConnectionRequestCreationOptions>
 @end
@@ -65,8 +71,8 @@
     if (self) {
         _typeTransformerRegistry = [NSMutableDictionary new];
         _objectMapperRegistry = [NSMutableDictionary new];
-        self.defaultRequestSerialization = TRCRequestSerializationJson;
-        self.defaultResponseSerialization = TRCResponseSerializationJson;
+        self.defaultRequestSerialization = TRCSerializationJson;
+        self.defaultResponseSerialization = TRCSerializationJson;
         self.validationOptions = TRCValidationOptionsTreatEmptyDictionaryAsNilInResponsesForOptional |
                 TRCValidationOptionsTreatEmptyDictionaryAsNilInRequestsForOptional;
         _schemeFactory = [TRCSchemeFactory new];
@@ -84,10 +90,30 @@
 {
     TRCSerializerJson *json = [TRCSerializerJson new];
     [self registerSchemeFormat:json forFileExtension:@"json"];
-    [self registerRequestSerializer:json forName:TRCRequestSerializationJson];
-    [self registerResponseSerializer:json forName:TRCResponseSerializationJson];
+    [self registerRequestSerializer:json forName:TRCSerializationJson];
+    [self registerResponseSerializer:json forName:TRCSerializationJson];
 
+    TRCSerializerPlist *plist = [TRCSerializerPlist new];
+    [self registerSchemeFormat:plist forFileExtension:@"plist"];
+    [self registerRequestSerializer:plist forName:TRCSerializationPlist];
+    [self registerResponseSerializer:plist forName:TRCSerializationPlist];
 
+    TRCSerializerData *data = [TRCSerializerData new];
+    [self registerRequestSerializer:data forName:TRCSerializationData];
+    [self registerResponseSerializer:data forName:TRCSerializationData];
+
+    TRCSerializerString *string = [TRCSerializerString new];
+    [self registerRequestSerializer:string forName:TRCSerializationString];
+    [self registerResponseSerializer:string forName:TRCSerializationString];
+
+    TRCSerializerHttpQuery *http = [TRCSerializerHttpQuery new];
+    [self registerRequestSerializer:http forName:TRCSerializationRequestHttp];
+
+    TRCSerializerInputStream *inputStream = [TRCSerializerInputStream new];
+    [self registerRequestSerializer:inputStream forName:TRCSerializationRequestInputStream];
+
+    TRCSerializerImage *image = [TRCSerializerImage new];
+    [self registerResponseSerializer:image forName:TRCSerializationResponseImage];
 }
 
 - (id<TRCProgressHandler>)sendRequest:(id<TRCRequest>)request completion:(void (^)(id result, NSError *error))completion
@@ -136,23 +162,23 @@
         options.outputStream = [request responseBodyOutputStream];
     }
 
-    TRCResponseSerialization serializationName = self.defaultResponseSerialization;
+    TRCSerialization serializationName = self.defaultResponseSerialization;
     if ([request respondsToSelector:@selector(responseSerialization)]) {
         serializationName = [request responseSerialization];
-        if (options.outputStream && serializationName != TRCResponseSerializationData) {
+        if (options.outputStream && serializationName != TRCSerializationData) {
             [self logWarning:@"Both 'responseSerialization' and 'responseBodyOutputStream' methods implemented in '%@' request. "
                                      "Value returned by 'responseSerialization' method will be ignored. To avoid this warning please remove"
-                                     " 'responseSerialization' implementation or change returned value to TRCResponseSerializationData", [request class]];
+                                     " 'responseSerialization' implementation or change returned value to TRCSerializationData", [request class]];
         }
     }
 
     if (options.outputStream) {
-        serializationName = TRCResponseSerializationData;
+        serializationName = TRCSerializationData;
     }
 
     options.responseSerialization = _responseSerializers[serializationName];
     if (!options.responseSerialization) {
-        TRCSetError(error, NSErrorWithFormat(@"Can't find serialization for name '%@'", serializationName));
+        TRCSetError(error, NSErrorWithFormat(@"Can't find response serialization for name '%@'", serializationName));
         return nil;
     }
 
@@ -182,10 +208,10 @@
         return nil;
     }
 
-    TRCRequestSerialization serializationName = [self requestSerializationFromRequest:request body:options.body];
+    TRCSerialization serializationName = [self requestSerializationFromRequest:request body:options.body];
     options.serialization = _requestSerializers[serializationName];
     if (!options.serialization) {
-        TRCSetError(error, NSErrorWithFormat(@"Can't find serialization for name '%@'", serializationName));
+        TRCSetError(error, NSErrorWithFormat(@"Can't find request serialization for name '%@'", serializationName));
         return nil;
     }
 
@@ -233,14 +259,17 @@
     return body;
 }
 
-- (TRCRequestSerialization)requestSerializationFromRequest:(id<TRCRequest>)request body:(id)body
+- (TRCSerialization)requestSerializationFromRequest:(id<TRCRequest>)request body:(id)body
 {
-    TRCRequestSerialization serialization = self.defaultRequestSerialization;
+    TRCSerialization serialization = self.defaultRequestSerialization;
     if ([request respondsToSelector:@selector(requestSerialization)]) {
         serialization = [request requestSerialization];
-        if (![body isKindOfClass:[NSArray class]] && ![body isKindOfClass:[NSDictionary class]]) {
-            [self logWarning:@"Body object of type '%@' can't be serialized, but you implemented 'requestSerialization' method in %@ request. Specified serialization will be ignored.", [body class], [request class]];
-        }
+    } else if ([body isKindOfClass:[NSString class]]) {
+        serialization = TRCSerializationString;
+    } else if ([body isKindOfClass:[NSData class]]) {
+        serialization = TRCSerializationData;
+    } else if ([body isKindOfClass:[NSInputStream class]]) {
+        serialization = TRCSerializationRequestInputStream;
     }
     return serialization;
 }

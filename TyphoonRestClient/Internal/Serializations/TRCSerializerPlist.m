@@ -9,47 +9,41 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#import "TRCSerializerJson.h"
-#import "TRCSchema.h"
-#import "TRCSchemaData.h"
+#import "TRCSerializerPlist.h"
 #import "TRCSchemaDictionaryData.h"
+#import "TRCRequest.h"
 
-TRCSerialization TRCSerializationJson = @"TRCSerializationJson";
+TRCSerialization TRCSerializationPlist = @"TRCSerializationPlist";
 
-@interface TRCSerializerJson ()
-@property (nonatomic, strong) NSSet *acceptableContentTypes;
-@end
-
-@implementation TRCSerializerJson
+@implementation TRCSerializerPlist
 
 - (instancetype)init
 {
     self = [super init];
     if (self) {
-        self.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", nil];
-        self.readingOptions = NSJSONReadingAllowFragments;
+        self.format = NSPropertyListXMLFormat_v1_0;
     }
     return self;
 }
 
 - (NSData *)dataFromRequestObject:(id)requestObject error:(NSError **)error
 {
-    return [NSJSONSerialization dataWithJSONObject:requestObject options:self.writingOptions error:error];
-}
-
-- (NSString *)contentType
-{
-    return @"application/json";
+    return [NSPropertyListSerialization dataWithPropertyList:requestObject format:self.format options:self.writeOptions error:error];
 }
 
 - (id)objectFromResponseData:(NSData *)data error:(NSError **)error
 {
-    return [NSJSONSerialization JSONObjectWithData:data options:self.readingOptions error:error];
+    return [NSPropertyListSerialization propertyListWithData:data options:self.readOptions format:NULL error:error];;
+}
+
+- (NSString *)contentType
+{
+    return @"application/x-plist";
 }
 
 - (BOOL)isCorrectContentType:(NSString *)responseContentType
 {
-    return [self.acceptableContentTypes containsObject:responseContentType];
+    return [responseContentType isEqualToString:[self contentType]];
 }
 
 - (id<TRCSchemaData>)requestSchemaDataFromData:(NSData *)data dataProvider:(id<TRCSchemaDataProvider>)dataProvider error:(NSError **)error
@@ -64,9 +58,9 @@ TRCSerialization TRCSerializationJson = @"TRCSerializationJson";
 
 - (id<TRCSchemaData>)schemeDataFromData:(NSData *)data isRequest:(BOOL)request dataProvider:(id<TRCSchemaDataProvider>)dataProvider error:(NSError **)error
 {
-    id jsonObject = [NSJSONSerialization JSONObjectWithData:data options:self.readingOptions error:error];
-    if (jsonObject) {
-        TRCSchemaDictionaryData *result = [[TRCSchemaDictionaryData alloc] initWithArrayOrDictionary:jsonObject];
+    id object = [NSPropertyListSerialization propertyListWithData:data options:self.readOptions format:NULL error:error];;
+    if (object) {
+        TRCSchemaDictionaryData *result = [[TRCSchemaDictionaryData alloc] initWithArrayOrDictionary:object];
         result.requestData = request;
         result.dataProvider = dataProvider;
         return result;

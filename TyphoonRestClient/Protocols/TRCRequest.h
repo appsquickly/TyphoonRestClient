@@ -23,18 +23,22 @@ extern TRCRequestMethod TRCRequestMethodDelete;
 extern TRCRequestMethod TRCRequestMethodPatch;
 extern TRCRequestMethod TRCRequestMethodHead;
 
-typedef NSString * TRCRequestSerialization;
-extern TRCRequestSerialization TRCRequestSerializationJson;
-extern TRCRequestSerialization TRCRequestSerializationHttp;
-extern TRCRequestSerialization TRCRequestSerializationPlist;
 
-typedef NSString * TRCResponseSerialization;
-extern TRCResponseSerialization TRCResponseSerializationJson;
-extern TRCResponseSerialization TRCResponseSerializationXml; /* not tested yet */
-extern TRCResponseSerialization TRCResponseSerializationPlist; /* not tested yet */
-extern TRCResponseSerialization TRCResponseSerializationData;
-extern TRCResponseSerialization TRCResponseSerializationString;
-extern TRCResponseSerialization TRCResponseSerializationImage;
+typedef NSString *TRCSerialization;
+extern TRCSerialization TRCSerializationJson;
+extern TRCSerialization TRCSerializationPlist;
+extern TRCSerialization TRCSerializationData;
+extern TRCSerialization TRCSerializationString;
+
+//Request Only Serializations
+extern TRCSerialization TRCSerializationRequestHttp;
+extern TRCSerialization TRCSerializationRequestInputStream;
+
+//Response Only Serializations
+extern TRCSerialization TRCSerializationResponseImage;
+
+
+
 
 @protocol TRCRequest<NSObject>
 
@@ -116,7 +120,7 @@ extern TRCResponseSerialization TRCResponseSerializationImage;
 * Specify kind of request to send here. Using that type NSArray or NSDictionary request body will be converted to NSData.
 * If 'requestBody' is NSData, NSString or NSInputStream this method will be ignored (And warning appears in the console).
 * */
-- (TRCRequestSerialization)requestSerialization;
+- (TRCSerialization)requestSerialization;
 
 //=============================================================================================================================
 #pragma mark - Response
@@ -136,7 +140,7 @@ extern TRCResponseSerialization TRCResponseSerializationImage;
 * method instead.
 * If you implemented 'responseBodyOutputStream', then this method will be ignored!
 * */
-- (TRCResponseSerialization)responseSerialization;
+- (TRCSerialization)responseSerialization;
 
 /**
 * Implement this method to specify custom output stream. If you implement this method all output will be forwarded into
@@ -153,10 +157,10 @@ extern TRCResponseSerialization TRCResponseSerializationImage;
 * bodyObject represents HTTP body content depending on 'responseSerialization' value.
 *
 * bodyObject can be:
-*  - NSArray or NSDictionary (depending on content) when responseSerialization is TRCResponseSerialization(Json/Xml/Plist)
-*  - NSData when responseSerialization is TRCResponseSerializationImage
-*  - UIImage when responseSerialization is TRCResponseSerializationData
-*  - NSString when responseSerialization is TRCResponseSerializationString
+*  - NSArray or NSDictionary (depending on content) when responseSerialization is TRCSerialization(Json/Xml/Plist)
+*  - NSData when responseSerialization is TRCSerializationResponseImage
+*  - UIImage when responseSerialization is TRCSerializationData
+*  - NSString when responseSerialization is TRCSerializationString
 *  - nil when responseBodyOutputStream specified (you can hold path to file based OutputStream and post-process result here)
 * */
 - (id)responseProcessedFromBody:(id)bodyObject headers:(NSDictionary *)responseHeaders status:(TRCHttpStatusCode)statusCode error:(NSError **)parseError;

@@ -16,8 +16,6 @@
 #import "TyphoonRestClientErrors.h"
 #import "TRCSchemeStackTrace.h"
 
-NSString *TRCConverterNameKey = @"{mapper}";
-
 NSError *NSErrorWithFormat(NSString *format, ...)
 {
     va_list args;
@@ -142,7 +140,7 @@ NSString *TRCUrlPathFromPathByApplyingArguments(NSString *path, NSMutableDiction
 
     return path;
 }
-
+//TODO: Test nested dictionaries
 void TRCUrlPathParamsByRemovingNull(NSMutableDictionary *arguments)
 {
     for (NSString *key in [arguments allKeys]) {
@@ -150,4 +148,29 @@ void TRCUrlPathParamsByRemovingNull(NSMutableDictionary *arguments)
             [arguments removeObjectForKey:key];
         }
     }
+}
+
+
+//-------------------------------------------------------------------------------------------
+#pragma mark - AFNetworking code reusage
+//-------------------------------------------------------------------------------------------
+
+@interface AFQueryStringPair : NSObject
+
+- (NSString *)URLEncodedStringValueWithEncoding:(NSStringEncoding)stringEncoding;
+
+@end
+
+
+extern NSArray * AFQueryStringPairsFromDictionary(NSDictionary *dictionary);
+extern NSArray * AFQueryStringPairsFromKeyAndValue(NSString *key, id value);
+
+NSString * TRCQueryStringFromParametersWithEncoding(NSDictionary *parameters, NSStringEncoding stringEncoding)
+{
+    NSMutableArray *mutablePairs = [NSMutableArray array];
+    for (AFQueryStringPair *pair in AFQueryStringPairsFromDictionary(parameters)) {
+        [mutablePairs addObject:[pair URLEncodedStringValueWithEncoding:stringEncoding]];
+    }
+
+    return [mutablePairs componentsJoinedByString:@"&"];
 }

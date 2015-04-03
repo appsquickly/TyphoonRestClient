@@ -29,9 +29,9 @@
     return nil;
 }
 
-- (TRCRequestSerialization)requestSerialization
+- (TRCSerialization)requestSerialization
 {
-    return TRCRequestSerializationJson;
+    return TRCSerializationJson;
 }
 
 - (id)requestBody
@@ -39,9 +39,9 @@
     return self.requestParams;
 }
 
-- (TRCResponseSerialization)responseSerialization
+- (TRCSerialization)responseSerialization
 {
-    return TRCResponseSerializationImage;
+    return TRCSerializationResponseImage;
 }
 
 

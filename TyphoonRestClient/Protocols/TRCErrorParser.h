@@ -27,8 +27,8 @@
 *
 * 'bodyObject' can be:
 * - NSArray or NSDictionary, in cases when 'responseSerialization' is Json, Xml or Plist
-* - UIImage when 'responseSerialization' is TRCResponseSerializationData
-* - NSString when 'responseSerialization' is TRCResponseSerializationString
+* - UIImage when 'responseSerialization' is TRCSerializationData
+* - NSString when 'responseSerialization' is TRCSerializationString
 * - nil when 'responseBodyOutputStream' specified in TRCRequest
 * */
 - (NSError *)errorFromResponseBody:(id)bodyObject headers:(NSDictionary *)headers status:(TRCHttpStatusCode)statusCode error:(NSError **)error;

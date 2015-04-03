@@ -34,11 +34,11 @@ typedef NS_OPTIONS(NSInteger , TRCValidationOptions)
 @property (nonatomic, strong) id<TRCErrorParser> errorParser;
 @property (nonatomic, strong) id<TRCConnection> connection;
 
-/// Default: TRCRequestSerializationJson;
-@property (nonatomic) TRCRequestSerialization defaultRequestSerialization;
+/// Default: TRCSerializationJson;
+@property (nonatomic) TRCSerialization defaultRequestSerialization;
 
-/// Default: TRCResponseSerializationJson
-@property (nonatomic) TRCResponseSerialization defaultResponseSerialization;
+/// Default: TRCSerializationJson
+@property (nonatomic) TRCSerialization defaultResponseSerialization;
 
 /// Default: NO
 @property (nonatomic) BOOL shouldSuppressWarnings;
@@ -57,6 +57,10 @@ typedef NS_OPTIONS(NSInteger , TRCValidationOptions)
 - (void)registerObjectMapper:(id<TRCObjectMapper>)objectConverter forTag:(NSString *)tag;
 
 @end
+
+//-------------------------------------------------------------------------------------------
+#pragma mark - Extensions
+//-------------------------------------------------------------------------------------------
 
 @interface TyphoonRestClient (Infrastructure)
 
