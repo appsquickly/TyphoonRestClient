@@ -57,6 +57,7 @@
 		FAC9167D19E697A60009D824 /* StringsArray.json in Resources */ = {isa = PBXBuildFile; fileRef = FAC9166A19E697A60009D824 /* StringsArray.json */; };
 		FAC9167E19E697A60009D824 /* TestScheme.json in Resources */ = {isa = PBXBuildFile; fileRef = FAC9166B19E697A60009D824 /* TestScheme.json */; };
 		FAC9167F19E697A60009D824 /* TestSchemeOptionals.json in Resources */ = {isa = PBXBuildFile; fileRef = FAC9166C19E697A60009D824 /* TestSchemeOptionals.json */; };
+		FAE3B4D31ACFEA880033835A /* PropertyListSchema.plist in Resources */ = {isa = PBXBuildFile; fileRef = FAE3B4D21ACFEA880033835A /* PropertyListSchema.plist */; };
 		FC76D0CEC351728B7DD89E31 /* libPods-TyphoonRestClientTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 469D3C7EB63CCF077674B274 /* libPods-TyphoonRestClientTests.a */; };
 /* End PBXBuildFile section */
 
@@ -180,6 +181,7 @@
 		FAC9167319E697A60009D824 /* TRCConnectionStub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCConnectionStub.m; sourceTree = "<group>"; };
 		FAC9167419E697A60009D824 /* TRCValueTransformerStub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCValueTransformerStub.h; sourceTree = "<group>"; };
 		FAC9167519E697A60009D824 /* TRCValueTransformerStub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCValueTransformerStub.m; sourceTree = "<group>"; };
+		FAE3B4D21ACFEA880033835A /* PropertyListSchema.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PropertyListSchema.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -448,6 +450,7 @@
 				FAC9166B19E697A60009D824 /* TestScheme.json */,
 				FAC9166C19E697A60009D824 /* TestSchemeOptionals.json */,
 				2DBA104BA4D6F38FB51EC684 /* PersonsList.json */,
+				FAE3B4D21ACFEA880033835A /* PropertyListSchema.plist */,
 			);
 			path = Schemes;
 			sourceTree = "<group>";
@@ -552,6 +555,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAC9167C19E697A60009D824 /* NumbersArray.json in Resources */,
+				FAE3B4D31ACFEA880033835A /* PropertyListSchema.plist in Resources */,
 				FAC9167D19E697A60009D824 /* StringsArray.json in Resources */,
 				FAC9167E19E697A60009D824 /* TestScheme.json in Resources */,
 				FAC9167B19E697A60009D824 /* GetOrderScheme.json in Resources */,

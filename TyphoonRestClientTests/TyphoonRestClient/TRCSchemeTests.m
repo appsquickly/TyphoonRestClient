@@ -15,6 +15,7 @@
 #import "TRCSchemaData.h"
 #import "TRCSchemaDictionaryData.h"
 #import "TRCSerializerJson.h"
+#import "TRCSerializerPlist.h"
 
 @interface TRCSchemeTests : XCTestCase<TRCConvertersRegistry, TRCSchemaDataProvider>
 
@@ -460,6 +461,39 @@
 
     NSError *error = nil;
     XCTAssertTrue([listSchema validateResponse:input error:&error]);
+    XCTAssertNil(error);
+}
+
+- (void)test_plist_scheme
+{
+    NSBundle *bundle = [NSBundle bundleForClass:[TRCSchemeTests class]];
+    NSString *schemePath = [bundle pathForResource:@"PropertyListSchema" ofType:@"plist"];
+    
+    TRCSerializerPlist *jsonSerializer = [TRCSerializerPlist new];
+    NSData *data = [NSData dataWithContentsOfFile:schemePath];
+    id<TRCSchemaData> schemaData = [jsonSerializer responseSchemaDataFromData:data dataProvider:self error:NULL];;
+    TRCSchema *schema = [TRCSchema schemaWithData:schemaData name:@"PropertyListSchema.plist"];
+    schema.converterRegistry = self;
+    
+    NSDictionary *dataIncorrect = @{
+                           @"item": @"string",
+                           @"item2": @"string",
+                           @"date": [NSDate date]
+                           };
+    
+    NSError *error = nil;
+    XCTAssertFalse([schema validateResponse:dataIncorrect error:&error]);
+    XCTAssertNotNil(error);
+    
+
+    error = nil;
+    NSDictionary *dataCorrect = @{
+                                    @"item": @"string",
+                                    @"item2": @"",
+                                    @"date": [NSDate date]
+                                    };
+    
+    XCTAssertTrue([schema validateResponse:dataCorrect error:&error]);
     XCTAssertNil(error);
 }
 

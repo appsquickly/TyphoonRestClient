@@ -56,41 +56,33 @@
 #pragma mark -
 //-------------------------------------------------------------------------------------------
 
-- (BOOL)validateResponse:(id)response error:(NSError **)error
+- (BOOL)validate:(id)object isRequest:(BOOL)request error:(NSError **)error
 {
     _stack = nil;
+    _error = nil;
+    _isRequestValidation = request;
+
 #if TRCSchemaTrackErrorTrace
     _stack = [TRCSchemeStackTrace new];
-    _stack.originalObject = response;
+    _stack.originalObject = object;
 #endif
-
-    ((TRCSchemaDictionaryData *)self.data).requestData = NO;
-    [self.data enumerate:response withEnumerator:self];
-
-
-    NSError *validationError = _error;//[self validateReceivedValue:response withSchemaValue:self.schemeObject stackTrace:stackTrace];
+    
+    [self.data enumerate:object withEnumerator:self];
+    NSError *validationError = _error;
     if (validationError && error) {
         *error = validationError;
     }
     return validationError == nil;
 }
 
+- (BOOL)validateResponse:(id)response error:(NSError **)error
+{
+    return [self validate:response isRequest:NO error:error];
+}
+
 - (BOOL)validateRequest:(id)request error:(NSError **)error
 {
-    _isRequestValidation = YES;
-    _stack = nil;
-#if TRCSchemaTrackErrorTrace
-    _stack = [TRCSchemeStackTrace new];
-    _stack.originalObject = request;
-#endif
-    ((TRCSchemaDictionaryData *)self.data).requestData = YES;
-    [self.data enumerate:request withEnumerator:self];
-    NSError *validationError = _error;//[self validateReceivedValue:request withSchemaValue:self.schemeObject stackTrace:stackTrace];
-    if (validationError && error) {
-        *error = validationError;
-    }
-    _isRequestValidation = NO;
-    return validationError == nil;
+    return [self validate:request isRequest:YES error:error];
 }
 
 //-------------------------------------------------------------------------------------------
@@ -144,7 +136,19 @@
 #pragma mark - Utils
 //-------------------------------------------------------------------------------------------
 
-#define IsSameParent(value1, value2, parent) ([value1 isKindOfClass:[parent class]] && [value2 isKindOfClass:[parent class]])
+- (BOOL)isValue:(id)value hasSameParentWith:(id)value2
+{
+    BOOL hasSameParent = NO;
+    Class superClass = [value class];
+    while (superClass != [NSObject class]) {
+        if ([value2 isKindOfClass:superClass]) {
+            hasSameParent = YES;
+            break;
+        }
+        superClass = [superClass superclass];
+    }
+    return hasSameParent;
+}
 
 - (BOOL)isTypeOfValue:(id)dataValue validForSchemeValue:(id)schemeValue
 {
@@ -163,11 +167,7 @@
         return (isNumber && supportNumbers) || (isString && supportStrings);
     }
     else {
-        BOOL isBothNumbers = IsSameParent(dataValue, schemeValue, NSValue);
-        BOOL isBothDictionaries = IsSameParent(dataValue, schemeValue, NSDictionary);
-        BOOL isBothArray = IsSameParent(dataValue, schemeValue, NSArray);
-
-        return isBothNumbers || isBothDictionaries || isBothArray;
+        return [self isValue:dataValue hasSameParentWith:schemeValue];
     }
 }
 
