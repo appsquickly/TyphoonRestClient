@@ -35,6 +35,13 @@
 #import "TRCSerializerInputStream.h"
 #import "TRCSerializerString.h"
 
+TRCRequestMethod TRCRequestMethodPost = @"POST";
+TRCRequestMethod TRCRequestMethodGet = @"GET";
+TRCRequestMethod TRCRequestMethodPut = @"PUT";
+TRCRequestMethod TRCRequestMethodDelete = @"DELETE";
+TRCRequestMethod TRCRequestMethodPatch = @"PATCH";
+TRCRequestMethod TRCRequestMethodHead = @"HEAD";
+
 @interface TRCRequestCreateOptions : NSObject <TRCConnectionRequestCreationOptions>
 @end
 @implementation TRCRequestCreateOptions

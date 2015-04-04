@@ -5,7 +5,7 @@
 
 @implementation TRCObjectMapperIssue
 
-- (id)objectFromResponseObject:(NSDictionary *)dict error:(NSError *__autoreleasing *)error
+- (id)objectFromResponseObject:(NSDictionary *)dict error:(NSError **)error
 {
     Issue *issue = [Issue new];
     issue.identifier = dict[@"id"];

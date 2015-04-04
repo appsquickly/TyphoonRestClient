@@ -16,19 +16,8 @@
 #import "TRCSerialization.h"
 #import "TRCUtils.h"
 
-
-TRCSerialization TRCResponseSerializationXml = @"TRCResponseSerializationXml";
-
-TRCRequestMethod TRCRequestMethodPost = @"POST";
-TRCRequestMethod TRCRequestMethodGet = @"GET";
-TRCRequestMethod TRCRequestMethodPut = @"PUT";
-TRCRequestMethod TRCRequestMethodDelete = @"DELETE";
-TRCRequestMethod TRCRequestMethodPatch = @"PATCH";
-TRCRequestMethod TRCRequestMethodHead = @"HEAD";
-
 NSError *NSErrorWithDictionaryUnion(NSError *error, NSDictionary *dictionary);
 BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
-
 
 //=============================================================================================================================
 
