@@ -477,7 +477,7 @@
     
     NSDictionary *dataIncorrect = @{
                            @"item": @"string",
-                           @"item2": @"string",
+                           @"item2": @"asdf",
                            @"date": [NSDate date]
                            };
     
@@ -486,15 +486,15 @@
     XCTAssertNotNil(error);
     
 
-    error = nil;
+    NSError *error2 = nil;
     NSDictionary *dataCorrect = @{
                                     @"item": @"string",
-                                    @"item2": @"",
+                                    @"item2": @1,
                                     @"date": [NSDate date]
                                     };
     
-    XCTAssertTrue([schema validateResponse:dataCorrect error:&error]);
-    XCTAssertNil(error);
+    XCTAssertTrue([schema validateResponse:dataCorrect error:&error2]);
+    XCTAssertNil(error2);
 }
 
 @end
