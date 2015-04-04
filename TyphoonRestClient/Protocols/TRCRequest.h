@@ -154,11 +154,12 @@ extern TRCSerialization TRCSerializationResponseImage;
 * bodyObject represents HTTP body content depending on 'responseSerialization' value.
 *
 * bodyObject can be:
-*  - NSArray or NSDictionary (depending on content) when responseSerialization is TRCSerialization(Json/Xml/Plist)
+*  - NSArray or NSDictionary (depending on content) when responseSerialization is TRCSerialization(Json/Plist)
 *  - NSData when responseSerialization is TRCSerializationData
 *  - UIImage when responseSerialization is TRCSerializationResponseImage
 *  - NSString when responseSerialization is TRCSerializationString
 *  - nil when responseBodyOutputStream specified (you can hold path to file based OutputStream and post-process result here)
+*  - other custom object, when using your own TRCSerialization implementation
 * */
 - (id)responseProcessedFromBody:(id)bodyObject headers:(NSDictionary *)responseHeaders status:(TRCHttpStatusCode)statusCode error:(NSError **)parseError;
 
