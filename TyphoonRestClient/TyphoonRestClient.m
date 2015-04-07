@@ -42,6 +42,8 @@ TRCRequestMethod TRCRequestMethodDelete = @"DELETE";
 TRCRequestMethod TRCRequestMethodPatch = @"PATCH";
 TRCRequestMethod TRCRequestMethodHead = @"HEAD";
 
+NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClientReachabilityDidChangeNotification";
+
 @interface TRCRequestCreateOptions : NSObject <TRCConnectionRequestCreationOptions>
 @end
 @implementation TRCRequestCreateOptions
@@ -58,7 +60,7 @@ TRCRequestMethod TRCRequestMethodHead = @"HEAD";
 #define TRCSetError(errorPointer, error) if (errorPointer) { *errorPointer = error; }
 #define TRCCompleteWithError(completion, error) if (completion) { completion(nil, error); }
 
-@interface TyphoonRestClient ()<TRCConvertersRegistry, TRCSchemaDataProvider>
+@interface TyphoonRestClient ()<TRCConvertersRegistry, TRCSchemaDataProvider, TRCConnectionReachabilityDelegate>
 @end
 
 @implementation TyphoonRestClient
@@ -603,6 +605,42 @@ TRCRequestMethod TRCRequestMethodHead = @"HEAD";
         va_end(args);
         NSLog(@"TyphoonRestClient Warning: %@",warningString);
     }
+}
+
+//-------------------------------------------------------------------------------------------
+#pragma mark - Reachability
+//-------------------------------------------------------------------------------------------
+
+- (void)setConnection:(id<TRCConnection>)connection
+{
+    if (_connection != connection) {
+        _connection = connection;
+        if ([(id)_connection respondsToSelector:@selector(setReachabilityDelegate:)]) {
+            [_connection setReachabilityDelegate:self];
+        }
+    }
+}
+
+- (void)connection:(id<TRCConnection>)connection didChangeReachabilityState:(TRCConnectionReachabilityState)state
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:TyphoonRestClientReachabilityDidChangeNotification object:@(state)];
+    });
+}
+
+- (BOOL)isReachable
+{
+    TRCConnectionReachabilityState state = [self reachabilityState];
+    return (state == TRCConnectionReachabilityStateReachableViaWifi) || (state == TRCConnectionReachabilityStateReachableViaWWAN);
+}
+
+- (TRCConnectionReachabilityState)reachabilityState
+{
+    TRCConnectionReachabilityState state = TRCConnectionReachabilityStateUnknown;
+    if ([(id)_connection respondsToSelector:@selector(reachabilityState)]) {
+        state = [_connection reachabilityState];
+    }
+    return state;
 }
 
 @end

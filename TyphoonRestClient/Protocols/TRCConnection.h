@@ -25,14 +25,25 @@
 @protocol TRCConnectionRequestSendingOptions;
 @protocol TRCRequestSerializer;
 @protocol TRCResponseSerializer;
+@protocol TRCConnectionReachabilityDelegate;
+
+typedef enum {
+    TRCConnectionReachabilityStateUnknown = -1,
+    TRCConnectionReachabilityStateNotReachable = 0,
+    TRCConnectionReachabilityStateReachableViaWWAN = 1,
+    TRCConnectionReachabilityStateReachableViaWifi = 2
+} TRCConnectionReachabilityState;
 
 typedef void (^TRCConnectionCompletion)(id responseObject, NSError *error, id<TRCResponseInfo> responseInfo);
 
 @protocol TRCConnection
 
 - (NSMutableURLRequest *)requestWithOptions:(id<TRCConnectionRequestCreationOptions>)options error:(NSError **)requestComposingError;
-
 - (id<TRCProgressHandler>)sendRequest:(NSURLRequest *)request withOptions:(id<TRCConnectionRequestSendingOptions>)options completion:(TRCConnectionCompletion)completion;
+
+@optional
+- (TRCConnectionReachabilityState)reachabilityState;
+- (void)setReachabilityDelegate:(id<TRCConnectionReachabilityDelegate>)reachabilityDelegate;
 
 @end
 
@@ -70,9 +81,9 @@ typedef void (^TRCDownloadProgressBlock)(NSUInteger bytesRead, long long totalBy
 
 @end
 
-//-------------------------------------------------------------------------------------------
+//=============================================================================================================================
 #pragma mark - Request Context
-//-------------------------------------------------------------------------------------------
+//=============================================================================================================================
 
 @protocol TRCConnectionRequestCreationOptions <NSObject>
 
@@ -93,5 +104,15 @@ typedef void (^TRCDownloadProgressBlock)(NSUInteger bytesRead, long long totalBy
 @property (nonatomic, assign) id<TRCResponseSerializer> responseSerialization;
 @property (nonatomic, strong) NSDictionary *customProperties;
 @property (nonatomic, assign) NSOperationQueuePriority queuePriority;
+
+@end
+
+//=============================================================================================================================
+#pragma mark - Reachability Delegate
+//=============================================================================================================================
+
+@protocol TRCConnectionReachabilityDelegate <NSObject>
+
+- (void)connection:(id<TRCConnection>)connection didChangeReachabilityState:(TRCConnectionReachabilityState)state;
 
 @end

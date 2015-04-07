@@ -162,6 +162,7 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
     AFHTTPRequestOperationManager *_operationManager;
     NSCache *_responseSerializersCache;
     NSCache *_requestSerializersCache;
+    id<TRCConnectionReachabilityDelegate> _reachabilityDelegate;
 }
 
 - (instancetype)initWithBaseUrl:(NSURL *)baseUrl
@@ -172,6 +173,7 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
         _operationManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseUrl];
         _responseSerializersCache = [NSCache new];
         _requestSerializersCache = [NSCache new];
+        [self startReachabilityMonitoring];
     }
     return self;
 }
@@ -192,6 +194,16 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
 }
 
 #pragma mark - HttpWebServiceConnection protocol
+
+- (void)setReachabilityDelegate:(id<TRCConnectionReachabilityDelegate>)reachabilityDelegate
+{
+    _reachabilityDelegate = reachabilityDelegate;
+}
+
+- (TRCConnectionReachabilityState)reachabilityState
+{
+    return ReachabilityStateFromAFNetworkingState(_operationManager.reachabilityManager.networkReachabilityStatus);
+}
 
 - (NSMutableURLRequest *)requestWithOptions:(id<TRCConnectionRequestCreationOptions>)options error:(NSError **)requestComposingError
 {
@@ -295,6 +307,11 @@ NSError *NSErrorWithDictionaryUnion(NSError *error, NSDictionary *dictionary)
     NSMutableDictionary *userInfo = [[error userInfo] mutableCopy];
     [userInfo addEntriesFromDictionary:dictionary];
     return [NSError errorWithDomain:error.domain code:error.code userInfo:dictionary];
+}
+
+TRCConnectionReachabilityState ReachabilityStateFromAFNetworkingState(AFNetworkReachabilityStatus state)
+{
+    return (TRCConnectionReachabilityState)state;
 }
 
 //-------------------------------------------------------------------------------------------

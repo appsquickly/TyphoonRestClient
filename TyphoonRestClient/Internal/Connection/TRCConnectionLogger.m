@@ -72,6 +72,21 @@
     return progressHandler;
 }
 
+- (void)setReachabilityDelegate:(id<TRCConnectionReachabilityDelegate>)reachabilityDelegate
+{
+    if ([(id)_connection respondsToSelector:@selector(setReachabilityDelegate:)]) {
+        [_connection setReachabilityDelegate:reachabilityDelegate];
+    }
+}
+
+- (TRCConnectionReachabilityState)reachabilityState
+{
+    if ([(id)_connection respondsToSelector:@selector(reachabilityState)]) {
+        return [_connection reachabilityState];
+    }
+    return TRCConnectionReachabilityStateUnknown;
+}
+
 #pragma mark - Utils
 
 - (void)printDownloadingProgress:(id <TRCProgressHandler>)progressHandler forRequest:(NSURLRequest *)request

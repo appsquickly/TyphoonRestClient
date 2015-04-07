@@ -18,6 +18,8 @@
 #import "TRCBuiltInObjects.h"
 #import "TRCSerialization.h"
 
+extern NSString *TyphoonRestClientReachabilityDidChangeNotification;
+
 typedef NS_OPTIONS(NSInteger , TRCValidationOptions)
 {
     TRCValidationOptionsNone = 0,
@@ -30,6 +32,10 @@ typedef NS_OPTIONS(NSInteger , TRCValidationOptions)
 };
 
 @interface TyphoonRestClient : NSObject
+
+//Reachability
+@property (nonatomic, readonly, getter=isReachable) BOOL reachable;
+@property (nonatomic, readonly) TRCConnectionReachabilityState reachabilityState;
 
 @property (nonatomic, strong) id<TRCErrorParser> errorParser;
 @property (nonatomic, strong) id<TRCConnection> connection;
