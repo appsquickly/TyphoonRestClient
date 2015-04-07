@@ -126,6 +126,16 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
         schemeObject = @"{person}";
     }
 
+
+    if ([name isEqualToString:@"Token"]) {
+        schemeObject = @{
+                @"access_token": @"{string}",
+                @"token_type": @"bearer",
+                @"refresh_token{?}": @"{string}",
+                @"expires_in{?}": @36000
+        };
+    }
+
     if (schemeObject) {
         TRCSchemaDictionaryData *data = [[TRCSchemaDictionaryData alloc] initWithArrayOrDictionary:schemeObject];
         data.requestData = isRequest;
@@ -584,6 +594,27 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
         expected.lastName = @"Ivanov";
         expected.avatarUrl = [NSURL URLWithString:@"http://google.com"];
         XCTAssertEqualObjects(expected, result);
+    }];
+}
+
+- (void)test_passthrough_params_without_schema
+{
+    TRCRequestSpy *request = [TRCRequestSpy new];
+
+    [connectionStub setResponseObject:@{
+            @"token_type" : @"Bearer",
+            @"expires_in" : @36000,
+            @"scope" : @"write read groups",
+            @"access_token": @"s57JLTxcxR8YPdo4GxgC62ovzWKtFf",
+            @"refresh_token": @"IpqCFzvmRE35DiiHzTBwMz0mcOYMlO"
+    } responseError:nil];
+
+    request.parseObjectImplemented = NO;
+    request.responseSchemeName = @"Token";
+
+    [webService sendRequest:request completion:^(id result, NSError *error) {
+        XCTAssertNil(error);
+        XCTAssertNotNil(result);
     }];
 }
 
