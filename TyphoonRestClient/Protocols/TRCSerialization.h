@@ -19,10 +19,20 @@
 
 @optional
 
+/**
+* Convert your requestObject into NSData here.
+* */
 - (NSData *)dataFromRequestObject:(id)requestObject error:(NSError **)error;
 
+/**
+* Convert your requestObject into NSInputStream here.
+* */
 - (NSInputStream *)dataStreamFromRequestObject:(id)requestObject error:(NSError **)error;
 
+/**
+* This is string which would be used as Content-Type HTTP header value.
+* If not implemented or returns nil, then Content-Type would be not specified.
+* */
 - (NSString *)contentType;
 
 @end
