@@ -16,7 +16,11 @@ static NSString *TyphoonRestClientErrors = @"TyphoonRestClientErrors";
 static NSInteger TyphoonRestClientErrorCodeValidation = 100;
 static NSInteger TyphoonRestClientErrorCodeTransformation = 101;
 static NSInteger TyphoonRestClientErrorCodeRequestSerialization = 102;
+static NSInteger TyphoonRestClientErrorCodeBadResponseCode = 103;
 
 // UserInfo Dictionary Keys
 static NSString *TyphoonRestClientErrorKeyFullDescription = @"TyphoonRestClientErrorKeyFullDescription";
 static NSString *TyphoonRestClientErrorKeySchemaName = @"TyphoonRestClientErrorKeySchemaName";
+
+static NSString *TyphoonRestClientErrorKeyResponseData = @"TyphoonRestClientErrorKeyResponseData";
+static NSString *TyphoonRestClientErrorKeyResponse = @"TyphoonRestClientErrorKeyResponse";

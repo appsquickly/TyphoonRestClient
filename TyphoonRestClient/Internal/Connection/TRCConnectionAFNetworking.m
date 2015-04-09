@@ -15,6 +15,7 @@
 #import "AFHTTPRequestOperationManager.h"
 #import "TRCSerialization.h"
 #import "TRCUtils.h"
+#import "TyphoonRestClientErrors.h"
 
 NSError *NSErrorWithDictionaryUnion(NSError *error, NSDictionary *dictionary);
 BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
@@ -29,6 +30,21 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
 
 - (id)responseObjectForResponse:(NSURLResponse *)response data:(NSData *)data error:(NSError *__autoreleasing *)error
 {
+    if (self.acceptableStatusCodes && ![self.acceptableStatusCodes containsIndex:(NSUInteger)((NSHTTPURLResponse *)response).statusCode] && [response URL]) {
+        NSMutableDictionary *mutableUserInfo = [@{
+                NSLocalizedDescriptionKey: [NSString stringWithFormat:NSLocalizedStringFromTable(@"Request failed: %@ (%ld)", @"AFNetworking", nil), [NSHTTPURLResponse localizedStringForStatusCode:response.statusCode], (long)response.statusCode],
+                NSURLErrorFailingURLErrorKey:[response URL],
+                TyphoonRestClientErrorKeyResponse: response,
+        } mutableCopy];
+        if (data) {
+            mutableUserInfo[TyphoonRestClientErrorKeyResponseData] = data;
+        }
+        if (error) {
+            *error = [[NSError alloc] initWithDomain:TyphoonRestClientErrors code:TyphoonRestClientErrorCodeBadResponseCode userInfo:mutableUserInfo];
+        }
+        return nil;
+    }
+
     BOOL correctContentType = YES;
 
     if ([self.serializer respondsToSelector:@selector(isCorrectContentType:)]) {
