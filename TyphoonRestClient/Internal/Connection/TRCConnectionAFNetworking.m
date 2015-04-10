@@ -30,19 +30,22 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
 
 - (id)responseObjectForResponse:(NSURLResponse *)response data:(NSData *)data error:(NSError *__autoreleasing *)error
 {
-    if (self.acceptableStatusCodes && ![self.acceptableStatusCodes containsIndex:(NSUInteger)((NSHTTPURLResponse *)response).statusCode] && [response URL]) {
-        NSMutableDictionary *mutableUserInfo = [@{
-                NSLocalizedDescriptionKey: [NSString stringWithFormat:NSLocalizedStringFromTable(@"Request failed: %@ (%ld)", @"AFNetworking", nil), [NSHTTPURLResponse localizedStringForStatusCode:response.statusCode], (long)response.statusCode],
-                NSURLErrorFailingURLErrorKey:[response URL],
-                TyphoonRestClientErrorKeyResponse: response,
-        } mutableCopy];
-        if (data) {
-            mutableUserInfo[TyphoonRestClientErrorKeyResponseData] = data;
+    if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+        NSHTTPURLResponse *urlResponse = (NSHTTPURLResponse *)response;
+        if (self.acceptableStatusCodes && ![self.acceptableStatusCodes containsIndex:(NSUInteger)urlResponse.statusCode] && [response URL]) {
+            NSMutableDictionary *mutableUserInfo = [@{
+                    NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedStringFromTable(@"Request failed: %@ (%ld)", @"AFNetworking", nil), [NSHTTPURLResponse localizedStringForStatusCode:urlResponse.statusCode], (long)urlResponse.statusCode],
+                    NSURLErrorFailingURLErrorKey : [response URL],
+                    TyphoonRestClientErrorKeyResponse : response,
+            } mutableCopy];
+            if (data) {
+                mutableUserInfo[TyphoonRestClientErrorKeyResponseData] = data;
+            }
+            if (error) {
+                *error = [[NSError alloc] initWithDomain:TyphoonRestClientErrors code:TyphoonRestClientErrorCodeBadResponseCode userInfo:mutableUserInfo];
+            }
+            return nil;
         }
-        if (error) {
-            *error = [[NSError alloc] initWithDomain:TyphoonRestClientErrors code:TyphoonRestClientErrorCodeBadResponseCode userInfo:mutableUserInfo];
-        }
-        return nil;
     }
 
     BOOL correctContentType = YES;
