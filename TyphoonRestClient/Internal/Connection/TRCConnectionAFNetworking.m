@@ -28,8 +28,13 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
 
 @implementation AFTRCResponseSerializer
 
-- (id)responseObjectForResponse:(NSURLResponse *)response data:(NSData *)data error:(NSError *__autoreleasing *)error
+- (id)responseObjectForResponse:(NSURLResponse *)response data:(NSData *)data error:(NSError *__autoreleasing *)errorOut
 {
+    NSError *statusCodeError = nil;
+    NSError *serializerError = nil;
+    NSError *contentTypeError = nil;
+    id result = nil;
+
     if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
         NSHTTPURLResponse *urlResponse = (NSHTTPURLResponse *)response;
         if (self.acceptableStatusCodes && ![self.acceptableStatusCodes containsIndex:(NSUInteger)urlResponse.statusCode] && [response URL]) {
@@ -41,10 +46,7 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
             if (data) {
                 mutableUserInfo[TyphoonRestClientErrorKeyResponseData] = data;
             }
-            if (error) {
-                *error = [[NSError alloc] initWithDomain:TyphoonRestClientErrors code:TyphoonRestClientErrorCodeBadResponseCode userInfo:mutableUserInfo];
-            }
-            return nil;
+            statusCodeError = [[NSError alloc] initWithDomain:TyphoonRestClientErrors code:TyphoonRestClientErrorCodeBadResponseCode userInfo:mutableUserInfo];
         }
     }
 
@@ -54,14 +56,23 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
         correctContentType = [self.serializer isCorrectContentType:[response MIMEType]];
     }
 
-    if (!correctContentType) {
-        if (error) {
-            *error = NSErrorWithFormat(@"Request failed: unacceptable content-type: %@", [response MIMEType]);
-        }
-        return nil;
+    if (correctContentType) {
+        result = [self.serializer objectFromResponseData:data error:&serializerError];
     } else {
-        return [self.serializer objectFromResponseData:data error:error];
+        contentTypeError = NSErrorWithFormat(@"Request failed: unacceptable content-type: %@", [response MIMEType]);
     }
+
+    if (errorOut) {
+        if (statusCodeError) {
+            *errorOut = statusCodeError;
+        } else if (contentTypeError) {
+            *errorOut = contentTypeError;
+        } else if (serializerError) {
+            *errorOut = serializerError;
+        }
+    }
+
+    return result;
 }
 
 @end
