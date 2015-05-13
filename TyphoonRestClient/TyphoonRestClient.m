@@ -320,7 +320,7 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
 - (void)handleResponse:(id)responseObject withError:(NSError *)error info:(id<TRCResponseInfo>)responseInfo forRequest:(id<TRCRequest>)request completion:(void (^)(id result, NSError *error))completion
 {
     NSParameterAssert(completion);
-    if (error) {
+    if (error || [self isErrorInResponse:responseObject responseInfo:responseInfo]) {
         //Parse response for error description if needed:
         error = [self errorFromNetworkError:error withResponse:responseObject request:request responseInfo:responseInfo];
 
@@ -452,6 +452,19 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
     }
 
     return result;
+}
+
+- (BOOL)isErrorInResponse:(id)response responseInfo:(id<TRCResponseInfo>)info
+{
+    BOOL isError = NO;
+
+    if (self.errorParser && response) {
+        if ([self.errorParser respondsToSelector:@selector(isErrorResponseBody:headers:status:)]) {
+            isError = [self.errorParser isErrorResponseBody:response headers:info.response.allHeaderFields status:info.response.statusCode];
+        }
+    }
+
+    return isError;
 }
 
 //-------------------------------------------------------------------------------------------

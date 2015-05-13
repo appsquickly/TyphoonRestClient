@@ -36,6 +36,27 @@
 @optional
 
 /**
+* Implement your body checking for error. This is required when your API uses some status codes inside response body, instead of
+* HTTP status codes.
+*
+* Note that `bodyObject` is raw object, which goes directly from `TRCConnection`. Without applying any schema.
+*
+* The goal of this method is just say that body looks like error or not.
+*
+* Examples:
+* If each response contains `status` field, then you'll check for that code in that method
+* {
+*    "status": 200
+* }
+* or if each response contains `success` boolean field, you can check it here
+* {
+*   "success": true
+* }
+*
+* */
+- (BOOL)isErrorResponseBody:(id)bodyObject headers:(NSDictionary *)headers status:(TRCHttpStatusCode)statusCode;
+
+/**
 * If you expect NSArray or NSDictionary representable 'bodyObject' for error composing, you can specify
 * validation scheme, to be sure that all needed for parsing keys specified and has correct type.
 * If this method not implement then ClassName.response name assumed

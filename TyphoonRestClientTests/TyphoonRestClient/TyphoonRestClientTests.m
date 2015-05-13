@@ -21,6 +21,7 @@
 #import "Person.h"
 #import "TRCSchemeFactory.h"
 #import "TRCSchemaDictionaryData.h"
+#import "TRCErrorParserSimple.h"
 
 @interface NumberToStringConverter : NSObject <TRCValueTransformer>
 
@@ -617,5 +618,40 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
         XCTAssertNotNil(result);
     }];
 }
+
+- (void)test_simple_error_parser
+{
+    TRCRequestSpy *request = [TRCRequestSpy new];
+
+    [connectionStub setResponseObject:@{@"status":@200, @"message":@"OK"} responseError:nil];
+
+    webService.errorParser = [TRCErrorParserSimple new];
+
+    request.parseObjectImplemented = NO;
+
+    [webService sendRequest:request completion:^(id result, NSError *error) {
+        XCTAssertNil(error);
+        NSDictionary *expect = @{@"status":@200, @"message":@"OK"};
+        XCTAssertEqualObjects(expect, result);
+    }];
+}
+
+- (void)test_simple_error_parser_wrong_status
+{
+    TRCRequestSpy *request = [TRCRequestSpy new];
+
+    [connectionStub setResponseObject:@{@"status":@400, @"message":@"Fail"} responseError:nil];
+
+    webService.errorParser = [TRCErrorParserSimple new];
+
+    request.parseObjectImplemented = NO;
+
+    [webService sendRequest:request completion:^(id result, NSError *error) {
+        XCTAssertNotNil(error);
+        XCTAssertNil(result);
+        XCTAssertEqualObjects(error.localizedDescription, @"Fail");
+    }];
+}
+
 
 @end
