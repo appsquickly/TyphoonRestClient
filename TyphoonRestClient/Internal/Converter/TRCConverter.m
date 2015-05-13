@@ -16,6 +16,7 @@
 #import "TRCObjectMapper.h"
 #import "TRCSchema.h"
 #import "TRCSchemaData.h"
+#import "TyphoonRestClientErrors.h"
 
 @interface TRCConverter () <TRCSchemaDataModifier>
 
@@ -62,7 +63,7 @@
 
 - (NSError *)conversionError
 {
-    return NSErrorFromErrorSet(self.internalErrors, @"value transformations");
+    return TRCErrorFromErrorSet(self.internalErrors, TyphoonRestClientErrorCodeTransformation, @"value transformations");
 }
 
 - (NSOrderedSet *)conversionErrorSet

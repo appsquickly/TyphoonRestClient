@@ -59,7 +59,7 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
     if (correctContentType) {
         result = [self.serializer objectFromResponseData:data error:&serializerError];
     } else {
-        contentTypeError = NSErrorWithFormat(@"Request failed: unacceptable content-type: %@", [response MIMEType]);
+        contentTypeError = TRCErrorWithFormat(TyphoonRestClientErrorCodeBadResponseMime, @"Unacceptable content-type: %@", [response MIMEType]);
     }
 
     if (errorOut) {

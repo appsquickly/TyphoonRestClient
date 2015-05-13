@@ -12,6 +12,7 @@
 
 #import "TRCValueTransformerString.h"
 #import "TRCUtils.h"
+#import "TyphoonRestClientErrors.h"
 
 
 @implementation TRCValueTransformerString
@@ -25,7 +26,7 @@
 {
     if (![object isKindOfClass:[NSString class]]) {
         if (error) {
-            *error = NSErrorWithFormat(@"Can't convert '%@' into string", [object class]);
+            *error = TRCErrorWithFormat(TyphoonRestClientErrorCodeTransformation, @"Can't convert '%@' into string", [object class]);
         }
         return nil;
     }

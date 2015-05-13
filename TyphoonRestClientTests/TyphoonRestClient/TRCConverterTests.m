@@ -20,6 +20,7 @@
 #import "TRCMapperPhone.h"
 #import "TRCSchemaDictionaryData.h"
 #import "TRCSerializerJson.h"
+#import "TestUtils.h"
 
 @interface TRCConverterTests : XCTestCase<TRCConvertersRegistry>
 

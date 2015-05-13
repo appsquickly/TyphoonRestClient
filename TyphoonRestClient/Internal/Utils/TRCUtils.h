@@ -15,13 +15,11 @@
 #import <Foundation/Foundation.h>
 #import "TyphoonRestClient.h"
 
-NSError *NSErrorWithFormat(NSString *format, ...) NS_FORMAT_FUNCTION(1,2);
-
 NSError *TRCRequestSerializationErrorWithFormat(NSString *format, ...) NS_FORMAT_FUNCTION(1,2);
 
 NSString *TRCKeyFromOptionalKey(NSString *key, BOOL *isOptional);
 
-NSError *NSErrorFromErrorSet(NSOrderedSet *errors, NSString *action);
+NSError *TRCErrorFromErrorSet(NSOrderedSet *errors, NSInteger code, NSString *action);
 
 id TRCValueAfterApplyingOptions(id value, TRCValidationOptions options, BOOL isRequest, BOOL isOptional);
 
@@ -34,3 +32,7 @@ NSString *TRCUrlPathFromPathByApplyingArguments(NSString *path, NSMutableDiction
 void TRCUrlPathParamsByRemovingNull(NSMutableDictionary *arguments);
 
 NSString * TRCQueryStringFromParametersWithEncoding(NSDictionary *parameters, NSStringEncoding stringEncoding);
+
+NSError *TRCErrorWithFormat(NSInteger code, NSString *format, ...) NS_FORMAT_FUNCTION(2,3);
+
+NSError *TRCErrorWithOriginalError(NSInteger code, NSError *originalError, NSString *format, ...) NS_FORMAT_FUNCTION(3,4);

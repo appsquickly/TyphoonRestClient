@@ -16,6 +16,7 @@
 		2DBA14CB7D8DE86DEA7D44E7 /* TRCSchemaDataValueOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA123B3A97A2B227BB3C5F /* TRCSchemaDataValueOptions.m */; };
 		2DBA165A54E32E9FC8AB7010 /* TRCSerializerData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1F814C9C0061D9A11EB1 /* TRCSerializerData.m */; };
 		2DBA16E9A0B44E233E3816D8 /* TRCSerializerImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA147BDFCEECD38E4C4026 /* TRCSerializerImage.m */; };
+		2DBA1711C99D8E9A0D607D3A /* TestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA158B4E6546253271A111 /* TestUtils.m */; };
 		2DBA178CC76E21D9C1C6DCBE /* TRCMapperPerson.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA1A63E0B2BDDB5D227E95 /* TRCMapperPerson.json */; };
 		2DBA17F737835F7EDA40FA64 /* TRCMapperPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA10AE04851CC3BDE7480A /* TRCMapperPhone.m */; };
 		2DBA1B9CD3295467A9BE7FD8 /* TRCSchemeFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1DFAF75A7BFE623BC34C /* TRCSchemeFactory.m */; };
@@ -102,6 +103,7 @@
 		2DBA14B5D7C2659FF8718894 /* TRCSerializerString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSerializerString.m; sourceTree = "<group>"; };
 		2DBA14B7C183D6716CA448F1 /* TRCSerializerImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSerializerImage.h; sourceTree = "<group>"; };
 		2DBA1563A0E4B420C9FCC0F9 /* TRCSerializerString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSerializerString.h; sourceTree = "<group>"; };
+		2DBA158B4E6546253271A111 /* TestUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestUtils.m; sourceTree = "<group>"; };
 		2DBA15FCFB9EF2C034E83D64 /* TRCSerializerJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSerializerJson.m; sourceTree = "<group>"; };
 		2DBA161429FAAF8C959F4B7F /* TRCSchemaDataValueOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSchemaDataValueOptions.h; sourceTree = "<group>"; };
 		2DBA184B22606D14A6144306 /* TRCSerializerData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSerializerData.h; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 		2DBA1A63E0B2BDDB5D227E95 /* TRCMapperPerson.json */ = {isa = PBXFileReference; lastKnownFileType = file.request; path = TRCMapperPerson.json; sourceTree = "<group>"; };
 		2DBA1B8033DA8D5FA5B63C8B /* TRCObjectMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCObjectMapper.h; sourceTree = "<group>"; };
 		2DBA1C1ACE5CC5E232C97C4E /* TRCSchemaData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSchemaData.h; sourceTree = "<group>"; };
+		2DBA1D11775F7F7D595235D9 /* TestUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestUtils.h; sourceTree = "<group>"; };
 		2DBA1D51CC52855CCCAAE28D /* TRCSchemeFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSchemeFactory.h; sourceTree = "<group>"; };
 		2DBA1D5D6A4F1CD450673422 /* TRCUtilsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCUtilsTests.m; sourceTree = "<group>"; };
 		2DBA1D63DF19AC301D0604A5 /* TRCMapperPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCMapperPhone.h; sourceTree = "<group>"; };
@@ -439,6 +442,8 @@
 				FAC9166619E697A60009D824 /* Schemes */,
 				FAC9166D19E697A60009D824 /* TestObjects */,
 				2DBA1D5D6A4F1CD450673422 /* TRCUtilsTests.m */,
+				2DBA158B4E6546253271A111 /* TestUtils.m */,
+				2DBA1D11775F7F7D595235D9 /* TestUtils.h */,
 			);
 			path = TyphoonRestClient;
 			sourceTree = "<group>";
@@ -684,6 +689,7 @@
 				2DBA1D4B061007D83FEBC57C /* Phone.m in Sources */,
 				2DBA17F737835F7EDA40FA64 /* TRCMapperPhone.m in Sources */,
 				2DBA1BE868E4128AFAFCBBA0 /* TRCErrorParserSimple.m in Sources */,
+				2DBA1711C99D8E9A0D607D3A /* TestUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

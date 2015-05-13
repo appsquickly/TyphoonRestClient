@@ -16,13 +16,13 @@
 #import "TyphoonRestClientErrors.h"
 #import "TRCSchemeStackTrace.h"
 
-NSError *NSErrorWithFormat(NSString *format, ...)
+NSError *TRCErrorWithFormat(NSInteger code, NSString *format, ...) NS_FORMAT_FUNCTION(2,3)
 {
     va_list args;
     va_start(args, format);
     NSString *description = [[NSString alloc] initWithFormat:format arguments:args];
     va_end(args);
-    return [NSError errorWithDomain:@"" code:0 userInfo:@{ NSLocalizedDescriptionKey : description}];
+    return [NSError errorWithDomain:TyphoonRestClientErrors code:code userInfo:@{NSLocalizedDescriptionKey : description}];
 }
 
 NSError *TRCRequestSerializationErrorWithFormat(NSString *format, ...)
@@ -33,6 +33,16 @@ NSError *TRCRequestSerializationErrorWithFormat(NSString *format, ...)
     va_end(args);
     return [NSError errorWithDomain:TyphoonRestClientErrors code:TyphoonRestClientErrorCodeRequestSerialization userInfo:@{ NSLocalizedDescriptionKey : description}];
 
+}
+
+NSError *TRCErrorWithOriginalError(NSInteger code, NSError *originalError, NSString *format, ...)
+{
+    NSCParameterAssert(originalError);
+    va_list args;
+    va_start(args, format);
+    NSString *description = [[NSString alloc] initWithFormat:format arguments:args];
+    va_end(args);
+    return [NSError errorWithDomain:TyphoonRestClientErrors code:code userInfo:@{ NSLocalizedDescriptionKey : description, TyphoonRestClientErrorKeyOriginalError: originalError}];
 }
 
 NSString *TRCKeyFromOptionalKey(NSString *key, BOOL *isOptional)
@@ -47,7 +57,7 @@ NSString *TRCKeyFromOptionalKey(NSString *key, BOOL *isOptional)
     return key;
 }
 
-NSError *NSErrorFromErrorSet(NSOrderedSet *errors, NSString *action)
+NSError *TRCErrorFromErrorSet(NSOrderedSet *errors, NSInteger code, NSString *action)
 {
     if (errors.count == 0) {
         return nil;
@@ -56,7 +66,7 @@ NSError *NSErrorFromErrorSet(NSOrderedSet *errors, NSString *action)
         for (NSError *error in errors) {
             [description appendFormat:@"\n- %@",error.localizedDescription];
         }
-        return NSErrorWithFormat(@"%@", description);
+        return TRCErrorWithFormat(code, @"%@", description);
     }
 }
 
@@ -120,7 +130,7 @@ NSString *TRCUrlPathFromPathByApplyingArguments(NSString *path, NSMutableDiction
     if ([arguments count] > 0) {
         if ([mutableParams count] == 0) {
             if (error) {
-                *error = NSErrorWithFormat(@"Can't process path '%@', since it has arguments (%@) but no parameters specified ", path, [arguments componentsJoinedByString:@", "]);
+                *error = TRCErrorWithFormat(TyphoonRestClientErrorCodeRequestUrlComposing, @"Can't process path '%@', since it has arguments (%@) but no parameters specified ", path, [arguments componentsJoinedByString:@", "]);
             }
             return nil;
         }
@@ -135,7 +145,7 @@ NSString *TRCUrlPathFromPathByApplyingArguments(NSString *path, NSMutableDiction
             id value = mutableParams[argumentKey];
             if (!IsValidPathArgumentValue(value)) {
                 if (error) {
-                    *error = NSErrorWithFormat(@"Can't process path '%@', since value for argument %@ missing or invalid (must be NSNumber or non-empty NSString)", path, argument);
+                    *error = TRCErrorWithFormat(TyphoonRestClientErrorCodeRequestUrlComposing, @"Can't process path '%@', since value for argument %@ missing or invalid (must be NSNumber or non-empty NSString)", path, argument);
                 }
                 return nil;
             }

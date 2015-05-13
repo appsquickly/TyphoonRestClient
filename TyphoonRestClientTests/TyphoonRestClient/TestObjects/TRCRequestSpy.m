@@ -7,6 +7,7 @@
 #import "NSObject+AutoDescription.h"
 #import "TRCConverter.h"
 #import "TRCUtils.h"
+#import "TestUtils.h"
 
 @implementation TRCRequestSpy
 

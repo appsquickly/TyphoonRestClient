@@ -14,6 +14,7 @@
 
 #import "TRCValueTransformerUrl.h"
 #import "TRCUtils.h"
+#import "TyphoonRestClientErrors.h"
 
 
 @implementation TRCValueTransformerUrl
@@ -26,12 +27,12 @@
     } else if ([value isKindOfClass:[NSString class]]) {
         NSURL *url = [[NSURL alloc] initWithString:value];
         if (!url && error) {
-            *error = NSErrorWithFormat(@"Can't create URL from string '%@'", value);
+            *error = TRCErrorWithFormat(TyphoonRestClientErrorCodeTransformation, @"Can't create URL from string '%@'", value);
         }
         return url;
     } else {
         if (error) {
-            *error = NSErrorWithFormat(@"Can't convert type '%@' to url", [value class]);
+            *error = TRCErrorWithFormat(TyphoonRestClientErrorCodeTransformation, @"Can't convert type '%@' to url", [value class]);
         }
         return nil;
     }
@@ -45,7 +46,7 @@
         return object;
     } else {
         if (error) {
-            *error = NSErrorWithFormat(@"Can't convert type '%@' to url string", [object class]);
+            *error = TRCErrorWithFormat(TyphoonRestClientErrorCodeTransformation, @"Can't convert type '%@' to url string", [object class]);
         }
         return nil;
     }

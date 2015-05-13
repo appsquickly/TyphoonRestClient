@@ -9,6 +9,7 @@
 #import "TRCMapperPerson.h"
 #import "Person.h"
 #import "TRCUtils.h"
+#import "TestUtils.h"
 
 @implementation TRCMapperPerson
 

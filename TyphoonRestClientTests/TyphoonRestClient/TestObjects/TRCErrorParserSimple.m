@@ -11,6 +11,7 @@
 
 #import "TRCErrorParserSimple.h"
 #import "TRCUtils.h"
+#import "TestUtils.h"
 
 
 @implementation TRCErrorParserSimple

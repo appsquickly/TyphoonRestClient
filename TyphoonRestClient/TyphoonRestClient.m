@@ -34,6 +34,7 @@
 #import "TRCSerializerImage.h"
 #import "TRCSerializerInputStream.h"
 #import "TRCSerializerString.h"
+#import "TyphoonRestClientErrors.h"
 
 TRCRequestMethod TRCRequestMethodPost = @"POST";
 TRCRequestMethod TRCRequestMethodGet = @"GET";
@@ -187,7 +188,7 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
 
     options.responseSerialization = _responseSerializers[serializationName];
     if (!options.responseSerialization) {
-        TRCSetError(error, NSErrorWithFormat(@"Can't find response serialization for name '%@'", serializationName));
+        TRCSetError(error, TRCErrorWithFormat(TyphoonRestClientErrorCodeResponseSerialization, @"Can't find response serialization for name '%@'", serializationName));
         return nil;
     }
 
@@ -220,7 +221,7 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
     TRCSerialization serializationName = [self requestSerializationFromRequest:request body:options.body];
     options.serialization = _requestSerializers[serializationName];
     if (!options.serialization) {
-        TRCSetError(error, NSErrorWithFormat(@"Can't find request serialization for name '%@'", serializationName));
+        TRCSetError(error, TRCErrorWithFormat(TyphoonRestClientErrorCodeRequestSerialization, @"Can't find request serialization for name '%@'", serializationName));
         return nil;
     }
 
@@ -430,7 +431,7 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
 
 - (NSError *)errorFromNetworkError:(NSError *)networkError withResponse:(id)response request:(id<TRCRequest>)request responseInfo:(id<TRCResponseInfo>)info
 {
-    NSError *result = networkError;
+    NSError *result = TRCErrorWithOriginalError(TyphoonRestClientErrorCodeConnectionError, networkError, @"Connection error");
 
     if (self.errorParser && response) {
         TRCSchema *scheme = [_schemeFactory schemeForErrorParser:self.errorParser];

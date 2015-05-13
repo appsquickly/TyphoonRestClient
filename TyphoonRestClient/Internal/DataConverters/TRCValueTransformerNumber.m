@@ -15,6 +15,7 @@
 
 #import "TRCValueTransformerNumber.h"
 #import "TRCUtils.h"
+#import "TyphoonRestClientErrors.h"
 
 
 @implementation TRCValueTransformerNumber
@@ -37,7 +38,7 @@
     } else {
         NSNumber *number = [[self sharedNumberFormatter] numberFromString:value];
         if (!number && error) {
-            *error = NSErrorWithFormat(@"Can't convert string '%@' to NSNumber", value);
+            *error = TRCErrorWithFormat(TyphoonRestClientErrorCodeTransformation, @"Can't convert string '%@' to NSNumber", value);
         }
         return number;
     }
@@ -51,12 +52,12 @@
     } else if ([object isKindOfClass:[NSString class]]) {
         NSNumber *number = [[self sharedNumberFormatter] numberFromString:object];
         if (!number && error) {
-            *error = NSErrorWithFormat(@"Can't convert string '%@' to NSNumber", object);
+            *error = TRCErrorWithFormat(TyphoonRestClientErrorCodeTransformation, @"Can't convert string '%@' to NSNumber", object);
         }
         return number;
     } else {
         if (error) {
-            *error = NSErrorWithFormat(@"Can't convert '%@' into string", [object class]);
+            *error = TRCErrorWithFormat(TyphoonRestClientErrorCodeTransformation, @"Can't convert '%@' into string", [object class]);
         }
         return nil;
     }
