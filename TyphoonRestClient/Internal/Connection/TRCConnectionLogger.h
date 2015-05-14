@@ -11,14 +11,14 @@
 
 #import <Foundation/Foundation.h>
 #import "TRCConnection.h"
-#import "TRCConnectionBaseProxy.h"
+#import "TRCConnectionProxy.h"
 
 
 @protocol TRCConnectionLoggerWriter;
 @protocol TRCConnection;
 
 
-@interface TRCConnectionLogger : TRCConnectionBaseProxy <TRCConnection>
+@interface TRCConnectionLogger : TRCConnectionProxy <TRCConnection>
 
 @property(nonatomic, strong) id<TRCConnectionLoggerWriter> writer;
 

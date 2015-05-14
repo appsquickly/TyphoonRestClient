@@ -13,7 +13,7 @@
 #import "TRCConnection.h"
 
 
-@interface TRCConnectionBaseProxy : NSObject <TRCConnection>
+@interface TRCConnectionProxy : NSObject <TRCConnection>
 
 @property(nonatomic, strong) id<TRCConnection> connection;
 

@@ -9,10 +9,10 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#import "TRCConnectionBaseProxy.h"
+#import "TRCConnectionProxy.h"
 
 
-@implementation TRCConnectionBaseProxy
+@implementation TRCConnectionProxy
 
 - (instancetype)initWithConnection:(id<TRCConnection>)connection
 {
