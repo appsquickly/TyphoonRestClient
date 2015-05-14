@@ -19,10 +19,9 @@
 
 - (instancetype)initWithConnection:(id<TRCConnection>)connection
 {
-    self = [super init];
+    self = [super initWithConnection:connection];
     if (self) {
         [self setupLogger];
-        self.connection = connection;
     }
     return self;
 }
@@ -42,10 +41,6 @@
     dispatch_set_target_queue(printing_queue, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0));
 }
 
-- (NSMutableURLRequest *)requestWithOptions:(id<TRCConnectionRequestCreationOptions>)options error:(NSError **)requestComposingError
-{
-    return [self.connection requestWithOptions:options error:requestComposingError];
-}
 
 - (id<TRCProgressHandler>)sendRequest:(NSURLRequest *)request withOptions:(id<TRCConnectionRequestSendingOptions>)options completion:(TRCConnectionCompletion)completion
 {
@@ -72,20 +67,6 @@
     return progressHandler;
 }
 
-- (void)setReachabilityDelegate:(id<TRCConnectionReachabilityDelegate>)reachabilityDelegate
-{
-    if ([(id)_connection respondsToSelector:@selector(setReachabilityDelegate:)]) {
-        [_connection setReachabilityDelegate:reachabilityDelegate];
-    }
-}
-
-- (TRCConnectionReachabilityState)reachabilityState
-{
-    if ([(id)_connection respondsToSelector:@selector(reachabilityState)]) {
-        return [_connection reachabilityState];
-    }
-    return TRCConnectionReachabilityStateUnknown;
-}
 
 #pragma mark - Utils
 

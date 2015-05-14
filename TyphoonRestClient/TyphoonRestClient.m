@@ -431,7 +431,10 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
 
 - (NSError *)errorFromNetworkError:(NSError *)networkError withResponse:(id)response request:(id<TRCRequest>)request responseInfo:(id<TRCResponseInfo>)info
 {
-    NSError *result = TRCErrorWithOriginalError(TyphoonRestClientErrorCodeConnectionError, networkError, @"Connection error");
+    NSError *result = nil;
+    if (networkError) {
+        result = TRCErrorWithOriginalError(TyphoonRestClientErrorCodeConnectionError, networkError, @"Connection error");
+    }
 
     if (self.errorParser && response) {
         TRCSchema *scheme = [_schemeFactory schemeForErrorParser:self.errorParser];

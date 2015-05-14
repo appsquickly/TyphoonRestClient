@@ -239,7 +239,7 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
         XCTAssertFalse(request.parseResponseObjectCalled);
         XCTAssertNil(result);
         XCTAssertNotNil(error);
-        XCTAssertEqualObjects(error.localizedDescription, @"Network Error!");
+        XCTAssertEqualObjects(error.localizedDescription, @"Connection error");
     }];
 }
 
@@ -287,7 +287,7 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
         XCTAssertFalse(request.parseResponseObjectCalled);
         XCTAssertNil(result);
         XCTAssertNotNil(error);
-        XCTAssertEqualObjects(error.localizedDescription, @"Network Error!");
+        XCTAssertEqualObjects(error.localizedDescription, @"Connection error");
     }];
 }
 
@@ -310,7 +310,7 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
         XCTAssertFalse(request.parseResponseObjectCalled);
         XCTAssertNil(result);
         XCTAssertNotNil(error);
-        XCTAssertEqualObjects(error.localizedDescription, @"Network Error!");
+        XCTAssertEqualObjects(error.localizedDescription, @"Connection error");
     }];
 }
 

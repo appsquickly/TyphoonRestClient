@@ -11,21 +11,20 @@
 
 #import <Foundation/Foundation.h>
 #import "TRCConnection.h"
+#import "TRCConnectionBaseProxy.h"
 
 
 @protocol TRCConnectionLoggerWriter;
 @protocol TRCConnection;
 
 
-@interface TRCConnectionLogger : NSObject <TRCConnection>
+@interface TRCConnectionLogger : TRCConnectionBaseProxy <TRCConnection>
 
-@property(nonatomic, strong) id<TRCConnection> connection;
 @property(nonatomic, strong) id<TRCConnectionLoggerWriter> writer;
 
 @property(nonatomic) BOOL shouldLogUploadProgress;
 @property(nonatomic) BOOL shouldLogDownloadProgress;
 
-- (instancetype)initWithConnection:(id<TRCConnection>)connection;
 
 @end
 
