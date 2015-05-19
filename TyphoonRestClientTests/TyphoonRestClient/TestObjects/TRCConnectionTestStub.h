@@ -8,7 +8,7 @@
 #import "TRCConnectionAFNetworking.h"
 
 
-@interface TRCConnectionStub : TRCConnectionAFNetworking<TRCConnection>
+@interface TRCConnectionTestStub : TRCConnectionAFNetworking<TRCConnection>
 
 + (id)newWithResponse:(id)responseObject error:(NSError *)error;
 

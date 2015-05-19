@@ -4,7 +4,7 @@
 //
 
 #import <objc/runtime.h>
-#import "TRCConnectionStub.h"
+#import "TRCConnectionTestStub.h"
 
 @interface HttpWebServiceConnectionStubResponse : NSObject
 @property (nonatomic, strong) id response;
@@ -14,7 +14,7 @@
 @implementation HttpWebServiceConnectionStubResponse
 @end
 
-@implementation TRCConnectionStub
+@implementation TRCConnectionTestStub
 {
     NSError *responseError;
     id responseObject;
@@ -72,7 +72,7 @@
 
 + (id)newWithResponse:(id)responseObject1 error:(NSError *)error
 {
-    TRCConnectionStub *stub = [TRCConnectionStub new];
+    TRCConnectionTestStub *stub = [TRCConnectionTestStub new];
     [stub setResponseObject:responseObject1 responseError:error];
     return stub;
 }

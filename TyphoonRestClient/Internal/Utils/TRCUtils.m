@@ -16,7 +16,7 @@
 #import "TyphoonRestClientErrors.h"
 #import "TRCSchemeStackTrace.h"
 
-NSError *TRCErrorWithFormat(NSInteger code, NSString *format, ...) NS_FORMAT_FUNCTION(2,3)
+NSError *TRCErrorWithFormat(NSInteger code, NSString *format, ...)
 {
     va_list args;
     va_start(args, format);

@@ -8,7 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "TyphoonRestClient.h"
-#import "TRCConnectionStub.h"
+#import "TRCConnectionTestStub.h"
 #import "TRCRequestSpy.h"
 #import "TRCErrorParserSpy.h"
 #import "TRCSchema.h"
@@ -57,7 +57,7 @@
 @implementation TyphoonRestClientTests
 {
     TyphoonRestClient *webService;
-    TRCConnectionStub *connectionStub;
+    TRCConnectionTestStub *connectionStub;
 }
 
 id(*originalImp)(id, SEL, NSString *, BOOL);
@@ -77,7 +77,7 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
     webService = [[TyphoonRestClient alloc] init];
     [webService registerValueTransformer:[NumberToStringConverter new] forTag:@"number-as-string"];
     [webService registerObjectMapper:[TRCMapperPerson new] forTag:@"{person}"];
-    connectionStub = [[TRCConnectionStub alloc] init];
+    connectionStub = [[TRCConnectionTestStub alloc] init];
     webService.connection = connectionStub;
 
 }

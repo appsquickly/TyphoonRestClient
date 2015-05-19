@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D80DE1F1B0B4CA000679774 /* TRCConnectionStub.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D80DE1E1B0B4CA000679774 /* TRCConnectionStub.m */; };
 		2DBA10F6D20316CBD2233306 /* TRCUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1D5D6A4F1CD450673422 /* TRCUtilsTests.m */; };
 		2DBA11D31595F590A4EB022B /* TRCSerializerHttpQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA13B88A15F6ACA497CA0F /* TRCSerializerHttpQuery.m */; };
 		2DBA11E0DA291B45A99BDB96 /* TRCSerializerInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA199E246F01A1A0A4382F /* TRCSerializerInputStream.m */; };
@@ -37,7 +38,7 @@
 		FA55918419E69A4E00E00570 /* TRCSchemeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC9166519E697A60009D824 /* TRCSchemeTests.m */; };
 		FA55918519E69A5B00E00570 /* TRCRequestSpy.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC9166F19E697A60009D824 /* TRCRequestSpy.m */; };
 		FA55918619E69A5B00E00570 /* TRCErrorParserSpy.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC9167119E697A60009D824 /* TRCErrorParserSpy.m */; };
-		FA55918719E69A5B00E00570 /* TRCConnectionStub.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC9167319E697A60009D824 /* TRCConnectionStub.m */; };
+		FA55918719E69A5B00E00570 /* TRCConnectionTestStub.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC9167319E697A60009D824 /* TRCConnectionTestStub.m */; };
 		FA55918819E69A5B00E00570 /* TRCValueTransformerStub.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC9167519E697A60009D824 /* TRCValueTransformerStub.m */; };
 		FAC9161719E693370009D824 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAC9161619E693370009D824 /* Foundation.framework */; };
 		FAC9161C19E693370009D824 /* TyphoonRestClient.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = FAC9161B19E693370009D824 /* TyphoonRestClient.h */; };
@@ -89,6 +90,8 @@
 
 /* Begin PBXFileReference section */
 		11A77D6930D24E1BA5797E0E /* libPods-HttpWebServiceTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HttpWebServiceTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D80DE1D1B0B4CA000679774 /* TRCConnectionStub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCConnectionStub.h; sourceTree = "<group>"; };
+		1D80DE1E1B0B4CA000679774 /* TRCConnectionStub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCConnectionStub.m; sourceTree = "<group>"; };
 		2DBA104BA4D6F38FB51EC684 /* PersonsList.json */ = {isa = PBXFileReference; lastKnownFileType = file.json; path = PersonsList.json; sourceTree = "<group>"; };
 		2DBA10A87A8A601C1DFC1F24 /* TRCSerializerJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSerializerJson.h; sourceTree = "<group>"; };
 		2DBA10AE04851CC3BDE7480A /* TRCMapperPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCMapperPhone.m; sourceTree = "<group>"; };
@@ -186,8 +189,8 @@
 		FAC9166F19E697A60009D824 /* TRCRequestSpy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCRequestSpy.m; sourceTree = "<group>"; };
 		FAC9167019E697A60009D824 /* TRCErrorParserSpy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCErrorParserSpy.h; sourceTree = "<group>"; };
 		FAC9167119E697A60009D824 /* TRCErrorParserSpy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCErrorParserSpy.m; sourceTree = "<group>"; };
-		FAC9167219E697A60009D824 /* TRCConnectionStub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCConnectionStub.h; sourceTree = "<group>"; };
-		FAC9167319E697A60009D824 /* TRCConnectionStub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCConnectionStub.m; sourceTree = "<group>"; };
+		FAC9167219E697A60009D824 /* TRCConnectionTestStub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCConnectionTestStub.h; sourceTree = "<group>"; };
+		FAC9167319E697A60009D824 /* TRCConnectionTestStub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCConnectionTestStub.m; sourceTree = "<group>"; };
 		FAC9167419E697A60009D824 /* TRCValueTransformerStub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCValueTransformerStub.h; sourceTree = "<group>"; };
 		FAC9167519E697A60009D824 /* TRCValueTransformerStub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCValueTransformerStub.m; sourceTree = "<group>"; };
 		FAE3B4D21ACFEA880033835A /* PropertyListSchema.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PropertyListSchema.plist; sourceTree = "<group>"; };
@@ -372,8 +375,10 @@
 				FAC9163F19E694FA0009D824 /* TRCConnectionAFNetworking.m */,
 				2DBA18BF346770A2DA8D1B56 /* TRCConnectionLogger.h */,
 				2DBA124E62BE34E0A5539F39 /* TRCConnectionLogger.m */,
-				2DBA199E46DC905F5B2013EA /* TRCConnectionProxy.m */,
 				2DBA1F206569A25C5B48B2B1 /* TRCConnectionProxy.h */,
+				2DBA199E46DC905F5B2013EA /* TRCConnectionProxy.m */,
+				1D80DE1D1B0B4CA000679774 /* TRCConnectionStub.h */,
+				1D80DE1E1B0B4CA000679774 /* TRCConnectionStub.m */,
 			);
 			path = Connection;
 			sourceTree = "<group>";
@@ -475,8 +480,8 @@
 				FAC9166F19E697A60009D824 /* TRCRequestSpy.m */,
 				FAC9167019E697A60009D824 /* TRCErrorParserSpy.h */,
 				FAC9167119E697A60009D824 /* TRCErrorParserSpy.m */,
-				FAC9167219E697A60009D824 /* TRCConnectionStub.h */,
-				FAC9167319E697A60009D824 /* TRCConnectionStub.m */,
+				FAC9167219E697A60009D824 /* TRCConnectionTestStub.h */,
+				FAC9167319E697A60009D824 /* TRCConnectionTestStub.m */,
 				FAC9167419E697A60009D824 /* TRCValueTransformerStub.h */,
 				FAC9167519E697A60009D824 /* TRCValueTransformerStub.m */,
 				FA46955E1A938782004036A5 /* TRCMapperPerson.h */,
@@ -672,6 +677,7 @@
 				2DBA16E9A0B44E233E3816D8 /* TRCSerializerImage.m in Sources */,
 				2DBA1362184317A12AE85327 /* TRCSerializerPlist.m in Sources */,
 				2DBA11D31595F590A4EB022B /* TRCSerializerHttpQuery.m in Sources */,
+				1D80DE1F1B0B4CA000679774 /* TRCConnectionStub.m in Sources */,
 				2DBA11E0DA291B45A99BDB96 /* TRCSerializerInputStream.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -688,7 +694,7 @@
 				FA55918619E69A5B00E00570 /* TRCErrorParserSpy.m in Sources */,
 				FA4695631A9387FF004036A5 /* Person.m in Sources */,
 				FA4695601A938782004036A5 /* TRCMapperPerson.m in Sources */,
-				FA55918719E69A5B00E00570 /* TRCConnectionStub.m in Sources */,
+				FA55918719E69A5B00E00570 /* TRCConnectionTestStub.m in Sources */,
 				FA55918419E69A4E00E00570 /* TRCSchemeTests.m in Sources */,
 				2DBA10F6D20316CBD2233306 /* TRCUtilsTests.m in Sources */,
 				2DBA1D4B061007D83FEBC57C /* Phone.m in Sources */,
