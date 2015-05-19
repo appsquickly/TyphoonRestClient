@@ -77,6 +77,10 @@
         }
     }
 
+    if (response.statusCode < 200 || response.statusCode >= 300) {
+        responseError = TRCErrorWithFormat(TyphoonRestClientErrorCodeBadResponseCode, @"Incorrect HTTP status code %d", response.statusCode);
+    }
+
     if (completion) {
         if (response.delayInSeconds > 0) {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(response.delayInSeconds * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

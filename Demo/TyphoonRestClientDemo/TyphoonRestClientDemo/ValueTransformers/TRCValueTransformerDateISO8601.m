@@ -2,6 +2,7 @@
 
 #import "TRCValueTransformerDateISO8601.h"
 #import "TRCUtils.h"
+#import "TyphoonRestClientErrors.h"
 
 @implementation TRCValueTransformerDateISO8601
 
@@ -24,7 +25,7 @@
     
     NSDate *date = [dateFormatter dateFromString:responseValue];
     if (!date && error) {
-        *error = NSErrorWithFormat(@"Can't create NSDate from string '%@'", responseValue);
+        *error = TRCErrorWithFormat(TyphoonRestClientErrorCodeResponseSerialization, @"Can't create NSDate from string '%@'", responseValue);
     }
     return date;
 }
@@ -33,7 +34,7 @@
 {
     if (![object isKindOfClass:[NSDate class]]) {
         if (error) {
-            *error = NSErrorWithFormat(@"Can't convert '%@' into NSString using %@", [object class], [self class]);
+            *error = TRCErrorWithFormat(TyphoonRestClientErrorCodeRequestSerialization, @"Can't convert '%@' into NSString using %@", [object class], [self class]);
         }
         return nil;
     }
@@ -42,7 +43,7 @@
     NSString *string = [dateFormatter stringFromDate:object];
     
     if (!string && error) {
-        *error = NSErrorWithFormat(@"Can't convert NSDate '%@' into NSStrign", object);
+        *error = TRCErrorWithFormat(TyphoonRestClientErrorCodeRequestSerialization, @"Can't convert NSDate '%@' into NSStrign", object);
     }
     
     return string;

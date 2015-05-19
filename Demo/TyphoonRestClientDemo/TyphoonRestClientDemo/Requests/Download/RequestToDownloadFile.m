@@ -18,9 +18,9 @@
     return [NSOutputStream outputStreamToFileAtPath:self.outputPath append:NO];
 }
 
-- (TRCResponseSerialization)responseSerialization
+- (TRCSerialization)responseSerialization
 {
-    return TRCResponseSerializationData;
+    return TRCSerializationData;
 }
 
 - (id)responseProcessedFromBody:(NSData *)bodyObject headers:(NSDictionary *)responseHeaders status:(TRCHttpStatusCode)statusCode error:(NSError **)parseError
