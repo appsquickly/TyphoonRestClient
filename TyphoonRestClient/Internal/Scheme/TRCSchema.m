@@ -175,8 +175,10 @@
 
 - (NSError *)errorForMissedKey:(NSString *)key withStack:(TRCSchemaStackTrace *)stack
 {
+    NSMutableArray *stackArray = [[stack stack] mutableCopy];
+    [stackArray removeLastObject];
     NSString *fullDescriptionErrorMessage = [NSString stringWithFormat:@"Can't find value for key '%@' in this dictionary", key];
-    NSMutableDictionary *userInfo = [self userInfoForErrorDescriptionWithMessage:fullDescriptionErrorMessage stack:stack];
+    NSMutableDictionary *userInfo = [self userInfoForErrorDescriptionWithObject:stack.originalObject errorMessage:fullDescriptionErrorMessage stack:stackArray];
     userInfo[NSLocalizedDescriptionKey] = [NSString stringWithFormat:@"Can't find value for key '%@' in '%@' dictionary", key, [stack shortDescription]];
     return [NSError errorWithDomain:TyphoonRestClientErrors code:TyphoonRestClientErrorCodeValidation userInfo:userInfo];
 }
@@ -184,7 +186,7 @@
 - (NSError *)errorForIncorrectType:(NSString *)incorrectType correctType:(NSString *)correctType stack:(TRCSchemaStackTrace *)stack
 {
     NSString *fullDescriptionErrorMessage = [NSString stringWithFormat:@"Type mismatch: must be %@, but '%@' has given", correctType, incorrectType];
-    NSMutableDictionary *userInfo = [self userInfoForErrorDescriptionWithMessage:fullDescriptionErrorMessage stack:stack];
+    NSMutableDictionary *userInfo = [self userInfoForErrorDescriptionWithObject:stack.originalObject errorMessage:fullDescriptionErrorMessage stack:[stack stack]];
     userInfo[NSLocalizedDescriptionKey] = [NSString stringWithFormat:@"Type mismatch for '%@' (Must be %@, but '%@' has given)", [stack shortDescription], correctType, incorrectType];
     return [NSError errorWithDomain:TyphoonRestClientErrors code:TyphoonRestClientErrorCodeValidation userInfo:userInfo];
 }
@@ -212,11 +214,11 @@
     return [NSString stringWithFormat:@"'%@'",NSStringFromClass([schemeValue class])];
 }
 
-- (NSMutableDictionary *)userInfoForErrorDescriptionWithMessage:(NSString *)message stack:(TRCSchemaStackTrace *)stackTrace
+- (NSMutableDictionary *)userInfoForErrorDescriptionWithObject:(id)object errorMessage:(NSString *)message stack:(NSArray *)stack
 {
     NSMutableDictionary *userInfo = [NSMutableDictionary new];
-    if (stackTrace) {
-        NSString *fullDescription = [self errorDescriptionWithMessage:message withStack:stackTrace];
+    if (stack && message) {
+        NSString *fullDescription = [self errorDescriptionWithObject:object errorMessage:message stack:stack];
         if (fullDescription) {
             userInfo[TyphoonRestClientErrorKeyFullDescription] = fullDescription;
         }
@@ -225,7 +227,7 @@
     return userInfo;
 }
 
-- (NSString *)errorDescriptionWithMessage:(NSString *)message withStack:(TRCSchemaStackTrace *)stack
+- (NSString *)errorDescriptionWithObject:(id)object errorMessage:(NSString *)message stack:(NSArray *)stack
 {
     NSString *errorDescription = nil;
     id<TRCValidationErrorPrinter>errorPrinter = nil;
@@ -235,7 +237,7 @@
     }
 
     if (errorPrinter) {
-        errorDescription = [errorPrinter errorDescriptionWithErrorMessage:message stackTrace:stack];
+        errorDescription = [errorPrinter errorDescriptionForObject:object errorMessage:message stackTrace:stack];
     }
 
     return errorDescription;

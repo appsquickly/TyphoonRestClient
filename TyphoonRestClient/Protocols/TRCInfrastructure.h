@@ -59,6 +59,6 @@
 
 @protocol TRCValidationErrorPrinter
 
-- (NSString *)errorDescriptionWithErrorMessage:(NSString *)errorMessage stackTrace:(TRCSchemaStackTrace *)stackTrace;
+- (NSString *)errorDescriptionForObject:(id)object errorMessage:(NSString *)errorMessage stackTrace:(NSArray *)stackTrace;
 
 @end

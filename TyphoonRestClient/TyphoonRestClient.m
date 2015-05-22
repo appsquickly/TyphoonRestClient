@@ -102,6 +102,7 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
 {
     TRCSerializerJson *json = [TRCSerializerJson new];
     [self registerSchemeFormat:json forFileExtension:@"json"];
+    [self registerValidationErrorPrinter:json forFormatWithFileExtension:@"json"];
     [self registerRequestSerializer:json forName:TRCSerializationJson];
     [self registerResponseSerializer:json forName:TRCSerializationJson];
 

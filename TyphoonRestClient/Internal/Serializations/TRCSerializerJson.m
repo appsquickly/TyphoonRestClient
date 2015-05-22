@@ -26,6 +26,8 @@ TRCSerialization TRCSerializationJson = @"TRCSerializationJson";
 
 @property (nonatomic, strong) TRCSchemaStackTrace *printingStack;
 
+@property (nonatomic) BOOL cancelPrinting;
+
 @end
 
 @implementation TRCSchemeStackTraceContext
@@ -115,16 +117,16 @@ TRCSerialization TRCSerializationJson = @"TRCSerializationJson";
 #pragma mark - VALIDATION ERROR PRINTER
 //-------------------------------------------------------------------------------------------
 
-- (NSString *)errorDescriptionWithErrorMessage:(NSString *)errorMessage stackTrace:(TRCSchemaStackTrace *)stackTrace
+- (NSString *)errorDescriptionForObject:(id)object errorMessage:(NSString *)errorMessage stackTrace:(NSArray *)stackTrace
 {
     TRCSchemeStackTraceContext *context = [TRCSchemeStackTraceContext new];
     context.level = 0;
     if (errorMessage) {
-        context.stack = [stackTrace stack];
+        context.stack = stackTrace;
         context.errorMessage = errorMessage;
         context.printingStack = [TRCSchemaStackTrace new];
     }
-    return [[self class] stringFromObject:stackTrace.originalObject context:context];
+    return [[self class] stringFromObject:object context:context];
 }
 
 + (NSString *)stringFromObject:(id)object context:(TRCSchemeStackTraceContext *)context
@@ -149,10 +151,8 @@ TRCSerialization TRCSerializationJson = @"TRCSerializationJson";
     NSMutableString *buffer = [NSMutableString new];
     [buffer appendString:@"{"];
 
-    if ([[context.printingStack stack] isEqualToArray:context.stack]) {
-        [buffer appendFormat:@"  <----- %@", context.errorMessage];
-        context.printingStack = nil;
-    }
+    [self printErrorMessageIfNeededIntoBuffer:buffer withContext:context];
+
     [buffer appendString:@"\n"];
 
     context.level++;

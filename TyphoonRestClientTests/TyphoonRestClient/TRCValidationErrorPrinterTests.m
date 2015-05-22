@@ -29,12 +29,8 @@
 
 - (void)test_simple_output
 {
-
-    TRCSchemaStackTrace *stack = [TRCSchemaStackTrace new];
-    [stack pushSymbol:@"order"];
-    [stack pushSymbol:@"suitable_packing_materials"];
-    [stack pushSymbol:@1];
-    stack.originalObject = @{
+    NSArray *stack = @[@"order", @"suitable_packing_materials", @1];
+    NSDictionary *object = @{
             @"order" : @{
                     @"id" : @"asfsaf",
                     @"created_at" : @"123123",
@@ -66,7 +62,7 @@
             }
     };
 
-    NSString *result = [_jsonPrinter errorDescriptionWithErrorMessage:@"Must be '123'" stackTrace:stack];
+    NSString *result = [_jsonPrinter errorDescriptionForObject:object errorMessage:@"Must be '123'" stackTrace:stack];
 
     XCTAssertEqualObjects(result, @"{\n"
             " \"order\" = {\n"

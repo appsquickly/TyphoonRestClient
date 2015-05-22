@@ -51,9 +51,6 @@
 
 @end
 
-@interface TyphoonRestClientTests ()
-@end
-
 @implementation TyphoonRestClientTests
 {
     TyphoonRestClient *webService;
@@ -102,7 +99,7 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
                 @"url{?}": @"{url}"
         };
     }
-    if ([name isEqualToString:@"SimpleRequest"]) {
+    if ([name isEqualToString:@"SimpleRequest.json"]) {
         schemeObject = @{
                 @"key": @"{url}",
         };
@@ -168,7 +165,7 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
     [connectionStub setResponseObject:@{ @"key": @"value" } responseError:nil];
 
     TRCRequestSpy *request = [TRCRequestSpy new];
-    request.requestSchemeName = @"SimpleRequest";
+    request.requestSchemeName = @"SimpleRequest.json";
     request.requestParams = @{ @"key": @"123"};
     request.parseResult = @"result";
 
@@ -184,7 +181,7 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
     [connectionStub setResponseObject:@{ @"key": @"value" } responseError:nil];
 
     TRCRequestSpy *request = [TRCRequestSpy new];
-    request.requestSchemeName = @"SimpleRequest";
+    request.requestSchemeName = @"SimpleRequest.json";
     request.requestParams = @{ @"key": @123};
     request.parseResult = @"result";
 
@@ -199,7 +196,7 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
     [connectionStub setResponseObject:@{ @"key": @"value" } responseError:nil];
 
     TRCRequestSpy *request = [TRCRequestSpy new];
-    request.requestSchemeName = @"SimpleRequest";
+    request.requestSchemeName = @"SimpleRequest.json";
     request.requestParams = @{ @"key2": @123};
     request.parseResult = @"result";
 
