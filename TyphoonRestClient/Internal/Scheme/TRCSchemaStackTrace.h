@@ -16,13 +16,12 @@
 
 @property (nonatomic, strong) id originalObject;
 
+- (NSArray *)stack;
+
 - (void)pushSymbol:(NSString *)symbol;
 - (void)pushSymbolWithArrayIndex:(NSNumber *)index;
 - (void)pop;
 
 - (NSString *)shortDescription;
-//- (NSString *)fullDescriptionWithErrorMessage:(NSString *)errorMessage;
-
-+ (NSString *)descriptionOfObject:(id)object;
 
 @end

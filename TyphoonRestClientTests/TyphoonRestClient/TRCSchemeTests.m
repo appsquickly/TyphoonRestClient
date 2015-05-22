@@ -109,6 +109,11 @@
     }
 }
 
+- (id<TRCValidationErrorPrinter>)validationErrorPrinterForExtension:(NSString *)extension
+{
+    return nil;
+}
+
 - (id)convertValuesInResponse:(id)arrayOrDictionary schema:(TRCSchema *)scheme1 error:(NSError **)parseError
 {
     return nil;

@@ -39,6 +39,7 @@
 		2DBA1D2D9A36B17788C70C55 /* TRCConnectionLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA124E62BE34E0A5539F39 /* TRCConnectionLogger.m */; };
 		2DBA1D4B061007D83FEBC57C /* Phone.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1942EBD89F99FB0149DC /* Phone.m */; };
 		2DBA1DCF070CBF74CFE8ED28 /* TRCSerializerJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA15FCFB9EF2C034E83D64 /* TRCSerializerJson.m */; };
+		2DBA1EC0738D4C1358B0A70E /* TRCValidationErrorPrinterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1FD2324DAC2AE398F276 /* TRCValidationErrorPrinterTests.m */; };
 		2DBA1EDFD218B24F2C14C317 /* TRCMapperPhone.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA11C1B532C921805BEC2F /* TRCMapperPhone.json */; };
 		2DBA1F6E1E803ECCFC821C92 /* TRCSerializerString.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA14B5D7C2659FF8718894 /* TRCSerializerString.m */; };
 		2DBA1FA9C99981038EB8F5F5 /* RequestToGetIssues.response.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA13C0A49BD73E2874EE16 /* RequestToGetIssues.response.json */; };
@@ -167,6 +168,7 @@
 		2DBA1ECDC2BD02AD01F101C3 /* TRCErrorParserSimple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCErrorParserSimple.h; sourceTree = "<group>"; };
 		2DBA1F206569A25C5B48B2B1 /* TRCConnectionProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCConnectionProxy.h; sourceTree = "<group>"; };
 		2DBA1F814C9C0061D9A11EB1 /* TRCSerializerData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSerializerData.m; sourceTree = "<group>"; };
+		2DBA1FD2324DAC2AE398F276 /* TRCValidationErrorPrinterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCValidationErrorPrinterTests.m; sourceTree = "<group>"; };
 		469D3C7EB63CCF077674B274 /* libPods-TyphoonRestClientTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TyphoonRestClientTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		48F28F705C352E4073F55876 /* Pods-TyphoonRestClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TyphoonRestClient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TyphoonRestClient/Pods-TyphoonRestClient.debug.xcconfig"; sourceTree = "<group>"; };
 		5C84882D07B06327E8D9BB26 /* libPods-TyphoonRestClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TyphoonRestClient.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -587,6 +589,7 @@
 				2DBA158B4E6546253271A111 /* TestUtils.m */,
 				2DBA1D11775F7F7D595235D9 /* TestUtils.h */,
 				2DBA1E5643454D1FAE46A1F0 /* Integration */,
+				2DBA1FD2324DAC2AE398F276 /* TRCValidationErrorPrinterTests.m */,
 			);
 			path = TyphoonRestClient;
 			sourceTree = "<group>";
@@ -849,6 +852,7 @@
 				2DBA11E098A448128CB9E68D /* Issue.m in Sources */,
 				2DBA1931DD7F8B70613BC3A7 /* TRCIntegrationTests.m in Sources */,
 				2DBA17092859137A58185FB9 /* SimpleErrorParser.m in Sources */,
+				2DBA1EC0738D4C1358B0A70E /* TRCValidationErrorPrinterTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

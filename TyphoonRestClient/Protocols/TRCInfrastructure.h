@@ -61,6 +61,4 @@
 
 - (NSString *)errorDescriptionWithErrorMessage:(NSString *)errorMessage stackTrace:(TRCSchemaStackTrace *)stackTrace;
 
-- (NSString *)errorDescriptionWithErrorMessage:(NSString *)errorMessage schemaData:(id<TRCSchemaData>)data stackTrace:(TRCSchemaStackTrace *)stackTrace;
-
 @end
