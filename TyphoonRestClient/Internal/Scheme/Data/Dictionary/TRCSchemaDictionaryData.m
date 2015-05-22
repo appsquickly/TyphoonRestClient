@@ -12,7 +12,6 @@
 #import "TRCSchemaDictionaryData.h"
 #import "TRCUtils.h"
 
-
 @implementation TRCSchemaDictionaryData
 {
     id _schemeValue;
@@ -21,14 +20,26 @@
     id<TRCSchemaDataModifier> _modifier;
 }
 
-- (instancetype)initWithArrayOrDictionary:(id)arrayOrDictionary
+- (instancetype)initWithArrayOrDictionary:(id)arrayOrDictionary request:(BOOL)isRequest dataProvider:(id<TRCSchemaDataProvider>)dataProvider
 {
     if (!arrayOrDictionary) {
         return nil;
     } else {
         self = [super init];
         if (self) {
-            _schemeValue = arrayOrDictionary;
+            _dataProvider = dataProvider;
+            _requestData = isRequest;
+
+
+            NSString *rootMapperKey = nil;
+            if ([arrayOrDictionary isKindOfClass:[NSDictionary class]]) {
+                rootMapperKey = arrayOrDictionary[TRCRootMapperKey];
+            }
+            if (rootMapperKey.length > 0 && [self.dataProvider schemaData:self hasObjectMapperForTag:rootMapperKey]) {
+                _schemeValue = rootMapperKey;
+            } else {
+                _schemeValue = arrayOrDictionary;
+            }
         }
         return self;
     }

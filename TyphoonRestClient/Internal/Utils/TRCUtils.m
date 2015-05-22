@@ -9,12 +9,11 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #import "TRCUtils.h"
 #import "TyphoonRestClientErrors.h"
 #import "TRCSchemaStackTrace.h"
+
+NSString *TRCRootMapperKey = @"{root_mapper}";
 
 NSError *TRCErrorWithFormat(NSInteger code, NSString *format, ...)
 {

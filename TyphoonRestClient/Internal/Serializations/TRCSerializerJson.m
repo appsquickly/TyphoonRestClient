@@ -104,10 +104,7 @@ TRCSerialization TRCSerializationJson = @"TRCSerializationJson";
 {
     id jsonObject = [NSJSONSerialization JSONObjectWithData:data options:self.readingOptions error:error];
     if (jsonObject) {
-        TRCSchemaDictionaryData *result = [[TRCSchemaDictionaryData alloc] initWithArrayOrDictionary:jsonObject];
-        result.requestData = request;
-        result.dataProvider = dataProvider;
-        return result;
+        return [[TRCSchemaDictionaryData alloc] initWithArrayOrDictionary:jsonObject request:request dataProvider:dataProvider];
     } else {
         return nil;
     }

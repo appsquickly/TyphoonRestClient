@@ -15,6 +15,8 @@
 #import <Foundation/Foundation.h>
 #import "TyphoonRestClient.h"
 
+extern NSString *TRCRootMapperKey;
+
 NSError *TRCRequestSerializationErrorWithFormat(NSString *format, ...) NS_FORMAT_FUNCTION(1,2);
 
 NSString *TRCKeyFromOptionalKey(NSString *key, BOOL *isOptional);

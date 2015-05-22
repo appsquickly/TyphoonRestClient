@@ -10,15 +10,10 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #import <Foundation/Foundation.h>
-#import "TRCSchemaData.h"
+#import "TRCRequest.h"
 
 
-@interface TRCSchemaDictionaryData : NSObject <TRCSchemaData>
+@interface RequestToGetIssueIntoRoot : NSObject <TRCRequest>
 
-@property (nonatomic, getter=isRequestData, readonly) BOOL requestData;
-
-@property (nonatomic, weak, readonly) id<TRCSchemaDataProvider> dataProvider;
-
-- (instancetype)initWithArrayOrDictionary:(id)arrayOrDictionary request:(BOOL)isRequest dataProvider:(id<TRCSchemaDataProvider>)dataProvider;
 
 @end

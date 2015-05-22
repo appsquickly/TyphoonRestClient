@@ -68,10 +68,7 @@ TRCSerialization TRCSerializationPlist = @"TRCSerializationPlist";
 {
     id object = [NSPropertyListSerialization propertyListWithData:data options:self.readOptions format:NULL error:error];;
     if (object) {
-        TRCSchemaDictionaryData *result = [[TRCSchemaDictionaryData alloc] initWithArrayOrDictionary:object];
-        result.requestData = request;
-        result.dataProvider = dataProvider;
-        return result;
+        return [[TRCSchemaDictionaryData alloc] initWithArrayOrDictionary:object request:request dataProvider:dataProvider];
     } else {
         return nil;
     }

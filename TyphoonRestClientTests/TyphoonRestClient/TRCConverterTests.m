@@ -158,8 +158,7 @@ TRCValidationOptions validationOptions;
 
 - (id)convertResponseObject:(id)data schema:(id)schemaArrayOrDictionary errors:(NSOrderedSet **)errorsSet
 {
-    TRCSchemaDictionaryData *schemeData = [[TRCSchemaDictionaryData alloc] initWithArrayOrDictionary:schemaArrayOrDictionary];
-    schemeData.dataProvider = self;
+    TRCSchemaDictionaryData *schemeData = [[TRCSchemaDictionaryData alloc] initWithArrayOrDictionary:schemaArrayOrDictionary request:NO dataProvider:self];
     TRCSchema *schema = [TRCSchema schemaWithData:schemeData name:@"test"];
     if (!schema) {
         return data;
@@ -175,9 +174,7 @@ TRCValidationOptions validationOptions;
 
 - (id)convertRequestObject:(id)data schema:(id)schemaArrayOrDictionary errors:(NSOrderedSet **)errorsSet
 {
-    TRCSchemaDictionaryData *schemeData = [[TRCSchemaDictionaryData alloc] initWithArrayOrDictionary:schemaArrayOrDictionary];
-    schemeData.requestData = YES;
-    schemeData.dataProvider = self;
+    TRCSchemaDictionaryData *schemeData = [[TRCSchemaDictionaryData alloc] initWithArrayOrDictionary:schemaArrayOrDictionary request:YES dataProvider:self];
     TRCSchema *schema = [TRCSchema schemaWithData:schemeData name:@"test"];
     if (!schema) {
         return data;

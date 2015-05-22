@@ -135,9 +135,7 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
     }
 
     if (schemeObject) {
-        TRCSchemaDictionaryData *data = [[TRCSchemaDictionaryData alloc] initWithArrayOrDictionary:schemeObject];
-        data.requestData = isRequest;
-        data.dataProvider = (id<TRCSchemaDataProvider>)webService;
+        TRCSchemaDictionaryData *data = [[TRCSchemaDictionaryData alloc] initWithArrayOrDictionary:schemeObject request:isRequest dataProvider:(id<TRCSchemaDataProvider>)webService];
         TRCSchema *schema = [TRCSchema schemaWithData:data name:name];
         schema.converterRegistry = (id<TRCConvertersRegistry>)webService;
         return schema;
