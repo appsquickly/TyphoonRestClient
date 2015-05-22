@@ -24,7 +24,7 @@
     [super setUp];
 
     _jsonPrinter = [TRCSerializerJson new];
-    
+
 }
 
 - (void)test_simple_output

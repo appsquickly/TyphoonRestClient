@@ -74,6 +74,11 @@ TRCValidationOptions validationOptions;
     };
 }
 
+- (id<TRCValidationErrorPrinter>)validationErrorPrinterForExtension:(NSString *)extension
+{
+    return nil;
+}
+
 - (BOOL)schemaData:(id<TRCSchemaData>)data hasObjectMapperForTag:(NSString *)schemaName
 {
     return [self objectMapperForTag:schemaName] != nil;
