@@ -117,13 +117,7 @@
 
 - (void)schemaData:(id<TRCSchemaData>)data willEnumerateItemAtIndentifier:(id)itemIdentifier
 {
-    if ([itemIdentifier isKindOfClass:[NSNumber class]]) {
-        [_stack pushSymbolWithArrayIndex:itemIdentifier];
-    } else if ([itemIdentifier isKindOfClass:[NSString class]]) {
-        [_stack pushSymbol:itemIdentifier];
-    } else {
-        NSAssert(NO, @"Unsupported identifier type: %@", itemIdentifier);
-    }
+    [_stack pushSymbol:itemIdentifier];
 }
 
 - (void)schemaData:(id<TRCSchemaData>)data didEnumerateItemAtIndentifier:(id)itemIdentifier

@@ -17,6 +17,7 @@
 #import "TRCSchema.h"
 #import "TRCSchemaData.h"
 #import "TyphoonRestClientErrors.h"
+#import "TRCSchemaStackTrace.h"
 
 @interface TRCConverter () <TRCSchemaDataModifier>
 
@@ -113,7 +114,7 @@
 
 - (void)schemaData:(id<TRCSchemaData>)data typeMismatchForValue:(id)value withSchemaValue:(id)schemaValue
 {
-    NSError *error = TRCConversionErrorForObject([NSString stringWithFormat:@"Object of type '%@' doesn't match type '%@'", [value class], [schemaValue class]], value, self.schema.name, _convertingForRequest);
+    NSError *error = TRCConversionError([NSString stringWithFormat:@"Object of type '%@' doesn't match type '%@'", [value class], [schemaValue class]], self.schema.name, _convertingForRequest);
     [self.internalErrors addObject:error];
 }
 
@@ -150,7 +151,7 @@
     NSParameterAssert(self.registry);
     id<TRCObjectMapper> converter = [self.registry objectMapperForTag:tag];
     if (!converter) {
-        [self.internalErrors addObject:TRCConversionErrorForObject([NSString stringWithFormat:@"Can't find converter for tag '%@'", tag], object, self.schema.name, !_convertingForRequest)];
+        [self.internalErrors addObject:TRCConversionError([NSString stringWithFormat:@"Can't find converter for tag '%@'", tag], self.schema.name, !_convertingForRequest)];
         return nil;
     }
     NSError *error = nil;
@@ -163,7 +164,7 @@
             result = nil;
         }
     } else {
-        [self.internalErrors addObject:TRCConversionErrorForObject([NSString stringWithFormat:@"Converter for tag '%@' (Class: %@) not responds to '%@'", tag, [converter class], NSStringFromSelector(sel)], object, self.schema.name, !_convertingForRequest)];
+        [self.internalErrors addObject:TRCConversionError([NSString stringWithFormat:@"Converter for tag '%@' (Class: %@) not responds to '%@'", tag, [converter class], NSStringFromSelector(sel)], self.schema.name, !_convertingForRequest)];
     }
     return result;
 }

@@ -119,20 +119,12 @@ TRCSerialization TRCSerializationJson = @"TRCSerializationJson";
 {
     TRCSchemeStackTraceContext *context = [TRCSchemeStackTraceContext new];
     context.level = 0;
-    context.stack = [stackTrace stack];
-    context.errorMessage = errorMessage;
-    context.printingStack = [TRCSchemaStackTrace new];
-
+    if (errorMessage) {
+        context.stack = [stackTrace stack];
+        context.errorMessage = errorMessage;
+        context.printingStack = [TRCSchemaStackTrace new];
+    }
     return [[self class] stringFromObject:stackTrace.originalObject context:context];
-}
-
-
-+ (NSString *)descriptionOfObject:(id)object
-{
-    TRCSchemeStackTraceContext *context = [TRCSchemeStackTraceContext new];
-    context.level = 0;
-
-    return [[self class] stringFromObject:object context:context];
 }
 
 + (NSString *)stringFromObject:(id)object context:(TRCSchemeStackTraceContext *)context
@@ -175,10 +167,7 @@ TRCSerialization TRCSerializationJson = @"TRCSerializationJson";
 
         [buffer appendFormat:@"%@\"%@\" = %@", indent, key, [self stringFromObject:obj context:context]];
 
-        if ([[context.printingStack stack] isEqualToArray:context.stack]) {
-            [buffer appendFormat:@"  <----- %@", context.errorMessage];
-            context.printingStack = nil;
-        }
+        [self printErrorMessageIfNeededIntoBuffer:buffer withContext:context];
 
         BOOL isLast = (++index == count);
         [buffer appendFormat:@"%@\n",isLast?@"":@","];
@@ -206,14 +195,17 @@ TRCSerialization TRCSerializationJson = @"TRCSerializationJson";
     NSUInteger count = [array count];
     [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
 
-        [context.printingStack pushSymbolWithArrayIndex:@(idx)];
+        [context.printingStack pushSymbol:@(idx)];
 
         [buffer appendString:indent];
         [buffer appendString:[self stringFromObject:obj context:context]];
 
         BOOL isLast = (idx == count - 1);
-        [buffer appendFormat:@"%@\n",isLast?@"":@","];
+        [buffer appendFormat:@"%@",isLast?@"":@","];
 
+        [self printErrorMessageIfNeededIntoBuffer:buffer withContext:context];
+
+        [buffer appendString:@"\n"];
         [context.printingStack pop];
     }];
 
@@ -222,6 +214,14 @@ TRCSerialization TRCSerializationJson = @"TRCSerializationJson";
     [buffer appendFormat:@"%@]", [self indentForContext:context]];
 
     return buffer;
+}
+
++ (void)printErrorMessageIfNeededIntoBuffer:(NSMutableString *)buffer withContext:(TRCSchemeStackTraceContext *)context
+{
+    if ([[context.printingStack stack] isEqualToArray:context.stack]) {
+        [buffer appendFormat:@"  <----- %@", context.errorMessage];
+        context.printingStack = nil;
+    }
 }
 
 + (NSString *)stringFromNumber:(NSNumber *)number context:(TRCSchemeStackTraceContext *)context

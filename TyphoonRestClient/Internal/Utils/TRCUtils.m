@@ -94,17 +94,16 @@ NSError *TRCUnknownValidationErrorForObject(id object, NSString *schemaName, BOO
 {
     NSString *errorMessage = [NSString stringWithFormat:@"Unknown error while %@ validation", isResponse?@"response":@"request"];
     NSMutableDictionary *userInfo = [NSMutableDictionary new];
-//    userInfo[TyphoonRestClientErrorKeyFullDescription] = [NSString stringWithFormat:@"Origianl object: %@", [TRCSchemaStackTrace descriptionOfObject:object]];
+    userInfo[TyphoonRestClientErrorKeyFullDescription] = [NSString stringWithFormat:@"Origianl object: %@", object];
     userInfo[TyphoonRestClientErrorKeySchemaName] = schemaName;
     userInfo[NSLocalizedDescriptionKey] = errorMessage;
     return [NSError errorWithDomain:TyphoonRestClientErrors code:TyphoonRestClientErrorCodeValidation userInfo:userInfo];
 }
 
-NSError *TRCConversionErrorForObject(NSString *errorMessage, id object, NSString *schemaName, BOOL isResponse)
+NSError *TRCConversionError(NSString *errorMessage, NSString *schemaName, BOOL isResponse)
 {
     NSString *message = errorMessage ?: [NSString stringWithFormat:@"Unknown error while %@ conversion", isResponse?@"response":@"request"];
     NSMutableDictionary *userInfo = [NSMutableDictionary new];
-//    userInfo[TyphoonRestClientErrorKeyFullDescription] = [NSString stringWithFormat:@"Origianl object: %@", [TRCSchemaStackTrace descriptionOfObject:object]];
     userInfo[TyphoonRestClientErrorKeySchemaName] = schemaName;
     userInfo[NSLocalizedDescriptionKey] = message;
     return [NSError errorWithDomain:TyphoonRestClientErrors code:TyphoonRestClientErrorCodeTransformation userInfo:userInfo];

@@ -24,22 +24,16 @@
     [super setUp];
 
     _jsonPrinter = [TRCSerializerJson new];
-
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+    
 }
-
-- (id<TRCSchemaData>)schemaDataForName:(NSString *)name
-{
-    NSString *path = [[NSBundle bundleForClass:[self class]] pathForResource:name ofType:nil];
-    NSData *schemaData = [NSData dataWithContentsOfFile:path];
-    return [_jsonPrinter requestSchemaDataFromData:schemaData dataProvider:nil error:nil];
-}
-
 
 - (void)test_simple_output
 {
 
     TRCSchemaStackTrace *stack = [TRCSchemaStackTrace new];
+    [stack pushSymbol:@"order"];
+    [stack pushSymbol:@"suitable_packing_materials"];
+    [stack pushSymbol:@1];
     stack.originalObject = @{
             @"order" : @{
                     @"id" : @"asfsaf",
@@ -72,13 +66,42 @@
             }
     };
 
-    NSString *result = [_jsonPrinter errorDescriptionWithErrorMessage:@"Test" stackTrace:stack];
+    NSString *result = [_jsonPrinter errorDescriptionWithErrorMessage:@"Must be '123'" stackTrace:stack];
 
-    NSLog(@"result:\n===========================\n%@\n===========================\n", result);
-
-    XCTAssert(result);
-
-    XCTFail();
+    XCTAssertEqualObjects(result, @"{\n"
+            " \"order\" = {\n"
+            "  \"products\" = [\n"
+            "   {\n"
+            "    \"color\" = \"adsfa\",\n"
+            "    \"id\" = \"123\",\n"
+            "    \"price\" = \"23\",\n"
+            "    \"image_url\" = \"123123\",\n"
+            "    \"size\" = \"123\",\n"
+            "    \"brand\" = \"123\",\n"
+            "    \"description\" = \"asdfsa\",\n"
+            "    \"display_order\" = 0\n"
+            "   },\n"
+            "   {\n"
+            "    \"color\" = \"adsfa\",\n"
+            "    \"id\" = \"dfad\",\n"
+            "    \"price\" = \"23\",\n"
+            "    \"image_url\" = \"123123\",\n"
+            "    \"size\" = \"123\",\n"
+            "    \"brand\" = \"123\",\n"
+            "    \"description\" = \"asdfsa\",\n"
+            "    \"display_order\" = 0\n"
+            "   }\n"
+            "  ],\n"
+            "  \"id\" = \"asfsaf\",\n"
+            "  \"display_order\" = 2,\n"
+            "  \"currency\" = \"AUD\",\n"
+            "  \"suitable_packing_materials\" = [\n"
+            "   \"123\",\n"
+            "   \"321\"  <----- Must be '123'\n"
+            "  ],\n"
+            "  \"created_at\" = \"123123\"\n"
+            " }\n"
+            "}");
 }
 
 

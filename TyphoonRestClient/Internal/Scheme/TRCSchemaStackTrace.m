@@ -11,67 +11,6 @@
 
 #import "TRCSchemaStackTrace.h"
 
-typedef NS_ENUM(NSInteger, TRCSchemeStackTraceSymbolType) {
-    TRCSchemeStackTraceSymbolTypeKey,
-    TRCSchemeStackTraceSymbolTypeIndex
-};
-
-@interface TRCSchemeStackTraceSymbol : NSObject
-
-@property (nonatomic) TRCSchemeStackTraceSymbolType type;
-@property (nonatomic, strong) id value;
-
-- (BOOL)isEqual:(id)other;
-
-- (BOOL)isEqualToSymbol:(TRCSchemeStackTraceSymbol *)symbol;
-
-- (NSUInteger)hash;
-
-@end
-
-@implementation TRCSchemeStackTraceSymbol
-
-- (NSString *)description
-{
-    NSMutableString *description = [NSMutableString stringWithFormat:@"<%@: ", NSStringFromClass([self class])];
-    [description appendFormat:@"type=%@, ",(self.type==TRCSchemeStackTraceSymbolTypeKey)?@"key":@"index"];
-    [description appendFormat:@"value=%@",self.value];
-    [description appendString:@">"];
-    return description;
-}
-
-- (BOOL)isEqual:(id)other
-{
-    if (other == self)
-        return YES;
-    if (!other || ![[other class] isEqual:[self class]])
-        return NO;
-
-    return [self isEqualToSymbol:other];
-}
-
-- (BOOL)isEqualToSymbol:(TRCSchemeStackTraceSymbol *)symbol
-{
-    if (self == symbol)
-        return YES;
-    if (symbol == nil)
-        return NO;
-    if (self.type != symbol.type)
-        return NO;
-    if (self.value != symbol.value && ![self.value isEqual:symbol.value])
-        return NO;
-    return YES;
-}
-
-- (NSUInteger)hash
-{
-    NSUInteger hash = (NSUInteger)self.type;
-    hash = hash * 31u + [self.value hash];
-    return hash;
-}
-
-@end
-
 @implementation TRCSchemaStackTrace
 {
     NSMutableArray *_stack;
@@ -93,18 +32,7 @@ typedef NS_ENUM(NSInteger, TRCSchemeStackTraceSymbolType) {
 
 - (void)pushSymbol:(NSString *)symbol
 {
-    TRCSchemeStackTraceSymbol *stackItem = [TRCSchemeStackTraceSymbol new];
-    stackItem.type = TRCSchemeStackTraceSymbolTypeKey;
-    stackItem.value = symbol;
-    [_stack addObject:stackItem];
-}
-
-- (void)pushSymbolWithArrayIndex:(NSNumber *)index
-{
-    TRCSchemeStackTraceSymbol *stackItem = [TRCSchemeStackTraceSymbol new];
-    stackItem.type = TRCSchemeStackTraceSymbolTypeIndex;
-    stackItem.value = index;
-    [_stack addObject:stackItem];
+    [_stack addObject:symbol];
 }
 
 - (void)pop
@@ -116,11 +44,11 @@ typedef NS_ENUM(NSInteger, TRCSchemeStackTraceSymbolType) {
 {
     NSMutableString *buffer = [NSMutableString new];
     [buffer appendString:@"root"];
-    for (TRCSchemeStackTraceSymbol *symbol in _stack) {
-        if ([symbol type] == TRCSchemeStackTraceSymbolTypeKey) {
-            [buffer appendFormat:@".%@",symbol.value];
-        } else {
-            [buffer appendFormat:@"[%@]",symbol.value];
+    for (id symbol in _stack) {
+        if ([symbol isKindOfClass:[NSString class]]) {
+            [buffer appendFormat:@".%@",symbol];
+        } else if ([symbol isKindOfClass:[NSNumber class]]) {
+            [buffer appendFormat:@"[%@]",symbol];
         }
     }
     return buffer;

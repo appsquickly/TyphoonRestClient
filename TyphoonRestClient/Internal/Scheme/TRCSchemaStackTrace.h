@@ -18,8 +18,7 @@
 
 - (NSArray *)stack;
 
-- (void)pushSymbol:(NSString *)symbol;
-- (void)pushSymbolWithArrayIndex:(NSNumber *)index;
+- (void)pushSymbol:(id)symbol;
 - (void)pop;
 
 - (NSString *)shortDescription;

@@ -25,7 +25,7 @@ id TRCValueAfterApplyingOptions(id value, TRCValidationOptions options, BOOL isR
 
 NSError *TRCUnknownValidationErrorForObject(id object, NSString *schemaName, BOOL isResponse);
 
-NSError *TRCConversionErrorForObject(NSString *errorMessage, id object, NSString *schemaName, BOOL isResponse);
+NSError *TRCConversionError(NSString *errorMessage, NSString *schemaName, BOOL isResponse);
 
 NSString *TRCUrlPathFromPathByApplyingArguments(NSString *path, NSMutableDictionary *arguments, NSError **error);
 
