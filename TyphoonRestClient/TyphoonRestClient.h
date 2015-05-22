@@ -14,9 +14,9 @@
 #import "TRCObjectMapper.h"
 #import "TRCValueTransformer.h"
 #import "TRCConnection.h"
-#import "TRCErrorParser.h"
+#import "TRCErrorHandler.h"
 #import "TRCBuiltInObjects.h"
-#import "TRCSerialization.h"
+#import "TRCInfrastructure.h"
 
 extern NSString *TyphoonRestClientReachabilityDidChangeNotification;
 
@@ -37,7 +37,7 @@ typedef NS_OPTIONS(NSInteger , TRCValidationOptions)
 @property (nonatomic, readonly, getter=isReachable) BOOL reachable;
 @property (nonatomic, readonly) TRCConnectionReachabilityState reachabilityState;
 
-@property (nonatomic, strong) id<TRCErrorParser> errorParser;
+@property (nonatomic, strong) id<TRCErrorHandler> errorParser;
 @property (nonatomic, strong) id<TRCConnection> connection;
 
 /// Default: TRCSerializationJson;
@@ -75,5 +75,7 @@ typedef NS_OPTIONS(NSInteger , TRCValidationOptions)
 - (void)registerResponseSerializer:(id<TRCResponseSerializer>)serializer forName:(TRCSerialization)serializerName;
 
 - (void)registerSchemeFormat:(id<TRCSchemaFormat>)schemeFormat forFileExtension:(NSString *)extension;
+
+- (void)registerValidationErrorPrinter:(id<TRCValidationErrorPrinter>)printer forFormatWithFileExtension:(NSString *)extension;
 
 @end

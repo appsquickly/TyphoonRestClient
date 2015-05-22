@@ -19,7 +19,7 @@
 #import "TRCConverter.h"
 #import "TRCValueTransformer.h"
 #import "TRCConvertersRegistry.h"
-#import "TRCErrorParser.h"
+#import "TRCErrorHandler.h"
 #import "TRCConnection.h"
 #import "TRCValueTransformerUrl.h"
 #import "TRCValueTransformerString.h"
@@ -73,6 +73,7 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
 
     NSMutableDictionary *_responseSerializers;
     NSMutableDictionary *_requestSerializers;
+    NSMutableDictionary *_validationErrorPrinters;
 }
 
 - (instancetype)init
@@ -89,6 +90,7 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
         _schemeFactory.owner = self;
         _responseSerializers = [NSMutableDictionary new];
         _requestSerializers = [NSMutableDictionary new];
+        _validationErrorPrinters = [NSMutableDictionary new];
 
         [self registerDefaultTypeConverters];
         [self registerDefaultSchemeFormats];
@@ -437,7 +439,7 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
     }
 
     if (self.errorParser && response) {
-        TRCSchema *scheme = [_schemeFactory schemeForErrorParser:self.errorParser];
+        TRCSchema *scheme = [_schemeFactory schemeForErrorHandler:self.errorParser];
         NSError *convertError = nil;
         id converted = [self validateThenConvertObject:response withScheme:scheme error:&convertError];
 
@@ -601,11 +603,19 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
 
 - (id<TRCObjectMapper>)objectMapperForTag:(NSString *)tag
 {
+    NSParameterAssert(tag);
     return _objectMapperRegistry[tag];
+}
+
+- (id<TRCValidationErrorPrinter>)validationErrorPrinterForExtension:(NSString *)extension
+{
+    NSParameterAssert(extension);
+    return _validationErrorPrinters[extension];
 }
 
 - (id<TRCValueTransformer>)valueTransformerForTag:(NSString *)tag
 {
+    NSParameterAssert(tag);
     return _typeTransformerRegistry[tag];
 }
 
@@ -688,5 +698,16 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
 {
     [_schemeFactory registerSchemeFormat:schemeFormat forFileExtension:extension];
 }
+
+- (void)registerValidationErrorPrinter:(id<TRCValidationErrorPrinter>)printer forFormatWithFileExtension:(NSString *)extension
+{
+    NSParameterAssert(extension);
+    if (printer) {
+        _validationErrorPrinters[extension] = printer;
+    } else {
+        [_validationErrorPrinters removeObjectForKey:extension];
+    }
+}
+
 
 @end

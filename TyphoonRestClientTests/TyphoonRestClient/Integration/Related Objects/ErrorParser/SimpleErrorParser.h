@@ -10,9 +10,9 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #import <Foundation/Foundation.h>
-#import "TRCErrorParser.h"
+#import "TRCErrorHandler.h"
 
 
-@interface SimpleErrorParser : NSObject <TRCErrorParser>
+@interface SimpleErrorParser : NSObject <TRCErrorHandler>
 
 @end

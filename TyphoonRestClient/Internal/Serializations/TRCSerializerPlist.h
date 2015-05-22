@@ -10,7 +10,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #import <Foundation/Foundation.h>
-#import "TRCSerialization.h"
+#import "TRCInfrastructure.h"
 
 
 @interface TRCSerializerPlist : NSObject <TRCRequestSerializer, TRCResponseSerializer, TRCSchemaFormat>

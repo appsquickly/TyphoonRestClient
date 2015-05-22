@@ -31,4 +31,10 @@
 
 - (id<TRCObjectMapper>)objectMapperForTag:(NSString *)tag;
 
+//-------------------------------------------------------------------------------------------
+#pragma mark - Error Printer
+//-------------------------------------------------------------------------------------------
+
+- (id<TRCValidationErrorPrinter>)validationErrorPrinterForExtension:(NSString *)extension;
+
 @end

@@ -10,10 +10,10 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #import <Foundation/Foundation.h>
-#import "TRCSerialization.h"
+#import "TRCInfrastructure.h"
 
 
-@interface TRCSerializerJson : NSObject <TRCRequestSerializer, TRCResponseSerializer, TRCSchemaFormat>
+@interface TRCSerializerJson : NSObject <TRCRequestSerializer, TRCResponseSerializer, TRCSchemaFormat, TRCValidationErrorPrinter>
 
 @property (nonatomic, assign) NSJSONReadingOptions readingOptions;
 @property (nonatomic, assign) NSJSONWritingOptions writingOptions;

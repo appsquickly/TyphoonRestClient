@@ -12,9 +12,9 @@
 #import "TRCSchemeFactory.h"
 #import "TRCSchema.h"
 #import "TRCRequest.h"
-#import "TRCErrorParser.h"
+#import "TRCErrorHandler.h"
 #import "TRCObjectMapper.h"
-#import "TRCSerialization.h"
+#import "TRCInfrastructure.h"
 #import "TyphoonRestClient.h"
 #import "TRCSchemaData.h"
 #import "TRCConvertersRegistry.h"
@@ -41,7 +41,7 @@
 #pragma mark - Schemes
 //-------------------------------------------------------------------------------------------
 
-- (TRCSchema *)schemeForErrorParser:(id<TRCErrorParser>)parser
+- (TRCSchema *)schemeForErrorHandler:(id<TRCErrorHandler>)parser
 {
     return [self schemeForObject:parser nameSelector:@selector(errorValidationSchemaName) suffix:@"response" isRequest:NO];
 }

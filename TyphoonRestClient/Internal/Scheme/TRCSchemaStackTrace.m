@@ -9,7 +9,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#import "TRCSchemeStackTrace.h"
+#import "TRCSchemaStackTrace.h"
 
 typedef NS_ENUM(NSInteger, TRCSchemeStackTraceSymbolType) {
     TRCSchemeStackTraceSymbolTypeKey,
@@ -78,14 +78,14 @@ typedef NS_ENUM(NSInteger, TRCSchemeStackTraceSymbolType) {
 @property (nonatomic, strong) NSArray *stack;
 @property (nonatomic) NSString *errorMessage;
 
-@property (nonatomic, strong) TRCSchemeStackTrace *printingStack;
+@property (nonatomic, strong) TRCSchemaStackTrace *printingStack;
 
 @end
 
 @implementation TRCSchemeStackTraceContext
 @end
 
-@implementation TRCSchemeStackTrace
+@implementation TRCSchemaStackTrace
 {
     NSMutableArray *_stack;
 }
@@ -145,7 +145,7 @@ typedef NS_ENUM(NSInteger, TRCSchemeStackTraceSymbolType) {
     context.level = 0;
     context.stack = _stack;
     context.errorMessage = errorMessage;
-    context.printingStack = [TRCSchemeStackTrace new];
+    context.printingStack = [TRCSchemaStackTrace new];
 
     return [[self class] stringFromObject:self.originalObject context:context];
 }

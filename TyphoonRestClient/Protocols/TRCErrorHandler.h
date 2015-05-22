@@ -16,10 +16,10 @@
 #import "TRCRequest.h"
 
 /**
-* TRCErrorParser used to compose custom NSError from response body when request finished
+* TRCErrorHandler used to compose custom NSError from response body when request finished
 * with error status code (For example 4xx or 5xx codes)
 * */
-@protocol TRCErrorParser<NSObject>
+@protocol TRCErrorHandler<NSObject>
 
 /**
 * This method returns custom NSError composed from response body. Body represented by 'bodyObject'

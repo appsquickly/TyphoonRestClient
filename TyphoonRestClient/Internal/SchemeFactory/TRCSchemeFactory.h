@@ -13,7 +13,7 @@
 
 @class TRCSchema;
 @protocol TRCRequest;
-@protocol TRCErrorParser;
+@protocol TRCErrorHandler;
 @protocol TRCObjectMapper;
 @protocol TRCSchemaFormat;
 @class TyphoonRestClient;
@@ -24,7 +24,7 @@
 
 @property (nonatomic, weak) TyphoonRestClient *owner;
 
-- (TRCSchema *)schemeForErrorParser:(id<TRCErrorParser>)parser;
+- (TRCSchema *)schemeForErrorHandler:(id<TRCErrorHandler>)parser;
 
 - (TRCSchema *)schemeForPathParametersWithRequest:(id<TRCRequest>)request;
 

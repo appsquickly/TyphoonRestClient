@@ -12,7 +12,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface TRCSchemeStackTrace : NSObject
+@interface TRCSchemaStackTrace : NSObject
 
 @property (nonatomic, strong) id originalObject;
 
@@ -21,7 +21,7 @@
 - (void)pop;
 
 - (NSString *)shortDescription;
-- (NSString *)fullDescriptionWithErrorMessage:(NSString *)errorMessage;
+//- (NSString *)fullDescriptionWithErrorMessage:(NSString *)errorMessage;
 
 + (NSString *)descriptionOfObject:(id)object;
 

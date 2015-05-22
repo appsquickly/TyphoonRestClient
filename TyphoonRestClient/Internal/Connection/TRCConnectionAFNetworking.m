@@ -13,7 +13,7 @@
 #import "AFURLRequestSerialization.h"
 #import "AFURLResponseSerialization.h"
 #import "AFHTTPRequestOperationManager.h"
-#import "TRCSerialization.h"
+#import "TRCInfrastructure.h"
 #import "TRCUtils.h"
 #import "TyphoonRestClientErrors.h"
 

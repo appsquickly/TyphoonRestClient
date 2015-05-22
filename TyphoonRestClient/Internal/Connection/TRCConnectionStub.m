@@ -11,7 +11,7 @@
 
 
 #import "TRCConnectionStub.h"
-#import "TRCSerialization.h"
+#import "TRCInfrastructure.h"
 #import "TyphoonRestClientErrors.h"
 #import "TRCUtils.h"
 

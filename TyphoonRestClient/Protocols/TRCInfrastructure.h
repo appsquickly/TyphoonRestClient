@@ -14,6 +14,7 @@
 @class TRCSchema;
 @protocol TRCSchemaData;
 @protocol TRCSchemaDataProvider;
+@class TRCSchemaStackTrace;
 
 @protocol TRCRequestSerializer <NSObject>
 
@@ -53,5 +54,13 @@
 - (id<TRCSchemaData>)requestSchemaDataFromData:(NSData *)data dataProvider:(id<TRCSchemaDataProvider>)dataProvider error:(NSError **)error;
 
 - (id<TRCSchemaData>)responseSchemaDataFromData:(NSData *)data dataProvider:(id<TRCSchemaDataProvider>)dataProvider error:(NSError **)error;
+
+@end
+
+@protocol TRCValidationErrorPrinter
+
+- (NSString *)errorDescriptionWithErrorMessage:(NSString *)errorMessage stackTrace:(TRCSchemaStackTrace *)stackTrace;
+
+- (NSString *)errorDescriptionWithErrorMessage:(NSString *)errorMessage schemaData:(id<TRCSchemaData>)data stackTrace:(TRCSchemaStackTrace *)stackTrace;
 
 @end

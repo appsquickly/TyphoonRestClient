@@ -14,7 +14,7 @@
 #import "TRCUtils.h"
 #import "TRCConvertersRegistry.h"
 #import "TRCValueTransformer.h"
-#import "TRCSchemeStackTrace.h"
+#import "TRCSchemaStackTrace.h"
 #import "TyphoonRestClientErrors.h"
 #import "TRCSchemaData.h"
 #import "TRCSchemaDictionaryData.h"
@@ -33,7 +33,7 @@
     BOOL _isRequestValidation;
 
     NSError *_error;
-    TRCSchemeStackTrace *_stack;
+    TRCSchemaStackTrace *_stack;
 }
 
 //-------------------------------------------------------------------------------------------
@@ -63,7 +63,7 @@
     _isRequestValidation = request;
 
 #if TRCSchemaTrackErrorTrace
-    _stack = [TRCSchemeStackTrace new];
+    _stack = [TRCSchemaStackTrace new];
     _stack.originalObject = object;
 #endif
     
@@ -179,28 +179,20 @@
 #pragma mark - Error Composing
 //-------------------------------------------------------------------------------------------
 
-- (NSError *)errorForMissedKey:(NSString *)key withStack:(TRCSchemeStackTrace *)stack
+- (NSError *)errorForMissedKey:(NSString *)key withStack:(TRCSchemaStackTrace *)stack
 {
     NSString *fullDescriptionErrorMessage = [NSString stringWithFormat:@"Can't find value for key '%@' in this dictionary", key];
-    NSMutableDictionary *userInfo = [NSMutableDictionary new];
-    if (stack) {
-        userInfo[TyphoonRestClientErrorKeyFullDescription] = [stack fullDescriptionWithErrorMessage:fullDescriptionErrorMessage];
-    }
-    userInfo[TyphoonRestClientErrorKeySchemaName] = _name;
+    NSMutableDictionary *userInfo = [self userInfoForErrorDescriptionWithMessage:fullDescriptionErrorMessage stack:stack];
     userInfo[NSLocalizedDescriptionKey] = [NSString stringWithFormat:@"Can't find value for key '%@' in '%@' dictionary", key, [stack shortDescription]];
-    return [NSError errorWithDomain:@"TyphoonRestClientErrors" code:TyphoonRestClientErrorCodeValidation userInfo:userInfo];
+    return [NSError errorWithDomain:TyphoonRestClientErrors code:TyphoonRestClientErrorCodeValidation userInfo:userInfo];
 }
 
-- (NSError *)errorForIncorrectType:(NSString *)incorrectType correctType:(NSString *)correctType stack:(TRCSchemeStackTrace *)stack
+- (NSError *)errorForIncorrectType:(NSString *)incorrectType correctType:(NSString *)correctType stack:(TRCSchemaStackTrace *)stack
 {
     NSString *fullDescriptionErrorMessage = [NSString stringWithFormat:@"Type mismatch: must be %@, but '%@' has given", correctType, incorrectType];
-    NSMutableDictionary *userInfo = [NSMutableDictionary new];
-    if (stack) {
-        userInfo[TyphoonRestClientErrorKeyFullDescription] = [stack fullDescriptionWithErrorMessage:fullDescriptionErrorMessage];
-    }
-    userInfo[TyphoonRestClientErrorKeySchemaName] = _name;
+    NSMutableDictionary *userInfo = [self userInfoForErrorDescriptionWithMessage:fullDescriptionErrorMessage stack:stack];
     userInfo[NSLocalizedDescriptionKey] = [NSString stringWithFormat:@"Type mismatch for '%@' (Must be %@, but '%@' has given)", [stack shortDescription], correctType, incorrectType];
-    return [NSError errorWithDomain:@"TyphoonRestClientErrors" code:TyphoonRestClientErrorCodeValidation userInfo:userInfo];
+    return [NSError errorWithDomain:TyphoonRestClientErrors code:TyphoonRestClientErrorCodeValidation userInfo:userInfo];
 }
 
 - (NSString *)typeRepresentationForSchemeValue:(id)schemeValue
@@ -224,6 +216,35 @@
     }
 
     return [NSString stringWithFormat:@"'%@'",NSStringFromClass([schemeValue class])];
+}
+
+- (NSMutableDictionary *)userInfoForErrorDescriptionWithMessage:(NSString *)message stack:(TRCSchemaStackTrace *)stackTrace
+{
+    NSMutableDictionary *userInfo = [NSMutableDictionary new];
+    if (stackTrace) {
+        NSString *fullDescription = [self errorDescriptionWithMessage:message withStack:stackTrace];
+        if (fullDescription) {
+            userInfo[TyphoonRestClientErrorKeyFullDescription] = fullDescription;
+        }
+    }
+    userInfo[TyphoonRestClientErrorKeySchemaName] = _name;
+    return userInfo;
+}
+
+- (NSString *)errorDescriptionWithMessage:(NSString *)message withStack:(TRCSchemaStackTrace *)stack
+{
+    NSString *errorDescription = nil;
+    id<TRCValidationErrorPrinter>errorPrinter = nil;
+
+    if ([[self.name pathExtension] length] > 0) {
+        errorPrinter = [self.converterRegistry validationErrorPrinterForExtension:[self.name pathExtension]];
+    }
+
+    if (errorPrinter) {
+        errorDescription = [errorPrinter errorDescriptionWithErrorMessage:message stackTrace:stack];
+    }
+
+    return errorDescription;
 }
 
 @end

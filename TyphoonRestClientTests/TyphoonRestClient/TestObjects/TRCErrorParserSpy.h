@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TRCErrorParser.h"
+#import "TRCErrorHandler.h"
 
-@interface TRCErrorParserSpy : NSObject <TRCErrorParser>
+@interface TRCErrorParserSpy : NSObject <TRCErrorHandler>
 
 @property (nonatomic) BOOL parseErrorCalled;
 
