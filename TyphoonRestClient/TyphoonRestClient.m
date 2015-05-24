@@ -357,13 +357,13 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
 {
     id result = response;
 
-    result = [self postProcessResponseObject:result forRequest:request];
-
     NSError *parsingError = nil;
 
     if ([request respondsToSelector:@selector(responseProcessedFromBody:headers:status:error:)]) {
         result = [request responseProcessedFromBody:response headers:responseInfo.response.allHeaderFields status:responseInfo.response.statusCode error:&parsingError];
     }
+
+    result = [self postProcessResponseObject:result forRequest:request];
 
     if (parsingError) {
         completion(nil, parsingError);
