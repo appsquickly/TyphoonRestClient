@@ -35,6 +35,7 @@
 #import "TRCSerializerInputStream.h"
 #import "TRCSerializerString.h"
 #import "TyphoonRestClientErrors.h"
+#import "TRCPostProcessor.h"
 
 TRCRequestMethod TRCRequestMethodPost = @"POST";
 TRCRequestMethod TRCRequestMethodGet = @"GET";
@@ -74,6 +75,8 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
     NSMutableDictionary *_responseSerializers;
     NSMutableDictionary *_requestSerializers;
     NSMutableDictionary *_validationErrorPrinters;
+
+    NSMutableOrderedSet *_postProcessors;
 }
 
 - (instancetype)init
@@ -91,6 +94,7 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
         _responseSerializers = [NSMutableDictionary new];
         _requestSerializers = [NSMutableDictionary new];
         _validationErrorPrinters = [NSMutableDictionary new];
+        _postProcessors = [NSMutableOrderedSet new];
 
         [self registerDefaultTypeConverters];
         [self registerDefaultSchemeFormats];
@@ -352,6 +356,8 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
 - (void)parseResponse:(id)response withRequest:(id<TRCRequest>)request responseInfo:(id<TRCResponseInfo>)responseInfo withCompletion:(void (^)(id result, NSError *error))completion
 {
     id result = response;
+
+    result = [self postProcessResponseObject:result forRequest:request];
 
     NSError *parsingError = nil;
 
@@ -634,6 +640,30 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
         NSLog(@"TyphoonRestClient Warning: %@",warningString);
     }
 }
+
+//-------------------------------------------------------------------------------------------
+#pragma mark - PostProcessors
+//-------------------------------------------------------------------------------------------
+
+- (void)registerPostProcessor:(id<TRCPostProcessor>)postProcessor
+{
+    NSAssert(postProcessor, @"PostProcessor can't be nil");
+    [_postProcessors addObject:postProcessor];
+}
+
+- (id)postProcessResponseObject:(id)responseObject forRequest:(id<TRCRequest>)request
+{
+    id result = responseObject;
+
+    for (id<TRCPostProcessor> postProcessor in _postProcessors) {
+        if ([postProcessor respondsToSelector:@selector(postProcessResponseObject:forRequest:)]) {
+            result = [postProcessor postProcessResponseObject:result forRequest:request];
+        }
+    }
+
+    return result;
+}
+
 
 //-------------------------------------------------------------------------------------------
 #pragma mark - Reachability

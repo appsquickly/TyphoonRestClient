@@ -18,6 +18,8 @@
 #import "TRCBuiltInObjects.h"
 #import "TRCInfrastructure.h"
 
+@protocol TRCPostProcessor;
+
 extern NSString *TyphoonRestClientReachabilityDidChangeNotification;
 
 typedef NS_OPTIONS(NSInteger , TRCValidationOptions)
@@ -61,6 +63,8 @@ typedef NS_OPTIONS(NSInteger , TRCValidationOptions)
 - (void)registerValueTransformer:(id<TRCValueTransformer>)valueTransformer forTag:(NSString *)tag;
 
 - (void)registerObjectMapper:(id<TRCObjectMapper>)objectConverter forTag:(NSString *)tag;
+
+- (void)registerPostProcessor:(id<TRCPostProcessor>)postProcessor;
 
 @end
 

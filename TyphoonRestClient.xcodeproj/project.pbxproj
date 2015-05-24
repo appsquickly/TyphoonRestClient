@@ -124,6 +124,7 @@
 		2DBA13C0A49BD73E2874EE16 /* RequestToGetIssues.response.json */ = {isa = PBXFileReference; lastKnownFileType = file.json; path = RequestToGetIssues.response.json; sourceTree = "<group>"; };
 		2DBA13C94FF38532A31D5CFF /* TRCSchemaDictionaryData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSchemaDictionaryData.m; sourceTree = "<group>"; };
 		2DBA13F8CD52678CF22C08F2 /* RequestToGetIssue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestToGetIssue.h; sourceTree = "<group>"; };
+		2DBA142DC592EB2E5622DD73 /* TRCPostProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCPostProcessor.h; sourceTree = "<group>"; };
 		2DBA1465E4C6E3A34A4752B6 /* SimpleErrorParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleErrorParser.m; sourceTree = "<group>"; };
 		2DBA147BDFCEECD38E4C4026 /* TRCSerializerImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSerializerImage.m; sourceTree = "<group>"; };
 		2DBA14B5D7C2659FF8718894 /* TRCSerializerString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSerializerString.m; sourceTree = "<group>"; };
@@ -580,6 +581,7 @@
 				FAC9166019E695020009D824 /* TRCErrorHandler.h */,
 				2DBA1B8033DA8D5FA5B63C8B /* TRCObjectMapper.h */,
 				2DBA136E3AFB4B0F07B7C5AC /* TRCInfrastructure.h */,
+				2DBA142DC592EB2E5622DD73 /* TRCPostProcessor.h */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
