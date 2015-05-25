@@ -78,7 +78,7 @@
     }
 
     if (response.statusCode < 200 || response.statusCode >= 300) {
-        responseError = TRCErrorWithFormat(TyphoonRestClientErrorCodeBadResponseCode, @"Incorrect HTTP status code %d", response.statusCode);
+        responseError = TRCErrorWithFormat(TyphoonRestClientErrorCodeBadResponseCode, @"Incorrect HTTP status code %lu", (unsigned long)response.statusCode);
     }
 
     if (completion) {
