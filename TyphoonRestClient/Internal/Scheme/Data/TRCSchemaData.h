@@ -16,6 +16,9 @@
 @protocol TRCSchemaDataDelegate;
 @protocol TRCSchemaDataEnumerator;
 
+/**
+* TRCSchemaData is abstract data structure, used to represent schema and validate it's values
+* */
 @protocol TRCSchemaData <NSObject>
 
 /**

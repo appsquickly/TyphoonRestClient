@@ -327,6 +327,8 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
 
 - (void)handleResponse:(id)responseObject withError:(NSError *)error info:(id<TRCResponseInfo>)responseInfo forRequest:(id<TRCRequest>)request completion:(void (^)(id result, NSError *error))completion
 {
+    id response = nil;
+
     NSParameterAssert(completion);
     if (error || [self isErrorInResponse:responseObject responseInfo:responseInfo]) {
         //Parse response for error description if needed:
@@ -336,24 +338,26 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
         if ([request respondsToSelector:@selector(respondedWithError:headers:status:)]) {
             [request respondedWithError:error headers:[responseInfo.response allHeaderFields] status:[responseInfo.response statusCode]];
         }
-
-        completion(nil, error);
-        return;
+    }
+    else {
+        NSError *validationOrConversionError = nil;
+        TRCSchema *scheme = [_schemeFactory schemeForResponseWithRequest:request];
+        response = [self validateThenConvertObject:responseObject withScheme:scheme error:&validationOrConversionError];
+        if (!validationOrConversionError) {
+            response = [self parseResponse:response withRequest:request responseInfo:responseInfo error:&validationOrConversionError];
+        }
+        error = validationOrConversionError;
     }
 
-    TRCSchema *scheme = [_schemeFactory schemeForResponseWithRequest:request];
-
-    NSError *validationOrConversionError = nil;
-    id converted = [self validateThenConvertObject:responseObject withScheme:scheme error:&validationOrConversionError];
-
-    if (validationOrConversionError) {
-        completion(nil, validationOrConversionError);
+    if (error) {
+        error = [self postProcessError:error forRequest:request];
+        completion(nil, error);
     } else {
-        [self parseResponse:converted withRequest:request responseInfo:responseInfo withCompletion:completion];
+        completion(response, nil);
     }
 }
 
-- (void)parseResponse:(id)response withRequest:(id<TRCRequest>)request responseInfo:(id<TRCResponseInfo>)responseInfo withCompletion:(void (^)(id result, NSError *error))completion
+- (id)parseResponse:(id)response withRequest:(id<TRCRequest>)request responseInfo:(id<TRCResponseInfo>)responseInfo error:(NSError **)error
 {
     id result = response;
 
@@ -363,13 +367,16 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
         result = [request responseProcessedFromBody:response headers:responseInfo.response.allHeaderFields status:responseInfo.response.statusCode error:&parsingError];
     }
 
-    result = [self postProcessResponseObject:result forRequest:request];
-
-    if (parsingError) {
-        completion(nil, parsingError);
-    } else {
-        completion(result, nil);
+    if (!parsingError) {
+        result = [self postProcessResponseObject:result forRequest:request postProcessError:&parsingError];
     }
+
+    if (parsingError && error) {
+        *error = parsingError;
+        result = nil;
+    }
+
+    return result;
 }
 
 - (id)validateThenConvertObject:(id)object withScheme:(TRCSchema *)scheme error:(NSError **)error
@@ -651,19 +658,38 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
     [_postProcessors addObject:postProcessor];
 }
 
-- (id)postProcessResponseObject:(id)responseObject forRequest:(id<TRCRequest>)request
+- (id)postProcessResponseObject:(id)responseObject forRequest:(id<TRCRequest>)request postProcessError:(NSError **)postProcessError
 {
     id result = responseObject;
 
     for (id<TRCPostProcessor> postProcessor in _postProcessors) {
-        if ([postProcessor respondsToSelector:@selector(postProcessResponseObject:forRequest:)]) {
-            result = [postProcessor postProcessResponseObject:result forRequest:request];
+        if ([postProcessor respondsToSelector:@selector(postProcessResponseObject:forRequest:postProcessError:)]) {
+            NSError *error = nil;
+            result = [postProcessor postProcessResponseObject:result forRequest:request postProcessError:&error];
+            if (error) {
+                if (postProcessError) {
+                    *postProcessError = error;
+                }
+                return nil;
+            }
         }
     }
 
     return result;
 }
 
+- (NSError *)postProcessError:(NSError *)error forRequest:(id<TRCRequest>)request
+{
+    NSError *result = error;
+
+    for (id<TRCPostProcessor> postProcessor in _postProcessors) {
+        if ([postProcessor respondsToSelector:@selector(postProcessError:forRequest:)]) {
+            result = [postProcessor postProcessError:result forRequest:request];
+        }
+    }
+
+    return result;
+}
 
 //-------------------------------------------------------------------------------------------
 #pragma mark - Reachability

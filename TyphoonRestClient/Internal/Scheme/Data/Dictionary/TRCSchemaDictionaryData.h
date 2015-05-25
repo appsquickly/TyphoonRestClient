@@ -12,7 +12,13 @@
 #import <Foundation/Foundation.h>
 #import "TRCSchemaData.h"
 
-
+/**
+* Concrete implementation of TRCSchemaData protocol. Represents classical dictionary data structure, like JSON and Plist has.
+* Each value in dictionary is one of
+* - dictionary
+* - array
+* - object
+* */
 @interface TRCSchemaDictionaryData : NSObject <TRCSchemaData>
 
 @property (nonatomic, getter=isRequestData, readonly) BOOL requestData;
