@@ -26,6 +26,8 @@
 @implementation TRCSchemeFactory
 {
     NSMutableDictionary *_formats;
+
+    NSString *_moduleName;
 }
 
 - (instancetype)init
@@ -33,6 +35,9 @@
     self = [super init];
     if (self) {
         _formats = [NSMutableDictionary new];
+
+        _moduleName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];
+        _moduleName = [_moduleName stringByAppendingString:@"."];
     }
     return self;
 }
@@ -88,6 +93,10 @@
 
     if (!filePath) {
         NSString *className = NSStringFromClass([object class]);
+
+        if ([className hasPrefix:_moduleName]) {
+            className = [className stringByReplacingOccurrencesOfString:_moduleName withString:@""];
+        }
 
         if ([suffix isKindOfClass:[NSArray class]]) {
             for (NSString *suffixString in suffix) {
@@ -147,6 +156,7 @@
     return result;
 }
 
+/** User for unit tests only */
 - (TRCSchema *)schemeForName:(NSString *)schemeName isRequest:(BOOL)isRequest
 {
     return nil;

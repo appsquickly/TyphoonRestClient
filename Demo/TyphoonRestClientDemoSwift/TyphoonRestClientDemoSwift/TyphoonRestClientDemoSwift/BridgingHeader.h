@@ -9,23 +9,4 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#import "RequestToDownloadFile.h"
-
-@implementation RequestToDownloadFile
-
-- (NSString *)path
-{
-    return [self.downloadUrl absoluteString];
-}
-
-- (TRCRequestMethod)method
-{
-    return TRCRequestMethodGet;
-}
-
-- (NSOutputStream *)responseBodyOutputStream
-{
-    return [NSOutputStream outputStreamToFileAtPath:self.outputPath append:NO];
-}
-
-@end
+#import "TyphoonRestClient.h"

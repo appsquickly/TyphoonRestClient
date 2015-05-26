@@ -9,23 +9,20 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#import "RequestToDownloadFile.h"
 
-@implementation RequestToDownloadFile
+import Foundation
 
-- (NSString *)path
-{
-    return [self.downloadUrl absoluteString];
+class Issue {
+    var identifier = 0
+    var projectName: String? = ""
+    var authorName: String? = ""
+    var statusText: String? = ""
+    
+    var subject = ""
+    var descriptionText = ""
+    
+    var created: NSDate?
+    var updated: NSDate?
+    
+    var doneRatio = 0.0
 }
-
-- (TRCRequestMethod)method
-{
-    return TRCRequestMethodGet;
-}
-
-- (NSOutputStream *)responseBodyOutputStream
-{
-    return [NSOutputStream outputStreamToFileAtPath:self.outputPath append:NO];
-}
-
-@end

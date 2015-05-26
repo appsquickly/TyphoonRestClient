@@ -9,23 +9,10 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#import "RequestToDownloadFile.h"
+#import "TRCRequest.h"
 
-@implementation RequestToDownloadFile
+@interface RequestToUploadFile : NSObject <TRCRequest>
 
-- (NSString *)path
-{
-    return [self.downloadUrl absoluteString];
-}
-
-- (TRCRequestMethod)method
-{
-    return TRCRequestMethodGet;
-}
-
-- (NSOutputStream *)responseBodyOutputStream
-{
-    return [NSOutputStream outputStreamToFileAtPath:self.outputPath append:NO];
-}
+@property (nonatomic, strong) NSString *uploadPath;
 
 @end
