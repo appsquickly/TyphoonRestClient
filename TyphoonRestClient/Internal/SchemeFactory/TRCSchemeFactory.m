@@ -94,7 +94,7 @@
     if (!filePath) {
         NSString *className = NSStringFromClass([object class]);
 
-        if ([className hasPrefix:_moduleName]) {
+        if (_moduleName && [className hasPrefix:_moduleName]) {
             className = [className stringByReplacingOccurrencesOfString:_moduleName withString:@""];
         }
 

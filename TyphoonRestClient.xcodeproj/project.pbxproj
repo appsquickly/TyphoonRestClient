@@ -31,7 +31,6 @@
 		2DBA178CC76E21D9C1C6DCBE /* TRCMapperPerson.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA1A63E0B2BDDB5D227E95 /* TRCMapperPerson.json */; };
 		2DBA17F737835F7EDA40FA64 /* TRCMapperPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA10AE04851CC3BDE7480A /* TRCMapperPhone.m */; };
 		2DBA186B29DECECEE698EA7D /* RequestToGetIssueIntoRoot.response.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA1A5131CD2EBB66C01FE1 /* RequestToGetIssueIntoRoot.response.json */; };
-		2DBA18A5F98399DF303AEA68 /* RequestToGetIssue.response.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA13512661BF9F3C58F13E /* RequestToGetIssue.response.xml */; };
 		2DBA1931DD7F8B70613BC3A7 /* TRCIntegrationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1DCB50C312ECC2FCB559 /* TRCIntegrationTests.m */; };
 		2DBA1970DEB404C22A5DA4B5 /* RequestToUploadFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1DD932DF6F87827DA34A /* RequestToUploadFile.m */; };
 		2DBA1B7370A68AF382B9B10A /* TRCObjectMapperIssue.response.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA17F1B976B5EB28C21EAF /* TRCObjectMapperIssue.response.json */; };
@@ -118,7 +117,6 @@
 		2DBA123B3A97A2B227BB3C5F /* TRCSchemaDataValueOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSchemaDataValueOptions.m; sourceTree = "<group>"; };
 		2DBA124E62BE34E0A5539F39 /* TRCConnectionLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCConnectionLogger.m; sourceTree = "<group>"; };
 		2DBA12519DF33996626F6739 /* TRCErrorParserSimple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCErrorParserSimple.m; sourceTree = "<group>"; };
-		2DBA13512661BF9F3C58F13E /* RequestToGetIssue.response.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = RequestToGetIssue.response.xml; sourceTree = "<group>"; };
 		2DBA136E3AFB4B0F07B7C5AC /* TRCInfrastructure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCInfrastructure.h; sourceTree = "<group>"; };
 		2DBA13B88A15F6ACA497CA0F /* TRCSerializerHttpQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSerializerHttpQuery.m; sourceTree = "<group>"; };
 		2DBA13C0A49BD73E2874EE16 /* RequestToGetIssues.response.json */ = {isa = PBXFileReference; lastKnownFileType = file.json; path = RequestToGetIssues.response.json; sourceTree = "<group>"; };
@@ -353,7 +351,6 @@
 				2DBA17F8C628DF8501898A45 /* RequestToGetIssue.m */,
 				2DBA1BCF37D4C57ADA09022C /* RequestToGetIssues.h */,
 				2DBA1B3CE3EA804ABDF75C93 /* RequestToGetIssues.m */,
-				2DBA13512661BF9F3C58F13E /* RequestToGetIssue.response.xml */,
 				2DBA1B78AB1BA3F36948A026 /* RequestToGetIssue.response.json */,
 				2DBA13C0A49BD73E2874EE16 /* RequestToGetIssues.response.json */,
 				2DBA1DC627FB29E0B30ECA52 /* RequestToGetIssueIntoRoot.m */,
@@ -732,7 +729,6 @@
 				2DBA120634800EF8507024AD /* PersonsList.json in Resources */,
 				2DBA1EDFD218B24F2C14C317 /* TRCMapperPhone.json in Resources */,
 				2DBA1B7370A68AF382B9B10A /* TRCObjectMapperIssue.response.json in Resources */,
-				2DBA18A5F98399DF303AEA68 /* RequestToGetIssue.response.xml in Resources */,
 				2DBA132C5F555265F4E57942 /* RequestToGetIssue.response.json in Resources */,
 				2DBA1FA9C99981038EB8F5F5 /* RequestToGetIssues.response.json in Resources */,
 				2DBA158AE4B960FD89DE18BC /* RequestToUploadFile.response.json in Resources */,

@@ -57,6 +57,8 @@
     TRCConnectionTestStub *connectionStub;
 }
 
+static TyphoonRestClient *currentWebService;
+
 id(*originalImp)(id, SEL, NSString *, BOOL);
 
 + (void)load
@@ -77,11 +79,14 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
     connectionStub = [[TRCConnectionTestStub alloc] init];
     webService.connection = connectionStub;
 
+    currentWebService = webService;
 }
 
 - (void)tearDown
 {
     [super tearDown];
+
+    currentWebService = nil;
 //    extern void __gcov_flush(void);
 //    __gcov_flush();
 }
@@ -135,9 +140,10 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
     }
 
     if (schemeObject) {
-        TRCSchemaDictionaryData *data = [[TRCSchemaDictionaryData alloc] initWithArrayOrDictionary:schemeObject request:isRequest dataProvider:(id<TRCSchemaDataProvider>)webService];
+        NSParameterAssert(currentWebService);
+        TRCSchemaDictionaryData *data = [[TRCSchemaDictionaryData alloc] initWithArrayOrDictionary:schemeObject request:isRequest dataProvider:(id<TRCSchemaDataProvider>)currentWebService];
         TRCSchema *schema = [TRCSchema schemaWithData:data name:name];
-        schema.converterRegistry = (id<TRCConvertersRegistry>)webService;
+        schema.converterRegistry = (id<TRCConvertersRegistry>)currentWebService;
         return schema;
     } else {
         return originalImp(self, _cmd, name, isRequest);
