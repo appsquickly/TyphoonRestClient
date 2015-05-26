@@ -47,7 +47,6 @@
 		FAC610AD1AC147720008A729 /* RequestToUploadFile.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC610AB1AC147720008A729 /* RequestToUploadFile.m */; };
 		FAC610AE1AC147720008A729 /* RequestToUploadFile.response.json in Resources */ = {isa = PBXBuildFile; fileRef = FAC610AC1AC147720008A729 /* RequestToUploadFile.response.json */; };
 		FAC610B21AC147A40008A729 /* RequestToDownloadFile.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC610B11AC147A40008A729 /* RequestToDownloadFile.m */; };
-		FAC610B41AC150210008A729 /* RequestToGetIssue.response.xml in Resources */ = {isa = PBXBuildFile; fileRef = FAC610B31AC150210008A729 /* RequestToGetIssue.response.xml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -137,7 +136,6 @@
 		FAC610AC1AC147720008A729 /* RequestToUploadFile.response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RequestToUploadFile.response.json; sourceTree = "<group>"; };
 		FAC610B01AC147A40008A729 /* RequestToDownloadFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestToDownloadFile.h; sourceTree = "<group>"; };
 		FAC610B11AC147A40008A729 /* RequestToDownloadFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestToDownloadFile.m; sourceTree = "<group>"; };
-		FAC610B31AC150210008A729 /* RequestToGetIssue.response.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = RequestToGetIssue.response.xml; sourceTree = "<group>"; };
 		FC78FF1BBD1A36FA08D61C2A /* Pods-TyphoonRestClientDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TyphoonRestClientDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TyphoonRestClientDemo/Pods-TyphoonRestClientDemo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -405,7 +403,6 @@
 				FAC6109F1AC147320008A729 /* RequestToGetIssue.h */,
 				FAC610A01AC147320008A729 /* RequestToGetIssue.m */,
 				FAC610A11AC147320008A729 /* RequestToGetIssue.response.json */,
-				FAC610B31AC150210008A729 /* RequestToGetIssue.response.xml */,
 				FAC610A21AC147320008A729 /* RequestToGetIssues.h */,
 				FAC610A31AC147320008A729 /* RequestToGetIssues.m */,
 				FAC610A41AC147320008A729 /* RequestToGetIssues.response.json */,
@@ -498,7 +495,6 @@
 				FAA684321ABED8EC00EF4CB6 /* LaunchScreen.xib in Resources */,
 				FAA6842F1ABED8EC00EF4CB6 /* Images.xcassets in Resources */,
 				FAC610A61AC147320008A729 /* RequestToGetIssue.response.json in Resources */,
-				FAC610B41AC150210008A729 /* RequestToGetIssue.response.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

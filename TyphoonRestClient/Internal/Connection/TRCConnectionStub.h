@@ -1,11 +1,11 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-//  APPS QUICKLY
-//  Copyright 2015 Apps Quickly Pty Ltd
+//  TYPHOON REST CLIENT
+//  Copyright 2015, Typhoon Rest Client Contributors
 //  All Rights Reserved.
 //
-//  NOTICE: Prepared by AppsQuick.ly on behalf of Apps Quickly. This software
-//  is proprietary information. Unauthorized use is prohibited.
+//  NOTICE: The authors permit you to use, modify, and distribute this file
+//  in accordance with the terms of the license agreement accompanying it.
 //
 ////////////////////////////////////////////////////////////////////////////////
 
