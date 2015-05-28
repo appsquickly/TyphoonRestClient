@@ -13,6 +13,18 @@
 
 @protocol TRCRequest;
 
+/**
+* `TRCPostProcessor` is per-request post-processor.
+* This post-processor useful when you want centralized place to modify all response objects.
+* You can check for `TRCRequest.customProperties` here for targeting (or use another criteria for that)
+*
+* @note
+*   If more than one `TRCPostProcessor` registered, then result chaining, i.e. output of postProcessor1 used as input
+*   for postProcessor2:
+*   (object ---> postProcessor1 --> postProcessor2 --> ... --> result)
+*   This rule correct for both method in that protocol
+*
+* */
 @protocol TRCPostProcessor<NSObject>
 
 @optional
@@ -30,3 +42,6 @@
 - (NSError *)postProcessError:(id)responseError forRequest:(id<TRCRequest>)request;
 
 @end
+
+
+
