@@ -16,6 +16,10 @@
 @protocol AFURLRequestSerialization;
 @protocol AFURLResponseSerialization;
 
+/**
+* TRCConnectionAFNetworking is default implementation of 'real' network connection.
+* It's clear from name, that it's uses AFNetwokring library
+* */
 @interface TRCConnectionAFNetworking : NSObject <TRCConnection>
 
 @property (nonatomic, strong, readonly) AFNetworkReachabilityManager *reachabilityManager;

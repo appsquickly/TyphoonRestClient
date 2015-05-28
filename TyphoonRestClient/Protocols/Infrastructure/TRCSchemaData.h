@@ -49,6 +49,11 @@
 
 @protocol TRCSchemaDataDelegate <NSObject>
 
+/**
+* Called when TRCSchemaData can't enumerate or modify object because type mismatching in schema and object structure.
+* This can be called, for example, when schema value is array, but object's value is string, so TRCSchemaData can't
+* iterate dictionary in same way as string.
+* */
 - (void)schemaData:(id<TRCSchemaData>)data typeMismatchForValue:(id)value withSchemaValue:(id)schemaValue;
 
 @end

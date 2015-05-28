@@ -7,7 +7,7 @@ echo '--------------------------------------------------------------------------
 echo "Generating Doxygen documentation"
 echo '--------------------------------------------------------------------------------'
 
-doxygen > ${reportsDir}/doxygen_out.txt 
+doxygen > ${reportsDir} /doxygen_out.txt
 mkdir -p ${reportsDir}/api/images
 ditto ${resourceDir}/navtree.css ${reportsDir}/api
 ditto ${resourceDir}/doxygen.png ${reportsDir}/api
