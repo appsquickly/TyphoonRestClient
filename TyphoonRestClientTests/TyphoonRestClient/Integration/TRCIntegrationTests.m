@@ -32,7 +32,7 @@
     [super setUp];
 
     _restClient = [[TyphoonRestClient alloc] init];
-    _restClient.errorParser = [SimpleErrorParser new];
+    _restClient.errorHandler = [SimpleErrorParser new];
     [_restClient registerValueTransformer:[TRCValueTransformerDateISO8601 new] forTag:@"{date_iso8601}"];
     [_restClient registerObjectMapper:[TRCObjectMapperIssue new] forTag:@"{issue}"];
 

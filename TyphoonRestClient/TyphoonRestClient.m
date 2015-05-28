@@ -452,8 +452,8 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
         result = TRCErrorWithOriginalError(TyphoonRestClientErrorCodeConnectionError, networkError, @"Connection error");
     }
 
-    if (self.errorParser && response) {
-        TRCSchema *scheme = [_schemeFactory schemeForErrorHandler:self.errorParser];
+    if (self.errorHandler && response) {
+        TRCSchema *scheme = [_schemeFactory schemeForErrorHandler:self.errorHandler];
         NSError *convertError = nil;
         id converted = [self validateThenConvertObject:response withScheme:scheme error:&convertError];
 
@@ -461,7 +461,7 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
             [self logWarning:@"Error schema validation/conversion error: \"%@\". Will return ordinary network error", convertError.localizedDescription];
         } else {
             NSError *error = nil;
-            NSError *parsedError = [self.errorParser errorFromResponseBody:converted headers:info.response.allHeaderFields status:info.response.statusCode error:&error];
+            NSError *parsedError = [self.errorHandler errorFromResponseBody:converted headers:info.response.allHeaderFields status:info.response.statusCode error:&error];
 
             if (error) {
                 [self logWarning:@"Error parsing error: \"%@\". Will return ordinary network error", error.localizedDescription];
@@ -478,9 +478,9 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
 {
     BOOL isError = NO;
 
-    if (self.errorParser && response) {
-        if ([self.errorParser respondsToSelector:@selector(isErrorResponseBody:headers:status:)]) {
-            isError = [self.errorParser isErrorResponseBody:response headers:info.response.allHeaderFields status:info.response.statusCode];
+    if (self.errorHandler && response) {
+        if ([self.errorHandler respondsToSelector:@selector(isErrorResponseBody:headers:status:)]) {
+            isError = [self.errorHandler isErrorResponseBody:response headers:info.response.allHeaderFields status:info.response.statusCode];
         }
     }
 

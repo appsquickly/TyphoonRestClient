@@ -255,7 +255,7 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 
     [connectionStub setResponseObject:@{ @"message": @"Unknown error happens" } responseError:networkError];
 
-    webService.errorParser = errorParserSpy;
+    webService.errorHandler = errorParserSpy;
 
     TRCRequestSpy *request = [TRCRequestSpy new];
     request.parseResult = @"result";
@@ -279,7 +279,7 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 
     [connectionStub setResponseObject:@{ @"message": @"Unknown error happens" } responseError:networkError];
 
-    webService.errorParser = errorParserSpy;
+    webService.errorHandler = errorParserSpy;
 
     TRCRequestSpy *request = [TRCRequestSpy new];
     request.parseResult = @"result";
@@ -302,7 +302,7 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 
     [connectionStub setResponseObject:@{ @"code": @"string", @"message": @"Unknown error happens" } responseError:networkError];
 
-    webService.errorParser = errorParserSpy;
+    webService.errorHandler = errorParserSpy;
 
     TRCRequestSpy *request = [TRCRequestSpy new];
     request.parseResult = @"result";
@@ -325,7 +325,7 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 
     [connectionStub setResponseObject:@{ @"code": @123, @"message": @"Unknown error happens", @"reason_url": @"http://google.com/"} responseError:networkError];
 
-    webService.errorParser = errorParserSpy;
+    webService.errorHandler = errorParserSpy;
 
     TRCRequestSpy *request = [TRCRequestSpy new];
     request.parseResult = @"result";
@@ -626,7 +626,7 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 
     [connectionStub setResponseObject:@{@"status":@200, @"message":@"OK"} responseError:nil];
 
-    webService.errorParser = [TRCErrorParserSimple new];
+    webService.errorHandler = [TRCErrorParserSimple new];
 
     request.parseObjectImplemented = NO;
 
@@ -643,7 +643,7 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 
     [connectionStub setResponseObject:@{@"status":@400, @"message":@"Fail"} responseError:nil];
 
-    webService.errorParser = [TRCErrorParserSimple new];
+    webService.errorHandler = [TRCErrorParserSimple new];
 
     request.parseObjectImplemented = NO;
 

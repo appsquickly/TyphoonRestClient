@@ -17,8 +17,7 @@
 #import "TRCErrorHandler.h"
 #import "TRCBuiltInObjects.h"
 #import "TRCInfrastructure.h"
-
-@protocol TRCPostProcessor;
+#import "TRCPostProcessor.h"
 
 extern NSString *TyphoonRestClientReachabilityDidChangeNotification;
 
@@ -39,7 +38,7 @@ typedef NS_OPTIONS(NSInteger , TRCValidationOptions)
 @property (nonatomic, readonly, getter=isReachable) BOOL reachable;
 @property (nonatomic, readonly) TRCConnectionReachabilityState reachabilityState;
 
-@property (nonatomic, strong) id<TRCErrorHandler> errorParser;
+@property (nonatomic, strong) id<TRCErrorHandler> errorHandler;
 @property (nonatomic, strong) id<TRCConnection> connection;
 
 /// Default: TRCSerializationJson;
@@ -56,9 +55,7 @@ typedef NS_OPTIONS(NSInteger , TRCValidationOptions)
 
 - (id<TRCProgressHandler>)sendRequest:(id<TRCRequest>)request completion:(void(^)(id result, NSError *error))completion;
 
-//-------------------------------------------------------------------------------------------
 #pragma mark - Registry
-//-------------------------------------------------------------------------------------------
 
 - (void)registerValueTransformer:(id<TRCValueTransformer>)valueTransformer forTag:(NSString *)tag;
 
@@ -72,6 +69,9 @@ typedef NS_OPTIONS(NSInteger , TRCValidationOptions)
 #pragma mark - Extensions
 //-------------------------------------------------------------------------------------------
 
+/**
+* This category declares additional methods to extend `TyphoonRestClient` with additional formats and serializations
+* */
 @interface TyphoonRestClient (Infrastructure)
 
 - (void)registerRequestSerializer:(id<TRCRequestSerializer>)serializer forName:(TRCSerialization)serializerName;
