@@ -15,6 +15,10 @@
 @protocol TRCSchemaData;
 @protocol TRCSchemaDataProvider;
 
+//-------------------------------------------------------------------------------------------
+#pragma mark - REQUEST SERIALIZATION
+//-------------------------------------------------------------------------------------------
+
 /**
 * Defines protocol for objects which converts `TRCRequest.requestBody` object into `NSData`
 *
@@ -58,6 +62,10 @@
 
 @end
 
+//-------------------------------------------------------------------------------------------
+#pragma mark - RESPONSE SERIALIZATION
+//-------------------------------------------------------------------------------------------
+
 /**
 * Defines protocol for objects which converts `NSData` of response body into `responseObject`
 *
@@ -88,6 +96,10 @@
 
 @end
 
+//-------------------------------------------------------------------------------------------
+#pragma mark - SCHEMA FORMAT
+//-------------------------------------------------------------------------------------------
+
 /**
 * Describes schema format protocol.
 *
@@ -102,6 +114,7 @@
 *
 * @param data file's data
 * @param dataProvider provides schemas by *mapperTag*. Used to treat `TRCSchemaData` with *sub-schemes* as single schema.
+* @param error error pointer to write out
 * @return abstract data structure, described by `TRCSchemaData` protocol
 * */
 - (id<TRCSchemaData>)requestSchemaDataFromData:(NSData *)data dataProvider:(id<TRCSchemaDataProvider>)dataProvider error:(NSError **)error;
@@ -111,14 +124,59 @@
 *
 * @param data file's data
 * @param dataProvider provides schemas by *mapperTag*. Used to treat `TRCSchemaData` with *sub-schemes* as single schema.
+* @param error error pointer to write out
 * @return abstract data structure, described by `TRCSchemaData` protocol
 * */
 - (id<TRCSchemaData>)responseSchemaDataFromData:(NSData *)data dataProvider:(id<TRCSchemaDataProvider>)dataProvider error:(NSError **)error;
 
 @end
 
+
+//-------------------------------------------------------------------------------------------
+#pragma mark - VALIDATION ERROR PRINTER
+//-------------------------------------------------------------------------------------------
+
+/**
+* Implementation of this protocol let you print custom validation error description for your custom schema format.
+*
+* Each validation `NSError` has custom keys in dictionary which help to you debug the error.
+* One of these keys is `TyphoonRestClientErrorKeyFullDescription`, and if want good error description you may implement that protocol
+* and register for your scheme format, using method `TyphoonRestClient.registerValidationErrorPrinter:forFormatWithFileExtension:`
+*
+* By default, error printer implemented only for JSON schema format
+* */
 @protocol TRCValidationErrorPrinter
 
+/**
+* This method prints object with errorMessage string at specific path
+*
+* for example for input: :
+* @code
+* object = {
+*       "key": {
+*       "subkey": "value"
+*   }
+* }
+* errorMessage = "value must be NSNumber, but NSString given"
+* stackTrace = @["key", @"subkey"]
+* @endcode
+*
+* The output would be:
+* @code
+* {
+*   "key": {
+*      "subkey": "value"  <---  value must be NSNumber, but NSString given
+*   }
+* }
+* @endcode
+*
+* @param object input object to print. Usually comes from response/request serialization
+* @param errorMessage error string to print
+* @param stackTrace - array of identifiers, which means stack trace (path to element with error). For JSON/Plist format, stackTrace contains only
+* NSNumber (means array index) and NSString (means dictionary key)
+* @return full description of error, with whole object and error message with pointer
+* */
 - (NSString *)errorDescriptionForObject:(id)object errorMessage:(NSString *)errorMessage stackTrace:(NSArray *)stackTrace;
 
 @end
+

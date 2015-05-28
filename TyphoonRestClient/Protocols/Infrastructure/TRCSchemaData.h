@@ -100,6 +100,11 @@
 
 @end
 
+/**
+* Implementation of this protocol provides `TRCSchemaData` data for specified mapper tag or `nil`
+*
+* Used by `TRCSchemaData`, to load child schemes and replace mapper tags with them.
+* */
 @protocol TRCSchemaDataProvider <NSObject>
 
 /**
