@@ -272,10 +272,11 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
 - (id<TRCProgressHandler>)sendRequest:(NSURLRequest *)request withOptions:(id<TRCConnectionRequestSendingOptions>)options completion:(TRCConnectionCompletion)completion
 {
     AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-
     requestOperation.responseSerializer = [self responseSerializationForTRCSerializer:options.responseSerialization];
-
     requestOperation.outputStream = options.outputStream;
+
+    TRCAFNetworkingConnectionProgressHandler *progressHandler = [TRCAFNetworkingConnectionProgressHandler new];
+    progressHandler.operation = requestOperation;
 
     [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (completion) {
@@ -292,9 +293,6 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
     }];
 
     requestOperation.queuePriority = options.queuePriority;
-
-    TRCAFNetworkingConnectionProgressHandler *progressHandler = [TRCAFNetworkingConnectionProgressHandler new];
-    progressHandler.operation = requestOperation;
 
     [_operationManager.operationQueue addOperation:requestOperation];
 

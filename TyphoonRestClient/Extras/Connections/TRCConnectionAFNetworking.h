@@ -18,18 +18,28 @@
 
 /**
 * TRCConnectionAFNetworking is default implementation of 'real' network connection.
-* It's clear from name, that it's uses AFNetwokring library
+* It's clear from name, that it's uses AFNetworking library
 * */
 @interface TRCConnectionAFNetworking : NSObject <TRCConnection>
 
+/**
+* Current `reachabilityManager`, we can be used to get current `networkReachabilityStatus`, `isReachable`, etc...
+* */
 @property (nonatomic, strong, readonly) AFNetworkReachabilityManager *reachabilityManager;
+
 
 @property (nonatomic, strong, readonly) NSURL *baseUrl;
 
 - (instancetype)initWithBaseUrl:(NSURL *)baseUrl;
 
+/**
+* Invokes `startMonitoring` on `reachabilityManager`
+* */
 - (void)startReachabilityMonitoring;
 
+/**
+* Invokes `stopMonitoring` on `reachabilityManager`
+* */
 - (void)stopReachabilityMonitoring;
 
 @end
