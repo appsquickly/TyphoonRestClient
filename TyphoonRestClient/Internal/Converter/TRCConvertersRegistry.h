@@ -37,4 +37,10 @@
 
 - (id<TRCValidationErrorPrinter>)validationErrorPrinterForExtension:(NSString *)extension;
 
+//-------------------------------------------------------------------------------------------
+#pragma mark - TRCValueTransformerTypes
+//-------------------------------------------------------------------------------------------
+
+- (void)enumerateTransformerTypesWithClasses:(void(^)(TRCValueTransformerType type, Class clazz, BOOL *stop))block;
+
 @end

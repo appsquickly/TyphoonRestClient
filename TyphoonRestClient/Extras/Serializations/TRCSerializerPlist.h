@@ -11,7 +11,13 @@
 
 #import <Foundation/Foundation.h>
 #import "TRCInfrastructure.h"
+#import "TRCValueTransformer.h"
 
+/// Represents NSDate
+TRCValueTransformerType TRCValueTransformerTypeDate;
+
+/// Represents NSData
+TRCValueTransformerType TRCValueTransformerTypeData;
 
 @interface TRCSerializerPlist : NSObject <TRCRequestSerializer, TRCResponseSerializer, TRCSchemaFormat>
 

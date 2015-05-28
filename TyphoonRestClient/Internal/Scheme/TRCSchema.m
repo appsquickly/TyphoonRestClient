@@ -156,13 +156,21 @@
         if (!converter || ![converter respondsToSelector:@selector(externalTypes)]) {
             return [dataValue isKindOfClass:[NSString class]];
         }
-        TRCValueTransformerType types = [converter externalTypes];
-        BOOL isNumber = [dataValue isKindOfClass:[NSNumber class]];
-        BOOL isString = [dataValue isKindOfClass:[NSString class]];
-        BOOL supportNumbers = (types & TRCValueTransformerTypeNumber);
-        BOOL supportStrings = (types & TRCValueTransformerTypeString);
 
-        return (isNumber && supportNumbers) || (isString && supportStrings);
+        __block BOOL isTypeSupported = NO;
+        TRCValueTransformerType types = [converter externalTypes];
+        [self.converterRegistry enumerateTransformerTypesWithClasses:^(TRCValueTransformerType type, Class clazz, BOOL *stop) {
+            BOOL typeSupported = (BOOL)(types & type);
+            if (typeSupported) {
+                BOOL isThatType = [dataValue isKindOfClass:clazz];
+                if (isThatType) {
+                    isTypeSupported = YES;
+                    *stop = YES;
+                }
+            }
+        }];
+
+        return isTypeSupported;
     }
     else {
         return [self isValue:dataValue hasSameParentWith:schemeValue];
@@ -201,12 +209,11 @@
                 types = [converter externalTypes];
             }
             NSMutableArray *supportedTypes = [NSMutableArray new];
-            if (types & TRCValueTransformerTypeNumber) {
-                [supportedTypes addObject:@"'NSNumber'"];
-            }
-            if (types & TRCValueTransformerTypeString) {
-                [supportedTypes addObject:@"'NSString'"];
-            }
+            [self.converterRegistry enumerateTransformerTypesWithClasses:^(TRCValueTransformerType type, Class clazz, BOOL *stop) {
+                if (types & type) {
+                    [supportedTypes addObject:NSStringFromClass(clazz)];
+                }
+            }];
             return [supportedTypes componentsJoinedByString:@" or "];
         }
     }

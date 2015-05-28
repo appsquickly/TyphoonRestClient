@@ -77,6 +77,7 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
     NSMutableDictionary *_validationErrorPrinters;
 
     NSMutableOrderedSet *_postProcessors;
+    NSMutableDictionary *_trcValueTransformerTypesRegistry;
 }
 
 - (instancetype)init
@@ -95,6 +96,7 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
         _requestSerializers = [NSMutableDictionary new];
         _validationErrorPrinters = [NSMutableDictionary new];
         _postProcessors = [NSMutableOrderedSet new];
+        _trcValueTransformerTypesRegistry = [NSMutableDictionary new];
 
         [self registerDefaultTypeConverters];
         [self registerDefaultSchemeFormats];
@@ -587,6 +589,11 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
     [self registerValueTransformer:[TRCValueTransformerUrl new] forTag:@"{url}"];
     [self registerValueTransformer:[TRCValueTransformerString new] forTag:@"{string}"];
     [self registerValueTransformer:[TRCValueTransformerNumber new] forTag:@"{number}"];
+
+    [self registerTRCValueTransformerType:&TRCValueTransformerTypeString withValueClass:[NSString class]];
+    [self registerTRCValueTransformerType:&TRCValueTransformerTypeNumber withValueClass:[NSNumber class]];
+    [self registerTRCValueTransformerType:&TRCValueTransformerTypeData withValueClass:[NSData class]];
+    [self registerTRCValueTransformerType:&TRCValueTransformerTypeDate withValueClass:[NSDate class]];
 }
 
 - (void)registerValueTransformer:(id<TRCValueTransformer>)valueTransformer forTag:(NSString *)tag
@@ -692,6 +699,18 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
 }
 
 //-------------------------------------------------------------------------------------------
+#pragma mark - TRCValueTransformerType
+//-------------------------------------------------------------------------------------------
+
+- (void)enumerateTransformerTypesWithClasses:(void (^)(TRCValueTransformerType type, Class clazz, BOOL *stop))block
+{
+    [_trcValueTransformerTypesRegistry enumerateKeysAndObjectsUsingBlock:^(id clazz, NSNumber *value, BOOL *stop) {
+        TRCValueTransformerType type = [value integerValue];
+        block(type, clazz, stop);
+    }];
+}
+
+//-------------------------------------------------------------------------------------------
 #pragma mark - Reachability
 //-------------------------------------------------------------------------------------------
 
@@ -763,6 +782,20 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
         _validationErrorPrinters[extension] = printer;
     } else {
         [_validationErrorPrinters removeObjectForKey:extension];
+    }
+}
+
+- (void)registerTRCValueTransformerType:(TRCValueTransformerType *)type withValueClass:(Class)clazz
+{
+    if (type) {
+        if (_trcValueTransformerTypesRegistry[clazz]) {
+            NSNumber *currentValue = _trcValueTransformerTypesRegistry[clazz];
+            *type = [currentValue integerValue];
+        } else {
+            NSUInteger currentCount = [_trcValueTransformerTypesRegistry count];
+            *type = 1 << currentCount;
+            _trcValueTransformerTypesRegistry[(id<NSCopying>)clazz] = @(*type);
+        }
     }
 }
 

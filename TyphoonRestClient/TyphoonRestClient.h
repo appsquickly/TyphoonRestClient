@@ -82,4 +82,6 @@ typedef NS_OPTIONS(NSInteger , TRCValidationOptions)
 
 - (void)registerValidationErrorPrinter:(id<TRCValidationErrorPrinter>)printer forFormatWithFileExtension:(NSString *)extension;
 
+- (void)registerTRCValueTransformerType:(TRCValueTransformerType *)type withValueClass:(Class)clazz;
+
 @end

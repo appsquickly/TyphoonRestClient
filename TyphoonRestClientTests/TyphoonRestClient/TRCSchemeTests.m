@@ -114,6 +114,22 @@
     return nil;
 }
 
+- (void)enumerateTransformerTypesWithClasses:(void (^)(TRCValueTransformerType type, Class clazz, BOOL *stop))block
+{
+    static NSDictionary *typesRegistry = nil;
+    if (!typesRegistry) {
+        typesRegistry = @{
+                @(TRCValueTransformerTypeNumber): [NSNumber class],
+                @(TRCValueTransformerTypeString): [NSString class]
+        };
+    }
+
+    [typesRegistry enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        block([key integerValue], obj, stop);
+    }];
+}
+
+
 - (id)convertValuesInResponse:(id)arrayOrDictionary schema:(TRCSchema *)scheme1 error:(NSError **)parseError
 {
     return nil;
@@ -126,6 +142,9 @@
 
 - (void)setUp
 {
+    TRCValueTransformerTypeNumber = 1 << 0;
+    TRCValueTransformerTypeString = 1 << 1;
+
     scheme = [self schemaWithName:@"TestScheme.json" forRequest:NO];
     stringsArrayScheme = [self schemaWithName:@"StringsArray.json" forRequest:NO];
     dictionariesArrayScheme = [self schemaWithName:@"DictionaryArray.json" forRequest:NO];
