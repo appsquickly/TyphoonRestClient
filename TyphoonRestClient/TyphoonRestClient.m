@@ -80,8 +80,6 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
     NSMutableDictionary *_trcValueTransformerTypesRegistry;
 
     NSMutableDictionary *_defaultRequestSerializationsPerType;
-    NSMutableDictionary *_defaultResponseSerializationsPerType;
-
 }
 
 - (instancetype)init
@@ -101,13 +99,10 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
         _trcValueTransformerTypesRegistry = [NSMutableDictionary new];
 
         _defaultRequestSerializationsPerType = [NSMutableDictionary new];
-        _defaultResponseSerializationsPerType = [NSMutableDictionary new];
 
-        [self registerDefaultRequestSerializations];
+        [self registerDefaultSerializations];
         [self registerDefaultTypeConverters];
         [self registerDefaultSchemeFormats];
-        self.defaultResponseSerialization = TRCSerializationJson;
-
     }
     return self;
 }
@@ -710,8 +705,10 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
 #pragma mark - Default Serialization
 //-------------------------------------------------------------------------------------------
 
-- (void)registerDefaultRequestSerializations
+- (void)registerDefaultSerializations
 {
+    self.defaultResponseSerialization = TRCSerializationJson;
+
     [self registerDefaultRequestSerialization:TRCSerializationJson forBodyObjectWithClass:[NSDictionary class]];
     [self registerDefaultRequestSerialization:TRCSerializationJson forBodyObjectWithClass:[NSArray class]];
     [self registerDefaultRequestSerialization:TRCSerializationData forBodyObjectWithClass:[NSData class]];

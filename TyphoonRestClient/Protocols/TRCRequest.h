@@ -22,6 +22,10 @@
 
 typedef NSInteger TRCHttpStatusCode;
 
+//-------------------------------------------------------------------------------------------
+#pragma mark - HTTP METHODS
+//-------------------------------------------------------------------------------------------
+
 /**
 * `TRCRequestMethod` is NSString used as HTTP method.
 * If you need some additional HTTP methods, feel free to use your own.
@@ -40,6 +44,10 @@ extern TRCRequestMethod TRCRequestMethodPatch;
 /// HEAD
 extern TRCRequestMethod TRCRequestMethodHead;
 
+
+//-------------------------------------------------------------------------------------------
+#pragma mark - SERIALIZATION
+//-------------------------------------------------------------------------------------------
 /**
 * `TRCSerialization` is registered name of request/response serializer.
 *
@@ -135,10 +143,17 @@ extern TRCSerialization TRCSerializationRequestInputStream;
 extern TRCSerialization TRCSerializationResponseImage;
 
 
-//TODO: Rewrite docs
-
 /**
-* `TRCRequest`
+* The `TRCRequest` implementation manages request composing and response handling at same time. Each `TRCRequest` implementation
+* represents one API call which does one function.
+*
+* @discussion
+* Any information and logic, specific for that API call should be placed inside implementation of `TRCRequest`. Then you can easily
+* manage your *requests*: just add one more `TRCRequest` implementation and this means adding one more API call. Same for deletion,
+* no need to change something else somewhere in the app. Only `TRCRequest` and it's usage in the app.
+*
+* `TRCRequest` implementations should be lite. If see that something can be reused, check if it can be done via `TRCObjectMapper`,
+* `TRCValueTransformer`, `TRCConnection`. I thought to place here only information specific to API call (i.e. can't be reused)
 *
 * Most methods, related to request composing, starts from `request` prefix. At same time,
 * method related tot response processing, starts from `response` prefix
@@ -153,6 +168,8 @@ extern TRCSerialization TRCSerializationResponseImage;
 
 /**
 * Provide endpoint here. It can be relative path as well as absolute path to endpoint (matching by http: or https: prefix)
+* I.e. if path starts from `http://` or `https://`, then it used as absolute URL, in other case path would be appended into
+* base URL, specified in connection.
 *
 * If your URL has dynamic parts, you can mark them as path argument via curly braces like this:
 *    order/{id}
@@ -290,14 +307,18 @@ extern TRCSerialization TRCSerializationResponseImage;
 *
 * Use `TyphoonRestClient.registerResponseSerializer:forName:` to register your own response serializers
 *
+* If this method is not implemented, default value assumed, specified as `TyphoonRestClient.defaultResponseSerialization`
+*
 * @note
 * If want to save response body as is to file, then don't implement this method. Check `TRCRequest.responseBodyOutputStream`
 * method instead.
 *
 * @see
+* `TRCRequest.responseBodyOutputStream`
+* @see
 * `TRCSerialization`
 * @see
-* `TRCRequest.responseBodyOutputStream`
+* `TyphoonRestClient.defaultResponseSerialization`
 * */
 - (TRCSerialization)responseBodySerialization;
 
@@ -311,7 +332,6 @@ extern TRCSerialization TRCSerializationResponseImage;
 * */
 - (NSOutputStream *)responseBodyOutputStream;
 
-//TODO: Rework default serialization approach
 /**
 * Result of this method will be returned as `result` in the `TyphoonRestClient.sendRequest:completion:`.
 *
@@ -330,7 +350,7 @@ extern TRCSerialization TRCSerializationResponseImage;
 * - custom model object, when using custom `TRCSerialization`
 * - custom model object, when using `TRCObjectMapper` for root object
 *
-* Also note, `bodyObject` comes from serializer, validated using schema, post-processed by `TRCValueTransformer` and `TRCObjectMapper`s
+* Also note, `bodyObject` that comes from serializer, validated using schema, post-processed by `TRCValueTransformer` and `TRCObjectMapper`s
 *
 * ```NSData -> TRCSerializer -> ... TRCObjectMapper's ... -> bodyObject```
 *
