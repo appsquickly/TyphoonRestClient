@@ -12,6 +12,8 @@
 
 #import <Foundation/Foundation.h>
 
+//TODO: Write docs
+
 @protocol TRCObjectMapper<NSObject>
 
 @optional

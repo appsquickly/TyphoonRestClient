@@ -30,7 +30,7 @@
     return nil;
 }
 
-- (TRCSerialization)requestSerialization
+- (TRCSerialization)requestBodySerialization
 {
     return TRCSerializationJson;
 }
@@ -40,7 +40,7 @@
     return self.requestParams;
 }
 
-- (TRCSerialization)responseSerialization
+- (TRCSerialization)responseBodySerialization
 {
     return TRCSerializationResponseImage;
 }

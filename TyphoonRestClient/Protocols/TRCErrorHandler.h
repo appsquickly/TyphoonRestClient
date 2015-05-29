@@ -15,6 +15,8 @@
 #import <Foundation/Foundation.h>
 #import "TRCRequest.h"
 
+//TODO: Rewrite docs
+
 /**
 * TRCErrorHandler used to compose custom NSError from response body when request finished
 * with error status code (For example 4xx or 5xx codes)
@@ -26,7 +28,7 @@
 * argument.
 *
 * 'bodyObject' can be:
-* - NSArray or NSDictionary, in cases when 'responseSerialization' is Json, Xml or Plist
+* - NSArray or NSDictionary, in cases when 'responseBodySerialization' is Json, Xml or Plist
 * - UIImage when 'responseSerialization' is TRCSerializationData
 * - NSString when 'responseSerialization' is TRCSerializationString
 * - nil when 'responseBodyOutputStream' specified in TRCRequest

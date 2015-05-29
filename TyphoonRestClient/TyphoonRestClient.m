@@ -78,6 +78,10 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
 
     NSMutableOrderedSet *_postProcessors;
     NSMutableDictionary *_trcValueTransformerTypesRegistry;
+
+    NSMutableDictionary *_defaultRequestSerializationsPerType;
+    NSMutableDictionary *_defaultResponseSerializationsPerType;
+
 }
 
 - (instancetype)init
@@ -86,8 +90,6 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
     if (self) {
         _typeTransformerRegistry = [NSMutableDictionary new];
         _objectMapperRegistry = [NSMutableDictionary new];
-        self.defaultRequestSerialization = TRCSerializationJson;
-        self.defaultResponseSerialization = TRCSerializationJson;
         self.validationOptions = TRCValidationOptionsTreatEmptyDictionaryAsNilInResponsesForOptional |
                 TRCValidationOptionsTreatEmptyDictionaryAsNilInRequestsForOptional;
         _schemeFactory = [TRCSchemeFactory new];
@@ -98,8 +100,14 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
         _postProcessors = [NSMutableOrderedSet new];
         _trcValueTransformerTypesRegistry = [NSMutableDictionary new];
 
+        _defaultRequestSerializationsPerType = [NSMutableDictionary new];
+        _defaultResponseSerializationsPerType = [NSMutableDictionary new];
+
+        [self registerDefaultRequestSerializations];
         [self registerDefaultTypeConverters];
         [self registerDefaultSchemeFormats];
+        self.defaultResponseSerialization = TRCSerializationJson;
+
     }
     return self;
 }
@@ -182,12 +190,12 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
     }
 
     TRCSerialization serializationName = self.defaultResponseSerialization;
-    if ([request respondsToSelector:@selector(responseSerialization)]) {
-        serializationName = [request responseSerialization];
+    if ([request respondsToSelector:@selector(responseBodySerialization)]) {
+        serializationName = [request responseBodySerialization];
         if (options.outputStream && serializationName != TRCSerializationData) {
-            [self logWarning:@"Both 'responseSerialization' and 'responseBodyOutputStream' methods implemented in '%@' request. "
-                                     "Value returned by 'responseSerialization' method will be ignored. To avoid this warning please remove"
-                                     " 'responseSerialization' implementation or change returned value to TRCSerializationData", [request class]];
+            [self logWarning:@"Both 'responseBodySerialization' and 'responseBodyOutputStream' methods implemented in '%@' request. "
+                                     "Value returned by 'responseBodySerialization' method will be ignored. To avoid this warning please remove"
+                                     " 'responseBodySerialization' implementation or change returned value to TRCSerializationData", [request class]];
         }
     }
 
@@ -228,6 +236,10 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
     }
 
     TRCSerialization serializationName = [self requestSerializationFromRequest:request body:options.body];
+    if  (!serializationName) {
+        TRCSetError(error, TRCErrorWithFormat(TyphoonRestClientErrorCodeRequestSerialization, @"Request serialization not specified for object with type '%@'", [options.body class]));
+        return nil;
+    }
     options.serialization = _requestSerializers[serializationName];
     if (!options.serialization) {
         TRCSetError(error, TRCErrorWithFormat(TyphoonRestClientErrorCodeRequestSerialization, @"Can't find request serialization for name '%@'", serializationName));
@@ -280,15 +292,11 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
 
 - (TRCSerialization)requestSerializationFromRequest:(id<TRCRequest>)request body:(id)body
 {
-    TRCSerialization serialization = self.defaultRequestSerialization;
-    if ([request respondsToSelector:@selector(requestSerialization)]) {
-        serialization = [request requestSerialization];
-    } else if ([body isKindOfClass:[NSString class]]) {
-        serialization = TRCSerializationString;
-    } else if ([body isKindOfClass:[NSData class]]) {
-        serialization = TRCSerializationData;
-    } else if ([body isKindOfClass:[NSInputStream class]]) {
-        serialization = TRCSerializationRequestInputStream;
+    TRCSerialization serialization = nil;
+    if ([request respondsToSelector:@selector(requestBodySerialization)]) {
+        serialization = [request requestBodySerialization];
+    } else {
+        serialization = [self defaultRequestSerializationForBodyObject:body];
     }
     return serialization;
 }
@@ -695,6 +703,43 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
         }
     }
 
+    return result;
+}
+
+//-------------------------------------------------------------------------------------------
+#pragma mark - Default Serialization
+//-------------------------------------------------------------------------------------------
+
+- (void)registerDefaultRequestSerializations
+{
+    [self registerDefaultRequestSerialization:TRCSerializationJson forBodyObjectWithClass:[NSDictionary class]];
+    [self registerDefaultRequestSerialization:TRCSerializationJson forBodyObjectWithClass:[NSArray class]];
+    [self registerDefaultRequestSerialization:TRCSerializationData forBodyObjectWithClass:[NSData class]];
+    [self registerDefaultRequestSerialization:TRCSerializationRequestInputStream forBodyObjectWithClass:[NSInputStream class]];
+    [self registerDefaultRequestSerialization:TRCSerializationString forBodyObjectWithClass:[NSString class]];
+}
+
+- (void)registerDefaultRequestSerialization:(TRCSerialization)requestSerialization forBodyObjectWithClass:(Class)clazz
+{
+    if (requestSerialization) {
+        _defaultRequestSerializationsPerType[(id<NSCopying>)clazz] = requestSerialization;
+    } else {
+        [_defaultRequestSerializationsPerType removeObjectForKey:(id<NSCopying>)clazz];
+    }
+}
+
+- (TRCSerialization)defaultRequestSerializationForBodyObject:(id)bodyObject
+{
+    __block TRCSerialization result = nil;
+    if (bodyObject) {
+        [_defaultRequestSerializationsPerType enumerateKeysAndObjectsUsingBlock:^(id key, TRCSerialization serialization, BOOL *stop) {
+            Class clazz = key;
+            if ([bodyObject isKindOfClass:clazz]) {
+                result = serialization;
+                *stop = YES;
+            }
+        }];
+    }
     return result;
 }
 

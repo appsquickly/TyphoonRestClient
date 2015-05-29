@@ -53,7 +53,7 @@
 
 - (TRCSchema *)schemeForPathParametersWithRequest:(id<TRCRequest>)request
 {
-    return [self schemeForObject:request nameSelector:@selector(requestPathParametersValidationSchemaName) suffix:@"path" isRequest:YES];
+    return [self schemeForObject:request nameSelector:@selector(pathParametersValidationSchemaName) suffix:@"path" isRequest:YES];
 }
 
 - (TRCSchema *)schemeForRequest:(id<TRCRequest>)request

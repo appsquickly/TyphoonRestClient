@@ -66,7 +66,7 @@ typedef void (^TRCConnectionCompletion)(id responseObject, NSError *error, id<TR
 - (NSMutableURLRequest *)requestWithOptions:(id<TRCConnectionRequestCreationOptions>)options error:(NSError **)requestComposingError;
 
 /**
-* Sends `NSURLRequest` via network, then handles response using `options.responseSerialization` or writes into `options.outputStream`.
+* Sends `NSURLRequest` via network, then handles response using `options.responseBodySerialization` or writes into `options.outputStream`.
 * `TyphoonRestClient` makes `TRCConnectionRequestSendingOptions` using `TRCRequest`. These send options contains all necessary information to send request and handle response.
 *
 * Note that this method should return object that confirms `<TRCProgressHandler>` protocol, so  caller can track upload and download progress. (Implemented in `TRCConnectionAFNetworking`)

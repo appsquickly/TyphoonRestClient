@@ -19,6 +19,8 @@
 #import "TRCInfrastructure.h"
 #import "TRCPostProcessor.h"
 
+//TODO: Write docs
+
 extern NSString *TyphoonRestClientReachabilityDidChangeNotification;
 
 typedef NS_OPTIONS(NSInteger , TRCValidationOptions)
@@ -41,9 +43,6 @@ typedef NS_OPTIONS(NSInteger , TRCValidationOptions)
 @property (nonatomic, strong) id<TRCErrorHandler> errorHandler;
 @property (nonatomic, strong) id<TRCConnection> connection;
 
-/// Default: TRCSerializationJson;
-@property (nonatomic) TRCSerialization defaultRequestSerialization;
-
 /// Default: TRCSerializationJson
 @property (nonatomic) TRCSerialization defaultResponseSerialization;
 
@@ -62,6 +61,8 @@ typedef NS_OPTIONS(NSInteger , TRCValidationOptions)
 - (void)registerObjectMapper:(id<TRCObjectMapper>)objectConverter forTag:(NSString *)tag;
 
 - (void)registerPostProcessor:(id<TRCPostProcessor>)postProcessor;
+
+- (void)registerDefaultRequestSerialization:(TRCSerialization)requestSerialization forBodyObjectWithClass:(Class)clazz;
 
 @end
 
