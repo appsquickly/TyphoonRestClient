@@ -9,33 +9,40 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #import <Foundation/Foundation.h>
 #import "TRCRequest.h"
 
-//TODO: Rewrite docs
-
 /**
 * TRCErrorHandler used to compose custom NSError from response body when request finished
-* with error status code (For example 4xx or 5xx codes)
+* with error status code (For example 4xx or 5xx codes), or when response body contains error.
 * */
-@protocol TRCErrorHandler<NSObject>
+ @protocol TRCErrorHandler<NSObject>
 
 /**
 * This method returns custom NSError composed from response body. Body represented by 'bodyObject'
 * argument.
 *
-* 'bodyObject' can be:
-* - NSArray or NSDictionary, in cases when 'responseBodySerialization' is Json, Xml or Plist
-* - UIImage when 'responseSerialization' is TRCSerializationData
-* - NSString when 'responseSerialization' is TRCSerializationString
-* - nil when 'responseBodyOutputStream' specified in TRCRequest
+* `bodyObject` comes through serialization, validation, conversions (using `TRCObjectMapper` and `TRCValueTransformer`)
+* before appears here.
+*
+* See more information about `bodyObject` in `TRCRequest.responseProcessedFromBody:headers:status:error:`.
+*
+* You also may want to specify schema for validation. Check `TRCErrorHandler.errorValidationSchemaName` method.
+* If schema specified, then `bodyObject` validation failed, this method will not be called, and general error returns at
+* top-level call
+*
+* @see `TRCRequest.responseProcessedFromBody:headers:status:error:`
+* @see `TyphoonRestClient.errorHandler`
 * */
 - (NSError *)errorFromResponseBody:(id)bodyObject headers:(NSDictionary *)headers status:(TRCHttpStatusCode)statusCode error:(NSError **)error;
 
 @optional
+
+/**
+* Specify schema name to validate `bodyObject` before processing.
+* If this method not implemented then ClassName.response.{format} name assumed
+* */
+- (NSString *)errorValidationSchemaName;
 
 /**
 * Implement your body checking for error. This is required when your API uses some status codes inside response body, instead of
@@ -57,12 +64,5 @@
 *
 * */
 - (BOOL)isErrorResponseBody:(id)bodyObject headers:(NSDictionary *)headers status:(TRCHttpStatusCode)statusCode;
-
-/**
-* If you expect NSArray or NSDictionary representable 'bodyObject' for error composing, you can specify
-* validation scheme, to be sure that all needed for parsing keys specified and has correct type.
-* If this method not implement then ClassName.response name assumed
-* */
-- (NSString *)errorValidationSchemaName;
 
 @end
