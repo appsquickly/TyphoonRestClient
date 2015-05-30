@@ -13,18 +13,10 @@
 
 
 #import "TyphoonRestClient.h"
-#import "TRCRequest.h"
 #import "TRCSchema.h"
 #import "TRCUtils.h"
 #import "TRCConverter.h"
-#import "TRCValueTransformer.h"
 #import "TRCConvertersRegistry.h"
-#import "TRCErrorHandler.h"
-#import "TRCConnection.h"
-#import "TRCValueTransformerUrl.h"
-#import "TRCValueTransformerString.h"
-#import "TRCValueTransformerNumber.h"
-#import "TRCObjectMapper.h"
 #import "TRCSchemaDictionaryData.h"
 #import "TRCSchemeFactory.h"
 #import "TRCSerializerJson.h"
@@ -35,7 +27,6 @@
 #import "TRCSerializerInputStream.h"
 #import "TRCSerializerString.h"
 #import "TyphoonRestClientErrors.h"
-#import "TRCPostProcessor.h"
 
 TRCRequestMethod TRCRequestMethodPost = @"POST";
 TRCRequestMethod TRCRequestMethodGet = @"GET";
@@ -386,6 +377,7 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
 
 - (id)validateThenConvertObject:(id)object withScheme:(TRCSchema *)scheme error:(NSError **)error
 {
+    //TODO: Rethink
     BOOL isObjectCanBeValidated = [object isKindOfClass:[NSArray class]] || [object isKindOfClass:[NSDictionary class]];
     if (!isObjectCanBeValidated) {
         if (scheme && object) {
@@ -418,6 +410,7 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
 
 - (id)convertThenValidateObject:(id)object withScheme:(TRCSchema *)scheme error:(NSError **)error
 {
+    //TODO: Rethink
     BOOL isObjectCanBeValidated = [object isKindOfClass:[NSArray class]] || [object isKindOfClass:[NSDictionary class]];
     if (!isObjectCanBeValidated) {
         if (scheme && object) {
@@ -614,12 +607,12 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
 #pragma mark - Object Mappers
 //-------------------------------------------------------------------------------------------
 
-- (void)registerObjectMapper:(id<TRCObjectMapper>)objectConverter forTag:(NSString *)tag
+- (void)registerObjectMapper:(id<TRCObjectMapper>)objectMapper forTag:(NSString *)tag
 {
     NSParameterAssert(tag);
     NSAssert(_typeTransformerRegistry[tag] == nil, @"This tag already used as TRCValueTransformer. Call [registerValueTransformer:nil forTag:%@] before registering object mapper ", tag);
-    if (objectConverter) {
-        _objectMapperRegistry[tag] = objectConverter;
+    if (objectMapper) {
+        _objectMapperRegistry[tag] = objectMapper;
     } else {
         [_objectMapperRegistry removeObjectForKey:tag];
     }

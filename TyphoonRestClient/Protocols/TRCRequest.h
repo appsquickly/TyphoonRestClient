@@ -147,7 +147,6 @@ extern TRCSerialization TRCSerializationResponseImage;
 * The `TRCRequest` implementation manages request composing and response handling at same time. Each `TRCRequest` implementation
 * represents one API call which does one function.
 *
-* @discussion
 * Any information and logic, specific for that API call should be placed inside implementation of `TRCRequest`. Then you can easily
 * manage your *requests*: just add one more `TRCRequest` implementation and this means adding one more API call. Same for deletion,
 * no need to change something else somewhere in the app. Only `TRCRequest` and it's usage in the app.

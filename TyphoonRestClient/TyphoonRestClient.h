@@ -19,10 +19,18 @@
 #import "TRCInfrastructure.h"
 #import "TRCPostProcessor.h"
 
-//TODO: Write docs
+/**
+* If `TRCConnection` set in `TyphoonRestClient` supports reachability, then this notification would be posted after each
+* reachability state change.
+* This notification would be posted on main thread
+* */
 extern NSString *TyphoonRestClientReachabilityDidChangeNotification;
 
 
+//TODO: Describe each TRCValidationOptions option
+/**
+* `TRCValidationOptions` is special options to validation and conversion rules
+* */
 typedef NS_OPTIONS(NSInteger , TRCValidationOptions)
 {
     TRCValidationOptionsNone = 0,
@@ -34,34 +42,129 @@ typedef NS_OPTIONS(NSInteger , TRCValidationOptions)
     TRCValidationOptionsRemoveValuesMissedInSchemeForResponses = 1 << 5
 };
 
+
+//TODO: Write summery
+/**
+* `TyphoonRestClient` is HTTP client which aimed to help building large application with flexible architecture.
+*
+* ...
+*
+* */
 @interface TyphoonRestClient : NSObject
 
 //Reachability
+
+/// Returns `YES` if `connection` supports reachability and network is reachable - otherwise `NO`
 @property (nonatomic, readonly, getter=isReachable) BOOL reachable;
+
+/// Returns current reachabilityState. @see `TRCConnectionReachabilityState`
 @property (nonatomic, readonly) TRCConnectionReachabilityState reachabilityState;
 
+/// Set your `TRCErrorHandler` here. Default `nil`.
 @property (nonatomic, strong) id<TRCErrorHandler> errorHandler;
+
+/// Set your `TRCConnection` here. Default `nil`. You must set this property
 @property (nonatomic, strong) id<TRCConnection> connection;
 
 /// Default: TRCSerializationJson
 @property (nonatomic) TRCSerialization defaultResponseSerialization;
 
+/// If enabled, warning messages would be printed using NSLog. Disable if you are nervous, enable if you careful.
 /// Default: NO
 @property (nonatomic) BOOL shouldSuppressWarnings;
 
-/// Default: TRCValidationOptionsTreatEmptyDictionaryAsNilInResponsesForOptional | TRCValidationOptionsTreatEmptyDictionaryAsNilInRequestsForOptional
+/// Set validation and processing options here.
+/// Default: `TRCValidationOptionsTreatEmptyDictionaryAsNilInResponsesForOptional` | `TRCValidationOptionsTreatEmptyDictionaryAsNilInRequestsForOptional`
 @property (nonatomic) TRCValidationOptions validationOptions;
 
+/**
+* Sends your `TRCRequest` using `connection` and returns result in `completion` block.
+*
+* Make sure that `connection` property set before calling this method.
+*
+* @see
+* `TRCRequest`
+* `TRCConnection`
+* */
 - (id<TRCProgressHandler>)sendRequest:(id<TRCRequest>)request completion:(void(^)(id result, NSError *error))completion;
 
 #pragma mark - Registry
 
+/**
+* Registers `TRCValueTransformer` for specific `tag` string.
+* Use this `tag` in your schemes to mark values which must be processed by this `valueTransformer`
+*
+* @see
+* `TRCValueTransformer`
+* */
 - (void)registerValueTransformer:(id<TRCValueTransformer>)valueTransformer forTag:(NSString *)tag;
 
-- (void)registerObjectMapper:(id<TRCObjectMapper>)objectConverter forTag:(NSString *)tag;
+/**
+* Registers `TRCObjectMapper` for specific `tag` string.
+* Use this `tag` in schemas to mark which part of object should be processed by this `objectMapper`
+*
+* For example, you have next JSON object:
+* @code
+* {
+*   "people": {
+*      "first_name": "string",
+*      "last_name": "string"
+*   }
+* }
+* @endcode
+* and your mappers process objects:
+* @code
+* {
+*   "first_name": "string",
+*   "last_name": "string"
+* }
+* @endcode
+* then you can register your mapper, for example, with `tag = <people>`.
+* After that registration you can modify your scheme into that:
+* @code
+* {
+*   "people": "<people>"
+* }
+* @endcode
+*
+*
+* @see
+* `TRCObjectMapper`
+* */
+- (void)registerObjectMapper:(id<TRCObjectMapper>)objectMapper forTag:(NSString *)tag;
 
+/**
+* Adds your `TRCPostProcessor` into registry.
+* See `TRCPostProcessor` for more details
+*
+* @see `TRCPostProcessor`
+* */
 - (void)registerPostProcessor:(id<TRCPostProcessor>)postProcessor;
 
+/**
+* Registers `TRCSerialization` as default for body object class.
+*
+* That's useful to avoid typing `TRCRequest.requestBodySerialization` in each `TRCRequest` in most cases.
+*
+* Default registration is:
+* - `NSArray` registered with `TRCSerializationJson`
+* - `NSDictionary` registered with `TRCSerializationJson`
+* - `NSData` registered with `TRCSerializationData`
+* - `NSInputStream` registered with `TRCSerializationRequestInputStream`
+* - `NSString` registered with `TRCSerializationString`
+*
+* So if you return `NSInputStream` as `bodyObject.TRCRequest` and avoid implementation of `TRCRequest.requestBodySerialization`
+* then `TRCSerializationRequestInputStream` serialization would be used automatically
+*
+* Feel free to change that registration, by re-registering for same classes, or registering `nil`s
+*
+* @note class matching done using `NSObject.isKindOfClass` method. If you register different `TRCSerialization`-s for classes
+* that inherit each over, then result is unexpected. For example if you register `TRCSerializationJson` for `NSArray` and
+* `TRCSerializationPlist` for  `NSMutableArray` it's undefined which serialization would be taken for `NSMutableArray`.
+*
+* @param requestSerialization `TRCSerialization` string identifier to register or `nil` to undo registration
+* @param clazz class used for matching when search for default serialization.
+* */
 - (void)registerDefaultRequestSerialization:(TRCSerialization)requestSerialization forBodyObjectWithClass:(Class)clazz;
 
 @end
