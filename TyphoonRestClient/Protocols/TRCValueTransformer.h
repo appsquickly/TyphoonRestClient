@@ -18,7 +18,7 @@
 * Available values for `TRCValueTransformerType` are depends on serialization format you using. For example, JSON has only
 * two simple (atomic) types, it's number and string (array and dictionary are not simple (or atomic)).
 * Another example is Plist, it has all JSON types, plus date and  data. If your format has another format, you can register them
-* using `registerTRCValueTransformerType:withValueClass:` method on `TyphoonRestClient`. Like this:
+* using `TyphoonRestClient.registerTRCValueTransformerType:withValueClass:` method. Like this:
 * @code
 * [_restClient registerTRCValueTransformerType:&TRCValueTransformerTypeString withValueClass:[NSString class]];
 * [_restClient registerTRCValueTransformerType:&TRCValueTransformerTypeNumber withValueClass:[NSNumber class]];

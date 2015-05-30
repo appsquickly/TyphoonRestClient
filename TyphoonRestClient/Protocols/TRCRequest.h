@@ -356,7 +356,7 @@ extern TRCSerialization TRCSerializationResponseImage;
 *
 * Also note, `bodyObject` that comes from serializer, validated using schema, post-processed by `TRCValueTransformer` and `TRCObjectMapper`s
 *
-* ```NSData -> TRCSerializer -> ... TRCObjectMapper's ... -> bodyObject```
+* ```NSData -> TRCSerializer -> ... TRCObjectMapper-s ... -> bodyObject```
 *
 * That means, that `bodyObject` already validated here (has correct structure), no need to check it here again. That also means, that some parts of
 * object (or whole objects itself) already converted into model objects to use in the app
