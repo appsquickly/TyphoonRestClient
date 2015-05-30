@@ -133,6 +133,7 @@
         object = *result;
     }
 
+    //TODO: Test case with NSArray
     //Only NSDictionary can be used for mappers
     if (![object isKindOfClass:[NSDictionary class]]) {
         [self notifyFail:object withSchemaObject:[NSDictionary new]];

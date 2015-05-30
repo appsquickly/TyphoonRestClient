@@ -249,6 +249,10 @@ extern TRCSerialization TRCSerializationResponseImage;
 * To register default serialization for `requestBody` type, use `TyphoonRestClient.registerDefaultRequestSerialization:forBodyObjectWithClass:`
 * method.
 *
+* Note, if you `TRCRequest has request body validation scheme, then this object would be transformed using `TRCValueTransformer`s and
+* `TRCObjectMapper`s specified in schema, and the validated.
+* If validation isn't passed, request wouldn't being sent and finishes with error
+*
 * @see
 * `TRCRequest.requestSerialization`
 * @see
