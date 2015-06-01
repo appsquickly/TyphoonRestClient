@@ -21,6 +21,7 @@
 #import "TRCSchemaDictionaryData.h"
 #import "TRCSerializerJson.h"
 #import "TestUtils.h"
+#import "TRCMapperWithArray.h"
 
 @interface TRCConverterTests : XCTestCase<TRCConvertersRegistry, TRCSchemaDataProvider>
 
@@ -92,6 +93,8 @@
         return [TRCMapperPhone new];
     } else if ([tag isEqualToString:@"{person-cant-laod}"]) {
         return nil;
+    } else if ([tag isEqualToString:@"{array}"]) {
+        return [TRCMapperWithArray new];
     } else {
         return nil;
     };
@@ -120,6 +123,8 @@
         name = @"TRCMapperPerson.json";
     } else if ([schemaName isEqualToString:@"{phone}"]) {
         name = @"TRCMapperPhone.json";
+    } else if ([schemaName isEqualToString:@"{array}"]) {
+        name = @"TRCMapperWithArray.json";
     }
 
     if (name) {
@@ -701,6 +706,49 @@
 
     XCTAssert(conversionError == nil);
     XCTAssertNil(result[@"key3"]);
+}
+
+- (void)test_response_mapper_with_array
+{
+    NSDictionary *data = @{ @"array": @[
+            @{
+                    @"id" : @1,
+                    @"text" : @"one"
+            },
+            @{
+                    @"id" : @2,
+                    @"text" : @"two"
+            },
+    ]};
+    NSDictionary *schema = @{ @"array": @"{array}"};
+
+    NSError *conversionError = nil;
+    NSDictionary *result = [self convertResponseObject:data schema:schema error:&conversionError];
+
+    TRCMapperWithArrayItemsCollection *collection = result[@"array"];
+
+    XCTAssertTrue(conversionError == nil);
+    XCTAssertTrue([collection isKindOfClass:[TRCMapperWithArrayItemsCollection class]]);
+    NSArray *items = [collection allItems];
+    TRCMapperWithArrayItem *item1 = [items firstObject];
+    XCTAssertTrue([item1.text isEqualToString:@"one"]);
+
+}
+
+- (void)test_request_mapper_with_array
+{
+    TRCMapperWithArrayItem *item = [TRCMapperWithArrayItem new];
+    item.identifier = @1;
+    item.text = @"one";
+    TRCMapperWithArrayItemsCollection *collection = [[TRCMapperWithArrayItemsCollection alloc] initWithItems:@[item]];
+
+    NSDictionary *schema = @{ @"array": @"{array}"};
+
+    NSError *error = nil;
+    NSDictionary *result = [self convertRequestObject:@{ @"array" : collection}  schema:schema error:&error];
+    XCTAssertNil(error);
+    NSDictionary *expected = @{@"array": @[@{ @"id": @1, @"text": @"one"}]};
+    XCTAssertEqualObjects(result, expected, @"");
 }
 
 @end

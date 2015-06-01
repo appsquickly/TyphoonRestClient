@@ -134,14 +134,6 @@
         object = *result;
     }
 
-    //TODO: Test case with NSArray
-    //Only NSDictionary can be used for mappers
-    if (![object isKindOfClass:[NSDictionary class]]) {
-        [self notifyFail:object withSchemaObject:[NSDictionary new]];
-        [self cancel];
-        return;
-    }
-
     id<TRCSchemaData> child = nil;
     if ([self isRequestData]) {
         child = [self.dataProvider schemaData:self requestSchemaForMapperWithTag:name];
