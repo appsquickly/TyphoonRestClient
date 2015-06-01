@@ -34,11 +34,14 @@ extern NSString *TyphoonRestClientReachabilityDidChangeNotification;
 typedef NS_OPTIONS(NSInteger , TRCValidationOptions)
 {
     TRCValidationOptionsNone = 0,
-    TRCValidationOptionsTreatEmptyDictionaryAsNilInResponsesForOptional = 1 << 0,
-    TRCValidationOptionsTreatEmptyDictionaryAsNilInResponsesForRequired = 1 << 1,
-    TRCValidationOptionsTreatEmptyDictionaryAsNilInRequestsForOptional = 1 << 2,
-    TRCValidationOptionsTreatEmptyDictionaryAsNilInRequestsForRequired = 1 << 3,
+
+    TRCValidationOptionsReplaceEmptyDictionariesWithNilInResponsesForOptional = 1 << 0,
+    TRCValidationOptionsReplaceEmptyDictionariesWithNilInResponsesForRequired = 1 << 1,
+    TRCValidationOptionsReplaceEmptyDictionariesWithNilInRequestsForOptional = 1 << 2,
+    TRCValidationOptionsReplaceEmptyDictionariesWithNilInRequestsForRequired = 1 << 3,
+    ///If enabled, all values missed in schema would be removed in request object
     TRCValidationOptionsRemoveValuesMissedInSchemeForRequests  = 1 << 4,
+    ///If enabled, all values missed in schema would be removed in response object
     TRCValidationOptionsRemoveValuesMissedInSchemeForResponses = 1 << 5
 };
 
@@ -74,7 +77,7 @@ typedef NS_OPTIONS(NSInteger , TRCValidationOptions)
 @property (nonatomic) BOOL shouldSuppressWarnings;
 
 /// Set validation and processing options here.
-/// Default: `TRCValidationOptionsTreatEmptyDictionaryAsNilInResponsesForOptional` | `TRCValidationOptionsTreatEmptyDictionaryAsNilInRequestsForOptional`
+/// Default: `TRCValidationOptionsReplaceEmptyDictionariesWithNilInResponsesForOptional` | `TRCValidationOptionsReplaceEmptyDictionariesWithNilInRequestsForOptional`
 @property (nonatomic) TRCValidationOptions validationOptions;
 
 /**

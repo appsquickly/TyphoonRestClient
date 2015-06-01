@@ -22,20 +22,33 @@
 #import "TRCSerializerJson.h"
 #import "TestUtils.h"
 
-@interface TRCConverterTests : XCTestCase<TRCConvertersRegistry>
+@interface TRCConverterTests : XCTestCase<TRCConvertersRegistry, TRCSchemaDataProvider>
 
-@end
-
-@interface TRCConverterTests ()<TRCSchemaDataProvider>
 @end
 
 @implementation TRCConverterTests
 
 TRCValidationOptions validationOptions;
 
+- (void)enumerateTransformerTypesWithClasses:(void (^)(TRCValueTransformerType type, Class clazz, BOOL *stop))block
+{
+    static NSDictionary *typesRegistry = nil;
+    if (!typesRegistry) {
+        typesRegistry = @{
+                @(TRCValueTransformerTypeNumber): [NSNumber class],
+                @(TRCValueTransformerTypeString): [NSString class]
+        };
+    }
+
+    [typesRegistry enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        block([key integerValue], obj, stop);
+    }];
+}
+
 - (id<TRCValueTransformer>)valueTransformerForTag:(NSString *)type
 {
     TRCValueTransformerStub *stub = [TRCValueTransformerStub new];
+    stub.supportedTypes = TRCValueTransformerTypeString;
 
     if ([type isEqualToString:@"NSURL"]) {
         stub.object = @"Url";
@@ -45,6 +58,7 @@ TRCValidationOptions validationOptions;
         stub.value = [[NSURL alloc] initWithString:@"http://appsquick.ly"];
     } else if ([type isEqualToString:@"NSDate"]) {
         stub.object = @"Date";
+        stub.supportedTypes = TRCValueTransformerTypeNumber | TRCValueTransformerTypeString;
     } else if ([type isEqualToString:@"NSObject"]) {
         stub.error = NSErrorWithFormat(@"Can't convert NSObject type");
     } else {
@@ -146,7 +160,9 @@ TRCValidationOptions validationOptions;
 
 + (void)setUp
 {
-    validationOptions = TRCValidationOptionsTreatEmptyDictionaryAsNilInResponsesForOptional | TRCValidationOptionsTreatEmptyDictionaryAsNilInRequestsForOptional;
+    TRCValueTransformerTypeNumber = 1 << 0;
+    TRCValueTransformerTypeString = 1 << 1;
+    validationOptions = TRCValidationOptionsReplaceEmptyDictionariesWithNilInResponsesForOptional | TRCValidationOptionsReplaceEmptyDictionariesWithNilInRequestsForOptional;
     [super setUp];
 }
 
@@ -208,8 +224,8 @@ TRCValidationOptions validationOptions;
     NSOrderedSet *errors = nil;
     NSDictionary *object = [self convertResponseObject:data schema:schema errors:&errors];
 
-    XCTAssertTrue([[object objectForKey:@"key"] isEqualToString:@"value"]);
-    XCTAssertTrue([[object objectForKey:@"key2"] isEqualToNumber:@23]);
+    XCTAssertTrue([object[@"key"] isEqualToString:@"value"]);
+    XCTAssertTrue([object[@"key2"] isEqualToNumber:@23]);
     XCTAssertTrue([errors count] == 0, @"Error: %@", errors);
 }
 
@@ -233,15 +249,15 @@ TRCValidationOptions validationOptions;
     NSOrderedSet *errors = nil;
     NSDictionary *object = [self convertResponseObject:data schema:schema errors:&errors];
 
-    XCTAssertTrue([[object objectForKey:@"key"] isEqualToString:@"Url"]);
-    XCTAssertTrue([[object objectForKey:@"key2"] isEqual:@"Date"]);
+    XCTAssertTrue([object[@"key"] isEqualToString:@"Url"]);
+    XCTAssertTrue([object[@"key2"] isEqual:@"Date"]);
     XCTAssertTrue([errors count] == 0, @"Error: %@", errors);
 }
 
 - (void)test_plain_dictionary_with_schema_and_converting_incorrect_class
 {
     NSDictionary *data = @{@"key" : @"value", @"key2" : @12};
-    NSDictionary *schema = @{@"key" : @"NSURL", @"key2" : @"NSObject"};
+    NSDictionary *schema = @{@"key" : @"NSURL", @"key2": @"NSObject"};
 
     NSOrderedSet *errors = nil;
     NSDictionary *object = [self convertResponseObject:data schema:schema errors:&errors];
@@ -524,95 +540,92 @@ TRCValidationOptions validationOptions;
     XCTAssertTrue(errors.count == 1, @"Error: %@", errors);
 }
 
-//TODO: Fix
+- (void)test_model_object_response_parsing
+{
+    NSDictionary *data = @{ @"first_name": @"Ivan", @"last_name": @"Ivanov", @"avatar_url": @"some_url"};
+    NSDictionary *schema = @{ @"{root_mapper}": @"{person}"};
+
+    NSOrderedSet *errors = nil;
+    Person *object = [self convertResponseObject:data schema:schema errors:&errors];
+
+    XCTAssertEqualObjects(object.firstName, @"Ivan");
+    XCTAssertEqualObjects(object.lastName, @"Ivanov");
+    XCTAssertEqualObjects(object.avatarUrl, [NSURL URLWithString:@"http://appsquick.ly"]);
+    XCTAssertTrue([errors count] == 0);
+}
+
+- (void)test_model_object_request_composing
+{
+    Person *test = [Person new];
+    test.firstName = @"Ivan";
+    test.lastName = @"Ivanov";
+    test.avatarUrl = [NSURL URLWithString:@"http://google.com"];
+
+    NSDictionary *schema = @{ @"{root_mapper}": @"{person}"};
+
+    NSOrderedSet *errors = nil;
+    NSDictionary *object = [self convertRequestObject:test schema:schema errors:&errors];
+
+    XCTAssertEqualObjects(object[@"first_name"], @"Ivan");
+    XCTAssertEqualObjects(object[@"last_name"], @"Ivanov");
+    XCTAssertEqualObjects(object[@"avatar_url"], [NSURL URLWithString:@"http://appsquick.ly"]);
+    XCTAssertTrue([errors count] == 0);
+}
+
+- (void)test_model_object_response_parsing_error
+{
+    NSDictionary *data = @{ @"first_name": @"i", @"last_name": @"Ivanov", @"avatar_url": @"some_url"};
+    NSDictionary *schema = @{ @"{root_mapper}": @"test"};
+
+    NSOrderedSet *errors = nil;
+    Person *object = [self convertResponseObject:data schema:schema errors:&errors];
+
+    XCTAssertNil(object);
+    XCTAssertTrue([errors count] >= 1);
+}
+
+- (void)test_model_object_request_composing_error
+{
+    Person *test = [Person new];
+    test.firstName = @"i";
+    test.lastName = @"Ivanov";
+    test.avatarUrl = [NSURL URLWithString:@"http://google.com"];
+
+    NSDictionary *schema = @{ @"{root_mapper}": @"test"};
+
+    NSOrderedSet *errors = nil;
+    NSDictionary *object = [self convertRequestObject:test schema:schema errors:&errors];
+
+    XCTAssertNil(object);
+    XCTAssertTrue([errors count] >= 1);
+}
+
+- (void)test_mapper_request_not_implemented
+{
+    Person *test = [Person new];
+    test.firstName = @"Ivan";
+    test.lastName = @"Ivanov";
+    test.avatarUrl = [NSURL URLWithString:@"http://google.com"];
+
+    NSDictionary *schema = @{ @"{root_mapper}": @"test_without_request"};
+
+    NSOrderedSet *errors = nil;
+    [self convertRequestObject:test schema:schema errors:&errors];
+
+    XCTAssertTrue([errors count] >= 1);
+}
 
 
-//- (void)test_model_object_response_parsing
-//{
-//    NSDictionary *data = @{ @"first_name": @"Ivan", @"last_name": @"Ivanov", @"avatar_url": @"some_url"};
-//    NSDictionary *schema = @{ @"first_name": @"Ivan", @"last_name": @"Ivanov", @"avatar_url": @"{url}", @"{mapper}": @"test"};
-//
-//    NSOrderedSet *errors = nil;
-//    Person *object = [self convertResponseObject:data schema:schema errors:&errors];
-//
-//    XCTAssertEqualObjects(object.firstName, @"Ivan");
-//    XCTAssertEqualObjects(object.lastName, @"Ivanov");
-//    XCTAssertEqualObjects(object.avatarUrl, [NSURL URLWithString:@"http://appsquick.ly"]);
-//    XCTAssertTrue([errors count] == 0);
-//}
+- (void)test_mapper_response_not_implemented
+{
+    NSDictionary *data = @{ @"first_name": @"Ivan", @"last_name": @"Ivanov", @"avatar_url": @"some_url"};
+    NSDictionary *schema = @{ @"{root_mapper}": @"test_without_response"};
 
-//- (void)test_model_object_request_composing
-//{
-//    Person *test = [Person new];
-//    test.firstName = @"Ivan";
-//    test.lastName = @"Ivanov";
-//    test.avatarUrl = [NSURL URLWithString:@"http://google.com"];
-//
-//    NSDictionary *schema = @{ @"first_name": @"Ivan", @"last_name": @"Ivanov", @"avatar_url": @"{url}", @"{mapper}": @"test"};
-//
-//    NSOrderedSet *errors = nil;
-//    NSDictionary *object = [self convertRequestObject:test schema:schema errors:&errors];
-//
-//    XCTAssertEqualObjects(object[@"first_name"], @"Ivan");
-//    XCTAssertEqualObjects(object[@"last_name"], @"Ivanov");
-//    XCTAssertEqualObjects(object[@"avatar_url"], [NSURL URLWithString:@"http://appsquick.ly"]);
-//    XCTAssertTrue([errors count] == 0);
-//}
+    NSOrderedSet *errors = nil;
+    [self convertResponseObject:data schema:schema errors:&errors];
 
-//- (void)test_model_object_response_parsing_error
-//{
-//    NSDictionary *data = @{ @"first_name": @"i", @"last_name": @"Ivanov", @"avatar_url": @"some_url"};
-//    NSDictionary *schema = @{ @"first_name": @"Ivan", @"last_name": @"Ivanov", @"avatar_url": @"{url}", @"{mapper}": @"test"};
-//
-//    NSOrderedSet *errors = nil;
-//    Person *object = [self convertResponseObject:data schema:schema errors:&errors];
-//
-//    XCTAssertNil(object);
-//    XCTAssertTrue([errors count] >= 1);
-//}
-
-//- (void)test_model_object_request_composing_error
-//{
-//    Person *test = [Person new];
-//    test.firstName = @"i";
-//    test.lastName = @"Ivanov";
-//    test.avatarUrl = [NSURL URLWithString:@"http://google.com"];
-//
-//    NSDictionary *schema = @{ @"first_name": @"Ivan", @"last_name": @"Ivanov", @"avatar_url": @"{url}", @"{mapper}": @"test"};
-//
-//    NSOrderedSet *errors = nil;
-//    NSDictionary *object = [self convertRequestObject:test schema:schema errors:&errors];
-//
-//    XCTAssertEqualObjects(object, @{});
-//    XCTAssertTrue([errors count] >= 1);
-//}
-
-//- (void)test_mapper_request_not_implemented
-//{
-//    Person *test = [Person new];
-//    test.firstName = @"Ivan";
-//    test.lastName = @"Ivanov";
-//    test.avatarUrl = [NSURL URLWithString:@"http://google.com"];
-//
-//    NSDictionary *schema = @{ @"first_name": @"Ivan", @"last_name": @"Ivanov", @"avatar_url": @"{url}", @"{mapper}": @"test_without_request"};
-//
-//    NSOrderedSet *errors = nil;
-//    [self convertRequestObject:test schema:schema errors:&errors];
-//
-//    XCTAssertTrue([errors count] >= 1);
-//}
-
-
-//- (void)test_mapper_response_not_implemented
-//{
-//    NSDictionary *data = @{ @"first_name": @"Ivan", @"last_name": @"Ivanov", @"avatar_url": @"some_url"};
-//    NSDictionary *schema = @{ @"first_name": @"Ivan", @"last_name": @"Ivanov", @"avatar_url": @"{url}", @"{mapper}": @"test_without_response"};
-//
-//    NSOrderedSet *errors = nil;
-//    [self convertResponseObject:data schema:schema errors:&errors];
-//
-//    XCTAssertTrue([errors count] > 0);
-//}
+    XCTAssertTrue([errors count] > 0);
+}
 
 - (void)test_model_object_request_composing_external_scheme
 {
@@ -643,7 +656,7 @@ TRCValidationOptions validationOptions;
     XCTAssertEqualObjects(object.firstName, @"Ivan");
     XCTAssertEqualObjects(object.lastName, @"Ivanov");
     XCTAssertEqualObjects(object.avatarUrl, [NSURL URLWithString:@"http://appsquick.ly"]);
-    XCTAssertTrue([errors count] == 0);
+    XCTAssertTrue([errors count] == 0, @"Errors: %@", errors);
 }
 
 - (void)test_model_object_response_parsing_external_scheme_sub_scheme
@@ -673,5 +686,39 @@ TRCValidationOptions validationOptions;
     
     XCTAssertEqualObjects(result, @{@"key1": @"1" });
 }
+
+//-------------------------------------------------------------------------------------------
+#pragma mark - Validation options tests
+//-------------------------------------------------------------------------------------------
+
+//TODO: Complete these tests
+//- (void)test_validation_option1
+//{
+//    NSDictionary *data = @{ @"key1": @"1", @"key2": @{}};
+//    NSDictionary *schema = @{ @"key1": @"1", @"key2{?}": @{ @"key3": @"value"}};
+//
+//    NSOrderedSet *errors = nil;
+//    NSDictionary *result = [self convertResponseObject:data schema:schema errors:&errors];
+//
+//    XCTAssert([errors count] == 0);
+//    XCTAssertNil(result[@"key2"]);
+//}
+//
+//- (void)test_validation_option2
+//{
+//    NSDictionary *data = @{ @"key1": @"1", @"key2": @{}};
+//    NSDictionary *schema = @{ @"key1": @"1", @"key2": @{ @"key3": @"value"}};
+//
+//    NSOrderedSet *errors = nil;
+//    NSDictionary *result = [self convertResponseObject:data schema:schema errors:&errors];
+//
+//    XCTAssert([errors count] == 0);
+//    XCTAssertNil(result[@"key2"]);
+//}
+
+
+//-------------------------------------------------------------------------------------------
+#pragma mark -
+//-------------------------------------------------------------------------------------------
 
 @end

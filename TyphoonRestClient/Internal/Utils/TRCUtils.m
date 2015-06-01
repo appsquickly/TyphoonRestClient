@@ -74,10 +74,10 @@ id TRCValueAfterApplyingOptions(id value, TRCValidationOptions options, BOOL isR
     id result = value;
     BOOL isEmptyDictionary = [result isKindOfClass:[NSDictionary class]] && [result count] == 0;
     if (isEmptyDictionary) {
-        TRCValidationOptions treatForOptional = isRequest ? TRCValidationOptionsTreatEmptyDictionaryAsNilInRequestsForOptional :
-                TRCValidationOptionsTreatEmptyDictionaryAsNilInResponsesForOptional;
-        TRCValidationOptions treatForRequired = isRequest ? TRCValidationOptionsTreatEmptyDictionaryAsNilInRequestsForRequired :
-                TRCValidationOptionsTreatEmptyDictionaryAsNilInResponsesForRequired;
+        TRCValidationOptions treatForOptional = isRequest ? TRCValidationOptionsReplaceEmptyDictionariesWithNilInRequestsForOptional :
+                TRCValidationOptionsReplaceEmptyDictionariesWithNilInResponsesForOptional;
+        TRCValidationOptions treatForRequired = isRequest ? TRCValidationOptionsReplaceEmptyDictionariesWithNilInRequestsForRequired :
+                TRCValidationOptionsReplaceEmptyDictionariesWithNilInResponsesForRequired;
 
         if (isOptional && (options & treatForOptional)) {
             result = nil;

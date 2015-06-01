@@ -79,8 +79,8 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
     if (self) {
         _typeTransformerRegistry = [NSMutableDictionary new];
         _objectMapperRegistry = [NSMutableDictionary new];
-        self.validationOptions = TRCValidationOptionsTreatEmptyDictionaryAsNilInResponsesForOptional |
-                TRCValidationOptionsTreatEmptyDictionaryAsNilInRequestsForOptional;
+        self.validationOptions = TRCValidationOptionsReplaceEmptyDictionariesWithNilInResponsesForOptional |
+                TRCValidationOptionsReplaceEmptyDictionariesWithNilInRequestsForOptional;
         _schemeFactory = [TRCSchemeFactory new];
         _schemeFactory.owner = self;
         _responseSerializers = [NSMutableDictionary new];
@@ -221,15 +221,18 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
         return nil;
     }
 
-    TRCSerialization serializationName = [self requestSerializationFromRequest:request body:options.body];
-    if  (!serializationName) {
-        TRCSetError(error, TRCErrorWithFormat(TyphoonRestClientErrorCodeRequestSerialization, @"Request serialization not specified for object with type '%@'", [options.body class]));
-        return nil;
-    }
-    options.serialization = _requestSerializers[serializationName];
-    if (!options.serialization) {
-        TRCSetError(error, TRCErrorWithFormat(TyphoonRestClientErrorCodeRequestSerialization, @"Can't find request serialization for name '%@'", serializationName));
-        return nil;
+    TRCSerialization serializationName = nil;
+    if (options.body) {
+        serializationName = [self requestSerializationFromRequest:request body:options.body];
+        if  (!serializationName) {
+            TRCSetError(error, TRCErrorWithFormat(TyphoonRestClientErrorCodeRequestSerialization, @"Request serialization not specified for object with type '%@'", [options.body class]));
+            return nil;
+        }
+        options.serialization = _requestSerializers[serializationName];
+        if (!options.serialization) {
+            TRCSetError(error, TRCErrorWithFormat(TyphoonRestClientErrorCodeRequestSerialization, @"Can't find request serialization for name '%@'", serializationName));
+            return nil;
+        }
     }
 
     NSMutableDictionary *pathParams = [[self requestPathParametersFromRequest:request error:&composingError] mutableCopy];
