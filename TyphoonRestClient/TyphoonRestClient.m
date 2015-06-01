@@ -79,8 +79,7 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
     if (self) {
         _typeTransformerRegistry = [NSMutableDictionary new];
         _objectMapperRegistry = [NSMutableDictionary new];
-        self.validationOptions = TRCValidationOptionsReplaceEmptyDictionariesWithNilInResponsesForOptional |
-                TRCValidationOptionsReplaceEmptyDictionariesWithNilInRequestsForOptional;
+        self.validationOptions = TRCValidationOptionsNone;
         _schemeFactory = [TRCSchemeFactory new];
         _schemeFactory.owner = self;
         _responseSerializers = [NSMutableDictionary new];

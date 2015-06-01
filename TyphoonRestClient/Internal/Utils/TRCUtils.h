@@ -23,8 +23,6 @@ NSString *TRCKeyFromOptionalKey(NSString *key, BOOL *isOptional);
 
 NSError *TRCErrorFromErrorSet(NSOrderedSet *errors, NSInteger code, NSString *action);
 
-id TRCValueAfterApplyingOptions(id value, TRCValidationOptions options, BOOL isRequest, BOOL isOptional);
-
 NSError *TRCUnknownValidationErrorForObject(id object, NSString *schemaName, BOOL isResponse);
 
 NSError *TRCConversionError(NSString *errorMessage, NSString *schemaName, BOOL isResponse);

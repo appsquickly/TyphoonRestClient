@@ -69,26 +69,6 @@ NSError *TRCErrorFromErrorSet(NSOrderedSet *errors, NSInteger code, NSString *ac
     }
 }
 
-id TRCValueAfterApplyingOptions(id value, TRCValidationOptions options, BOOL isRequest, BOOL isOptional)
-{
-    id result = value;
-    BOOL isEmptyDictionary = [result isKindOfClass:[NSDictionary class]] && [result count] == 0;
-    if (isEmptyDictionary) {
-        TRCValidationOptions treatForOptional = isRequest ? TRCValidationOptionsReplaceEmptyDictionariesWithNilInRequestsForOptional :
-                TRCValidationOptionsReplaceEmptyDictionariesWithNilInResponsesForOptional;
-        TRCValidationOptions treatForRequired = isRequest ? TRCValidationOptionsReplaceEmptyDictionariesWithNilInRequestsForRequired :
-                TRCValidationOptionsReplaceEmptyDictionariesWithNilInResponsesForRequired;
-
-        if (isOptional && (options & treatForOptional)) {
-            result = nil;
-        }
-        if (!isOptional && (options & treatForRequired)) {
-            result = nil;
-        }
-    }
-    return result;
-}
-
 NSError *TRCUnknownValidationErrorForObject(id object, NSString *schemaName, BOOL isResponse)
 {
     NSString *errorMessage = [NSString stringWithFormat:@"Unknown error while %@ validation", isResponse?@"response":@"request"];

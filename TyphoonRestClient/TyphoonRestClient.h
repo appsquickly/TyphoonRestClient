@@ -26,25 +26,17 @@
 * */
 extern NSString *TyphoonRestClientReachabilityDidChangeNotification;
 
-
-//TODO: Describe each TRCValidationOptions option
 /**
 * `TRCValidationOptions` is special options to validation and conversion rules
 * */
 typedef NS_OPTIONS(NSInteger , TRCValidationOptions)
 {
     TRCValidationOptionsNone = 0,
-
-    TRCValidationOptionsReplaceEmptyDictionariesWithNilInResponsesForOptional = 1 << 0,
-    TRCValidationOptionsReplaceEmptyDictionariesWithNilInResponsesForRequired = 1 << 1,
-    TRCValidationOptionsReplaceEmptyDictionariesWithNilInRequestsForOptional = 1 << 2,
-    TRCValidationOptionsReplaceEmptyDictionariesWithNilInRequestsForRequired = 1 << 3,
     ///If enabled, all values missed in schema would be removed in request object
-    TRCValidationOptionsRemoveValuesMissedInSchemeForRequests  = 1 << 4,
+    TRCValidationOptionsRemoveValuesMissedInSchemeForRequests  = 1 << 0,
     ///If enabled, all values missed in schema would be removed in response object
-    TRCValidationOptionsRemoveValuesMissedInSchemeForResponses = 1 << 5
+    TRCValidationOptionsRemoveValuesMissedInSchemeForResponses = 1 << 1
 };
-
 
 //TODO: Write summery
 /**
@@ -77,7 +69,7 @@ typedef NS_OPTIONS(NSInteger , TRCValidationOptions)
 @property (nonatomic) BOOL shouldSuppressWarnings;
 
 /// Set validation and processing options here.
-/// Default: `TRCValidationOptionsReplaceEmptyDictionariesWithNilInResponsesForOptional` | `TRCValidationOptionsReplaceEmptyDictionariesWithNilInRequestsForOptional`
+/// Default: `TRCValidationOptionsNone`
 @property (nonatomic) TRCValidationOptions validationOptions;
 
 /**

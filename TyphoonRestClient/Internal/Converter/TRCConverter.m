@@ -93,8 +93,6 @@
         }
     }
 
-    object = TRCValueAfterApplyingOptions(object, self.options, _convertingForRequest, options.isOptional);
-
     if (object && self.registry && [schemeValue isKindOfClass:[NSString class]]) {
         return [self convertValue:object toType:schemeValue];
     } else {

@@ -26,9 +26,16 @@
 
 @end
 
-@implementation TRCConverterTests
+@implementation TRCConverterTests {
+    TRCValidationOptions validationOptions;
+}
 
-TRCValidationOptions validationOptions;
+- (void)setUp
+{
+    validationOptions = TRCValidationOptionsNone;
+    [super setUp];
+}
+
 
 - (void)enumerateTransformerTypesWithClasses:(void (^)(TRCValueTransformerType type, Class clazz, BOOL *stop))block
 {
@@ -122,50 +129,12 @@ TRCValidationOptions validationOptions;
     return [self schemaData:data requestSchemaForMapperWithTag:schemaName];
 }
 
-- (id)convertValuesInResponse:(id)arrayOrDictionary schema:(TRCSchema *)scheme error:(NSError **)parseError
-{
-    if (!scheme) {
-        return arrayOrDictionary;
-    }
-
-    TRCConverter *converter = [[TRCConverter alloc] initWithSchema:scheme];
-    converter.registry = self;
-    converter.options = validationOptions;
-    NSError *error = nil;
-    id result = [converter convertResponseValue:arrayOrDictionary error:&error];
-    if (error && parseError) {
-        *parseError = error;
-    }
-
-    return result;
-}
-
-- (id)convertValuesInRequest:(id)arrayOrDictionary schema:(TRCSchema *)scheme error:(NSError **)parseError
-{
-    if (!scheme) {
-        return arrayOrDictionary;
-    }
-
-    TRCConverter *converter = [[TRCConverter alloc] initWithSchema:scheme];
-    converter.registry = self;
-    converter.options = validationOptions;
-    NSError *error = nil;
-    id result = [converter convertRequestValue:arrayOrDictionary error:&error];
-    if (error && parseError) {
-        *parseError = error;
-    }
-
-    return result;
-}
-
 + (void)setUp
 {
     TRCValueTransformerTypeNumber = 1 << 0;
     TRCValueTransformerTypeString = 1 << 1;
-    validationOptions = TRCValidationOptionsReplaceEmptyDictionariesWithNilInResponsesForOptional | TRCValidationOptionsReplaceEmptyDictionariesWithNilInRequestsForOptional;
     [super setUp];
 }
-
 
 - (void)tearDown
 {
@@ -687,38 +656,33 @@ TRCValidationOptions validationOptions;
     XCTAssertEqualObjects(result, @{@"key1": @"1" });
 }
 
-//-------------------------------------------------------------------------------------------
-#pragma mark - Validation options tests
-//-------------------------------------------------------------------------------------------
+- (void)test_conversion_with_validation_options
+{
+    validationOptions = TRCValidationOptionsRemoveValuesMissedInSchemeForResponses;
 
-//TODO: Complete these tests
-//- (void)test_validation_option1
-//{
-//    NSDictionary *data = @{ @"key1": @"1", @"key2": @{}};
-//    NSDictionary *schema = @{ @"key1": @"1", @"key2{?}": @{ @"key3": @"value"}};
-//
-//    NSOrderedSet *errors = nil;
-//    NSDictionary *result = [self convertResponseObject:data schema:schema errors:&errors];
-//
-//    XCTAssert([errors count] == 0);
-//    XCTAssertNil(result[@"key2"]);
-//}
-//
-//- (void)test_validation_option2
-//{
-//    NSDictionary *data = @{ @"key1": @"1", @"key2": @{}};
-//    NSDictionary *schema = @{ @"key1": @"1", @"key2": @{ @"key3": @"value"}};
-//
-//    NSOrderedSet *errors = nil;
-//    NSDictionary *result = [self convertResponseObject:data schema:schema errors:&errors];
-//
-//    XCTAssert([errors count] == 0);
-//    XCTAssertNil(result[@"key2"]);
-//}
+    NSDictionary *data = @{ @"key1": @"1", @"key2": @"", @"key3": @"123"};
+    NSDictionary *schema = @{ @"key1": @"1", @"key2": @""};
 
+    NSOrderedSet *errors = nil;
+    NSDictionary *result = [self convertResponseObject:data schema:schema errors:&errors];
 
-//-------------------------------------------------------------------------------------------
-#pragma mark -
-//-------------------------------------------------------------------------------------------
+    XCTAssert([errors count] == 0);
+    XCTAssertNil(result[@"key3"]);
+
+}
+//
+- (void)test_validation_option2
+{
+    validationOptions = TRCValidationOptionsRemoveValuesMissedInSchemeForRequests;
+
+    NSDictionary *data = @{ @"key1": @"1", @"key2": @"", @"key3": @"123"};
+    NSDictionary *schema = @{ @"key1": @"1", @"key2": @""};
+
+    NSOrderedSet *errors = nil;
+    NSDictionary *result = [self convertRequestObject:data schema:schema errors:&errors];
+
+    XCTAssert([errors count] == 0);
+    XCTAssertNil(result[@"key3"]);
+}
 
 @end
