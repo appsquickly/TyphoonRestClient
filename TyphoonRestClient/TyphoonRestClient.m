@@ -265,14 +265,12 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
     id body = nil;
     if ([request respondsToSelector:@selector(requestBody)]) {
         body = [request requestBody];
-        if ([body isKindOfClass:[NSArray class]] || [body isKindOfClass:[NSDictionary class]]) {
-            NSError *validationOrConversionError = nil;
-            TRCSchema *schema = [_schemeFactory schemeForRequest:request];
-            body = [self convertThenValidateObject:body withScheme:schema error:&validationOrConversionError];
-            if (validationOrConversionError) {
-                TRCSetError(error, validationOrConversionError);
-                return nil;
-            }
+        NSError *validationOrConversionError = nil;
+        TRCSchema *schema = [_schemeFactory schemeForRequest:request];
+        body = [self convertThenValidateObject:body withScheme:schema error:&validationOrConversionError];
+        if (validationOrConversionError) {
+            TRCSetError(error, validationOrConversionError);
+            return nil;
         }
     }
     return body;
@@ -379,15 +377,6 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
 
 - (id)validateThenConvertObject:(id)object withScheme:(TRCSchema *)scheme error:(NSError **)error
 {
-    //TODO: Rethink
-    BOOL isObjectCanBeValidated = [object isKindOfClass:[NSArray class]] || [object isKindOfClass:[NSDictionary class]];
-    if (!isObjectCanBeValidated) {
-        if (scheme && object) {
-            [self logWarning:@"Object of type '%@' can't be validated, but validation scheme '%@' specified. Validation scheme ignored", [object class], scheme.name];
-        }
-        return object;
-    }
-
     //Scheme validation
     NSError *validationError = nil;
     if (![self validateResponse:object withSchema:scheme error:&validationError]) {
@@ -412,15 +401,6 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
 
 - (id)convertThenValidateObject:(id)object withScheme:(TRCSchema *)scheme error:(NSError **)error
 {
-    //TODO: Rethink
-    BOOL isObjectCanBeValidated = [object isKindOfClass:[NSArray class]] || [object isKindOfClass:[NSDictionary class]];
-    if (!isObjectCanBeValidated) {
-        if (scheme && object) {
-            [self logWarning:@"Object of type '%@' can't be validated, but validation scheme '%@' specified. Validation scheme ignored", [object class], scheme.name];
-        }
-        return object;
-    }
-
     //Values conversion
     NSError *convertError = nil;
     id converted = [self convertValuesInRequest:object schema:scheme error:&convertError];

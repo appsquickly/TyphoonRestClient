@@ -56,6 +56,14 @@
 * */
 - (void)schemaData:(id<TRCSchemaData>)data typeMismatchForValue:(id)value withSchemaValue:(id)schemaValue;
 
+@optional
+
+/** These two methods calls each collection item. For example for each array and dictionary item: in that case `itemIdentifier`
+* is index in array and key in dictionary. Used to get great debugging information.
+* */
+- (void)schemaData:(id<TRCSchemaData>)data willEnumerateItemAtIndentifier:(id)itemIdentifier;
+- (void)schemaData:(id<TRCSchemaData>)data didEnumerateItemAtIndentifier:(id)itemIdentifier;
+
 @end
 
 @protocol TRCSchemaDataEnumerator <TRCSchemaDataDelegate>
@@ -64,14 +72,6 @@
 * Calls for each value in object. You can match 'value' with 'schemeValue'. Identifier could be array index or dictionary key
 * */
 - (void)schemaData:(id<TRCSchemaData>)data foundValue:(id)value withOptions:(TRCSchemaDataValueOptions *)options withSchemeValue:(id)schemeValue;
-
-@optional
-
-/** These two methods calls each collection item. For example for each array and dictionary item: in that case `itemIdentifier`
-* is index in array and key in dictionary. Used to get great debugging information.
-* */
-- (void)schemaData:(id<TRCSchemaData>)data willEnumerateItemAtIndentifier:(id)itemIdentifier;
-- (void)schemaData:(id<TRCSchemaData>)data didEnumerateItemAtIndentifier:(id)itemIdentifier;
 
 @end
 

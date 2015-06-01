@@ -90,6 +90,8 @@
         return [TRCMapperPerson new];
     } else if ([tag isEqualToString:@"{phone}"]) {
         return [TRCMapperPhone new];
+    } else if ([tag isEqualToString:@"{person-cant-laod}"]) {
+        return nil;
     } else {
         return nil;
     };
@@ -102,7 +104,11 @@
 
 - (BOOL)schemaData:(id<TRCSchemaData>)data hasObjectMapperForTag:(NSString *)schemaName
 {
-    return [self objectMapperForTag:schemaName] != nil;
+    if ([schemaName isEqualToString:@"{person-cant-laod}"]) {
+        return YES;
+    } else {
+        return  [self objectMapperForTag:schemaName] != nil;
+    }
 }
 
 - (id<TRCSchemaData>)schemaData:(id<TRCSchemaData>)data requestSchemaForMapperWithTag:(NSString *)schemaName
@@ -141,7 +147,7 @@
     [super tearDown];
 }
 
-- (id)convertResponseObject:(id)data schema:(id)schemaArrayOrDictionary errors:(NSOrderedSet **)errorsSet
+- (id)convertResponseObject:(id)data schema:(id)schemaArrayOrDictionary error:(NSError **)error
 {
     TRCSchemaDictionaryData *schemeData = [[TRCSchemaDictionaryData alloc] initWithArrayOrDictionary:schemaArrayOrDictionary request:NO dataProvider:self];
     TRCSchema *schema = [TRCSchema schemaWithData:schemeData name:@"test"];
@@ -151,13 +157,11 @@
     TRCConverter *converter = [[TRCConverter alloc] initWithSchema:schema];
     converter.options = validationOptions;
     converter.registry = self;
-    if (errorsSet) {
-        *errorsSet = converter.conversionErrorSet;
-    }
-    return [converter convertResponseValue:data error:NULL];
+
+    return [converter convertResponseValue:data error:error];
 }
 
-- (id)convertRequestObject:(id)data schema:(id)schemaArrayOrDictionary errors:(NSOrderedSet **)errorsSet
+- (id)convertRequestObject:(id)data schema:(id)schemaArrayOrDictionary error:(NSError **)error
 {
     TRCSchemaDictionaryData *schemeData = [[TRCSchemaDictionaryData alloc] initWithArrayOrDictionary:schemaArrayOrDictionary request:YES dataProvider:self];
     TRCSchema *schema = [TRCSchema schemaWithData:schemeData name:@"test"];
@@ -167,10 +171,8 @@
     TRCConverter *converter = [[TRCConverter alloc] initWithSchema:schema];
     converter.options = validationOptions;
     converter.registry = self;
-    if (errorsSet) {
-        *errorsSet = converter.conversionErrorSet;
-    }
-    return [converter convertRequestValue:data error:NULL];
+    
+    return [converter convertRequestValue:data error:error];
 }
 
 - (void)test_request_with_conversion
@@ -178,10 +180,10 @@
     NSDictionary *data = @{@"key" : @"value", @"key2" : @"123"};
     NSDictionary *schema = @{@"key" : @"value", @"key2" : @"NSURL"};
 
-    NSOrderedSet *errors = nil;
-    NSDictionary *object = [self convertRequestObject:data schema:schema errors:&errors];
+    NSError *conversionError = nil;
+    NSDictionary *object = [self convertRequestObject:data schema:schema error:&conversionError];
 
-    XCTAssertTrue([errors count] == 0);
+    XCTAssertTrue(conversionError == nil);
     XCTAssertEqualObjects(object[@"key2"], @"Url");
 }
 
@@ -190,24 +192,24 @@
     NSDictionary *data = @{@"key" : @"value", @"key2" : @23};
     NSDictionary *schema = @{@"key" : @"value", @"key2" : @12};
 
-    NSOrderedSet *errors = nil;
-    NSDictionary *object = [self convertResponseObject:data schema:schema errors:&errors];
+    NSError *conversionError = nil;
+    NSDictionary *object = [self convertResponseObject:data schema:schema error:&conversionError];
 
     XCTAssertTrue([object[@"key"] isEqualToString:@"value"]);
     XCTAssertTrue([object[@"key2"] isEqualToNumber:@23]);
-    XCTAssertTrue([errors count] == 0, @"Error: %@", errors);
+    XCTAssertTrue(conversionError == nil, @"Error: %@", conversionError);
 }
 
 - (void)test_plain_dictionary_without_schema
 {
     NSDictionary *data = @{@"key" : @"value", @"key2" : @23};
 
-    NSOrderedSet *errors;
-    NSDictionary *object = [self convertResponseObject:data schema:nil errors:&errors];
+    NSError *conversionError;
+    NSDictionary *object = [self convertResponseObject:data schema:nil error:&conversionError];
 
     XCTAssertTrue([[object objectForKey:@"key"] isEqualToString:@"value"]);
     XCTAssertTrue([[object objectForKey:@"key2"] isEqualToNumber:@23]);
-    XCTAssertTrue([errors count] == 0, @"Error: %@", errors);
+    XCTAssertTrue(conversionError == nil, @"Error: %@", conversionError);
 }
 
 - (void)test_plain_dictionary_with_schema_and_converting
@@ -215,12 +217,12 @@
     NSDictionary *data = @{@"key" : @"value", @"key2" : @12};
     NSDictionary *schema = @{@"key" : @"NSURL", @"key2" : @"NSDate"};
 
-    NSOrderedSet *errors = nil;
-    NSDictionary *object = [self convertResponseObject:data schema:schema errors:&errors];
+    NSError *conversionError = nil;
+    NSDictionary *object = [self convertResponseObject:data schema:schema error:&conversionError];
 
     XCTAssertTrue([object[@"key"] isEqualToString:@"Url"]);
     XCTAssertTrue([object[@"key2"] isEqual:@"Date"]);
-    XCTAssertTrue([errors count] == 0, @"Error: %@", errors);
+    XCTAssertTrue(conversionError == nil, @"Error: %@", conversionError);
 }
 
 - (void)test_plain_dictionary_with_schema_and_converting_incorrect_class
@@ -228,12 +230,12 @@
     NSDictionary *data = @{@"key" : @"value", @"key2" : @12};
     NSDictionary *schema = @{@"key" : @"NSURL", @"key2": @"NSObject"};
 
-    NSOrderedSet *errors = nil;
-    NSDictionary *object = [self convertResponseObject:data schema:schema errors:&errors];
+    NSError *conversionError = nil;
+    NSDictionary *object = [self convertResponseObject:data schema:schema error:&conversionError];
 
     XCTAssertTrue([[object objectForKey:@"key"] isEqualToString:@"Url"]);
     XCTAssertTrue([object objectForKey:@"key2"] == nil);
-    XCTAssertTrue(errors.count == 1, @"Error: %@", errors);
+    XCTAssertTrue(conversionError != nil, @"Error: %@", conversionError);
 }
 
 - (void)test_plain_dictionary_with_schema_and_converting_unknown_class
@@ -241,12 +243,12 @@
     NSDictionary *data = @{@"key" : @"value", @"key2" : @12};
     NSDictionary *schema = @{@"key" : @"NSURL", @"key2" : @"UnknownClass"};
 
-    NSOrderedSet *errors = nil;
-    NSDictionary *object = [self convertResponseObject:data schema:schema errors:&errors];
+    NSError *conversionError = nil;
+    NSDictionary *object = [self convertResponseObject:data schema:schema error:&conversionError];
 
     XCTAssertTrue([object[@"key"] isEqualToString:@"Url"]);
     XCTAssertTrue([object[@"key2"] isEqual:@12]);
-    XCTAssertTrue([errors count] == 0, @"Error: %@", errors);
+    XCTAssertTrue(conversionError == nil, @"Error: %@", conversionError);
 }
 
 - (void)test_plain_dictionary_with_schema_and_converting_dict_repr
@@ -254,24 +256,24 @@
     NSDictionary *data = @{@"key" : @"value", @"key2" : @12};
     NSDictionary *schema = @{@"key" : @"NSURL", @"key2" : @"NSDate"};
 
-    NSOrderedSet *errors = nil;
-    NSDictionary *object = [self convertResponseObject:data schema:schema errors:&errors];
+    NSError *conversionError = nil;
+    NSDictionary *object = [self convertResponseObject:data schema:schema error:&conversionError];
 
     NSDictionary *expect = @{@"key" : @"Url", @"key2" : @"Date"};
     XCTAssertEqualObjects(object, expect);
-    XCTAssertTrue([errors count] == 0, @"Error: %@", errors);
+    XCTAssertTrue(conversionError == nil, @"Error: %@", conversionError);
 }
 
 - (void)test_plain_dictionary_without_schema_and_converting_dict_repr
 {
     NSDictionary *data = @{@"key" : @"value", @"key2" : @12};
 
-    NSOrderedSet *errors = nil;
-    NSDictionary *object = [self convertResponseObject:data schema:nil errors:&errors];
+    NSError *conversionError = nil;
+    NSDictionary *object = [self convertResponseObject:data schema:nil error:&conversionError];
 
     NSDictionary *expect = @{@"key" : @"value", @"key2" : @12};
     XCTAssertEqualObjects(object, expect);
-    XCTAssertTrue([errors count] == 0, @"Error: %@", errors);
+    XCTAssertTrue(conversionError == nil, @"Error: %@", conversionError);
 }
 
 - (void)test_nested_object_with_schema
@@ -279,8 +281,8 @@
     NSDictionary *data = @{@"key" : @"value", @"object" : @{@"key" : @"value", @"date" : @"date"}};
     NSDictionary *schema = @{@"key" : @"value", @"object" : @{@"key" : @"value", @"date" : @"date"}};
 
-    NSOrderedSet *errors = nil;
-    NSDictionary *object = [self convertResponseObject:data schema:schema errors:&errors];
+    NSError *conversionError = nil;
+    NSDictionary *object = [self convertResponseObject:data schema:schema error:&conversionError];
 
     NSDictionary *excpected = @{@"key" : @"value", @"date" : @"date"};
     XCTAssertEqualObjects(object[@"key"], @"value");
@@ -290,7 +292,7 @@
     XCTAssertEqualObjects(nestedObject[@"key"], @"value");
     XCTAssertEqualObjects(nestedObject[@"date"], @"date");
 
-    XCTAssertTrue([errors count] == 0, @"Error: %@", errors);
+    XCTAssertTrue(conversionError == nil, @"Error: %@", conversionError);
 }
 
 - (void)test_nested_object_with_schema_and_converter
@@ -298,8 +300,8 @@
     NSDictionary *data = @{@"key" : @"value", @"object" : @{@"key" : @"value", @"date" : @"date"}};
     NSDictionary *schema = @{@"key" : @"value", @"object" : @{@"key" : @"NSURL", @"date" : @"NSDate"}};
 
-    NSOrderedSet *errors = nil;
-    NSDictionary *object = [self convertResponseObject:data schema:schema errors:&errors];
+    NSError *conversionError = nil;
+    NSDictionary *object = [self convertResponseObject:data schema:schema error:&conversionError];
 
     NSDictionary *excpected = @{@"key" : @"Url", @"date" : @"Date"};
     XCTAssertEqualObjects(object[@"key"], @"value");
@@ -309,7 +311,7 @@
     XCTAssertEqualObjects(nestedObject[@"key"], @"Url");
     XCTAssertEqualObjects(nestedObject[@"date"], @"Date");
 
-    XCTAssertTrue([errors count] == 0, @"Error: %@", errors);
+    XCTAssertTrue(conversionError == nil, @"Error: %@", conversionError);
 }
 
 - (void)test_object_with_values_missed_in_scheme_response
@@ -317,8 +319,8 @@
     NSDictionary *data = @{@"value1" : @1, @"value2": @2};
     NSDictionary *schema = @{ @"value1" : @1 };
 
-    NSOrderedSet *errors = nil;
-    NSDictionary *object = [self convertResponseObject:data schema:schema errors:&errors];
+    NSError *conversionError = nil;
+    NSDictionary *object = [self convertResponseObject:data schema:schema error:&conversionError];
     XCTAssertNotNil(object[@"value1"]);
     XCTAssertNotNil(object[@"value2"]);
 }
@@ -330,8 +332,8 @@
     NSDictionary *data = @{@"value1" : @1, @"value2": @2};
     NSDictionary *schema = @{ @"value1" : @1 };
 
-    NSOrderedSet *errors = nil;
-    NSDictionary *object = [self convertResponseObject:data schema:schema errors:&errors];
+    NSError *conversionError = nil;
+    NSDictionary *object = [self convertResponseObject:data schema:schema error:&conversionError];
     XCTAssertNotNil(object[@"value1"]);
     XCTAssertNil(object[@"value2"]);
 }
@@ -341,8 +343,8 @@
     NSDictionary *data = @{@"value1" : @1, @"value2": @2};
     NSDictionary *schema = @{ @"value1" : @1 };
 
-    NSOrderedSet *errors = nil;
-    NSDictionary *object = [self convertRequestObject:data schema:schema errors:&errors];
+    NSError *conversionError = nil;
+    NSDictionary *object = [self convertRequestObject:data schema:schema error:&conversionError];
     XCTAssertNotNil(object[@"value1"]);
     XCTAssertNotNil(object[@"value2"]);
 }
@@ -354,8 +356,8 @@
     NSDictionary *data = @{@"value1" : @1, @"value2": @2};
     NSDictionary *schema = @{ @"value1" : @1 };
 
-    NSOrderedSet *errors = nil;
-    NSDictionary *object = [self convertRequestObject:data schema:schema errors:&errors];
+    NSError *conversionError = nil;
+    NSDictionary *object = [self convertRequestObject:data schema:schema error:&conversionError];
     XCTAssertNotNil(object[@"value1"]);
     XCTAssertNil(object[@"value2"]);
 }
@@ -364,8 +366,8 @@
 {
     NSDictionary *data = @{@"key" : @"value", @"object" : @{@"key" : @"value", @"date" : @"date"}};
 
-    NSOrderedSet *errors = nil;
-    NSDictionary *object = [self convertResponseObject:data schema:nil errors:&errors];
+    NSError *conversionError = nil;
+    NSDictionary *object = [self convertResponseObject:data schema:nil error:&conversionError];
 
     NSDictionary *excpected = @{@"key" : @"value", @"date" : @"date"};
     XCTAssertEqualObjects(object[@"key"], @"value");
@@ -375,7 +377,7 @@
     XCTAssertEqualObjects(nestedObject[@"key"], @"value");
     XCTAssertEqualObjects(nestedObject[@"date"], @"date");
 
-    XCTAssertTrue([errors count] == 0, @"Error: %@", errors);
+    XCTAssertTrue(conversionError == nil, @"Error: %@", conversionError);
 }
 
 
@@ -394,8 +396,8 @@
             ]
     };
 
-    NSOrderedSet *errors = nil;
-    NSDictionary *object = [self convertResponseObject:data schema:schema errors:&errors];
+    NSError *conversionError = nil;
+    NSDictionary *object = [self convertResponseObject:data schema:schema error:&conversionError];
 
     NSDictionary *excpected0 = @{@"key1" : @"value1", @"key2" : @"Url"};
     NSDictionary *excpected1 = @{@"key1" : @"value2", @"key2" : @"Url"};
@@ -413,7 +415,7 @@
     XCTAssertEqualObjects(nestedObject2[@"key1"], @"value2");
     XCTAssertEqualObjects(nestedObject2[@"key2"], @"Url");
 
-    XCTAssertTrue([errors count] == 0, @"Error: %@", errors);
+    XCTAssertTrue(conversionError == nil, @"Error: %@", conversionError);
 }
 
 - (void)test_nested_array_of_objects_without_schema
@@ -425,8 +427,8 @@
             ]
     };
 
-    NSOrderedSet *errors = nil;
-    NSDictionary *object = [self convertResponseObject:data schema:nil errors:&errors];
+    NSError *conversionError = nil;
+    NSDictionary *object = [self convertResponseObject:data schema:nil error:&conversionError];
 
     NSDictionary *excpected0 = @{@"key1" : @"value1", @"key2" : @"date1"};
     NSDictionary *excpected1 = @{@"key1" : @"value2", @"key2" : @"date2"};
@@ -444,15 +446,15 @@
     XCTAssertEqualObjects(nestedObject2[@"key1"], @"value2");
     XCTAssertEqualObjects(nestedObject2[@"key2"], @"date2");
 
-    XCTAssertTrue([errors count] == 0, @"Error: %@", errors);
+    XCTAssertTrue(conversionError == nil, @"Error: %@", conversionError);
 }
 
 - (void)test_nested_array_of_primitives_with_schema
 {
     NSDictionary *data = @{@"array" : @[@"1", @"2", @"3"]};
 
-    NSOrderedSet *errors = nil;
-    NSDictionary *object = [self convertResponseObject:data schema:nil errors:&errors];
+    NSError *conversionError = nil;
+    NSDictionary *object = [self convertResponseObject:data schema:nil error:&conversionError];
 
     NSArray *excpected = @[@"1", @"2", @"3"];
 
@@ -460,7 +462,7 @@
     XCTAssertNotNil(array);
     XCTAssertEqualObjects(object[@"array"], excpected);
 
-    XCTAssertTrue([errors count] == 0, @"Error: %@", errors);
+    XCTAssertTrue(conversionError == nil, @"Error: %@", conversionError);
 }
 
 - (void)test_nested_array_of_primitives_with_schema_converting
@@ -469,8 +471,8 @@
 
     NSDictionary *scheme = @{@"array" : @[@"NSURL"]};
 
-    NSOrderedSet *errors = nil;
-    NSDictionary *object = [self convertResponseObject:data schema:scheme errors:&errors];
+    NSError *conversionError = nil;
+    NSDictionary *object = [self convertResponseObject:data schema:scheme error:&conversionError];
 
     NSArray *excpected = @[@"Url", @"Url", @"Url"];
 
@@ -479,21 +481,21 @@
 
     XCTAssertEqualObjects(object[@"array"], excpected);
 
-    XCTAssertTrue([errors count] == 0, @"Error: %@", errors);
+    XCTAssertTrue(conversionError == nil, @"Error: %@", conversionError);
 }
 
 - (void)test_nested_array_of_primitives_without_schema
 {
     NSDictionary *data = @{@"array" : @[@"1", @"2", @"3"]};
 
-    NSOrderedSet *errors = nil;
-    NSDictionary *object = [self convertResponseObject:data schema:nil errors:&errors];
+    NSError *conversionError = nil;
+    NSDictionary *object = [self convertResponseObject:data schema:nil error:&conversionError];
 
     NSArray *excpected = @[@"1", @"2", @"3"];
 
     XCTAssertEqualObjects(object[@"array"], excpected);
 
-    XCTAssertTrue([errors count] == 0, @"Error: %@", errors);
+    XCTAssertTrue(conversionError == nil, @"Error: %@", conversionError);
 }
 
 - (void)test_nested_object_with_schema_and_error
@@ -501,12 +503,12 @@
     NSDictionary *data =   @{@"key" : @"value", @"object" : @{@"key" : @"value", @"date" : @"date", @"array" : @[@{@"another_array" : @[@"1", @"2"]}]}};
     NSDictionary *schema = @{@"key" : @"value", @"object" : @{@"key" : @"value", @"date" : @"date", @"array" : @[@{@"another_array" : @[@"NSObject"], @"key" : @"value", @"key2{?}" : @"value2",}]}};
 
-    NSOrderedSet *errors = nil;
-    __unused NSDictionary *object = [self convertResponseObject:data schema:schema errors:&errors];
+    NSError *conversionError = nil;
+    __unused NSDictionary *object = [self convertResponseObject:data schema:schema error:&conversionError];
 
     //Only one conversion error: can't convert "1" and "2" into NSObject
 
-    XCTAssertTrue(errors.count == 1, @"Error: %@", errors);
+    XCTAssertTrue(conversionError != nil, @"Error: %@", conversionError);
 }
 
 - (void)test_model_object_response_parsing
@@ -514,13 +516,13 @@
     NSDictionary *data = @{ @"first_name": @"Ivan", @"last_name": @"Ivanov", @"avatar_url": @"some_url"};
     NSDictionary *schema = @{ @"{root_mapper}": @"{person}"};
 
-    NSOrderedSet *errors = nil;
-    Person *object = [self convertResponseObject:data schema:schema errors:&errors];
+    NSError *conversionError = nil;
+    Person *object = [self convertResponseObject:data schema:schema error:&conversionError];
 
     XCTAssertEqualObjects(object.firstName, @"Ivan");
     XCTAssertEqualObjects(object.lastName, @"Ivanov");
     XCTAssertEqualObjects(object.avatarUrl, [NSURL URLWithString:@"http://appsquick.ly"]);
-    XCTAssertTrue([errors count] == 0);
+    XCTAssertTrue(conversionError == nil);
 }
 
 - (void)test_model_object_request_composing
@@ -532,13 +534,13 @@
 
     NSDictionary *schema = @{ @"{root_mapper}": @"{person}"};
 
-    NSOrderedSet *errors = nil;
-    NSDictionary *object = [self convertRequestObject:test schema:schema errors:&errors];
+    NSError *conversionError = nil;
+    NSDictionary *object = [self convertRequestObject:test schema:schema error:&conversionError];
 
     XCTAssertEqualObjects(object[@"first_name"], @"Ivan");
     XCTAssertEqualObjects(object[@"last_name"], @"Ivanov");
     XCTAssertEqualObjects(object[@"avatar_url"], [NSURL URLWithString:@"http://appsquick.ly"]);
-    XCTAssertTrue([errors count] == 0);
+    XCTAssertTrue(conversionError == nil);
 }
 
 - (void)test_model_object_response_parsing_error
@@ -546,11 +548,11 @@
     NSDictionary *data = @{ @"first_name": @"i", @"last_name": @"Ivanov", @"avatar_url": @"some_url"};
     NSDictionary *schema = @{ @"{root_mapper}": @"test"};
 
-    NSOrderedSet *errors = nil;
-    Person *object = [self convertResponseObject:data schema:schema errors:&errors];
+    NSError *conversionError = nil;
+    Person *object = [self convertResponseObject:data schema:schema error:&conversionError];
 
     XCTAssertNil(object);
-    XCTAssertTrue([errors count] >= 1);
+    XCTAssertTrue(conversionError != nil);
 }
 
 - (void)test_model_object_request_composing_error
@@ -562,11 +564,11 @@
 
     NSDictionary *schema = @{ @"{root_mapper}": @"test"};
 
-    NSOrderedSet *errors = nil;
-    NSDictionary *object = [self convertRequestObject:test schema:schema errors:&errors];
+    NSError *conversionError = nil;
+    NSDictionary *object = [self convertRequestObject:test schema:schema error:&conversionError];
 
     XCTAssertNil(object);
-    XCTAssertTrue([errors count] >= 1);
+    XCTAssertTrue(conversionError != nil);
 }
 
 - (void)test_mapper_request_not_implemented
@@ -578,10 +580,10 @@
 
     NSDictionary *schema = @{ @"{root_mapper}": @"test_without_request"};
 
-    NSOrderedSet *errors = nil;
-    [self convertRequestObject:test schema:schema errors:&errors];
+    NSError *conversionError = nil;
+    [self convertRequestObject:test schema:schema error:&conversionError];
 
-    XCTAssertTrue([errors count] >= 1);
+    XCTAssertTrue(conversionError != nil);
 }
 
 
@@ -590,10 +592,26 @@
     NSDictionary *data = @{ @"first_name": @"Ivan", @"last_name": @"Ivanov", @"avatar_url": @"some_url"};
     NSDictionary *schema = @{ @"{root_mapper}": @"test_without_response"};
 
-    NSOrderedSet *errors = nil;
-    [self convertResponseObject:data schema:schema errors:&errors];
+    NSError *conversionError = nil;
+    [self convertResponseObject:data schema:schema error:&conversionError];
 
-    XCTAssertTrue([errors count] > 0);
+    XCTAssertTrue(conversionError != nil);
+}
+
+- (void)test_model_with_incorrect_object_mapper
+{
+
+    Person *test = [Person new];
+    test.firstName = @"Ivan";
+    test.lastName = @"Ivanov";
+    test.avatarUrl = [NSURL URLWithString:@"http://google.com"];
+
+    NSError *conversionError = nil;
+    NSDictionary *schema = @{ @"person": @"{person-cant-laod}"};
+    [self convertRequestObject:@{@"person" : test} schema:schema error:&conversionError];
+
+    XCTAssertTrue(conversionError != nil);
+
 }
 
 - (void)test_model_object_request_composing_external_scheme
@@ -605,13 +623,13 @@
 
     NSDictionary *schema = @{ @"person": @"{person}"};
 
-    NSOrderedSet *errors = nil;
-    NSDictionary *object = [self convertRequestObject:@{ @"person" : test } schema:schema errors:&errors];
+    NSError *conversionError = nil;
+    NSDictionary *object = [self convertRequestObject:@{@"person" : test} schema:schema error:&conversionError];
 
     XCTAssertEqualObjects(object[@"person"][@"first_name"], @"Ivan");
     XCTAssertEqualObjects(object[@"person"][@"last_name"], @"Ivanov");
     XCTAssertEqualObjects(object[@"person"][@"avatar_url"], [NSURL URLWithString:@"http://appsquick.ly"]);
-    XCTAssertTrue([errors count] == 0);
+    XCTAssertTrue(conversionError == nil);
 }
 
 - (void)test_model_object_response_parsing_external_scheme
@@ -619,13 +637,13 @@
     NSDictionary *data = @{ @"person": @{@"first_name": @"Ivan", @"last_name": @"Ivanov", @"avatar_url": @"some_url"}};
     NSDictionary *schema = @{ @"person": @"{person}"};
 
-    NSOrderedSet *errors = nil;
-    Person *object = [self convertResponseObject:data schema:schema errors:&errors][@"person"];
+    NSError *conversionError = nil;
+    Person *object = [self convertResponseObject:data schema:schema error:&conversionError][@"person"];
 
     XCTAssertEqualObjects(object.firstName, @"Ivan");
     XCTAssertEqualObjects(object.lastName, @"Ivanov");
     XCTAssertEqualObjects(object.avatarUrl, [NSURL URLWithString:@"http://appsquick.ly"]);
-    XCTAssertTrue([errors count] == 0, @"Errors: %@", errors);
+    XCTAssertTrue(conversionError == nil, @"conversionError: %@", conversionError);
 }
 
 - (void)test_model_object_response_parsing_external_scheme_sub_scheme
@@ -633,15 +651,15 @@
     NSDictionary *data = @{ @"person": @{@"first_name": @"Ivan", @"last_name": @"Ivanov", @"avatar_url": @"some_url", @"phone": @{ @"mobile":@"123", @"work":@"321"}}};
     NSDictionary *schema = @{ @"person": @"{person}"};
 
-    NSOrderedSet *errors = nil;
-    Person *object = [self convertResponseObject:data schema:schema errors:&errors][@"person"];
+    NSError *conversionError = nil;
+    Person *object = [self convertResponseObject:data schema:schema error:&conversionError][@"person"];
 
     XCTAssertEqualObjects(object.firstName, @"Ivan");
     XCTAssertEqualObjects(object.lastName, @"Ivanov");
     XCTAssertEqualObjects(object.avatarUrl, [NSURL URLWithString:@"http://appsquick.ly"]);
     XCTAssertEqualObjects(object.phone.work, @"321");
     XCTAssertEqualObjects(object.phone.mobile, @"123");
-    XCTAssertTrue([errors count] == 0);
+    XCTAssertTrue(conversionError == nil);
 }
 
 - (void)test_null_value_skipped
@@ -651,7 +669,7 @@
     
     NSDictionary *schema = @{ @"key1": @"1", @"key2{?}": @"2"};
     
-    NSDictionary *result = [self convertResponseObject:data schema:schema  errors:nil];
+    NSDictionary *result = [self convertResponseObject:data schema:schema error:nil];
     
     XCTAssertEqualObjects(result, @{@"key1": @"1" });
 }
@@ -663,10 +681,10 @@
     NSDictionary *data = @{ @"key1": @"1", @"key2": @"", @"key3": @"123"};
     NSDictionary *schema = @{ @"key1": @"1", @"key2": @""};
 
-    NSOrderedSet *errors = nil;
-    NSDictionary *result = [self convertResponseObject:data schema:schema errors:&errors];
+    NSError *conversionError = nil;
+    NSDictionary *result = [self convertResponseObject:data schema:schema error:&conversionError];
 
-    XCTAssert([errors count] == 0);
+    XCTAssert(conversionError == nil);
     XCTAssertNil(result[@"key3"]);
 
 }
@@ -678,10 +696,10 @@
     NSDictionary *data = @{ @"key1": @"1", @"key2": @"", @"key3": @"123"};
     NSDictionary *schema = @{ @"key1": @"1", @"key2": @""};
 
-    NSOrderedSet *errors = nil;
-    NSDictionary *result = [self convertRequestObject:data schema:schema errors:&errors];
+    NSError *conversionError = nil;
+    NSDictionary *result = [self convertRequestObject:data schema:schema error:&conversionError];
 
-    XCTAssert([errors count] == 0);
+    XCTAssert(conversionError == nil);
     XCTAssertNil(result[@"key3"]);
 }
 

@@ -85,10 +85,7 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 - (void)tearDown
 {
     [super tearDown];
-
     currentWebService = nil;
-//    extern void __gcov_flush(void);
-//    __gcov_flush();
 }
 
 - (TRCSchema *)schemeForName:(NSString *)name isRequest:(BOOL)isRequest
@@ -170,7 +167,7 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 
     TRCRequestSpy *request = [TRCRequestSpy new];
     request.requestSchemeName = @"SimpleRequest.json";
-    request.requestParams = @{ @"key": @"123"};
+    request.requestBody = @{ @"key": @"123"};
     request.parseResult = @"result";
 
     [webService sendRequest:request completion:^(id result, NSError *error) {
@@ -186,7 +183,7 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 
     TRCRequestSpy *request = [TRCRequestSpy new];
     request.requestSchemeName = @"SimpleRequest.json";
-    request.requestParams = @{ @"key": @123};
+    request.requestBody = @{ @"key": @123};
     request.parseResult = @"result";
 
     [webService sendRequest:request completion:^(id result, NSError *error) {
@@ -201,7 +198,7 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 
     TRCRequestSpy *request = [TRCRequestSpy new];
     request.requestSchemeName = @"SimpleRequest.json";
-    request.requestParams = @{ @"key2": @123};
+    request.requestBody = @{ @"key2": @123};
     request.parseResult = @"result";
 
     [webService sendRequest:request completion:^(id result, NSError *error) {
@@ -317,7 +314,6 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 
 - (void)test_plain_dictionary_request_with_network_error_parse_with_schema_success
 {
-
     TRCErrorParserSpy *errorParserSpy = [TRCErrorParserSpy new];
     errorParserSpy.schemaName = @"ErrorSchema";
 
@@ -651,6 +647,31 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
         XCTAssertNotNil(error);
         XCTAssertNil(result);
         XCTAssertEqualObjects(error.localizedDescription, @"Fail");
+    }];
+}
+
+- (void)test_incorrect_object_received_for_request_with_schema
+{
+    [connectionStub setResponseObject:[NSData new] responseError:nil];
+
+    TRCRequestSpy *request = [TRCRequestSpy new];
+    request.responseSchemeName = @"SimpleArray";
+
+    [webService sendRequest:request completion:^(id result, NSError *error) {
+        XCTAssertNotNil(error, @"Error: %@", error.localizedDescription);
+    }];
+}
+
+- (void)test_incorrect_object_in_request_with_schema
+{
+    [connectionStub setResponseObject:[NSData new] responseError:nil];
+
+    TRCRequestSpy *request = [TRCRequestSpy new];
+    request.requestSchemeName = @"SimpleRequest.json";
+    request.requestBody = (id)[NSData new];
+
+    [webService sendRequest:request completion:^(id result, NSError *error) {
+        XCTAssertNotNil(error, @"Error: %@", error.localizedDescription);
     }];
 }
 
