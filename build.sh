@@ -1,5 +1,9 @@
 #!/bin/sh
 
+#Fail immediately if a task fails
+set -e
+set -o pipefail
+
 rm -rf ~/Library/Developer/Xcode/DerivedData/TyphoonRestClient-*
 
 xcodebuild test -workspace TyphoonRestClient.xcworkspace/ -scheme 'Tests' -configuration Debug \
