@@ -35,16 +35,10 @@
     return TRCSerializationJson;
 }
 
-- (id)requestBody
-{
-    return self.requestParams;
-}
-
 - (TRCSerialization)responseBodySerialization
 {
     return TRCSerializationResponseImage;
 }
-
 
 - (NSString *)responseBodyValidationSchemaName
 {
@@ -64,17 +58,12 @@
     return [super respondsToSelector:aSelector];
 }
 
-
 - (id)responseProcessedFromBody:(id)responseObject headers:(NSDictionary *)headers status:(TRCHttpStatusCode)status error:(NSError **)parseError
 {
     self.parseResponseObjectCalled = YES;
 
     if (parseError && self.parseError) {
         *parseError = self.parseError;
-    }
-
-    if (self.shouldFailConversion) {
-        [(NSMutableOrderedSet *)[(TRCConverter *)responseObject conversionErrorSet] addObject:NSErrorWithFormat(@"Unkown")];
     }
 
     return self.parseResult;

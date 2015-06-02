@@ -459,8 +459,9 @@
     };
 
     NSError *error = nil;
-    XCTAssertFalse([listSchema validateResponse:input error:&error]);
-    XCTAssertNotNil(error);
+    //If object mapper scheme is not specified, then we can't validate this part. So it's assumes as correct (passing as is)
+    XCTAssertTrue([listSchema validateResponse:input error:&error]);
+    XCTAssertNil(error);
 }
 
 - (void)test_mapper_without_schema_correct

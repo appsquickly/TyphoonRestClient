@@ -9,6 +9,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#import <objc/runtime.h>
 #import "TRCConverter.h"
 #import "TRCUtils.h"
 #import "TRCConvertersRegistry.h"
@@ -23,12 +24,15 @@
 
 @property (nonatomic, strong) TRCSchema *schema;
 
-@property (nonatomic, strong) NSMutableOrderedSet *internalErrors;
 @end
 
 @implementation TRCConverter
 {
+    NSError *_error;
+
     BOOL _convertingForRequest;
+
+    TRCSchemaStackTrace *_stack;
 }
 
 - (instancetype)initWithSchema:(TRCSchema *)schema
@@ -37,7 +41,6 @@
     self = [super init];
     if (self) {
         self.schema = schema;
-        self.internalErrors = [NSMutableOrderedSet new];
     }
     return self;
 }
@@ -45,9 +48,15 @@
 - (id)convertResponseValue:(id)value error:(NSError **)error
 {
     _convertingForRequest = NO;
+
+#if TRCSchemaTrackErrorTrace
+    _stack = [TRCSchemaStackTrace new];
+    _stack.originalObject = value;
+#endif
+
     id result = [self.schema.data modify:value withModifier:self];
-    if (error) {
-        *error = [self conversionError];
+    if (error && _error) {
+        *error = _error;
     }
     return result;
 }
@@ -55,21 +64,17 @@
 - (id)convertRequestValue:(id)value error:(NSError **)error
 {
     _convertingForRequest = YES;
+
+#if TRCSchemaTrackErrorTrace
+    _stack = [TRCSchemaStackTrace new];
+    _stack.originalObject = value;
+#endif
+
     id result = [self.schema.data modify:value withModifier:self];
-    if (error) {
-        *error = [self conversionError];
+    if (error && _error) {
+        *error = _error;
     }
     return result;
-}
-
-- (NSError *)conversionError
-{
-    return TRCErrorFromErrorSet(self.internalErrors, TyphoonRestClientErrorCodeTransformation, @"value transformations");
-}
-
-- (NSOrderedSet *)conversionErrorSet
-{
-    return self.internalErrors;
 }
 
 //-------------------------------------------------------------------------------------------
@@ -93,8 +98,6 @@
         }
     }
 
-    object = TRCValueAfterApplyingOptions(object, self.options, _convertingForRequest, options.isOptional);
-
     if (object && self.registry && [schemeValue isKindOfClass:[NSString class]]) {
         return [self convertValue:object toType:schemeValue];
     } else {
@@ -114,8 +117,18 @@
 
 - (void)schemaData:(id<TRCSchemaData>)data typeMismatchForValue:(id)value withSchemaValue:(id)schemaValue
 {
-    NSError *error = TRCConversionError([NSString stringWithFormat:@"Object of type '%@' doesn't match type '%@'", [value class], [schemaValue class]], self.schema.name, _convertingForRequest);
-    [self.internalErrors addObject:error];
+    NSString *errorDescription =  [NSString stringWithFormat:@"Type mismatch for '%@' (Must be %@, but '%@' has given)", [_stack shortDescription], [schemaValue class], [value class]];
+    _error = TRCConversionError(errorDescription, self.schema.name, _convertingForRequest);
+}
+
+- (void)schemaData:(id<TRCSchemaData>)data willEnumerateItemAtIndentifier:(id)itemIdentifier
+{
+    [_stack pushSymbol:itemIdentifier];
+}
+
+- (void)schemaData:(id<TRCSchemaData>)data didEnumerateItemAtIndentifier:(id)itemIdentifier
+{
+    [_stack pop];
 }
 
 //-------------------------------------------------------------------------------------------
@@ -139,7 +152,8 @@
     }
 
     if (convertError) {
-        [self.internalErrors addObject:convertError];
+        _error = [self errorWithMessage:@"Can't transform value" originalError:convertError];
+        [self.schema.data cancel];
         result = nil;
     }
     return result;
@@ -147,26 +161,42 @@
 
 - (id)convertObject:(id)object withMapperTag:(NSString *)tag usingSelector:(SEL)sel
 {
+    NSError *error = nil;
+    id result = nil;
     NSParameterAssert(tag);
     NSParameterAssert(self.registry);
     id<TRCObjectMapper> converter = [self.registry objectMapperForTag:tag];
     if (!converter) {
-        [self.internalErrors addObject:TRCConversionError([NSString stringWithFormat:@"Can't find converter for tag '%@'", tag], self.schema.name, !_convertingForRequest)];
-        return nil;
-    }
-    NSError *error = nil;
-    id result = nil;
-    if ([converter respondsToSelector:sel]) {
-        id(*impl)(id, SEL, id, NSError **) = (id(*)(id, SEL, id, NSError **))[(NSObject*)converter methodForSelector:sel];
-        result = impl(converter, sel, object, &error);
-        if (error) {
-            [self.internalErrors addObject:error];
-            result = nil;
-        }
+        error = TRCConversionError([NSString stringWithFormat:@"Can't find TRCObjectMapper for '%@' with tag '%@'", [_stack shortDescription], tag], self.schema.name, !_convertingForRequest);
     } else {
-        [self.internalErrors addObject:TRCConversionError([NSString stringWithFormat:@"Converter for tag '%@' (Class: %@) not responds to '%@'", tag, [converter class], NSStringFromSelector(sel)], self.schema.name, !_convertingForRequest)];
+        if ([converter respondsToSelector:sel]) {
+            id(*impl)(id, SEL, id, NSError **) = (id(*)(id, SEL, id, NSError **))[(NSObject*)converter methodForSelector:sel];
+            result = impl(converter, sel, object, &error);
+            if (error) {
+                error = [self errorWithMessage:@"Can't map object" originalError:error];
+                result = nil;
+            }
+        } else {
+            error = TRCConversionError([NSString stringWithFormat:@"TRCObjectMapper for '%@' with tag '%@' (Class: %@) not responds to '%@'", [_stack shortDescription], tag, [converter class], NSStringFromSelector(sel)], self.schema.name, !_convertingForRequest);
+        }
     }
+
+    if (error) {
+        _error = error;
+        [self.schema.data cancel];
+    }
+
     return result;
+}
+
+- (NSError *)errorWithMessage:(NSString *)message originalError:(NSError *)originalError
+{
+    message = [NSString stringWithFormat:@"%@ for '%@': %@", message, [_stack shortDescription], [originalError localizedDescription]];
+    NSMutableDictionary *userInfo = [NSMutableDictionary new];
+    userInfo[TyphoonRestClientErrorKeySchemaName] = self.schema.name;
+    userInfo[NSLocalizedDescriptionKey] = message;
+    userInfo[TyphoonRestClientErrorKeyOriginalError] = originalError;
+    return [NSError errorWithDomain:TyphoonRestClientErrors code:TyphoonRestClientErrorCodeTransformation userInfo:userInfo];
 }
 
 @end

@@ -13,7 +13,7 @@
 
 @property (nonatomic) BOOL shouldFailConversion;
 
-@property (nonatomic, strong) NSDictionary *requestParams;
+@property (nonatomic, strong) id requestBody;
 @property (nonatomic, strong) NSString *requestSchemeName;
 
 @property (nonatomic, strong) NSString *responseSchemeName;

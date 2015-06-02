@@ -99,8 +99,6 @@
         return;
     }
 
-    value = TRCValueAfterApplyingOptions(value, self.options, _isRequestValidation, [options isOptional]);
-
     //1. Check value exists
     if (![options isOptional] && !value) {
         _error = [self errorForMissedKey:options.identifier withStack:_stack];

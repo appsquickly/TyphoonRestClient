@@ -36,10 +36,4 @@
 
 - (id)convertRequestValue:(id)value error:(NSError **)error;
 
-#pragma mark - Errors
-
-- (NSError *)conversionError;
-
-- (NSOrderedSet *)conversionErrorSet;
-
 @end

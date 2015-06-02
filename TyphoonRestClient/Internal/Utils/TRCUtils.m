@@ -69,26 +69,6 @@ NSError *TRCErrorFromErrorSet(NSOrderedSet *errors, NSInteger code, NSString *ac
     }
 }
 
-id TRCValueAfterApplyingOptions(id value, TRCValidationOptions options, BOOL isRequest, BOOL isOptional)
-{
-    id result = value;
-    BOOL isEmptyDictionary = [result isKindOfClass:[NSDictionary class]] && [result count] == 0;
-    if (isEmptyDictionary) {
-        TRCValidationOptions treatForOptional = isRequest ? TRCValidationOptionsTreatEmptyDictionaryAsNilInRequestsForOptional :
-                TRCValidationOptionsTreatEmptyDictionaryAsNilInResponsesForOptional;
-        TRCValidationOptions treatForRequired = isRequest ? TRCValidationOptionsTreatEmptyDictionaryAsNilInRequestsForRequired :
-                TRCValidationOptionsTreatEmptyDictionaryAsNilInResponsesForRequired;
-
-        if (isOptional && (options & treatForOptional)) {
-            result = nil;
-        }
-        if (!isOptional && (options & treatForRequired)) {
-            result = nil;
-        }
-    }
-    return result;
-}
-
 NSError *TRCUnknownValidationErrorForObject(id object, NSString *schemaName, BOOL isResponse)
 {
     NSString *errorMessage = [NSString stringWithFormat:@"Unknown error while %@ validation", isResponse?@"response":@"request"];
@@ -158,7 +138,7 @@ NSString *TRCUrlPathFromPathByApplyingArguments(NSString *path, NSMutableDiction
 
     return path;
 }
-//TODO: Test nested dictionaries
+
 void TRCUrlPathParamsByRemovingNull(NSMutableDictionary *arguments)
 {
     for (NSString *key in [arguments allKeys]) {
@@ -183,6 +163,8 @@ void TRCUrlPathParamsByRemovingNull(NSMutableDictionary *arguments)
 extern NSArray * AFQueryStringPairsFromDictionary(NSDictionary *dictionary);
 extern NSArray * AFQueryStringPairsFromKeyAndValue(NSString *key, id value);
 
+
+//TODO: Support nested dictionaries
 NSString * TRCQueryStringFromParametersWithEncoding(NSDictionary *parameters, NSStringEncoding stringEncoding)
 {
     NSMutableArray *mutablePairs = [NSMutableArray array];

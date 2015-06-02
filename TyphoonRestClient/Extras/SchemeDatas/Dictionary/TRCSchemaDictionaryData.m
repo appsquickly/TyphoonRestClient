@@ -84,6 +84,7 @@
 {
     @synchronized (self) {
         _enumerator = nil;
+        _modifier = nil;
         _isCancelled = YES;
     }
 }
@@ -131,14 +132,6 @@
     if ([self isRequestData] && _modifier && result) {
         *result = [_modifier schemaData:self requestFromObject:*result withMapperTag:name];
         object = *result;
-    }
-
-    //TODO: Test case with NSArray
-    //Only NSDictionary can be used for mappers
-    if (![object isKindOfClass:[NSDictionary class]]) {
-        [self notifyFail:object withSchemaObject:[NSDictionary new]];
-        [self cancel];
-        return;
     }
 
     id<TRCSchemaData> child = nil;
@@ -260,6 +253,9 @@
     if ([_enumerator respondsToSelector:@selector(schemaData:willEnumerateItemAtIndentifier:)]) {
         [_enumerator schemaData:self willEnumerateItemAtIndentifier:itemId];
     }
+    if ([_modifier respondsToSelector:@selector(schemaData:willEnumerateItemAtIndentifier:)]) {
+        [_modifier schemaData:self willEnumerateItemAtIndentifier:itemId];
+    }
 }
 
 - (void)notifyEnumeratingItemEnd:(id)itemId
@@ -267,11 +263,15 @@
     if ([_enumerator respondsToSelector:@selector(schemaData:didEnumerateItemAtIndentifier:)]) {
         [_enumerator schemaData:self didEnumerateItemAtIndentifier:itemId];
     }
+    if ([_modifier respondsToSelector:@selector(schemaData:didEnumerateItemAtIndentifier:)]) {
+        [_modifier schemaData:self didEnumerateItemAtIndentifier:itemId];
+    }
 }
 
 - (void)notifyFail:(id)object withSchemaObject:(id)schemaObject
 {
     [_enumerator schemaData:self typeMismatchForValue:object withSchemaValue:schemaObject];
+    [_modifier schemaData:self typeMismatchForValue:object withSchemaValue:schemaObject];
 }
 
 - (void)notifyObject:(id)object withIdentifier:(id)identifier withSchemeObject:(id)schemeObject replacement:(id *)replacement

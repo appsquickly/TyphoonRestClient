@@ -26,29 +26,24 @@
 * */
 extern NSString *TyphoonRestClientReachabilityDidChangeNotification;
 
-
-//TODO: Describe each TRCValidationOptions option
 /**
 * `TRCValidationOptions` is special options to validation and conversion rules
 * */
 typedef NS_OPTIONS(NSInteger , TRCValidationOptions)
 {
     TRCValidationOptionsNone = 0,
-    TRCValidationOptionsTreatEmptyDictionaryAsNilInResponsesForOptional = 1 << 0,
-    TRCValidationOptionsTreatEmptyDictionaryAsNilInResponsesForRequired = 1 << 1,
-    TRCValidationOptionsTreatEmptyDictionaryAsNilInRequestsForOptional = 1 << 2,
-    TRCValidationOptionsTreatEmptyDictionaryAsNilInRequestsForRequired = 1 << 3,
-    TRCValidationOptionsRemoveValuesMissedInSchemeForRequests  = 1 << 4,
-    TRCValidationOptionsRemoveValuesMissedInSchemeForResponses = 1 << 5
+    ///If enabled, all values missed in schema would be removed in request object
+    TRCValidationOptionsRemoveValuesMissedInSchemeForRequests  = 1 << 0,
+    ///If enabled, all values missed in schema would be removed in response object
+    TRCValidationOptionsRemoveValuesMissedInSchemeForResponses = 1 << 1
 };
 
-
-//TODO: Write summery
 /**
-* `TyphoonRestClient` is HTTP client which aimed to help building large application with flexible architecture.
+* `TyphoonRestClient` is a library for integration against contract-first web service. It provides facilities for customisable
+* serialisation / marshalling, validation and stubbing requests.
 *
-* ...
-*
+* TRC helps to quickly achieve end-to-end proof of concept, at the same time as providing a robust platform for deploying
+* into demanding production environments.
 * */
 @interface TyphoonRestClient : NSObject
 
@@ -74,7 +69,7 @@ typedef NS_OPTIONS(NSInteger , TRCValidationOptions)
 @property (nonatomic) BOOL shouldSuppressWarnings;
 
 /// Set validation and processing options here.
-/// Default: `TRCValidationOptionsTreatEmptyDictionaryAsNilInResponsesForOptional` | `TRCValidationOptionsTreatEmptyDictionaryAsNilInRequestsForOptional`
+/// Default: `TRCValidationOptionsNone`
 @property (nonatomic) TRCValidationOptions validationOptions;
 
 /**

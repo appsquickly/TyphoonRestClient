@@ -25,6 +25,8 @@
 		2DBA186B29DECECEE698EA7D /* RequestToGetIssueIntoRoot.response.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA1A5131CD2EBB66C01FE1 /* RequestToGetIssueIntoRoot.response.json */; };
 		2DBA1931DD7F8B70613BC3A7 /* TRCIntegrationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1DCB50C312ECC2FCB559 /* TRCIntegrationTests.m */; };
 		2DBA1970DEB404C22A5DA4B5 /* RequestToUploadFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1DD932DF6F87827DA34A /* RequestToUploadFile.m */; };
+		2DBA199EE6026F8769FAB714 /* TRCMapperWithArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA17FA4B5016447633E32A /* TRCMapperWithArray.m */; };
+		2DBA1A9AA9E0D6E61CC42D97 /* TRCMapperWithArray.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA1365A34B2D111EA6E463 /* TRCMapperWithArray.json */; };
 		2DBA1B7370A68AF382B9B10A /* TRCObjectMapperIssue.response.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA17F1B976B5EB28C21EAF /* TRCObjectMapperIssue.response.json */; };
 		2DBA1B9CD3295467A9BE7FD8 /* TRCSchemeFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1DFAF75A7BFE623BC34C /* TRCSchemeFactory.m */; };
 		2DBA1BE868E4128AFAFCBBA0 /* TRCErrorParserSimple.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA12519DF33996626F6739 /* TRCErrorParserSimple.m */; };
@@ -107,11 +109,13 @@
 /* Begin PBXFileReference section */
 		11A77D6930D24E1BA5797E0E /* libPods-HttpWebServiceTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HttpWebServiceTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DBA104BA4D6F38FB51EC684 /* PersonsList.json */ = {isa = PBXFileReference; lastKnownFileType = file.json; path = PersonsList.json; sourceTree = "<group>"; };
+		2DBA1076B15A22774213B2FA /* TRCMapperWithArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCMapperWithArray.h; sourceTree = "<group>"; };
 		2DBA10AE04851CC3BDE7480A /* TRCMapperPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCMapperPhone.m; sourceTree = "<group>"; };
 		2DBA11792F43CB6AC07AA5EB /* RequestToDownloadFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestToDownloadFile.h; sourceTree = "<group>"; };
 		2DBA11C1B532C921805BEC2F /* TRCMapperPhone.json */ = {isa = PBXFileReference; lastKnownFileType = file.json; path = TRCMapperPhone.json; sourceTree = "<group>"; };
 		2DBA123B3A97A2B227BB3C5F /* TRCSchemaDataValueOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSchemaDataValueOptions.m; sourceTree = "<group>"; };
 		2DBA12519DF33996626F6739 /* TRCErrorParserSimple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCErrorParserSimple.m; sourceTree = "<group>"; };
+		2DBA1365A34B2D111EA6E463 /* TRCMapperWithArray.json */ = {isa = PBXFileReference; lastKnownFileType = file.json; path = TRCMapperWithArray.json; sourceTree = "<group>"; };
 		2DBA13C0A49BD73E2874EE16 /* RequestToGetIssues.response.json */ = {isa = PBXFileReference; lastKnownFileType = file.json; path = RequestToGetIssues.response.json; sourceTree = "<group>"; };
 		2DBA13F8CD52678CF22C08F2 /* RequestToGetIssue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestToGetIssue.h; sourceTree = "<group>"; };
 		2DBA142DC592EB2E5622DD73 /* TRCPostProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCPostProcessor.h; sourceTree = "<group>"; };
@@ -123,6 +127,7 @@
 		2DBA178BDFA467A043F0FD6C /* TRCValueTransformerDateISO8601.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCValueTransformerDateISO8601.m; sourceTree = "<group>"; };
 		2DBA17F1B976B5EB28C21EAF /* TRCObjectMapperIssue.response.json */ = {isa = PBXFileReference; lastKnownFileType = file.response; path = TRCObjectMapperIssue.response.json; sourceTree = "<group>"; };
 		2DBA17F8C628DF8501898A45 /* RequestToGetIssue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestToGetIssue.m; sourceTree = "<group>"; };
+		2DBA17FA4B5016447633E32A /* TRCMapperWithArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCMapperWithArray.m; sourceTree = "<group>"; };
 		2DBA1819CFDD593D70254BD5 /* Issue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Issue.h; path = Demo/TyphoonRestClientDemo/TyphoonRestClientDemo/Issue.h; sourceTree = SOURCE_ROOT; };
 		2DBA1942EBD89F99FB0149DC /* Phone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Phone.m; sourceTree = "<group>"; };
 		2DBA19CDB29AAD3C4F65D42B /* Phone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Phone.h; sourceTree = "<group>"; };
@@ -577,6 +582,9 @@
 				2DBA11C1B532C921805BEC2F /* TRCMapperPhone.json */,
 				2DBA12519DF33996626F6739 /* TRCErrorParserSimple.m */,
 				2DBA1ECDC2BD02AD01F101C3 /* TRCErrorParserSimple.h */,
+				2DBA17FA4B5016447633E32A /* TRCMapperWithArray.m */,
+				2DBA1076B15A22774213B2FA /* TRCMapperWithArray.h */,
+				2DBA1365A34B2D111EA6E463 /* TRCMapperWithArray.json */,
 			);
 			path = TestObjects;
 			sourceTree = "<group>";
@@ -757,6 +765,7 @@
 				2DBA1FA9C99981038EB8F5F5 /* RequestToGetIssues.response.json in Resources */,
 				2DBA158AE4B960FD89DE18BC /* RequestToUploadFile.response.json in Resources */,
 				2DBA186B29DECECEE698EA7D /* RequestToGetIssueIntoRoot.response.json in Resources */,
+				2DBA1A9AA9E0D6E61CC42D97 /* TRCMapperWithArray.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -852,6 +861,7 @@
 				FAE88A291B171F5700CCADC3 /* TRCSerializerImage.m in Sources */,
 				FAE88A221B171F5700CCADC3 /* TRCConnectionStub.m in Sources */,
 				2DBA1B9CD3295467A9BE7FD8 /* TRCSchemeFactory.m in Sources */,
+				2DBA199EE6026F8769FAB714 /* TRCMapperWithArray.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
