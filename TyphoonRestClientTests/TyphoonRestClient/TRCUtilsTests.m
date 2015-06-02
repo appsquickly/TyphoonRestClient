@@ -142,5 +142,20 @@
     XCTAssertNil(result);
 }
 
+//- (void)test_nested_dictionaries_in_query_params
+//{
+//    NSString *path = @"path/to/request";
+//    NSMutableDictionary *params = [NSMutableDictionary new];
+//    params[@"location"][@"long"] = @"123";
+//    params[@"location"][@"lat"] = @321;
+//    params[@"searchQuery"] = @"qwerty";
+//    params[@"page"] = @2;
+//    params[@"pages"] = @[@1, @2, @3];
+//    NSError *error = nil;
+//
+//    NSString *result = TRCQueryStringFromParametersWithEncoding(params, NSUTF8StringEncoding);
+//
+//    XCTAssertNil(error);
+//}
 
 @end

@@ -138,7 +138,7 @@ NSString *TRCUrlPathFromPathByApplyingArguments(NSString *path, NSMutableDiction
 
     return path;
 }
-//TODO: Test nested dictionaries
+
 void TRCUrlPathParamsByRemovingNull(NSMutableDictionary *arguments)
 {
     for (NSString *key in [arguments allKeys]) {
@@ -163,6 +163,8 @@ void TRCUrlPathParamsByRemovingNull(NSMutableDictionary *arguments)
 extern NSArray * AFQueryStringPairsFromDictionary(NSDictionary *dictionary);
 extern NSArray * AFQueryStringPairsFromKeyAndValue(NSString *key, id value);
 
+
+//TODO: Support nested dictionaries
 NSString * TRCQueryStringFromParametersWithEncoding(NSDictionary *parameters, NSStringEncoding stringEncoding)
 {
     NSMutableArray *mutablePairs = [NSMutableArray array];

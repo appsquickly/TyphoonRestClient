@@ -38,12 +38,12 @@ typedef NS_OPTIONS(NSInteger , TRCValidationOptions)
     TRCValidationOptionsRemoveValuesMissedInSchemeForResponses = 1 << 1
 };
 
-//TODO: Write summery
 /**
-* `TyphoonRestClient` is HTTP client which aimed to help building large application with flexible architecture.
+* `TyphoonRestClient` is a library for integration against contract-first web service. It provides facilities for customisable
+* serialisation / marshalling, validation and stubbing requests.
 *
-* ...
-*
+* TRC helps to quickly achieve end-to-end proof of concept, at the same time as providing a robust platform for deploying
+* into demanding production environments.
 * */
 @interface TyphoonRestClient : NSObject
 
