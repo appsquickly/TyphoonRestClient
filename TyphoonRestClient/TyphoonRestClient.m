@@ -35,6 +35,9 @@ TRCRequestMethod TRCRequestMethodDelete = @"DELETE";
 TRCRequestMethod TRCRequestMethodPatch = @"PATCH";
 TRCRequestMethod TRCRequestMethodHead = @"HEAD";
 
+TRCValueTransformerType TRCValueTransformerTypeString;
+TRCValueTransformerType TRCValueTransformerTypeNumber;
+
 NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClientReachabilityDidChangeNotification";
 
 @interface TRCRequestCreateOptions : NSObject <TRCConnectionRequestCreationOptions>

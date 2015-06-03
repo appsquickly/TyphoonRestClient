@@ -16,6 +16,10 @@
 
 TRCSerialization TRCSerializationPlist = @"TRCSerializationPlist";
 
+TRCValueTransformerType TRCValueTransformerTypeDate;
+TRCValueTransformerType TRCValueTransformerTypeData;
+
+
 @implementation TRCSerializerPlist
 
 - (instancetype)init

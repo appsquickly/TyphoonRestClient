@@ -8,28 +8,28 @@
 
 /* Begin PBXBuildFile section */
 		76417E2E51EAEE070F95A75E /* libPods-TyphoonRestClientDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D228E71A9F064D5B48A851DA /* libPods-TyphoonRestClientDemo.a */; };
-		FA0A5FDA1B1336DB000A45B8 /* TRCConnectionAFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0A5F9A1B1336DB000A45B8 /* TRCConnectionAFNetworking.m */; };
-		FA0A5FDB1B1336DB000A45B8 /* TRCConnectionLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0A5F9C1B1336DB000A45B8 /* TRCConnectionLogger.m */; };
-		FA0A5FDC1B1336DB000A45B8 /* TRCConnectionProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0A5F9E1B1336DB000A45B8 /* TRCConnectionProxy.m */; };
-		FA0A5FDD1B1336DB000A45B8 /* TRCConnectionStub.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0A5FA01B1336DB000A45B8 /* TRCConnectionStub.m */; };
-		FA0A5FDE1B1336DB000A45B8 /* TRCConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0A5FA31B1336DB000A45B8 /* TRCConverter.m */; };
-		FA0A5FDF1B1336DB000A45B8 /* TRCValueTransformerNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0A5FA71B1336DB000A45B8 /* TRCValueTransformerNumber.m */; };
-		FA0A5FE01B1336DB000A45B8 /* TRCValueTransformerString.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0A5FA91B1336DB000A45B8 /* TRCValueTransformerString.m */; };
-		FA0A5FE11B1336DB000A45B8 /* TRCValueTransformerUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0A5FAB1B1336DB000A45B8 /* TRCValueTransformerUrl.m */; };
-		FA0A5FE21B1336DB000A45B8 /* TRCSchemaDictionaryData.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0A5FB01B1336DB000A45B8 /* TRCSchemaDictionaryData.m */; };
-		FA0A5FE31B1336DB000A45B8 /* TRCSchemaDataValueOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0A5FB31B1336DB000A45B8 /* TRCSchemaDataValueOptions.m */; };
-		FA0A5FE41B1336DB000A45B8 /* TRCSchema.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0A5FB51B1336DB000A45B8 /* TRCSchema.m */; };
-		FA0A5FE51B1336DB000A45B8 /* TRCSchemaStackTrace.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0A5FB71B1336DB000A45B8 /* TRCSchemaStackTrace.m */; };
-		FA0A5FE61B1336DB000A45B8 /* TRCSchemeFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0A5FBA1B1336DB000A45B8 /* TRCSchemeFactory.m */; };
-		FA0A5FE71B1336DB000A45B8 /* TRCSerializerData.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0A5FBD1B1336DB000A45B8 /* TRCSerializerData.m */; };
-		FA0A5FE81B1336DB000A45B8 /* TRCSerializerHttpQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0A5FBF1B1336DB000A45B8 /* TRCSerializerHttpQuery.m */; };
-		FA0A5FE91B1336DB000A45B8 /* TRCSerializerImage.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0A5FC11B1336DB000A45B8 /* TRCSerializerImage.m */; };
-		FA0A5FEA1B1336DB000A45B8 /* TRCSerializerInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0A5FC31B1336DB000A45B8 /* TRCSerializerInputStream.m */; };
-		FA0A5FEB1B1336DB000A45B8 /* TRCSerializerJson.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0A5FC51B1336DB000A45B8 /* TRCSerializerJson.m */; };
-		FA0A5FEC1B1336DB000A45B8 /* TRCSerializerPlist.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0A5FC71B1336DB000A45B8 /* TRCSerializerPlist.m */; };
-		FA0A5FED1B1336DB000A45B8 /* TRCSerializerString.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0A5FC91B1336DB000A45B8 /* TRCSerializerString.m */; };
-		FA0A5FEE1B1336DB000A45B8 /* TRCUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0A5FCD1B1336DB000A45B8 /* TRCUtils.m */; };
-		FA0A5FEF1B1336DB000A45B8 /* TyphoonRestClient.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0A5FD91B1336DB000A45B8 /* TyphoonRestClient.m */; };
+		FA41165C1B1F8ECB00AC5E8A /* TRCConnectionAFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = FA41161A1B1F8ECB00AC5E8A /* TRCConnectionAFNetworking.m */; };
+		FA41165D1B1F8ECB00AC5E8A /* TRCConnectionLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = FA41161C1B1F8ECB00AC5E8A /* TRCConnectionLogger.m */; };
+		FA41165E1B1F8ECB00AC5E8A /* TRCConnectionProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = FA41161E1B1F8ECB00AC5E8A /* TRCConnectionProxy.m */; };
+		FA41165F1B1F8ECB00AC5E8A /* TRCConnectionStub.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4116201B1F8ECB00AC5E8A /* TRCConnectionStub.m */; };
+		FA4116601B1F8ECB00AC5E8A /* TRCValueTransformerNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4116231B1F8ECB00AC5E8A /* TRCValueTransformerNumber.m */; };
+		FA4116611B1F8ECB00AC5E8A /* TRCValueTransformerString.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4116251B1F8ECB00AC5E8A /* TRCValueTransformerString.m */; };
+		FA4116621B1F8ECB00AC5E8A /* TRCValueTransformerUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4116271B1F8ECB00AC5E8A /* TRCValueTransformerUrl.m */; };
+		FA4116631B1F8ECB00AC5E8A /* TRCSchemaDictionaryData.m in Sources */ = {isa = PBXBuildFile; fileRef = FA41162B1B1F8ECB00AC5E8A /* TRCSchemaDictionaryData.m */; };
+		FA4116641B1F8ECB00AC5E8A /* TRCSerializerData.m in Sources */ = {isa = PBXBuildFile; fileRef = FA41162E1B1F8ECB00AC5E8A /* TRCSerializerData.m */; };
+		FA4116651B1F8ECB00AC5E8A /* TRCSerializerHttpQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4116301B1F8ECB00AC5E8A /* TRCSerializerHttpQuery.m */; };
+		FA4116661B1F8ECB00AC5E8A /* TRCSerializerImage.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4116321B1F8ECB00AC5E8A /* TRCSerializerImage.m */; };
+		FA4116671B1F8ECB00AC5E8A /* TRCSerializerInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4116341B1F8ECB00AC5E8A /* TRCSerializerInputStream.m */; };
+		FA4116681B1F8ECB00AC5E8A /* TRCSerializerJson.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4116361B1F8ECB00AC5E8A /* TRCSerializerJson.m */; };
+		FA4116691B1F8ECB00AC5E8A /* TRCSerializerPlist.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4116381B1F8ECB00AC5E8A /* TRCSerializerPlist.m */; };
+		FA41166A1B1F8ECB00AC5E8A /* TRCSerializerString.m in Sources */ = {isa = PBXBuildFile; fileRef = FA41163A1B1F8ECB00AC5E8A /* TRCSerializerString.m */; };
+		FA41166B1B1F8ECB00AC5E8A /* TRCConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA41163E1B1F8ECB00AC5E8A /* TRCConverter.m */; };
+		FA41166C1B1F8ECB00AC5E8A /* TRCSchemaDataValueOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4116431B1F8ECB00AC5E8A /* TRCSchemaDataValueOptions.m */; };
+		FA41166D1B1F8ECB00AC5E8A /* TRCSchema.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4116451B1F8ECB00AC5E8A /* TRCSchema.m */; };
+		FA41166E1B1F8ECB00AC5E8A /* TRCSchemaStackTrace.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4116471B1F8ECB00AC5E8A /* TRCSchemaStackTrace.m */; };
+		FA41166F1B1F8ECB00AC5E8A /* TRCSchemeFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = FA41164A1B1F8ECB00AC5E8A /* TRCSchemeFactory.m */; };
+		FA4116701B1F8ECB00AC5E8A /* TRCUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = FA41164E1B1F8ECB00AC5E8A /* TRCUtils.m */; };
+		FA4116711B1F8ECB00AC5E8A /* TyphoonRestClient.m in Sources */ = {isa = PBXBuildFile; fileRef = FA41165A1B1F8ECB00AC5E8A /* TyphoonRestClient.m */; };
 		FAA684241ABED8EC00EF4CB6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA684231ABED8EC00EF4CB6 /* main.m */; };
 		FAA684271ABED8EC00EF4CB6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA684261ABED8EC00EF4CB6 /* AppDelegate.m */; };
 		FAA6842A1ABED8EC00EF4CB6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA684291ABED8EC00EF4CB6 /* ViewController.m */; };
@@ -49,62 +49,61 @@
 /* Begin PBXFileReference section */
 		98AE606D5F53EE29BDA355AA /* Pods-TyphoonRestClientDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TyphoonRestClientDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-TyphoonRestClientDemo/Pods-TyphoonRestClientDemo.release.xcconfig"; sourceTree = "<group>"; };
 		D228E71A9F064D5B48A851DA /* libPods-TyphoonRestClientDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TyphoonRestClientDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		FA0A5F991B1336DB000A45B8 /* TRCConnectionAFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCConnectionAFNetworking.h; sourceTree = "<group>"; };
-		FA0A5F9A1B1336DB000A45B8 /* TRCConnectionAFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCConnectionAFNetworking.m; sourceTree = "<group>"; };
-		FA0A5F9B1B1336DB000A45B8 /* TRCConnectionLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCConnectionLogger.h; sourceTree = "<group>"; };
-		FA0A5F9C1B1336DB000A45B8 /* TRCConnectionLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCConnectionLogger.m; sourceTree = "<group>"; };
-		FA0A5F9D1B1336DB000A45B8 /* TRCConnectionProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCConnectionProxy.h; sourceTree = "<group>"; };
-		FA0A5F9E1B1336DB000A45B8 /* TRCConnectionProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCConnectionProxy.m; sourceTree = "<group>"; };
-		FA0A5F9F1B1336DB000A45B8 /* TRCConnectionStub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCConnectionStub.h; sourceTree = "<group>"; };
-		FA0A5FA01B1336DB000A45B8 /* TRCConnectionStub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCConnectionStub.m; sourceTree = "<group>"; };
-		FA0A5FA21B1336DB000A45B8 /* TRCConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCConverter.h; sourceTree = "<group>"; };
-		FA0A5FA31B1336DB000A45B8 /* TRCConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCConverter.m; sourceTree = "<group>"; };
-		FA0A5FA41B1336DB000A45B8 /* TRCConvertersRegistry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCConvertersRegistry.h; sourceTree = "<group>"; };
-		FA0A5FA61B1336DB000A45B8 /* TRCValueTransformerNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCValueTransformerNumber.h; sourceTree = "<group>"; };
-		FA0A5FA71B1336DB000A45B8 /* TRCValueTransformerNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCValueTransformerNumber.m; sourceTree = "<group>"; };
-		FA0A5FA81B1336DB000A45B8 /* TRCValueTransformerString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCValueTransformerString.h; sourceTree = "<group>"; };
-		FA0A5FA91B1336DB000A45B8 /* TRCValueTransformerString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCValueTransformerString.m; sourceTree = "<group>"; };
-		FA0A5FAA1B1336DB000A45B8 /* TRCValueTransformerUrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCValueTransformerUrl.h; sourceTree = "<group>"; };
-		FA0A5FAB1B1336DB000A45B8 /* TRCValueTransformerUrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCValueTransformerUrl.m; sourceTree = "<group>"; };
-		FA0A5FAF1B1336DB000A45B8 /* TRCSchemaDictionaryData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSchemaDictionaryData.h; sourceTree = "<group>"; };
-		FA0A5FB01B1336DB000A45B8 /* TRCSchemaDictionaryData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSchemaDictionaryData.m; sourceTree = "<group>"; };
-		FA0A5FB11B1336DB000A45B8 /* TRCSchemaData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSchemaData.h; sourceTree = "<group>"; };
-		FA0A5FB21B1336DB000A45B8 /* TRCSchemaDataValueOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSchemaDataValueOptions.h; sourceTree = "<group>"; };
-		FA0A5FB31B1336DB000A45B8 /* TRCSchemaDataValueOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSchemaDataValueOptions.m; sourceTree = "<group>"; };
-		FA0A5FB41B1336DB000A45B8 /* TRCSchema.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSchema.h; sourceTree = "<group>"; };
-		FA0A5FB51B1336DB000A45B8 /* TRCSchema.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSchema.m; sourceTree = "<group>"; };
-		FA0A5FB61B1336DB000A45B8 /* TRCSchemaStackTrace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSchemaStackTrace.h; sourceTree = "<group>"; };
-		FA0A5FB71B1336DB000A45B8 /* TRCSchemaStackTrace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSchemaStackTrace.m; sourceTree = "<group>"; };
-		FA0A5FB91B1336DB000A45B8 /* TRCSchemeFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSchemeFactory.h; sourceTree = "<group>"; };
-		FA0A5FBA1B1336DB000A45B8 /* TRCSchemeFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSchemeFactory.m; sourceTree = "<group>"; };
-		FA0A5FBC1B1336DB000A45B8 /* TRCSerializerData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSerializerData.h; sourceTree = "<group>"; };
-		FA0A5FBD1B1336DB000A45B8 /* TRCSerializerData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSerializerData.m; sourceTree = "<group>"; };
-		FA0A5FBE1B1336DB000A45B8 /* TRCSerializerHttpQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSerializerHttpQuery.h; sourceTree = "<group>"; };
-		FA0A5FBF1B1336DB000A45B8 /* TRCSerializerHttpQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSerializerHttpQuery.m; sourceTree = "<group>"; };
-		FA0A5FC01B1336DB000A45B8 /* TRCSerializerImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSerializerImage.h; sourceTree = "<group>"; };
-		FA0A5FC11B1336DB000A45B8 /* TRCSerializerImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSerializerImage.m; sourceTree = "<group>"; };
-		FA0A5FC21B1336DB000A45B8 /* TRCSerializerInputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSerializerInputStream.h; sourceTree = "<group>"; };
-		FA0A5FC31B1336DB000A45B8 /* TRCSerializerInputStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSerializerInputStream.m; sourceTree = "<group>"; };
-		FA0A5FC41B1336DB000A45B8 /* TRCSerializerJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSerializerJson.h; sourceTree = "<group>"; };
-		FA0A5FC51B1336DB000A45B8 /* TRCSerializerJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSerializerJson.m; sourceTree = "<group>"; };
-		FA0A5FC61B1336DB000A45B8 /* TRCSerializerPlist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSerializerPlist.h; sourceTree = "<group>"; };
-		FA0A5FC71B1336DB000A45B8 /* TRCSerializerPlist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSerializerPlist.m; sourceTree = "<group>"; };
-		FA0A5FC81B1336DB000A45B8 /* TRCSerializerString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSerializerString.h; sourceTree = "<group>"; };
-		FA0A5FC91B1336DB000A45B8 /* TRCSerializerString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSerializerString.m; sourceTree = "<group>"; };
-		FA0A5FCB1B1336DB000A45B8 /* TRCBuiltInObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCBuiltInObjects.h; sourceTree = "<group>"; };
-		FA0A5FCC1B1336DB000A45B8 /* TRCUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCUtils.h; sourceTree = "<group>"; };
-		FA0A5FCD1B1336DB000A45B8 /* TRCUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCUtils.m; sourceTree = "<group>"; };
-		FA0A5FCE1B1336DB000A45B8 /* TyphoonRestClientErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TyphoonRestClientErrors.h; sourceTree = "<group>"; };
-		FA0A5FD01B1336DB000A45B8 /* TRCConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCConnection.h; sourceTree = "<group>"; };
-		FA0A5FD11B1336DB000A45B8 /* TRCErrorHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCErrorHandler.h; sourceTree = "<group>"; };
-		FA0A5FD21B1336DB000A45B8 /* TRCInfrastructure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCInfrastructure.h; sourceTree = "<group>"; };
-		FA0A5FD31B1336DB000A45B8 /* TRCObjectMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCObjectMapper.h; sourceTree = "<group>"; };
-		FA0A5FD41B1336DB000A45B8 /* TRCPostProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCPostProcessor.h; sourceTree = "<group>"; };
-		FA0A5FD51B1336DB000A45B8 /* TRCRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCRequest.h; sourceTree = "<group>"; };
-		FA0A5FD61B1336DB000A45B8 /* TRCValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCValueTransformer.h; sourceTree = "<group>"; };
-		FA0A5FD71B1336DB000A45B8 /* TyphoonRestClient-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TyphoonRestClient-Prefix.pch"; sourceTree = "<group>"; };
-		FA0A5FD81B1336DB000A45B8 /* TyphoonRestClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TyphoonRestClient.h; sourceTree = "<group>"; };
-		FA0A5FD91B1336DB000A45B8 /* TyphoonRestClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TyphoonRestClient.m; sourceTree = "<group>"; };
+		FA4116191B1F8ECB00AC5E8A /* TRCConnectionAFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCConnectionAFNetworking.h; sourceTree = "<group>"; };
+		FA41161A1B1F8ECB00AC5E8A /* TRCConnectionAFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCConnectionAFNetworking.m; sourceTree = "<group>"; };
+		FA41161B1B1F8ECB00AC5E8A /* TRCConnectionLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCConnectionLogger.h; sourceTree = "<group>"; };
+		FA41161C1B1F8ECB00AC5E8A /* TRCConnectionLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCConnectionLogger.m; sourceTree = "<group>"; };
+		FA41161D1B1F8ECB00AC5E8A /* TRCConnectionProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCConnectionProxy.h; sourceTree = "<group>"; };
+		FA41161E1B1F8ECB00AC5E8A /* TRCConnectionProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCConnectionProxy.m; sourceTree = "<group>"; };
+		FA41161F1B1F8ECB00AC5E8A /* TRCConnectionStub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCConnectionStub.h; sourceTree = "<group>"; };
+		FA4116201B1F8ECB00AC5E8A /* TRCConnectionStub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCConnectionStub.m; sourceTree = "<group>"; };
+		FA4116221B1F8ECB00AC5E8A /* TRCValueTransformerNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCValueTransformerNumber.h; sourceTree = "<group>"; };
+		FA4116231B1F8ECB00AC5E8A /* TRCValueTransformerNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCValueTransformerNumber.m; sourceTree = "<group>"; };
+		FA4116241B1F8ECB00AC5E8A /* TRCValueTransformerString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCValueTransformerString.h; sourceTree = "<group>"; };
+		FA4116251B1F8ECB00AC5E8A /* TRCValueTransformerString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCValueTransformerString.m; sourceTree = "<group>"; };
+		FA4116261B1F8ECB00AC5E8A /* TRCValueTransformerUrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCValueTransformerUrl.h; sourceTree = "<group>"; };
+		FA4116271B1F8ECB00AC5E8A /* TRCValueTransformerUrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCValueTransformerUrl.m; sourceTree = "<group>"; };
+		FA41162A1B1F8ECB00AC5E8A /* TRCSchemaDictionaryData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSchemaDictionaryData.h; sourceTree = "<group>"; };
+		FA41162B1B1F8ECB00AC5E8A /* TRCSchemaDictionaryData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSchemaDictionaryData.m; sourceTree = "<group>"; };
+		FA41162D1B1F8ECB00AC5E8A /* TRCSerializerData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSerializerData.h; sourceTree = "<group>"; };
+		FA41162E1B1F8ECB00AC5E8A /* TRCSerializerData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSerializerData.m; sourceTree = "<group>"; };
+		FA41162F1B1F8ECB00AC5E8A /* TRCSerializerHttpQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSerializerHttpQuery.h; sourceTree = "<group>"; };
+		FA4116301B1F8ECB00AC5E8A /* TRCSerializerHttpQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSerializerHttpQuery.m; sourceTree = "<group>"; };
+		FA4116311B1F8ECB00AC5E8A /* TRCSerializerImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSerializerImage.h; sourceTree = "<group>"; };
+		FA4116321B1F8ECB00AC5E8A /* TRCSerializerImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSerializerImage.m; sourceTree = "<group>"; };
+		FA4116331B1F8ECB00AC5E8A /* TRCSerializerInputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSerializerInputStream.h; sourceTree = "<group>"; };
+		FA4116341B1F8ECB00AC5E8A /* TRCSerializerInputStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSerializerInputStream.m; sourceTree = "<group>"; };
+		FA4116351B1F8ECB00AC5E8A /* TRCSerializerJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSerializerJson.h; sourceTree = "<group>"; };
+		FA4116361B1F8ECB00AC5E8A /* TRCSerializerJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSerializerJson.m; sourceTree = "<group>"; };
+		FA4116371B1F8ECB00AC5E8A /* TRCSerializerPlist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSerializerPlist.h; sourceTree = "<group>"; };
+		FA4116381B1F8ECB00AC5E8A /* TRCSerializerPlist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSerializerPlist.m; sourceTree = "<group>"; };
+		FA4116391B1F8ECB00AC5E8A /* TRCSerializerString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSerializerString.h; sourceTree = "<group>"; };
+		FA41163A1B1F8ECB00AC5E8A /* TRCSerializerString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSerializerString.m; sourceTree = "<group>"; };
+		FA41163D1B1F8ECB00AC5E8A /* TRCConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCConverter.h; sourceTree = "<group>"; };
+		FA41163E1B1F8ECB00AC5E8A /* TRCConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCConverter.m; sourceTree = "<group>"; };
+		FA41163F1B1F8ECB00AC5E8A /* TRCConvertersRegistry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCConvertersRegistry.h; sourceTree = "<group>"; };
+		FA4116421B1F8ECB00AC5E8A /* TRCSchemaDataValueOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSchemaDataValueOptions.h; sourceTree = "<group>"; };
+		FA4116431B1F8ECB00AC5E8A /* TRCSchemaDataValueOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSchemaDataValueOptions.m; sourceTree = "<group>"; };
+		FA4116441B1F8ECB00AC5E8A /* TRCSchema.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSchema.h; sourceTree = "<group>"; };
+		FA4116451B1F8ECB00AC5E8A /* TRCSchema.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSchema.m; sourceTree = "<group>"; };
+		FA4116461B1F8ECB00AC5E8A /* TRCSchemaStackTrace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSchemaStackTrace.h; sourceTree = "<group>"; };
+		FA4116471B1F8ECB00AC5E8A /* TRCSchemaStackTrace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSchemaStackTrace.m; sourceTree = "<group>"; };
+		FA4116491B1F8ECB00AC5E8A /* TRCSchemeFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSchemeFactory.h; sourceTree = "<group>"; };
+		FA41164A1B1F8ECB00AC5E8A /* TRCSchemeFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSchemeFactory.m; sourceTree = "<group>"; };
+		FA41164C1B1F8ECB00AC5E8A /* TRCBuiltInObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCBuiltInObjects.h; sourceTree = "<group>"; };
+		FA41164D1B1F8ECB00AC5E8A /* TRCUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCUtils.h; sourceTree = "<group>"; };
+		FA41164E1B1F8ECB00AC5E8A /* TRCUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCUtils.m; sourceTree = "<group>"; };
+		FA4116511B1F8ECB00AC5E8A /* TRCInfrastructure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCInfrastructure.h; sourceTree = "<group>"; };
+		FA4116521B1F8ECB00AC5E8A /* TRCSchemaData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSchemaData.h; sourceTree = "<group>"; };
+		FA4116531B1F8ECB00AC5E8A /* TRCConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCConnection.h; sourceTree = "<group>"; };
+		FA4116541B1F8ECB00AC5E8A /* TRCErrorHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCErrorHandler.h; sourceTree = "<group>"; };
+		FA4116551B1F8ECB00AC5E8A /* TRCObjectMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCObjectMapper.h; sourceTree = "<group>"; };
+		FA4116561B1F8ECB00AC5E8A /* TRCPostProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCPostProcessor.h; sourceTree = "<group>"; };
+		FA4116571B1F8ECB00AC5E8A /* TRCRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCRequest.h; sourceTree = "<group>"; };
+		FA4116581B1F8ECB00AC5E8A /* TRCValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCValueTransformer.h; sourceTree = "<group>"; };
+		FA4116591B1F8ECB00AC5E8A /* TyphoonRestClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TyphoonRestClient.h; sourceTree = "<group>"; };
+		FA41165A1B1F8ECB00AC5E8A /* TyphoonRestClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TyphoonRestClient.m; sourceTree = "<group>"; };
+		FA41165B1B1F8ECB00AC5E8A /* TyphoonRestClientErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TyphoonRestClientErrors.h; sourceTree = "<group>"; };
 		FAA6841E1ABED8EC00EF4CB6 /* TyphoonRestClientDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TyphoonRestClientDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAA684221ABED8EC00EF4CB6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FAA684231ABED8EC00EF4CB6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -160,156 +159,179 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		FA0A5F961B1336DB000A45B8 /* TyphoonRestClient */ = {
+		FA4116161B1F8ECB00AC5E8A /* TyphoonRestClient */ = {
 			isa = PBXGroup;
 			children = (
-				FA0A5F971B1336DB000A45B8 /* Internal */,
-				FA0A5FCF1B1336DB000A45B8 /* Protocols */,
-				FA0A5FD71B1336DB000A45B8 /* TyphoonRestClient-Prefix.pch */,
-				FA0A5FD81B1336DB000A45B8 /* TyphoonRestClient.h */,
-				FA0A5FD91B1336DB000A45B8 /* TyphoonRestClient.m */,
+				FA4116171B1F8ECB00AC5E8A /* Extras */,
+				FA41163B1B1F8ECB00AC5E8A /* Internal */,
+				FA41164F1B1F8ECB00AC5E8A /* Protocols */,
+				FA4116591B1F8ECB00AC5E8A /* TyphoonRestClient.h */,
+				FA41165A1B1F8ECB00AC5E8A /* TyphoonRestClient.m */,
+				FA41165B1B1F8ECB00AC5E8A /* TyphoonRestClientErrors.h */,
 			);
 			name = TyphoonRestClient;
 			path = ../../../TyphoonRestClient;
 			sourceTree = "<group>";
 		};
-		FA0A5F971B1336DB000A45B8 /* Internal */ = {
+		FA4116171B1F8ECB00AC5E8A /* Extras */ = {
 			isa = PBXGroup;
 			children = (
-				FA0A5F981B1336DB000A45B8 /* Connection */,
-				FA0A5FA11B1336DB000A45B8 /* Converter */,
-				FA0A5FA51B1336DB000A45B8 /* DataConverters */,
-				FA0A5FAC1B1336DB000A45B8 /* Scheme */,
-				FA0A5FB81B1336DB000A45B8 /* SchemeFactory */,
-				FA0A5FBB1B1336DB000A45B8 /* Serializations */,
-				FA0A5FCA1B1336DB000A45B8 /* Utils */,
+				FA4116181B1F8ECB00AC5E8A /* Connections */,
+				FA4116211B1F8ECB00AC5E8A /* DataConverters */,
+				FA4116281B1F8ECB00AC5E8A /* SchemeDatas */,
+				FA41162C1B1F8ECB00AC5E8A /* Serializations */,
 			);
-			path = Internal;
+			path = Extras;
 			sourceTree = "<group>";
 		};
-		FA0A5F981B1336DB000A45B8 /* Connection */ = {
+		FA4116181B1F8ECB00AC5E8A /* Connections */ = {
 			isa = PBXGroup;
 			children = (
-				FA0A5F991B1336DB000A45B8 /* TRCConnectionAFNetworking.h */,
-				FA0A5F9A1B1336DB000A45B8 /* TRCConnectionAFNetworking.m */,
-				FA0A5F9B1B1336DB000A45B8 /* TRCConnectionLogger.h */,
-				FA0A5F9C1B1336DB000A45B8 /* TRCConnectionLogger.m */,
-				FA0A5F9D1B1336DB000A45B8 /* TRCConnectionProxy.h */,
-				FA0A5F9E1B1336DB000A45B8 /* TRCConnectionProxy.m */,
-				FA0A5F9F1B1336DB000A45B8 /* TRCConnectionStub.h */,
-				FA0A5FA01B1336DB000A45B8 /* TRCConnectionStub.m */,
+				FA4116191B1F8ECB00AC5E8A /* TRCConnectionAFNetworking.h */,
+				FA41161A1B1F8ECB00AC5E8A /* TRCConnectionAFNetworking.m */,
+				FA41161B1B1F8ECB00AC5E8A /* TRCConnectionLogger.h */,
+				FA41161C1B1F8ECB00AC5E8A /* TRCConnectionLogger.m */,
+				FA41161D1B1F8ECB00AC5E8A /* TRCConnectionProxy.h */,
+				FA41161E1B1F8ECB00AC5E8A /* TRCConnectionProxy.m */,
+				FA41161F1B1F8ECB00AC5E8A /* TRCConnectionStub.h */,
+				FA4116201B1F8ECB00AC5E8A /* TRCConnectionStub.m */,
 			);
-			path = Connection;
+			path = Connections;
 			sourceTree = "<group>";
 		};
-		FA0A5FA11B1336DB000A45B8 /* Converter */ = {
+		FA4116211B1F8ECB00AC5E8A /* DataConverters */ = {
 			isa = PBXGroup;
 			children = (
-				FA0A5FA21B1336DB000A45B8 /* TRCConverter.h */,
-				FA0A5FA31B1336DB000A45B8 /* TRCConverter.m */,
-				FA0A5FA41B1336DB000A45B8 /* TRCConvertersRegistry.h */,
-			);
-			path = Converter;
-			sourceTree = "<group>";
-		};
-		FA0A5FA51B1336DB000A45B8 /* DataConverters */ = {
-			isa = PBXGroup;
-			children = (
-				FA0A5FA61B1336DB000A45B8 /* TRCValueTransformerNumber.h */,
-				FA0A5FA71B1336DB000A45B8 /* TRCValueTransformerNumber.m */,
-				FA0A5FA81B1336DB000A45B8 /* TRCValueTransformerString.h */,
-				FA0A5FA91B1336DB000A45B8 /* TRCValueTransformerString.m */,
-				FA0A5FAA1B1336DB000A45B8 /* TRCValueTransformerUrl.h */,
-				FA0A5FAB1B1336DB000A45B8 /* TRCValueTransformerUrl.m */,
+				FA4116221B1F8ECB00AC5E8A /* TRCValueTransformerNumber.h */,
+				FA4116231B1F8ECB00AC5E8A /* TRCValueTransformerNumber.m */,
+				FA4116241B1F8ECB00AC5E8A /* TRCValueTransformerString.h */,
+				FA4116251B1F8ECB00AC5E8A /* TRCValueTransformerString.m */,
+				FA4116261B1F8ECB00AC5E8A /* TRCValueTransformerUrl.h */,
+				FA4116271B1F8ECB00AC5E8A /* TRCValueTransformerUrl.m */,
 			);
 			path = DataConverters;
 			sourceTree = "<group>";
 		};
-		FA0A5FAC1B1336DB000A45B8 /* Scheme */ = {
+		FA4116281B1F8ECB00AC5E8A /* SchemeDatas */ = {
 			isa = PBXGroup;
 			children = (
-				FA0A5FAD1B1336DB000A45B8 /* Data */,
-				FA0A5FB41B1336DB000A45B8 /* TRCSchema.h */,
-				FA0A5FB51B1336DB000A45B8 /* TRCSchema.m */,
-				FA0A5FB61B1336DB000A45B8 /* TRCSchemaStackTrace.h */,
-				FA0A5FB71B1336DB000A45B8 /* TRCSchemaStackTrace.m */,
+				FA4116291B1F8ECB00AC5E8A /* Dictionary */,
 			);
-			path = Scheme;
+			path = SchemeDatas;
 			sourceTree = "<group>";
 		};
-		FA0A5FAD1B1336DB000A45B8 /* Data */ = {
+		FA4116291B1F8ECB00AC5E8A /* Dictionary */ = {
 			isa = PBXGroup;
 			children = (
-				FA0A5FAE1B1336DB000A45B8 /* Dictionary */,
-				FA0A5FB11B1336DB000A45B8 /* TRCSchemaData.h */,
-				FA0A5FB21B1336DB000A45B8 /* TRCSchemaDataValueOptions.h */,
-				FA0A5FB31B1336DB000A45B8 /* TRCSchemaDataValueOptions.m */,
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
-		FA0A5FAE1B1336DB000A45B8 /* Dictionary */ = {
-			isa = PBXGroup;
-			children = (
-				FA0A5FAF1B1336DB000A45B8 /* TRCSchemaDictionaryData.h */,
-				FA0A5FB01B1336DB000A45B8 /* TRCSchemaDictionaryData.m */,
+				FA41162A1B1F8ECB00AC5E8A /* TRCSchemaDictionaryData.h */,
+				FA41162B1B1F8ECB00AC5E8A /* TRCSchemaDictionaryData.m */,
 			);
 			path = Dictionary;
 			sourceTree = "<group>";
 		};
-		FA0A5FB81B1336DB000A45B8 /* SchemeFactory */ = {
+		FA41162C1B1F8ECB00AC5E8A /* Serializations */ = {
 			isa = PBXGroup;
 			children = (
-				FA0A5FB91B1336DB000A45B8 /* TRCSchemeFactory.h */,
-				FA0A5FBA1B1336DB000A45B8 /* TRCSchemeFactory.m */,
-			);
-			path = SchemeFactory;
-			sourceTree = "<group>";
-		};
-		FA0A5FBB1B1336DB000A45B8 /* Serializations */ = {
-			isa = PBXGroup;
-			children = (
-				FA0A5FBC1B1336DB000A45B8 /* TRCSerializerData.h */,
-				FA0A5FBD1B1336DB000A45B8 /* TRCSerializerData.m */,
-				FA0A5FBE1B1336DB000A45B8 /* TRCSerializerHttpQuery.h */,
-				FA0A5FBF1B1336DB000A45B8 /* TRCSerializerHttpQuery.m */,
-				FA0A5FC01B1336DB000A45B8 /* TRCSerializerImage.h */,
-				FA0A5FC11B1336DB000A45B8 /* TRCSerializerImage.m */,
-				FA0A5FC21B1336DB000A45B8 /* TRCSerializerInputStream.h */,
-				FA0A5FC31B1336DB000A45B8 /* TRCSerializerInputStream.m */,
-				FA0A5FC41B1336DB000A45B8 /* TRCSerializerJson.h */,
-				FA0A5FC51B1336DB000A45B8 /* TRCSerializerJson.m */,
-				FA0A5FC61B1336DB000A45B8 /* TRCSerializerPlist.h */,
-				FA0A5FC71B1336DB000A45B8 /* TRCSerializerPlist.m */,
-				FA0A5FC81B1336DB000A45B8 /* TRCSerializerString.h */,
-				FA0A5FC91B1336DB000A45B8 /* TRCSerializerString.m */,
+				FA41162D1B1F8ECB00AC5E8A /* TRCSerializerData.h */,
+				FA41162E1B1F8ECB00AC5E8A /* TRCSerializerData.m */,
+				FA41162F1B1F8ECB00AC5E8A /* TRCSerializerHttpQuery.h */,
+				FA4116301B1F8ECB00AC5E8A /* TRCSerializerHttpQuery.m */,
+				FA4116311B1F8ECB00AC5E8A /* TRCSerializerImage.h */,
+				FA4116321B1F8ECB00AC5E8A /* TRCSerializerImage.m */,
+				FA4116331B1F8ECB00AC5E8A /* TRCSerializerInputStream.h */,
+				FA4116341B1F8ECB00AC5E8A /* TRCSerializerInputStream.m */,
+				FA4116351B1F8ECB00AC5E8A /* TRCSerializerJson.h */,
+				FA4116361B1F8ECB00AC5E8A /* TRCSerializerJson.m */,
+				FA4116371B1F8ECB00AC5E8A /* TRCSerializerPlist.h */,
+				FA4116381B1F8ECB00AC5E8A /* TRCSerializerPlist.m */,
+				FA4116391B1F8ECB00AC5E8A /* TRCSerializerString.h */,
+				FA41163A1B1F8ECB00AC5E8A /* TRCSerializerString.m */,
 			);
 			path = Serializations;
 			sourceTree = "<group>";
 		};
-		FA0A5FCA1B1336DB000A45B8 /* Utils */ = {
+		FA41163B1B1F8ECB00AC5E8A /* Internal */ = {
 			isa = PBXGroup;
 			children = (
-				FA0A5FCB1B1336DB000A45B8 /* TRCBuiltInObjects.h */,
-				FA0A5FCC1B1336DB000A45B8 /* TRCUtils.h */,
-				FA0A5FCD1B1336DB000A45B8 /* TRCUtils.m */,
-				FA0A5FCE1B1336DB000A45B8 /* TyphoonRestClientErrors.h */,
+				FA41163C1B1F8ECB00AC5E8A /* Converter */,
+				FA4116401B1F8ECB00AC5E8A /* Scheme */,
+				FA4116481B1F8ECB00AC5E8A /* SchemeFactory */,
+				FA41164B1B1F8ECB00AC5E8A /* Utils */,
+			);
+			path = Internal;
+			sourceTree = "<group>";
+		};
+		FA41163C1B1F8ECB00AC5E8A /* Converter */ = {
+			isa = PBXGroup;
+			children = (
+				FA41163D1B1F8ECB00AC5E8A /* TRCConverter.h */,
+				FA41163E1B1F8ECB00AC5E8A /* TRCConverter.m */,
+				FA41163F1B1F8ECB00AC5E8A /* TRCConvertersRegistry.h */,
+			);
+			path = Converter;
+			sourceTree = "<group>";
+		};
+		FA4116401B1F8ECB00AC5E8A /* Scheme */ = {
+			isa = PBXGroup;
+			children = (
+				FA4116411B1F8ECB00AC5E8A /* Data */,
+				FA4116441B1F8ECB00AC5E8A /* TRCSchema.h */,
+				FA4116451B1F8ECB00AC5E8A /* TRCSchema.m */,
+				FA4116461B1F8ECB00AC5E8A /* TRCSchemaStackTrace.h */,
+				FA4116471B1F8ECB00AC5E8A /* TRCSchemaStackTrace.m */,
+			);
+			path = Scheme;
+			sourceTree = "<group>";
+		};
+		FA4116411B1F8ECB00AC5E8A /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				FA4116421B1F8ECB00AC5E8A /* TRCSchemaDataValueOptions.h */,
+				FA4116431B1F8ECB00AC5E8A /* TRCSchemaDataValueOptions.m */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		FA4116481B1F8ECB00AC5E8A /* SchemeFactory */ = {
+			isa = PBXGroup;
+			children = (
+				FA4116491B1F8ECB00AC5E8A /* TRCSchemeFactory.h */,
+				FA41164A1B1F8ECB00AC5E8A /* TRCSchemeFactory.m */,
+			);
+			path = SchemeFactory;
+			sourceTree = "<group>";
+		};
+		FA41164B1B1F8ECB00AC5E8A /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				FA41164C1B1F8ECB00AC5E8A /* TRCBuiltInObjects.h */,
+				FA41164D1B1F8ECB00AC5E8A /* TRCUtils.h */,
+				FA41164E1B1F8ECB00AC5E8A /* TRCUtils.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		FA0A5FCF1B1336DB000A45B8 /* Protocols */ = {
+		FA41164F1B1F8ECB00AC5E8A /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				FA0A5FD01B1336DB000A45B8 /* TRCConnection.h */,
-				FA0A5FD11B1336DB000A45B8 /* TRCErrorHandler.h */,
-				FA0A5FD21B1336DB000A45B8 /* TRCInfrastructure.h */,
-				FA0A5FD31B1336DB000A45B8 /* TRCObjectMapper.h */,
-				FA0A5FD41B1336DB000A45B8 /* TRCPostProcessor.h */,
-				FA0A5FD51B1336DB000A45B8 /* TRCRequest.h */,
-				FA0A5FD61B1336DB000A45B8 /* TRCValueTransformer.h */,
+				FA4116501B1F8ECB00AC5E8A /* Infrastructure */,
+				FA4116531B1F8ECB00AC5E8A /* TRCConnection.h */,
+				FA4116541B1F8ECB00AC5E8A /* TRCErrorHandler.h */,
+				FA4116551B1F8ECB00AC5E8A /* TRCObjectMapper.h */,
+				FA4116561B1F8ECB00AC5E8A /* TRCPostProcessor.h */,
+				FA4116571B1F8ECB00AC5E8A /* TRCRequest.h */,
+				FA4116581B1F8ECB00AC5E8A /* TRCValueTransformer.h */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		FA4116501B1F8ECB00AC5E8A /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				FA4116511B1F8ECB00AC5E8A /* TRCInfrastructure.h */,
+				FA4116521B1F8ECB00AC5E8A /* TRCSchemaData.h */,
+			);
+			path = Infrastructure;
 			sourceTree = "<group>";
 		};
 		FAA684151ABED8EC00EF4CB6 = {
@@ -333,7 +355,7 @@
 		FAA684201ABED8EC00EF4CB6 /* TyphoonRestClientDemo */ = {
 			isa = PBXGroup;
 			children = (
-				FA0A5F961B1336DB000A45B8 /* TyphoonRestClient */,
+				FA4116161B1F8ECB00AC5E8A /* TyphoonRestClient */,
 				FAA684751ABEDAA200EF4CB6 /* Requests */,
 				FAA6847D1ABEEB2900EF4CB6 /* ValueTransformers */,
 				FAA684841ABEFA3200EF4CB6 /* ObjectMappers */,
@@ -500,36 +522,36 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA4116611B1F8ECB00AC5E8A /* TRCValueTransformerString.m in Sources */,
 				FAA6847A1ABEDF8C00EF4CB6 /* RequestToGetIssues.m in Sources */,
-				FA0A5FDD1B1336DB000A45B8 /* TRCConnectionStub.m in Sources */,
-				FA0A5FDB1B1336DB000A45B8 /* TRCConnectionLogger.m in Sources */,
+				FA41165F1B1F8ECB00AC5E8A /* TRCConnectionStub.m in Sources */,
+				FA41166A1B1F8ECB00AC5E8A /* TRCSerializerString.m in Sources */,
+				FA41165D1B1F8ECB00AC5E8A /* TRCConnectionLogger.m in Sources */,
+				FA4116701B1F8ECB00AC5E8A /* TRCUtils.m in Sources */,
+				FA4116641B1F8ECB00AC5E8A /* TRCSerializerData.m in Sources */,
 				FAA6842A1ABED8EC00EF4CB6 /* ViewController.m in Sources */,
-				FA0A5FDE1B1336DB000A45B8 /* TRCConverter.m in Sources */,
-				FA0A5FEE1B1336DB000A45B8 /* TRCUtils.m in Sources */,
+				FA41166E1B1F8ECB00AC5E8A /* TRCSchemaStackTrace.m in Sources */,
+				FA4116621B1F8ECB00AC5E8A /* TRCValueTransformerUrl.m in Sources */,
+				FA41166C1B1F8ECB00AC5E8A /* TRCSchemaDataValueOptions.m in Sources */,
 				FAA684801ABEEDD600EF4CB6 /* TRCValueTransformerDateISO8601.m in Sources */,
-				FA0A5FEA1B1336DB000A45B8 /* TRCSerializerInputStream.m in Sources */,
-				FA0A5FE01B1336DB000A45B8 /* TRCValueTransformerString.m in Sources */,
-				FA0A5FE71B1336DB000A45B8 /* TRCSerializerData.m in Sources */,
 				FAA684271ABED8EC00EF4CB6 /* AppDelegate.m in Sources */,
+				FA4116601B1F8ECB00AC5E8A /* TRCValueTransformerNumber.m in Sources */,
 				FAA684241ABED8EC00EF4CB6 /* main.m in Sources */,
-				FA0A5FE31B1336DB000A45B8 /* TRCSchemaDataValueOptions.m in Sources */,
-				FA0A5FE21B1336DB000A45B8 /* TRCSchemaDictionaryData.m in Sources */,
-				FA0A5FDF1B1336DB000A45B8 /* TRCValueTransformerNumber.m in Sources */,
-				FA0A5FE61B1336DB000A45B8 /* TRCSchemeFactory.m in Sources */,
-				FA0A5FDC1B1336DB000A45B8 /* TRCConnectionProxy.m in Sources */,
-				FA0A5FEC1B1336DB000A45B8 /* TRCSerializerPlist.m in Sources */,
-				FA0A5FEF1B1336DB000A45B8 /* TyphoonRestClient.m in Sources */,
-				FA0A5FDA1B1336DB000A45B8 /* TRCConnectionAFNetworking.m in Sources */,
-				FA0A5FED1B1336DB000A45B8 /* TRCSerializerString.m in Sources */,
-				FA0A5FEB1B1336DB000A45B8 /* TRCSerializerJson.m in Sources */,
-				FA0A5FE81B1336DB000A45B8 /* TRCSerializerHttpQuery.m in Sources */,
+				FA4116681B1F8ECB00AC5E8A /* TRCSerializerJson.m in Sources */,
+				FA41165E1B1F8ECB00AC5E8A /* TRCConnectionProxy.m in Sources */,
+				FA4116651B1F8ECB00AC5E8A /* TRCSerializerHttpQuery.m in Sources */,
+				FA4116711B1F8ECB00AC5E8A /* TyphoonRestClient.m in Sources */,
+				FA41165C1B1F8ECB00AC5E8A /* TRCConnectionAFNetworking.m in Sources */,
+				FA4116661B1F8ECB00AC5E8A /* TRCSerializerImage.m in Sources */,
+				FA41166F1B1F8ECB00AC5E8A /* TRCSchemeFactory.m in Sources */,
+				FA4116691B1F8ECB00AC5E8A /* TRCSerializerPlist.m in Sources */,
+				FA41166B1B1F8ECB00AC5E8A /* TRCConverter.m in Sources */,
 				FAA684831ABEF1F300EF4CB6 /* Issue.m in Sources */,
-				FA0A5FE51B1336DB000A45B8 /* TRCSchemaStackTrace.m in Sources */,
-				FA0A5FE41B1336DB000A45B8 /* TRCSchema.m in Sources */,
+				FA4116671B1F8ECB00AC5E8A /* TRCSerializerInputStream.m in Sources */,
+				FA41166D1B1F8ECB00AC5E8A /* TRCSchema.m in Sources */,
 				FAA6848C1ABEFF9F00EF4CB6 /* RequestToGetIssue.m in Sources */,
-				FA0A5FE91B1336DB000A45B8 /* TRCSerializerImage.m in Sources */,
+				FA4116631B1F8ECB00AC5E8A /* TRCSchemaDictionaryData.m in Sources */,
 				FAA684871ABEFA4400EF4CB6 /* TRCObjectMapperIssue.m in Sources */,
-				FA0A5FE11B1336DB000A45B8 /* TRCValueTransformerUrl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

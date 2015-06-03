@@ -14,10 +14,10 @@
 #import "TRCValueTransformer.h"
 
 /// Represents NSDate
-TRCValueTransformerType TRCValueTransformerTypeDate;
+extern TRCValueTransformerType TRCValueTransformerTypeDate;
 
 /// Represents NSData
-TRCValueTransformerType TRCValueTransformerTypeData;
+extern TRCValueTransformerType TRCValueTransformerTypeData;
 
 @interface TRCSerializerPlist : NSObject <TRCRequestSerializer, TRCResponseSerializer, TRCSchemaFormat>
 

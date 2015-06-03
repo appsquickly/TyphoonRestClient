@@ -27,10 +27,10 @@
 typedef NSInteger TRCValueTransformerType;
 
 /// Represents NSString
-TRCValueTransformerType TRCValueTransformerTypeString;
+extern TRCValueTransformerType TRCValueTransformerTypeString;
 
 /// Represents NSNumber
-TRCValueTransformerType TRCValueTransformerTypeNumber;
+extern TRCValueTransformerType TRCValueTransformerTypeNumber;
 
 /**
 * `TRCValueTransformer` aimed to convert simple (atomic) typed objects, received as response, into
