@@ -12,5 +12,7 @@ Pod::Spec.new do |s|
   s.source_files = 'TyphoonRestClient/**/*.{h,m}'
   s.requires_arc = true
   
+  s.documentation_url = 'http://appsquickly.github.io/TyphoonRestClient/docs/latest/api/'
+  
   s.dependency 'AFNetworking', '~> 2.5'
 end
