@@ -7,35 +7,35 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2DBA10E5E1193CA77F91E63A /* RequestToGetIssue.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA17F8C628DF8501898A45 /* RequestToGetIssue.m */; };
 		2DBA10F6D20316CBD2233306 /* TRCUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1D5D6A4F1CD450673422 /* TRCUtilsTests.m */; };
-		2DBA11E098A448128CB9E68D /* Issue.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1670D79615684D7E64CC /* Issue.m */; };
 		2DBA120634800EF8507024AD /* PersonsList.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA104BA4D6F38FB51EC684 /* PersonsList.json */; };
-		2DBA12435274CEACE1256FDF /* TRCValueTransformerDateISO8601.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA178BDFA467A043F0FD6C /* TRCValueTransformerDateISO8601.m */; };
-		2DBA12EE2CBC8801E51D153B /* TRCObjectMapperIssue.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1A0FD27AE5B9AC02A4B5 /* TRCObjectMapperIssue.m */; };
-		2DBA132C5F555265F4E57942 /* RequestToGetIssue.response.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA1B78AB1BA3F36948A026 /* RequestToGetIssue.response.json */; };
 		2DBA14CB7D8DE86DEA7D44E7 /* TRCSchemaDataValueOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA123B3A97A2B227BB3C5F /* TRCSchemaDataValueOptions.m */; };
-		2DBA1542CE22F5778C6405DE /* RequestToDownloadFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1D9B27528AA4098D22CE /* RequestToDownloadFile.m */; };
-		2DBA158AE4B960FD89DE18BC /* RequestToUploadFile.response.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA1A26927CB653C8838CEC /* RequestToUploadFile.response.json */; };
-		2DBA15B24344E523F15F7DC3 /* RequestToGetIssues.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1B3CE3EA804ABDF75C93 /* RequestToGetIssues.m */; };
 		2DBA17092859137A58185FB9 /* SimpleErrorParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1465E4C6E3A34A4752B6 /* SimpleErrorParser.m */; };
 		2DBA1711C99D8E9A0D607D3A /* TestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA158B4E6546253271A111 /* TestUtils.m */; };
 		2DBA178CC76E21D9C1C6DCBE /* TRCMapperPerson.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA1A63E0B2BDDB5D227E95 /* TRCMapperPerson.json */; };
 		2DBA17F737835F7EDA40FA64 /* TRCMapperPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA10AE04851CC3BDE7480A /* TRCMapperPhone.m */; };
-		2DBA186B29DECECEE698EA7D /* RequestToGetIssueIntoRoot.response.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA1A5131CD2EBB66C01FE1 /* RequestToGetIssueIntoRoot.response.json */; };
 		2DBA1931DD7F8B70613BC3A7 /* TRCIntegrationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1DCB50C312ECC2FCB559 /* TRCIntegrationTests.m */; };
-		2DBA1970DEB404C22A5DA4B5 /* RequestToUploadFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1DD932DF6F87827DA34A /* RequestToUploadFile.m */; };
 		2DBA199EE6026F8769FAB714 /* TRCMapperWithArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA17FA4B5016447633E32A /* TRCMapperWithArray.m */; };
 		2DBA1A9AA9E0D6E61CC42D97 /* TRCMapperWithArray.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA1365A34B2D111EA6E463 /* TRCMapperWithArray.json */; };
-		2DBA1B7370A68AF382B9B10A /* TRCObjectMapperIssue.response.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA17F1B976B5EB28C21EAF /* TRCObjectMapperIssue.response.json */; };
 		2DBA1B9CD3295467A9BE7FD8 /* TRCSchemeFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1DFAF75A7BFE623BC34C /* TRCSchemeFactory.m */; };
 		2DBA1BE868E4128AFAFCBBA0 /* TRCErrorParserSimple.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA12519DF33996626F6739 /* TRCErrorParserSimple.m */; };
 		2DBA1D4B061007D83FEBC57C /* Phone.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1942EBD89F99FB0149DC /* Phone.m */; };
 		2DBA1EC0738D4C1358B0A70E /* TRCValidationErrorPrinterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1FD2324DAC2AE398F276 /* TRCValidationErrorPrinterTests.m */; };
 		2DBA1EDFD218B24F2C14C317 /* TRCMapperPhone.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA11C1B532C921805BEC2F /* TRCMapperPhone.json */; };
-		2DBA1F412199690DCF374C35 /* RequestToGetIssueIntoRoot.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1DC627FB29E0B30ECA52 /* RequestToGetIssueIntoRoot.m */; };
-		2DBA1FA9C99981038EB8F5F5 /* RequestToGetIssues.response.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA13C0A49BD73E2874EE16 /* RequestToGetIssues.response.json */; };
 		4EA244112427BF0621D67139 /* libPods-TyphoonRestClient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C84882D07B06327E8D9BB26 /* libPods-TyphoonRestClient.a */; };
+		FA28E08C1B42941E00453FB8 /* Issue.m in Sources */ = {isa = PBXBuildFile; fileRef = FA28E0721B42941E00453FB8 /* Issue.m */; };
+		FA28E08D1B42941E00453FB8 /* TRCObjectMapperIssue.m in Sources */ = {isa = PBXBuildFile; fileRef = FA28E0751B42941E00453FB8 /* TRCObjectMapperIssue.m */; };
+		FA28E08E1B42941E00453FB8 /* TRCObjectMapperIssue.response.json in Resources */ = {isa = PBXBuildFile; fileRef = FA28E0761B42941E00453FB8 /* TRCObjectMapperIssue.response.json */; };
+		FA28E08F1B42941E00453FB8 /* RequestToDownloadFile.m in Sources */ = {isa = PBXBuildFile; fileRef = FA28E07A1B42941E00453FB8 /* RequestToDownloadFile.m */; };
+		FA28E0901B42941E00453FB8 /* RequestToGetIssue.m in Sources */ = {isa = PBXBuildFile; fileRef = FA28E07D1B42941E00453FB8 /* RequestToGetIssue.m */; };
+		FA28E0911B42941E00453FB8 /* RequestToGetIssue.response.json in Resources */ = {isa = PBXBuildFile; fileRef = FA28E07E1B42941E00453FB8 /* RequestToGetIssue.response.json */; };
+		FA28E0921B42941E00453FB8 /* RequestToGetIssueIntoRoot.m in Sources */ = {isa = PBXBuildFile; fileRef = FA28E0801B42941E00453FB8 /* RequestToGetIssueIntoRoot.m */; };
+		FA28E0931B42941E00453FB8 /* RequestToGetIssueIntoRoot.response.json in Resources */ = {isa = PBXBuildFile; fileRef = FA28E0811B42941E00453FB8 /* RequestToGetIssueIntoRoot.response.json */; };
+		FA28E0941B42941E00453FB8 /* RequestToGetIssues.m in Sources */ = {isa = PBXBuildFile; fileRef = FA28E0831B42941E00453FB8 /* RequestToGetIssues.m */; };
+		FA28E0951B42941E00453FB8 /* RequestToGetIssues.response.json in Resources */ = {isa = PBXBuildFile; fileRef = FA28E0841B42941E00453FB8 /* RequestToGetIssues.response.json */; };
+		FA28E0961B42941E00453FB8 /* RequestToUploadFile.m in Sources */ = {isa = PBXBuildFile; fileRef = FA28E0871B42941E00453FB8 /* RequestToUploadFile.m */; };
+		FA28E0971B42941E00453FB8 /* RequestToUploadFile.response.json in Resources */ = {isa = PBXBuildFile; fileRef = FA28E0881B42941E00453FB8 /* RequestToUploadFile.response.json */; };
+		FA28E0981B42941E00453FB8 /* TRCValueTransformerDateISO8601.m in Sources */ = {isa = PBXBuildFile; fileRef = FA28E08B1B42941E00453FB8 /* TRCValueTransformerDateISO8601.m */; };
 		FA4695601A938782004036A5 /* TRCMapperPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = FA46955F1A938782004036A5 /* TRCMapperPerson.m */; };
 		FA4695631A9387FF004036A5 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4695621A9387FF004036A5 /* Person.m */; };
 		FA5126691A96000F00EAF902 /* TRCSchemaStackTrace.m in Sources */ = {isa = PBXBuildFile; fileRef = FA5126681A96000F00EAF902 /* TRCSchemaStackTrace.m */; };
@@ -111,47 +111,26 @@
 		2DBA104BA4D6F38FB51EC684 /* PersonsList.json */ = {isa = PBXFileReference; lastKnownFileType = file.json; path = PersonsList.json; sourceTree = "<group>"; };
 		2DBA1076B15A22774213B2FA /* TRCMapperWithArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCMapperWithArray.h; sourceTree = "<group>"; };
 		2DBA10AE04851CC3BDE7480A /* TRCMapperPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCMapperPhone.m; sourceTree = "<group>"; };
-		2DBA11792F43CB6AC07AA5EB /* RequestToDownloadFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestToDownloadFile.h; sourceTree = "<group>"; };
 		2DBA11C1B532C921805BEC2F /* TRCMapperPhone.json */ = {isa = PBXFileReference; lastKnownFileType = file.json; path = TRCMapperPhone.json; sourceTree = "<group>"; };
 		2DBA123B3A97A2B227BB3C5F /* TRCSchemaDataValueOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSchemaDataValueOptions.m; sourceTree = "<group>"; };
 		2DBA12519DF33996626F6739 /* TRCErrorParserSimple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCErrorParserSimple.m; sourceTree = "<group>"; };
 		2DBA1365A34B2D111EA6E463 /* TRCMapperWithArray.json */ = {isa = PBXFileReference; lastKnownFileType = file.json; path = TRCMapperWithArray.json; sourceTree = "<group>"; };
-		2DBA13C0A49BD73E2874EE16 /* RequestToGetIssues.response.json */ = {isa = PBXFileReference; lastKnownFileType = file.json; path = RequestToGetIssues.response.json; sourceTree = "<group>"; };
-		2DBA13F8CD52678CF22C08F2 /* RequestToGetIssue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestToGetIssue.h; sourceTree = "<group>"; };
 		2DBA142DC592EB2E5622DD73 /* TRCPostProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCPostProcessor.h; sourceTree = "<group>"; };
 		2DBA1465E4C6E3A34A4752B6 /* SimpleErrorParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleErrorParser.m; sourceTree = "<group>"; };
-		2DBA14F9D1855E90A1140FB7 /* RequestToGetIssueIntoRoot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestToGetIssueIntoRoot.h; sourceTree = "<group>"; };
 		2DBA158B4E6546253271A111 /* TestUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestUtils.m; sourceTree = "<group>"; };
 		2DBA161429FAAF8C959F4B7F /* TRCSchemaDataValueOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSchemaDataValueOptions.h; sourceTree = "<group>"; };
-		2DBA1670D79615684D7E64CC /* Issue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Issue.m; path = Demo/TyphoonRestClientDemo/TyphoonRestClientDemo/Issue.m; sourceTree = SOURCE_ROOT; };
-		2DBA178BDFA467A043F0FD6C /* TRCValueTransformerDateISO8601.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCValueTransformerDateISO8601.m; sourceTree = "<group>"; };
-		2DBA17F1B976B5EB28C21EAF /* TRCObjectMapperIssue.response.json */ = {isa = PBXFileReference; lastKnownFileType = file.response; path = TRCObjectMapperIssue.response.json; sourceTree = "<group>"; };
-		2DBA17F8C628DF8501898A45 /* RequestToGetIssue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestToGetIssue.m; sourceTree = "<group>"; };
 		2DBA17FA4B5016447633E32A /* TRCMapperWithArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCMapperWithArray.m; sourceTree = "<group>"; };
-		2DBA1819CFDD593D70254BD5 /* Issue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Issue.h; path = Demo/TyphoonRestClientDemo/TyphoonRestClientDemo/Issue.h; sourceTree = SOURCE_ROOT; };
 		2DBA1942EBD89F99FB0149DC /* Phone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Phone.m; sourceTree = "<group>"; };
 		2DBA19CDB29AAD3C4F65D42B /* Phone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Phone.h; sourceTree = "<group>"; };
-		2DBA1A0FD27AE5B9AC02A4B5 /* TRCObjectMapperIssue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCObjectMapperIssue.m; sourceTree = "<group>"; };
-		2DBA1A26927CB653C8838CEC /* RequestToUploadFile.response.json */ = {isa = PBXFileReference; lastKnownFileType = file.json; path = RequestToUploadFile.response.json; sourceTree = "<group>"; };
-		2DBA1A5131CD2EBB66C01FE1 /* RequestToGetIssueIntoRoot.response.json */ = {isa = PBXFileReference; lastKnownFileType = file.json; path = RequestToGetIssueIntoRoot.response.json; sourceTree = "<group>"; };
 		2DBA1A63E0B2BDDB5D227E95 /* TRCMapperPerson.json */ = {isa = PBXFileReference; lastKnownFileType = file.request; path = TRCMapperPerson.json; sourceTree = "<group>"; };
-		2DBA1AEDDD5F4ED5340AD827 /* TRCValueTransformerDateISO8601.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCValueTransformerDateISO8601.h; sourceTree = "<group>"; };
-		2DBA1B3CE3EA804ABDF75C93 /* RequestToGetIssues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestToGetIssues.m; sourceTree = "<group>"; };
-		2DBA1B78AB1BA3F36948A026 /* RequestToGetIssue.response.json */ = {isa = PBXFileReference; lastKnownFileType = file.json; path = RequestToGetIssue.response.json; sourceTree = "<group>"; };
 		2DBA1B8033DA8D5FA5B63C8B /* TRCObjectMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCObjectMapper.h; sourceTree = "<group>"; };
-		2DBA1BCF37D4C57ADA09022C /* RequestToGetIssues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestToGetIssues.h; sourceTree = "<group>"; };
 		2DBA1C44E47EDAB03031EED3 /* SimpleErrorParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleErrorParser.h; sourceTree = "<group>"; };
 		2DBA1D11775F7F7D595235D9 /* TestUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestUtils.h; sourceTree = "<group>"; };
 		2DBA1D51CC52855CCCAAE28D /* TRCSchemeFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSchemeFactory.h; sourceTree = "<group>"; };
 		2DBA1D5D6A4F1CD450673422 /* TRCUtilsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCUtilsTests.m; sourceTree = "<group>"; };
 		2DBA1D63DF19AC301D0604A5 /* TRCMapperPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCMapperPhone.h; sourceTree = "<group>"; };
-		2DBA1D9B27528AA4098D22CE /* RequestToDownloadFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestToDownloadFile.m; sourceTree = "<group>"; };
-		2DBA1DA517A8FAB532CEED64 /* RequestToUploadFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestToUploadFile.h; sourceTree = "<group>"; };
-		2DBA1DC627FB29E0B30ECA52 /* RequestToGetIssueIntoRoot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestToGetIssueIntoRoot.m; sourceTree = "<group>"; };
 		2DBA1DCB50C312ECC2FCB559 /* TRCIntegrationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCIntegrationTests.m; sourceTree = "<group>"; };
-		2DBA1DD932DF6F87827DA34A /* RequestToUploadFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestToUploadFile.m; sourceTree = "<group>"; };
 		2DBA1DFAF75A7BFE623BC34C /* TRCSchemeFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSchemeFactory.m; sourceTree = "<group>"; };
-		2DBA1E085AE1E533C09C8D95 /* TRCObjectMapperIssue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCObjectMapperIssue.h; sourceTree = "<group>"; };
 		2DBA1ECDC2BD02AD01F101C3 /* TRCErrorParserSimple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCErrorParserSimple.h; sourceTree = "<group>"; };
 		2DBA1FD2324DAC2AE398F276 /* TRCValidationErrorPrinterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCValidationErrorPrinterTests.m; sourceTree = "<group>"; };
 		469D3C7EB63CCF077674B274 /* libPods-TyphoonRestClientTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TyphoonRestClientTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,6 +140,27 @@
 		95F03988170F5DD45005F3EE /* Pods-TyphoonRestClientTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TyphoonRestClientTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TyphoonRestClientTests/Pods-TyphoonRestClientTests.release.xcconfig"; sourceTree = "<group>"; };
 		A14BA2DE857D4EC58948A253 /* libPods-HttpWebService.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HttpWebService.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB1AF3E3BAD71ED13F222739 /* Pods-TyphoonRestClientTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TyphoonRestClientTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TyphoonRestClientTests/Pods-TyphoonRestClientTests.debug.xcconfig"; sourceTree = "<group>"; };
+		FA28E0711B42941E00453FB8 /* Issue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Issue.h; sourceTree = "<group>"; };
+		FA28E0721B42941E00453FB8 /* Issue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Issue.m; sourceTree = "<group>"; };
+		FA28E0741B42941E00453FB8 /* TRCObjectMapperIssue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCObjectMapperIssue.h; sourceTree = "<group>"; };
+		FA28E0751B42941E00453FB8 /* TRCObjectMapperIssue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCObjectMapperIssue.m; sourceTree = "<group>"; };
+		FA28E0761B42941E00453FB8 /* TRCObjectMapperIssue.response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TRCObjectMapperIssue.response.json; sourceTree = "<group>"; };
+		FA28E0791B42941E00453FB8 /* RequestToDownloadFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestToDownloadFile.h; sourceTree = "<group>"; };
+		FA28E07A1B42941E00453FB8 /* RequestToDownloadFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestToDownloadFile.m; sourceTree = "<group>"; };
+		FA28E07C1B42941E00453FB8 /* RequestToGetIssue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestToGetIssue.h; sourceTree = "<group>"; };
+		FA28E07D1B42941E00453FB8 /* RequestToGetIssue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestToGetIssue.m; sourceTree = "<group>"; };
+		FA28E07E1B42941E00453FB8 /* RequestToGetIssue.response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RequestToGetIssue.response.json; sourceTree = "<group>"; };
+		FA28E07F1B42941E00453FB8 /* RequestToGetIssueIntoRoot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestToGetIssueIntoRoot.h; sourceTree = "<group>"; };
+		FA28E0801B42941E00453FB8 /* RequestToGetIssueIntoRoot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestToGetIssueIntoRoot.m; sourceTree = "<group>"; };
+		FA28E0811B42941E00453FB8 /* RequestToGetIssueIntoRoot.response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RequestToGetIssueIntoRoot.response.json; sourceTree = "<group>"; };
+		FA28E0821B42941E00453FB8 /* RequestToGetIssues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestToGetIssues.h; sourceTree = "<group>"; };
+		FA28E0831B42941E00453FB8 /* RequestToGetIssues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestToGetIssues.m; sourceTree = "<group>"; };
+		FA28E0841B42941E00453FB8 /* RequestToGetIssues.response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RequestToGetIssues.response.json; sourceTree = "<group>"; };
+		FA28E0861B42941E00453FB8 /* RequestToUploadFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestToUploadFile.h; sourceTree = "<group>"; };
+		FA28E0871B42941E00453FB8 /* RequestToUploadFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestToUploadFile.m; sourceTree = "<group>"; };
+		FA28E0881B42941E00453FB8 /* RequestToUploadFile.response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RequestToUploadFile.response.json; sourceTree = "<group>"; };
+		FA28E08A1B42941E00453FB8 /* TRCValueTransformerDateISO8601.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCValueTransformerDateISO8601.h; sourceTree = "<group>"; };
+		FA28E08B1B42941E00453FB8 /* TRCValueTransformerDateISO8601.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCValueTransformerDateISO8601.m; sourceTree = "<group>"; };
 		FA46955E1A938782004036A5 /* TRCMapperPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCMapperPerson.h; sourceTree = "<group>"; };
 		FA46955F1A938782004036A5 /* TRCMapperPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCMapperPerson.m; sourceTree = "<group>"; };
 		FA4695611A9387FF004036A5 /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
@@ -268,27 +268,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2DBA1210F0EB3C535A2BB2CB /* Upload */ = {
-			isa = PBXGroup;
-			children = (
-				2DBA1DA517A8FAB532CEED64 /* RequestToUploadFile.h */,
-				2DBA1DD932DF6F87827DA34A /* RequestToUploadFile.m */,
-				2DBA1A26927CB653C8838CEC /* RequestToUploadFile.response.json */,
-			);
-			path = Upload;
-			sourceTree = "<group>";
-		};
-		2DBA13321CFE474319CF18C5 /* Requests */ = {
-			isa = PBXGroup;
-			children = (
-				2DBA1BD2AFBEFF3B7675A970 /* Issues */,
-				2DBA1210F0EB3C535A2BB2CB /* Upload */,
-				2DBA14E13DED224BECF488F3 /* Download */,
-			);
-			name = Requests;
-			path = Demo/TyphoonRestClientDemo/TyphoonRestClientDemo/Requests;
-			sourceTree = SOURCE_ROOT;
-		};
 		2DBA142B41142B7C4B452940 /* ErrorParser */ = {
 			isa = PBXGroup;
 			children = (
@@ -296,15 +275,6 @@
 				2DBA1C44E47EDAB03031EED3 /* SimpleErrorParser.h */,
 			);
 			path = ErrorParser;
-			sourceTree = "<group>";
-		};
-		2DBA14E13DED224BECF488F3 /* Download */ = {
-			isa = PBXGroup;
-			children = (
-				2DBA11792F43CB6AC07AA5EB /* RequestToDownloadFile.h */,
-				2DBA1D9B27528AA4098D22CE /* RequestToDownloadFile.m */,
-			);
-			path = Download;
 			sourceTree = "<group>";
 		};
 		2DBA17EA20F50B557220E3D1 /* Data */ = {
@@ -319,11 +289,11 @@
 		2DBA19902B2143CA5E9C59A0 /* Related Objects */ = {
 			isa = PBXGroup;
 			children = (
-				2DBA1FAB54E46AAC024805C4 /* ValueTransformers */,
-				2DBA1D4A3DA5DC06724F8962 /* ObjectMappers */,
-				2DBA13321CFE474319CF18C5 /* Requests */,
-				2DBA1670D79615684D7E64CC /* Issue.m */,
-				2DBA1819CFDD593D70254BD5 /* Issue.h */,
+				FA28E0711B42941E00453FB8 /* Issue.h */,
+				FA28E0721B42941E00453FB8 /* Issue.m */,
+				FA28E0731B42941E00453FB8 /* ObjectMappers */,
+				FA28E0771B42941E00453FB8 /* Requests */,
+				FA28E0891B42941E00453FB8 /* ValueTransformers */,
 				2DBA142B41142B7C4B452940 /* ErrorParser */,
 			);
 			path = "Related Objects";
@@ -338,51 +308,14 @@
 			path = SchemeFactory;
 			sourceTree = "<group>";
 		};
-		2DBA1BD2AFBEFF3B7675A970 /* Issues */ = {
-			isa = PBXGroup;
-			children = (
-				2DBA13F8CD52678CF22C08F2 /* RequestToGetIssue.h */,
-				2DBA17F8C628DF8501898A45 /* RequestToGetIssue.m */,
-				2DBA1BCF37D4C57ADA09022C /* RequestToGetIssues.h */,
-				2DBA1B3CE3EA804ABDF75C93 /* RequestToGetIssues.m */,
-				2DBA1B78AB1BA3F36948A026 /* RequestToGetIssue.response.json */,
-				2DBA13C0A49BD73E2874EE16 /* RequestToGetIssues.response.json */,
-				2DBA1DC627FB29E0B30ECA52 /* RequestToGetIssueIntoRoot.m */,
-				2DBA14F9D1855E90A1140FB7 /* RequestToGetIssueIntoRoot.h */,
-				2DBA1A5131CD2EBB66C01FE1 /* RequestToGetIssueIntoRoot.response.json */,
-			);
-			path = Issues;
-			sourceTree = "<group>";
-		};
-		2DBA1D4A3DA5DC06724F8962 /* ObjectMappers */ = {
-			isa = PBXGroup;
-			children = (
-				2DBA1E085AE1E533C09C8D95 /* TRCObjectMapperIssue.h */,
-				2DBA1A0FD27AE5B9AC02A4B5 /* TRCObjectMapperIssue.m */,
-				2DBA17F1B976B5EB28C21EAF /* TRCObjectMapperIssue.response.json */,
-			);
-			name = ObjectMappers;
-			path = Demo/TyphoonRestClientDemo/TyphoonRestClientDemo/ObjectMappers;
-			sourceTree = SOURCE_ROOT;
-		};
 		2DBA1E5643454D1FAE46A1F0 /* Integration */ = {
 			isa = PBXGroup;
 			children = (
-				2DBA1DCB50C312ECC2FCB559 /* TRCIntegrationTests.m */,
 				2DBA19902B2143CA5E9C59A0 /* Related Objects */,
+				2DBA1DCB50C312ECC2FCB559 /* TRCIntegrationTests.m */,
 			);
 			path = Integration;
 			sourceTree = "<group>";
-		};
-		2DBA1FAB54E46AAC024805C4 /* ValueTransformers */ = {
-			isa = PBXGroup;
-			children = (
-				2DBA1AEDDD5F4ED5340AD827 /* TRCValueTransformerDateISO8601.h */,
-				2DBA178BDFA467A043F0FD6C /* TRCValueTransformerDateISO8601.m */,
-			);
-			name = ValueTransformers;
-			path = Demo/TyphoonRestClientDemo/TyphoonRestClientDemo/ValueTransformers;
-			sourceTree = SOURCE_ROOT;
 		};
 		7C7F52DF2A50096085E5149B /* Pods */ = {
 			isa = PBXGroup;
@@ -393,6 +326,70 @@
 				95F03988170F5DD45005F3EE /* Pods-TyphoonRestClientTests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		FA28E0731B42941E00453FB8 /* ObjectMappers */ = {
+			isa = PBXGroup;
+			children = (
+				FA28E0741B42941E00453FB8 /* TRCObjectMapperIssue.h */,
+				FA28E0751B42941E00453FB8 /* TRCObjectMapperIssue.m */,
+				FA28E0761B42941E00453FB8 /* TRCObjectMapperIssue.response.json */,
+			);
+			path = ObjectMappers;
+			sourceTree = "<group>";
+		};
+		FA28E0771B42941E00453FB8 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				FA28E0781B42941E00453FB8 /* Download */,
+				FA28E07B1B42941E00453FB8 /* Issues */,
+				FA28E0851B42941E00453FB8 /* Upload */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		FA28E0781B42941E00453FB8 /* Download */ = {
+			isa = PBXGroup;
+			children = (
+				FA28E0791B42941E00453FB8 /* RequestToDownloadFile.h */,
+				FA28E07A1B42941E00453FB8 /* RequestToDownloadFile.m */,
+			);
+			path = Download;
+			sourceTree = "<group>";
+		};
+		FA28E07B1B42941E00453FB8 /* Issues */ = {
+			isa = PBXGroup;
+			children = (
+				FA28E07C1B42941E00453FB8 /* RequestToGetIssue.h */,
+				FA28E07D1B42941E00453FB8 /* RequestToGetIssue.m */,
+				FA28E07E1B42941E00453FB8 /* RequestToGetIssue.response.json */,
+				FA28E07F1B42941E00453FB8 /* RequestToGetIssueIntoRoot.h */,
+				FA28E0801B42941E00453FB8 /* RequestToGetIssueIntoRoot.m */,
+				FA28E0811B42941E00453FB8 /* RequestToGetIssueIntoRoot.response.json */,
+				FA28E0821B42941E00453FB8 /* RequestToGetIssues.h */,
+				FA28E0831B42941E00453FB8 /* RequestToGetIssues.m */,
+				FA28E0841B42941E00453FB8 /* RequestToGetIssues.response.json */,
+			);
+			path = Issues;
+			sourceTree = "<group>";
+		};
+		FA28E0851B42941E00453FB8 /* Upload */ = {
+			isa = PBXGroup;
+			children = (
+				FA28E0861B42941E00453FB8 /* RequestToUploadFile.h */,
+				FA28E0871B42941E00453FB8 /* RequestToUploadFile.m */,
+				FA28E0881B42941E00453FB8 /* RequestToUploadFile.response.json */,
+			);
+			path = Upload;
+			sourceTree = "<group>";
+		};
+		FA28E0891B42941E00453FB8 /* ValueTransformers */ = {
+			isa = PBXGroup;
+			children = (
+				FA28E08A1B42941E00453FB8 /* TRCValueTransformerDateISO8601.h */,
+				FA28E08B1B42941E00453FB8 /* TRCValueTransformerDateISO8601.m */,
+			);
+			path = ValueTransformers;
 			sourceTree = "<group>";
 		};
 		FAC9160A19E693370009D824 = {
@@ -752,19 +749,19 @@
 				FAC9167C19E697A60009D824 /* NumbersArray.json in Resources */,
 				FAE3B4D31ACFEA880033835A /* PropertyListSchema.plist in Resources */,
 				FAC9167D19E697A60009D824 /* StringsArray.json in Resources */,
+				FA28E0971B42941E00453FB8 /* RequestToUploadFile.response.json in Resources */,
 				FAC9167E19E697A60009D824 /* TestScheme.json in Resources */,
 				FAC9167B19E697A60009D824 /* GetOrderScheme.json in Resources */,
 				FAC9163119E693370009D824 /* InfoPlist.strings in Resources */,
+				FA28E0931B42941E00453FB8 /* RequestToGetIssueIntoRoot.response.json in Resources */,
 				FAC9167F19E697A60009D824 /* TestSchemeOptionals.json in Resources */,
+				FA28E0911B42941E00453FB8 /* RequestToGetIssue.response.json in Resources */,
 				FAC9167A19E697A60009D824 /* DictionaryArray.json in Resources */,
+				FA28E0951B42941E00453FB8 /* RequestToGetIssues.response.json in Resources */,
 				2DBA178CC76E21D9C1C6DCBE /* TRCMapperPerson.json in Resources */,
+				FA28E08E1B42941E00453FB8 /* TRCObjectMapperIssue.response.json in Resources */,
 				2DBA120634800EF8507024AD /* PersonsList.json in Resources */,
 				2DBA1EDFD218B24F2C14C317 /* TRCMapperPhone.json in Resources */,
-				2DBA1B7370A68AF382B9B10A /* TRCObjectMapperIssue.response.json in Resources */,
-				2DBA132C5F555265F4E57942 /* RequestToGetIssue.response.json in Resources */,
-				2DBA1FA9C99981038EB8F5F5 /* RequestToGetIssues.response.json in Resources */,
-				2DBA158AE4B960FD89DE18BC /* RequestToUploadFile.response.json in Resources */,
-				2DBA186B29DECECEE698EA7D /* RequestToGetIssueIntoRoot.response.json in Resources */,
 				2DBA1A9AA9E0D6E61CC42D97 /* TRCMapperWithArray.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -876,25 +873,25 @@
 				FA55918219E69A4E00E00570 /* TRCValueTransformerNumberTests.m in Sources */,
 				FA55918619E69A5B00E00570 /* TRCErrorParserSpy.m in Sources */,
 				FA4695631A9387FF004036A5 /* Person.m in Sources */,
+				FA28E08C1B42941E00453FB8 /* Issue.m in Sources */,
 				FA4695601A938782004036A5 /* TRCMapperPerson.m in Sources */,
+				FA28E0901B42941E00453FB8 /* RequestToGetIssue.m in Sources */,
 				FA55918719E69A5B00E00570 /* TRCConnectionTestStub.m in Sources */,
 				FA55918419E69A4E00E00570 /* TRCSchemeTests.m in Sources */,
+				FA28E0981B42941E00453FB8 /* TRCValueTransformerDateISO8601.m in Sources */,
+				FA28E0921B42941E00453FB8 /* RequestToGetIssueIntoRoot.m in Sources */,
+				FA28E0961B42941E00453FB8 /* RequestToUploadFile.m in Sources */,
 				2DBA10F6D20316CBD2233306 /* TRCUtilsTests.m in Sources */,
 				2DBA1D4B061007D83FEBC57C /* Phone.m in Sources */,
+				FA28E0941B42941E00453FB8 /* RequestToGetIssues.m in Sources */,
 				2DBA17F737835F7EDA40FA64 /* TRCMapperPhone.m in Sources */,
 				2DBA1BE868E4128AFAFCBBA0 /* TRCErrorParserSimple.m in Sources */,
+				FA28E08F1B42941E00453FB8 /* RequestToDownloadFile.m in Sources */,
+				FA28E08D1B42941E00453FB8 /* TRCObjectMapperIssue.m in Sources */,
 				2DBA1711C99D8E9A0D607D3A /* TestUtils.m in Sources */,
-				2DBA12435274CEACE1256FDF /* TRCValueTransformerDateISO8601.m in Sources */,
-				2DBA12EE2CBC8801E51D153B /* TRCObjectMapperIssue.m in Sources */,
-				2DBA10E5E1193CA77F91E63A /* RequestToGetIssue.m in Sources */,
-				2DBA15B24344E523F15F7DC3 /* RequestToGetIssues.m in Sources */,
-				2DBA1970DEB404C22A5DA4B5 /* RequestToUploadFile.m in Sources */,
-				2DBA1542CE22F5778C6405DE /* RequestToDownloadFile.m in Sources */,
-				2DBA11E098A448128CB9E68D /* Issue.m in Sources */,
 				2DBA1931DD7F8B70613BC3A7 /* TRCIntegrationTests.m in Sources */,
 				2DBA17092859137A58185FB9 /* SimpleErrorParser.m in Sources */,
 				2DBA1EC0738D4C1358B0A70E /* TRCValidationErrorPrinterTests.m in Sources */,
-				2DBA1F412199690DCF374C35 /* RequestToGetIssueIntoRoot.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

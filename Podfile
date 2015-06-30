@@ -5,7 +5,6 @@ inhibit_all_warnings!
 
 target "TyphoonRestClient" do
     pod 'AFNetworking'
-
 end
 
 target "TyphoonRestClientTests" do
