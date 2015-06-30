@@ -15,3 +15,25 @@ TRC helps to quickly achieve end-to-end proof of concept, at the same time as pr
 * User has control over sending of each NSURLRequest.
 * Easy to stub any network call
 * Has extendable architecture
+
+
+# How to use
+
+* [Quick Start](Quick-Start)
+* [Frequently Asked Questions](Frequently-Asked-Questions)
+
+# Installation
+
+
+## Cocoapods
+
+Preferred way is using Cocoapods:
+
+```
+pod 'TyphoonRestClient'
+```
+
+## From Sources
+
+1. Drag `TyphoonRestClient` folder into your project
+2. Install `AFNetworking` with your prefered way
