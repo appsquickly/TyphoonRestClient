@@ -19,8 +19,8 @@ TRC helps to quickly achieve end-to-end proof of concept, at the same time as pr
 
 # How to use
 
-* [Quick Start](Quick-Start)
-* [Frequently Asked Questions](Frequently-Asked-Questions)
+* [Quick Start](https://github.com/appsquickly/TyphoonRestClient/wiki/Quick-Start)
+* [Frequently Asked Questions](https://github.com/appsquickly/TyphoonRestClient/wiki/Frequently-Asked-Questions)
 
 # Installation
 
