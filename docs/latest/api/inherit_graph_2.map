@@ -1,0 +1,8 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node2" href="$interface_t_r_c_connection_a_f_networking.html" title="TRCConnectionAFNetworking is default implementation of &#39;real&#39; network connection. ..." alt="" coords="205,153,405,179"/>
+<area shape="rect" id="node3" href="$interface_t_r_c_connection_stub.html" title="TRCConnectionStub" alt="" coords="234,104,377,129"/>
+<area shape="rect" id="node4" href="$interface_t_r_c_connection_stub_response.html" title="TRCConnectionStubResponse" alt="" coords="204,5,407,31"/>
+<area shape="rect" id="node5" href="$interface_typhoon_rest_client.html" title="TyphoonRestClient is a library for integration against contract&#45;first web service. " alt="" coords="238,55,372,80"/>
+<area shape="rect" id="node6" href="$protocol_t_r_c_connection-p.html" title="TRCConnection provides abstraction over network connection. " alt="" coords="15,153,146,179"/>
+<area shape="rect" id="node7" href="$interface_t_r_c_connection_logger.html" title="TRCConnectionLogger" alt="" coords="227,203,384,228"/>
+</map>
