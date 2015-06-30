@@ -19,6 +19,7 @@ DerivedData
 *.xccheckout
 
 Pods/*
+Podfile.lock
 
 .DS_Store
 
