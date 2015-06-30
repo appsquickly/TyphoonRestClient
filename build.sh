@@ -1,5 +1,7 @@
 #!/bin/sh
 
+pod update
+
 #Fail immediately if a task fails
 set -e
 set -o pipefail
