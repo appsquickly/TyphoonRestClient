@@ -38,3 +38,8 @@ pod 'TyphoonRestClient'
 
 1. Drag `TyphoonRestClient` folder into your project
 2. Install `AFNetworking` with your prefered way
+
+
+# Sponsors
+
+TyphoonRestClient was developed by AppsQuick.ly with kind sponsorship from <a href="http://www.codemonastery.com.au/">Code Monastery</a>. 
