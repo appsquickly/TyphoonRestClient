@@ -26,6 +26,7 @@
 #import "TRCSerializerImage.h"
 #import "TRCSerializerInputStream.h"
 #import "TRCSerializerString.h"
+#import "TRCSerializerMultipart.h"
 #import "TyphoonRestClientErrors.h"
 
 TRCRequestMethod TRCRequestMethodPost = @"POST";

@@ -16,7 +16,7 @@ TRCSerialization TRCSerializationRequestHttp = @"TRCSerializationRequestHttp";
 
 @implementation TRCSerializerHttpQuery
 
-- (NSData *)dataFromRequestObject:(id)requestObject error:(NSError **)error
+- (NSData *)bodyDataFromObject:(id)requestObject forRequest:(NSMutableURLRequest *)urlRequest error:(NSError **)error
 {
     if (![requestObject isKindOfClass:[NSDictionary class]]) {
         if (error) {

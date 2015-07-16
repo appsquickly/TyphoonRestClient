@@ -39,7 +39,7 @@
 * @param error write NSError into that pointer if error happens
 * @return NSData which used as request body
 * */
-- (NSData *)dataFromRequestObject:(id)requestObject error:(NSError **)error;
+- (NSData *)bodyDataFromObject:(id)requestObject forRequest:(NSMutableURLRequest *)urlRequest error:(NSError **)error;
 
 /**
 * Convert your `requestObject` into `NSInputStream` here.
@@ -52,7 +52,7 @@
 * @param error write NSError into that pointer if error happens
 * @return NSInputStream which used to upload request body
 * */
-- (NSInputStream *)dataStreamFromRequestObject:(id)requestObject error:(NSError **)error;
+- (NSInputStream *)bodyStreamFromObject:(id)requestObject forRequest:(NSMutableURLRequest *)urlRequest error:(NSError **)error;
 
 /**
 * This is string which would be used as Content-Type HTTP header value.

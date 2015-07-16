@@ -31,7 +31,7 @@ TRCValueTransformerType TRCValueTransformerTypeData;
     return self;
 }
 
-- (NSData *)dataFromRequestObject:(id)requestObject error:(NSError **)error
+- (NSData *)bodyDataFromObject:(id)requestObject forRequest:(NSMutableURLRequest *)urlRequest error:(NSError **)error
 {
     if ([requestObject isKindOfClass:[NSArray class]] || [requestObject isKindOfClass:[NSDictionary class]]) {
         return [NSPropertyListSerialization dataWithPropertyList:requestObject format:self.format options:self.writeOptions error:error];

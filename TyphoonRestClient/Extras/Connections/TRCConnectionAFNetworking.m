@@ -106,13 +106,17 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
                 [mutableRequest setValue:[self.serializer contentType] forHTTPHeaderField:@"Content-Type"];
             }
 
-            if ([self.serializer respondsToSelector:@selector(dataFromRequestObject:error:)]) {
-                NSData *data = [self.serializer dataFromRequestObject:parameters error:error];
+            if ([self.serializer respondsToSelector:@selector(bodyDataFromObject:forRequest:error:)]) {
+                NSData *data = [self.serializer bodyDataFromObject:parameters forRequest:mutableRequest error:error];
                 if (data) {
                     [mutableRequest setHTTPBody:data];
+                    if (![mutableRequest valueForHTTPHeaderField:@"Content-Length"]) {
+                        NSString *bodyLength = [NSString stringWithFormat:@"%llu", (unsigned long long int)[data length]];
+                        [mutableRequest setValue:bodyLength forHTTPHeaderField:@"Content-Length"];
+                    }
                 }
-            } else if ([self.serializer respondsToSelector:@selector(dataStreamFromRequestObject:error:)]) {
-                NSInputStream *stream = [self.serializer dataStreamFromRequestObject:parameters error:error];
+            } else if ([self.serializer respondsToSelector:@selector(bodyStreamFromObject:forRequest:error:)]) {
+                NSInputStream *stream = [self.serializer bodyStreamFromObject:parameters forRequest:mutableRequest error:error];
                 if (stream) {
                     [mutableRequest setHTTPBodyStream:stream];
                 }

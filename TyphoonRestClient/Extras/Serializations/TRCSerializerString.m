@@ -26,7 +26,7 @@ TRCSerialization TRCSerializationString = @"TRCSerializationString";
     return self;
 }
 
-- (NSData *)dataFromRequestObject:(NSString *)requestObject error:(NSError **)error
+- (NSData *)bodyDataFromObject:(id)requestObject forRequest:(NSMutableURLRequest *)urlRequest error:(NSError **)error
 {
     if ([requestObject isKindOfClass:[NSString class]]) {
         return [requestObject dataUsingEncoding:self.encoding];

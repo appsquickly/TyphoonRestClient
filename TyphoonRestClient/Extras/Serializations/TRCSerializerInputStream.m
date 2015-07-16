@@ -17,7 +17,7 @@ TRCSerialization TRCSerializationRequestInputStream = @"TRCSerializationRequestI
 
 @implementation TRCSerializerInputStream
 
-- (NSInputStream *)dataStreamFromRequestObject:(id)requestObject error:(NSError **)error
+- (NSInputStream *)bodyStreamFromObject:(id)requestObject forRequest:(NSMutableURLRequest *)urlRequest error:(NSError **)error
 {
     if ([requestObject isKindOfClass:[NSInputStream class]]) {
         return requestObject;

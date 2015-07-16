@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2DBA10F6D20316CBD2233306 /* TRCUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1D5D6A4F1CD450673422 /* TRCUtilsTests.m */; };
 		2DBA120634800EF8507024AD /* PersonsList.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA104BA4D6F38FB51EC684 /* PersonsList.json */; };
+		2DBA1462FF2E726FD6E5F609 /* TRCSerializerMultipart.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1B5308D0A28755F5CE2C /* TRCSerializerMultipart.m */; };
 		2DBA14CB7D8DE86DEA7D44E7 /* TRCSchemaDataValueOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA123B3A97A2B227BB3C5F /* TRCSchemaDataValueOptions.m */; };
 		2DBA17092859137A58185FB9 /* SimpleErrorParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1465E4C6E3A34A4752B6 /* SimpleErrorParser.m */; };
 		2DBA1711C99D8E9A0D607D3A /* TestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA158B4E6546253271A111 /* TestUtils.m */; };
@@ -119,10 +120,12 @@
 		2DBA1465E4C6E3A34A4752B6 /* SimpleErrorParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleErrorParser.m; sourceTree = "<group>"; };
 		2DBA158B4E6546253271A111 /* TestUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestUtils.m; sourceTree = "<group>"; };
 		2DBA161429FAAF8C959F4B7F /* TRCSchemaDataValueOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSchemaDataValueOptions.h; sourceTree = "<group>"; };
+		2DBA16B6CE5A86891F838F01 /* TRCSerializerMultipart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSerializerMultipart.h; sourceTree = "<group>"; };
 		2DBA17FA4B5016447633E32A /* TRCMapperWithArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCMapperWithArray.m; sourceTree = "<group>"; };
 		2DBA1942EBD89F99FB0149DC /* Phone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Phone.m; sourceTree = "<group>"; };
 		2DBA19CDB29AAD3C4F65D42B /* Phone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Phone.h; sourceTree = "<group>"; };
 		2DBA1A63E0B2BDDB5D227E95 /* TRCMapperPerson.json */ = {isa = PBXFileReference; lastKnownFileType = file.request; path = TRCMapperPerson.json; sourceTree = "<group>"; };
+		2DBA1B5308D0A28755F5CE2C /* TRCSerializerMultipart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSerializerMultipart.m; sourceTree = "<group>"; };
 		2DBA1B8033DA8D5FA5B63C8B /* TRCObjectMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCObjectMapper.h; sourceTree = "<group>"; };
 		2DBA1C44E47EDAB03031EED3 /* SimpleErrorParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleErrorParser.h; sourceTree = "<group>"; };
 		2DBA1D11775F7F7D595235D9 /* TestUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestUtils.h; sourceTree = "<group>"; };
@@ -659,6 +662,8 @@
 				FAE88A1C1B171F5700CCADC3 /* TRCSerializerPlist.m */,
 				FAE88A1D1B171F5700CCADC3 /* TRCSerializerString.h */,
 				FAE88A1E1B171F5700CCADC3 /* TRCSerializerString.m */,
+				2DBA1B5308D0A28755F5CE2C /* TRCSerializerMultipart.m */,
+				2DBA16B6CE5A86891F838F01 /* TRCSerializerMultipart.h */,
 			);
 			path = Serializations;
 			sourceTree = "<group>";
@@ -859,6 +864,7 @@
 				FAE88A221B171F5700CCADC3 /* TRCConnectionStub.m in Sources */,
 				2DBA1B9CD3295467A9BE7FD8 /* TRCSchemeFactory.m in Sources */,
 				2DBA199EE6026F8769FAB714 /* TRCMapperWithArray.m in Sources */,
+				2DBA1462FF2E726FD6E5F609 /* TRCSerializerMultipart.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

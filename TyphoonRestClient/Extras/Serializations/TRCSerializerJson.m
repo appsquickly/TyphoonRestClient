@@ -55,7 +55,7 @@ TRCSerialization TRCSerializationJson = @"TRCSerializationJson";
 #pragma mark - REQUEST SERIALIZATION
 //-------------------------------------------------------------------------------------------
 
-- (NSData *)dataFromRequestObject:(id)requestObject error:(NSError **)error
+- (NSData *)bodyDataFromObject:(id)requestObject forRequest:(NSMutableURLRequest *)urlRequest error:(NSError **)error
 {
     if ([NSJSONSerialization isValidJSONObject:requestObject]) {
         return [NSJSONSerialization dataWithJSONObject:requestObject options:self.writingOptions error:error];
