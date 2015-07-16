@@ -143,6 +143,10 @@ extern TRCSerialization TRCSerializationRequestInputStream;
 extern TRCSerialization TRCSerializationResponseImage;
 
 
+
+extern TRCSerialization TRCSerializationMultipart;
+
+
 /**
 * The `TRCRequest` implementation manages request composing and response handling at same time. Each `TRCRequest` implementation
 * represents one API call which does one function.

@@ -130,6 +130,9 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
 
     TRCSerializerImage *image = [TRCSerializerImage new];
     [self registerResponseSerializer:image forName:TRCSerializationResponseImage];
+
+    TRCSerializerMultipart *multipart = [TRCSerializerMultipart new];
+    [self registerRequestSerializer:multipart forName:TRCSerializationMultipart];
 }
 
 - (id<TRCProgressHandler>)sendRequest:(id<TRCRequest>)request completion:(void (^)(id result, NSError *error))completion

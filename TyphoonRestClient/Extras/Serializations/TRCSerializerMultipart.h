@@ -13,6 +13,12 @@
 #import <Foundation/Foundation.h>
 #import "TRCInfrastructure.h"
 
+
+@interface TRCSerializerMultipart : NSObject <TRCRequestSerializer>
+
+@end
+
+
 @interface TRCMultipartFile : NSObject
 
 @property (nonatomic, strong) NSData *data;
@@ -21,6 +27,3 @@
 
 @end
 
-@interface TRCSerializerMultipart : NSObject <TRCRequestSerializer>
-
-@end

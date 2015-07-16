@@ -14,6 +14,8 @@
 #import "AFURLRequestSerialization.h"
 #import "TRCUtils.h"
 
+TRCSerialization TRCSerializationMultipart = @"TRCSerializationMultipart";
+
 @implementation TRCSerializerMultipart
 
 - (NSInputStream *)bodyStreamFromObject:(id)requestObject forRequest:(NSMutableURLRequest *)urlRequest error:(NSError **)error
