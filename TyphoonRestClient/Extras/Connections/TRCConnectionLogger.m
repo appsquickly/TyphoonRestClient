@@ -125,7 +125,12 @@
 {
     NSMutableString *output = [NSMutableString new];
 
-    NSString *body = [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding];
+    NSString *body = nil;
+    if (request.HTTPBody) {
+        body = [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding];
+    } else if (request.HTTPBodyStream) {
+        body = [NSString stringWithFormat:@"Reading body from stream: %@", [request.HTTPBodyStream debugDescription]];
+    }
     [output appendString:@"======================================================================================================>\n"];
     [output appendFormat:@"REQUEST  | id: %lu", (unsigned long) request];
     [output appendString:@"\n======================================================================================================>"];
