@@ -48,35 +48,41 @@
 
 - (TRCSchema *)schemeForErrorHandler:(id<TRCErrorHandler>)parser
 {
-    return [self schemeForObject:parser nameSelector:@selector(errorValidationSchemaName) suffix:@"response" isRequest:NO];
+    return [self schemeForObject:parser nameSelector:@selector(errorValidationSchemaName) suffix:@"response"
+                   excludeSuffix:nil isRequest:NO];
 }
 
 - (TRCSchema *)schemeForPathParametersWithRequest:(id<TRCRequest>)request
 {
-    return [self schemeForObject:request nameSelector:@selector(pathParametersValidationSchemaName) suffix:@"path" isRequest:YES];
+    return [self schemeForObject:request nameSelector:@selector(pathParametersValidationSchemaName) suffix:@"path"
+                   excludeSuffix:nil isRequest:YES];
 }
 
 - (TRCSchema *)schemeForRequest:(id<TRCRequest>)request
 {
-    return [self schemeForObject:request nameSelector:@selector(requestBodyValidationSchemaName) suffix:@"request" isRequest:YES];
+    return [self schemeForObject:request nameSelector:@selector(requestBodyValidationSchemaName) suffix:@"request"
+                   excludeSuffix:nil isRequest:YES];
 }
 
 - (TRCSchema *)schemeForResponseWithRequest:(id<TRCRequest>)request
 {
-    return [self schemeForObject:request nameSelector:@selector(responseBodyValidationSchemaName) suffix:@"response" isRequest:NO];
+    return [self schemeForObject:request nameSelector:@selector(responseBodyValidationSchemaName) suffix:@"response"
+                   excludeSuffix:nil isRequest:NO];
 }
 
 - (id<TRCSchemaData>)requestSchemaDataForMapper:(id<TRCObjectMapper>)mapper
 {
-    return [self schemeForObject:mapper nameSelector:@selector(requestValidationSchemaName) suffix:@[@"request", @""] isRequest:YES].data;
+    return [self schemeForObject:mapper nameSelector:@selector(requestValidationSchemaName) suffix:@[@"request", @""]
+                   excludeSuffix:@"response" isRequest:YES].data;
 }
 
 - (id<TRCSchemaData>)responseSchemaDataForMapper:(id<TRCObjectMapper>)mapper
 {
-    return [self schemeForObject:mapper nameSelector:@selector(responseValidationSchemaName) suffix:@[@"response", @""] isRequest:NO].data;
+    return [self schemeForObject:mapper nameSelector:@selector(responseValidationSchemaName) suffix:@[@"response", @""]
+                   excludeSuffix:@"request" isRequest:NO].data;
 }
 
-- (TRCSchema *)schemeForObject:(id)object nameSelector:(SEL)sel suffix:(id)suffix isRequest:(BOOL)request
+- (TRCSchema *)schemeForObject:(id)object nameSelector:(SEL)sel suffix:(id)suffix excludeSuffix:(NSString *)excludeSuffix isRequest:(BOOL)request
 {
     NSString *filePath = nil;
     NSBundle *bundle = [NSBundle bundleForClass:[self class]];
@@ -100,13 +106,13 @@
 
         if ([suffix isKindOfClass:[NSArray class]]) {
             for (NSString *suffixString in suffix) {
-                filePath = [self pathForSchemeWithClassName:className suffix:suffixString];
+                filePath = [self pathForSchemeWithClassName:className suffix:suffixString excludeSuffix:excludeSuffix];
                 if (filePath) {
                     break;
                 }
             }
         } else if ([suffix isKindOfClass:[NSString class]]) {
-            filePath = [self pathForSchemeWithClassName:className suffix:suffix];
+            filePath = [self pathForSchemeWithClassName:className suffix:suffix excludeSuffix:excludeSuffix];
         }
     }
 
@@ -121,14 +127,22 @@
     }
 }
 
-- (NSString *)pathForSchemeWithClassName:(NSString *)className suffix:(NSString *)suffix
+- (NSString *)pathForSchemeWithClassName:(NSString *)className suffix:(NSString *)suffix excludeSuffix:(NSString *)excludeSuffix
 {
     NSString *fileNamePrefix = suffix.length > 0 ? [NSString stringWithFormat:@"%@.%@", className, suffix] : className;
     NSBundle *bundle = [NSBundle bundleForClass:[self class]];
     NSArray *allFiles = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[bundle bundlePath] error:nil];
     for (NSString *fileName in allFiles) {
         if ([fileName hasPrefix:fileNamePrefix]) {
-            return [[bundle bundlePath] stringByAppendingPathComponent:fileName];
+            NSString *fullPath = [[bundle bundlePath] stringByAppendingPathComponent:fileName];
+            if (excludeSuffix) {
+                NSString *fileNameSuffix = [fileName stringByReplacingOccurrencesOfString:fileNamePrefix withString:@""];
+                if ([fileNameSuffix rangeOfString:excludeSuffix].location == NSNotFound) {
+                    return fullPath;
+                }
+            } else {
+                return fullPath;
+            }
         }
     }
     return nil;
