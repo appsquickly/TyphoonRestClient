@@ -84,7 +84,7 @@
 - (id)schemaData:(id<TRCSchemaData>)data replacementForValue:(id)object withOptions:(TRCSchemaDataValueOptions *)options withSchemeValue:(id)schemeValue
 {
     //Handle NSNull case
-    if ([object isKindOfClass:[NSNull class]]) {
+    if ([object isKindOfClass:[NSNull class]] && !(self.transformationOptions & TRCTransformationOptionsPassNullAsIs)) {
         object = nil;
     }
 

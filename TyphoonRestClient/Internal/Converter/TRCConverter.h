@@ -25,6 +25,7 @@
 
 @property (nonatomic, strong) id<TRCConvertersRegistry> registry;
 @property (nonatomic) TRCValidationOptions options;
+@property (nonatomic) TRCTransformationOptions transformationOptions;
 
 #pragma mark - Initialization
 

@@ -147,6 +147,16 @@ extern TRCSerialization TRCSerializationResponseImage;
 extern TRCSerialization TRCSerializationMultipart;
 
 
+//-------------------------------------------------------------------------------------------
+#pragma mark - Transformation Options
+//-------------------------------------------------------------------------------------------
+
+
+typedef NS_OPTIONS(NSInteger, TRCTransformationOptions) {
+    TRCTransformationOptionsNone = 0,
+    TRCTransformationOptionsPassNullAsIs = 1 << 0
+};
+
 /**
 * The `TRCRequest` implementation manages request composing and response handling at same time. Each `TRCRequest` implementation
 * represents one API call which does one function.
@@ -291,6 +301,10 @@ extern TRCSerialization TRCSerializationMultipart;
 * */
 - (TRCSerialization)requestBodySerialization;
 
+
+
+- (TRCTransformationOptions)requestTransformationOptions;
+
 //=============================================================================================================================
 #pragma mark - Response
 //=============================================================================================================================
@@ -374,6 +388,9 @@ extern TRCSerialization TRCSerializationMultipart;
 * Error notification. Called when network call ended with error. Used to do some custom logic on error (for example delete resource at output stream, clean up, etc.. )
 * */
 - (void)respondedWithError:(NSError *)networkError headers:(NSDictionary *)responseHeaders status:(TRCHttpStatusCode)statusCode;
+
+
+- (TRCTransformationOptions)responseTransformationOptions;
 
 //-------------------------------------------------------------------------------------------
 #pragma mark - Custom context

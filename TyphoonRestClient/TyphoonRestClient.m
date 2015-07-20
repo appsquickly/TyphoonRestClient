@@ -274,7 +274,8 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
         body = [request requestBody];
         NSError *validationOrConversionError = nil;
         TRCSchema *schema = [_schemeFactory schemeForRequest:request];
-        body = [self convertThenValidateObject:body withScheme:schema error:&validationOrConversionError];
+        TRCTransformationOptions options = [self transformationOptionsFromObject:request usingSelector:@selector(requestTransformationOptions)];
+        body = [self convertThenValidateObject:body withScheme:schema options:options error:&validationOrConversionError];
         if (validationOrConversionError) {
             TRCSetError(error, validationOrConversionError);
             return nil;
@@ -301,7 +302,7 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
         pathParams = [request pathParameters];
         NSError *validationOrConversionError = nil;
         TRCSchema *schema = [_schemeFactory schemeForPathParametersWithRequest:request];
-        pathParams = [self convertThenValidateObject:pathParams withScheme:schema error:&validationOrConversionError];
+        pathParams = [self convertThenValidateObject:pathParams withScheme:schema options:(TRCTransformationOptionsNone) error:&validationOrConversionError];
         if (validationOrConversionError) {
             TRCSetError(error, validationOrConversionError);
             return nil;
@@ -324,6 +325,17 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
     }
     return path;
 }
+
+- (TRCTransformationOptions)transformationOptionsFromObject:(id)object usingSelector:(SEL)sel
+{
+    TRCTransformationOptions result = TRCTransformationOptionsNone;
+    if ([object respondsToSelector:sel]) {
+        TRCTransformationOptions(*impl)(id, SEL) = (TRCTransformationOptions(*)(id, SEL))[object methodForSelector:sel];
+        result = impl(object, sel);
+    }
+    return result;
+}
+
 //-------------------------------------------------------------------------------------------
 #pragma mark - Response handling
 //-------------------------------------------------------------------------------------------
@@ -345,7 +357,8 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
     else {
         NSError *validationOrConversionError = nil;
         TRCSchema *scheme = [_schemeFactory schemeForResponseWithRequest:request];
-        response = [self validateThenConvertObject:responseObject withScheme:scheme error:&validationOrConversionError];
+        TRCTransformationOptions options = [self transformationOptionsFromObject:request usingSelector:@selector(responseTransformationOptions)];
+        response = [self validateThenConvertObject:responseObject withScheme:scheme options:options error:&validationOrConversionError];
         if (!validationOrConversionError) {
             response = [self parseResponse:response withRequest:request responseInfo:responseInfo error:&validationOrConversionError];
         }
@@ -382,7 +395,7 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
     return result;
 }
 
-- (id)validateThenConvertObject:(id)object withScheme:(TRCSchema *)scheme error:(NSError **)error
+- (id)validateThenConvertObject:(id)object withScheme:(TRCSchema *)scheme options:(TRCTransformationOptions)options error:(NSError **)error
 {
     //Scheme validation
     NSError *validationError = nil;
@@ -399,18 +412,18 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
 
     //Values conversion
     NSError *convertError = nil;
-    id converted = [self convertValuesInResponse:object schema:scheme error:&convertError];
+    id converted = [self convertValuesInResponse:object schema:scheme options:options error:&convertError];
     if (convertError && error) {
         *error = convertError;
     }
     return converted;
 }
 
-- (id)convertThenValidateObject:(id)object withScheme:(TRCSchema *)scheme error:(NSError **)error
+- (id)convertThenValidateObject:(id)object withScheme:(TRCSchema *)scheme options:(TRCTransformationOptions)options error:(NSError **)error
 {
     //Values conversion
     NSError *convertError = nil;
-    id converted = [self convertValuesInRequest:object schema:scheme error:&convertError];
+    id converted = [self convertValuesInRequest:object schema:scheme options:options error:&convertError];
     if (convertError && error) {
         *error = convertError;
     }
@@ -442,7 +455,7 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
     if (self.errorHandler && response) {
         TRCSchema *scheme = [_schemeFactory schemeForErrorHandler:self.errorHandler];
         NSError *convertError = nil;
-        id converted = [self validateThenConvertObject:response withScheme:scheme error:&convertError];
+        id converted = [self validateThenConvertObject:response withScheme:scheme options:TRCTransformationOptionsNone error:&convertError];
 
         if (convertError) {
             [self logWarning:@"Error schema validation/conversion error: \"%@\". Will return ordinary network error", convertError.localizedDescription];
@@ -500,7 +513,7 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
 #pragma mark - Conversion
 //-------------------------------------------------------------------------------------------
 
-- (id)convertValuesInResponse:(id)responseObject schema:(TRCSchema *)scheme error:(NSError **)parseError
+- (id)convertValuesInResponse:(id)responseObject schema:(TRCSchema *)scheme options:(TRCTransformationOptions)options error:(NSError **)parseError
 {
     if (!scheme) {
         return responseObject;
@@ -509,6 +522,7 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
     TRCConverter *converter = [[TRCConverter alloc] initWithSchema:scheme];
     converter.registry = self;
     converter.options = self.validationOptions;
+    converter.transformationOptions = options;
     NSError *error = nil;
     id result = [converter convertResponseValue:responseObject error:&error];
     if (error && parseError) {
@@ -518,7 +532,7 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
     return result;
 }
 
-- (id)convertValuesInRequest:(id)requestObject schema:(TRCSchema *)scheme error:(NSError **)parseError
+- (id)convertValuesInRequest:(id)requestObject schema:(TRCSchema *)scheme options:(TRCTransformationOptions)options error:(NSError **)parseError
 {
     if (!scheme) {
         return requestObject;
@@ -527,6 +541,7 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
     TRCConverter *converter = [[TRCConverter alloc] initWithSchema:scheme];
     converter.registry = self;
     converter.options = self.validationOptions;
+    converter.transformationOptions = options;
     NSError *error = nil;
     id result = [converter convertRequestValue:requestObject error:&error];
     if (error && parseError) {
