@@ -194,7 +194,7 @@
 {
     dispatch_async(printing_queue, ^{
         if (self.writer) {
-            [self.writer logString:string];
+            [self.writer writeLogString:string];
         } else {
             NSLog(@"\n%@", string);
         }

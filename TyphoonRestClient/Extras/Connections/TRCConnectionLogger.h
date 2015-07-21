@@ -30,6 +30,6 @@
 
 @protocol TRCConnectionLoggerWriter <NSObject>
 
-- (void)logString:(NSString *)string;
+- (void)writeLogString:(NSString *)string;
 
 @end
