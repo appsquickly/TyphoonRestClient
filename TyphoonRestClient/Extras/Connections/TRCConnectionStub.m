@@ -69,11 +69,13 @@
         if (response.mime && [responseSerializer respondsToSelector:@selector(isCorrectContentType:)]) {
             isContentTypeCorrect = [responseSerializer isCorrectContentType:response.mime];
         }
-        if (isContentTypeCorrect) {
-            responseObject = [responseSerializer objectFromResponseData:[responseInfo responseData] error:&responseError];
-        } else {
-            responseObject = nil;
-            responseError = TRCErrorWithFormat(TyphoonRestClientErrorCodeBadResponseMime, @"Unacceptable content-type: %@", response.mime);
+        if ([[responseInfo responseData] length] > 0) {
+            if (isContentTypeCorrect) {
+                responseObject = [responseSerializer objectFromResponseData:[responseInfo responseData] error:&responseError];
+            } else {
+                responseObject = nil;
+                responseError = TRCErrorWithFormat(TyphoonRestClientErrorCodeBadResponseMime, @"Unacceptable content-type: %@", response.mime);
+            }
         }
     }
 

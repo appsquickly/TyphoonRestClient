@@ -493,7 +493,7 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
 
 - (BOOL)validateResponse:(id)response withSchema:(TRCSchema *)schema error:(NSError **)error
 {
-    if (!response || !schema) {
+    if (!schema) {
         return YES;
     }
 
@@ -502,7 +502,7 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
 
 - (BOOL)validateRequest:(id)request withSchema:(TRCSchema *)schema error:(NSError **)error
 {
-    if (!request || !schema) {
+    if (!schema) {
         return YES;
     }
 

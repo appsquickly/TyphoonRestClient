@@ -50,25 +50,27 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
         }
     }
 
-    BOOL correctContentType = YES;
+    if ([data length] > 0) {
+        BOOL correctContentType = YES;
 
-    if ([self.serializer respondsToSelector:@selector(isCorrectContentType:)]) {
-        correctContentType = [self.serializer isCorrectContentType:[response MIMEType]];
-    }
+        if ([self.serializer respondsToSelector:@selector(isCorrectContentType:)]) {
+            correctContentType = [self.serializer isCorrectContentType:[response MIMEType]];
+        }
 
-    if (correctContentType) {
-        result = [self.serializer objectFromResponseData:data error:&serializerError];
-    } else {
-        contentTypeError = TRCErrorWithFormat(TyphoonRestClientErrorCodeBadResponseMime, @"Unacceptable content-type: %@", [response MIMEType]);
-    }
+        if (correctContentType) {
+            result = [self.serializer objectFromResponseData:data error:&serializerError];
+        } else {
+            contentTypeError = TRCErrorWithFormat(TyphoonRestClientErrorCodeBadResponseMime, @"Unacceptable content-type: %@", [response MIMEType]);
+        }
 
-    if (errorOut) {
-        if (statusCodeError) {
-            *errorOut = statusCodeError;
-        } else if (contentTypeError) {
-            *errorOut = contentTypeError;
-        } else if (serializerError) {
-            *errorOut = serializerError;
+        if (errorOut) {
+            if (statusCodeError) {
+                *errorOut = statusCodeError;
+            } else if (contentTypeError) {
+                *errorOut = contentTypeError;
+            } else if (serializerError) {
+                *errorOut = serializerError;
+            }
         }
     }
 

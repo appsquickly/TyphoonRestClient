@@ -17,6 +17,7 @@
 #import "TyphoonRestClientErrors.h"
 #import "SimpleErrorParser.h"
 #import "RequestToGetIssueIntoRoot.h"
+#import "RequestToSetIssue.h"
 
 @interface TRCIntegrationTests : XCTestCase
 
@@ -105,6 +106,33 @@
         XCTAssertNil(error);
         XCTAssertEqualObjects(result.authorName, @"Todd McGrath");
         XCTAssertEqualObjects(result.identifier, @3);
+    }];
+}
+
+
+- (void)test_empty_response_without_schema
+{
+    TRCConnectionStubResponse *response = [[TRCConnectionStubResponse alloc] initWithResponseData:[NSData new] mime:nil headers:nil status:200];
+    [_connection setResponse:response];
+
+    RequestToSetIssue *request = [[RequestToSetIssue alloc] init];
+
+    [_restClient sendRequest:request completion:^(Issue *result, NSError *error) {
+        XCTAssertNil(result);
+        XCTAssertNil(error);
+    }];
+}
+
+- (void)test_empty_response_withSchema
+{
+    TRCConnectionStubResponse *response = [[TRCConnectionStubResponse alloc] initWithResponseData:[NSData new] mime:nil headers:nil status:200];
+    [_connection setResponse:response];
+
+    RequestToGetIssue *request = [[RequestToGetIssue alloc] initWithIssueId:@3];
+
+    [_restClient sendRequest:request completion:^(Issue *result, NSError *error) {
+        XCTAssertNil(result);
+        XCTAssertNotNil(error);
     }];
 }
 

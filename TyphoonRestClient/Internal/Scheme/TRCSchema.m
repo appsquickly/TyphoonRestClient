@@ -101,7 +101,7 @@
 
     //1. Check value exists
     if (![options isOptional] && !value) {
-        _error = [self errorForMissedKey:options.identifier withStack:_stack];
+        _error = [self errorForMissedKey:options.identifier withStack:_stack schemaValue:schemeValue];
         [data cancel];
     }
     else if (value) {
@@ -179,13 +179,21 @@
 #pragma mark - Error Composing
 //-------------------------------------------------------------------------------------------
 
-- (NSError *)errorForMissedKey:(NSString *)key withStack:(TRCSchemaStackTrace *)stack
+- (NSError *)errorForMissedKey:(NSString *)key withStack:(TRCSchemaStackTrace *)stack schemaValue:(id)schemaValue
 {
     NSMutableArray *stackArray = [[stack stack] mutableCopy];
     [stackArray removeLastObject];
-    NSString *fullDescriptionErrorMessage = [NSString stringWithFormat:@"Can't find value for key '%@' in this dictionary", key];
+    NSString *fullDescriptionErrorMessage = nil;
+    NSString *descriptionMessage = nil;
+    if (key) {
+        fullDescriptionErrorMessage = [NSString stringWithFormat:@"Can't find value for key '%@' in this dictionary", key];
+        descriptionMessage = [NSString stringWithFormat:@"Can't find value for key '%@' in '%@' dictionary", key, [stack shortDescription]];
+    } else {
+        fullDescriptionErrorMessage = [NSString stringWithFormat:@"Can't find root value. Must be kind of %@", NSStringFromClass([schemaValue class])];
+        descriptionMessage = fullDescriptionErrorMessage;
+    }
     NSMutableDictionary *userInfo = [self userInfoForErrorDescriptionWithObject:stack.originalObject errorMessage:fullDescriptionErrorMessage stack:stackArray];
-    userInfo[NSLocalizedDescriptionKey] = [NSString stringWithFormat:@"Can't find value for key '%@' in '%@' dictionary", key, [stack shortDescription]];
+    userInfo[NSLocalizedDescriptionKey] = descriptionMessage;
     return [NSError errorWithDomain:TyphoonRestClientErrors code:TyphoonRestClientErrorCodeValidation userInfo:userInfo];
 }
 
