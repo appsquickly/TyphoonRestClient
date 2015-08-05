@@ -23,4 +23,6 @@
 
 - (NSString *)shortDescription;
 
++ (NSString *)shortDescriptionFromObject:(id)object;
+
 @end

@@ -42,9 +42,14 @@
 
 - (NSString *)shortDescription
 {
+    return [[self class] shortDescriptionFromObject:_stack];
+}
+
++ (NSString *)shortDescriptionFromObject:(id)object
+{
     NSMutableString *buffer = [NSMutableString new];
     [buffer appendString:@"root"];
-    for (id symbol in _stack) {
+    for (id symbol in object) {
         if ([symbol isKindOfClass:[NSString class]]) {
             [buffer appendFormat:@".%@",symbol];
         } else if ([symbol isKindOfClass:[NSNumber class]]) {
@@ -53,7 +58,6 @@
     }
     return buffer;
 }
-
 
 
 @end

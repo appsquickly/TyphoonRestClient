@@ -187,7 +187,7 @@
     NSString *descriptionMessage = nil;
     if (key) {
         fullDescriptionErrorMessage = [NSString stringWithFormat:@"Can't find value for key '%@' in this dictionary", key];
-        descriptionMessage = [NSString stringWithFormat:@"Can't find value for key '%@' in '%@' dictionary", key, [stack shortDescription]];
+        descriptionMessage = [NSString stringWithFormat:@"Can't find value for key '%@' in '%@' dictionary", key, [TRCSchemaStackTrace shortDescriptionFromObject:stackArray]];
     } else {
         fullDescriptionErrorMessage = [NSString stringWithFormat:@"Can't find root value. Must be kind of %@", NSStringFromClass([schemaValue class])];
         descriptionMessage = fullDescriptionErrorMessage;
