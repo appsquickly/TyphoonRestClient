@@ -10,6 +10,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #import "TRCConnectionLogger.h"
+#import "MF_Base64Additions.h"
 
 
 @implementation TRCConnectionLogger
@@ -129,7 +130,16 @@
     if (request.HTTPBody) {
         body = [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding];
     } else if (request.HTTPBodyStream) {
-        body = [NSString stringWithFormat:@"Reading body from stream: %@", [request.HTTPBodyStream debugDescription]];
+        NSInputStream *streamCopy = [request.HTTPBodyStream copy];
+        [streamCopy open];
+        NSData *data = [[self class] dataWithContentsOfStream:streamCopy initialCapacity:NSUIntegerMax error:nil];
+        [streamCopy close];
+        if (data) {
+            body = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            if (!body) {
+                body = [NSString stringWithFormat:@"__binary data, represented as base64__\n%@", [data base64String]];
+            }
+        }
     }
     [output appendString:@"======================================================================================================>\n"];
     [output appendFormat:@"REQUEST  | id: %lu", (unsigned long) request];
@@ -200,5 +210,49 @@
         }
     });
 }
+
+
++(NSData *)dataWithContentsOfStream:(NSInputStream *)input initialCapacity:(NSUInteger)capacity error:(NSError **)error
+{
+    size_t bufsize = MIN(65536U, capacity);
+    uint8_t * buf = malloc(bufsize);
+    if (buf == NULL) {
+        if (error) {
+            *error = [NSError errorWithDomain:NSPOSIXErrorDomain code:ENOMEM userInfo:nil];
+        }
+        return nil;
+    }
+
+    NSMutableData* result = capacity == NSUIntegerMax ? [NSMutableData data] : [NSMutableData dataWithCapacity:capacity];
+    @try {
+        while (true) {
+            NSInteger n = [input read:buf maxLength:bufsize];
+            if (n < 0) {
+                result = nil;
+                if (error) {
+                    *error = [NSError errorWithDomain:NSPOSIXErrorDomain code:errno userInfo:nil];
+                }
+                break;
+            }
+            else if (n == 0) {
+                break;
+            }
+            else {
+                [result appendBytes:buf length:n];
+            }
+        }
+    }
+    @catch (NSException * exn) {
+        NSLog(@"Caught exception writing to file: %@", exn);
+        result = nil;
+        if (error) {
+            *error = [NSError errorWithDomain:NSPOSIXErrorDomain code:EIO userInfo:nil];
+        }
+    }
+
+    free(buf);
+    return result;
+}
+
 
 @end
