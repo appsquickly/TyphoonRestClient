@@ -25,6 +25,7 @@
 @property(nonatomic) BOOL shouldLogUploadProgress;
 @property(nonatomic) BOOL shouldLogDownloadProgress;
 
+@property(nonatomic) BOOL shouldLogBinaryDataAsBase64;
 
 @end
 

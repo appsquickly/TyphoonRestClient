@@ -40,6 +40,8 @@
 {
     printing_queue = dispatch_queue_create("TRCConnectionLogger", DISPATCH_QUEUE_SERIAL);
     dispatch_set_target_queue(printing_queue, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0));
+
+    self.shouldLogBinaryDataAsBase64 = YES;
 }
 
 
@@ -126,21 +128,22 @@
 {
     NSMutableString *output = [NSMutableString new];
 
-    NSString *body = nil;
+    NSData *bodyData = nil;
     if (request.HTTPBody) {
-        body = [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding];
+        bodyData = request.HTTPBody;
     } else if (request.HTTPBodyStream) {
         NSInputStream *streamCopy = [request.HTTPBodyStream copy];
         [streamCopy open];
-        NSData *data = [[self class] dataWithContentsOfStream:streamCopy initialCapacity:NSUIntegerMax error:nil];
+        bodyData = [[self class] dataWithContentsOfStream:streamCopy initialCapacity:NSUIntegerMax error:nil];
         [streamCopy close];
-        if (data) {
-            body = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            if (!body) {
-                body = [NSString stringWithFormat:@"__binary data, represented as base64__\n%@", [data base64String]];
-            }
-        }
     }
+    NSString *body = nil;
+
+    body = [[NSString alloc] initWithData:bodyData encoding:NSUTF8StringEncoding];
+    if (!body && bodyData && self.shouldLogBinaryDataAsBase64) {
+        body = [NSString stringWithFormat:@"=============================binary body data=========================================================>\n%@", [bodyData base64String]];
+    }
+    
     [output appendString:@"======================================================================================================>\n"];
     [output appendFormat:@"REQUEST  | id: %lu", (unsigned long) request];
     [output appendString:@"\n======================================================================================================>"];
