@@ -131,7 +131,7 @@
     NSData *bodyData = nil;
     if (request.HTTPBody) {
         bodyData = request.HTTPBody;
-    } else if (request.HTTPBodyStream) {
+    } else if (request.HTTPBodyStream && [request.HTTPBodyStream respondsToSelector:NSSelectorFromString(@"copyWithZone:")]) {
         NSInputStream *streamCopy = [request.HTTPBodyStream copy];
         [streamCopy open];
         bodyData = [[self class] dataWithContentsOfStream:streamCopy initialCapacity:NSUIntegerMax error:nil];
