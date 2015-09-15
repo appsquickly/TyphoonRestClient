@@ -41,7 +41,7 @@
     printing_queue = dispatch_queue_create("TRCConnectionLogger", DISPATCH_QUEUE_SERIAL);
     dispatch_set_target_queue(printing_queue, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0));
 
-    self.shouldLogBinaryDataAsBase64 = YES;
+    self.shouldLogBinaryDataAsBase64 = NO;
 }
 
 
@@ -142,6 +142,8 @@
     body = [[NSString alloc] initWithData:bodyData encoding:NSUTF8StringEncoding];
     if (!body && bodyData && self.shouldLogBinaryDataAsBase64) {
         body = [NSString stringWithFormat:@"=============================binary body data=========================================================>\n%@", [bodyData base64String]];
+    } else if (!body && bodyData) {
+        body = [NSString stringWithFormat:@"[Binary Data, %lu bytes]", (unsigned long)[bodyData length]];
     }
     
     [output appendString:@"======================================================================================================>\n"];
