@@ -17,4 +17,6 @@
 
 - (instancetype)initWithBaseUrl:(NSURL *)baseUrl;
 
+- (instancetype)initWithBaseUrl:(NSURL *)baseUrl configuration:(NSURLSessionConfiguration *)configuration;
+
 @end

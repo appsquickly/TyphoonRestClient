@@ -97,9 +97,11 @@
         }
     }
 
-    if (self.completion) {
-        self.completion(dataObject, error, self);
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (self.completion) {
+            self.completion(dataObject, error, self);
+        }
+    });
 }
 
 //-------------------------------------------------------------------------------------------
