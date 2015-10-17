@@ -11,6 +11,8 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol TRCResponseDelegate;
+
 /**
 * ValueOrNull returns value if it's not `nil` or `[NSNull null]` instead.
 * Useful when you compose dictionary with optional values to avoid crashes or annoying checking for each value.
@@ -391,6 +393,9 @@ typedef NS_OPTIONS(NSInteger, TRCTransformationOptions) {
 
 
 - (TRCTransformationOptions)responseTransformationOptions;
+
+
+- (id<TRCResponseDelegate>)responseDelegate;
 
 //-------------------------------------------------------------------------------------------
 #pragma mark - Custom context

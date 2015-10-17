@@ -1,0 +1,174 @@
+////////////////////////////////////////////////////////////////////////////////
+//
+//  APPS QUICKLY
+//  Copyright 2015 Apps Quickly Pty Ltd
+//  All Rights Reserved.
+//
+//  NOTICE: Prepared by AppsQuick.ly on behalf of Apps Quickly. This software
+//  is proprietary information. Unauthorized use is prohibited.
+//
+////////////////////////////////////////////////////////////////////////////////
+
+#import "TRCConnectionNSURLSession.h"
+#import "TRCUtils.h"
+
+
+BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
+
+@interface TRCConnectionNSURLSession ()
+
+@property (nonatomic, strong) NSURL *baseUrl;
+
+@end
+
+@implementation TRCConnectionNSURLSession
+
+//-------------------------------------------------------------------------------------------
+#pragma mark - TRCConnection Protocol
+//-------------------------------------------------------------------------------------------
+
+- (NSMutableURLRequest *)requestWithOptions:(id<TRCConnectionRequestCreationOptions>)options error:(NSError **)requestComposingError
+{
+    NSError *urlComposingError = nil;
+    NSURL *url = [self urlFromPath:options.path parameters:options.pathParameters error:&urlComposingError];
+
+    if (urlComposingError) {
+        if(requestComposingError) {
+            *requestComposingError = urlComposingError;
+        }
+        return nil;
+    }
+
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    request.HTTPMethod = options.method;
+    NSAssert([request.HTTPMethod length] > 0, @"Incorrect HTTP method ('%@') for request with options: %@", options.method, options);
+    [options.headers enumerateKeysAndObjectsUsingBlock:^(NSString *field, NSString *value, BOOL *stop) {
+        if ([value isKindOfClass:[NSString class]] && [value length] > 0) {
+            [request setValue:value forHTTPHeaderField:field];
+        }
+    }];
+
+    BOOL success = [self composeBodyForRequest:request withOptions:options error:requestComposingError];
+    if (!success) {
+        request = nil;
+    }
+
+    return request;
+}
+
+- (id<TRCProgressHandler>)sendRequest:(NSURLRequest *)request withOptions:(id<TRCConnectionRequestSendingOptions>)options completion:(TRCConnectionCompletion)completion
+{
+    return nil;
+}
+
+- (TRCConnectionReachabilityState)reachabilityState
+{
+    return TRCConnectionReachabilityStateUnknown;
+}
+
+- (void)setReachabilityDelegate:(id<TRCConnectionReachabilityDelegate>)reachabilityDelegate
+{
+
+}
+
+//-------------------------------------------------------------------------------------------
+#pragma mark - Private Methods
+//-------------------------------------------------------------------------------------------
+
+- (instancetype)initWithBaseUrl:(NSURL *)baseUrl
+{
+    self = [super init];
+    if (self) {
+        self.baseUrl = baseUrl;
+    }
+    return self;
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        NSAssert(NO, @"Use `initWithBaseUrl` method instead");
+    }
+    return self;
+}
+
+//-------------------------------------------------------------------------------------------
+#pragma mark - Request composing
+//-------------------------------------------------------------------------------------------
+
+- (BOOL)composeBodyForRequest:(NSMutableURLRequest *)request withOptions:(id<TRCConnectionRequestCreationOptions>)options error:(NSError **)error
+{
+    id<TRCRequestSerializer> serializer = options.serialization;
+    id bodyObject = options.body;
+    NSError *composeError = nil;
+
+    if (!IsBodyAllowedInHttpMethod(options.method)) {
+        bodyObject = nil;
+    }
+
+    if (bodyObject) {
+        if (![request valueForHTTPHeaderField:@"Content-Type"]
+                && [serializer respondsToSelector:@selector(contentType)] && [serializer contentType]) {
+            [request setValue:[serializer contentType] forHTTPHeaderField:@"Content-Type"];
+        }
+        if ([serializer respondsToSelector:@selector(bodyDataFromObject:forRequest:error:)]) {
+            NSData *data = [serializer bodyDataFromObject:bodyObject forRequest:request error:&composeError];
+            if (data) {
+                [request setHTTPBody:data];
+                if (![request valueForHTTPHeaderField:@"Content-Length"]) {
+                    NSString *bodyLength = [NSString stringWithFormat:@"%llu", (unsigned long long int)[data length]];
+                    [request setValue:bodyLength forHTTPHeaderField:@"Content-Length"];
+                }
+            }
+        } else if ([serializer respondsToSelector:@selector(bodyStreamFromObject:forRequest:error:)]) {
+            NSInputStream *stream = [serializer bodyStreamFromObject:bodyObject forRequest:request error:&composeError];
+            if (stream) {
+                [request setHTTPBodyStream:stream];
+            }
+        }
+    }
+
+    if (composeError && error) {
+        *error = composeError;
+    }
+
+    return (composeError == nil);
+}
+
+//-------------------------------------------------------------------------------------------
+#pragma mark - URL Composing
+//-------------------------------------------------------------------------------------------
+
+- (NSURL *)urlFromPath:(NSString *)path parameters:(NSDictionary *)parameters error:(NSError **)error
+{
+    NSURL *result = [self absoluteUrlFromPath:path];
+
+    if ([parameters count] > 0) {
+        NSString *query = TRCQueryStringFromParametersWithEncoding(parameters, NSUTF8StringEncoding);
+        result = [NSURL URLWithString:[[result absoluteString] stringByAppendingFormat:result.query ? @"&%@" : @"?%@", query]];
+    }
+
+    return result;
+}
+
+- (NSURL *)absoluteUrlFromPath:(NSString *)path
+{
+    BOOL isAlreadyAbsolute = [path rangeOfString:@"://"].location != NSNotFound;
+    if (isAlreadyAbsolute) {
+        return [[NSURL alloc] initWithString:path];
+    } else {
+        return [[NSURL alloc] initWithString:path relativeToURL:self.baseUrl];
+    }
+}
+
+//-------------------------------------------------------------------------------------------
+#pragma mark - Private Utils
+//-------------------------------------------------------------------------------------------
+
+BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method)
+{
+    return method == TRCRequestMethodPost || method == TRCRequestMethodPut || method == TRCRequestMethodPatch;
+}
+
+@end

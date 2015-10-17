@@ -149,6 +149,8 @@ void TRCUrlPathParamsByRemovingNull(NSMutableDictionary *arguments)
 }
 
 
+//TODO: Get rid of AFNetworking dependency here
+
 //-------------------------------------------------------------------------------------------
 #pragma mark - AFNetworking code reusage
 //-------------------------------------------------------------------------------------------
@@ -164,7 +166,6 @@ extern NSArray * AFQueryStringPairsFromDictionary(NSDictionary *dictionary);
 extern NSArray * AFQueryStringPairsFromKeyAndValue(NSString *key, id value);
 
 
-//TODO: Support nested dictionaries
 NSString * TRCQueryStringFromParametersWithEncoding(NSDictionary *parameters, NSStringEncoding stringEncoding)
 {
     NSMutableArray *mutablePairs = [NSMutableArray array];
