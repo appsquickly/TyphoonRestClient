@@ -15,8 +15,8 @@
 #import "TRCSessionTaskContext.h"
 
 
-BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
-float TaskPriorityFromQueuePriority(NSOperationQueuePriority priority);
+static BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
+static float TaskPriorityFromQueuePriority(NSOperationQueuePriority priority);
 
 @interface TRCConnectionNSURLSession ()
 
@@ -178,12 +178,12 @@ float TaskPriorityFromQueuePriority(NSOperationQueuePriority priority);
 #pragma mark - Private Utils
 //-------------------------------------------------------------------------------------------
 
-BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method)
+static BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method)
 {
     return method == TRCRequestMethodPost || method == TRCRequestMethodPut || method == TRCRequestMethodPatch;
 }
 
-float TaskPriorityFromQueuePriority(NSOperationQueuePriority priority)
+static float TaskPriorityFromQueuePriority(NSOperationQueuePriority priority)
 {
     switch (priority) {
         case NSOperationQueuePriorityVeryLow:

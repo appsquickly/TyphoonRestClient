@@ -72,7 +72,8 @@
         }
     } else {
         if (!self.responseData) {
-            self.responseData = [[NSMutableData alloc] initWithCapacity:(NSUInteger)self.response.expectedContentLength];
+            NSInteger expectedLength = self.response.expectedContentLength > 0 ? self.response.expectedContentLength : 0;
+            self.responseData = [[NSMutableData alloc] initWithCapacity:expectedLength];
         }
         [self.responseData appendData:data];
     }
