@@ -16,6 +16,7 @@
 
 
 BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
+float TaskPriorityFromQueuePriority(NSOperationQueuePriority priority);
 
 @interface TRCConnectionNSURLSession ()
 
@@ -62,6 +63,10 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
 - (id<TRCProgressHandler>)sendRequest:(NSURLRequest *)request withOptions:(id<TRCConnectionRequestSendingOptions>)options completion:(TRCConnectionCompletion)completion
 {
     NSURLSessionDataTask *task = [self.session dataTaskWithRequest:request];
+    if ([task respondsToSelector:@selector(priority)]) {
+        task.priority = TaskPriorityFromQueuePriority(options.queuePriority);
+    }
+
     TRCSessionTaskContext *context = [[TRCSessionTaskContext alloc] initWithTask:task options:options completion:completion];
     [self.sessionHandler startDataTask:task withContext:context];
     return context;
@@ -176,6 +181,21 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
 BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method)
 {
     return method == TRCRequestMethodPost || method == TRCRequestMethodPut || method == TRCRequestMethodPatch;
+}
+
+float TaskPriorityFromQueuePriority(NSOperationQueuePriority priority)
+{
+    switch (priority) {
+        case NSOperationQueuePriorityVeryLow:
+        case NSOperationQueuePriorityLow:
+            return NSURLSessionTaskPriorityLow;
+        default:
+        case NSOperationQueuePriorityNormal:
+            return NSURLSessionTaskPriorityDefault;
+        case NSOperationQueuePriorityHigh:
+        case NSOperationQueuePriorityVeryHigh:
+            return NSURLSessionTaskPriorityHigh;
+    }
 }
 
 @end
