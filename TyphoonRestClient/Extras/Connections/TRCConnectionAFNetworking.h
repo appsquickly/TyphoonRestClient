@@ -23,7 +23,7 @@
 @interface TRCConnectionAFNetworking : NSObject <TRCConnection>
 
 /**
-* Current `reachabilityManager`, we can be used to get current `networkReachabilityStatus`, `isReachable`, etc...
+* Current `reachabilityManager`, we can be use to get current `networkReachabilityStatus`, `isReachable`, etc...
 * */
 @property (nonatomic, strong, readonly) AFNetworkReachabilityManager *reachabilityManager;
 

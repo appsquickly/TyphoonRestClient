@@ -12,6 +12,6 @@
 
 @protocol TRCResponseDelegate
 
-
+- (BOOL)shouldProcessResponse:(NSURLResponse *)response;
 
 @end

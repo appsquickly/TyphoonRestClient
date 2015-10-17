@@ -8,13 +8,13 @@
 //  in accordance with the terms of the license agreement accompanying it.
 //
 ////////////////////////////////////////////////////////////////////////////////
+
 #import <Foundation/Foundation.h>
-#import "TRCConnection.h"
 
-@interface TRCConnectionNSURLSession : NSObject <TRCConnection>
+@class TRCSessionTaskContext;
 
-@property (nonatomic, strong, readonly) NSURLSession *session;
+@interface TRCSessionHandler : NSObject <NSURLSessionDataDelegate>
 
-- (instancetype)initWithBaseUrl:(NSURL *)baseUrl;
+- (void)startDataTask:(NSURLSessionDataTask *)task withContext:(TRCSessionTaskContext *)context;
 
 @end

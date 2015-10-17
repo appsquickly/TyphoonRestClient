@@ -1,16 +1,18 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-//  APPS QUICKLY
-//  Copyright 2015 Apps Quickly Pty Ltd
+//  TYPHOON REST CLIENT
+//  Copyright 2015, Typhoon Rest Client Contributors
 //  All Rights Reserved.
 //
-//  NOTICE: Prepared by AppsQuick.ly on behalf of Apps Quickly. This software
-//  is proprietary information. Unauthorized use is prohibited.
+//  NOTICE: The authors permit you to use, modify, and distribute this file
+//  in accordance with the terms of the license agreement accompanying it.
 //
 ////////////////////////////////////////////////////////////////////////////////
 
 #import "TRCConnectionNSURLSession.h"
 #import "TRCUtils.h"
+#import "TRCSessionHandler.h"
+#import "TRCSessionTaskContext.h"
 
 
 BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
@@ -18,6 +20,7 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
 @interface TRCConnectionNSURLSession ()
 
 @property (nonatomic, strong) NSURL *baseUrl;
+@property (nonatomic, strong) TRCSessionHandler *sessionHandler;
 
 @end
 
@@ -58,17 +61,10 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
 
 - (id<TRCProgressHandler>)sendRequest:(NSURLRequest *)request withOptions:(id<TRCConnectionRequestSendingOptions>)options completion:(TRCConnectionCompletion)completion
 {
-    return nil;
-}
-
-- (TRCConnectionReachabilityState)reachabilityState
-{
-    return TRCConnectionReachabilityStateUnknown;
-}
-
-- (void)setReachabilityDelegate:(id<TRCConnectionReachabilityDelegate>)reachabilityDelegate
-{
-
+    NSURLSessionDataTask *task = [self.session dataTaskWithRequest:request];
+    TRCSessionTaskContext *context = [[TRCSessionTaskContext alloc] initWithTask:task options:options completion:completion];
+    [self.sessionHandler startDataTask:task withContext:context];
+    return context;
 }
 
 //-------------------------------------------------------------------------------------------
@@ -77,9 +73,20 @@ BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
 
 - (instancetype)initWithBaseUrl:(NSURL *)baseUrl
 {
+    return [self initWithBaseUrl:baseUrl configuration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+}
+
+- (instancetype)initWithBaseUrl:(NSURL *)baseUrl configuration:(NSURLSessionConfiguration *)configuration
+{
     self = [super init];
     if (self) {
-        self.baseUrl = baseUrl;
+        NSOperationQueue *backgroundQueue = [NSOperationQueue new];
+        if ([backgroundQueue respondsToSelector:@selector(qualityOfService)]) {
+            backgroundQueue.qualityOfService = NSOperationQualityOfServiceUtility;
+        }
+        _sessionHandler = [TRCSessionHandler new];
+        _session = [NSURLSession sessionWithConfiguration:configuration delegate:_sessionHandler delegateQueue:backgroundQueue];
+        _baseUrl = baseUrl;
     }
     return self;
 }

@@ -18,6 +18,7 @@ static NSInteger TyphoonRestClientErrorCodeTransformation = 101;
 static NSInteger TyphoonRestClientErrorCodeRequestUrlComposing = 103;
 static NSInteger TyphoonRestClientErrorCodeRequestSerialization = 102;
 static NSInteger TyphoonRestClientErrorCodeResponseSerialization = 104;
+static NSInteger TyphoonRestClientErrorCodeBadResponse = 108;
 static NSInteger TyphoonRestClientErrorCodeBadResponseCode = 105;
 static NSInteger TyphoonRestClientErrorCodeBadResponseMime = 106;
 static NSInteger TyphoonRestClientErrorCodeConnectionError = 107;

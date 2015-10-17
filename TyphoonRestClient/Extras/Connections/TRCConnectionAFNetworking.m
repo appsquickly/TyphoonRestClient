@@ -352,7 +352,6 @@ TRCConnectionReachabilityState ReachabilityStateFromAFNetworkingState(AFNetworkR
 #pragma mark - Serializers Cache
 //-------------------------------------------------------------------------------------------
 
-
 - (id<AFURLResponseSerialization>)responseSerializationForTRCSerializer:(id<TRCResponseSerializer>)serializer
 {
     AFTRCResponseSerializer *result = [_responseSerializersCache objectForKey:serializer];
