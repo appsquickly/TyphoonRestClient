@@ -208,6 +208,9 @@ typedef void (^TRCDownloadProgressBlock)(NSUInteger bytesRead, long long totalBy
 /// Queue priority in case there is limitation of concurrent requests. See `TRCRequest.queuePriority`
 @property (nonatomic, assign) NSOperationQueuePriority queuePriority;
 
+/// Custom response delegate. Useful to intercept all traffic, or implement custom logic
+@property (nonatomic, strong) id<TRCResponseDelegate> responseDelegate;
+
 @end
 
 //=============================================================================================================================

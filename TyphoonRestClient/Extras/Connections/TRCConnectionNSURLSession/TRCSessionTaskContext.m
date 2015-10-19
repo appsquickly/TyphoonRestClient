@@ -12,6 +12,7 @@
 #import "TRCSessionTaskContext.h"
 #import "TRCUtils.h"
 #import "TyphoonRestClientErrors.h"
+#import "TRCResponseDelegate.h"
 
 @interface TRCSessionTaskContext ()<TRCResponseInfo>
 
@@ -48,13 +49,24 @@
 - (BOOL)shouldProcessResponse:(NSURLResponse *)response
 {
     self.response = (NSHTTPURLResponse *)response;
-    return YES;
+
+    BOOL shouldProcess = YES;
+
+    if ([self.options.responseDelegate respondsToSelector:@selector(connection:shouldProcessResponse:)]) {
+        shouldProcess = [self.options.responseDelegate connection:self.connection shouldProcessResponse:response];
+    }
+
+    return shouldProcess;
 }
 
 - (void)didSendBodyData:(int64_t)bytesSent totalBytesSent:(int64_t)totalBytesSent totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
 {
     if (self.uploadProgressBlock) {
         self.uploadProgressBlock((NSUInteger)bytesSent, totalBytesSent, totalBytesExpectedToSend);
+    }
+
+    if ([self.options.responseDelegate respondsToSelector:@selector(connection:didSendBodyData:totalBytesSent:totalBytesExpectedToSend:)]) {
+        [self.options.responseDelegate connection:self.connection didSendBodyData:bytesSent totalBytesSent:totalBytesSent totalBytesExpectedToSend:totalBytesExpectedToSend];
     }
 }
 
@@ -76,6 +88,10 @@
         }
         [self.responseData appendData:data];
     }
+
+    if ([self.options.responseDelegate respondsToSelector:@selector(connection:didReceiveData:)]) {
+        [self.options.responseDelegate connection:self.connection didReceiveData:data];
+    }
 }
 
 - (void)didCompleteWithError:(NSError *)networkError
@@ -95,6 +111,10 @@
         } else {
             error = responseError;
         }
+    }
+
+    if ([self.options.responseDelegate respondsToSelector:@selector(connection:didCompleteWithError:)]) {
+        [self.options.responseDelegate connection:self.connection didCompleteWithError:error];
     }
 
     dispatch_async(dispatch_get_main_queue(), ^{

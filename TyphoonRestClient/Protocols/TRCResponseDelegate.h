@@ -9,9 +9,17 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+@protocol TRCConnection;
 
-@protocol TRCResponseDelegate
+@protocol TRCResponseDelegate <NSObject>
 
-- (BOOL)shouldProcessResponse:(NSURLResponse *)response;
+@optional
+- (BOOL)connection:(id<TRCConnection>)connection shouldProcessResponse:(NSURLResponse *)response;
+
+- (void)connection:(id<TRCConnection>)connection didSendBodyData:(int64_t)bytesSent totalBytesSent:(int64_t)totalBytesSent totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
+
+- (void)connection:(id<TRCConnection>)connection didReceiveData:(NSData *)data;
+
+- (void)connection:(id<TRCConnection>)connection didCompleteWithError:(NSError *)networkError;
 
 @end

@@ -19,7 +19,7 @@
 
 static NSString * const TRCMultipartFormCRLF = @"\r\n";
 
-TRCSerialization TRCSerializationMultipart = @"TRCSerializationMultipart";
+TRCSerialization TRCSerializationRequestMultipart = @"TRCSerializationRequestMultipart";
 
 @implementation TRCSerializerMultipart
 

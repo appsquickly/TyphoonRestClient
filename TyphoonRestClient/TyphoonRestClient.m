@@ -50,7 +50,7 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
 @interface TRCRequestSendOptions : NSObject <TRCConnectionRequestSendingOptions>
 @end
 @implementation TRCRequestSendOptions
-@synthesize outputStream, responseSerialization, customProperties, queuePriority;
+@synthesize outputStream, responseSerialization, customProperties, queuePriority, responseDelegate;
 @end
 
 
@@ -132,7 +132,7 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
     [self registerResponseSerializer:image forName:TRCSerializationResponseImage];
 
     TRCSerializerMultipart *multipart = [TRCSerializerMultipart new];
-    [self registerRequestSerializer:multipart forName:TRCSerializationMultipart];
+    [self registerRequestSerializer:multipart forName:TRCSerializationRequestMultipart];
 }
 
 - (id<TRCProgressHandler>)sendRequest:(id<TRCRequest>)request completion:(void (^)(id result, NSError *error))completion
@@ -209,6 +209,10 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
 
     if ([request respondsToSelector:@selector(customProperties)]) {
         options.customProperties = [request customProperties];
+    }
+
+    if ([request respondsToSelector:@selector(responseDelegate)]) {
+        options.responseDelegate = [request responseDelegate];
     }
 
     return options;

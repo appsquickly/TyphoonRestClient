@@ -24,6 +24,7 @@ static float TaskPriorityFromQueuePriority(NSOperationQueuePriority priority);
 @property (nonatomic, strong) NSURL *baseUrl;
 @property (nonatomic, strong) TRCSessionHandler *sessionHandler;
 
+@property (nonatomic, weak) id<TRCConnectionReachabilityDelegate> reachabilityDelegate;
 @end
 
 @implementation TRCConnectionNSURLSession
@@ -69,8 +70,14 @@ static float TaskPriorityFromQueuePriority(NSOperationQueuePriority priority);
     }
 
     TRCSessionTaskContext *context = [[TRCSessionTaskContext alloc] initWithTask:task options:options completion:completion];
+    context.connection = self;
     [self.sessionHandler startDataTask:task withContext:context];
     return context;
+}
+
+- (TRCConnectionReachabilityState)reachabilityState
+{
+    return (TRCConnectionReachabilityState)self.reachabilityManager.networkReachabilityStatus;
 }
 
 //-------------------------------------------------------------------------------------------
@@ -94,7 +101,11 @@ static float TaskPriorityFromQueuePriority(NSOperationQueuePriority priority);
         _session = [NSURLSession sessionWithConfiguration:configuration delegate:_sessionHandler delegateQueue:backgroundQueue];
         _baseUrl = baseUrl;
 
+        __weak __typeof (self) weakSelf = self;
         _reachabilityManager = [TRCNetworkReachabilityManager sharedManager];
+        [_reachabilityManager setReachabilityStatusChangeBlock:^(TRCNetworkReachabilityStatus status) {
+            [weakSelf.reachabilityDelegate connection:weakSelf didChangeReachabilityState:(TRCConnectionReachabilityState)status];
+        }];
     }
     return self;
 }

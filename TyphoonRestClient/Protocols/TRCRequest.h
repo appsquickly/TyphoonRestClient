@@ -134,6 +134,11 @@ extern TRCSerialization TRCSerializationRequestHttp;
 * */
 extern TRCSerialization TRCSerializationRequestInputStream;
 
+/**
+ * TODO: write doc
+ * */
+extern TRCSerialization TRCSerializationRequestMultipart;
+
 /** Registered for `TRCSerializerImage`.
 * Can be used **ONLY** for response body.
 *
@@ -143,10 +148,6 @@ extern TRCSerialization TRCSerializationRequestInputStream;
 * Response object would be `UIImage`
 * */
 extern TRCSerialization TRCSerializationResponseImage;
-
-
-
-extern TRCSerialization TRCSerializationMultipart;
 
 
 //-------------------------------------------------------------------------------------------
@@ -304,7 +305,9 @@ typedef NS_OPTIONS(NSInteger, TRCTransformationOptions) {
 - (TRCSerialization)requestBodySerialization;
 
 
-
+/**
+ * TODO: Write doc
+ * */
 - (TRCTransformationOptions)requestTransformationOptions;
 
 //=============================================================================================================================
@@ -394,7 +397,12 @@ typedef NS_OPTIONS(NSInteger, TRCTransformationOptions) {
 
 - (TRCTransformationOptions)responseTransformationOptions;
 
-
+/**
+ * TODO: Write doc
+ *
+ * @note
+ * Delegate methods called NOT on main thread. Switch to main manually if necessary
+ * */
 - (id<TRCResponseDelegate>)responseDelegate;
 
 //-------------------------------------------------------------------------------------------

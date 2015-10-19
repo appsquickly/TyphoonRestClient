@@ -15,6 +15,8 @@
 
 @interface TRCSessionTaskContext : NSObject <TRCProgressHandler>
 
+@property (nonatomic, weak) id<TRCConnection> connection;
+
 - (instancetype)initWithTask:(NSURLSessionDataTask *)task options:(id<TRCConnectionRequestSendingOptions>)options completion:(TRCConnectionCompletion)completion;
 
 - (BOOL)shouldProcessResponse:(NSURLResponse *)response;

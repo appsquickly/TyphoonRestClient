@@ -26,7 +26,6 @@
 
 - (instancetype)initWithBaseUrl:(NSURL *)baseUrl configuration:(NSURLSessionConfiguration *)configuration;
 
-
 /**
 * Invokes `startMonitoring` on `reachabilityManager`
 * */
