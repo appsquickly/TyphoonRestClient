@@ -11,6 +11,7 @@
 
 #import "TRCUtils.h"
 #import "TyphoonRestClientErrors.h"
+#import "TRCHttpQueryComposer.h"
 
 NSString *TRCRootMapperKey = @"{root_mapper}";
 
@@ -146,99 +147,6 @@ void TRCUrlPathParamsByRemovingNull(NSMutableDictionary *arguments)
         }
     }
 }
-
-//-------------------------------------------------------------------------------------------
-#pragma mark - AFNetworking code
-//-------------------------------------------------------------------------------------------
-
-/**
- * The code below was copy-pasted from AFNetworking. Many thanks authors
- * AF prefix was replaced with TRC to avoid possible linking error while using with AFNetworking library
- * */
-
-static NSString * const kTRCCharactersToBeEscapedInQueryString = @":/?&=;+!@#$()',*";
-
-static NSString * TRCPercentEscapedQueryStringKeyFromStringWithEncoding(NSString *string, NSStringEncoding encoding) {
-    static NSString * const kTRCCharactersToLeaveUnescapedInQueryStringPairKey = @"[].";
-
-    return (__bridge_transfer  NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (__bridge CFStringRef)string, (__bridge CFStringRef)kTRCCharactersToLeaveUnescapedInQueryStringPairKey, (__bridge CFStringRef)kTRCCharactersToBeEscapedInQueryString, CFStringConvertNSStringEncodingToEncoding(encoding));
-}
-
-static NSString * TRCPercentEscapedQueryStringValueFromStringWithEncoding(NSString *string, NSStringEncoding encoding) {
-    return (__bridge_transfer  NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (__bridge CFStringRef)string, NULL, (__bridge CFStringRef)kTRCCharactersToBeEscapedInQueryString, CFStringConvertNSStringEncodingToEncoding(encoding));
-}
-
-@interface TRCQueryStringPair : NSObject
-@property (readwrite, nonatomic, strong) id field;
-@property (readwrite, nonatomic, strong) id value;
-
-- (id)initWithField:(id)field value:(id)value;
-
-- (NSString *)URLEncodedStringValueWithEncoding:(NSStringEncoding)stringEncoding;
-@end
-
-@implementation TRCQueryStringPair
-
-- (id)initWithField:(id)field value:(id)value {
-    self = [super init];
-    if (!self) {
-        return nil;
-    }
-
-    self.field = field;
-    self.value = value;
-
-    return self;
-}
-
-- (NSString *)URLEncodedStringValueWithEncoding:(NSStringEncoding)stringEncoding {
-    if (!self.value || [self.value isEqual:[NSNull null]]) {
-        return TRCPercentEscapedQueryStringKeyFromStringWithEncoding([self.field description], stringEncoding);
-    } else {
-        return [NSString stringWithFormat:@"%@=%@", TRCPercentEscapedQueryStringKeyFromStringWithEncoding([self.field description], stringEncoding), TRCPercentEscapedQueryStringValueFromStringWithEncoding([self.value description], stringEncoding)];
-    }
-}
-
-@end
-
-static NSArray *TRCQueryStringPairsFromKeyAndValue(NSString *key, id value) {
-    NSMutableArray *mutableQueryStringComponents = [NSMutableArray array];
-
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"description" ascending:YES selector:@selector(compare:)];
-
-    if ([value isKindOfClass:[NSDictionary class]]) {
-        NSDictionary *dictionary = value;
-        // Sort dictionary keys to ensure consistent ordering in query string, which is important when deserializing potentially ambiguous sequences, such as an array of dictionaries
-        for (id nestedKey in [dictionary.allKeys sortedArrayUsingDescriptors:@[ sortDescriptor ]]) {
-            id nestedValue = dictionary[nestedKey];
-            if (nestedValue) {
-                [mutableQueryStringComponents addObjectsFromArray:TRCQueryStringPairsFromKeyAndValue((key ? [NSString stringWithFormat:@"%@[%@]", key, nestedKey] : nestedKey), nestedValue)];
-            }
-        }
-    } else if ([value isKindOfClass:[NSArray class]]) {
-        NSArray *array = value;
-        for (id nestedValue in array) {
-            [mutableQueryStringComponents addObjectsFromArray:TRCQueryStringPairsFromKeyAndValue([NSString stringWithFormat:@"%@[]", key], nestedValue)];
-        }
-    } else if ([value isKindOfClass:[NSSet class]]) {
-        NSSet *set = value;
-        for (id obj in [set sortedArrayUsingDescriptors:@[ sortDescriptor ]]) {
-            [mutableQueryStringComponents addObjectsFromArray:TRCQueryStringPairsFromKeyAndValue(key, obj)];
-        }
-    } else {
-        [mutableQueryStringComponents addObject:[[TRCQueryStringPair alloc] initWithField:key value:value]];
-    }
-
-    return mutableQueryStringComponents;
-}
-
-static NSArray * TRCQueryStringPairsFromDictionary(NSDictionary *dictionary) {
-    return TRCQueryStringPairsFromKeyAndValue(nil, dictionary);
-}
-
-//-------------------------------------------------------------------------------------------
-#pragma mark -
-//-------------------------------------------------------------------------------------------
 
 NSString * TRCQueryStringFromParametersWithEncoding(NSDictionary *parameters, NSStringEncoding stringEncoding)
 {
