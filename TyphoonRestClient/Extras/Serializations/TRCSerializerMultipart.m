@@ -136,7 +136,7 @@ TRCSerialization TRCSerializationMultipart = @"TRCSerializationMultipart";
 - (NSData *)partDataFromData:(NSData *)bodyData withHeaders:(NSDictionary *)headers
 {
     NSData *headersData = [self dataFromHeaders:headers];
-    NSMutableData *partData = [NSMutableData dataWithLength:[headersData length] + [bodyData length]];
+    NSMutableData *partData = [NSMutableData dataWithCapacity:[headersData length] + [bodyData length]];
     [partData appendData:headersData];
     [partData appendData:bodyData];
     return partData;
