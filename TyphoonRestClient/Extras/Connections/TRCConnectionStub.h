@@ -11,7 +11,6 @@
 
 #import <Foundation/Foundation.h>
 #import "TRCConnection.h"
-#import "TRCConnectionAFNetworking.h"
 
 @class TRCConnectionStubResponse;
 typedef TRCConnectionStubResponse *(^TRCConnectionStubResponseBlock)(NSURLRequest *);

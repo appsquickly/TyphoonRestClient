@@ -22,12 +22,15 @@
 
 
     BOOL (^responseBlock)(NSURLRequest *, id *, NSError **);
+
+    id<TRCConnection> _requestMakingConnection;
 }
 
 - (id)init
 {
     self = [super init];
     if (self) {
+        _requestMakingConnection = [[TRCConnectionNSURLSession alloc] initWithBaseUrl:[NSURL URLWithString:@"http://connection.stub"]];
         responses = [NSMutableDictionary new];
     }
     return self;
@@ -36,7 +39,7 @@
 - (NSMutableURLRequest *)requestWithOptions:(id<TRCConnectionRequestCreationOptions>)options error:(NSError **)requestComposingError
 {
     if (options.path.length > 0) {
-        return [super requestWithOptions:options error:requestComposingError];
+        return [_requestMakingConnection requestWithOptions:options error:requestComposingError];
     } else {
         return [NSMutableURLRequest new];
     }

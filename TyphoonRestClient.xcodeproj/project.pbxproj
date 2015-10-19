@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2DBA101DBDDF6837CC2764FB /* TRCSessionTaskContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA12EB780D6799AD1F8462 /* TRCSessionTaskContext.m */; };
 		2DBA1032DE3FC4B71AD5015B /* RequestToSetIssue.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA14DCB3A9D1601CFB7FD1 /* RequestToSetIssue.m */; };
+		2DBA10C8F1A7B8687AAA3C78 /* TRCNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1DF66E068A7D28A35396 /* TRCNetworkReachabilityManager.m */; };
 		2DBA10F6D20316CBD2233306 /* TRCUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1D5D6A4F1CD450673422 /* TRCUtilsTests.m */; };
 		2DBA120634800EF8507024AD /* PersonsList.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA104BA4D6F38FB51EC684 /* PersonsList.json */; };
 		2DBA1462FF2E726FD6E5F609 /* TRCSerializerMultipart.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1B5308D0A28755F5CE2C /* TRCSerializerMultipart.m */; };
@@ -70,7 +71,6 @@
 		FAC9167E19E697A60009D824 /* TestScheme.json in Resources */ = {isa = PBXBuildFile; fileRef = FAC9166B19E697A60009D824 /* TestScheme.json */; };
 		FAC9167F19E697A60009D824 /* TestSchemeOptionals.json in Resources */ = {isa = PBXBuildFile; fileRef = FAC9166C19E697A60009D824 /* TestSchemeOptionals.json */; };
 		FAE3B4D31ACFEA880033835A /* PropertyListSchema.plist in Resources */ = {isa = PBXBuildFile; fileRef = FAE3B4D21ACFEA880033835A /* PropertyListSchema.plist */; };
-		FAE88A1F1B171F5700CCADC3 /* TRCConnectionAFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE889FE1B171F5700CCADC3 /* TRCConnectionAFNetworking.m */; };
 		FAE88A201B171F5700CCADC3 /* TRCConnectionLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE88A001B171F5700CCADC3 /* TRCConnectionLogger.m */; };
 		FAE88A211B171F5700CCADC3 /* TRCConnectionProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE88A021B171F5700CCADC3 /* TRCConnectionProxy.m */; };
 		FAE88A221B171F5700CCADC3 /* TRCConnectionStub.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE88A041B171F5700CCADC3 /* TRCConnectionStub.m */; };
@@ -116,6 +116,7 @@
 		2DBA104BA4D6F38FB51EC684 /* PersonsList.json */ = {isa = PBXFileReference; lastKnownFileType = file.json; path = PersonsList.json; sourceTree = "<group>"; };
 		2DBA1076B15A22774213B2FA /* TRCMapperWithArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCMapperWithArray.h; sourceTree = "<group>"; };
 		2DBA10AE04851CC3BDE7480A /* TRCMapperPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCMapperPhone.m; sourceTree = "<group>"; };
+		2DBA10B8B095A61370FF141A /* TRCNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCNetworkReachabilityManager.h; sourceTree = "<group>"; };
 		2DBA1139A068FD435CFD2C2A /* TRCResponseDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCResponseDelegate.h; sourceTree = "<group>"; };
 		2DBA119F94B4B1A277B51A2B /* TRCSessionTaskContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSessionTaskContext.h; sourceTree = "<group>"; };
 		2DBA11C1B532C921805BEC2F /* TRCMapperPhone.json */ = {isa = PBXFileReference; lastKnownFileType = file.json; path = TRCMapperPhone.json; sourceTree = "<group>"; };
@@ -144,6 +145,7 @@
 		2DBA1D5D6A4F1CD450673422 /* TRCUtilsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCUtilsTests.m; sourceTree = "<group>"; };
 		2DBA1D63DF19AC301D0604A5 /* TRCMapperPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCMapperPhone.h; sourceTree = "<group>"; };
 		2DBA1DCB50C312ECC2FCB559 /* TRCIntegrationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCIntegrationTests.m; sourceTree = "<group>"; };
+		2DBA1DF66E068A7D28A35396 /* TRCNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCNetworkReachabilityManager.m; sourceTree = "<group>"; };
 		2DBA1DFAF75A7BFE623BC34C /* TRCSchemeFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSchemeFactory.m; sourceTree = "<group>"; };
 		2DBA1E03A8FA7ED062C8376B /* TRCSessionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSessionHandler.m; sourceTree = "<group>"; };
 		2DBA1EBD1A9ADDFE7A44DD50 /* TRCSessionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSessionHandler.h; sourceTree = "<group>"; };
@@ -225,8 +227,6 @@
 		FAE3B4D21ACFEA880033835A /* PropertyListSchema.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PropertyListSchema.plist; sourceTree = "<group>"; };
 		FAE889F91B171D3F00CCADC3 /* TyphoonRestClient-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TyphoonRestClient-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		FAE889FA1B171F2300CCADC3 /* TyphoonRestClientErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TyphoonRestClientErrors.h; sourceTree = "<group>"; };
-		FAE889FD1B171F5700CCADC3 /* TRCConnectionAFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCConnectionAFNetworking.h; sourceTree = "<group>"; };
-		FAE889FE1B171F5700CCADC3 /* TRCConnectionAFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCConnectionAFNetworking.m; sourceTree = "<group>"; };
 		FAE889FF1B171F5700CCADC3 /* TRCConnectionLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCConnectionLogger.h; sourceTree = "<group>"; };
 		FAE88A001B171F5700CCADC3 /* TRCConnectionLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCConnectionLogger.m; sourceTree = "<group>"; };
 		FAE88A011B171F5700CCADC3 /* TRCConnectionProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCConnectionProxy.h; sourceTree = "<group>"; };
@@ -284,6 +284,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2DBA101783BF2EC134BDD0D5 /* Third Parties */ = {
+			isa = PBXGroup;
+			children = (
+				2DBA1418F7CA1727B2D24483 /* AFNetwroking Parts */,
+			);
+			path = "Third Parties";
+			sourceTree = "<group>";
+		};
+		2DBA10B2C75FA1E966F2D96B /* HttpQueryComposer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = HttpQueryComposer;
+			sourceTree = "<group>";
+		};
+		2DBA1418F7CA1727B2D24483 /* AFNetwroking Parts */ = {
+			isa = PBXGroup;
+			children = (
+				2DBA1F27CE21DCB632343D9D /* Reachability */,
+				2DBA10B2C75FA1E966F2D96B /* HttpQueryComposer */,
+			);
+			path = "AFNetwroking Parts";
+			sourceTree = "<group>";
+		};
 		2DBA142B41142B7C4B452940 /* ErrorParser */ = {
 			isa = PBXGroup;
 			children = (
@@ -311,7 +335,6 @@
 				2DBA1EBD1A9ADDFE7A44DD50 /* TRCSessionHandler.h */,
 				2DBA12EB780D6799AD1F8462 /* TRCSessionTaskContext.m */,
 				2DBA119F94B4B1A277B51A2B /* TRCSessionTaskContext.h */,
-				2DBA1A1E8CC8EBF62F1778A1 /* Reachability */,
 			);
 			path = TRCConnectionNSURLSession;
 			sourceTree = "<group>";
@@ -327,13 +350,6 @@
 				2DBA142B41142B7C4B452940 /* ErrorParser */,
 			);
 			path = "Related Objects";
-			sourceTree = "<group>";
-		};
-		2DBA1A1E8CC8EBF62F1778A1 /* Reachability */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Reachability;
 			sourceTree = "<group>";
 		};
 		2DBA1AEED0012EED9DFC72CA /* SchemeFactory */ = {
@@ -352,6 +368,15 @@
 				2DBA1DCB50C312ECC2FCB559 /* TRCIntegrationTests.m */,
 			);
 			path = Integration;
+			sourceTree = "<group>";
+		};
+		2DBA1F27CE21DCB632343D9D /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				2DBA1DF66E068A7D28A35396 /* TRCNetworkReachabilityManager.m */,
+				2DBA10B8B095A61370FF141A /* TRCNetworkReachabilityManager.h */,
+			);
+			path = Reachability;
 			sourceTree = "<group>";
 		};
 		7C7F52DF2A50096085E5149B /* Pods */ = {
@@ -475,6 +500,7 @@
 				FAC9161D19E693370009D824 /* TyphoonRestClient.m */,
 				FAE889FA1B171F2300CCADC3 /* TyphoonRestClientErrors.h */,
 				FAC9161919E693370009D824 /* Supporting Files */,
+				2DBA101783BF2EC134BDD0D5 /* Third Parties */,
 			);
 			path = TyphoonRestClient;
 			sourceTree = "<group>";
@@ -640,8 +666,6 @@
 		FAE889FC1B171F5700CCADC3 /* Connections */ = {
 			isa = PBXGroup;
 			children = (
-				FAE889FD1B171F5700CCADC3 /* TRCConnectionAFNetworking.h */,
-				FAE889FE1B171F5700CCADC3 /* TRCConnectionAFNetworking.m */,
 				FAE889FF1B171F5700CCADC3 /* TRCConnectionLogger.h */,
 				FAE88A001B171F5700CCADC3 /* TRCConnectionLogger.m */,
 				FAE88A011B171F5700CCADC3 /* TRCConnectionProxy.h */,
@@ -746,6 +770,7 @@
 				FAC9162019E693370009D824 /* Frameworks */,
 				FAC9162119E693370009D824 /* Resources */,
 				5F6F230CDD29EFAA5F60EAEA /* Copy Pods Resources */,
+				14B76CE33E139A47D7B02D59 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -763,7 +788,7 @@
 		FAC9160B19E693370009D824 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Apps Quickly";
 			};
 			buildConfigurationList = FAC9160E19E693370009D824 /* Build configuration list for PBXProject "TyphoonRestClient" */;
@@ -825,6 +850,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		14B76CE33E139A47D7B02D59 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TyphoonRestClientTests/Pods-TyphoonRestClientTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		36031CF4AA19312055B79A4C /* Copy Pods Resources */ = {
@@ -895,7 +935,6 @@
 				FAE88A2C1B171F5700CCADC3 /* TRCSerializerPlist.m in Sources */,
 				FAE88A251B171F5700CCADC3 /* TRCValueTransformerUrl.m in Sources */,
 				FAE88A271B171F5700CCADC3 /* TRCSerializerData.m in Sources */,
-				FAE88A1F1B171F5700CCADC3 /* TRCConnectionAFNetworking.m in Sources */,
 				FAE88A241B171F5700CCADC3 /* TRCValueTransformerString.m in Sources */,
 				FAE88A2D1B171F5700CCADC3 /* TRCSerializerString.m in Sources */,
 				FAE88A291B171F5700CCADC3 /* TRCSerializerImage.m in Sources */,
@@ -907,6 +946,7 @@
 				2DBA1BDB7463207464DBD58D /* TRCConnectionNSURLSession.m in Sources */,
 				2DBA177DCFDC2DB5EB9784B8 /* TRCSessionHandler.m in Sources */,
 				2DBA101DBDDF6837CC2764FB /* TRCSessionTaskContext.m in Sources */,
+				2DBA10C8F1A7B8687AAA3C78 /* TRCNetworkReachabilityManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -982,6 +1022,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1077,6 +1118,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "TyphoonRestClientTests/TyphoonRestClientTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.codemonastery.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = TyphoonRestClientTests;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = xctest;
@@ -1097,6 +1139,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TyphoonRestClient-Prefix.pch";
 				INFOPLIST_FILE = "TyphoonRestClientTests/TyphoonRestClientTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.codemonastery.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = TyphoonRestClientTests;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = xctest;

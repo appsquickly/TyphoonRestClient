@@ -11,12 +11,30 @@
 #import <Foundation/Foundation.h>
 #import "TRCConnection.h"
 
+@class TRCNetworkReachabilityManager;
+
 @interface TRCConnectionNSURLSession : NSObject <TRCConnection>
 
 @property (nonatomic, strong, readonly) NSURLSession *session;
 
+/**
+* Current `reachabilityManager`, it can be used to get current `networkReachabilityStatus`, `isReachable`, etc...
+* */
+@property (nonatomic, strong, readonly) TRCNetworkReachabilityManager *reachabilityManager;
+
 - (instancetype)initWithBaseUrl:(NSURL *)baseUrl;
 
 - (instancetype)initWithBaseUrl:(NSURL *)baseUrl configuration:(NSURLSessionConfiguration *)configuration;
+
+
+/**
+* Invokes `startMonitoring` on `reachabilityManager`
+* */
+- (void)startReachabilityMonitoring;
+
+/**
+* Invokes `stopMonitoring` on `reachabilityManager`
+* */
+- (void)stopReachabilityMonitoring;
 
 @end

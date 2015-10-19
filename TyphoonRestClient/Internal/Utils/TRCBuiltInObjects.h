@@ -9,7 +9,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#import "TRCConnectionAFNetworking.h"
+#import "TRCConnectionNSURLSession.h"
 #import "TRCConnectionLogger.h"
 
 #import "TRCValueTransformerNumber.h"

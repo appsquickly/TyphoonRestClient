@@ -13,6 +13,7 @@
 #import "TRCUtils.h"
 #import "TRCSessionHandler.h"
 #import "TRCSessionTaskContext.h"
+#import "TRCNetworkReachabilityManager.h"
 
 
 static BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
@@ -92,8 +93,20 @@ static float TaskPriorityFromQueuePriority(NSOperationQueuePriority priority);
         _sessionHandler = [TRCSessionHandler new];
         _session = [NSURLSession sessionWithConfiguration:configuration delegate:_sessionHandler delegateQueue:backgroundQueue];
         _baseUrl = baseUrl;
+
+        _reachabilityManager = [TRCNetworkReachabilityManager sharedManager];
     }
     return self;
+}
+
+- (void)startReachabilityMonitoring
+{
+    [self.reachabilityManager startMonitoring];
+}
+
+- (void)stopReachabilityMonitoring
+{
+    [self.reachabilityManager stopMonitoring];
 }
 
 - (instancetype)init

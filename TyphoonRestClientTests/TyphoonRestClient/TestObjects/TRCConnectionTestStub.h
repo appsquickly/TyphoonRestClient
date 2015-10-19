@@ -5,10 +5,10 @@
 
 #import <Foundation/Foundation.h>
 #import "TRCConnection.h"
-#import "TRCConnectionAFNetworking.h"
+#import "TRCConnectionNSURLSession.h"
 
 
-@interface TRCConnectionTestStub : TRCConnectionAFNetworking<TRCConnection>
+@interface TRCConnectionTestStub : NSObject<TRCConnection>
 
 + (id)newWithResponse:(id)responseObject error:(NSError *)error;
 

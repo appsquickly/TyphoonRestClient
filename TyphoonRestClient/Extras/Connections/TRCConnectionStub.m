@@ -38,7 +38,7 @@
 {
     self = [super init];
     if (self) {
-        _requestMakingConnection = [[TRCConnectionAFNetworking alloc] initWithBaseUrl:[NSURL URLWithString:@"http://connection.stub"]];
+        _requestMakingConnection = [[TRCConnectionNSURLSession alloc] initWithBaseUrl:[NSURL URLWithString:@"http://connection.stub"]];
     }
 
     return self;

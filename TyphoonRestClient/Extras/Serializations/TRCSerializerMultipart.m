@@ -11,8 +11,11 @@
 
 
 #import "TRCSerializerMultipart.h"
-#import "AFURLRequestSerialization.h"
 #import "TRCUtils.h"
+#if TARGET_OS_IPHONE
+#import <UIKit/UIKit.h>
+#endif
+
 
 static NSString * const TRCMultipartFormCRLF = @"\r\n";
 
@@ -103,13 +106,17 @@ TRCSerialization TRCSerializationMultipart = @"TRCSerializationMultipart";
         partData = [self partDataFromFile:param withName:name];
     } else if ([param isKindOfClass:[NSNull class]]) {
         partData = [self partDataFromData:[NSData data] withName:name];
-    } else if ([param isKindOfClass:[UIImage class]]) {
+    }
+#if TARGET_OS_IPHONE
+    else if ([param isKindOfClass:[UIImage class]]) {
         TRCMultipartFile *file = [TRCMultipartFile new];
         file.data = UIImageJPEGRepresentation(param, 0.8);
         file.filename = name;
         file.mimeType = @"image/jpeg";
         partData = [self partDataFromFile:file withName:name];
-    } else {
+    }
+#endif
+    else {
         NSData *partBodyData = [[param description] dataUsingEncoding:NSUTF8StringEncoding];
         partData = [self partDataFromData:partBodyData withName:name];
     }
