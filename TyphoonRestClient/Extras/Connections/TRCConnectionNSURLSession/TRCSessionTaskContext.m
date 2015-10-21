@@ -56,6 +56,10 @@
         shouldProcess = [self.options.responseDelegate connection:self.connection shouldProcessResponse:response];
     }
 
+    if (self.options.outputStream) {
+        [self.options.outputStream open];
+    }
+
     return shouldProcess;
 }
 
@@ -79,7 +83,8 @@
 
     if (self.options.outputStream) {
         NSUInteger dataLength = data.length;
-        if ([self.options.outputStream write:data.bytes maxLength:dataLength] < dataLength) {
+        NSInteger written = [self.options.outputStream write:data.bytes maxLength:dataLength];
+        if (written < (NSInteger)dataLength) {
             NSLog(@"Warning: Can't write data to output stream. Do we have enough disk space?");
         }
     } else {
@@ -111,6 +116,10 @@
         } else {
             error = responseError;
         }
+    }
+
+    if (self.options.outputStream) {
+        [self.options.outputStream close];
     }
 
     if ([self.options.responseDelegate respondsToSelector:@selector(connection:didCompleteWithError:)]) {
@@ -198,7 +207,7 @@
         }
 
         if (error) {
-        if (contentTypeError) {
+            if (contentTypeError) {
                 *error = contentTypeError;
             } else if (serializerError) {
                 *error = serializerError;
