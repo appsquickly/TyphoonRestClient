@@ -66,7 +66,9 @@
 - (void)didSendBodyData:(int64_t)bytesSent totalBytesSent:(int64_t)totalBytesSent totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
 {
     if (self.uploadProgressBlock) {
-        self.uploadProgressBlock((NSUInteger)bytesSent, totalBytesSent, totalBytesExpectedToSend);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.uploadProgressBlock((NSUInteger)bytesSent, totalBytesSent, totalBytesExpectedToSend);
+        });
     }
 
     if ([self.options.responseDelegate respondsToSelector:@selector(connection:didSendBodyData:totalBytesSent:totalBytesExpectedToSend:)]) {
@@ -78,7 +80,9 @@
 {
     _totalBytesReceived += [data length];
     if (self.downloadProgressBlock) {
-        self.downloadProgressBlock([data length], _totalBytesReceived, self.response.expectedContentLength);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.downloadProgressBlock([data length], _totalBytesReceived, self.response.expectedContentLength);
+        });
     }
 
     if (self.options.outputStream) {
