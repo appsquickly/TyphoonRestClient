@@ -310,6 +310,12 @@ typedef NS_OPTIONS(NSInteger, TRCTransformationOptions) {
  * */
 - (TRCTransformationOptions)requestTransformationOptions;
 
+/**
+ * You can modify or replace NSURLRequest, created by TRCConnection here. This method can be useful
+ * for setting specific parameters like cache policy, cookies policy and timeout
+ * */
+- (NSMutableURLRequest *)requestPostProcessedFromRequest:(NSMutableURLRequest *)request;
+
 //=============================================================================================================================
 #pragma mark - Response
 //=============================================================================================================================

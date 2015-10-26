@@ -189,6 +189,9 @@ typedef void (^TRCDownloadProgressBlock)(NSUInteger bytesRead, long long totalBy
 /// User-defined custom properties, which can be used by connections-in-the-middle. See `TRCRequest.customProperties`
 @property (nonatomic, strong) NSDictionary *customProperties;
 
+/// Please use this property only for `requestPostProcessedFromRequest` call
+@property (nonatomic, strong) id<TRCRequest> requestPostProcessor;
+
 @end
 
 /**

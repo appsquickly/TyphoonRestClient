@@ -59,6 +59,10 @@ static float TaskPriorityFromQueuePriority(NSOperationQueuePriority priority);
         request = nil;
     }
 
+    if (request && options.requestPostProcessor && [options.requestPostProcessor respondsToSelector:@selector(requestPostProcessedFromRequest:)]) {
+        request = [options.requestPostProcessor requestPostProcessedFromRequest:request];
+    }
+
     return request;
 }
 
