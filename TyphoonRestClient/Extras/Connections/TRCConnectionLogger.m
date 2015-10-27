@@ -142,7 +142,7 @@
         bodyString = [[NSString alloc] initWithData:bodyData encoding:NSUTF8StringEncoding];
     }
 
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_7_0
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_7_0
     if (!bodyString && bodyData && self.shouldLogBinaryDataAsBase64) {
         bodyString = [NSString stringWithFormat:@"=============================binary body data=========================================================>\n%@", [bodyData base64EncodedStringWithOptions:0]];
     } else
