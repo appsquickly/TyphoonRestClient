@@ -29,7 +29,6 @@
 		2DBA1D4B061007D83FEBC57C /* Phone.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1942EBD89F99FB0149DC /* Phone.m */; };
 		2DBA1EC0738D4C1358B0A70E /* TRCValidationErrorPrinterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1FD2324DAC2AE398F276 /* TRCValidationErrorPrinterTests.m */; };
 		2DBA1EDFD218B24F2C14C317 /* TRCMapperPhone.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA11C1B532C921805BEC2F /* TRCMapperPhone.json */; };
-		4EA244112427BF0621D67139 /* libPods-TyphoonRestClient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C84882D07B06327E8D9BB26 /* libPods-TyphoonRestClient.a */; };
 		FA28E08C1B42941E00453FB8 /* Issue.m in Sources */ = {isa = PBXBuildFile; fileRef = FA28E0721B42941E00453FB8 /* Issue.m */; };
 		FA28E08D1B42941E00453FB8 /* TRCObjectMapperIssue.m in Sources */ = {isa = PBXBuildFile; fileRef = FA28E0751B42941E00453FB8 /* TRCObjectMapperIssue.m */; };
 		FA28E08E1B42941E00453FB8 /* TRCObjectMapperIssue.response.json in Resources */ = {isa = PBXBuildFile; fileRef = FA28E0761B42941E00453FB8 /* TRCObjectMapperIssue.response.json */; };
@@ -54,6 +53,8 @@
 		FA55918619E69A5B00E00570 /* TRCErrorParserSpy.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC9167119E697A60009D824 /* TRCErrorParserSpy.m */; };
 		FA55918719E69A5B00E00570 /* TRCConnectionTestStub.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC9167319E697A60009D824 /* TRCConnectionTestStub.m */; };
 		FA55918819E69A5B00E00570 /* TRCValueTransformerStub.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC9167519E697A60009D824 /* TRCValueTransformerStub.m */; };
+		FAC814AB1BDFB7CE006D5E8E /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAC814AA1BDFB7CE006D5E8E /* CFNetwork.framework */; };
+		FAC814AD1BDFB826006D5E8E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAC814AC1BDFB826006D5E8E /* SystemConfiguration.framework */; };
 		FAC9161719E693370009D824 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAC9161619E693370009D824 /* Foundation.framework */; };
 		FAC9161C19E693370009D824 /* TyphoonRestClient.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = FAC9161B19E693370009D824 /* TyphoonRestClient.h */; };
 		FAC9161E19E693370009D824 /* TyphoonRestClient.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC9161D19E693370009D824 /* TyphoonRestClient.m */; };
@@ -86,7 +87,6 @@
 		FAE88A2B1B171F5700CCADC3 /* TRCSerializerJson.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE88A1A1B171F5700CCADC3 /* TRCSerializerJson.m */; };
 		FAE88A2C1B171F5700CCADC3 /* TRCSerializerPlist.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE88A1C1B171F5700CCADC3 /* TRCSerializerPlist.m */; };
 		FAE88A2D1B171F5700CCADC3 /* TRCSerializerString.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE88A1E1B171F5700CCADC3 /* TRCSerializerString.m */; };
-		FC76D0CEC351728B7DD89E31 /* libPods-TyphoonRestClientTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 469D3C7EB63CCF077674B274 /* libPods-TyphoonRestClientTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -155,12 +155,8 @@
 		2DBA1ECDC2BD02AD01F101C3 /* TRCErrorParserSimple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCErrorParserSimple.h; sourceTree = "<group>"; };
 		2DBA1FD2324DAC2AE398F276 /* TRCValidationErrorPrinterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCValidationErrorPrinterTests.m; sourceTree = "<group>"; };
 		469D3C7EB63CCF077674B274 /* libPods-TyphoonRestClientTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TyphoonRestClientTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		48F28F705C352E4073F55876 /* Pods-TyphoonRestClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TyphoonRestClient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TyphoonRestClient/Pods-TyphoonRestClient.debug.xcconfig"; sourceTree = "<group>"; };
 		5C84882D07B06327E8D9BB26 /* libPods-TyphoonRestClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TyphoonRestClient.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		76720616CF1D2D7E284DA0D3 /* Pods-TyphoonRestClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TyphoonRestClient.release.xcconfig"; path = "Pods/Target Support Files/Pods-TyphoonRestClient/Pods-TyphoonRestClient.release.xcconfig"; sourceTree = "<group>"; };
-		95F03988170F5DD45005F3EE /* Pods-TyphoonRestClientTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TyphoonRestClientTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TyphoonRestClientTests/Pods-TyphoonRestClientTests.release.xcconfig"; sourceTree = "<group>"; };
 		A14BA2DE857D4EC58948A253 /* libPods-HttpWebService.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HttpWebService.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		EB1AF3E3BAD71ED13F222739 /* Pods-TyphoonRestClientTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TyphoonRestClientTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TyphoonRestClientTests/Pods-TyphoonRestClientTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FA28E0711B42941E00453FB8 /* Issue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Issue.h; sourceTree = "<group>"; };
 		FA28E0721B42941E00453FB8 /* Issue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Issue.m; sourceTree = "<group>"; };
 		FA28E0741B42941E00453FB8 /* TRCObjectMapperIssue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCObjectMapperIssue.h; sourceTree = "<group>"; };
@@ -189,6 +185,8 @@
 		FA5126671A96000F00EAF902 /* TRCSchemaStackTrace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSchemaStackTrace.h; sourceTree = "<group>"; };
 		FA5126681A96000F00EAF902 /* TRCSchemaStackTrace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSchemaStackTrace.m; sourceTree = "<group>"; };
 		FAA684901ABF077300EF4CB6 /* TRCBuiltInObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCBuiltInObjects.h; sourceTree = "<group>"; };
+		FAC814AA1BDFB7CE006D5E8E /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		FAC814AC1BDFB826006D5E8E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		FAC9161319E693370009D824 /* libTyphoonRestClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTyphoonRestClient.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAC9161619E693370009D824 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FAC9161B19E693370009D824 /* TyphoonRestClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TyphoonRestClient.h; sourceTree = "<group>"; };
@@ -268,7 +266,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAC9161719E693370009D824 /* Foundation.framework in Frameworks */,
-				4EA244112427BF0621D67139 /* libPods-TyphoonRestClient.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,11 +273,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAC814AD1BDFB826006D5E8E /* SystemConfiguration.framework in Frameworks */,
+				FAC814AB1BDFB7CE006D5E8E /* CFNetwork.framework in Frameworks */,
 				FAC9162B19E693370009D824 /* libTyphoonRestClient.a in Frameworks */,
 				FAC9162519E693370009D824 /* XCTest.framework in Frameworks */,
 				FAC9162819E693370009D824 /* UIKit.framework in Frameworks */,
 				FAC9162619E693370009D824 /* Foundation.framework in Frameworks */,
-				FC76D0CEC351728B7DD89E31 /* libPods-TyphoonRestClientTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,8 +296,8 @@
 		2DBA10B2C75FA1E966F2D96B /* HttpQueryComposer */ = {
 			isa = PBXGroup;
 			children = (
-				2DBA112EEFEB1DB5EBDE0ED9 /* TRCHttpQueryComposer.m */,
 				2DBA138B5637203565AA205A /* TRCHttpQueryComposer.h */,
+				2DBA112EEFEB1DB5EBDE0ED9 /* TRCHttpQueryComposer.m */,
 			);
 			path = HttpQueryComposer;
 			sourceTree = "<group>";
@@ -360,8 +358,8 @@
 		2DBA1AEED0012EED9DFC72CA /* SchemeFactory */ = {
 			isa = PBXGroup;
 			children = (
-				2DBA1DFAF75A7BFE623BC34C /* TRCSchemeFactory.m */,
 				2DBA1D51CC52855CCCAAE28D /* TRCSchemeFactory.h */,
+				2DBA1DFAF75A7BFE623BC34C /* TRCSchemeFactory.m */,
 			);
 			path = SchemeFactory;
 			sourceTree = "<group>";
@@ -378,21 +376,10 @@
 		2DBA1F27CE21DCB632343D9D /* Reachability */ = {
 			isa = PBXGroup;
 			children = (
-				2DBA1DF66E068A7D28A35396 /* TRCNetworkReachabilityManager.m */,
 				2DBA10B8B095A61370FF141A /* TRCNetworkReachabilityManager.h */,
+				2DBA1DF66E068A7D28A35396 /* TRCNetworkReachabilityManager.m */,
 			);
 			path = Reachability;
-			sourceTree = "<group>";
-		};
-		7C7F52DF2A50096085E5149B /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				48F28F705C352E4073F55876 /* Pods-TyphoonRestClient.debug.xcconfig */,
-				76720616CF1D2D7E284DA0D3 /* Pods-TyphoonRestClient.release.xcconfig */,
-				EB1AF3E3BAD71ED13F222739 /* Pods-TyphoonRestClientTests.debug.xcconfig */,
-				95F03988170F5DD45005F3EE /* Pods-TyphoonRestClientTests.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 		FA28E0731B42941E00453FB8 /* ObjectMappers */ = {
@@ -468,7 +455,6 @@
 				FAC9162C19E693370009D824 /* TyphoonRestClientTests */,
 				FAC9161519E693370009D824 /* Frameworks */,
 				FAC9161419E693370009D824 /* Products */,
-				7C7F52DF2A50096085E5149B /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -484,6 +470,8 @@
 		FAC9161519E693370009D824 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FAC814AC1BDFB826006D5E8E /* SystemConfiguration.framework */,
+				FAC814AA1BDFB7CE006D5E8E /* CFNetwork.framework */,
 				FAC9161619E693370009D824 /* Foundation.framework */,
 				FAC9162419E693370009D824 /* XCTest.framework */,
 				FAC9162719E693370009D824 /* UIKit.framework */,
@@ -751,11 +739,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FAC9163619E693370009D824 /* Build configuration list for PBXNativeTarget "TyphoonRestClient" */;
 			buildPhases = (
-				60C7D97060CDCEF2A6DA8AC7 /* Check Pods Manifest.lock */,
 				FAC9160F19E693370009D824 /* Sources */,
 				FAC9161019E693370009D824 /* Frameworks */,
 				FAC9161119E693370009D824 /* CopyFiles */,
-				36031CF4AA19312055B79A4C /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -770,12 +756,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FAC9163919E693370009D824 /* Build configuration list for PBXNativeTarget "TyphoonRestClientTests" */;
 			buildPhases = (
-				04CC283EB507C466145160C9 /* Check Pods Manifest.lock */,
 				FAC9161F19E693370009D824 /* Sources */,
 				FAC9162019E693370009D824 /* Frameworks */,
 				FAC9162119E693370009D824 /* Resources */,
-				5F6F230CDD29EFAA5F60EAEA /* Copy Pods Resources */,
-				14B76CE33E139A47D7B02D59 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -840,84 +823,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		04CC283EB507C466145160C9 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		14B76CE33E139A47D7B02D59 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TyphoonRestClientTests/Pods-TyphoonRestClientTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		36031CF4AA19312055B79A4C /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TyphoonRestClient/Pods-TyphoonRestClient-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5F6F230CDD29EFAA5F60EAEA /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TyphoonRestClientTests/Pods-TyphoonRestClientTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		60C7D97060CDCEF2A6DA8AC7 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FAC9160F19E693370009D824 /* Sources */ = {
@@ -1082,7 +987,6 @@
 		};
 		FAC9163719E693370009D824 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 48F28F705C352E4073F55876 /* Pods-TyphoonRestClient.debug.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/TyphoonRestClient.dst;
 				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
@@ -1096,7 +1000,6 @@
 		};
 		FAC9163819E693370009D824 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 76720616CF1D2D7E284DA0D3 /* Pods-TyphoonRestClient.release.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/TyphoonRestClient.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1108,7 +1011,6 @@
 		};
 		FAC9163A19E693370009D824 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EB1AF3E3BAD71ED13F222739 /* Pods-TyphoonRestClientTests.debug.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -1133,7 +1035,6 @@
 		};
 		FAC9163B19E693370009D824 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 95F03988170F5DD45005F3EE /* Pods-TyphoonRestClientTests.release.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",

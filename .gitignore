@@ -15,6 +15,9 @@ profile
 DerivedData
 
 
+*.gcno
+*.gcda
+
 # Xcode-Dacted
 *.xccheckout
 

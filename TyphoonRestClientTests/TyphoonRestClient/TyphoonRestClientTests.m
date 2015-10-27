@@ -15,7 +15,6 @@
 #import "TRCUtils.h"
 #import "TRCValueTransformer.h"
 #import <objc/runtime.h>
-#import "NSObject+AutoDescription.h"
 #import "TyphoonRestClientErrors.h"
 #import "TRCMapperPerson.h"
 #import "Person.h"
@@ -515,8 +514,8 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
         XCTAssertNil(error);
         NSArray *expect = @[@{@"number":@1, @"string":@"2", @"url": [[NSURL alloc] initWithString:@"3"]}];
         XCTAssertEqualObjects(expect, result);
-        NSLog(@"expect: %@", [expect autoDescription]);
-        NSLog(@"got: %@", [result autoDescription]);
+        NSLog(@"expect: %@", [expect description]);
+        NSLog(@"got: %@", [result description]);
     }];
 }
 

@@ -69,10 +69,11 @@ static float TaskPriorityFromQueuePriority(NSOperationQueuePriority priority);
 - (id<TRCProgressHandler>)sendRequest:(NSURLRequest *)request withOptions:(id<TRCConnectionRequestSendingOptions>)options completion:(TRCConnectionCompletion)completion
 {
     NSURLSessionDataTask *task = [self.session dataTaskWithRequest:request];
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_8_0
     if ([task respondsToSelector:@selector(priority)]) {
         task.priority = TaskPriorityFromQueuePriority(options.queuePriority);
     }
-
+#endif
     TRCSessionTaskContext *context = [[TRCSessionTaskContext alloc] initWithTask:task options:options completion:completion];
     context.connection = self;
     [self.sessionHandler startDataTask:task withContext:context];
@@ -98,9 +99,11 @@ static float TaskPriorityFromQueuePriority(NSOperationQueuePriority priority);
     self = [super init];
     if (self) {
         NSOperationQueue *backgroundQueue = [NSOperationQueue new];
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_8_0
         if ([backgroundQueue respondsToSelector:@selector(qualityOfService)]) {
             backgroundQueue.qualityOfService = NSOperationQualityOfServiceUtility;
         }
+#endif
         _sessionHandler = [TRCSessionHandler new];
         _session = [NSURLSession sessionWithConfiguration:configuration delegate:_sessionHandler delegateQueue:backgroundQueue];
         _baseUrl = baseUrl;

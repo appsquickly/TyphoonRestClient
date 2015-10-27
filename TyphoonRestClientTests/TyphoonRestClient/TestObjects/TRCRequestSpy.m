@@ -4,7 +4,6 @@
 //
 
 #import "TRCRequestSpy.h"
-#import "NSObject+AutoDescription.h"
 #import "TRCConverter.h"
 #import "TRCUtils.h"
 #import "TestUtils.h"
@@ -68,7 +67,5 @@
 
     return self.parseResult;
 }
-
-AUTO_DESCRIPTION
 
 @end
