@@ -17,7 +17,9 @@
 
 
 static BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_8_0
 static float TaskPriorityFromQueuePriority(NSOperationQueuePriority priority);
+#endif
 
 @interface TRCConnectionNSURLSession ()
 
