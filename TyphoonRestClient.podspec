@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = 'TyphoonRestClient'
-  s.version  = '1.2.5'
+  s.version  = '1.2.6'
   s.license  = 'Apache2.0'
   s.summary  = 'Flexible HTTP client for Objective-C and Swift'
   s.homepage = 'https://github.com/appsquickly/TyphoonRestClient'
@@ -14,5 +14,4 @@ Pod::Spec.new do |s|
   
   s.documentation_url = 'http://appsquickly.github.io/TyphoonRestClient/docs/latest/api/'
   
-  s.dependency 'Base64'
 end
