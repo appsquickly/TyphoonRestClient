@@ -4,7 +4,7 @@
 inhibit_all_warnings!
 
 target "TyphoonRestClient" do
-    pod 'Base64'
+
 end
 
 target "TyphoonRestClientTests" do

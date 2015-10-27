@@ -25,7 +25,9 @@
 @property(nonatomic) BOOL shouldLogUploadProgress;
 @property(nonatomic) BOOL shouldLogDownloadProgress;
 
-@property(nonatomic) BOOL shouldLogBinaryDataAsBase64;
+@property(nonatomic) BOOL shouldLogInputStreamContent;
+
+@property(nonatomic) BOOL shouldLogBinaryDataAsBase64 NS_AVAILABLE(10_9, 7_0);
 
 @end
 

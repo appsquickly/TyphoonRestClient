@@ -10,8 +10,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #import "TRCConnectionLogger.h"
-#import "MF_Base64Additions.h"
-
 
 @implementation TRCConnectionLogger
 {
@@ -128,22 +126,29 @@
 {
     NSMutableString *output = [NSMutableString new];
 
+    NSString *bodyString = nil;
     NSData *bodyData = nil;
     if (request.HTTPBody) {
         bodyData = request.HTTPBody;
-    } else if (request.HTTPBodyStream && [request.HTTPBodyStream respondsToSelector:NSSelectorFromString(@"copyWithZone:")]) {
+    } else if (request.HTTPBodyStream && [request.HTTPBodyStream respondsToSelector:NSSelectorFromString(@"copyWithZone:")] && self.shouldLogInputStreamContent) {
         NSInputStream *streamCopy = [request.HTTPBodyStream copy];
         [streamCopy open];
         bodyData = [[self class] dataWithContentsOfStream:streamCopy initialCapacity:NSUIntegerMax error:nil];
         [streamCopy close];
+    } else if (request.HTTPBodyStream) {
+        bodyString = [NSString stringWithFormat:@"[Binary Data, NSInputStream specified: %@]", request.HTTPBodyStream];
     }
-    NSString *body = nil;
+    if (!bodyString) {
+        bodyString = [[NSString alloc] initWithData:bodyData encoding:NSUTF8StringEncoding];
+    }
 
-    body = [[NSString alloc] initWithData:bodyData encoding:NSUTF8StringEncoding];
-    if (!body && bodyData && self.shouldLogBinaryDataAsBase64) {
-        body = [NSString stringWithFormat:@"=============================binary body data=========================================================>\n%@", [bodyData base64String]];
-    } else if (!body && bodyData) {
-        body = [NSString stringWithFormat:@"[Binary Data, %lu bytes]", (unsigned long)[bodyData length]];
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_7_0
+    if (!bodyString && bodyData && self.shouldLogBinaryDataAsBase64) {
+        bodyString = [NSString stringWithFormat:@"=============================binary body data=========================================================>\n%@", [bodyData base64EncodedStringWithOptions:0]];
+    } else
+#endif
+    if (!bodyString && bodyData) {
+        bodyString = [NSString stringWithFormat:@"[Binary Data, %lu bytes]", (unsigned long)[bodyData length]];
     }
     
     [output appendString:@"======================================================================================================>\n"];
@@ -151,8 +156,8 @@
     [output appendString:@"\n======================================================================================================>"];
     [output appendFormat:@"\nHTTP %@ %@\n", request.HTTPMethod, [[request.URL absoluteString] stringByRemovingPercentEncoding]];
     [output appendString:[self httpHeadersString:request.allHTTPHeaderFields]];
-    if (body.length > 0) {
-        [output appendFormat:@"\n\n%@", body];
+    if (bodyString.length > 0) {
+        [output appendFormat:@"\n\n%@", bodyString];
     }
     [output appendString:@"\n======================================================================================================>\n"];
 
@@ -217,10 +222,10 @@
 }
 
 
-+(NSData *)dataWithContentsOfStream:(NSInputStream *)input initialCapacity:(NSUInteger)capacity error:(NSError **)error
++ (NSData *)dataWithContentsOfStream:(NSInputStream *)input initialCapacity:(NSUInteger)capacity error:(NSError **)error
 {
-    size_t bufsize = MIN(65536U, capacity);
-    uint8_t * buf = malloc(bufsize);
+    size_t bufferSize = MIN(65536U, capacity);
+    uint8_t *buf = malloc(bufferSize);
     if (buf == NULL) {
         if (error) {
             *error = [NSError errorWithDomain:NSPOSIXErrorDomain code:ENOMEM userInfo:nil];
@@ -228,10 +233,10 @@
         return nil;
     }
 
-    NSMutableData* result = capacity == NSUIntegerMax ? [NSMutableData data] : [NSMutableData dataWithCapacity:capacity];
+    NSMutableData *result = capacity == NSUIntegerMax ? [NSMutableData data] : [NSMutableData dataWithCapacity:capacity];
     @try {
         while (true) {
-            NSInteger n = [input read:buf maxLength:bufsize];
+            NSInteger n = [input read:buf maxLength:bufferSize];
             if (n < 0) {
                 result = nil;
                 if (error) {
@@ -247,7 +252,7 @@
             }
         }
     }
-    @catch (NSException * exn) {
+    @catch (NSException *exn) {
         NSLog(@"Caught exception writing to file: %@", exn);
         result = nil;
         if (error) {
