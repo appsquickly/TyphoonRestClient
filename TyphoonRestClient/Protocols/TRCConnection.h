@@ -99,9 +99,15 @@ typedef void (^TRCConnectionCompletion)(id responseObject, NSError *error, id<TR
 typedef void (^TRCUploadProgressBlock)(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite);
 typedef void (^TRCDownloadProgressBlock)(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead);
 
+typedef NS_ENUM(NSInteger, TRCProgressHandlerState) {
+    TRCProgressHandlerStateRunning,
+    TRCProgressHandlerStateSuspended,
+    TRCProgressHandlerStateCanceling,
+    TRCProgressHandlerStateCompleted
+};
+
 /**
 * `TRCProgressHandler` describes methods of object, used to track download and upload progress
-* `TRCConnectionAFNetworking` has own internal object which follows that protocol
 * */
 @protocol TRCProgressHandler<NSObject>
 
@@ -133,6 +139,11 @@ typedef void (^TRCDownloadProgressBlock)(NSUInteger bytesRead, long long totalBy
 * Cancels current upload or download progress
 * */
 - (void)cancel;
+
+/**
+ * Returns current state of network operation
+ * */
+- (TRCProgressHandlerState)state;
 
 @end
 

@@ -156,6 +156,12 @@
     [self.task cancel];
 }
 
+- (TRCProgressHandlerState)state
+{
+    //TODO: Do explicit states mapping
+    return (TRCProgressHandlerState)self.task.state;
+}
+
 //-------------------------------------------------------------------------------------------
 #pragma mark - Private
 //-------------------------------------------------------------------------------------------

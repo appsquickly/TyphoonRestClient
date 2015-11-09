@@ -27,4 +27,6 @@
 
 - (void)didCompleteWithError:(NSError *)networkError;
 
+- (TRCProgressHandlerState)state;
+
 @end
