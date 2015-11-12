@@ -140,6 +140,7 @@
 		2DBA1942EBD89F99FB0149DC /* Phone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Phone.m; sourceTree = "<group>"; };
 		2DBA19CDB29AAD3C4F65D42B /* Phone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Phone.h; sourceTree = "<group>"; };
 		2DBA1A63E0B2BDDB5D227E95 /* TRCMapperPerson.json */ = {isa = PBXFileReference; lastKnownFileType = file.request; path = TRCMapperPerson.json; sourceTree = "<group>"; };
+		2DBA1A8591D3051F01356F3E /* TyphoonRestClient.podspec */ = {isa = PBXFileReference; lastKnownFileType = file.podspec; path = TyphoonRestClient.podspec; sourceTree = SOURCE_ROOT; };
 		2DBA1B5308D0A28755F5CE2C /* TRCSerializerMultipart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCSerializerMultipart.m; sourceTree = "<group>"; };
 		2DBA1B8033DA8D5FA5B63C8B /* TRCObjectMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCObjectMapper.h; sourceTree = "<group>"; };
 		2DBA1C44E47EDAB03031EED3 /* SimpleErrorParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleErrorParser.h; sourceTree = "<group>"; };
@@ -502,6 +503,7 @@
 			isa = PBXGroup;
 			children = (
 				FAE889F91B171D3F00CCADC3 /* TyphoonRestClient-Prefix.pch */,
+				2DBA1A8591D3051F01356F3E /* TyphoonRestClient.podspec */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
