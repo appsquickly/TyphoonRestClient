@@ -216,21 +216,21 @@ static BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method)
     return method == TRCRequestMethodPost || method == TRCRequestMethodPut || method == TRCRequestMethodPatch;
 }
 
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_8_0
 static float TaskPriorityFromQueuePriority(NSOperationQueuePriority priority)
 {
     switch (priority) {
         case NSOperationQueuePriorityVeryLow:
+            return 0.15;
         case NSOperationQueuePriorityLow:
-            return NSURLSessionTaskPriorityLow;
+            return 0.25;
         default:
         case NSOperationQueuePriorityNormal:
-            return NSURLSessionTaskPriorityDefault;
+            return 0.5;
         case NSOperationQueuePriorityHigh:
+            return 0.75;
         case NSOperationQueuePriorityVeryHigh:
-            return NSURLSessionTaskPriorityHigh;
+            return 0.95;
     }
 }
-#endif
 
 @end
