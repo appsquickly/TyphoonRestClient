@@ -69,11 +69,9 @@ static float TaskPriorityFromQueuePriority(NSOperationQueuePriority priority);
 - (id<TRCProgressHandler>)sendRequest:(NSURLRequest *)request withOptions:(id<TRCConnectionRequestSendingOptions>)options completion:(TRCConnectionCompletion)completion
 {
     NSURLSessionDataTask *task = [self.session dataTaskWithRequest:request];
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_8_0
     if ([task respondsToSelector:@selector(priority)]) {
         task.priority = TaskPriorityFromQueuePriority(options.queuePriority);
     }
-#endif
     TRCSessionTaskContext *context = [[TRCSessionTaskContext alloc] initWithTask:task options:options completion:completion];
     context.connection = self;
     [self.sessionHandler startDataTask:task withContext:context];
