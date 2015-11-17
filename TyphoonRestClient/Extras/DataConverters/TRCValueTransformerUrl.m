@@ -25,7 +25,7 @@
     if ([value isKindOfClass:[NSURL class]]) {
         return value;
     } else if ([value isKindOfClass:[NSString class]]) {
-        NSURL *url = [[NSURL alloc] initWithString:value];
+        NSURL *url = [[NSURL alloc] initWithString:[value stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         if (!url && error) {
             *error = TRCErrorWithFormat(TyphoonRestClientErrorCodeTransformation, @"Can't create URL from string '%@'", value);
         }
