@@ -404,7 +404,7 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
     TRCRequestSpy *request = [TRCRequestSpy new];
     request.responseSchemeName = @"SimpleDictionary";
 
-    [connectionStub setResponseObject:@{ @"number": @1, @"string": @"123", @"url": @"not an url at all.\n"} responseError:nil];
+    [connectionStub setResponseObject:@{ @"number": @1, @"string": @"123", @"url": [NSObject new]} responseError:nil];
 
     request.parseResult = [NSObject new];
     request.parseObjectImplemented = NO;
@@ -541,7 +541,7 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 {
     TRCRequestSpy *request = [TRCRequestSpy new];
 
-    [connectionStub setResponseObject:@[ @"1", @"2", @"3\n" ] responseError:nil];
+    [connectionStub setResponseObject:@[ @"1", @"2", [NSObject new] ] responseError:nil];
 
     request.parseResult = [NSObject new];
     request.responseSchemeName = @"SimpleArray";
