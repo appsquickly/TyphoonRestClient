@@ -198,7 +198,7 @@
 
 - (NSString *)stringFromDuration:(CFAbsoluteTime)duration
 {
-    return [NSString stringWithFormat:@"%d second%s", (int) duration, (int) duration == 1 ? "" : "s"];
+    return [NSString stringWithFormat:@"%.0f ms", duration*1000];
 }
 
 - (void)printFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1, 2);
