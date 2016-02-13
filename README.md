@@ -26,9 +26,9 @@ TRC helps to quickly achieve end-to-end proof of concept, at the same time as pr
 # Installation
 
 
-## Cocoapods
+## CocoaPods
 
-Preferred way is using Cocoapods:
+Preferred way is using CocoaPods:
 
 ```
 pod 'TyphoonRestClient'
