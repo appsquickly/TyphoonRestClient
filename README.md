@@ -36,9 +36,7 @@ pod 'TyphoonRestClient'
 
 ## From Sources
 
-1. Drag `TyphoonRestClient` folder into your project
-2. Install `AFNetworking` with your prefered way
-
+Drag `TyphoonRestClient` folder into your project
 
 # Sponsors
 
