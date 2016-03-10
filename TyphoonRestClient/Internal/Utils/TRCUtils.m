@@ -60,6 +60,8 @@ NSError *TRCErrorFromErrorSet(NSOrderedSet *errors, NSInteger code, NSString *ac
 {
     if (errors.count == 0) {
         return nil;
+    } else if (errors.count == 1) {
+        return [errors firstObject];
     } else {
         NSMutableString *description = [NSMutableString stringWithFormat:@"There is %d errors during %@:",(int)errors.count, action];
         for (NSError *error in errors) {

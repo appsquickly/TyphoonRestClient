@@ -112,14 +112,17 @@
         NSError *responseError = nil;
         NSError *dataError = nil;
 
-        if ([self validateResponse:self.response data:nil error:&responseError]) {
-            dataObject = [self bodyObjectWithError:&dataError];
-            if (dataError) {
-                error = dataError;
-            }
-        } else {
-            error = responseError;
+        [self validateResponse:self.response error:&responseError];
+        dataObject = [self bodyObjectWithError:&dataError];
+
+        NSMutableOrderedSet *errors = [[NSMutableOrderedSet alloc] initWithCapacity:2];
+        if (dataError) {
+            [errors addObject:dataError];
         }
+        if (responseError) {
+            [errors addObject:responseError];
+        }
+        error = TRCErrorFromErrorSet(errors, TyphoonRestClientErrorCodeBadResponse, @"response");
     }
 
     if (self.options.outputStream) {
@@ -166,7 +169,7 @@
 #pragma mark - Private
 //-------------------------------------------------------------------------------------------
 
-- (BOOL)validateResponse:(NSURLResponse *)response data:(NSData *)data error:(NSError **)error
+- (BOOL)validateResponse:(NSURLResponse *)response error:(NSError **)error
 {
     if (![response isKindOfClass:[NSHTTPURLResponse class]]) {
         if (error) {
@@ -176,7 +179,6 @@
     }
 
     NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-
     if (![_acceptableStatusCodes containsIndex:(NSUInteger)httpResponse.statusCode]) {
         if (error) {
             NSMutableDictionary *mutableUserInfo = [@{
@@ -184,9 +186,6 @@
                     NSURLErrorFailingURLErrorKey : [response URL],
                     TyphoonRestClientErrorKeyResponse : response,
             } mutableCopy];
-            if (data) {
-                mutableUserInfo[TyphoonRestClientErrorKeyResponseData] = data;
-            }
             *error = [[NSError alloc] initWithDomain:TyphoonRestClientErrors code:TyphoonRestClientErrorCodeBadResponseCode userInfo:mutableUserInfo];
         }
         return NO;
