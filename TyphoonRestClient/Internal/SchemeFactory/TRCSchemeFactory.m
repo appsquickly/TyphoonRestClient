@@ -118,10 +118,7 @@
 
     if (filePath) {
         id<TRCSchemaData>schemaData = [self schemeDataFromFilePath:filePath isRequest:request];
-        TRCSchema *schema = [TRCSchema schemaWithData:schemaData name:[filePath lastPathComponent]];
-        schema.converterRegistry = self.owner;
-        schema.options = self.owner.validationOptions;
-        return schema;
+        return [self schemeFromData:schemaData withName:[filePath lastPathComponent]];
     } else {
         return nil;
     }
@@ -170,7 +167,15 @@
     return result;
 }
 
-/** User for unit tests only */
+- (TRCSchema *)schemeFromData:(id<TRCSchemaData>)data withName:(NSString *)name
+{
+    TRCSchema *schema = [TRCSchema schemaWithData:data name:name];
+    schema.converterRegistry = self.owner;
+    schema.options = self.owner.validationOptions;
+    return schema;
+}
+
+/** Used for unit tests only */
 - (TRCSchema *)schemeForName:(NSString *)schemeName isRequest:(BOOL)isRequest
 {
     return nil;

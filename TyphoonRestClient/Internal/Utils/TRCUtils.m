@@ -12,6 +12,7 @@
 #import "TRCUtils.h"
 #import "TyphoonRestClientErrors.h"
 #import "TRCHttpQueryComposer.h"
+#import "TRCSerializerHttpQuery.h"
 
 NSString *TRCRootMapperKey = @"{root_mapper}";
 
@@ -150,10 +151,10 @@ void TRCUrlPathParamsByRemovingNull(NSMutableDictionary *arguments)
     }
 }
 
-NSString * TRCQueryStringFromParametersWithEncoding(NSDictionary *parameters, NSStringEncoding stringEncoding)
+NSString *TRCQueryStringFromParametersWithEncoding(NSDictionary *parameters, NSStringEncoding stringEncoding, TRCSerializerHttpQueryOptions options)
 {
     NSMutableArray *mutablePairs = [NSMutableArray array];
-    for (TRCQueryStringPair *pair in TRCQueryStringPairsFromDictionary(parameters)) {
+    for (TRCQueryStringPair *pair in TRCQueryStringPairsFromDictionary(parameters, options)) {
         [mutablePairs addObject:[pair URLEncodedStringValueWithEncoding:stringEncoding]];
     }
     return [mutablePairs componentsJoinedByString:@"&"];

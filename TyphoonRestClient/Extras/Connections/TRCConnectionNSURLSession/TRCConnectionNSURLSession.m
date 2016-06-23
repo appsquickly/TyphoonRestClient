@@ -36,7 +36,7 @@ static float TaskPriorityFromQueuePriority(NSOperationQueuePriority priority);
 - (NSMutableURLRequest *)requestWithOptions:(id<TRCConnectionRequestCreationOptions>)options error:(NSError **)requestComposingError
 {
     NSError *urlComposingError = nil;
-    NSURL *url = [self urlFromPath:options.path parameters:options.pathParameters error:&urlComposingError];
+    NSURL *url = [self urlFromPath:options.path parameters:options.pathParameters queryOptions:options.queryOptions error:&urlComposingError];
 
     if (urlComposingError) {
         if(requestComposingError) {
@@ -181,12 +181,12 @@ static float TaskPriorityFromQueuePriority(NSOperationQueuePriority priority);
 #pragma mark - URL Composing
 //-------------------------------------------------------------------------------------------
 
-- (NSURL *)urlFromPath:(NSString *)path parameters:(NSDictionary *)parameters error:(NSError **)error
+- (NSURL *)urlFromPath:(NSString *)path parameters:(NSDictionary *)parameters queryOptions:(TRCSerializerHttpQueryOptions)options error:(NSError **)error
 {
     NSURL *result = [self absoluteUrlFromPath:path];
 
     if ([parameters count] > 0) {
-        NSString *query = TRCQueryStringFromParametersWithEncoding(parameters, NSUTF8StringEncoding);
+        NSString *query = TRCQueryStringFromParametersWithEncoding(parameters, NSUTF8StringEncoding, options);
         result = [NSURL URLWithString:[[result absoluteString] stringByAppendingFormat:result.query ? @"&%@" : @"?%@", query]];
     }
 

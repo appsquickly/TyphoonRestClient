@@ -142,20 +142,29 @@
     XCTAssertNil(result);
 }
 
-//- (void)test_nested_dictionaries_in_query_params
-//{
-//    NSString *path = @"path/to/request";
-//    NSMutableDictionary *params = [NSMutableDictionary new];
-//    params[@"location"][@"long"] = @"123";
-//    params[@"location"][@"lat"] = @321;
-//    params[@"searchQuery"] = @"qwerty";
-//    params[@"page"] = @2;
-//    params[@"pages"] = @[@1, @2, @3];
-//    NSError *error = nil;
-//
-//    NSString *result = TRCQueryStringFromParametersWithEncoding(params, NSUTF8StringEncoding);
-//
-//    XCTAssertNil(error);
-//}
+- (void)test_nested_dictionaries_in_query_params
+{
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    params[@"location"][@"long"] = @"123";
+    params[@"location"][@"lat"] = @321;
+    params[@"searchQuery"] = @"qwerty";
+    params[@"page"] = @2;
+    params[@"pages"] = @[@1, @2, @3];
+    NSError *error = nil;
+
+    NSString *result = TRCQueryStringFromParametersWithEncoding(params, NSUTF8StringEncoding, TRCSerializerHttpQueryOptionsNone);
+
+    XCTAssertEqualObjects(result, @"page=2&pages[]=1&pages[]=2&pages[]=3&searchQuery=qwerty");
+    XCTAssertNil(error);
+
+    result = TRCQueryStringFromParametersWithEncoding(params, NSUTF8StringEncoding, TRCSerializerHttpQueryOptionsIncludeArrayIndices);
+    XCTAssertEqualObjects(result, @"page=2&pages[0]=1&pages[1]=2&pages[2]=3&searchQuery=qwerty");
+    XCTAssertNil(error);
+
+    params[@"params"] = @[ @{ @"name" : @"123"}, @{@"name" : @"321" } ];
+    result = TRCQueryStringFromParametersWithEncoding(params, NSUTF8StringEncoding, TRCSerializerHttpQueryOptionsIncludeArrayIndices);
+    XCTAssertEqualObjects(result, @"page=2&pages[0]=1&pages[1]=2&pages[2]=3&params[0][name]=123&params[1][name]=321&searchQuery=qwerty");
+    XCTAssertNil(error);
+}
 
 @end

@@ -19,6 +19,7 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
+#import "TRCSerializerHttpQuery.h"
 
 /**
  * Http Query code was extracted from AFNetworking library. Many thanks authors
@@ -35,4 +36,4 @@
 
 @end
 
-NSArray<TRCQueryStringPair *> * TRCQueryStringPairsFromDictionary(NSDictionary *dictionary);
+NSArray<TRCQueryStringPair *> *TRCQueryStringPairsFromDictionary(NSDictionary *dictionary, TRCSerializerHttpQueryOptions options);

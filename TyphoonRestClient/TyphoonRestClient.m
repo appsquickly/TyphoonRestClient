@@ -44,7 +44,7 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
 @interface TRCRequestCreateOptions : NSObject <TRCConnectionRequestCreationOptions>
 @end
 @implementation TRCRequestCreateOptions
-@synthesize method, path, pathParameters, body, headers, serialization, customProperties, requestPostProcessor;
+@synthesize method, path, pathParameters, body, headers, serialization, customProperties, requestPostProcessor, queryOptions;
 @end
 
 @interface TRCRequestSendOptions : NSObject <TRCConnectionRequestSendingOptions>
@@ -101,6 +101,16 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
     return self;
 }
 
+- (void)setQuerySerializationOptions:(TRCSerializerHttpQueryOptions)querySerializationOptions
+{
+    _querySerializationOptions = querySerializationOptions;
+
+    id httpSerializer = _requestSerializers[TRCSerializationRequestHttp];
+    if (httpSerializer && [httpSerializer isKindOfClass:[TRCSerializerHttpQuery class]]) {
+        [httpSerializer setOptions:self.querySerializationOptions];
+    }
+}
+
 - (void)registerDefaultSchemeFormats
 {
     TRCSerializerJson *json = [TRCSerializerJson new];
@@ -123,6 +133,7 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
     [self registerResponseSerializer:string forName:TRCSerializationString];
 
     TRCSerializerHttpQuery *http = [TRCSerializerHttpQuery new];
+    http.options = self.querySerializationOptions;
     [self registerRequestSerializer:http forName:TRCSerializationRequestHttp];
 
     TRCSerializerInputStream *inputStream = [TRCSerializerInputStream new];
@@ -221,6 +232,8 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
 - (TRCRequestCreateOptions *)requestCreateOptionsFromRequest:(id<TRCRequest>)request error:(NSError **)error
 {
     TRCRequestCreateOptions *options = [TRCRequestCreateOptions new];
+
+    options.queryOptions = self.querySerializationOptions;
 
     NSError *composingError = nil;
 

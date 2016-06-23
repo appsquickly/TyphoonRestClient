@@ -18,6 +18,7 @@
 #import "TRCBuiltInObjects.h"
 #import "TRCInfrastructure.h"
 #import "TRCPostProcessor.h"
+#import "TRCSerializerHttpQuery.h"
 
 /**
 * If `TRCConnection` set in `TyphoonRestClient` supports reachability, then this notification would be posted after each
@@ -71,6 +72,10 @@ typedef NS_OPTIONS(NSInteger , TRCValidationOptions)
 /// Set validation and processing options here.
 /// Default: `TRCValidationOptionsNone`
 @property (nonatomic) TRCValidationOptions validationOptions;
+
+/// This options allows you to specify specific query serialization parameters
+/// It used while generating request's URL query and also by TRCSerializerHttpQuery to generate the body
+@property (nonatomic) TRCSerializerHttpQueryOptions querySerializationOptions;
 
 /**
 * Sends your `TRCRequest` using `connection` and returns result in `completion` block.
