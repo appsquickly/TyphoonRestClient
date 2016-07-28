@@ -950,17 +950,31 @@ static inline void TRCCompleteWithError(void(^completion)(id, NSError *), NSErro
 - (id)convertThenValidateRequestObject:(id)object usingSchemaTag:(NSString *)tag options:(TRCTransformationOptions)options error:(NSError **)pError
 {
     TRCSchemaDictionaryData *data = [[TRCSchemaDictionaryData alloc] initWithArrayOrDictionary:@{ @"object" : tag } request:YES dataProvider:self];
-    TRCSchema *schema = [TRCSchema schemaWithData:data name:@"temp-convert-schema"];
+    TRCSchema *schema = [_schemeFactory schemeFromData:data withName:@"temp-convert-schema"];
 
-    return [self convertThenValidateObject:@{ @"object" : object } withScheme:schema options:options error:pError][@"object"];
+    NSError *error = nil;
+    NSDictionary *result = [self convertThenValidateObject:@{ @"object" : object } withScheme:schema options:options error:&error];
+    if (error) {
+        TRCSetError(pError, error);
+        return nil;
+    } else {
+        return result[@"object"];
+    }
 }
 
 - (id)validateThenConvertResponseObject:(id)object usingSchemaTag:(NSString *)tag options:(TRCTransformationOptions)options error:(NSError **)pError
 {
     TRCSchemaDictionaryData *data = [[TRCSchemaDictionaryData alloc] initWithArrayOrDictionary:@{ @"object" : tag } request:NO dataProvider:self];
-    TRCSchema *schema = [TRCSchema schemaWithData:data name:@"temp-convert-schema"];
+    TRCSchema *schema = [_schemeFactory schemeFromData:data withName:@"temp-convert-schema"];
 
-    return [self validateThenConvertObject:@{ @"object" : object } withScheme:schema options:options error:pError][@"object"];;
+    NSError *error = nil;
+    NSDictionary *result = [self validateThenConvertObject:@{ @"object" : object } withScheme:schema options:options error:&error];
+    if (error) {
+        TRCSetError(pError, error);
+        return nil;
+    } else {
+        return result[@"object"];
+    }
 }
 
 @end
