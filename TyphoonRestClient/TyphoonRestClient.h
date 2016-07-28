@@ -226,3 +226,15 @@ typedef NS_OPTIONS(NSInteger , TRCValidationOptions)
 - (void)registerTRCValueTransformerType:(TRCValueTransformerType *)type withValueClass:(Class)clazz;
 
 @end
+
+//-------------------------------------------------------------------------------------------
+#pragma mark -
+//-------------------------------------------------------------------------------------------
+
+@interface TyphoonRestClient (Extensions)
+
+- (id)convertThenValidateRequestObject:(id)object usingSchemaTag:(NSString *)tag options:(TRCTransformationOptions)options error:(NSError **)pError;
+
+- (id)validateThenConvertResponseObject:(id)object usingSchemaTag:(NSString *)tag options:(TRCTransformationOptions)options error:(NSError **)pError;
+
+@end

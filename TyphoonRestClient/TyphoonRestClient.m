@@ -858,3 +858,23 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
 
 
 @end
+
+@implementation TyphoonRestClient (Extensions)
+
+- (id)convertThenValidateRequestObject:(id)object usingSchemaTag:(NSString *)tag options:(TRCTransformationOptions)options error:(NSError **)pError
+{
+    TRCSchemaDictionaryData *data = [[TRCSchemaDictionaryData alloc] initWithArrayOrDictionary:@{ @"object" : tag } request:YES dataProvider:self];
+    TRCSchema *schema = [TRCSchema schemaWithData:data name:@"temp-convert-schema"];
+
+    return [self convertThenValidateObject:@{ @"object" : object } withScheme:schema options:options error:pError][@"object"];
+}
+
+- (id)validateThenConvertResponseObject:(id)object usingSchemaTag:(NSString *)tag options:(TRCTransformationOptions)options error:(NSError **)pError
+{
+    TRCSchemaDictionaryData *data = [[TRCSchemaDictionaryData alloc] initWithArrayOrDictionary:@{ @"object" : tag } request:NO dataProvider:self];
+    TRCSchema *schema = [TRCSchema schemaWithData:data name:@"temp-convert-schema"];
+
+    return [self validateThenConvertObject:@{ @"object" : object } withScheme:schema options:options error:pError][@"object"];;
+}
+
+@end

@@ -1,4 +1,5 @@
-//
+#import "Phone.h"
+#import "Phone.h"//
 //  TyphoonRestClientTests.m
 //  Iconic
 //
@@ -21,6 +22,7 @@
 #import "TRCSchemeFactory.h"
 #import "TRCSchemaDictionaryData.h"
 #import "TRCErrorParserSimple.h"
+#import "TRCMapperPhone.h"
 
 @interface NumberToStringConverter : NSObject <TRCValueTransformer>
 
@@ -75,6 +77,7 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
     webService = [[TyphoonRestClient alloc] init];
     [webService registerValueTransformer:[NumberToStringConverter new] forTag:@"number-as-string"];
     [webService registerObjectMapper:[TRCMapperPerson new] forTag:@"{person}"];
+    [webService registerObjectMapper:[TRCMapperPhone new] forTag:@"{phone}"];
     connectionStub = [[TRCConnectionTestStub alloc] init];
     webService.connection = connectionStub;
 
@@ -674,5 +677,34 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
     }];
 }
 
+- (void)test_manual_mapper_method
+{
+    id input = [NSURL URLWithString:@"http://google.com/"];
+    id result = [webService convertThenValidateRequestObject:input usingSchemaTag:@"{url}" options:TRCTransformationOptionsNone error:nil];
+
+    XCTAssert( [result isKindOfClass:[NSString class]] );
+
+    input = @"http://google.com/";
+    result = [webService validateThenConvertResponseObject:input usingSchemaTag:@"{url}" options:TRCTransformationOptionsNone error:nil];
+
+    XCTAssert( [result isKindOfClass:[NSURL class]] );
+
+    input = @{
+            @"first_name": @"Test1",
+            @"last_name": @"Test2",
+            @"avatar_url": @"http://google.com/",
+            @"phone": @{
+                    @"mobile" : @"123",
+                    @"work": @"321"
+            }
+    };
+    result = [webService validateThenConvertResponseObject:input usingSchemaTag:@"{person}" options:TRCTransformationOptionsNone error:nil];
+
+    XCTAssert( [result isKindOfClass:[Person class]] );
+    Person *person = result;
+
+    XCTAssert([person.firstName isEqualToString:@"Test1"]);
+    XCTAssert([person.phone.mobile isEqualToString:@"123"]);
+}
 
 @end
