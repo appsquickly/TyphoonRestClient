@@ -77,6 +77,12 @@ typedef NS_OPTIONS(NSInteger , TRCValidationOptions)
 /// It used while generating request's URL query and also by TRCSerializerHttpQuery to generate the body
 @property (nonatomic) TRCSerializerHttpQueryOptions querySerializationOptions;
 
+/// This queue used to call completion blocks. Main Queue used by default
+@property (nonatomic, strong) NSOperationQueue *callbackQueue;
+
+/// This queue used to do all serialization, deserialization, validations and parsing. Main Queue used by default
+@property (nonatomic, strong) NSOperationQueue *workQueue;
+
 /**
 * Sends your `TRCRequest` using `connection` and returns result in `completion` block.
 *

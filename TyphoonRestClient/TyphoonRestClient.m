@@ -28,6 +28,18 @@
 #import "TRCSerializerString.h"
 #import "TRCSerializerMultipart.h"
 #import "TyphoonRestClientErrors.h"
+#import "TRCProxyProgressHandler.h"
+
+@implementation NSOperationQueue (BlockWithPriority)
+
+- (void)addOperationPriority:(NSOperationQueuePriority)priority withBlock:(void(^)())block
+{
+    NSOperation *operation = [NSBlockOperation blockOperationWithBlock:block];
+    operation.queuePriority = priority;
+    [self addOperation:operation];
+}
+
+@end
 
 TRCRequestMethod TRCRequestMethodPost = @"POST";
 TRCRequestMethod TRCRequestMethodGet = @"GET";
@@ -55,7 +67,14 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
 
 
 #define TRCSetError(errorPointer, error) if (errorPointer) { *errorPointer = error; }
-#define TRCCompleteWithError(completion, error) if (completion) { completion(nil, error); }
+//#define TRCCompleteWithError(completion, error) if (completion) { completion(nil, error); }
+
+static inline void TRCCompleteWithError(void(^completion)(id, NSError *), NSError *error)
+{
+    if (completion) {
+        completion(nil, error);
+    }
+}
 
 @interface TyphoonRestClient ()<TRCConvertersRegistry, TRCSchemaDataProvider, TRCConnectionReachabilityDelegate>
 @end
@@ -93,6 +112,9 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
         _trcValueTransformerTypesRegistry = [NSMutableDictionary new];
 
         _defaultRequestSerializationsPerType = [NSMutableDictionary new];
+
+        _workQueue = [NSOperationQueue mainQueue];
+        _callbackQueue = [NSOperationQueue mainQueue];
 
         [self registerDefaultSerializations];
         [self registerDefaultTypeConverters];
@@ -150,34 +172,98 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
 {
     NSParameterAssert(self.connection);
 
-    NSError *error = nil;
-    TRCRequestCreateOptions *createOptions = [self requestCreateOptionsFromRequest:request error:&error];
-    if (error) {
-        TRCCompleteWithError(completion, error);
-        return nil;
-    }
+    TRCProxyProgressHandler *handler = [TRCProxyProgressHandler new];
+    NSOperationQueue *workQueue = [self workQueueFromRequest:request];
+    NSOperationQueue *callbackQueue = [self callbackQueueFromRequest:request];
+    NSOperationQueuePriority priority = [self queuePriorityForRequest:request];
 
-    NSMutableURLRequest *httpRequest = [self.connection requestWithOptions:createOptions error:&error];
-    if (error) {
-        TRCCompleteWithError(completion, error);
-        return nil;
-    }
+    NSBlockOperation *operation = [NSBlockOperation blockOperationWithBlock:^{
+        NSError *error = nil;
+        TRCRequestCreateOptions *createOptions = [self requestCreateOptionsFromRequest:request error:&error];
+        if (error) {
+            [callbackQueue addOperationPriority:priority withBlock:^{
+                TRCCompleteWithError(completion, error);
+            }];
+            return;
+        }
 
-    NSParameterAssert(httpRequest);
+        NSMutableURLRequest *httpRequest = [self.connection requestWithOptions:createOptions error:&error];
+        if (error) {
+            [callbackQueue addOperationPriority:priority withBlock:^{
+                TRCCompleteWithError(completion, error);
+            }];
+            return;
+        }
 
-    TRCRequestSendOptions *sendOptions = [self requestSendOptionsFromRequest:request error:&error];
-    if (error) {
-        TRCCompleteWithError(completion, error);
-        return nil;
-    }
+        NSParameterAssert(httpRequest);
 
-    return [self.connection sendRequest:httpRequest withOptions:sendOptions completion:^(id responseObject, NSError *networkError, id<TRCResponseInfo> responseInfo) {
-        [self handleResponse:responseObject withError:networkError info:responseInfo forRequest:request completion:^(id result, NSError *handleError) {
-            if (completion) {
-                completion(result, handleError);
-            }
+        TRCRequestSendOptions *sendOptions = [self requestSendOptionsFromRequest:request error:&error];
+        if (error) {
+            [callbackQueue addOperationPriority:priority withBlock:^{
+                TRCCompleteWithError(completion, error);
+            }];
+            return;
+        }
+
+        if ([handler isCancelled]) {
+            return;
+        }
+
+        id<TRCProgressHandler> networkHandler = [self.connection sendRequest:httpRequest withOptions:sendOptions completion:^(id responseObject, NSError *networkError, id<TRCResponseInfo> responseInfo) {
+            [workQueue addOperationPriority:priority withBlock:^{
+                [self handleResponse:responseObject withError:networkError info:responseInfo forRequest:request completion:^(id result, NSError *handleError) {
+                    if (completion) {
+                        [callbackQueue addOperationWithBlock:^{
+                            completion(result, handleError);
+                        }];
+                    }
+                }];
+            }];
         }];
+        [handler setProgressHandler:networkHandler];
     }];
+    operation.queuePriority = priority;
+    [workQueue addOperation:operation];
+
+    return handler;
+}
+
+//-------------------------------------------------------------------------------------------
+#pragma mark - Queues
+//-------------------------------------------------------------------------------------------
+
+- (NSOperationQueue *)workQueueFromRequest:(id<TRCRequest>)request
+{
+    NSOperationQueue *queue = nil;
+    if ([request respondsToSelector:@selector(workQueue)]) {
+        queue = [request workQueue];
+    }
+    if (!queue) {
+        queue = _workQueue;
+    }
+    return queue;
+}
+
+- (NSOperationQueue *)callbackQueueFromRequest:(id<TRCRequest>)request
+{
+    NSOperationQueue *queue = nil;
+    if ([request respondsToSelector:@selector(callbackQueue)]) {
+        queue = [request callbackQueue];
+    }
+    if (!queue) {
+        queue = _callbackQueue;
+    }
+    return queue;
+}
+
+- (NSOperationQueuePriority)queuePriorityForRequest:(id<TRCRequest>)request
+{
+    NSOperationQueuePriority queuePriority = NSOperationQueuePriorityNormal;
+    if ([request respondsToSelector:@selector(queuePriority)]) {
+        queuePriority = [request queuePriority];
+    }
+
+    return queuePriority;
 }
 
 //-------------------------------------------------------------------------------------------

@@ -422,10 +422,26 @@ typedef NS_OPTIONS(NSInteger, TRCTransformationOptions) {
 * */
 - (NSDictionary *)customProperties;
 
+//-------------------------------------------------------------------------------------------
+#pragma mark - Queues
+//-------------------------------------------------------------------------------------------
+
+@optional
+
 /**
 * Use queue priority for your custom `TRCConnection` implementation. Useful if your `TRCConnection` has limitation on
 * number of concurrent requests, then you can specify priority here
 **/
 - (NSOperationQueuePriority)queuePriority;
+
+/**
+ * Same as workQueue in TyphoonRestClient, but specified per request
+ * */
+- (NSOperationQueue *)workQueue;
+
+/**
+ * Same as callbackQueue in TyphoonRestClient, but specified per request
+ * */
+- (NSOperationQueue *)callbackQueue;
 
 @end

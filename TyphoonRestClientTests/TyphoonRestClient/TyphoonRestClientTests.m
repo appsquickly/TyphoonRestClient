@@ -23,6 +23,7 @@
 #import "TRCSchemaDictionaryData.h"
 #import "TRCErrorParserSimple.h"
 #import "TRCMapperPhone.h"
+#import "SyncOperationQueue.h"
 
 @interface NumberToStringConverter : NSObject <TRCValueTransformer>
 
@@ -78,6 +79,8 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
     [webService registerValueTransformer:[NumberToStringConverter new] forTag:@"number-as-string"];
     [webService registerObjectMapper:[TRCMapperPerson new] forTag:@"{person}"];
     [webService registerObjectMapper:[TRCMapperPhone new] forTag:@"{phone}"];
+    webService.workQueue = [SyncOperationQueue new];
+    webService.workQueue = [SyncOperationQueue new];
     connectionStub = [[TRCConnectionTestStub alloc] init];
     webService.connection = connectionStub;
 
@@ -705,6 +708,31 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 
     XCTAssert([person.firstName isEqualToString:@"Test1"]);
     XCTAssert([person.phone.mobile isEqualToString:@"123"]);
+}
+
+- (void)test_parsing_on_background_queue
+{
+    NSOperationQueue *bgQueue = [NSOperationQueue new];
+    NSOperationQueue *mainQueue = [NSOperationQueue mainQueue];
+    webService.workQueue = bgQueue;
+    webService.callbackQueue = mainQueue;
+
+    [connectionStub setResponseObject:[NSData new] responseError:nil];
+
+    TRCRequestSpy *request = [TRCRequestSpy new];
+    request.insideParseBlock = ^{
+        XCTAssert([NSOperationQueue currentQueue] == bgQueue);
+    };
+
+    XCTestExpectation *expectation = [self expectationWithDescription:@"waiting for response"];
+    [webService sendRequest:request completion:^(id result, NSError *error) {
+        XCTAssert([NSOperationQueue currentQueue] == mainQueue);
+        [expectation fulfill];
+    }];
+
+    [self waitForExpectationsWithTimeout:10 handler:^(NSError *error) {
+
+    }];
 }
 
 @end
