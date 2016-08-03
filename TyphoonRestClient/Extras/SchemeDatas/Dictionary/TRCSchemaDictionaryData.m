@@ -178,7 +178,7 @@
         if (_isCancelled) {
             *stop = YES;
         } else {
-            NSNumber *index = @(idx);
+            NSString *index = [NSString stringWithFormat:@"%lu{?}", (unsigned long)idx];
             [self notifyEnumeratingItemStart:index];
 
             if (resultArray) {
