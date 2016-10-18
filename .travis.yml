@@ -2,3 +2,4 @@ language: objective-c
 osx_image: xcode8
 xcode_project: TyphoonRestClient.xcodeproj
 xcode_scheme: TyphoonRestClient
+script: xcodebuild test -project TyphoonRestClient.xcodeproj/ -scheme 'TyphoonRestClient' -destination 'platform=iOS Simulator,name=iPhone 6,OS=latest'
