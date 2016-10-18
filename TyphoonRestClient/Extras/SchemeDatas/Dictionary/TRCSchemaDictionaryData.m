@@ -16,8 +16,8 @@
 {
     id _schemeValue;
     BOOL _isCancelled;
-    id<TRCSchemaDataEnumerator> _enumerator;
-    id<TRCSchemaDataModifier> _modifier;
+    __weak id<TRCSchemaDataEnumerator> _enumerator;
+    __weak id<TRCSchemaDataModifier> _modifier;
 }
 
 - (instancetype)initWithArrayOrDictionary:(id)arrayOrDictionary request:(BOOL)isRequest dataProvider:(id<TRCSchemaDataProvider>)dataProvider
