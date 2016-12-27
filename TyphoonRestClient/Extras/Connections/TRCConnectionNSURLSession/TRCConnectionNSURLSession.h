@@ -8,6 +8,7 @@
 //  in accordance with the terms of the license agreement accompanying it.
 //
 ////////////////////////////////////////////////////////////////////////////////
+
 #import <Foundation/Foundation.h>
 #import "TRCConnection.h"
 
@@ -22,9 +23,20 @@
 * */
 @property (nonatomic, strong, readonly) TRCNetworkReachabilityManager *reachabilityManager;
 
+/**
+ * `init` and `initWithBaseUrl` will use [NSURLSessionConfiguration defaultSessionConfiguration] as configuration.
+ */
+- (instancetype)init;
 - (instancetype)initWithBaseUrl:(NSURL *)baseUrl;
 
+- (instancetype)initWithConfiguration:(NSURLSessionConfiguration *)configuration;
+
 - (instancetype)initWithBaseUrl:(NSURL *)baseUrl configuration:(NSURLSessionConfiguration *)configuration;
+
+/**
+ * You may change baseUrl in runtime.
+ */
+@property (nonatomic) NSURL *baseUrl;
 
 /**
 * Invokes `startMonitoring` on `reachabilityManager`
