@@ -21,7 +21,6 @@ static float TaskPriorityFromQueuePriority(NSOperationQueuePriority priority);
 
 @interface TRCConnectionNSURLSession ()
 
-@property (nonatomic, strong) NSURL *baseUrl;
 @property (nonatomic, strong) TRCSessionHandler *sessionHandler;
 
 @property (nonatomic, weak) id<TRCConnectionReachabilityDelegate> reachabilityDelegate;
@@ -87,6 +86,11 @@ static float TaskPriorityFromQueuePriority(NSOperationQueuePriority priority);
 #pragma mark - Private Methods
 //-------------------------------------------------------------------------------------------
 
+- (instancetype)init
+{
+    return [self initWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+}
+
 - (instancetype)initWithBaseUrl:(NSURL *)baseUrl
 {
     return [self initWithBaseUrl:baseUrl configuration:[NSURLSessionConfiguration defaultSessionConfiguration]];
@@ -96,23 +100,37 @@ static float TaskPriorityFromQueuePriority(NSOperationQueuePriority priority);
 {
     self = [super init];
     if (self) {
-        NSOperationQueue *backgroundQueue = [NSOperationQueue new];
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_8_0
-        if ([backgroundQueue respondsToSelector:@selector(qualityOfService)]) {
-            backgroundQueue.qualityOfService = NSOperationQualityOfServiceUtility;
-        }
-#endif
-        _sessionHandler = [TRCSessionHandler new];
-        _session = [NSURLSession sessionWithConfiguration:configuration delegate:_sessionHandler delegateQueue:backgroundQueue];
         _baseUrl = baseUrl;
-
-        __weak __typeof (self) weakSelf = self;
-        _reachabilityManager = [TRCNetworkReachabilityManager sharedManager];
-        [_reachabilityManager setReachabilityStatusChangeBlock:^(TRCNetworkReachabilityStatus status) {
-            [weakSelf.reachabilityDelegate connection:weakSelf didChangeReachabilityState:(TRCConnectionReachabilityState)status];
-        }];
+        [self setupWithConfiguration:configuration];
     }
     return self;
+}
+
+- (instancetype)initWithConfiguration:(NSURLSessionConfiguration *)configuration
+{
+    self = [super init];
+    if (self) {
+        [self setupWithConfiguration:configuration];
+    }
+    return self;
+}
+
+- (void)setupWithConfiguration:(NSURLSessionConfiguration *)configuration
+{
+    NSOperationQueue *backgroundQueue = [NSOperationQueue new];
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_8_0
+    if ([backgroundQueue respondsToSelector:@selector(qualityOfService)]) {
+        backgroundQueue.qualityOfService = NSOperationQualityOfServiceUtility;
+    }
+#endif
+    _sessionHandler = [TRCSessionHandler new];
+    _session = [NSURLSession sessionWithConfiguration:configuration delegate:_sessionHandler delegateQueue:backgroundQueue];
+
+    __weak __typeof (self) weakSelf = self;
+    _reachabilityManager = [TRCNetworkReachabilityManager sharedManager];
+    [_reachabilityManager setReachabilityStatusChangeBlock:^(TRCNetworkReachabilityStatus status) {
+        [weakSelf.reachabilityDelegate connection:weakSelf didChangeReachabilityState:(TRCConnectionReachabilityState)status];
+    }];
 }
 
 - (void)startReachabilityMonitoring
@@ -123,15 +141,6 @@ static float TaskPriorityFromQueuePriority(NSOperationQueuePriority priority);
 - (void)stopReachabilityMonitoring
 {
     [self.reachabilityManager stopMonitoring];
-}
-
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        NSAssert(NO, @"Use `initWithBaseUrl` method instead");
-    }
-    return self;
 }
 
 //-------------------------------------------------------------------------------------------
