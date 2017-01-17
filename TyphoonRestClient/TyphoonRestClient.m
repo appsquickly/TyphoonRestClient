@@ -28,6 +28,8 @@
 #import "TRCSerializerString.h"
 #import "TRCSerializerMultipart.h"
 #import "TyphoonRestClientErrors.h"
+#import "TRCPreProcessor.h"
+
 
 TRCRequestMethod TRCRequestMethodPost = @"POST";
 TRCRequestMethod TRCRequestMethodGet = @"GET";
@@ -71,6 +73,7 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
     NSMutableDictionary *_requestSerializers;
     NSMutableDictionary *_validationErrorPrinters;
 
+    NSMutableOrderedSet *_preProcessors;
     NSMutableOrderedSet *_postProcessors;
     NSMutableDictionary *_trcValueTransformerTypesRegistry;
 
@@ -89,6 +92,7 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
         _responseSerializers = [NSMutableDictionary new];
         _requestSerializers = [NSMutableDictionary new];
         _validationErrorPrinters = [NSMutableDictionary new];
+        _preProcessors = [NSMutableOrderedSet new];
         _postProcessors = [NSMutableOrderedSet new];
         _trcValueTransformerTypesRegistry = [NSMutableDictionary new];
 
@@ -345,14 +349,13 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
 #pragma mark - Response handling
 //-------------------------------------------------------------------------------------------
 
-- (void)handleResponse:(id)responseObject withError:(NSError *)error info:(id<TRCResponseInfo>)responseInfo forRequest:(id<TRCRequest>)request completion:(void (^)(id result, NSError *error))completion
+- (void)handleResponse:(id)response withError:(NSError *)error info:(id<TRCResponseInfo>)responseInfo forRequest:(id<TRCRequest>)request completion:(void (^)(id result, NSError *error))completion
 {
-    id response = nil;
-
     NSParameterAssert(completion);
-    if (error || [self isErrorInResponse:responseObject responseInfo:responseInfo]) {
+
+    if (error || [self isErrorInResponse:response responseInfo:responseInfo]) {
         //Parse response for error description if needed:
-        error = [self errorFromNetworkError:error withResponse:responseObject request:request responseInfo:responseInfo];
+        error = [self errorFromNetworkError:error withResponse:response request:request responseInfo:responseInfo];
 
         //Notify request with error
         if ([request respondsToSelector:@selector(respondedWithError:headers:status:)]) {
@@ -360,14 +363,15 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
         }
     }
     else {
-        NSError *validationOrConversionError = nil;
-        TRCSchema *scheme = [_schemeFactory schemeForResponseWithRequest:request];
-        TRCTransformationOptions options = [self transformationOptionsFromObject:request usingSelector:@selector(responseTransformationOptions)];
-        response = [self validateThenConvertObject:responseObject withScheme:scheme options:options error:&validationOrConversionError];
-        if (!validationOrConversionError) {
-            response = [self parseResponse:response withRequest:request responseInfo:responseInfo error:&validationOrConversionError];
+        NSError *preprocessParseError = nil;
+        response = [self preProcessResponseObject:response forRequest:request preProcessError:&preprocessParseError];
+        error = preprocessParseError;
+
+        if (!error) {
+            NSError *validateError = nil;
+            response = [self validateAndConvertResponse:response responseInfo:responseInfo request:request error:&validateError];
+            error = validateError;
         }
-        error = validationOrConversionError;
     }
 
     if (error) {
@@ -376,6 +380,21 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
     } else {
         completion(response, nil);
     }
+}
+
+- (id)validateAndConvertResponse:(id)responseObject responseInfo:(id<TRCResponseInfo>)responseInfo request:(id<TRCRequest>)request error:(NSError **)error
+{
+    NSError *validationOrConversionError = nil;
+    TRCSchema *scheme = [self->_schemeFactory schemeForResponseWithRequest:request];
+    TRCTransformationOptions options = [self transformationOptionsFromObject:request usingSelector:@selector(responseTransformationOptions)];
+
+    responseObject = [self validateThenConvertObject:responseObject withScheme:scheme options:options error:&validationOrConversionError];
+
+    if (!validationOrConversionError) {
+        responseObject = [self parseResponse:responseObject withRequest:request responseInfo:responseInfo error:&validationOrConversionError];
+    }
+
+    return responseObject;
 }
 
 - (id)parseResponse:(id)response withRequest:(id<TRCRequest>)request responseInfo:(id<TRCResponseInfo>)responseInfo error:(NSError **)error
@@ -658,6 +677,36 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
         va_end(args);
         NSLog(@"TyphoonRestClient Warning: %@",warningString);
     }
+}
+
+//-------------------------------------------------------------------------------------------
+#pragma mark - PreProcessors
+//-------------------------------------------------------------------------------------------
+
+- (void)registerPreProcessor:(id<TRCPreProcessor>)preProcessor
+{
+    NSAssert(preProcessor, @"PreProcessor can't be nil");
+    [_preProcessors addObject:preProcessor];
+}
+
+- (id)preProcessResponseObject:(id)responseObject forRequest:(id<TRCRequest>)request preProcessError:(NSError **)preProcessError
+{
+    id result = responseObject;
+
+    for (id<TRCPreProcessor> preProcessor in _preProcessors) {
+        if ([preProcessor respondsToSelector:@selector(preProcessResponseObject:forRequest:preProcessError:)]) {
+            NSError *error = nil;
+            result = [preProcessor preProcessResponseObject:result forRequest:request preProcessError:&error];
+            if (error) {
+                if (preProcessError) {
+                    *preProcessError = error;
+                }
+                return nil;
+            }
+        }
+    }
+
+    return result;
 }
 
 //-------------------------------------------------------------------------------------------
