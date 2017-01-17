@@ -349,13 +349,15 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
 #pragma mark - Response handling
 //-------------------------------------------------------------------------------------------
 
-- (void)handleResponse:(id)response withError:(NSError *)error info:(id<TRCResponseInfo>)responseInfo forRequest:(id<TRCRequest>)request completion:(void (^)(id result, NSError *error))completion
+- (void)handleResponse:(id)responseObject withError:(NSError *)error info:(id<TRCResponseInfo>)responseInfo forRequest:(id<TRCRequest>)request completion:(void (^)(id result, NSError *error))completion
 {
+    id response = nil;
+
     NSParameterAssert(completion);
 
-    if (error || [self isErrorInResponse:response responseInfo:responseInfo]) {
+    if (error || [self isErrorInResponse:responseObject responseInfo:responseInfo]) {
         //Parse response for error description if needed:
-        error = [self errorFromNetworkError:error withResponse:response request:request responseInfo:responseInfo];
+        error = [self errorFromNetworkError:error withResponse:responseObject request:request responseInfo:responseInfo];
 
         //Notify request with error
         if ([request respondsToSelector:@selector(respondedWithError:headers:status:)]) {
@@ -364,7 +366,7 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
     }
     else {
         NSError *preprocessParseError = nil;
-        response = [self preProcessResponseObject:response forRequest:request preProcessError:&preprocessParseError];
+        response = [self preProcessResponseObject:responseObject forRequest:request preProcessError:&preprocessParseError];
         error = preprocessParseError;
 
         if (!error) {
