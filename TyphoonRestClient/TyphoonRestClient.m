@@ -366,12 +366,12 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
     }
     else {
         NSError *preprocessParseError = nil;
-        response = [self preProcessResponseObject:responseObject forRequest:request preProcessError:&preprocessParseError];
+        responseObject = [self preProcessResponseObject:responseObject forRequest:request preProcessError:&preprocessParseError];
         error = preprocessParseError;
 
         if (!error) {
             NSError *validateError = nil;
-            response = [self validateAndConvertResponse:response responseInfo:responseInfo request:request error:&validateError];
+            response = [self validateAndConvertResponse:responseObject responseInfo:responseInfo request:request error:&validateError];
             error = validateError;
         }
     }

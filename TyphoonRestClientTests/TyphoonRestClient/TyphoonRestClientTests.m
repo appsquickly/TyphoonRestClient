@@ -473,7 +473,7 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
     [connectionStub setResponseObject:@[ @{@"number":@1, @"string":@"2", @"url": @"3"} ] responseError:nil];
 
     request.parseResult = [NSObject new];
-    NSError *parseError = nil;
+    NSError *parseError = [NSError new];
     request.parseError = parseError;
 
     [webService sendRequest:request completion:^(id result, NSError *error) {
