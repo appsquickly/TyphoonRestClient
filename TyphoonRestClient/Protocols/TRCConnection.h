@@ -12,6 +12,7 @@
 
 #import <Foundation/Foundation.h>
 #import "TRCRequest.h"
+#import "TRCSerializerHttpQuery.h"
 
 //=============================================================================================================================
 #pragma mark - Connection
@@ -202,6 +203,8 @@ typedef NS_ENUM(NSInteger, TRCProgressHandlerState) {
 
 /// Please use this property only for `requestPostProcessedFromRequest` call
 @property (nonatomic, strong) id<TRCRequest> requestPostProcessor;
+
+@property (nonatomic, assign) TRCSerializerHttpQueryOptions queryOptions;
 
 @end
 

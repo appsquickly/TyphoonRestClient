@@ -24,7 +24,7 @@ TRCSerialization TRCSerializationRequestHttp = @"TRCSerializationRequestHttp";
         }
         return nil;
     } else {
-        return [TRCQueryStringFromParametersWithEncoding(requestObject, NSUTF8StringEncoding) dataUsingEncoding:NSUTF8StringEncoding];
+        return [TRCQueryStringFromParametersWithEncoding(requestObject, NSUTF8StringEncoding, self.options) dataUsingEncoding:NSUTF8StringEncoding];
     }
 }
 

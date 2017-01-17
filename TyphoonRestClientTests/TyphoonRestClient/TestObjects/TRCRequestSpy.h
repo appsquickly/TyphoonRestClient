@@ -23,4 +23,6 @@
 
 @property (nonatomic) BOOL parseObjectImplemented;
 
+@property (nonatomic, copy) void(^insideParseBlock)();
+
 @end

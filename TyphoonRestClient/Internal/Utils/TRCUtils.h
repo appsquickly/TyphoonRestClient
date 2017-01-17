@@ -14,6 +14,7 @@
 
 #import <Foundation/Foundation.h>
 #import "TyphoonRestClient.h"
+#import "TRCSerializerHttpQuery.h"
 
 extern NSString *TRCRootMapperKey;
 
@@ -31,7 +32,7 @@ NSString *TRCUrlPathFromPathByApplyingArguments(NSString *path, NSMutableDiction
 
 void TRCUrlPathParamsByRemovingNull(NSMutableDictionary *arguments);
 
-NSString * TRCQueryStringFromParametersWithEncoding(NSDictionary *parameters, NSStringEncoding stringEncoding);
+NSString *TRCQueryStringFromParametersWithEncoding(NSDictionary *parameters, NSStringEncoding stringEncoding, TRCSerializerHttpQueryOptions options);
 
 NSError *TRCErrorWithFormat(NSInteger code, NSString *format, ...) NS_FORMAT_FUNCTION(2,3);
 

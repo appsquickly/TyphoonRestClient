@@ -28,12 +28,16 @@
 
 - (TRCSessionTaskContext *)contextForTask:(NSURLSessionTask *)task
 {
-    return _taskContextRegistry[@(task.taskIdentifier)];
+    @synchronized (self) {
+        return _taskContextRegistry[@(task.taskIdentifier)];
+    }
 }
 
 - (void)startDataTask:(NSURLSessionDataTask *)task withContext:(TRCSessionTaskContext *)context
 {
-    _taskContextRegistry[@(task.taskIdentifier)] = context;
+    @synchronized (self) {
+        _taskContextRegistry[@(task.taskIdentifier)] = context;
+    }
     [task resume];
 }
 
@@ -65,7 +69,9 @@
     TRCSessionTaskContext *context = [self contextForTask:task];
     [context didCompleteWithError:error];
 
-    [_taskContextRegistry removeObjectForKey:@(task.taskIdentifier)];
+    @synchronized (self) {
+        [_taskContextRegistry removeObjectForKey:@(task.taskIdentifier)];
+    }
 }
 
 

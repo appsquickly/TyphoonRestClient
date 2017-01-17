@@ -1,4 +1,5 @@
-//
+#import "Phone.h"
+#import "Phone.h"//
 //  TyphoonRestClientTests.m
 //  Iconic
 //
@@ -21,6 +22,8 @@
 #import "TRCSchemeFactory.h"
 #import "TRCSchemaDictionaryData.h"
 #import "TRCErrorParserSimple.h"
+#import "TRCMapperPhone.h"
+#import "SyncOperationQueue.h"
 
 @interface NumberToStringConverter : NSObject <TRCValueTransformer>
 
@@ -75,6 +78,9 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
     webService = [[TyphoonRestClient alloc] init];
     [webService registerValueTransformer:[NumberToStringConverter new] forTag:@"number-as-string"];
     [webService registerObjectMapper:[TRCMapperPerson new] forTag:@"{person}"];
+    [webService registerObjectMapper:[TRCMapperPhone new] forTag:@"{phone}"];
+    webService.workQueue = [SyncOperationQueue new];
+    webService.workQueue = [SyncOperationQueue new];
     connectionStub = [[TRCConnectionTestStub alloc] init];
     webService.connection = connectionStub;
 
@@ -404,7 +410,7 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
     TRCRequestSpy *request = [TRCRequestSpy new];
     request.responseSchemeName = @"SimpleDictionary";
 
-    [connectionStub setResponseObject:@{ @"number": @1, @"string": @"123", @"url": @"not an url at all.\n"} responseError:nil];
+    [connectionStub setResponseObject:@{ @"number": @1, @"string": @"123", @"url": [NSObject new]} responseError:nil];
 
     request.parseResult = [NSObject new];
     request.parseObjectImplemented = NO;
@@ -541,7 +547,7 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 {
     TRCRequestSpy *request = [TRCRequestSpy new];
 
-    [connectionStub setResponseObject:@[ @"1", @"2", @"3\n" ] responseError:nil];
+    [connectionStub setResponseObject:@[ @"1", @"2", [NSObject new] ] responseError:nil];
 
     request.parseResult = [NSObject new];
     request.responseSchemeName = @"SimpleArray";
@@ -674,5 +680,59 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
     }];
 }
 
+- (void)test_manual_mapper_method
+{
+    id input = [NSURL URLWithString:@"http://google.com/"];
+    id result = [webService convertThenValidateRequestObject:input usingSchemaTag:@"{url}" options:TRCTransformationOptionsNone error:nil];
+
+    XCTAssert( [result isKindOfClass:[NSString class]] );
+
+    input = @"http://google.com/";
+    result = [webService validateThenConvertResponseObject:input usingSchemaTag:@"{url}" options:TRCTransformationOptionsNone error:nil];
+
+    XCTAssert( [result isKindOfClass:[NSURL class]] );
+
+    input = @{
+            @"first_name": @"Test1",
+            @"last_name": @"Test2",
+            @"avatar_url": @"http://google.com/",
+            @"phone": @{
+                    @"mobile" : @"123",
+                    @"work": @"321"
+            }
+    };
+    result = [webService validateThenConvertResponseObject:input usingSchemaTag:@"{person}" options:TRCTransformationOptionsNone error:nil];
+
+    XCTAssert( [result isKindOfClass:[Person class]] );
+    Person *person = result;
+
+    XCTAssert([person.firstName isEqualToString:@"Test1"]);
+    XCTAssert([person.phone.mobile isEqualToString:@"123"]);
+}
+
+- (void)test_parsing_on_background_queue
+{
+    NSOperationQueue *bgQueue = [NSOperationQueue new];
+    NSOperationQueue *mainQueue = [NSOperationQueue mainQueue];
+    webService.workQueue = bgQueue;
+    webService.callbackQueue = mainQueue;
+
+    [connectionStub setResponseObject:[NSData new] responseError:nil];
+
+    TRCRequestSpy *request = [TRCRequestSpy new];
+    request.insideParseBlock = ^{
+        XCTAssert([NSOperationQueue currentQueue] == bgQueue);
+    };
+
+    XCTestExpectation *expectation = [self expectationWithDescription:@"waiting for response"];
+    [webService sendRequest:request completion:^(id result, NSError *error) {
+        XCTAssert([NSOperationQueue currentQueue] == mainQueue);
+        [expectation fulfill];
+    }];
+
+    [self waitForExpectationsWithTimeout:10 handler:^(NSError *error) {
+
+    }];
+}
 
 @end

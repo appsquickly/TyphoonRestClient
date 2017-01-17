@@ -16,8 +16,8 @@
 {
     id _schemeValue;
     BOOL _isCancelled;
-    id<TRCSchemaDataEnumerator> _enumerator;
-    id<TRCSchemaDataModifier> _modifier;
+    __weak id<TRCSchemaDataEnumerator> _enumerator;
+    __weak id<TRCSchemaDataModifier> _modifier;
 }
 
 - (instancetype)initWithArrayOrDictionary:(id)arrayOrDictionary request:(BOOL)isRequest dataProvider:(id<TRCSchemaDataProvider>)dataProvider
@@ -178,7 +178,7 @@
         if (_isCancelled) {
             *stop = YES;
         } else {
-            NSNumber *index = @(idx);
+            NSString *index = [NSString stringWithFormat:@"%lu{?}", (unsigned long)idx];
             [self notifyEnumeratingItemStart:index];
 
             if (resultArray) {

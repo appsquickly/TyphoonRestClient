@@ -1,0 +1,3 @@
+language: objective-c
+osx_image: xcode7.3
+script: set -o pipefail && xcodebuild test -project TyphoonRestClient.xcodeproj -scheme 'TyphoonRestClient' -sdk iphonesimulator9.3

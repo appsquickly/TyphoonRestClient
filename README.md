@@ -5,6 +5,8 @@ It provides facilities for customisable serialisation / marshalling, validation 
 
 TRC helps to quickly achieve end-to-end proof of concept, at the same time as providing a robust platform for deploying into demanding production environments.
 
+[![Build Status](https://travis-ci.org/appsquickly/TyphoonRestClient.svg?branch=master)](https://travis-ci.org/appsquickly/TyphoonRestClient)
+
 # Features
 
 * Response and request body validation, using schema file.
@@ -26,9 +28,9 @@ TRC helps to quickly achieve end-to-end proof of concept, at the same time as pr
 # Installation
 
 
-## Cocoapods
+## CocoaPods
 
-Preferred way is using Cocoapods:
+Preferred way is using CocoaPods:
 
 ```
 pod 'TyphoonRestClient'
@@ -36,9 +38,7 @@ pod 'TyphoonRestClient'
 
 ## From Sources
 
-1. Drag `TyphoonRestClient` folder into your project
-2. Install `AFNetworking` with your prefered way
-
+Drag `TyphoonRestClient` folder into your project
 
 # Sponsors
 

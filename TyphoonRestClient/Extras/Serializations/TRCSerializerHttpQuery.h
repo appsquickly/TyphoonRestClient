@@ -12,7 +12,13 @@
 #import <Foundation/Foundation.h>
 #import "TRCInfrastructure.h"
 
+typedef NS_OPTIONS(NSInteger, TRCSerializerHttpQueryOptions) {
+    TRCSerializerHttpQueryOptionsNone = 0,
+    TRCSerializerHttpQueryOptionsIncludeArrayIndices = 1 << 0
+};
 
 @interface TRCSerializerHttpQuery : NSObject <TRCRequestSerializer>
+
+@property (nonatomic) TRCSerializerHttpQueryOptions options;
 
 @end

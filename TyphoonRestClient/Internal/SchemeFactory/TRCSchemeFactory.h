@@ -36,6 +36,8 @@
 
 - (id<TRCSchemaData>)responseSchemaDataForMapper:(id<TRCObjectMapper>)mapper;
 
+- (TRCSchema *)schemeFromData:(id<TRCSchemaData>)data withName:(NSString *)name;
+
 //-------------------------------------------------------------------------------------------
 #pragma mark - Registry
 //-------------------------------------------------------------------------------------------

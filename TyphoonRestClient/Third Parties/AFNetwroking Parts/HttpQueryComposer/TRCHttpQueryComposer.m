@@ -19,6 +19,7 @@
 // THE SOFTWARE.
 
 #import "TRCHttpQueryComposer.h"
+#import "TRCSerializerHttpQuery.h"
 
 static NSString * const kTRCCharactersToBeEscapedInQueryString = @":/?&=;+!@#$()',*";
 
@@ -56,7 +57,8 @@ static NSString * TRCPercentEscapedQueryStringValueFromStringWithEncoding(NSStri
 
 @end
 
-static NSArray *TRCQueryStringPairsFromKeyAndValue(NSString *key, id value) {
+static NSArray *TRCQueryStringPairsFromKeyAndValue(NSString *key, id value, TRCSerializerHttpQueryOptions options)
+{
     NSMutableArray *mutableQueryStringComponents = [NSMutableArray array];
 
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"description" ascending:YES selector:@selector(compare:)];
@@ -67,18 +69,26 @@ static NSArray *TRCQueryStringPairsFromKeyAndValue(NSString *key, id value) {
         for (id nestedKey in [dictionary.allKeys sortedArrayUsingDescriptors:@[ sortDescriptor ]]) {
             id nestedValue = dictionary[nestedKey];
             if (nestedValue) {
-                [mutableQueryStringComponents addObjectsFromArray:TRCQueryStringPairsFromKeyAndValue((key ? [NSString stringWithFormat:@"%@[%@]", key, nestedKey] : nestedKey), nestedValue)];
+                [mutableQueryStringComponents addObjectsFromArray:TRCQueryStringPairsFromKeyAndValue((key ? [NSString stringWithFormat:@"%@[%@]",
+                                                                                                                                       key,
+                                                                                                                                       nestedKey] : nestedKey), nestedValue, options)];
             }
         }
     } else if ([value isKindOfClass:[NSArray class]]) {
         NSArray *array = value;
-        for (id nestedValue in array) {
-            [mutableQueryStringComponents addObjectsFromArray:TRCQueryStringPairsFromKeyAndValue([NSString stringWithFormat:@"%@[]", key], nestedValue)];
-        }
+        [array enumerateObjectsUsingBlock:^(id nestedValue, NSUInteger idx, BOOL *stop) {
+            NSString *fullKey = nil;
+            if (options & TRCSerializerHttpQueryOptionsIncludeArrayIndices) {
+                fullKey =  [NSString stringWithFormat:@"%@[%lu]", key, (long unsigned)idx];
+            } else {
+                fullKey =  [NSString stringWithFormat:@"%@[]", key];
+            }
+            [mutableQueryStringComponents addObjectsFromArray:TRCQueryStringPairsFromKeyAndValue(fullKey, nestedValue, options)];
+        }];
     } else if ([value isKindOfClass:[NSSet class]]) {
         NSSet *set = value;
         for (id obj in [set sortedArrayUsingDescriptors:@[ sortDescriptor ]]) {
-            [mutableQueryStringComponents addObjectsFromArray:TRCQueryStringPairsFromKeyAndValue(key, obj)];
+            [mutableQueryStringComponents addObjectsFromArray:TRCQueryStringPairsFromKeyAndValue(key, obj, options)];
         }
     } else {
         [mutableQueryStringComponents addObject:[[TRCQueryStringPair alloc] initWithField:key value:value]];
@@ -87,6 +97,7 @@ static NSArray *TRCQueryStringPairsFromKeyAndValue(NSString *key, id value) {
     return mutableQueryStringComponents;
 }
 
-NSArray<TRCQueryStringPair *> *TRCQueryStringPairsFromDictionary(NSDictionary *dictionary) {
-    return TRCQueryStringPairsFromKeyAndValue(nil, dictionary);
+NSArray<TRCQueryStringPair *> *TRCQueryStringPairsFromDictionary(NSDictionary *dictionary, TRCSerializerHttpQueryOptions options)
+{
+    return TRCQueryStringPairsFromKeyAndValue(nil, dictionary, options);
 }

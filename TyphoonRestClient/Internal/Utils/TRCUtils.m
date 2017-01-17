@@ -12,6 +12,7 @@
 #import "TRCUtils.h"
 #import "TyphoonRestClientErrors.h"
 #import "TRCHttpQueryComposer.h"
+#import "TRCSerializerHttpQuery.h"
 
 NSString *TRCRootMapperKey = @"{root_mapper}";
 
@@ -60,6 +61,8 @@ NSError *TRCErrorFromErrorSet(NSOrderedSet *errors, NSInteger code, NSString *ac
 {
     if (errors.count == 0) {
         return nil;
+    } else if (errors.count == 1) {
+        return [errors firstObject];
     } else {
         NSMutableString *description = [NSMutableString stringWithFormat:@"There is %d errors during %@:",(int)errors.count, action];
         for (NSError *error in errors) {
@@ -148,10 +151,10 @@ void TRCUrlPathParamsByRemovingNull(NSMutableDictionary *arguments)
     }
 }
 
-NSString * TRCQueryStringFromParametersWithEncoding(NSDictionary *parameters, NSStringEncoding stringEncoding)
+NSString *TRCQueryStringFromParametersWithEncoding(NSDictionary *parameters, NSStringEncoding stringEncoding, TRCSerializerHttpQueryOptions options)
 {
     NSMutableArray *mutablePairs = [NSMutableArray array];
-    for (TRCQueryStringPair *pair in TRCQueryStringPairsFromDictionary(parameters)) {
+    for (TRCQueryStringPair *pair in TRCQueryStringPairsFromDictionary(parameters, options)) {
         [mutablePairs addObject:[pair URLEncodedStringValueWithEncoding:stringEncoding]];
     }
     return [mutablePairs componentsJoinedByString:@"&"];

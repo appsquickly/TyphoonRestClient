@@ -18,6 +18,7 @@
 #import "SimpleErrorParser.h"
 #import "RequestToGetIssueIntoRoot.h"
 #import "RequestToSetIssue.h"
+#import "SyncOperationQueue.h"
 
 @interface TRCIntegrationTests : XCTestCase
 
@@ -36,6 +37,9 @@
     _restClient.errorHandler = [SimpleErrorParser new];
     [_restClient registerValueTransformer:[TRCValueTransformerDateISO8601 new] forTag:@"{date_iso8601}"];
     [_restClient registerObjectMapper:[TRCObjectMapperIssue new] forTag:@"{issue}"];
+
+    _restClient.callbackQueue = [SyncOperationQueue new];
+    _restClient.workQueue = [SyncOperationQueue new];
 
     _connection = [TRCConnectionStub new];
 

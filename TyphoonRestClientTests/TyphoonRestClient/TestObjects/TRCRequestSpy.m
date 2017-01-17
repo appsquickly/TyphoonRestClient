@@ -61,6 +61,10 @@
 {
     self.parseResponseObjectCalled = YES;
 
+    if (self.insideParseBlock) {
+        self.insideParseBlock();
+    }
+
     if (parseError && self.parseError) {
         *parseError = self.parseError;
     }

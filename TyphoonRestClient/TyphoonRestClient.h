@@ -18,6 +18,7 @@
 #import "TRCBuiltInObjects.h"
 #import "TRCInfrastructure.h"
 #import "TRCPostProcessor.h"
+#import "TRCSerializerHttpQuery.h"
 
 
 @protocol TRCPreProcessor;
@@ -75,6 +76,16 @@ typedef NS_OPTIONS(NSInteger , TRCValidationOptions)
 /// Set validation and processing options here.
 /// Default: `TRCValidationOptionsNone`
 @property (nonatomic) TRCValidationOptions validationOptions;
+
+/// This options allows you to specify specific query serialization parameters
+/// It used while generating request's URL query and also by TRCSerializerHttpQuery to generate the body
+@property (nonatomic) TRCSerializerHttpQueryOptions querySerializationOptions;
+
+/// This queue used to call completion blocks. Main Queue used by default
+@property (nonatomic, strong) NSOperationQueue *callbackQueue;
+
+/// This queue used to do all serialization, deserialization, validations and parsing. Main Queue used by default
+@property (nonatomic, strong) NSOperationQueue *workQueue;
 
 /**
 * Sends your `TRCRequest` using `connection` and returns result in `completion` block.
@@ -231,5 +242,17 @@ typedef NS_OPTIONS(NSInteger , TRCValidationOptions)
 * @see `TRCValueTransformerType`
 * */
 - (void)registerTRCValueTransformerType:(TRCValueTransformerType *)type withValueClass:(Class)clazz;
+
+@end
+
+//-------------------------------------------------------------------------------------------
+#pragma mark -
+//-------------------------------------------------------------------------------------------
+
+@interface TyphoonRestClient (Extensions)
+
+- (id)convertThenValidateRequestObject:(id)object usingSchemaTag:(NSString *)tag options:(TRCTransformationOptions)options error:(NSError **)pError;
+
+- (id)validateThenConvertResponseObject:(id)object usingSchemaTag:(NSString *)tag options:(TRCTransformationOptions)options error:(NSError **)pError;
 
 @end
