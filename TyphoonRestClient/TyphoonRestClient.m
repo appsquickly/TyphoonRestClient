@@ -370,9 +370,14 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
         error = preprocessParseError;
 
         if (!error) {
-            NSError *validateError = nil;
-            response = [self validateAndConvertResponse:responseObject responseInfo:responseInfo request:request error:&validateError];
-            error = validateError;
+            NSError *validationOrConversionError = nil;
+            TRCSchema *scheme = [_schemeFactory schemeForResponseWithRequest:request];
+            TRCTransformationOptions options = [self transformationOptionsFromObject:request usingSelector:@selector(responseTransformationOptions)];
+            response = [self validateThenConvertObject:responseObject withScheme:scheme options:options error:&validationOrConversionError];
+            if (!validationOrConversionError) {
+                response = [self parseResponse:response withRequest:request responseInfo:responseInfo error:&validationOrConversionError];
+            }
+            error = validationOrConversionError;
         }
     }
 
@@ -382,21 +387,6 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
     } else {
         completion(response, nil);
     }
-}
-
-- (id)validateAndConvertResponse:(id)responseObject responseInfo:(id<TRCResponseInfo>)responseInfo request:(id<TRCRequest>)request error:(NSError **)error
-{
-    NSError *validationOrConversionError = nil;
-    TRCSchema *scheme = [self->_schemeFactory schemeForResponseWithRequest:request];
-    TRCTransformationOptions options = [self transformationOptionsFromObject:request usingSelector:@selector(responseTransformationOptions)];
-
-    responseObject = [self validateThenConvertObject:responseObject withScheme:scheme options:options error:&validationOrConversionError];
-
-    if (!validationOrConversionError) {
-        responseObject = [self parseResponse:responseObject withRequest:request responseInfo:responseInfo error:&validationOrConversionError];
-    }
-
-    return responseObject;
 }
 
 - (id)parseResponse:(id)response withRequest:(id<TRCRequest>)request responseInfo:(id<TRCResponseInfo>)responseInfo error:(NSError **)error
