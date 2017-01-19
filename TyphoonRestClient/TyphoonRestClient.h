@@ -20,6 +20,10 @@
 #import "TRCPostProcessor.h"
 #import "TRCSerializerHttpQuery.h"
 
+
+@protocol TRCPreProcessor;
+@protocol TRCPreProcessor;
+
 /**
 * If `TRCConnection` set in `TyphoonRestClient` supports reachability, then this notification would be posted after each
 * reachability state change.
@@ -138,6 +142,14 @@ typedef NS_OPTIONS(NSInteger , TRCValidationOptions)
 * `TRCObjectMapper`
 * */
 - (void)registerObjectMapper:(id<TRCObjectMapper>)objectMapper forTag:(NSString *)tag;
+
+/**
+* Adds your `TRCPreProcessor` into registry.
+* See `TRCPreProcessor` for more details
+*
+* @see `TRCPostProcessor`
+* */
+- (void)registerPreProcessor:(id<TRCPreProcessor>)preProcessor;
 
 /**
 * Adds your `TRCPostProcessor` into registry.

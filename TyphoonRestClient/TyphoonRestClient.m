@@ -28,6 +28,8 @@
 #import "TRCSerializerString.h"
 #import "TRCSerializerMultipart.h"
 #import "TyphoonRestClientErrors.h"
+#import "TRCPreProcessor.h"
+
 #import "TRCProxyProgressHandler.h"
 
 @implementation NSOperationQueue (BlockWithPriority)
@@ -90,6 +92,7 @@ static inline void TRCCompleteWithError(void(^completion)(id, NSError *), NSErro
     NSMutableDictionary *_requestSerializers;
     NSMutableDictionary *_validationErrorPrinters;
 
+    NSMutableOrderedSet *_preProcessors;
     NSMutableOrderedSet *_postProcessors;
     NSMutableDictionary *_trcValueTransformerTypesRegistry;
 
@@ -108,6 +111,7 @@ static inline void TRCCompleteWithError(void(^completion)(id, NSError *), NSErro
         _responseSerializers = [NSMutableDictionary new];
         _requestSerializers = [NSMutableDictionary new];
         _validationErrorPrinters = [NSMutableDictionary new];
+        _preProcessors = [NSMutableOrderedSet new];
         _postProcessors = [NSMutableOrderedSet new];
         _trcValueTransformerTypesRegistry = [NSMutableDictionary new];
 
@@ -449,6 +453,7 @@ static inline void TRCCompleteWithError(void(^completion)(id, NSError *), NSErro
     id response = nil;
 
     NSParameterAssert(completion);
+
     if (error || [self isErrorInResponse:responseObject responseInfo:responseInfo]) {
         //Parse response for error description if needed:
         error = [self errorFromNetworkError:error withResponse:responseObject request:request responseInfo:responseInfo];
@@ -459,14 +464,20 @@ static inline void TRCCompleteWithError(void(^completion)(id, NSError *), NSErro
         }
     }
     else {
-        NSError *validationOrConversionError = nil;
-        TRCSchema *scheme = [_schemeFactory schemeForResponseWithRequest:request];
-        TRCTransformationOptions options = [self transformationOptionsFromObject:request usingSelector:@selector(responseTransformationOptions)];
-        response = [self validateThenConvertObject:responseObject withScheme:scheme options:options error:&validationOrConversionError];
-        if (!validationOrConversionError) {
-            response = [self parseResponse:response withRequest:request responseInfo:responseInfo error:&validationOrConversionError];
+        NSError *preprocessParseError = nil;
+        responseObject = [self preProcessResponseObject:responseObject forRequest:request preProcessError:&preprocessParseError];
+        error = preprocessParseError;
+
+        if (!error) {
+            NSError *validationOrConversionError = nil;
+            TRCSchema *scheme = [_schemeFactory schemeForResponseWithRequest:request];
+            TRCTransformationOptions options = [self transformationOptionsFromObject:request usingSelector:@selector(responseTransformationOptions)];
+            response = [self validateThenConvertObject:responseObject withScheme:scheme options:options error:&validationOrConversionError];
+            if (!validationOrConversionError) {
+                response = [self parseResponse:response withRequest:request responseInfo:responseInfo error:&validationOrConversionError];
+            }
+            error = validationOrConversionError;
         }
-        error = validationOrConversionError;
     }
 
     if (error) {
@@ -760,6 +771,36 @@ static inline void TRCCompleteWithError(void(^completion)(id, NSError *), NSErro
 }
 
 //-------------------------------------------------------------------------------------------
+#pragma mark - PreProcessors
+//-------------------------------------------------------------------------------------------
+
+- (void)registerPreProcessor:(id<TRCPreProcessor>)preProcessor
+{
+    NSAssert(preProcessor, @"PreProcessor can't be nil");
+    [_preProcessors addObject:preProcessor];
+}
+
+- (id)preProcessResponseObject:(id)responseObject forRequest:(id<TRCRequest>)request preProcessError:(NSError **)preProcessError
+{
+    id result = responseObject;
+
+    for (id<TRCPreProcessor> preProcessor in _preProcessors) {
+        if ([preProcessor respondsToSelector:@selector(preProcessResponseObject:forRequest:preProcessError:)]) {
+            NSError *error = nil;
+            result = [preProcessor preProcessResponseObject:result forRequest:request preProcessError:&error];
+            if (error) {
+                if (preProcessError) {
+                    *preProcessError = error;
+                }
+                return nil;
+            }
+        }
+    }
+
+    return result;
+}
+
+//-------------------------------------------------------------------------------------------
 #pragma mark - PostProcessors
 //-------------------------------------------------------------------------------------------
 
@@ -944,6 +985,7 @@ static inline void TRCCompleteWithError(void(^completion)(id, NSError *), NSErro
 
 
 @end
+
 
 @implementation TyphoonRestClient (Extensions)
 

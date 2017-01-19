@@ -161,6 +161,7 @@
 		2DBA1EBD1A9ADDFE7A44DD50 /* TRCSessionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCSessionHandler.h; sourceTree = "<group>"; };
 		2DBA1ECDC2BD02AD01F101C3 /* TRCErrorParserSimple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCErrorParserSimple.h; sourceTree = "<group>"; };
 		2DBA1FD2324DAC2AE398F276 /* TRCValidationErrorPrinterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCValidationErrorPrinterTests.m; sourceTree = "<group>"; };
+		318211C9A0EFA05BB328BAAB /* TRCPreProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCPreProcessor.h; sourceTree = "<group>"; };
 		469D3C7EB63CCF077674B274 /* libPods-TyphoonRestClientTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TyphoonRestClientTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C84882D07B06327E8D9BB26 /* libPods-TyphoonRestClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TyphoonRestClient.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A14BA2DE857D4EC58948A253 /* libPods-HttpWebService.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HttpWebService.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -596,6 +597,7 @@
 				2DBA1B8033DA8D5FA5B63C8B /* TRCObjectMapper.h */,
 				2DBA142DC592EB2E5622DD73 /* TRCPostProcessor.h */,
 				2DBA1139A068FD435CFD2C2A /* TRCResponseDelegate.h */,
+				318211C9A0EFA05BB328BAAB /* TRCPreProcessor.h */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
