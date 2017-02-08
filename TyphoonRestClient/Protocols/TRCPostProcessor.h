@@ -13,6 +13,17 @@
 
 @protocol TRCRequest;
 
+
+/**
+ * Specifies operation queue type. Queue which used by TyphoonRestClient to operate OR queue which used to
+ * return result in callback
+ * */
+typedef NS_OPTIONS(NSInteger , TRCQueueType)
+{
+    TRCQueueTypeWork = 0,
+    TRCQueueTypeCallback = 1,
+};
+
 /**
 * `TRCPostProcessor` is per-request post-processor.
 * This post-processor useful when you want centralized place to modify all response objects.
@@ -40,6 +51,12 @@
 *  Useful to handle all errors from RestClient in one place, and replace them with own error with own error codes.
 * */
 - (NSError *)postProcessError:(id)responseError forRequest:(id<TRCRequest>)request;
+
+/**
+ * Specify queue type to run this post processor.
+ * Used TRCQueueTypeWork if not specified
+ * */
+- (TRCQueueType)queueType;
 
 @end
 
