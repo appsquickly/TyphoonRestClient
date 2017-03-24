@@ -49,13 +49,14 @@ TRCSerialization TRCSerializationRequestMultipart = @"TRCSerializationRequestMul
 
     __block BOOL didAppendInitialBoundary = NO;
     [parameters enumerateKeysAndObjectsUsingBlock:^(NSString *name, id parameter, BOOL *stop) {
-        if (didAppendInitialBoundary) {
-            [self data:data appendIntermidiantBoundary:boundary];
-        } else {
-            [self data:data appendInitialBoundary:boundary];
-            didAppendInitialBoundary = YES;
-        }
-        [self data:data appendParameter:parameter withName:name];
+        [self data:data appendParameter:parameter withName:name appendBoundaryBlock:^{
+            if (didAppendInitialBoundary) {
+                [self data:data appendIntermidiantBoundary:boundary];
+            } else {
+                [self data:data appendInitialBoundary:boundary];
+                didAppendInitialBoundary = YES;
+            }
+        }];
     }];
 
     [self data:data appendFinalBoundary:boundary];
@@ -96,6 +97,26 @@ TRCSerialization TRCSerializationRequestMultipart = @"TRCSerializationRequestMul
 //-------------------------------------------------------------------------------------------
 #pragma mark - Part data
 //-------------------------------------------------------------------------------------------
+
+- (void)data:(NSMutableData *)data appendParameter:(id)param withName:(NSString *)name appendBoundaryBlock:(void(^)())appendBoundaryBlock
+{
+    if ([param isKindOfClass:[NSArray class]]) {
+        NSString *elementName = [NSString stringWithFormat:@"%@[]", name];
+        for (id element in param) {
+            appendBoundaryBlock();
+            [self data:data appendParameter:element withName:elementName];
+        }
+    } else if ([param isKindOfClass:[NSDictionary class]]) {
+        [(NSDictionary *) param enumerateKeysAndObjectsUsingBlock:^(id key, id element, BOOL *stop) {
+            NSString *elementName = [NSString stringWithFormat:@"%@[%@]", name, key];
+            appendBoundaryBlock();
+            [self data:data appendParameter:element withName:elementName];
+        }];
+    } else {
+        appendBoundaryBlock();
+        [self data:data appendParameter:param withName:name];
+    }
+}
 
 - (void)data:(NSMutableData *)data appendParameter:(id)param withName:(NSString *)name
 {
