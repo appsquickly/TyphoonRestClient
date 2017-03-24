@@ -143,7 +143,7 @@ extern TRCSerialization TRCSerializationRequestInputStream;
 * Supports arrays and dictionaries of values (but only at top level, no nesting possible).
 * You may also send files, use instance of TRCMultipartFile as value in body dictionary.
 *
-* Request object must be `NSInputStream`
+* Request object must be `NSDictionary`.
 * */
 extern TRCSerialization TRCSerializationRequestMultipart;
 
