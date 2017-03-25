@@ -134,9 +134,17 @@ extern TRCSerialization TRCSerializationRequestHttp;
 * */
 extern TRCSerialization TRCSerializationRequestInputStream;
 
-/**
- * TODO: write doc
- * */
+/** Registered for `TRCSerializerMultipart`.
+* Can be used **ONLY** for request body.
+*
+* This serialization converts `NSDictionary` into multipart/form-data binary data
+* (see https://en.wikipedia.org/wiki/MIME#Multipart_messages, https://tools.ietf.org/html/rfc7578).
+*
+* Supports arrays and dictionaries of values (but only at top level, no nesting possible).
+* You may also send files, use instance of TRCMultipartFile as value in body dictionary.
+*
+* Request object must be `NSDictionary`.
+* */
 extern TRCSerialization TRCSerializationRequestMultipart;
 
 /** Registered for `TRCSerializerImage`.
