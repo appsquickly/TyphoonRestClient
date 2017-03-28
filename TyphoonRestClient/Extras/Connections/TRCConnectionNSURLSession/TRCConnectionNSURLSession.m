@@ -218,7 +218,7 @@ static float TaskPriorityFromQueuePriority(NSOperationQueuePriority priority);
 
 static BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method)
 {
-    return method == TRCRequestMethodPost || method == TRCRequestMethodPut || method == TRCRequestMethodPatch;
+    return method == TRCRequestMethodPost || method == TRCRequestMethodPut || method == TRCRequestMethodPatch || method == TRCRequestMethodDelete;
 }
 
 static float TaskPriorityFromQueuePriority(NSOperationQueuePriority priority)
