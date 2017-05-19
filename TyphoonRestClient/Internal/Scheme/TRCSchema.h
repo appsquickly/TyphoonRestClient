@@ -24,7 +24,6 @@
 @property (nonatomic, strong, readonly) id<TRCSchemaData> data;
 
 @property (nonatomic, weak) id<TRCConvertersRegistry> converterRegistry;
-@property (nonatomic) TRCValidationOptions options;
 
 + (instancetype)schemaWithData:(id<TRCSchemaData>)data name:(NSString *)name;
 

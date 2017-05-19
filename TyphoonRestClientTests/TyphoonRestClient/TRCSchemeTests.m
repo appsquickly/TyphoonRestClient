@@ -140,6 +140,11 @@
     return nil;
 }
 
+- (TRCOptions)options
+{
+    return TRCOptionsNone;
+}
+
 - (void)setUp
 {
     TRCValueTransformerTypeNumber = 1 << 0;

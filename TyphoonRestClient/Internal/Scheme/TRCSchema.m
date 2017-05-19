@@ -198,7 +198,7 @@
 
 - (BOOL)isValue:(id)dataValue canBeConvertedToSchemeValue:(id)schemeValue
 {
-    if (self.options & TRCValidationOptionsConvertNumbersAutomatically) {
+    if (self.converterRegistry.options & TRCOptionsConvertNumbersAutomatically) {
 
         // 1 -> "1"
         if ([dataValue isKindOfClass:[NSNumber class]] && [schemeValue isKindOfClass:[NSString class]]) {
@@ -236,10 +236,10 @@
     return [NSError errorWithDomain:TyphoonRestClientErrors code:TyphoonRestClientErrorCodeValidation userInfo:userInfo];
 }
 
-- (NSError *)errorForIncorrectValue:(id)value correctType:(NSString *)correctType stack:(TRCSchemaStackTrace *)stack
+- (NSError *)errorForIncorrectValue:(id)incorrectValue correctType:(NSString *)correctType stack:(TRCSchemaStackTrace *)stack
 {
-    NSString *incorrectType = [self typeDescriptionForValue:value];
-    NSString *fullDescriptionErrorMessage = [NSString stringWithFormat:@"Type mismatch: must be %@, but '%@' has given", correctType, incorrectType];
+    NSString *incorrectType = [self typeDescriptionForValue:incorrectValue];
+    NSString *fullDescriptionErrorMessage = [NSString stringWithFormat:@"Type mismatch: must be %@, but got %@ of type '%@'.", correctType, incorrectValue, incorrectType];
     NSMutableDictionary *userInfo = [self userInfoForErrorDescriptionWithObject:stack.originalObject errorMessage:fullDescriptionErrorMessage stack:[stack stack]];
     userInfo[NSLocalizedDescriptionKey] = [NSString stringWithFormat:@"Type mismatch for '%@' (Must be %@, but '%@' has given)", [stack shortDescription], correctType, incorrectType];
     return [NSError errorWithDomain:TyphoonRestClientErrors code:TyphoonRestClientErrorCodeValidation userInfo:userInfo];
@@ -298,7 +298,13 @@
 
 - (NSString *)typeDescriptionForValue:(id)value
 {
-    return [[value class] description];
+    if ([value isKindOfClass:[NSString class]]) {
+        return @"NSString";
+    } else if ([value isKindOfClass:[NSNumber class]]) {
+        return @"NSNumber";
+    } else {
+        return [[value class] description];
+    }
 }
 
 @end

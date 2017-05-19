@@ -32,17 +32,17 @@
 extern NSString *TyphoonRestClientReachabilityDidChangeNotification;
 
 /**
-* `TRCValidationOptions` is special options to validation and conversion rules
+* `TRCOptions` is special options to validation and conversion rules
 * */
-typedef NS_OPTIONS(NSInteger , TRCValidationOptions)
+typedef NS_OPTIONS(NSInteger , TRCOptions)
 {
-    TRCValidationOptionsNone = 0,
+    TRCOptionsNone = 0,
     ///If enabled, all values missed in schema would be removed in request object
-    TRCValidationOptionsRemoveValuesMissedInSchemeForRequests  = 1 << 0,
+    TRCOptionsRemoveValuesMissedInSchemeForRequests  = 1 << 0,
     ///If enabled, all values missed in schema would be removed in response object
-    TRCValidationOptionsRemoveValuesMissedInSchemeForResponses = 1 << 1,
+    TRCOptionsRemoveValuesMissedInSchemeForResponses = 1 << 1,
     ///If enabled, it will convert numbers to strings and vice versa, to match scheme (Usefull for some PHP APIs).
-    TRCValidationOptionsConvertNumbersAutomatically = 1 << 2
+    TRCOptionsConvertNumbersAutomatically = 1 << 2
 };
 
 /**
@@ -76,8 +76,8 @@ typedef NS_OPTIONS(NSInteger , TRCValidationOptions)
 @property (nonatomic) BOOL shouldSuppressWarnings;
 
 /// Set validation and processing options here.
-/// Default: `TRCValidationOptionsNone`
-@property (nonatomic) TRCValidationOptions validationOptions;
+/// Default: `TRCOptionsNone`
+@property (nonatomic) TRCOptions options;
 
 /// This options allows you to specify specific query serialization parameters
 /// It used while generating request's URL query and also by TRCSerializerHttpQuery to generate the body

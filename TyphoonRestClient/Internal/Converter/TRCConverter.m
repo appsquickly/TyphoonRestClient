@@ -90,10 +90,10 @@
 
     //Handle object missing in scheme
     if (!schemeValue) {
-        if (_convertingForRequest && (self.options & TRCValidationOptionsRemoveValuesMissedInSchemeForRequests)) {
+        if (_convertingForRequest && (self.registry.options & TRCOptionsRemoveValuesMissedInSchemeForRequests)) {
             object = nil;
         }
-        else if (!_convertingForRequest && (self.options & TRCValidationOptionsRemoveValuesMissedInSchemeForResponses)) {
+        else if (!_convertingForRequest && (self.registry.options & TRCOptionsRemoveValuesMissedInSchemeForResponses)) {
             object = nil;
         }
     }
@@ -173,7 +173,7 @@
 
 - (id)convertIfPossibleValue:(id)dataValue usingSchemeValue:(id)schemeValue
 {
-    if (self.options & TRCValidationOptionsConvertNumbersAutomatically) {
+    if (self.registry.options & TRCOptionsConvertNumbersAutomatically) {
         if ([dataValue isKindOfClass:[NSNumber class]] && [schemeValue isKindOfClass:[NSString class]]) {
             return [dataValue description];
         }

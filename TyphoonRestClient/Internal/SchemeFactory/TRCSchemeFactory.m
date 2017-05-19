@@ -171,7 +171,6 @@
 {
     TRCSchema *schema = [TRCSchema schemaWithData:data name:name];
     schema.converterRegistry = self.owner;
-    schema.options = self.owner.validationOptions;
     return schema;
 }
 

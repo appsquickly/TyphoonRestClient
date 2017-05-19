@@ -25,4 +25,19 @@
         [op start];
     }
 }
+
+- (void)addOperationWithBlock:(void (^)(void))block
+{
+    if (block) {
+        block();
+    }
+}
+
+- (void)addOperationPriority:(NSOperationQueuePriority)priority withBlock:(void(^)())block
+{
+    if (block) {
+        block();
+    }
+}
+
 @end

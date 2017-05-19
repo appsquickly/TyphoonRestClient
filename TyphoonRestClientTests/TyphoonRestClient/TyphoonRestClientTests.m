@@ -72,15 +72,21 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 }
 
 
+- (TyphoonRestClient *)newRestClient
+{
+    TyphoonRestClient *resetClient = [[TyphoonRestClient alloc] init];
+    [resetClient registerValueTransformer:[NumberToStringConverter new] forTag:@"number-as-string"];
+    [resetClient registerObjectMapper:[TRCMapperPerson new] forTag:@"{person}"];
+    [resetClient registerObjectMapper:[TRCMapperPhone new] forTag:@"{phone}"];
+    resetClient.workQueue = [SyncOperationQueue new];
+    resetClient.callbackQueue = [SyncOperationQueue new];
+    return resetClient;
+}
+
 - (void)setUp
 {
     [super setUp];
-    webService = [[TyphoonRestClient alloc] init];
-    [webService registerValueTransformer:[NumberToStringConverter new] forTag:@"number-as-string"];
-    [webService registerObjectMapper:[TRCMapperPerson new] forTag:@"{person}"];
-    [webService registerObjectMapper:[TRCMapperPhone new] forTag:@"{phone}"];
-    webService.workQueue = [SyncOperationQueue new];
-    webService.workQueue = [SyncOperationQueue new];
+    webService = [self newRestClient];
     connectionStub = [[TRCConnectionTestStub alloc] init];
     webService.connection = connectionStub;
 
@@ -91,6 +97,7 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 {
     [super tearDown];
     currentWebService = nil;
+    webService = nil;
 }
 
 - (TRCSchema *)schemeForName:(NSString *)name isRequest:(BOOL)isRequest
@@ -525,6 +532,33 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
     }];
 }
 
+- (void)test_array_with_scheme_and_converting_numbers
+{
+    TRCRequestSpy *request = [TRCRequestSpy new];
+
+    [connectionStub setResponseObject:@[ @{@"number":@"1", @"string":@2, @"url": @"3"} ] responseError:nil];
+
+    request.parseResult = [NSObject new];
+    request.responseSchemeName = @"ArrayOfObjects";
+    request.parseObjectImplemented = NO;
+
+    webService.options = TRCOptionsConvertNumbersAutomatically;
+
+    __block BOOL callbackCalled = NO;
+    
+    [webService sendRequest:request completion:^(id result, NSError *error) {
+        XCTAssertFalse(request.parseResponseObjectCalled);
+        XCTAssertNil(error);
+        NSArray *expect = @[@{@"number":@1, @"string":@"2", @"url": [[NSURL alloc] initWithString:@"3"]}];
+        XCTAssertEqualObjects(expect, result);
+        NSLog(@"expect: %@", [expect description]);
+        NSLog(@"got: %@", [result description]);
+        callbackCalled = YES;
+    }];
+    
+    XCTAssertTrue(callbackCalled);
+}
+
 - (void)test_array_with_scheme_2_and_converting
 {
     TRCRequestSpy *request = [TRCRequestSpy new];
@@ -712,12 +746,16 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 
 - (void)test_parsing_on_background_queue
 {
+    TyphoonRestClient *restClient = [self newRestClient];
+    TRCConnectionTestStub *stub = [[TRCConnectionTestStub alloc] init];
+    restClient.connection = stub;
+    
     NSOperationQueue *bgQueue = [NSOperationQueue new];
     NSOperationQueue *mainQueue = [NSOperationQueue mainQueue];
-    webService.workQueue = bgQueue;
-    webService.callbackQueue = mainQueue;
+    restClient.workQueue = bgQueue;
+    restClient.callbackQueue = mainQueue;
 
-    [connectionStub setResponseObject:[NSData new] responseError:nil];
+    [stub setResponseObject:[NSData new] responseError:nil];
 
     TRCRequestSpy *request = [TRCRequestSpy new];
     request.insideParseBlock = ^{
@@ -725,7 +763,7 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
     };
 
     XCTestExpectation *expectation = [self expectationWithDescription:@"waiting for response"];
-    [webService sendRequest:request completion:^(id result, NSError *error) {
+    [restClient sendRequest:request completion:^(id result, NSError *error) {
         XCTAssert([NSOperationQueue currentQueue] == mainQueue);
         [expectation fulfill];
     }];

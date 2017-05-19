@@ -28,12 +28,12 @@
 @end
 
 @implementation TRCConverterTests {
-    TRCValidationOptions validationOptions;
+    TRCOptions validationOptions;
 }
 
 - (void)setUp
 {
-    validationOptions = TRCValidationOptionsNone;
+    validationOptions = TRCOptionsNone;
     [super setUp];
 }
 
@@ -51,6 +51,11 @@
     [typesRegistry enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
         block([key integerValue], obj, stop);
     }];
+}
+
+- (TRCOptions)options
+{
+    return validationOptions;
 }
 
 - (id<TRCValueTransformer>)valueTransformerForTag:(NSString *)type
@@ -160,7 +165,6 @@
         return data;
     }
     TRCConverter *converter = [[TRCConverter alloc] initWithSchema:schema];
-    converter.options = validationOptions;
     converter.registry = self;
 
     return [converter convertResponseValue:data error:error];
@@ -174,7 +178,6 @@
         return data;
     }
     TRCConverter *converter = [[TRCConverter alloc] initWithSchema:schema];
-    converter.options = validationOptions;
     converter.registry = self;
     
     return [converter convertRequestValue:data error:error];
@@ -332,7 +335,7 @@
 
 - (void)test_object_with_values_missed_in_scheme_response_with_option_to_skip
 {
-    validationOptions |= TRCValidationOptionsRemoveValuesMissedInSchemeForResponses;
+    validationOptions |= TRCOptionsRemoveValuesMissedInSchemeForResponses;
 
     NSDictionary *data = @{@"value1" : @1, @"value2": @2};
     NSDictionary *schema = @{ @"value1" : @1 };
@@ -356,7 +359,7 @@
 
 - (void)test_object_with_values_missed_in_scheme_request_with_option_to_skip
 {
-    validationOptions |= TRCValidationOptionsRemoveValuesMissedInSchemeForRequests;
+    validationOptions |= TRCOptionsRemoveValuesMissedInSchemeForRequests;
 
     NSDictionary *data = @{@"value1" : @1, @"value2": @2};
     NSDictionary *schema = @{ @"value1" : @1 };
@@ -681,7 +684,7 @@
 
 - (void)test_conversion_with_validation_options
 {
-    validationOptions = TRCValidationOptionsRemoveValuesMissedInSchemeForResponses;
+    validationOptions = TRCOptionsRemoveValuesMissedInSchemeForResponses;
 
     NSDictionary *data = @{ @"key1": @"1", @"key2": @"", @"key3": @"123"};
     NSDictionary *schema = @{ @"key1": @"1", @"key2": @""};
@@ -696,7 +699,7 @@
 //
 - (void)test_validation_option2
 {
-    validationOptions = TRCValidationOptionsRemoveValuesMissedInSchemeForRequests;
+    validationOptions = TRCOptionsRemoveValuesMissedInSchemeForRequests;
 
     NSDictionary *data = @{ @"key1": @"1", @"key2": @"", @"key3": @"123"};
     NSDictionary *schema = @{ @"key1": @"1", @"key2": @""};

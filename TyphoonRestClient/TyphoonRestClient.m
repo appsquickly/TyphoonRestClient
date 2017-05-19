@@ -105,7 +105,7 @@ static inline void TRCCompleteWithError(void(^completion)(id, NSError *), NSErro
     if (self) {
         _typeTransformerRegistry = [NSMutableDictionary new];
         _objectMapperRegistry = [NSMutableDictionary new];
-        self.validationOptions = TRCValidationOptionsNone;
+        self.options = TRCOptionsNone;
         _schemeFactory = [TRCSchemeFactory new];
         _schemeFactory.owner = self;
         _responseSerializers = [NSMutableDictionary new];
@@ -181,7 +181,9 @@ static inline void TRCCompleteWithError(void(^completion)(id, NSError *), NSErro
     NSOperationQueue *callbackQueue = [self callbackQueueFromRequest:request];
     NSOperationQueuePriority priority = [self queuePriorityForRequest:request];
 
-    NSBlockOperation *operation = [NSBlockOperation blockOperationWithBlock:^{
+    __weak NSOperationQueue *weakWorkQueue = workQueue;
+    
+    [workQueue addOperationPriority:priority withBlock:^{
         NSError *error = nil;
         TRCRequestCreateOptions *createOptions = [self requestCreateOptionsFromRequest:request error:&error];
         if (error) {
@@ -190,7 +192,7 @@ static inline void TRCCompleteWithError(void(^completion)(id, NSError *), NSErro
             }];
             return;
         }
-
+        
         NSMutableURLRequest *httpRequest = [self.connection requestWithOptions:createOptions error:&error];
         if (error) {
             [callbackQueue addOperationPriority:priority withBlock:^{
@@ -198,9 +200,9 @@ static inline void TRCCompleteWithError(void(^completion)(id, NSError *), NSErro
             }];
             return;
         }
-
+        
         NSParameterAssert(httpRequest);
-
+        
         TRCRequestSendOptions *sendOptions = [self requestSendOptionsFromRequest:request error:&error];
         if (error) {
             [callbackQueue addOperationPriority:priority withBlock:^{
@@ -208,23 +210,23 @@ static inline void TRCCompleteWithError(void(^completion)(id, NSError *), NSErro
             }];
             return;
         }
-
+        
         if ([handler isCancelled]) {
             return;
         }
-
+        
         id<TRCProgressHandler> networkHandler = [self.connection sendRequest:httpRequest withOptions:sendOptions completion:^(id responseObject, NSError *networkError, id<TRCResponseInfo> responseInfo) {
-            [workQueue addOperationPriority:priority withBlock:^{
+            [weakWorkQueue addOperationPriority:priority withBlock:^{
                 [self handleResponse:responseObject withError:networkError info:responseInfo forRequest:request completion:^(id result, NSError *handleError) {
                     if (completion) {
-                        [callbackQueue addOperationWithBlock:^{
+                        [callbackQueue addOperationPriority:priority withBlock:^{
                             id finalResult = result;
                             NSError *finalError = handleError;
-
+                            
                             if (finalResult && !finalError) {
                                 finalResult = [self postProcessResponseObject:finalResult forRequest:request postProcessError:&finalError queueType:TRCQueueTypeCallback];
                             }
-
+                            
                             if (finalError) {
                                 finalError = [self postProcessError:finalError forRequest:request queueType:TRCQueueTypeCallback];
                             }
@@ -236,8 +238,6 @@ static inline void TRCCompleteWithError(void(^completion)(id, NSError *), NSErro
         }];
         [handler setProgressHandler:networkHandler];
     }];
-    operation.queuePriority = priority;
-    [workQueue addOperation:operation];
 
     return handler;
 }
@@ -646,7 +646,6 @@ static inline void TRCCompleteWithError(void(^completion)(id, NSError *), NSErro
 
     TRCConverter *converter = [[TRCConverter alloc] initWithSchema:scheme];
     converter.registry = self;
-    converter.options = self.validationOptions;
     converter.transformationOptions = options;
     NSError *error = nil;
     id result = [converter convertResponseValue:responseObject error:&error];
@@ -665,7 +664,6 @@ static inline void TRCCompleteWithError(void(^completion)(id, NSError *), NSErro
 
     TRCConverter *converter = [[TRCConverter alloc] initWithSchema:scheme];
     converter.registry = self;
-    converter.options = self.validationOptions;
     converter.transformationOptions = options;
     NSError *error = nil;
     id result = [converter convertRequestValue:requestObject error:&error];

@@ -661,8 +661,8 @@
 				2DBA17FA4B5016447633E32A /* TRCMapperWithArray.m */,
 				2DBA1076B15A22774213B2FA /* TRCMapperWithArray.h */,
 				2DBA1365A34B2D111EA6E463 /* TRCMapperWithArray.json */,
-				2DBA1A7F795C54D0DE12094A /* SyncOperationQueue.m */,
 				2DBA1D4A0D09EAEC8684A9B1 /* SyncOperationQueue.h */,
+				2DBA1A7F795C54D0DE12094A /* SyncOperationQueue.m */,
 			);
 			path = TestObjects;
 			sourceTree = "<group>";
