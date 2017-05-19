@@ -98,11 +98,7 @@
         }
     }
 
-    if (object && self.registry && [schemeValue isKindOfClass:[NSString class]]) {
-        return [self convertValue:object toType:schemeValue];
-    } else {
-        return object;
-    }
+    return [self convertValue:object usingSchemeValue:schemeValue];
 }
 
 - (id)schemaData:(id<TRCSchemaData>)data objectFromResponse:(id)object withMapperTag:(NSString *)tag
@@ -135,20 +131,35 @@
 #pragma mark - Utils
 //-------------------------------------------------------------------------------------------
 
-- (id)convertValue:(id)dataValue toType:(NSString *)typeName
+- (id)convertValue:(id)dataValue usingSchemeValue:(id)schemeValue
 {
     NSParameterAssert(self.registry);
 
-    NSError *convertError = nil;
-    id result = dataValue;
-    id<TRCValueTransformer>typeConverter = [self.registry valueTransformerForTag:typeName];
+    id result = nil;
+
+    id<TRCValueTransformer>typeConverter = nil;
+    if ([schemeValue isKindOfClass:[NSString class]] && self.registry) {
+        typeConverter = [self.registry valueTransformerForTag:schemeValue];
+    }
 
     if (typeConverter) {
-        if (_convertingForRequest) {
-            result = [typeConverter requestValueFromObject:dataValue error:&convertError];
-        } else {
-            result = [typeConverter objectFromResponseValue:dataValue error:&convertError];
-        }
+        result = [self convertIfPossibleValue:dataValue usingConverter:typeConverter];
+    } else {
+        result = [self convertIfPossibleValue:dataValue usingSchemeValue:schemeValue];
+    }
+
+    return result;
+}
+
+- (id)convertIfPossibleValue:(id)dataValue usingConverter:(id<TRCValueTransformer>)typeConverter
+{
+    NSError *convertError = nil;
+    id result = nil;
+
+    if (_convertingForRequest) {
+        result = [typeConverter requestValueFromObject:dataValue error:&convertError];
+    } else {
+        result = [typeConverter objectFromResponseValue:dataValue error:&convertError];
     }
 
     if (convertError) {
@@ -156,7 +167,26 @@
         [self.schema.data cancel];
         result = nil;
     }
+
     return result;
+}
+
+- (id)convertIfPossibleValue:(id)dataValue usingSchemeValue:(id)schemeValue
+{
+    if (self.options & TRCValidationOptionsConvertNumbersAutomatically) {
+        if ([dataValue isKindOfClass:[NSNumber class]] && [schemeValue isKindOfClass:[NSString class]]) {
+            return [dataValue description];
+        }
+        if ([dataValue isKindOfClass:[NSString class]] && [schemeValue isKindOfClass:[NSNumber class]]) {
+            if ([dataValue rangeOfString:@"."].location == NSNotFound) {
+                return @([(NSString *)dataValue longLongValue]);
+            } else {
+                return @([dataValue doubleValue]);
+            }
+        }
+    }
+
+    return dataValue;
 }
 
 - (id)convertObject:(id)object withMapperTag:(NSString *)tag usingSelector:(SEL)sel

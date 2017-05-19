@@ -40,7 +40,9 @@ typedef NS_OPTIONS(NSInteger , TRCValidationOptions)
     ///If enabled, all values missed in schema would be removed in request object
     TRCValidationOptionsRemoveValuesMissedInSchemeForRequests  = 1 << 0,
     ///If enabled, all values missed in schema would be removed in response object
-    TRCValidationOptionsRemoveValuesMissedInSchemeForResponses = 1 << 1
+    TRCValidationOptionsRemoveValuesMissedInSchemeForResponses = 1 << 1,
+    ///If enabled, it will convert numbers to strings and vice versa, to match scheme (Usefull for some PHP APIs).
+    TRCValidationOptionsConvertNumbersAutomatically = 1 << 2
 };
 
 /**

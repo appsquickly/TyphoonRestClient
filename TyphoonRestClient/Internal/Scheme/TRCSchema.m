@@ -34,6 +34,8 @@
 
     NSError *_error;
     TRCSchemaStackTrace *_stack;
+
+
 }
 
 //-------------------------------------------------------------------------------------------
@@ -107,8 +109,11 @@
     else if (value) {
         //2. Check value correct
         if (![self isTypeOfValue:value validForSchemeValue:schemeValue]) {
-            _error = [self errorForIncorrectType:[[value class] description] correctType:[self typeRepresentationForSchemeValue:schemeValue] stack:_stack];
-            [data cancel];
+            if (![self isValue:value canBeConvertedToSchemeValue:schemeValue]) {
+                _error = [self errorForIncorrectValue:value
+                                          correctType:[self typeRepresentationForSchemeValue:schemeValue] stack:_stack];
+                [data cancel];
+            }
         }
     }
 }
@@ -125,7 +130,8 @@
 
 - (void)schemaData:(id<TRCSchemaData>)data typeMismatchForValue:(id)value withSchemaValue:(id)schemaValue
 {
-    _error = [self errorForIncorrectType:[[value class] description] correctType:[self typeRepresentationForSchemeValue:schemaValue] stack:_stack];
+    _error = [self errorForIncorrectValue:value correctType:[self typeRepresentationForSchemeValue:schemaValue]
+                                    stack:_stack];
 }
 
 //-------------------------------------------------------------------------------------------
@@ -176,6 +182,39 @@
 }
 
 //-------------------------------------------------------------------------------------------
+#pragma mark - Numbers Auto Convertion
+//-------------------------------------------------------------------------------------------
+
++ (NSCharacterSet *)nonDigitsCharacterSet
+{
+    static NSCharacterSet *nonDigits = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        NSCharacterSet *digits = [NSCharacterSet characterSetWithCharactersInString:@"1234567890."];
+        nonDigits = [digits invertedSet];
+    });
+    return nonDigits;
+}
+
+- (BOOL)isValue:(id)dataValue canBeConvertedToSchemeValue:(id)schemeValue
+{
+    if (self.options & TRCValidationOptionsConvertNumbersAutomatically) {
+
+        // 1 -> "1"
+        if ([dataValue isKindOfClass:[NSNumber class]] && [schemeValue isKindOfClass:[NSString class]]) {
+            //We can always convert Number to String.
+            return YES;
+        }
+        if ([dataValue isKindOfClass:[NSString class]] && [schemeValue isKindOfClass:[NSNumber class]]) {
+            NSRange nonCharacterRange = [dataValue rangeOfCharacterFromSet:[[self class] nonDigitsCharacterSet]];
+            return nonCharacterRange.location == NSNotFound;
+        }
+    }
+
+    return NO;
+}
+
+//-------------------------------------------------------------------------------------------
 #pragma mark - Error Composing
 //-------------------------------------------------------------------------------------------
 
@@ -197,8 +236,9 @@
     return [NSError errorWithDomain:TyphoonRestClientErrors code:TyphoonRestClientErrorCodeValidation userInfo:userInfo];
 }
 
-- (NSError *)errorForIncorrectType:(NSString *)incorrectType correctType:(NSString *)correctType stack:(TRCSchemaStackTrace *)stack
+- (NSError *)errorForIncorrectValue:(id)value correctType:(NSString *)correctType stack:(TRCSchemaStackTrace *)stack
 {
+    NSString *incorrectType = [self typeDescriptionForValue:value];
     NSString *fullDescriptionErrorMessage = [NSString stringWithFormat:@"Type mismatch: must be %@, but '%@' has given", correctType, incorrectType];
     NSMutableDictionary *userInfo = [self userInfoForErrorDescriptionWithObject:stack.originalObject errorMessage:fullDescriptionErrorMessage stack:[stack stack]];
     userInfo[NSLocalizedDescriptionKey] = [NSString stringWithFormat:@"Type mismatch for '%@' (Must be %@, but '%@' has given)", [stack shortDescription], correctType, incorrectType];
@@ -224,7 +264,7 @@
         }
     }
 
-    return [NSString stringWithFormat:@"'%@'",NSStringFromClass([schemeValue class])];
+    return [self typeDescriptionForValue:schemeValue];
 }
 
 - (NSMutableDictionary *)userInfoForErrorDescriptionWithObject:(id)object errorMessage:(NSString *)message stack:(NSArray *)stack
@@ -254,6 +294,11 @@
     }
 
     return errorDescription;
+}
+
+- (NSString *)typeDescriptionForValue:(id)value
+{
+    return [[value class] description];
 }
 
 @end

@@ -1060,6 +1060,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "TyphoonRestClientTests/TyphoonRestClientTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.codemonastery.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = TyphoonRestClientTests;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
@@ -1080,6 +1081,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TyphoonRestClient-Prefix.pch";
 				INFOPLIST_FILE = "TyphoonRestClientTests/TyphoonRestClientTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.codemonastery.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = TyphoonRestClientTests;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
