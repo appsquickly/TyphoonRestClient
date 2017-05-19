@@ -138,7 +138,7 @@
     id result = nil;
 
     id<TRCValueTransformer>typeConverter = nil;
-    if ([schemeValue isKindOfClass:[NSString class]] && self.registry) {
+    if (dataValue && [schemeValue isKindOfClass:[NSString class]] && self.registry) {
         typeConverter = [self.registry valueTransformerForTag:schemeValue];
     }
 
