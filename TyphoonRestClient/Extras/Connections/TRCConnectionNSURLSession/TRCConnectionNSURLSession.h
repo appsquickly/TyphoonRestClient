@@ -13,6 +13,8 @@
 #import "TRCConnection.h"
 
 @class TRCNetworkReachabilityManager;
+@protocol TRCConnectionNSURLSessionDelegate;
+@class TRCSessionTaskContext;
 
 @interface TRCConnectionNSURLSession : NSObject <TRCConnection>
 
@@ -22,6 +24,11 @@
 * Current `reachabilityManager`, it can be used to get current `networkReachabilityStatus`, `isReachable`, etc...
 * */
 @property (nonatomic, strong, readonly) TRCNetworkReachabilityManager *reachabilityManager;
+
+/**
+ *
+ * */
+@property (nonatomic) id<TRCConnectionNSURLSessionDelegate> delegate;
 
 /**
  * `init` and `initWithBaseUrl` will use [NSURLSessionConfiguration defaultSessionConfiguration] as configuration.
@@ -47,5 +54,17 @@
 * Invokes `stopMonitoring` on `reachabilityManager`
 * */
 - (void)stopReachabilityMonitoring;
+
+@end
+
+
+@protocol TRCConnectionNSURLSessionDelegate <NSObject>
+
+@optional
+- (void)connection:(TRCConnectionNSURLSession *)connection context:(TRCSessionTaskContext *)context
+                                               didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
+                                                 completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential))completionHandler;
+
+//TODO: All other NSURLSessionDataDelegate methods
 
 @end

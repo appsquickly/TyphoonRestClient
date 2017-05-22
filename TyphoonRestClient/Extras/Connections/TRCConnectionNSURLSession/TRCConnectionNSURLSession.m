@@ -14,6 +14,7 @@
 #import "TRCSessionHandler.h"
 #import "TRCSessionTaskContext.h"
 #import "TRCNetworkReachabilityManager.h"
+#import "TRCBuiltInObjects.h"
 
 
 static BOOL IsBodyAllowedInHttpMethod(TRCRequestMethod method);

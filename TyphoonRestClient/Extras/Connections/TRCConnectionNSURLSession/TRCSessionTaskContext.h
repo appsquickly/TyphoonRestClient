@@ -12,10 +12,12 @@
 #import <Foundation/Foundation.h>
 #import "TRCConnection.h"
 
+@class TRCConnectionNSURLSession;
+
 
 @interface TRCSessionTaskContext : NSObject <TRCProgressHandler>
 
-@property (nonatomic, weak) id<TRCConnection> connection;
+@property (nonatomic, weak) TRCConnectionNSURLSession *connection;
 
 - (instancetype)initWithTask:(NSURLSessionDataTask *)task options:(id<TRCConnectionRequestSendingOptions>)options completion:(TRCConnectionCompletion)completion;
 
@@ -26,6 +28,9 @@
 - (void)didReceiveData:(NSData *)data;
 
 - (void)didCompleteWithError:(NSError *)networkError;
+
+- (void)didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
+          completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential))completionHandler;
 
 - (TRCProgressHandlerState)state;
 

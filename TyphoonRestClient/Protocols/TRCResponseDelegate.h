@@ -22,4 +22,7 @@
 
 - (void)connection:(id<TRCConnection>)connection didCompleteWithError:(NSError *)networkError;
 
+- (void)connection:(id<TRCConnection>)connection didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
+                                                   completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential))completionHandler;
+
 @end

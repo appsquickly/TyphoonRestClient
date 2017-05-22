@@ -74,5 +74,12 @@
     }
 }
 
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
+  completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *_Nullable credential))completionHandler
+{
+    TRCSessionTaskContext *context = [self contextForTask:task];
+    [context didReceiveChallenge:challenge completionHandler:completionHandler];
+}
+
 
 @end
