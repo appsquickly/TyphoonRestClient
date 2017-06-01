@@ -34,7 +34,7 @@
     NSIndexSet *_acceptableStatusCodes;
 }
 
-- (instancetype)initWithTask:(NSURLSessionDataTask *)task options:(id<TRCConnectionRequestSendingOptions>)options completion:(TRCConnectionCompletion)completion
+- (instancetype)initWithTask:(NSURLSessionTask *)task options:(id<TRCConnectionRequestSendingOptions>)options completion:(TRCConnectionCompletion)completion
 {
     self = [super init];
     if (self) {

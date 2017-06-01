@@ -68,13 +68,25 @@ static float TaskPriorityFromQueuePriority(NSOperationQueuePriority priority);
 
 - (id<TRCProgressHandler>)sendRequest:(NSURLRequest *)request withOptions:(id<TRCConnectionRequestSendingOptions>)options completion:(TRCConnectionCompletion)completion
 {
-    NSURLSessionDataTask *task = [self.session dataTaskWithRequest:request];
+    NSURLSessionTask *task = nil;
+    if (options.requestType == TRCRequestTypeData) {
+        task = [self.session dataTaskWithRequest:request];
+    } else if (options.requestType == TRCRequestTypeDownload) {
+        task = [self.session downloadTaskWithRequest:request];
+    } else if (options.requestType == TRCRequestTypeUpload) {
+        if (options.localFileUrl) {
+            task = [self.session uploadTaskWithRequest:request fromFile:options.localFileUrl];
+        } else {
+            NSAssert(NO, @"Upload requests from NSData are not supported yet.");
+            return nil;
+        }
+    }
     if ([task respondsToSelector:@selector(priority)]) {
         task.priority = TaskPriorityFromQueuePriority(options.queuePriority);
     }
     TRCSessionTaskContext *context = [[TRCSessionTaskContext alloc] initWithTask:task options:options completion:completion];
     context.connection = self;
-    [self.sessionHandler startDataTask:task withContext:context];
+    [self.sessionHandler startTask:task withContext:context];
     return context;
 }
 
