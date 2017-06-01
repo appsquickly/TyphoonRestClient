@@ -64,7 +64,7 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
 @interface TRCRequestSendOptions : NSObject <TRCConnectionRequestSendingOptions>
 @end
 @implementation TRCRequestSendOptions
-@synthesize outputStream, responseSerialization, customProperties, queuePriority, responseDelegate;
+@synthesize outputStream, responseSerialization, customProperties, queuePriority, responseDelegate, requestType, localFileUrl;
 @end
 
 
