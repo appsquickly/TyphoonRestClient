@@ -326,6 +326,22 @@ static inline void TRCCompleteWithError(void(^completion)(id, NSError *), NSErro
         options.responseDelegate = [request responseDelegate];
     }
 
+    if ([request respondsToSelector:@selector(requestType)]) {
+        options.requestType = [request requestType];
+    }
+
+    if ([request respondsToSelector:@selector(requestLocalFileUrl)]) {
+        NSURL *localFileUrl = [request requestLocalFileUrl];
+        if (options.requestType == TRCRequestTypeDownload || options.requestType == TRCRequestTypeUpload) {
+            if (localFileUrl == nil) {
+                TRCSetError(error, TRCErrorWithFormat(TyphoonRestClientErrorCodeRequestCreation, @"For download/upload requests, requestLocalFileUrl should not be nil."));
+                return nil;
+            } else {
+                options.localFileUrl = localFileUrl;
+            }
+        }
+    }
+
     return options;
 }
 
