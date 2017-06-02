@@ -206,6 +206,8 @@ typedef NS_ENUM(NSInteger, TRCProgressHandlerState) {
 
 @property (nonatomic, assign) TRCSerializerHttpQueryOptions queryOptions;
 
+@property (nonatomic, assign) TRCRequestType requestType;
+
 @end
 
 /**

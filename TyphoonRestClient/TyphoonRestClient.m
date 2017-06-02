@@ -58,7 +58,7 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
 @interface TRCRequestCreateOptions : NSObject <TRCConnectionRequestCreationOptions>
 @end
 @implementation TRCRequestCreateOptions
-@synthesize method, path, pathParameters, body, headers, serialization, customProperties, requestPostProcessor, queryOptions;
+@synthesize method, path, pathParameters, body, headers, serialization, customProperties, requestPostProcessor, queryOptions, requestType;
 @end
 
 @interface TRCRequestSendOptions : NSObject <TRCConnectionRequestSendingOptions>
@@ -391,6 +391,10 @@ static inline void TRCCompleteWithError(void(^completion)(id, NSError *), NSErro
 
     if ([request respondsToSelector:@selector(customProperties)]) {
         options.customProperties = [request customProperties];
+    }
+
+    if ([request respondsToSelector:@selector(requestType)]) {
+        options.requestType = [request requestType];
     }
 
     if (composingError) {
