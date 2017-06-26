@@ -141,6 +141,17 @@
     });
 }
 
+- (void)didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
+          completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *_Nullable credential))completionHandler
+{
+    if ([self.options.responseDelegate respondsToSelector:@selector(connection:didReceiveChallenge:completionHandler:)]) {
+        [self.options.responseDelegate connection:self.connection didReceiveChallenge:challenge completionHandler:completionHandler];
+    } else if ([self.connection.delegate respondsToSelector:@selector(connection:context:didReceiveChallenge:completionHandler:)]) {
+        [self.connection.delegate connection:self.connection
+                                     context:self didReceiveChallenge:challenge completionHandler:completionHandler];
+    }
+}
+
 //-------------------------------------------------------------------------------------------
 #pragma mark - Progress Handler Protocol
 //-------------------------------------------------------------------------------------------

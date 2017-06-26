@@ -29,6 +29,9 @@
 
 - (void)didCompleteWithError:(NSError *)networkError;
 
+- (void)didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
+          completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential))completionHandler;
+
 - (TRCProgressHandlerState)state;
 
 @end

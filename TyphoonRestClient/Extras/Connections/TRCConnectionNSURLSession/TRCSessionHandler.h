@@ -12,11 +12,8 @@
 #import <Foundation/Foundation.h>
 
 @class TRCSessionTaskContext;
-@class TRCConnectionNSURLSession;
 
 @interface TRCSessionHandler : NSObject <NSURLSessionDataDelegate>
-
-@property (nonatomic, weak) TRCConnectionNSURLSession *connection;
 
 - (void)startDataTask:(NSURLSessionDataTask *)task withContext:(TRCSessionTaskContext *)context;
 

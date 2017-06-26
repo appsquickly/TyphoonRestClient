@@ -11,7 +11,6 @@
 
 #import "TRCSessionHandler.h"
 #import "TRCSessionTaskContext.h"
-#import "TRCConnectionNSURLSession.h"
 
 @implementation TRCSessionHandler
 {
@@ -79,16 +78,7 @@
   completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *_Nullable credential))completionHandler
 {
     TRCSessionTaskContext *context = [self contextForTask:task];
-    [self.connection.delegate connection:self.connection context:context didReceiveChallenge:challenge completionHandler:completionHandler];
-}
-
-- (BOOL)respondsToSelector:(SEL)aSelector
-{
-    if (aSelector == @selector(URLSession:task:didReceiveChallenge:completionHandler:)) {
-        BOOL connectionDelegateImplemented = [self.connection.delegate respondsToSelector:@selector(connection:context:didReceiveChallenge:completionHandler:)];
-        return connectionDelegateImplemented;
-    }
-    return [super respondsToSelector:aSelector];
+    [context didReceiveChallenge:challenge completionHandler:completionHandler];
 }
 
 

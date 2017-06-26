@@ -125,7 +125,6 @@ static float TaskPriorityFromQueuePriority(NSOperationQueuePriority priority);
     }
 #endif
     _sessionHandler = [TRCSessionHandler new];
-    _sessionHandler.connection = self;
     _session = [NSURLSession sessionWithConfiguration:configuration delegate:_sessionHandler delegateQueue:backgroundQueue];
 
     __weak __typeof (self) weakSelf = self;
