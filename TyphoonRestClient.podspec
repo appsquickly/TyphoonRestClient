@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = 'TyphoonRestClient'
-  s.version  = '1.6.4'
+  s.version  = '1.6.5'
   s.license  = 'Apache2.0'
   s.summary  = 'Flexible HTTP client for Objective-C and Swift'
   s.homepage = 'https://github.com/appsquickly/TyphoonRestClient'
