@@ -149,6 +149,8 @@
     } else if ([self.connection.delegate respondsToSelector:@selector(connection:context:didReceiveChallenge:completionHandler:)]) {
         [self.connection.delegate connection:self.connection
                                      context:self didReceiveChallenge:challenge completionHandler:completionHandler];
+    } else {
+        completionHandler(NSURLSessionAuthChallengePerformDefaultHandling, nil);
     }
 }
 
