@@ -188,6 +188,7 @@
 		FA28E0881B42941E00453FB8 /* RequestToUploadFile.response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RequestToUploadFile.response.json; sourceTree = "<group>"; };
 		FA28E08A1B42941E00453FB8 /* TRCValueTransformerDateISO8601.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCValueTransformerDateISO8601.h; sourceTree = "<group>"; };
 		FA28E08B1B42941E00453FB8 /* TRCValueTransformerDateISO8601.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCValueTransformerDateISO8601.m; sourceTree = "<group>"; };
+		FA3329671F18DE040035456E /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
 		FA46955E1A938782004036A5 /* TRCMapperPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCMapperPerson.h; sourceTree = "<group>"; };
 		FA46955F1A938782004036A5 /* TRCMapperPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCMapperPerson.m; sourceTree = "<group>"; };
 		FA4695611A9387FF004036A5 /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
@@ -470,6 +471,7 @@
 		FAC9160A19E693370009D824 = {
 			isa = PBXGroup;
 			children = (
+				FA3329671F18DE040035456E /* .travis.yml */,
 				FAC9161819E693370009D824 /* TyphoonRestClient */,
 				FAC9162C19E693370009D824 /* TyphoonRestClientTests */,
 				FAC9161519E693370009D824 /* Frameworks */,
