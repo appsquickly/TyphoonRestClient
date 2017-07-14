@@ -6,6 +6,7 @@ It provides facilities for customisable serialisation / marshalling, validation 
 TRC helps to quickly achieve end-to-end proof of concept, at the same time as providing a robust platform for deploying into demanding production environments.
 
 [![Build Status](https://travis-ci.org/appsquickly/TyphoonRestClient.svg?branch=master)](https://travis-ci.org/appsquickly/TyphoonRestClient)
+[![codecov](https://codecov.io/gh/appsquickly/TyphoonRestClient/branch/master/graph/badge.svg)](https://codecov.io/gh/appsquickly/TyphoonRestClient)
 
 # Features
 
