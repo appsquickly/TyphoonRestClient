@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['headers',['headers',['../interface_t_r_c_connection_stub_response.html#a01bac86ed3d98abf210f634cb9546381',1,'TRCConnectionStubResponse::headers()'],['../protocol_t_r_c_connection_request_creation_options-p.html#a84a8efbb7f901e29ec9bfd511172230b',1,'TRCConnectionRequestCreationOptions-p::headers()']]]
+  ['field',['field',['../interface_t_r_c_query_string_pair.html#a6dbffadaa7a11d484b1285ed9bc66b5d',1,'TRCQueryStringPair']]],
+  ['filename',['filename',['../interface_t_r_c_multipart_file.html#ab87e309dcf98b239446a7f430aee64b1',1,'TRCMultipartFile']]],
+  ['format',['format',['../interface_t_r_c_serializer_plist.html#a31698baa56ca5391ca04104177f5ab48',1,'TRCSerializerPlist']]]
 ];

@@ -6,6 +6,7 @@ var _typhoon_rest_client_errors_8h =
     [ "TyphoonRestClientErrorCodeRequestUrlComposing", "_typhoon_rest_client_errors_8h.html#ab292513d2e4c7a96b7195bbe11a90059", null ],
     [ "TyphoonRestClientErrorCodeRequestSerialization", "_typhoon_rest_client_errors_8h.html#a5bca90d82cd370f7d164a22d7c5ae282", null ],
     [ "TyphoonRestClientErrorCodeResponseSerialization", "_typhoon_rest_client_errors_8h.html#a26d472cf663bbc93584404ad3d2b6265", null ],
+    [ "TyphoonRestClientErrorCodeBadResponse", "_typhoon_rest_client_errors_8h.html#a37664dae626f45af86696e54621033da", null ],
     [ "TyphoonRestClientErrorCodeBadResponseCode", "_typhoon_rest_client_errors_8h.html#a3701b6bac696a49566a9f5abef53cee3", null ],
     [ "TyphoonRestClientErrorCodeBadResponseMime", "_typhoon_rest_client_errors_8h.html#ac1aeff4ec1448f9e6850483d3015cb14", null ],
     [ "TyphoonRestClientErrorCodeConnectionError", "_typhoon_rest_client_errors_8h.html#aa47347e3e1bc4fc432a45e4fe6471a76", null ],

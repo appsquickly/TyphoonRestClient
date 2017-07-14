@@ -1,4 +1,24 @@
 var searchData=
 [
-  ['trcbundlefile',['TRCBundleFile',['../_t_r_c_connection_stub_8h.html#ad9b4161f6f2bb8aed563420c3d4dafa0',1,'TRCConnectionStub.h']]]
+  ['reachabilitystate',['reachabilityState',['../protocol_t_r_c_connection-p.html#a1b1992638453684be4de02cf3ef04dd8',1,'TRCConnection-p']]],
+  ['registerdefaultrequestserialization_3aforbodyobjectwithclass_3a',['registerDefaultRequestSerialization:forBodyObjectWithClass:',['../interface_typhoon_rest_client.html#af7ee2d9ec19b1c02756264271c6323c1',1,'TyphoonRestClient']]],
+  ['registerobjectmapper_3afortag_3a',['registerObjectMapper:forTag:',['../interface_typhoon_rest_client.html#ab91dcd6a309b3933444fa6b563115e0d',1,'TyphoonRestClient']]],
+  ['registerpostprocessor_3a',['registerPostProcessor:',['../interface_typhoon_rest_client.html#a6d79e113bb4bda537eac6ac52af8b331',1,'TyphoonRestClient']]],
+  ['registerpreprocessor_3a',['registerPreProcessor:',['../interface_typhoon_rest_client.html#ac4c54f7ab61047e97f9719d884981a22',1,'TyphoonRestClient']]],
+  ['registerrequestserializer_3aforname_3a',['registerRequestSerializer:forName:',['../category_typhoon_rest_client_07_infrastructure_08.html#a32f00e6041c8c765ab2a0dd54d2f9e9f',1,'TyphoonRestClient(Infrastructure)::registerRequestSerializer:forName:()'],['../interface_typhoon_rest_client.html#a32f00e6041c8c765ab2a0dd54d2f9e9f',1,'TyphoonRestClient::registerRequestSerializer:forName:()']]],
+  ['registerresponseserializer_3aforname_3a',['registerResponseSerializer:forName:',['../category_typhoon_rest_client_07_infrastructure_08.html#a86b8a6662a65600ac6ab5739924159b5',1,'TyphoonRestClient(Infrastructure)::registerResponseSerializer:forName:()'],['../interface_typhoon_rest_client.html#a86b8a6662a65600ac6ab5739924159b5',1,'TyphoonRestClient::registerResponseSerializer:forName:()']]],
+  ['registerschemeformat_3aforfileextension_3a',['registerSchemeFormat:forFileExtension:',['../category_typhoon_rest_client_07_infrastructure_08.html#ae2239cfe912805aabd38f4f28f0df1b2',1,'TyphoonRestClient(Infrastructure)::registerSchemeFormat:forFileExtension:()'],['../interface_typhoon_rest_client.html#ae2239cfe912805aabd38f4f28f0df1b2',1,'TyphoonRestClient::registerSchemeFormat:forFileExtension:()']]],
+  ['registertrcvaluetransformertype_3awithvalueclass_3a',['registerTRCValueTransformerType:withValueClass:',['../category_typhoon_rest_client_07_infrastructure_08.html#a67bad34aa2b1034301a28752d199fdc1',1,'TyphoonRestClient(Infrastructure)::registerTRCValueTransformerType:withValueClass:()'],['../interface_typhoon_rest_client.html#a67bad34aa2b1034301a28752d199fdc1',1,'TyphoonRestClient::registerTRCValueTransformerType:withValueClass:()']]],
+  ['registervalidationerrorprinter_3aforformatwithfileextension_3a',['registerValidationErrorPrinter:forFormatWithFileExtension:',['../category_typhoon_rest_client_07_infrastructure_08.html#a1f6f490e87782dbe531057c05349145a',1,'TyphoonRestClient(Infrastructure)::registerValidationErrorPrinter:forFormatWithFileExtension:()'],['../interface_typhoon_rest_client.html#a1f6f490e87782dbe531057c05349145a',1,'TyphoonRestClient::registerValidationErrorPrinter:forFormatWithFileExtension:()']]],
+  ['registervaluetransformer_3afortag_3a',['registerValueTransformer:forTag:',['../interface_typhoon_rest_client.html#a4ed973c96276f7c1ffe9fe83fee5be65',1,'TyphoonRestClient']]],
+  ['requestobjectfromobject_3aerror_3a',['requestObjectFromObject:error:',['../protocol_t_r_c_object_mapper-p.html#a67523fffff20e9911167bf1e7e0f4710',1,'TRCObjectMapper-p']]],
+  ['requestschemadatafromdata_3adataprovider_3aerror_3a',['requestSchemaDataFromData:dataProvider:error:',['../protocol_t_r_c_schema_format_01-p.html#af33ee81bc697e638c5c9705495527e05',1,'TRCSchemaFormat -p']]],
+  ['requestvalidationschemaname',['requestValidationSchemaName',['../protocol_t_r_c_object_mapper-p.html#a861449ce9a015fba56f2426d05f9bd24',1,'TRCObjectMapper-p']]],
+  ['requestvaluefromobject_3aerror_3a',['requestValueFromObject:error:',['../protocol_t_r_c_value_transformer_01-p.html#a8cb78de6ebe0d69617d5d033ecb40ff7',1,'TRCValueTransformer -p']]],
+  ['requestwithoptions_3aerror_3a',['requestWithOptions:error:',['../protocol_t_r_c_connection-p.html#a8133a2a6d0ca3dabe4e0568cd8a53a15',1,'TRCConnection-p']]],
+  ['response',['response',['../protocol_t_r_c_response_info-p.html#af0aec5ea1227324104933c12d1f07fed',1,'TRCResponseInfo-p']]],
+  ['responsedata',['responseData',['../protocol_t_r_c_response_info-p.html#a18df77bac4779ca28d0c18806203f19f',1,'TRCResponseInfo-p']]],
+  ['responseschemadatafromdata_3adataprovider_3aerror_3a',['responseSchemaDataFromData:dataProvider:error:',['../protocol_t_r_c_schema_format_01-p.html#a8e556bc48c4289c4f88b747101e85e6d',1,'TRCSchemaFormat -p']]],
+  ['responsevalidationschemaname',['responseValidationSchemaName',['../protocol_t_r_c_object_mapper-p.html#a79f803c4a5f97dcf4b5686f655616dc1',1,'TRCObjectMapper-p']]],
+  ['resume',['resume',['../protocol_t_r_c_progress_handler-p.html#ad9dc20e57b04218afbca393772e15bab',1,'TRCProgressHandler-p']]]
 ];

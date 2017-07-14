@@ -7,7 +7,7 @@
       <Subnodes>
        <Node>
         <Name>Classes</Name>
-        <Path></Path>
+        <Path>annotated.html</Path>
         <Subnodes>
          <Node>
           <Name>Class List</Name>
@@ -20,12 +20,12 @@
              <Node>
               <Name>requestWithOptions:error:</Name>
               <Path>protocol_t_r_c_connection-p.html</Path>
-              <Anchor>af825ae65f5137ff497df0acc1492ea06</Anchor>
+              <Anchor>a8133a2a6d0ca3dabe4e0568cd8a53a15</Anchor>
              </Node>
              <Node>
               <Name>sendRequest:withOptions:completion:</Name>
               <Path>protocol_t_r_c_connection-p.html</Path>
-              <Anchor>aa8070dbcd4e8c682ada6338ef689532d</Anchor>
+              <Anchor>aaee85adbcb332baf45b5045c357c2753</Anchor>
              </Node>
              <Node>
               <Name>reachabilityState</Name>
@@ -36,37 +36,6 @@
               <Name>setReachabilityDelegate:</Name>
               <Path>protocol_t_r_c_connection-p.html</Path>
               <Anchor>a1280faddbc900f1ca66c2c8cd4d5e346</Anchor>
-             </Node>
-            </Subnodes>
-           </Node>
-           <Node>
-            <Name>TRCConnectionAFNetworking</Name>
-            <Path>interface_t_r_c_connection_a_f_networking.html</Path>
-            <Subnodes>
-             <Node>
-              <Name>reachabilityManager</Name>
-              <Path>interface_t_r_c_connection_a_f_networking.html</Path>
-              <Anchor>abd731d364391c6f8ff71b6082035a1be</Anchor>
-             </Node>
-             <Node>
-              <Name>baseUrl</Name>
-              <Path>interface_t_r_c_connection_a_f_networking.html</Path>
-              <Anchor>a1d45d04463e1ed1c190a96208f54602b</Anchor>
-             </Node>
-             <Node>
-              <Name>initWithBaseUrl:</Name>
-              <Path>interface_t_r_c_connection_a_f_networking.html</Path>
-              <Anchor>a37bb276738cbd912c68cff05dac5c404</Anchor>
-             </Node>
-             <Node>
-              <Name>startReachabilityMonitoring</Name>
-              <Path>interface_t_r_c_connection_a_f_networking.html</Path>
-              <Anchor>adc4dffa345c7ebc55ec8e386108651ec</Anchor>
-             </Node>
-             <Node>
-              <Name>stopReachabilityMonitoring</Name>
-              <Path>interface_t_r_c_connection_a_f_networking.html</Path>
-              <Anchor>a8d97166d68a0c481ab94e5e1d59dee8a</Anchor>
              </Node>
             </Subnodes>
            </Node>
@@ -89,83 +58,202 @@
               <Path>interface_t_r_c_connection_logger.html</Path>
               <Anchor>a1447e473e85119251d436f78654c9e83</Anchor>
              </Node>
+             <Node>
+              <Name>shouldLogInputStreamContent</Name>
+              <Path>interface_t_r_c_connection_logger.html</Path>
+              <Anchor>aac6a4348136fcc2625e2aa1ef5932246</Anchor>
+             </Node>
+             <Node>
+              <Name>NS_AVAILABLE</Name>
+              <Path>interface_t_r_c_connection_logger.html</Path>
+              <Anchor>a90efaa5bc0d15f1f34ae8d7d1b1f6df0</Anchor>
+             </Node>
             </Subnodes>
            </Node>
            <Node>
-            <Name>&lt;TRCConnectionReachabilityDelegate&gt;</Name>
-            <Path>protocol_t_r_c_connection_reachability_delegate-p.html</Path>
+            <Name>&lt;TRCConnectionLoggerWriter &gt;</Name>
+            <Path>protocol_t_r_c_connection_logger_writer_01-p.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>writeLogString:</Name>
+              <Path>protocol_t_r_c_connection_logger_writer_01-p.html</Path>
+              <Anchor>aae6d7fdc7d3a353f58d21b42c8b2ec78</Anchor>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>TRCConnectionNSURLSession</Name>
+            <Path>interface_t_r_c_connection_n_s_u_r_l_session.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>session</Name>
+              <Path>interface_t_r_c_connection_n_s_u_r_l_session.html</Path>
+              <Anchor>a9088ea53b52d33ea3828ba4036d079f1</Anchor>
+             </Node>
+             <Node>
+              <Name>reachabilityManager</Name>
+              <Path>interface_t_r_c_connection_n_s_u_r_l_session.html</Path>
+              <Anchor>a798319c23e319c763b46aa54754f0194</Anchor>
+             </Node>
+             <Node>
+              <Name>delegate</Name>
+              <Path>interface_t_r_c_connection_n_s_u_r_l_session.html</Path>
+              <Anchor>afbb916db03df33ee85f232907ff46c11</Anchor>
+             </Node>
+             <Node>
+              <Name>baseUrl</Name>
+              <Path>interface_t_r_c_connection_n_s_u_r_l_session.html</Path>
+              <Anchor>a7da92a9d531096c9414fe40f794fa5e0</Anchor>
+             </Node>
+             <Node>
+              <Name>init</Name>
+              <Path>interface_t_r_c_connection_n_s_u_r_l_session.html</Path>
+              <Anchor>a318ddc79caea1fbed72a447f8e46faf7</Anchor>
+             </Node>
+             <Node>
+              <Name>initWithBaseUrl:</Name>
+              <Path>interface_t_r_c_connection_n_s_u_r_l_session.html</Path>
+              <Anchor>a59be341cde1140e5f4b57cd1959e296d</Anchor>
+             </Node>
+             <Node>
+              <Name>initWithConfiguration:</Name>
+              <Path>interface_t_r_c_connection_n_s_u_r_l_session.html</Path>
+              <Anchor>a8e5752ea22b036d4dfa82b27311b84cf</Anchor>
+             </Node>
+             <Node>
+              <Name>initWithBaseUrl:configuration:</Name>
+              <Path>interface_t_r_c_connection_n_s_u_r_l_session.html</Path>
+              <Anchor>a6c20b1a8b2f142f871f080fa99126f09</Anchor>
+             </Node>
+             <Node>
+              <Name>startReachabilityMonitoring</Name>
+              <Path>interface_t_r_c_connection_n_s_u_r_l_session.html</Path>
+              <Anchor>ae8407d8ce6ad0ad8b36b73b0c6b83397</Anchor>
+             </Node>
+             <Node>
+              <Name>stopReachabilityMonitoring</Name>
+              <Path>interface_t_r_c_connection_n_s_u_r_l_session.html</Path>
+              <Anchor>afc501269440d8bac001c8f229a0289e5</Anchor>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>&lt;TRCConnectionNSURLSessionDelegate &gt;</Name>
+            <Path>protocol_t_r_c_connection_n_s_u_r_l_session_delegate_01-p.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>connection:context:didReceiveChallenge:completionHandler:</Name>
+              <Path>protocol_t_r_c_connection_n_s_u_r_l_session_delegate_01-p.html</Path>
+              <Anchor>a7d75e930a38bd3f9b2a1c7dde387c560</Anchor>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>TRCConnectionProxy</Name>
+            <Path>interface_t_r_c_connection_proxy.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>connection</Name>
+              <Path>interface_t_r_c_connection_proxy.html</Path>
+              <Anchor>a83ac3ebfbddc0bc1b14c47773d3f7c63</Anchor>
+             </Node>
+             <Node>
+              <Name>initWithConnection:</Name>
+              <Path>interface_t_r_c_connection_proxy.html</Path>
+              <Anchor>aa476aedccd4ef5fbe9036d34954e88ac</Anchor>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>&lt;TRCConnectionReachabilityDelegate &gt;</Name>
+            <Path>protocol_t_r_c_connection_reachability_delegate_01-p.html</Path>
             <Subnodes>
              <Node>
               <Name>connection:didChangeReachabilityState:</Name>
-              <Path>protocol_t_r_c_connection_reachability_delegate-p.html</Path>
-              <Anchor>aa348ea9cad69044efd39142c403721ca</Anchor>
+              <Path>protocol_t_r_c_connection_reachability_delegate_01-p.html</Path>
+              <Anchor>a2673cd21bace1fbe56a9ec0252438daa</Anchor>
              </Node>
             </Subnodes>
            </Node>
            <Node>
-            <Name>&lt;TRCConnectionRequestCreationOptions&gt;</Name>
-            <Path>protocol_t_r_c_connection_request_creation_options-p.html</Path>
+            <Name>&lt;TRCConnectionRequestCreationOptions &gt;</Name>
+            <Path>protocol_t_r_c_connection_request_creation_options_01-p.html</Path>
             <Subnodes>
              <Node>
               <Name>method</Name>
-              <Path>protocol_t_r_c_connection_request_creation_options-p.html</Path>
-              <Anchor>a75efd133211544615ec6f748198a03eb</Anchor>
+              <Path>protocol_t_r_c_connection_request_creation_options_01-p.html</Path>
+              <Anchor>a97c158cd996ee7072d0079dd021a083b</Anchor>
              </Node>
              <Node>
               <Name>path</Name>
-              <Path>protocol_t_r_c_connection_request_creation_options-p.html</Path>
-              <Anchor>ac77ead3b0e05b7e3d6ffed5adb0cc42f</Anchor>
+              <Path>protocol_t_r_c_connection_request_creation_options_01-p.html</Path>
+              <Anchor>a23ccb73411758688f4b06049abd252c5</Anchor>
              </Node>
              <Node>
               <Name>pathParameters</Name>
-              <Path>protocol_t_r_c_connection_request_creation_options-p.html</Path>
-              <Anchor>ace4325ee1288d31da2baee657191d27d</Anchor>
+              <Path>protocol_t_r_c_connection_request_creation_options_01-p.html</Path>
+              <Anchor>a2f42d44d3408bcd30172c093a6500c84</Anchor>
              </Node>
              <Node>
               <Name>body</Name>
-              <Path>protocol_t_r_c_connection_request_creation_options-p.html</Path>
-              <Anchor>a4f1c36db2b3b0580cbf98d9c6b83835a</Anchor>
+              <Path>protocol_t_r_c_connection_request_creation_options_01-p.html</Path>
+              <Anchor>aed829cb6bb83efdd69fde5f8593c3878</Anchor>
              </Node>
              <Node>
               <Name>serialization</Name>
-              <Path>protocol_t_r_c_connection_request_creation_options-p.html</Path>
-              <Anchor>a28cd826d03977ccc10c42c716e0bbaf4</Anchor>
+              <Path>protocol_t_r_c_connection_request_creation_options_01-p.html</Path>
+              <Anchor>a423887a771863357154ce18d0043294e</Anchor>
              </Node>
              <Node>
               <Name>headers</Name>
-              <Path>protocol_t_r_c_connection_request_creation_options-p.html</Path>
-              <Anchor>a84a8efbb7f901e29ec9bfd511172230b</Anchor>
+              <Path>protocol_t_r_c_connection_request_creation_options_01-p.html</Path>
+              <Anchor>ac2f3d49ce8cc7621957c33828f7dd447</Anchor>
              </Node>
              <Node>
               <Name>customProperties</Name>
-              <Path>protocol_t_r_c_connection_request_creation_options-p.html</Path>
-              <Anchor>af75e3e3e664962f7209eea765966809f</Anchor>
+              <Path>protocol_t_r_c_connection_request_creation_options_01-p.html</Path>
+              <Anchor>a2aeb99b92aff0b917a6e0ebd29582732</Anchor>
+             </Node>
+             <Node>
+              <Name>requestPostProcessor</Name>
+              <Path>protocol_t_r_c_connection_request_creation_options_01-p.html</Path>
+              <Anchor>a84e07f6cf2181bf9563ef4e4bf27e937</Anchor>
+             </Node>
+             <Node>
+              <Name>queryOptions</Name>
+              <Path>protocol_t_r_c_connection_request_creation_options_01-p.html</Path>
+              <Anchor>a13420d6f985d7dd5e95f2c0bf9124b69</Anchor>
              </Node>
             </Subnodes>
            </Node>
            <Node>
-            <Name>&lt;TRCConnectionRequestSendingOptions&gt;</Name>
-            <Path>protocol_t_r_c_connection_request_sending_options-p.html</Path>
+            <Name>&lt;TRCConnectionRequestSendingOptions &gt;</Name>
+            <Path>protocol_t_r_c_connection_request_sending_options_01-p.html</Path>
             <Subnodes>
              <Node>
               <Name>outputStream</Name>
-              <Path>protocol_t_r_c_connection_request_sending_options-p.html</Path>
-              <Anchor>a9a25a621ec37aa377f5ab3c41b124b3a</Anchor>
+              <Path>protocol_t_r_c_connection_request_sending_options_01-p.html</Path>
+              <Anchor>ad48c67e470aa7af2f061562d18dc3192</Anchor>
              </Node>
              <Node>
               <Name>responseSerialization</Name>
-              <Path>protocol_t_r_c_connection_request_sending_options-p.html</Path>
-              <Anchor>a3c92196b761c77bb099d6660a9597f75</Anchor>
+              <Path>protocol_t_r_c_connection_request_sending_options_01-p.html</Path>
+              <Anchor>a78083c3c05741b4f0a640be3480f4d91</Anchor>
              </Node>
              <Node>
               <Name>customProperties</Name>
-              <Path>protocol_t_r_c_connection_request_sending_options-p.html</Path>
-              <Anchor>ab5009dbd3e4903ba0c4319889a67a93b</Anchor>
+              <Path>protocol_t_r_c_connection_request_sending_options_01-p.html</Path>
+              <Anchor>a4a557042c05e28a2918c8c043e5f69ec</Anchor>
              </Node>
              <Node>
               <Name>queuePriority</Name>
-              <Path>protocol_t_r_c_connection_request_sending_options-p.html</Path>
-              <Anchor>a26aa391ffeebd67feab42dfaf84bb8e6</Anchor>
+              <Path>protocol_t_r_c_connection_request_sending_options_01-p.html</Path>
+              <Anchor>a07eb2a5d2f3fade937cf05717a04db3e</Anchor>
+             </Node>
+             <Node>
+              <Name>responseDelegate</Name>
+              <Path>protocol_t_r_c_connection_request_sending_options_01-p.html</Path>
+              <Anchor>aabd6dca14adeea3987aa1c4cf2036837</Anchor>
              </Node>
             </Subnodes>
            </Node>
@@ -176,7 +264,7 @@
              <Node>
               <Name>setResponse:forPath:withQuery:</Name>
               <Path>interface_t_r_c_connection_stub.html</Path>
-              <Anchor>a42b9871b76b8c233af85ba5075b141ad</Anchor>
+              <Anchor>ab78753538214c9f597413e71b865b20f</Anchor>
              </Node>
              <Node>
               <Name>setResponse:</Name>
@@ -196,7 +284,7 @@
              <Node>
               <Name>setResponseText:status:</Name>
               <Path>interface_t_r_c_connection_stub.html</Path>
-              <Anchor>afa6d57e45e3147c24251ee20fb31c6e5</Anchor>
+              <Anchor>a735c6854a26fe7102365cc07c18bf496</Anchor>
              </Node>
              <Node>
               <Name>setResponseWithConnectionError</Name>
@@ -206,12 +294,12 @@
              <Node>
               <Name>setResponseText:forRequestPath:</Name>
               <Path>interface_t_r_c_connection_stub.html</Path>
-              <Anchor>a2ab8f1b1c30c03ed1f884293da9bd835</Anchor>
+              <Anchor>a2a0820ca843663b3057d4267da3b2ffc</Anchor>
              </Node>
              <Node>
               <Name>setResponseText:status:forRequestPath:</Name>
               <Path>interface_t_r_c_connection_stub.html</Path>
-              <Anchor>afe41000acf42f62a760cfd04fae062ae</Anchor>
+              <Anchor>a8d9f4821c0d3972a3d25fca99997886d</Anchor>
              </Node>
              <Node>
               <Name>setResponseTimeoutErrorForRequestPath:</Name>
@@ -221,7 +309,7 @@
              <Node>
               <Name>setResponseMinDelay:maxDelay:</Name>
               <Path>interface_t_r_c_connection_stub.html</Path>
-              <Anchor>a58d7aa832b006192674ad471ac625848</Anchor>
+              <Anchor>a22c3ae70186324704f5235ac8f67893c</Anchor>
              </Node>
             </Subnodes>
            </Node>
@@ -237,7 +325,7 @@
              <Node>
               <Name>setResponseText:status:</Name>
               <Path>category_t_r_c_connection_stub_07_shorthands_08.html</Path>
-              <Anchor>afa6d57e45e3147c24251ee20fb31c6e5</Anchor>
+              <Anchor>a735c6854a26fe7102365cc07c18bf496</Anchor>
              </Node>
              <Node>
               <Name>setResponseWithConnectionError</Name>
@@ -247,12 +335,12 @@
              <Node>
               <Name>setResponseText:forRequestPath:</Name>
               <Path>category_t_r_c_connection_stub_07_shorthands_08.html</Path>
-              <Anchor>a2ab8f1b1c30c03ed1f884293da9bd835</Anchor>
+              <Anchor>a2a0820ca843663b3057d4267da3b2ffc</Anchor>
              </Node>
              <Node>
               <Name>setResponseText:status:forRequestPath:</Name>
               <Path>category_t_r_c_connection_stub_07_shorthands_08.html</Path>
-              <Anchor>afe41000acf42f62a760cfd04fae062ae</Anchor>
+              <Anchor>a8d9f4821c0d3972a3d25fca99997886d</Anchor>
              </Node>
              <Node>
               <Name>setResponseTimeoutErrorForRequestPath:</Name>
@@ -262,7 +350,7 @@
              <Node>
               <Name>setResponseMinDelay:maxDelay:</Name>
               <Path>category_t_r_c_connection_stub_07_shorthands_08.html</Path>
-              <Anchor>a58d7aa832b006192674ad471ac625848</Anchor>
+              <Anchor>a22c3ae70186324704f5235ac8f67893c</Anchor>
              </Node>
             </Subnodes>
            </Node>
@@ -303,7 +391,7 @@
              <Node>
               <Name>initWithResponseData:mime:headers:status:</Name>
               <Path>interface_t_r_c_connection_stub_response.html</Path>
-              <Anchor>aeb5e98964efb338cbcfda101989292dc</Anchor>
+              <Anchor>a009f9303c9682a5bcde0d9914c62b9fe</Anchor>
              </Node>
              <Node>
               <Name>initWithConnectionError</Name>
@@ -324,7 +412,7 @@
              <Node>
               <Name>errorFromResponseBody:headers:status:error:</Name>
               <Path>protocol_t_r_c_error_handler-p.html</Path>
-              <Anchor>a935b0decf7c5da8f02de80431e8e46b8</Anchor>
+              <Anchor>a599652a7598412ba871a277de920ea93</Anchor>
              </Node>
              <Node>
               <Name>errorValidationSchemaName</Name>
@@ -334,7 +422,94 @@
              <Node>
               <Name>isErrorResponseBody:headers:status:</Name>
               <Path>protocol_t_r_c_error_handler-p.html</Path>
-              <Anchor>a2614e120ee2a4bfe94999a80af8ad0b3</Anchor>
+              <Anchor>ae04f12eb9cfeb49d9f744b1fd6ac2236</Anchor>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>TRCMultipartFile</Name>
+            <Path>interface_t_r_c_multipart_file.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>data</Name>
+              <Path>interface_t_r_c_multipart_file.html</Path>
+              <Anchor>af51e99f6ac8bb49caa2d989ca632588f</Anchor>
+             </Node>
+             <Node>
+              <Name>filename</Name>
+              <Path>interface_t_r_c_multipart_file.html</Path>
+              <Anchor>ab87e309dcf98b239446a7f430aee64b1</Anchor>
+             </Node>
+             <Node>
+              <Name>mimeType</Name>
+              <Path>interface_t_r_c_multipart_file.html</Path>
+              <Anchor>a52fffb8f3c8d7033cc41b810483337aa</Anchor>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>TRCNetworkReachabilityManager</Name>
+            <Path>interface_t_r_c_network_reachability_manager.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>networkReachabilityStatus</Name>
+              <Path>interface_t_r_c_network_reachability_manager.html</Path>
+              <Anchor>a24cf57e90ba91a1bf847f396e6523766</Anchor>
+             </Node>
+             <Node>
+              <Name>reachable</Name>
+              <Path>interface_t_r_c_network_reachability_manager.html</Path>
+              <Anchor>a2fcd60613ef21abb1cd177cb596f9203</Anchor>
+             </Node>
+             <Node>
+              <Name>reachableViaWWAN</Name>
+              <Path>interface_t_r_c_network_reachability_manager.html</Path>
+              <Anchor>adf8ffc811b49608ee56134f6e681ec6d</Anchor>
+             </Node>
+             <Node>
+              <Name>reachableViaWiFi</Name>
+              <Path>interface_t_r_c_network_reachability_manager.html</Path>
+              <Anchor>a7542a331313df932e0f8bb47a05afa40</Anchor>
+             </Node>
+             <Node>
+              <Name>sharedManager</Name>
+              <Path>interface_t_r_c_network_reachability_manager.html</Path>
+              <Anchor>aaa465b007999e7bb7183c73df72672fa</Anchor>
+             </Node>
+             <Node>
+              <Name>managerForDomain:</Name>
+              <Path>interface_t_r_c_network_reachability_manager.html</Path>
+              <Anchor>a6d41a91f2ecca46ae845ef4577756403</Anchor>
+             </Node>
+             <Node>
+              <Name>managerForAddress:</Name>
+              <Path>interface_t_r_c_network_reachability_manager.html</Path>
+              <Anchor>a2d2fea052e7a2514299d5972556e7cb3</Anchor>
+             </Node>
+             <Node>
+              <Name>initWithReachability:</Name>
+              <Path>interface_t_r_c_network_reachability_manager.html</Path>
+              <Anchor>a8e08c1acfede22a6b40223a512db14df</Anchor>
+             </Node>
+             <Node>
+              <Name>startMonitoring</Name>
+              <Path>interface_t_r_c_network_reachability_manager.html</Path>
+              <Anchor>aea96456433ccafdc7d9b0ff680aece42</Anchor>
+             </Node>
+             <Node>
+              <Name>stopMonitoring</Name>
+              <Path>interface_t_r_c_network_reachability_manager.html</Path>
+              <Anchor>a8a6b08fa3d4dc09d88cb12d2f09d0d9b</Anchor>
+             </Node>
+             <Node>
+              <Name>localizedNetworkReachabilityStatusString</Name>
+              <Path>interface_t_r_c_network_reachability_manager.html</Path>
+              <Anchor>ac9cb91c74d8b6cec2095824d241a3e24</Anchor>
+             </Node>
+             <Node>
+              <Name>setReachabilityStatusChangeBlock:</Name>
+              <Path>interface_t_r_c_network_reachability_manager.html</Path>
+              <Anchor>adb963c51b391d856f4a3725b86137a9f</Anchor>
              </Node>
             </Subnodes>
            </Node>
@@ -350,7 +525,7 @@
              <Node>
               <Name>objectFromResponseObject:error:</Name>
               <Path>protocol_t_r_c_object_mapper-p.html</Path>
-              <Anchor>ac7136de05cd53fd7ae88c09c281178f6</Anchor>
+              <Anchor>a9667e185b795ce33c328c1ef70afbedb</Anchor>
              </Node>
              <Node>
               <Name>requestValidationSchemaName</Name>
@@ -360,7 +535,7 @@
              <Node>
               <Name>requestObjectFromObject:error:</Name>
               <Path>protocol_t_r_c_object_mapper-p.html</Path>
-              <Anchor>a6ac5113cb00eefea8c8da3a546806a4b</Anchor>
+              <Anchor>a67523fffff20e9911167bf1e7e0f4710</Anchor>
              </Node>
             </Subnodes>
            </Node>
@@ -371,12 +546,28 @@
              <Node>
               <Name>postProcessResponseObject:forRequest:postProcessError:</Name>
               <Path>protocol_t_r_c_post_processor-p.html</Path>
-              <Anchor>aa482b3b50c11150d0da90f309700deba</Anchor>
+              <Anchor>ab7b383b4a1636f037402ee828e3ff2b6</Anchor>
              </Node>
              <Node>
               <Name>postProcessError:forRequest:</Name>
               <Path>protocol_t_r_c_post_processor-p.html</Path>
-              <Anchor>a92c13c5a99be31419ada9c2c8298580d</Anchor>
+              <Anchor>a0fe8b4b464c64dcd51de1b02c07d3328</Anchor>
+             </Node>
+             <Node>
+              <Name>queueType</Name>
+              <Path>protocol_t_r_c_post_processor-p.html</Path>
+              <Anchor>a992d0e24022a0946130c383d24f98f82</Anchor>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>&lt;TRCPreProcessor&gt;</Name>
+            <Path>protocol_t_r_c_pre_processor-p.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>preProcessResponseObject:forRequest:preProcessError:</Name>
+              <Path>protocol_t_r_c_pre_processor-p.html</Path>
+              <Anchor>a54dd1ba992dca0e38b48ee68f474616d</Anchor>
              </Node>
             </Subnodes>
            </Node>
@@ -409,6 +600,37 @@
               <Path>protocol_t_r_c_progress_handler-p.html</Path>
               <Anchor>aeee381780d7cbee3b642fc4dab580f9f</Anchor>
              </Node>
+             <Node>
+              <Name>state</Name>
+              <Path>protocol_t_r_c_progress_handler-p.html</Path>
+              <Anchor>a18bc59c7678bb68b0532a838f840ecda</Anchor>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>TRCQueryStringPair</Name>
+            <Path>interface_t_r_c_query_string_pair.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>field</Name>
+              <Path>interface_t_r_c_query_string_pair.html</Path>
+              <Anchor>a6dbffadaa7a11d484b1285ed9bc66b5d</Anchor>
+             </Node>
+             <Node>
+              <Name>value</Name>
+              <Path>interface_t_r_c_query_string_pair.html</Path>
+              <Anchor>a51a09f32744e3d9509bb6b2d5516992a</Anchor>
+             </Node>
+             <Node>
+              <Name>initWithField:value:</Name>
+              <Path>interface_t_r_c_query_string_pair.html</Path>
+              <Anchor>ad5993d865f396e622e749c6492f59c57</Anchor>
+             </Node>
+             <Node>
+              <Name>URLEncodedStringValueWithEncoding:</Name>
+              <Path>interface_t_r_c_query_string_pair.html</Path>
+              <Anchor>a03dd1959b0fa1077e4ac5b9c3c184cbb</Anchor>
+             </Node>
             </Subnodes>
            </Node>
            <Node>
@@ -425,91 +647,57 @@
               <Path>protocol_t_r_c_request-p.html</Path>
               <Anchor>a8d179f9d670b1ea92f9d9b0faf65b314</Anchor>
              </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>&lt;TRCRequestSerializer &gt;</Name>
+            <Path>protocol_t_r_c_request_serializer_01-p.html</Path>
+            <Subnodes>
              <Node>
-              <Name>pathParameters</Name>
-              <Path>protocol_t_r_c_request-p.html</Path>
-              <Anchor>aa4e419f84556cc0d41dae0602c8a0f80</Anchor>
+              <Name>bodyDataFromObject:forRequest:error:</Name>
+              <Path>protocol_t_r_c_request_serializer_01-p.html</Path>
+              <Anchor>a2d5656c65fe69b8ce9cadc1cbb27af17</Anchor>
              </Node>
              <Node>
-              <Name>pathParametersValidationSchemaName</Name>
-              <Path>protocol_t_r_c_request-p.html</Path>
-              <Anchor>aa37c7187d908fc06114c27d66648ac85</Anchor>
+              <Name>bodyStreamFromObject:forRequest:error:</Name>
+              <Path>protocol_t_r_c_request_serializer_01-p.html</Path>
+              <Anchor>a3aaf80c44f20271c348c6dcc5b74f4e1</Anchor>
              </Node>
              <Node>
-              <Name>requestHeaders</Name>
-              <Path>protocol_t_r_c_request-p.html</Path>
-              <Anchor>a5cc7e76abbbcf8237fab3a845effb258</Anchor>
-             </Node>
-             <Node>
-              <Name>requestBody</Name>
-              <Path>protocol_t_r_c_request-p.html</Path>
-              <Anchor>a1a76461fbf3222123aa9c4e811e061d9</Anchor>
-             </Node>
-             <Node>
-              <Name>requestBodyValidationSchemaName</Name>
-              <Path>protocol_t_r_c_request-p.html</Path>
-              <Anchor>abc3b9c9c6b2ec65f67ed74ce8a3f50ad</Anchor>
-             </Node>
-             <Node>
-              <Name>requestBodySerialization</Name>
-              <Path>protocol_t_r_c_request-p.html</Path>
-              <Anchor>a2aab7e85fc7a4d0ea92a53e0be1b72f1</Anchor>
-             </Node>
-             <Node>
-              <Name>responseBodyValidationSchemaName</Name>
-              <Path>protocol_t_r_c_request-p.html</Path>
-              <Anchor>ad4003fea5e41918229d039dcc4eca229</Anchor>
-             </Node>
-             <Node>
-              <Name>responseBodySerialization</Name>
-              <Path>protocol_t_r_c_request-p.html</Path>
-              <Anchor>a8ba19efa1b0cab2671adc417b250968d</Anchor>
-             </Node>
-             <Node>
-              <Name>responseBodyOutputStream</Name>
-              <Path>protocol_t_r_c_request-p.html</Path>
-              <Anchor>a30e070b3041f02f328364d1d759c745b</Anchor>
-             </Node>
-             <Node>
-              <Name>responseProcessedFromBody:headers:status:error:</Name>
-              <Path>protocol_t_r_c_request-p.html</Path>
-              <Anchor>add887b883c406b941fad92203b359a8f</Anchor>
-             </Node>
-             <Node>
-              <Name>respondedWithError:headers:status:</Name>
-              <Path>protocol_t_r_c_request-p.html</Path>
-              <Anchor>a54a286541590f8741bbd3917436fbbf1</Anchor>
-             </Node>
-             <Node>
-              <Name>customProperties</Name>
-              <Path>protocol_t_r_c_request-p.html</Path>
-              <Anchor>ab07c4dbb1a8e341faa6456287ad2d718</Anchor>
-             </Node>
-             <Node>
-              <Name>queuePriority</Name>
-              <Path>protocol_t_r_c_request-p.html</Path>
-              <Anchor>ae75f354a1e1a453e6ed86c6e83cdd30c</Anchor>
+              <Name>contentType</Name>
+              <Path>protocol_t_r_c_request_serializer_01-p.html</Path>
+              <Anchor>a3f9b47196d45cb1da31e64590c44c34d</Anchor>
              </Node>
             </Subnodes>
            </Node>
            <Node>
-            <Name>&lt;TRCRequestSerializer&gt;</Name>
-            <Path>protocol_t_r_c_request_serializer-p.html</Path>
+            <Name>&lt;TRCResponseDelegate &gt;</Name>
+            <Path>protocol_t_r_c_response_delegate_01-p.html</Path>
             <Subnodes>
              <Node>
-              <Name>dataFromRequestObject:error:</Name>
-              <Path>protocol_t_r_c_request_serializer-p.html</Path>
-              <Anchor>a50b6d8d809df81d8f8b2ea29435d9fc0</Anchor>
+              <Name>connection:shouldProcessResponse:</Name>
+              <Path>protocol_t_r_c_response_delegate_01-p.html</Path>
+              <Anchor>ac997f7d07e324bda35b0384a70d973e2</Anchor>
              </Node>
              <Node>
-              <Name>dataStreamFromRequestObject:error:</Name>
-              <Path>protocol_t_r_c_request_serializer-p.html</Path>
-              <Anchor>a581cb572b48ab34fc07f2d490f80b5da</Anchor>
+              <Name>connection:didSendBodyData:totalBytesSent:totalBytesExpectedToSend:</Name>
+              <Path>protocol_t_r_c_response_delegate_01-p.html</Path>
+              <Anchor>a19c7804c5b4a9df158b988fed0ab9aff</Anchor>
              </Node>
              <Node>
-              <Name>contentType</Name>
-              <Path>protocol_t_r_c_request_serializer-p.html</Path>
-              <Anchor>a306d331c31d3ef4217bea86755e4ff75</Anchor>
+              <Name>connection:didReceiveData:</Name>
+              <Path>protocol_t_r_c_response_delegate_01-p.html</Path>
+              <Anchor>a46d2d9d60d6a43d88dd433b6aa696519</Anchor>
+             </Node>
+             <Node>
+              <Name>connection:didCompleteWithError:</Name>
+              <Path>protocol_t_r_c_response_delegate_01-p.html</Path>
+              <Anchor>aafa0ebe585debda63b4ae20b0dda04d2</Anchor>
+             </Node>
+             <Node>
+              <Name>connection:didReceiveChallenge:completionHandler:</Name>
+              <Path>protocol_t_r_c_response_delegate_01-p.html</Path>
+              <Anchor>ad4b48a4f503d1370d09e902c2c9afd4e</Anchor>
              </Node>
             </Subnodes>
            </Node>
@@ -530,113 +718,287 @@
             </Subnodes>
            </Node>
            <Node>
-            <Name>&lt;TRCResponseSerializer&gt;</Name>
-            <Path>protocol_t_r_c_response_serializer-p.html</Path>
+            <Name>&lt;TRCResponseSerializer &gt;</Name>
+            <Path>protocol_t_r_c_response_serializer_01-p.html</Path>
             <Subnodes>
              <Node>
               <Name>objectFromResponseData:error:</Name>
-              <Path>protocol_t_r_c_response_serializer-p.html</Path>
-              <Anchor>a134abe9b790cbc40e61663603f1e8af8</Anchor>
+              <Path>protocol_t_r_c_response_serializer_01-p.html</Path>
+              <Anchor>aa8cb06d483f1f724f8ae614abad3e326</Anchor>
              </Node>
              <Node>
               <Name>isCorrectContentType:</Name>
-              <Path>protocol_t_r_c_response_serializer-p.html</Path>
-              <Anchor>a8196dc6671c28a76da317ddb16df5051</Anchor>
+              <Path>protocol_t_r_c_response_serializer_01-p.html</Path>
+              <Anchor>a8c0dbf6d40090feaadbff68f27aa168f</Anchor>
              </Node>
             </Subnodes>
            </Node>
            <Node>
-            <Name>&lt;TRCSchemaData&gt;</Name>
-            <Path>protocol_t_r_c_schema_data-p.html</Path>
+            <Name>&lt;TRCSchemaData &gt;</Name>
+            <Path>protocol_t_r_c_schema_data_01-p.html</Path>
             <Subnodes>
              <Node>
               <Name>enumerate:withEnumerator:</Name>
-              <Path>protocol_t_r_c_schema_data-p.html</Path>
-              <Anchor>ac59b7973afc05d3581a9e2da7d81743b</Anchor>
+              <Path>protocol_t_r_c_schema_data_01-p.html</Path>
+              <Anchor>a04642ed6ca75fd992e2403b1553f5445</Anchor>
              </Node>
              <Node>
               <Name>modify:withModifier:</Name>
-              <Path>protocol_t_r_c_schema_data-p.html</Path>
-              <Anchor>ae4fcd5068db4b3fe53bb90e9262a24ff</Anchor>
+              <Path>protocol_t_r_c_schema_data_01-p.html</Path>
+              <Anchor>a98f819000a072c4c9e592b2054afcb93</Anchor>
              </Node>
              <Node>
               <Name>cancel</Name>
-              <Path>protocol_t_r_c_schema_data-p.html</Path>
-              <Anchor>aa071a3786012c29cf369adcf3148e732</Anchor>
+              <Path>protocol_t_r_c_schema_data_01-p.html</Path>
+              <Anchor>ae52dd7c22e9fd3f16d28901d6d2332f8</Anchor>
              </Node>
              <Node>
               <Name>isCancelled</Name>
-              <Path>protocol_t_r_c_schema_data-p.html</Path>
-              <Anchor>a275e6d2c1d68c35a6433e414ef68443f</Anchor>
+              <Path>protocol_t_r_c_schema_data_01-p.html</Path>
+              <Anchor>a5eb949464655686f0cca9b9bd74a8a75</Anchor>
              </Node>
             </Subnodes>
            </Node>
            <Node>
-            <Name>&lt;TRCSchemaDataDelegate&gt;</Name>
-            <Path>protocol_t_r_c_schema_data_delegate-p.html</Path>
+            <Name>&lt;TRCSchemaDataDelegate &gt;</Name>
+            <Path>protocol_t_r_c_schema_data_delegate_01-p.html</Path>
             <Subnodes>
              <Node>
               <Name>schemaData:typeMismatchForValue:withSchemaValue:</Name>
-              <Path>protocol_t_r_c_schema_data_delegate-p.html</Path>
-              <Anchor>ae06a3b2c34abebb1a413d0bf64221d26</Anchor>
+              <Path>protocol_t_r_c_schema_data_delegate_01-p.html</Path>
+              <Anchor>aa8459937faefc1759e2b25ec3bd1a3db</Anchor>
              </Node>
              <Node>
               <Name>schemaData:willEnumerateItemAtIndentifier:</Name>
-              <Path>protocol_t_r_c_schema_data_delegate-p.html</Path>
-              <Anchor>afc16cc2c3b40cb6cca7d5d6204a0e189</Anchor>
+              <Path>protocol_t_r_c_schema_data_delegate_01-p.html</Path>
+              <Anchor>a663b40eee0ae92df2d062b16422133af</Anchor>
              </Node>
              <Node>
               <Name>schemaData:didEnumerateItemAtIndentifier:</Name>
-              <Path>protocol_t_r_c_schema_data_delegate-p.html</Path>
-              <Anchor>ad65141c8eaecb30fdc63528545cf7e0d</Anchor>
+              <Path>protocol_t_r_c_schema_data_delegate_01-p.html</Path>
+              <Anchor>a8dab6d4aab61ee020c9e006106076678</Anchor>
              </Node>
             </Subnodes>
            </Node>
            <Node>
-            <Name>&lt;TRCSchemaDataEnumerator&gt;</Name>
-            <Path>protocol_t_r_c_schema_data_enumerator-p.html</Path>
+            <Name>&lt;TRCSchemaDataEnumerator &gt;</Name>
+            <Path>protocol_t_r_c_schema_data_enumerator_01-p.html</Path>
             <Subnodes>
              <Node>
               <Name>schemaData:foundValue:withOptions:withSchemeValue:</Name>
-              <Path>protocol_t_r_c_schema_data_enumerator-p.html</Path>
-              <Anchor>a1da9171b1edf52b511a4540615bf38c1</Anchor>
+              <Path>protocol_t_r_c_schema_data_enumerator_01-p.html</Path>
+              <Anchor>aaa53ba9baf4f0e02816e0b858de7e2be</Anchor>
              </Node>
             </Subnodes>
            </Node>
            <Node>
-            <Name>&lt;TRCSchemaDataModifier&gt;</Name>
-            <Path>protocol_t_r_c_schema_data_modifier-p.html</Path>
+            <Name>&lt;TRCSchemaDataModifier &gt;</Name>
+            <Path>protocol_t_r_c_schema_data_modifier_01-p.html</Path>
             <Subnodes>
              <Node>
               <Name>schemaData:replacementForValue:withOptions:withSchemeValue:</Name>
-              <Path>protocol_t_r_c_schema_data_modifier-p.html</Path>
-              <Anchor>a489fa526053f39d4960b609d6487fd72</Anchor>
+              <Path>protocol_t_r_c_schema_data_modifier_01-p.html</Path>
+              <Anchor>ab319a9b9612d73ea89e9830047755391</Anchor>
              </Node>
              <Node>
               <Name>schemaData:objectFromResponse:withMapperTag:</Name>
-              <Path>protocol_t_r_c_schema_data_modifier-p.html</Path>
-              <Anchor>a4f3677d02497714817cd91489e73432f</Anchor>
+              <Path>protocol_t_r_c_schema_data_modifier_01-p.html</Path>
+              <Anchor>a183ace784d729b51ec01a19c0af85fbb</Anchor>
              </Node>
              <Node>
               <Name>schemaData:requestFromObject:withMapperTag:</Name>
-              <Path>protocol_t_r_c_schema_data_modifier-p.html</Path>
-              <Anchor>ad311599b8b23781d3da4a22107e6308e</Anchor>
+              <Path>protocol_t_r_c_schema_data_modifier_01-p.html</Path>
+              <Anchor>a14d83f641e68625e087ba6178ccce51d</Anchor>
              </Node>
             </Subnodes>
            </Node>
            <Node>
-            <Name>&lt;TRCSchemaFormat&gt;</Name>
-            <Path>protocol_t_r_c_schema_format-p.html</Path>
+            <Name>&lt;TRCSchemaDataProvider &gt;</Name>
+            <Path>protocol_t_r_c_schema_data_provider_01-p.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>schemaData:hasObjectMapperForTag:</Name>
+              <Path>protocol_t_r_c_schema_data_provider_01-p.html</Path>
+              <Anchor>a03cc7359bc6dd585dd65f60c3b18a901</Anchor>
+             </Node>
+             <Node>
+              <Name>schemaData:requestSchemaForMapperWithTag:</Name>
+              <Path>protocol_t_r_c_schema_data_provider_01-p.html</Path>
+              <Anchor>aee7e60fac8c583f7e7e651250db3f283</Anchor>
+             </Node>
+             <Node>
+              <Name>schemaData:responseSchemaForMapperWithTag:</Name>
+              <Path>protocol_t_r_c_schema_data_provider_01-p.html</Path>
+              <Anchor>aa98661fa46b69d111ef9303012f99613</Anchor>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>TRCSchemaDictionaryData</Name>
+            <Path>interface_t_r_c_schema_dictionary_data.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>requestData</Name>
+              <Path>interface_t_r_c_schema_dictionary_data.html</Path>
+              <Anchor>af515f7d5dba2a50ae5737e39c2129b59</Anchor>
+             </Node>
+             <Node>
+              <Name>dataProvider</Name>
+              <Path>interface_t_r_c_schema_dictionary_data.html</Path>
+              <Anchor>af42967a794885cc5cee621b756a1e34a</Anchor>
+             </Node>
+             <Node>
+              <Name>initWithArrayOrDictionary:request:dataProvider:</Name>
+              <Path>interface_t_r_c_schema_dictionary_data.html</Path>
+              <Anchor>a61bf42f687db92eaf13d006c7745612a</Anchor>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>&lt;TRCSchemaFormat &gt;</Name>
+            <Path>protocol_t_r_c_schema_format_01-p.html</Path>
             <Subnodes>
              <Node>
               <Name>requestSchemaDataFromData:dataProvider:error:</Name>
-              <Path>protocol_t_r_c_schema_format-p.html</Path>
-              <Anchor>a93fae8b9e94a680a5b2a0db90ccbb20a</Anchor>
+              <Path>protocol_t_r_c_schema_format_01-p.html</Path>
+              <Anchor>af33ee81bc697e638c5c9705495527e05</Anchor>
              </Node>
              <Node>
               <Name>responseSchemaDataFromData:dataProvider:error:</Name>
-              <Path>protocol_t_r_c_schema_format-p.html</Path>
-              <Anchor>a381450310c2a9996c706dd1271caf0d7</Anchor>
+              <Path>protocol_t_r_c_schema_format_01-p.html</Path>
+              <Anchor>a8e556bc48c4289c4f88b747101e85e6d</Anchor>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>TRCSerializerData</Name>
+            <Path>interface_t_r_c_serializer_data.html</Path>
+           </Node>
+           <Node>
+            <Name>TRCSerializerHttpQuery</Name>
+            <Path>interface_t_r_c_serializer_http_query.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>options</Name>
+              <Path>interface_t_r_c_serializer_http_query.html</Path>
+              <Anchor>a20d9dd9767fcae1fa0ba33dae527bfb2</Anchor>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>TRCSerializerImage</Name>
+            <Path>interface_t_r_c_serializer_image.html</Path>
+           </Node>
+           <Node>
+            <Name>TRCSerializerInputStream</Name>
+            <Path>interface_t_r_c_serializer_input_stream.html</Path>
+           </Node>
+           <Node>
+            <Name>TRCSerializerJson</Name>
+            <Path>interface_t_r_c_serializer_json.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>readingOptions</Name>
+              <Path>interface_t_r_c_serializer_json.html</Path>
+              <Anchor>abaae1362ed6bdef6c4fe86ee050149fb</Anchor>
+             </Node>
+             <Node>
+              <Name>writingOptions</Name>
+              <Path>interface_t_r_c_serializer_json.html</Path>
+              <Anchor>aa3118b8c1bba0330fec376a08178ba89</Anchor>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>TRCSerializerMultipart</Name>
+            <Path>interface_t_r_c_serializer_multipart.html</Path>
+           </Node>
+           <Node>
+            <Name>TRCSerializerPlist</Name>
+            <Path>interface_t_r_c_serializer_plist.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>readOptions</Name>
+              <Path>interface_t_r_c_serializer_plist.html</Path>
+              <Anchor>a8746432d1abed228e84c00bf5db843b7</Anchor>
+             </Node>
+             <Node>
+              <Name>writeOptions</Name>
+              <Path>interface_t_r_c_serializer_plist.html</Path>
+              <Anchor>a0060589cc9810d7b0aaaac1ec759b5f8</Anchor>
+             </Node>
+             <Node>
+              <Name>format</Name>
+              <Path>interface_t_r_c_serializer_plist.html</Path>
+              <Anchor>a31698baa56ca5391ca04104177f5ab48</Anchor>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>TRCSerializerString</Name>
+            <Path>interface_t_r_c_serializer_string.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>encoding</Name>
+              <Path>interface_t_r_c_serializer_string.html</Path>
+              <Anchor>af229f9ac2d3ca1d5b3bc08390a936f81</Anchor>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>TRCSessionHandler</Name>
+            <Path>interface_t_r_c_session_handler.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>startDataTask:withContext:</Name>
+              <Path>interface_t_r_c_session_handler.html</Path>
+              <Anchor>a85dc3b4485bd90b1b3fb5981f8b76333</Anchor>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>TRCSessionTaskContext</Name>
+            <Path>interface_t_r_c_session_task_context.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>connection</Name>
+              <Path>interface_t_r_c_session_task_context.html</Path>
+              <Anchor>a91f02dc4e10f355510fefa4a7c3ec567</Anchor>
+             </Node>
+             <Node>
+              <Name>initWithTask:options:completion:</Name>
+              <Path>interface_t_r_c_session_task_context.html</Path>
+              <Anchor>ad7ec1479590d5d5fc170973195212470</Anchor>
+             </Node>
+             <Node>
+              <Name>shouldProcessResponse:</Name>
+              <Path>interface_t_r_c_session_task_context.html</Path>
+              <Anchor>a804f42dc9fccce7aefc84b4bbc44e102</Anchor>
+             </Node>
+             <Node>
+              <Name>didSendBodyData:totalBytesSent:totalBytesExpectedToSend:</Name>
+              <Path>interface_t_r_c_session_task_context.html</Path>
+              <Anchor>a96690aeefd72898ffee516ab08fba424</Anchor>
+             </Node>
+             <Node>
+              <Name>didReceiveData:</Name>
+              <Path>interface_t_r_c_session_task_context.html</Path>
+              <Anchor>a5e1508c22691af99a2fec0f8501d9c18</Anchor>
+             </Node>
+             <Node>
+              <Name>didCompleteWithError:</Name>
+              <Path>interface_t_r_c_session_task_context.html</Path>
+              <Anchor>a197868e628d8748627018a42a4036325</Anchor>
+             </Node>
+             <Node>
+              <Name>didReceiveChallenge:completionHandler:</Name>
+              <Path>interface_t_r_c_session_task_context.html</Path>
+              <Anchor>a52ace4f2c24cc5b7a3c76bf7c6c4fb00</Anchor>
+             </Node>
+             <Node>
+              <Name>state</Name>
+              <Path>interface_t_r_c_session_task_context.html</Path>
+              <Anchor>a80643248b8013c39c86547dd46430ed6</Anchor>
              </Node>
             </Subnodes>
            </Node>
@@ -647,30 +1009,42 @@
              <Node>
               <Name>errorDescriptionForObject:errorMessage:stackTrace:</Name>
               <Path>protocol_t_r_c_validation_error_printer-p.html</Path>
-              <Anchor>a0865dfd7a8255c568bb57b8b2d11da64</Anchor>
+              <Anchor>a636e3efe9ace47f8d552a70aeb16a70b</Anchor>
              </Node>
             </Subnodes>
            </Node>
            <Node>
-            <Name>&lt;TRCValueTransformer&gt;</Name>
-            <Path>protocol_t_r_c_value_transformer-p.html</Path>
+            <Name>&lt;TRCValueTransformer &gt;</Name>
+            <Path>protocol_t_r_c_value_transformer_01-p.html</Path>
             <Subnodes>
              <Node>
               <Name>objectFromResponseValue:error:</Name>
-              <Path>protocol_t_r_c_value_transformer-p.html</Path>
-              <Anchor>a789f626601a7f7b7749943d478e13022</Anchor>
+              <Path>protocol_t_r_c_value_transformer_01-p.html</Path>
+              <Anchor>ae4e15fb9bac8fb2f85026b35b0108ec7</Anchor>
              </Node>
              <Node>
               <Name>requestValueFromObject:error:</Name>
-              <Path>protocol_t_r_c_value_transformer-p.html</Path>
-              <Anchor>aeef84919027ad5dff6afd22502aeb0a1</Anchor>
+              <Path>protocol_t_r_c_value_transformer_01-p.html</Path>
+              <Anchor>a8cb78de6ebe0d69617d5d033ecb40ff7</Anchor>
              </Node>
              <Node>
               <Name>externalTypes</Name>
-              <Path>protocol_t_r_c_value_transformer-p.html</Path>
-              <Anchor>a55f225768f4476e6122f660c5ea15734</Anchor>
+              <Path>protocol_t_r_c_value_transformer_01-p.html</Path>
+              <Anchor>a59dc460b155383b9ac04a4201c04a025</Anchor>
              </Node>
             </Subnodes>
+           </Node>
+           <Node>
+            <Name>TRCValueTransformerNumber</Name>
+            <Path>interface_t_r_c_value_transformer_number.html</Path>
+           </Node>
+           <Node>
+            <Name>TRCValueTransformerString</Name>
+            <Path>interface_t_r_c_value_transformer_string.html</Path>
+           </Node>
+           <Node>
+            <Name>TRCValueTransformerUrl</Name>
+            <Path>interface_t_r_c_value_transformer_url.html</Path>
            </Node>
            <Node>
             <Name>TyphoonRestClient</Name>
@@ -707,24 +1081,44 @@
               <Anchor>a8e5d753974a82c9d56f73bc0fc1df4ce</Anchor>
              </Node>
              <Node>
-              <Name>validationOptions</Name>
+              <Name>options</Name>
               <Path>interface_typhoon_rest_client.html</Path>
-              <Anchor>a3d9b3eb367f611ed2375c8a65c40ab25</Anchor>
+              <Anchor>a629d6eb0a904275d602e9d1db8ac590e</Anchor>
+             </Node>
+             <Node>
+              <Name>querySerializationOptions</Name>
+              <Path>interface_typhoon_rest_client.html</Path>
+              <Anchor>a448470457f425706df36573ccfc2ec3e</Anchor>
+             </Node>
+             <Node>
+              <Name>callbackQueue</Name>
+              <Path>interface_typhoon_rest_client.html</Path>
+              <Anchor>a85d2a12699d86c804a2c980a1ac606aa</Anchor>
+             </Node>
+             <Node>
+              <Name>workQueue</Name>
+              <Path>interface_typhoon_rest_client.html</Path>
+              <Anchor>aee20909d2f5f0a4227d985d72f72fca3</Anchor>
              </Node>
              <Node>
               <Name>sendRequest:completion:</Name>
               <Path>interface_typhoon_rest_client.html</Path>
-              <Anchor>adf3bca490c3b1cc5388188bcdb1698e2</Anchor>
+              <Anchor>a0dc83d88a9fb7cbfb73610e683fceb72</Anchor>
              </Node>
              <Node>
               <Name>registerValueTransformer:forTag:</Name>
               <Path>interface_typhoon_rest_client.html</Path>
-              <Anchor>a53fb3aa43f666ed29c2c996f04c90653</Anchor>
+              <Anchor>a4ed973c96276f7c1ffe9fe83fee5be65</Anchor>
              </Node>
              <Node>
               <Name>registerObjectMapper:forTag:</Name>
               <Path>interface_typhoon_rest_client.html</Path>
-              <Anchor>a7c1f4b8b2365c583b7fa9f674b1b4958</Anchor>
+              <Anchor>ab91dcd6a309b3933444fa6b563115e0d</Anchor>
+             </Node>
+             <Node>
+              <Name>registerPreProcessor:</Name>
+              <Path>interface_typhoon_rest_client.html</Path>
+              <Anchor>ac4c54f7ab61047e97f9719d884981a22</Anchor>
              </Node>
              <Node>
               <Name>registerPostProcessor:</Name>
@@ -734,32 +1128,58 @@
              <Node>
               <Name>registerDefaultRequestSerialization:forBodyObjectWithClass:</Name>
               <Path>interface_typhoon_rest_client.html</Path>
-              <Anchor>a21d5c18aaa9c1060b31e3de33dbee494</Anchor>
+              <Anchor>af7ee2d9ec19b1c02756264271c6323c1</Anchor>
+             </Node>
+             <Node>
+              <Name>convertThenValidateRequestObject:usingSchemaTag:options:error:</Name>
+              <Path>interface_typhoon_rest_client.html</Path>
+              <Anchor>af3f07ef2f91439fbd86ba72d153c671b</Anchor>
+             </Node>
+             <Node>
+              <Name>validateThenConvertResponseObject:usingSchemaTag:options:error:</Name>
+              <Path>interface_typhoon_rest_client.html</Path>
+              <Anchor>ac7babf848aab7431e97d6d42790ebedb</Anchor>
              </Node>
              <Node>
               <Name>registerRequestSerializer:forName:</Name>
               <Path>interface_typhoon_rest_client.html</Path>
-              <Anchor>ae1aea80c836f4112396fcb0a2307d382</Anchor>
+              <Anchor>a32f00e6041c8c765ab2a0dd54d2f9e9f</Anchor>
              </Node>
              <Node>
               <Name>registerResponseSerializer:forName:</Name>
               <Path>interface_typhoon_rest_client.html</Path>
-              <Anchor>a4f983e83b61fef7dea0befea0a0e0175</Anchor>
+              <Anchor>a86b8a6662a65600ac6ab5739924159b5</Anchor>
              </Node>
              <Node>
               <Name>registerSchemeFormat:forFileExtension:</Name>
               <Path>interface_typhoon_rest_client.html</Path>
-              <Anchor>a9ed339e2518c12f4376c31f13d2c77ea</Anchor>
+              <Anchor>ae2239cfe912805aabd38f4f28f0df1b2</Anchor>
              </Node>
              <Node>
               <Name>registerValidationErrorPrinter:forFormatWithFileExtension:</Name>
               <Path>interface_typhoon_rest_client.html</Path>
-              <Anchor>a6c9dc5924bd2a5c25ccdc54503c887fa</Anchor>
+              <Anchor>a1f6f490e87782dbe531057c05349145a</Anchor>
              </Node>
              <Node>
               <Name>registerTRCValueTransformerType:withValueClass:</Name>
               <Path>interface_typhoon_rest_client.html</Path>
-              <Anchor>a5f932db04e479dc304785d9a3085e11d</Anchor>
+              <Anchor>a67bad34aa2b1034301a28752d199fdc1</Anchor>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>TyphoonRestClient(Extensions)</Name>
+            <Path>category_typhoon_rest_client_07_extensions_08.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>convertThenValidateRequestObject:usingSchemaTag:options:error:</Name>
+              <Path>category_typhoon_rest_client_07_extensions_08.html</Path>
+              <Anchor>af3f07ef2f91439fbd86ba72d153c671b</Anchor>
+             </Node>
+             <Node>
+              <Name>validateThenConvertResponseObject:usingSchemaTag:options:error:</Name>
+              <Path>category_typhoon_rest_client_07_extensions_08.html</Path>
+              <Anchor>ac7babf848aab7431e97d6d42790ebedb</Anchor>
              </Node>
             </Subnodes>
            </Node>
@@ -770,27 +1190,27 @@
              <Node>
               <Name>registerRequestSerializer:forName:</Name>
               <Path>category_typhoon_rest_client_07_infrastructure_08.html</Path>
-              <Anchor>ae1aea80c836f4112396fcb0a2307d382</Anchor>
+              <Anchor>a32f00e6041c8c765ab2a0dd54d2f9e9f</Anchor>
              </Node>
              <Node>
               <Name>registerResponseSerializer:forName:</Name>
               <Path>category_typhoon_rest_client_07_infrastructure_08.html</Path>
-              <Anchor>a4f983e83b61fef7dea0befea0a0e0175</Anchor>
+              <Anchor>a86b8a6662a65600ac6ab5739924159b5</Anchor>
              </Node>
              <Node>
               <Name>registerSchemeFormat:forFileExtension:</Name>
               <Path>category_typhoon_rest_client_07_infrastructure_08.html</Path>
-              <Anchor>a9ed339e2518c12f4376c31f13d2c77ea</Anchor>
+              <Anchor>ae2239cfe912805aabd38f4f28f0df1b2</Anchor>
              </Node>
              <Node>
               <Name>registerValidationErrorPrinter:forFormatWithFileExtension:</Name>
               <Path>category_typhoon_rest_client_07_infrastructure_08.html</Path>
-              <Anchor>a6c9dc5924bd2a5c25ccdc54503c887fa</Anchor>
+              <Anchor>a1f6f490e87782dbe531057c05349145a</Anchor>
              </Node>
              <Node>
               <Name>registerTRCValueTransformerType:withValueClass:</Name>
               <Path>category_typhoon_rest_client_07_infrastructure_08.html</Path>
-              <Anchor>a5f932db04e479dc304785d9a3085e11d</Anchor>
+              <Anchor>a67bad34aa2b1034301a28752d199fdc1</Anchor>
              </Node>
             </Subnodes>
            </Node>
@@ -801,12 +1221,42 @@
           <Path>hierarchy.html</Path>
           <Subnodes>
            <Node>
-            <Name>NSObject</Name>
+            <Name>&lt;NSObject&gt;</Name>
             <Path></Path>
             <Subnodes>
              <Node>
-              <Name>TRCConnectionAFNetworking</Name>
-              <Path>interface_t_r_c_connection_a_f_networking.html</Path>
+              <Name>&lt;TRCConnectionLoggerWriter &gt;</Name>
+              <Path>protocol_t_r_c_connection_logger_writer_01-p.html</Path>
+             </Node>
+             <Node>
+              <Name>TRCConnectionNSURLSession</Name>
+              <Path>interface_t_r_c_connection_n_s_u_r_l_session.html</Path>
+             </Node>
+             <Node>
+              <Name>&lt;TRCConnectionNSURLSessionDelegate &gt;</Name>
+              <Path>protocol_t_r_c_connection_n_s_u_r_l_session_delegate_01-p.html</Path>
+             </Node>
+             <Node>
+              <Name>TRCConnectionProxy</Name>
+              <Path>interface_t_r_c_connection_proxy.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>TRCConnectionLogger</Name>
+                <Path>interface_t_r_c_connection_logger.html</Path>
+               </Node>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>&lt;TRCConnectionReachabilityDelegate &gt;</Name>
+              <Path>protocol_t_r_c_connection_reachability_delegate_01-p.html</Path>
+             </Node>
+             <Node>
+              <Name>&lt;TRCConnectionRequestCreationOptions &gt;</Name>
+              <Path>protocol_t_r_c_connection_request_creation_options_01-p.html</Path>
+             </Node>
+             <Node>
+              <Name>&lt;TRCConnectionRequestSendingOptions &gt;</Name>
+              <Path>protocol_t_r_c_connection_request_sending_options_01-p.html</Path>
              </Node>
              <Node>
               <Name>TRCConnectionStub</Name>
@@ -817,30 +1267,16 @@
               <Path>interface_t_r_c_connection_stub_response.html</Path>
              </Node>
              <Node>
-              <Name>TyphoonRestClient</Name>
-              <Path>interface_typhoon_rest_client.html</Path>
-             </Node>
-            </Subnodes>
-           </Node>
-           <Node>
-            <Name>&lt;NSObject&gt;</Name>
-            <Path></Path>
-            <Subnodes>
-             <Node>
-              <Name>&lt;TRCConnectionReachabilityDelegate&gt;</Name>
-              <Path>protocol_t_r_c_connection_reachability_delegate-p.html</Path>
-             </Node>
-             <Node>
-              <Name>&lt;TRCConnectionRequestCreationOptions&gt;</Name>
-              <Path>protocol_t_r_c_connection_request_creation_options-p.html</Path>
-             </Node>
-             <Node>
-              <Name>&lt;TRCConnectionRequestSendingOptions&gt;</Name>
-              <Path>protocol_t_r_c_connection_request_sending_options-p.html</Path>
-             </Node>
-             <Node>
               <Name>&lt;TRCErrorHandler&gt;</Name>
               <Path>protocol_t_r_c_error_handler-p.html</Path>
+             </Node>
+             <Node>
+              <Name>TRCMultipartFile</Name>
+              <Path>interface_t_r_c_multipart_file.html</Path>
+             </Node>
+             <Node>
+              <Name>TRCNetworkReachabilityManager</Name>
+              <Path>interface_t_r_c_network_reachability_manager.html</Path>
              </Node>
              <Node>
               <Name>&lt;TRCObjectMapper&gt;</Name>
@@ -851,50 +1287,132 @@
               <Path>protocol_t_r_c_post_processor-p.html</Path>
              </Node>
              <Node>
+              <Name>&lt;TRCPreProcessor&gt;</Name>
+              <Path>protocol_t_r_c_pre_processor-p.html</Path>
+             </Node>
+             <Node>
               <Name>&lt;TRCProgressHandler&gt;</Name>
               <Path>protocol_t_r_c_progress_handler-p.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>TRCSessionTaskContext</Name>
+                <Path>interface_t_r_c_session_task_context.html</Path>
+               </Node>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>TRCQueryStringPair</Name>
+              <Path>interface_t_r_c_query_string_pair.html</Path>
              </Node>
              <Node>
               <Name>&lt;TRCRequest&gt;</Name>
               <Path>protocol_t_r_c_request-p.html</Path>
              </Node>
              <Node>
-              <Name>&lt;TRCRequestSerializer&gt;</Name>
-              <Path>protocol_t_r_c_request_serializer-p.html</Path>
+              <Name>&lt;TRCRequestSerializer &gt;</Name>
+              <Path>protocol_t_r_c_request_serializer_01-p.html</Path>
+             </Node>
+             <Node>
+              <Name>&lt;TRCResponseDelegate &gt;</Name>
+              <Path>protocol_t_r_c_response_delegate_01-p.html</Path>
              </Node>
              <Node>
               <Name>&lt;TRCResponseInfo&gt;</Name>
               <Path>protocol_t_r_c_response_info-p.html</Path>
              </Node>
              <Node>
-              <Name>&lt;TRCResponseSerializer&gt;</Name>
-              <Path>protocol_t_r_c_response_serializer-p.html</Path>
+              <Name>&lt;TRCResponseSerializer &gt;</Name>
+              <Path>protocol_t_r_c_response_serializer_01-p.html</Path>
              </Node>
              <Node>
-              <Name>&lt;TRCSchemaData&gt;</Name>
-              <Path>protocol_t_r_c_schema_data-p.html</Path>
+              <Name>&lt;TRCSchemaData &gt;</Name>
+              <Path>protocol_t_r_c_schema_data_01-p.html</Path>
              </Node>
              <Node>
-              <Name>&lt;TRCSchemaDataDelegate&gt;</Name>
-              <Path>protocol_t_r_c_schema_data_delegate-p.html</Path>
-              <Subnodes>
-               <Node>
-                <Name>&lt;TRCSchemaDataEnumerator&gt;</Name>
-                <Path>protocol_t_r_c_schema_data_enumerator-p.html</Path>
-               </Node>
-               <Node>
-                <Name>&lt;TRCSchemaDataModifier&gt;</Name>
-                <Path>protocol_t_r_c_schema_data_modifier-p.html</Path>
-               </Node>
-              </Subnodes>
+              <Name>&lt;TRCSchemaDataDelegate &gt;</Name>
+              <Path>protocol_t_r_c_schema_data_delegate_01-p.html</Path>
              </Node>
              <Node>
-              <Name>&lt;TRCSchemaFormat&gt;</Name>
-              <Path>protocol_t_r_c_schema_format-p.html</Path>
+              <Name>&lt;TRCSchemaDataProvider &gt;</Name>
+              <Path>protocol_t_r_c_schema_data_provider_01-p.html</Path>
              </Node>
              <Node>
-              <Name>&lt;TRCValueTransformer&gt;</Name>
-              <Path>protocol_t_r_c_value_transformer-p.html</Path>
+              <Name>TRCSchemaDictionaryData</Name>
+              <Path>interface_t_r_c_schema_dictionary_data.html</Path>
+             </Node>
+             <Node>
+              <Name>&lt;TRCSchemaFormat &gt;</Name>
+              <Path>protocol_t_r_c_schema_format_01-p.html</Path>
+             </Node>
+             <Node>
+              <Name>TRCSerializerData</Name>
+              <Path>interface_t_r_c_serializer_data.html</Path>
+             </Node>
+             <Node>
+              <Name>TRCSerializerHttpQuery</Name>
+              <Path>interface_t_r_c_serializer_http_query.html</Path>
+             </Node>
+             <Node>
+              <Name>TRCSerializerImage</Name>
+              <Path>interface_t_r_c_serializer_image.html</Path>
+             </Node>
+             <Node>
+              <Name>TRCSerializerInputStream</Name>
+              <Path>interface_t_r_c_serializer_input_stream.html</Path>
+             </Node>
+             <Node>
+              <Name>TRCSerializerJson</Name>
+              <Path>interface_t_r_c_serializer_json.html</Path>
+             </Node>
+             <Node>
+              <Name>TRCSerializerMultipart</Name>
+              <Path>interface_t_r_c_serializer_multipart.html</Path>
+             </Node>
+             <Node>
+              <Name>TRCSerializerPlist</Name>
+              <Path>interface_t_r_c_serializer_plist.html</Path>
+             </Node>
+             <Node>
+              <Name>TRCSerializerString</Name>
+              <Path>interface_t_r_c_serializer_string.html</Path>
+             </Node>
+             <Node>
+              <Name>TRCSessionHandler</Name>
+              <Path>interface_t_r_c_session_handler.html</Path>
+             </Node>
+             <Node>
+              <Name>TRCSessionTaskContext</Name>
+              <Path>interface_t_r_c_session_task_context.html</Path>
+             </Node>
+             <Node>
+              <Name>&lt;TRCValueTransformer &gt;</Name>
+              <Path>protocol_t_r_c_value_transformer_01-p.html</Path>
+             </Node>
+             <Node>
+              <Name>TRCValueTransformerNumber</Name>
+              <Path>interface_t_r_c_value_transformer_number.html</Path>
+             </Node>
+             <Node>
+              <Name>TRCValueTransformerString</Name>
+              <Path>interface_t_r_c_value_transformer_string.html</Path>
+             </Node>
+             <Node>
+              <Name>TRCValueTransformerUrl</Name>
+              <Path>interface_t_r_c_value_transformer_url.html</Path>
+             </Node>
+             <Node>
+              <Name>TyphoonRestClient</Name>
+              <Path>interface_typhoon_rest_client.html</Path>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>&lt;NSURLSessionDataDelegate&gt;</Name>
+            <Path></Path>
+            <Subnodes>
+             <Node>
+              <Name>TRCSessionHandler</Name>
+              <Path>interface_t_r_c_session_handler.html</Path>
              </Node>
             </Subnodes>
            </Node>
@@ -903,12 +1421,16 @@
             <Path>protocol_t_r_c_connection-p.html</Path>
             <Subnodes>
              <Node>
-              <Name>TRCConnectionAFNetworking</Name>
-              <Path>interface_t_r_c_connection_a_f_networking.html</Path>
-             </Node>
-             <Node>
               <Name>TRCConnectionLogger</Name>
               <Path>interface_t_r_c_connection_logger.html</Path>
+             </Node>
+             <Node>
+              <Name>TRCConnectionNSURLSession</Name>
+              <Path>interface_t_r_c_connection_n_s_u_r_l_session.html</Path>
+             </Node>
+             <Node>
+              <Name>TRCConnectionProxy</Name>
+              <Path>interface_t_r_c_connection_proxy.html</Path>
              </Node>
              <Node>
               <Name>TRCConnectionStub</Name>
@@ -917,22 +1439,138 @@
             </Subnodes>
            </Node>
            <Node>
-            <Name>TRCConnectionProxy</Name>
-            <Path></Path>
-            <Subnodes>
-             <Node>
-              <Name>TRCConnectionLogger</Name>
-              <Path>interface_t_r_c_connection_logger.html</Path>
-             </Node>
-            </Subnodes>
-           </Node>
-           <Node>
             <Name>TRCConnectionStub(Shorthands)</Name>
             <Path>category_t_r_c_connection_stub_07_shorthands_08.html</Path>
            </Node>
            <Node>
+            <Name>&lt;TRCRequestSerializer&gt;</Name>
+            <Path></Path>
+            <Subnodes>
+             <Node>
+              <Name>TRCSerializerData</Name>
+              <Path>interface_t_r_c_serializer_data.html</Path>
+             </Node>
+             <Node>
+              <Name>TRCSerializerHttpQuery</Name>
+              <Path>interface_t_r_c_serializer_http_query.html</Path>
+             </Node>
+             <Node>
+              <Name>TRCSerializerInputStream</Name>
+              <Path>interface_t_r_c_serializer_input_stream.html</Path>
+             </Node>
+             <Node>
+              <Name>TRCSerializerJson</Name>
+              <Path>interface_t_r_c_serializer_json.html</Path>
+             </Node>
+             <Node>
+              <Name>TRCSerializerMultipart</Name>
+              <Path>interface_t_r_c_serializer_multipart.html</Path>
+             </Node>
+             <Node>
+              <Name>TRCSerializerPlist</Name>
+              <Path>interface_t_r_c_serializer_plist.html</Path>
+             </Node>
+             <Node>
+              <Name>TRCSerializerString</Name>
+              <Path>interface_t_r_c_serializer_string.html</Path>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>&lt;TRCResponseSerializer&gt;</Name>
+            <Path></Path>
+            <Subnodes>
+             <Node>
+              <Name>TRCSerializerData</Name>
+              <Path>interface_t_r_c_serializer_data.html</Path>
+             </Node>
+             <Node>
+              <Name>TRCSerializerImage</Name>
+              <Path>interface_t_r_c_serializer_image.html</Path>
+             </Node>
+             <Node>
+              <Name>TRCSerializerJson</Name>
+              <Path>interface_t_r_c_serializer_json.html</Path>
+             </Node>
+             <Node>
+              <Name>TRCSerializerPlist</Name>
+              <Path>interface_t_r_c_serializer_plist.html</Path>
+             </Node>
+             <Node>
+              <Name>TRCSerializerString</Name>
+              <Path>interface_t_r_c_serializer_string.html</Path>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>&lt;TRCSchemaData&gt;</Name>
+            <Path></Path>
+            <Subnodes>
+             <Node>
+              <Name>TRCSchemaDictionaryData</Name>
+              <Path>interface_t_r_c_schema_dictionary_data.html</Path>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>&lt;TRCSchemaDataDelegate&gt;</Name>
+            <Path></Path>
+            <Subnodes>
+             <Node>
+              <Name>&lt;TRCSchemaDataEnumerator &gt;</Name>
+              <Path>protocol_t_r_c_schema_data_enumerator_01-p.html</Path>
+             </Node>
+             <Node>
+              <Name>&lt;TRCSchemaDataModifier &gt;</Name>
+              <Path>protocol_t_r_c_schema_data_modifier_01-p.html</Path>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>&lt;TRCSchemaFormat&gt;</Name>
+            <Path></Path>
+            <Subnodes>
+             <Node>
+              <Name>TRCSerializerJson</Name>
+              <Path>interface_t_r_c_serializer_json.html</Path>
+             </Node>
+             <Node>
+              <Name>TRCSerializerPlist</Name>
+              <Path>interface_t_r_c_serializer_plist.html</Path>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
             <Name>&lt;TRCValidationErrorPrinter&gt;</Name>
             <Path>protocol_t_r_c_validation_error_printer-p.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>TRCSerializerJson</Name>
+              <Path>interface_t_r_c_serializer_json.html</Path>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>&lt;TRCValueTransformer&gt;</Name>
+            <Path></Path>
+            <Subnodes>
+             <Node>
+              <Name>TRCValueTransformerNumber</Name>
+              <Path>interface_t_r_c_value_transformer_number.html</Path>
+             </Node>
+             <Node>
+              <Name>TRCValueTransformerString</Name>
+              <Path>interface_t_r_c_value_transformer_string.html</Path>
+             </Node>
+             <Node>
+              <Name>TRCValueTransformerUrl</Name>
+              <Path>interface_t_r_c_value_transformer_url.html</Path>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>TyphoonRestClient(Extensions)</Name>
+            <Path>category_typhoon_rest_client_07_extensions_08.html</Path>
            </Node>
            <Node>
             <Name>TyphoonRestClient(Infrastructure)</Name>
@@ -979,12 +1617,12 @@
                <Node>
                 <Name>requestWithOptions:error:</Name>
                 <Path>protocol_t_r_c_connection-p.html</Path>
-                <Anchor>af825ae65f5137ff497df0acc1492ea06</Anchor>
+                <Anchor>a8133a2a6d0ca3dabe4e0568cd8a53a15</Anchor>
                </Node>
                <Node>
                 <Name>sendRequest:withOptions:completion:</Name>
                 <Path>protocol_t_r_c_connection-p.html</Path>
-                <Anchor>aa8070dbcd4e8c682ada6338ef689532d</Anchor>
+                <Anchor>aaee85adbcb332baf45b5045c357c2753</Anchor>
                </Node>
                <Node>
                 <Name>reachabilityState</Name>
@@ -1027,6 +1665,11 @@
                 <Path>protocol_t_r_c_progress_handler-p.html</Path>
                 <Anchor>aeee381780d7cbee3b642fc4dab580f9f</Anchor>
                </Node>
+               <Node>
+                <Name>state</Name>
+                <Path>protocol_t_r_c_progress_handler-p.html</Path>
+                <Anchor>a18bc59c7678bb68b0532a838f840ecda</Anchor>
+               </Node>
               </Subnodes>
              </Node>
              <Node>
@@ -1046,97 +1689,112 @@
               </Subnodes>
              </Node>
              <Node>
-              <Name>&lt;TRCConnectionRequestCreationOptions&gt;</Name>
-              <Path>protocol_t_r_c_connection_request_creation_options-p.html</Path>
+              <Name>&lt;TRCConnectionRequestCreationOptions &gt;</Name>
+              <Path>protocol_t_r_c_connection_request_creation_options_01-p.html</Path>
               <Subnodes>
                <Node>
                 <Name>method</Name>
-                <Path>protocol_t_r_c_connection_request_creation_options-p.html</Path>
-                <Anchor>a75efd133211544615ec6f748198a03eb</Anchor>
+                <Path>protocol_t_r_c_connection_request_creation_options_01-p.html</Path>
+                <Anchor>a97c158cd996ee7072d0079dd021a083b</Anchor>
                </Node>
                <Node>
                 <Name>path</Name>
-                <Path>protocol_t_r_c_connection_request_creation_options-p.html</Path>
-                <Anchor>ac77ead3b0e05b7e3d6ffed5adb0cc42f</Anchor>
+                <Path>protocol_t_r_c_connection_request_creation_options_01-p.html</Path>
+                <Anchor>a23ccb73411758688f4b06049abd252c5</Anchor>
                </Node>
                <Node>
                 <Name>pathParameters</Name>
-                <Path>protocol_t_r_c_connection_request_creation_options-p.html</Path>
-                <Anchor>ace4325ee1288d31da2baee657191d27d</Anchor>
+                <Path>protocol_t_r_c_connection_request_creation_options_01-p.html</Path>
+                <Anchor>a2f42d44d3408bcd30172c093a6500c84</Anchor>
                </Node>
                <Node>
                 <Name>body</Name>
-                <Path>protocol_t_r_c_connection_request_creation_options-p.html</Path>
-                <Anchor>a4f1c36db2b3b0580cbf98d9c6b83835a</Anchor>
+                <Path>protocol_t_r_c_connection_request_creation_options_01-p.html</Path>
+                <Anchor>aed829cb6bb83efdd69fde5f8593c3878</Anchor>
                </Node>
                <Node>
                 <Name>serialization</Name>
-                <Path>protocol_t_r_c_connection_request_creation_options-p.html</Path>
-                <Anchor>a28cd826d03977ccc10c42c716e0bbaf4</Anchor>
+                <Path>protocol_t_r_c_connection_request_creation_options_01-p.html</Path>
+                <Anchor>a423887a771863357154ce18d0043294e</Anchor>
                </Node>
                <Node>
                 <Name>headers</Name>
-                <Path>protocol_t_r_c_connection_request_creation_options-p.html</Path>
-                <Anchor>a84a8efbb7f901e29ec9bfd511172230b</Anchor>
+                <Path>protocol_t_r_c_connection_request_creation_options_01-p.html</Path>
+                <Anchor>ac2f3d49ce8cc7621957c33828f7dd447</Anchor>
                </Node>
                <Node>
                 <Name>customProperties</Name>
-                <Path>protocol_t_r_c_connection_request_creation_options-p.html</Path>
-                <Anchor>af75e3e3e664962f7209eea765966809f</Anchor>
+                <Path>protocol_t_r_c_connection_request_creation_options_01-p.html</Path>
+                <Anchor>a2aeb99b92aff0b917a6e0ebd29582732</Anchor>
+               </Node>
+               <Node>
+                <Name>requestPostProcessor</Name>
+                <Path>protocol_t_r_c_connection_request_creation_options_01-p.html</Path>
+                <Anchor>a84e07f6cf2181bf9563ef4e4bf27e937</Anchor>
+               </Node>
+               <Node>
+                <Name>queryOptions</Name>
+                <Path>protocol_t_r_c_connection_request_creation_options_01-p.html</Path>
+                <Anchor>a13420d6f985d7dd5e95f2c0bf9124b69</Anchor>
                </Node>
               </Subnodes>
              </Node>
              <Node>
-              <Name>&lt;TRCConnectionRequestSendingOptions&gt;</Name>
-              <Path>protocol_t_r_c_connection_request_sending_options-p.html</Path>
+              <Name>&lt;TRCConnectionRequestSendingOptions &gt;</Name>
+              <Path>protocol_t_r_c_connection_request_sending_options_01-p.html</Path>
               <Subnodes>
                <Node>
                 <Name>outputStream</Name>
-                <Path>protocol_t_r_c_connection_request_sending_options-p.html</Path>
-                <Anchor>a9a25a621ec37aa377f5ab3c41b124b3a</Anchor>
+                <Path>protocol_t_r_c_connection_request_sending_options_01-p.html</Path>
+                <Anchor>ad48c67e470aa7af2f061562d18dc3192</Anchor>
                </Node>
                <Node>
                 <Name>responseSerialization</Name>
-                <Path>protocol_t_r_c_connection_request_sending_options-p.html</Path>
-                <Anchor>a3c92196b761c77bb099d6660a9597f75</Anchor>
+                <Path>protocol_t_r_c_connection_request_sending_options_01-p.html</Path>
+                <Anchor>a78083c3c05741b4f0a640be3480f4d91</Anchor>
                </Node>
                <Node>
                 <Name>customProperties</Name>
-                <Path>protocol_t_r_c_connection_request_sending_options-p.html</Path>
-                <Anchor>ab5009dbd3e4903ba0c4319889a67a93b</Anchor>
+                <Path>protocol_t_r_c_connection_request_sending_options_01-p.html</Path>
+                <Anchor>a4a557042c05e28a2918c8c043e5f69ec</Anchor>
                </Node>
                <Node>
                 <Name>queuePriority</Name>
-                <Path>protocol_t_r_c_connection_request_sending_options-p.html</Path>
-                <Anchor>a26aa391ffeebd67feab42dfaf84bb8e6</Anchor>
+                <Path>protocol_t_r_c_connection_request_sending_options_01-p.html</Path>
+                <Anchor>a07eb2a5d2f3fade937cf05717a04db3e</Anchor>
+               </Node>
+               <Node>
+                <Name>responseDelegate</Name>
+                <Path>protocol_t_r_c_connection_request_sending_options_01-p.html</Path>
+                <Anchor>aabd6dca14adeea3987aa1c4cf2036837</Anchor>
                </Node>
               </Subnodes>
              </Node>
              <Node>
-              <Name>&lt;TRCConnectionReachabilityDelegate&gt;</Name>
-              <Path>protocol_t_r_c_connection_reachability_delegate-p.html</Path>
+              <Name>&lt;TRCConnectionReachabilityDelegate &gt;</Name>
+              <Path>protocol_t_r_c_connection_reachability_delegate_01-p.html</Path>
               <Subnodes>
                <Node>
                 <Name>connection:didChangeReachabilityState:</Name>
-                <Path>protocol_t_r_c_connection_reachability_delegate-p.html</Path>
-                <Anchor>aa348ea9cad69044efd39142c403721ca</Anchor>
+                <Path>protocol_t_r_c_connection_reachability_delegate_01-p.html</Path>
+                <Anchor>a2673cd21bace1fbe56a9ec0252438daa</Anchor>
                </Node>
               </Subnodes>
              </Node>
              <Node>
               <Name>TRCConnectionCompletion</Name>
               <Path>_t_r_c_connection_8h.html</Path>
-              <Anchor>a5c24abcb8a293a3f37a3a876f3361712</Anchor>
+              <Anchor>a334d8a55bf7f43e6c6eb986b61bfb894</Anchor>
              </Node>
              <Node>
               <Name>TRCUploadProgressBlock</Name>
               <Path>_t_r_c_connection_8h.html</Path>
-              <Anchor>a54107441a361e0dba8e06df1eb0b9b8d</Anchor>
+              <Anchor>a5bb4ec6bd77e2ad8808ae1ccbb9f83a7</Anchor>
              </Node>
              <Node>
               <Name>TRCDownloadProgressBlock</Name>
               <Path>_t_r_c_connection_8h.html</Path>
-              <Anchor>afa1d822d85388659d87f0ef61214f8f8</Anchor>
+              <Anchor>a711a53629927f35f5b4df4b7c032b2af</Anchor>
              </Node>
              <Node>
               <Name>TRCConnectionReachabilityState</Name>
@@ -1165,42 +1823,10 @@
                </Node>
               </Subnodes>
              </Node>
-            </Subnodes>
-           </Node>
-           <Node>
-            <Name>TRCConnectionAFNetworking.h</Name>
-            <Path>_t_r_c_connection_a_f_networking_8h.html</Path>
-            <Subnodes>
              <Node>
-              <Name>TRCConnectionAFNetworking</Name>
-              <Path>interface_t_r_c_connection_a_f_networking.html</Path>
-              <Subnodes>
-               <Node>
-                <Name>reachabilityManager</Name>
-                <Path>interface_t_r_c_connection_a_f_networking.html</Path>
-                <Anchor>abd731d364391c6f8ff71b6082035a1be</Anchor>
-               </Node>
-               <Node>
-                <Name>baseUrl</Name>
-                <Path>interface_t_r_c_connection_a_f_networking.html</Path>
-                <Anchor>a1d45d04463e1ed1c190a96208f54602b</Anchor>
-               </Node>
-               <Node>
-                <Name>initWithBaseUrl:</Name>
-                <Path>interface_t_r_c_connection_a_f_networking.html</Path>
-                <Anchor>a37bb276738cbd912c68cff05dac5c404</Anchor>
-               </Node>
-               <Node>
-                <Name>startReachabilityMonitoring</Name>
-                <Path>interface_t_r_c_connection_a_f_networking.html</Path>
-                <Anchor>adc4dffa345c7ebc55ec8e386108651ec</Anchor>
-               </Node>
-               <Node>
-                <Name>stopReachabilityMonitoring</Name>
-                <Path>interface_t_r_c_connection_a_f_networking.html</Path>
-                <Anchor>a8d97166d68a0c481ab94e5e1d59dee8a</Anchor>
-               </Node>
-              </Subnodes>
+              <Name>NS_ENUM</Name>
+              <Path>_t_r_c_connection_8h.html</Path>
+              <Anchor>a871437dcfa394edb17efe9bcf0ab8827</Anchor>
              </Node>
             </Subnodes>
            </Node>
@@ -1227,6 +1853,100 @@
                 <Path>interface_t_r_c_connection_logger.html</Path>
                 <Anchor>a1447e473e85119251d436f78654c9e83</Anchor>
                </Node>
+               <Node>
+                <Name>shouldLogInputStreamContent</Name>
+                <Path>interface_t_r_c_connection_logger.html</Path>
+                <Anchor>aac6a4348136fcc2625e2aa1ef5932246</Anchor>
+               </Node>
+               <Node>
+                <Name>NS_AVAILABLE</Name>
+                <Path>interface_t_r_c_connection_logger.html</Path>
+                <Anchor>a90efaa5bc0d15f1f34ae8d7d1b1f6df0</Anchor>
+               </Node>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>&lt;TRCConnectionLoggerWriter &gt;</Name>
+              <Path>protocol_t_r_c_connection_logger_writer_01-p.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>writeLogString:</Name>
+                <Path>protocol_t_r_c_connection_logger_writer_01-p.html</Path>
+                <Anchor>aae6d7fdc7d3a353f58d21b42c8b2ec78</Anchor>
+               </Node>
+              </Subnodes>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>TRCConnectionNSURLSession.h</Name>
+            <Path>_t_r_c_connection_n_s_u_r_l_session_8h.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>TRCConnectionNSURLSession</Name>
+              <Path>interface_t_r_c_connection_n_s_u_r_l_session.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>session</Name>
+                <Path>interface_t_r_c_connection_n_s_u_r_l_session.html</Path>
+                <Anchor>a9088ea53b52d33ea3828ba4036d079f1</Anchor>
+               </Node>
+               <Node>
+                <Name>reachabilityManager</Name>
+                <Path>interface_t_r_c_connection_n_s_u_r_l_session.html</Path>
+                <Anchor>a798319c23e319c763b46aa54754f0194</Anchor>
+               </Node>
+               <Node>
+                <Name>delegate</Name>
+                <Path>interface_t_r_c_connection_n_s_u_r_l_session.html</Path>
+                <Anchor>afbb916db03df33ee85f232907ff46c11</Anchor>
+               </Node>
+               <Node>
+                <Name>baseUrl</Name>
+                <Path>interface_t_r_c_connection_n_s_u_r_l_session.html</Path>
+                <Anchor>a7da92a9d531096c9414fe40f794fa5e0</Anchor>
+               </Node>
+               <Node>
+                <Name>init</Name>
+                <Path>interface_t_r_c_connection_n_s_u_r_l_session.html</Path>
+                <Anchor>a318ddc79caea1fbed72a447f8e46faf7</Anchor>
+               </Node>
+               <Node>
+                <Name>initWithBaseUrl:</Name>
+                <Path>interface_t_r_c_connection_n_s_u_r_l_session.html</Path>
+                <Anchor>a59be341cde1140e5f4b57cd1959e296d</Anchor>
+               </Node>
+               <Node>
+                <Name>initWithConfiguration:</Name>
+                <Path>interface_t_r_c_connection_n_s_u_r_l_session.html</Path>
+                <Anchor>a8e5752ea22b036d4dfa82b27311b84cf</Anchor>
+               </Node>
+               <Node>
+                <Name>initWithBaseUrl:configuration:</Name>
+                <Path>interface_t_r_c_connection_n_s_u_r_l_session.html</Path>
+                <Anchor>a6c20b1a8b2f142f871f080fa99126f09</Anchor>
+               </Node>
+               <Node>
+                <Name>startReachabilityMonitoring</Name>
+                <Path>interface_t_r_c_connection_n_s_u_r_l_session.html</Path>
+                <Anchor>ae8407d8ce6ad0ad8b36b73b0c6b83397</Anchor>
+               </Node>
+               <Node>
+                <Name>stopReachabilityMonitoring</Name>
+                <Path>interface_t_r_c_connection_n_s_u_r_l_session.html</Path>
+                <Anchor>afc501269440d8bac001c8f229a0289e5</Anchor>
+               </Node>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>&lt;TRCConnectionNSURLSessionDelegate &gt;</Name>
+              <Path>protocol_t_r_c_connection_n_s_u_r_l_session_delegate_01-p.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>connection:context:didReceiveChallenge:completionHandler:</Name>
+                <Path>protocol_t_r_c_connection_n_s_u_r_l_session_delegate_01-p.html</Path>
+                <Anchor>a7d75e930a38bd3f9b2a1c7dde387c560</Anchor>
+               </Node>
               </Subnodes>
              </Node>
             </Subnodes>
@@ -1234,6 +1954,24 @@
            <Node>
             <Name>TRCConnectionProxy.h</Name>
             <Path>_t_r_c_connection_proxy_8h.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>TRCConnectionProxy</Name>
+              <Path>interface_t_r_c_connection_proxy.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>connection</Name>
+                <Path>interface_t_r_c_connection_proxy.html</Path>
+                <Anchor>a83ac3ebfbddc0bc1b14c47773d3f7c63</Anchor>
+               </Node>
+               <Node>
+                <Name>initWithConnection:</Name>
+                <Path>interface_t_r_c_connection_proxy.html</Path>
+                <Anchor>aa476aedccd4ef5fbe9036d34954e88ac</Anchor>
+               </Node>
+              </Subnodes>
+             </Node>
+            </Subnodes>
            </Node>
            <Node>
             <Name>TRCConnectionStub.h</Name>
@@ -1246,7 +1984,7 @@
                <Node>
                 <Name>setResponse:forPath:withQuery:</Name>
                 <Path>interface_t_r_c_connection_stub.html</Path>
-                <Anchor>a42b9871b76b8c233af85ba5075b141ad</Anchor>
+                <Anchor>ab78753538214c9f597413e71b865b20f</Anchor>
                </Node>
                <Node>
                 <Name>setResponse:</Name>
@@ -1266,7 +2004,7 @@
                <Node>
                 <Name>setResponseText:status:</Name>
                 <Path>interface_t_r_c_connection_stub.html</Path>
-                <Anchor>afa6d57e45e3147c24251ee20fb31c6e5</Anchor>
+                <Anchor>a735c6854a26fe7102365cc07c18bf496</Anchor>
                </Node>
                <Node>
                 <Name>setResponseWithConnectionError</Name>
@@ -1276,12 +2014,12 @@
                <Node>
                 <Name>setResponseText:forRequestPath:</Name>
                 <Path>interface_t_r_c_connection_stub.html</Path>
-                <Anchor>a2ab8f1b1c30c03ed1f884293da9bd835</Anchor>
+                <Anchor>a2a0820ca843663b3057d4267da3b2ffc</Anchor>
                </Node>
                <Node>
                 <Name>setResponseText:status:forRequestPath:</Name>
                 <Path>interface_t_r_c_connection_stub.html</Path>
-                <Anchor>afe41000acf42f62a760cfd04fae062ae</Anchor>
+                <Anchor>a8d9f4821c0d3972a3d25fca99997886d</Anchor>
                </Node>
                <Node>
                 <Name>setResponseTimeoutErrorForRequestPath:</Name>
@@ -1291,7 +2029,7 @@
                <Node>
                 <Name>setResponseMinDelay:maxDelay:</Name>
                 <Path>interface_t_r_c_connection_stub.html</Path>
-                <Anchor>a58d7aa832b006192674ad471ac625848</Anchor>
+                <Anchor>a22c3ae70186324704f5235ac8f67893c</Anchor>
                </Node>
               </Subnodes>
              </Node>
@@ -1307,7 +2045,7 @@
                <Node>
                 <Name>setResponseText:status:</Name>
                 <Path>category_t_r_c_connection_stub_07_shorthands_08.html</Path>
-                <Anchor>afa6d57e45e3147c24251ee20fb31c6e5</Anchor>
+                <Anchor>a735c6854a26fe7102365cc07c18bf496</Anchor>
                </Node>
                <Node>
                 <Name>setResponseWithConnectionError</Name>
@@ -1317,12 +2055,12 @@
                <Node>
                 <Name>setResponseText:forRequestPath:</Name>
                 <Path>category_t_r_c_connection_stub_07_shorthands_08.html</Path>
-                <Anchor>a2ab8f1b1c30c03ed1f884293da9bd835</Anchor>
+                <Anchor>a2a0820ca843663b3057d4267da3b2ffc</Anchor>
                </Node>
                <Node>
                 <Name>setResponseText:status:forRequestPath:</Name>
                 <Path>category_t_r_c_connection_stub_07_shorthands_08.html</Path>
-                <Anchor>afe41000acf42f62a760cfd04fae062ae</Anchor>
+                <Anchor>a8d9f4821c0d3972a3d25fca99997886d</Anchor>
                </Node>
                <Node>
                 <Name>setResponseTimeoutErrorForRequestPath:</Name>
@@ -1332,7 +2070,7 @@
                <Node>
                 <Name>setResponseMinDelay:maxDelay:</Name>
                 <Path>category_t_r_c_connection_stub_07_shorthands_08.html</Path>
-                <Anchor>a58d7aa832b006192674ad471ac625848</Anchor>
+                <Anchor>a22c3ae70186324704f5235ac8f67893c</Anchor>
                </Node>
               </Subnodes>
              </Node>
@@ -1373,7 +2111,7 @@
                <Node>
                 <Name>initWithResponseData:mime:headers:status:</Name>
                 <Path>interface_t_r_c_connection_stub_response.html</Path>
-                <Anchor>aeb5e98964efb338cbcfda101989292dc</Anchor>
+                <Anchor>a009f9303c9682a5bcde0d9914c62b9fe</Anchor>
                </Node>
                <Node>
                 <Name>initWithConnectionError</Name>
@@ -1390,7 +2128,7 @@
              <Node>
               <Name>TRCConnectionStubResponseBlock</Name>
               <Path>_t_r_c_connection_stub_8h.html</Path>
-              <Anchor>ace28ad1aa830530114f46dba720975ce</Anchor>
+              <Anchor>aa5ddd9fb886fdd01b1d72dc461ed0a26</Anchor>
              </Node>
              <Node>
               <Name>TRCBundleFile</Name>
@@ -1410,7 +2148,7 @@
                <Node>
                 <Name>errorFromResponseBody:headers:status:error:</Name>
                 <Path>protocol_t_r_c_error_handler-p.html</Path>
-                <Anchor>a935b0decf7c5da8f02de80431e8e46b8</Anchor>
+                <Anchor>a599652a7598412ba871a277de920ea93</Anchor>
                </Node>
                <Node>
                 <Name>errorValidationSchemaName</Name>
@@ -1420,9 +2158,46 @@
                <Node>
                 <Name>isErrorResponseBody:headers:status:</Name>
                 <Path>protocol_t_r_c_error_handler-p.html</Path>
-                <Anchor>a2614e120ee2a4bfe94999a80af8ad0b3</Anchor>
+                <Anchor>ae04f12eb9cfeb49d9f744b1fd6ac2236</Anchor>
                </Node>
               </Subnodes>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>TRCHttpQueryComposer.h</Name>
+            <Path>_t_r_c_http_query_composer_8h.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>TRCQueryStringPair</Name>
+              <Path>interface_t_r_c_query_string_pair.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>field</Name>
+                <Path>interface_t_r_c_query_string_pair.html</Path>
+                <Anchor>a6dbffadaa7a11d484b1285ed9bc66b5d</Anchor>
+               </Node>
+               <Node>
+                <Name>value</Name>
+                <Path>interface_t_r_c_query_string_pair.html</Path>
+                <Anchor>a51a09f32744e3d9509bb6b2d5516992a</Anchor>
+               </Node>
+               <Node>
+                <Name>initWithField:value:</Name>
+                <Path>interface_t_r_c_query_string_pair.html</Path>
+                <Anchor>ad5993d865f396e622e749c6492f59c57</Anchor>
+               </Node>
+               <Node>
+                <Name>URLEncodedStringValueWithEncoding:</Name>
+                <Path>interface_t_r_c_query_string_pair.html</Path>
+                <Anchor>a03dd1959b0fa1077e4ac5b9c3c184cbb</Anchor>
+               </Node>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>TRCQueryStringPairsFromDictionary</Name>
+              <Path>_t_r_c_http_query_composer_8h.html</Path>
+              <Anchor>a4f29e1a7ef998a613291f4c20aedfe27</Anchor>
              </Node>
             </Subnodes>
            </Node>
@@ -1431,55 +2206,55 @@
             <Path>_t_r_c_infrastructure_8h.html</Path>
             <Subnodes>
              <Node>
-              <Name>&lt;TRCRequestSerializer&gt;</Name>
-              <Path>protocol_t_r_c_request_serializer-p.html</Path>
+              <Name>&lt;TRCRequestSerializer &gt;</Name>
+              <Path>protocol_t_r_c_request_serializer_01-p.html</Path>
               <Subnodes>
                <Node>
-                <Name>dataFromRequestObject:error:</Name>
-                <Path>protocol_t_r_c_request_serializer-p.html</Path>
-                <Anchor>a50b6d8d809df81d8f8b2ea29435d9fc0</Anchor>
+                <Name>bodyDataFromObject:forRequest:error:</Name>
+                <Path>protocol_t_r_c_request_serializer_01-p.html</Path>
+                <Anchor>a2d5656c65fe69b8ce9cadc1cbb27af17</Anchor>
                </Node>
                <Node>
-                <Name>dataStreamFromRequestObject:error:</Name>
-                <Path>protocol_t_r_c_request_serializer-p.html</Path>
-                <Anchor>a581cb572b48ab34fc07f2d490f80b5da</Anchor>
+                <Name>bodyStreamFromObject:forRequest:error:</Name>
+                <Path>protocol_t_r_c_request_serializer_01-p.html</Path>
+                <Anchor>a3aaf80c44f20271c348c6dcc5b74f4e1</Anchor>
                </Node>
                <Node>
                 <Name>contentType</Name>
-                <Path>protocol_t_r_c_request_serializer-p.html</Path>
-                <Anchor>a306d331c31d3ef4217bea86755e4ff75</Anchor>
+                <Path>protocol_t_r_c_request_serializer_01-p.html</Path>
+                <Anchor>a3f9b47196d45cb1da31e64590c44c34d</Anchor>
                </Node>
               </Subnodes>
              </Node>
              <Node>
-              <Name>&lt;TRCResponseSerializer&gt;</Name>
-              <Path>protocol_t_r_c_response_serializer-p.html</Path>
+              <Name>&lt;TRCResponseSerializer &gt;</Name>
+              <Path>protocol_t_r_c_response_serializer_01-p.html</Path>
               <Subnodes>
                <Node>
                 <Name>objectFromResponseData:error:</Name>
-                <Path>protocol_t_r_c_response_serializer-p.html</Path>
-                <Anchor>a134abe9b790cbc40e61663603f1e8af8</Anchor>
+                <Path>protocol_t_r_c_response_serializer_01-p.html</Path>
+                <Anchor>aa8cb06d483f1f724f8ae614abad3e326</Anchor>
                </Node>
                <Node>
                 <Name>isCorrectContentType:</Name>
-                <Path>protocol_t_r_c_response_serializer-p.html</Path>
-                <Anchor>a8196dc6671c28a76da317ddb16df5051</Anchor>
+                <Path>protocol_t_r_c_response_serializer_01-p.html</Path>
+                <Anchor>a8c0dbf6d40090feaadbff68f27aa168f</Anchor>
                </Node>
               </Subnodes>
              </Node>
              <Node>
-              <Name>&lt;TRCSchemaFormat&gt;</Name>
-              <Path>protocol_t_r_c_schema_format-p.html</Path>
+              <Name>&lt;TRCSchemaFormat &gt;</Name>
+              <Path>protocol_t_r_c_schema_format_01-p.html</Path>
               <Subnodes>
                <Node>
                 <Name>requestSchemaDataFromData:dataProvider:error:</Name>
-                <Path>protocol_t_r_c_schema_format-p.html</Path>
-                <Anchor>a93fae8b9e94a680a5b2a0db90ccbb20a</Anchor>
+                <Path>protocol_t_r_c_schema_format_01-p.html</Path>
+                <Anchor>af33ee81bc697e638c5c9705495527e05</Anchor>
                </Node>
                <Node>
                 <Name>responseSchemaDataFromData:dataProvider:error:</Name>
-                <Path>protocol_t_r_c_schema_format-p.html</Path>
-                <Anchor>a381450310c2a9996c706dd1271caf0d7</Anchor>
+                <Path>protocol_t_r_c_schema_format_01-p.html</Path>
+                <Anchor>a8e556bc48c4289c4f88b747101e85e6d</Anchor>
                </Node>
               </Subnodes>
              </Node>
@@ -1490,9 +2265,101 @@
                <Node>
                 <Name>errorDescriptionForObject:errorMessage:stackTrace:</Name>
                 <Path>protocol_t_r_c_validation_error_printer-p.html</Path>
-                <Anchor>a0865dfd7a8255c568bb57b8b2d11da64</Anchor>
+                <Anchor>a636e3efe9ace47f8d552a70aeb16a70b</Anchor>
                </Node>
               </Subnodes>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>TRCNetworkReachabilityManager.h</Name>
+            <Path>_t_r_c_network_reachability_manager_8h.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>TRCNetworkReachabilityManager</Name>
+              <Path>interface_t_r_c_network_reachability_manager.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>networkReachabilityStatus</Name>
+                <Path>interface_t_r_c_network_reachability_manager.html</Path>
+                <Anchor>a24cf57e90ba91a1bf847f396e6523766</Anchor>
+               </Node>
+               <Node>
+                <Name>reachable</Name>
+                <Path>interface_t_r_c_network_reachability_manager.html</Path>
+                <Anchor>a2fcd60613ef21abb1cd177cb596f9203</Anchor>
+               </Node>
+               <Node>
+                <Name>reachableViaWWAN</Name>
+                <Path>interface_t_r_c_network_reachability_manager.html</Path>
+                <Anchor>adf8ffc811b49608ee56134f6e681ec6d</Anchor>
+               </Node>
+               <Node>
+                <Name>reachableViaWiFi</Name>
+                <Path>interface_t_r_c_network_reachability_manager.html</Path>
+                <Anchor>a7542a331313df932e0f8bb47a05afa40</Anchor>
+               </Node>
+               <Node>
+                <Name>sharedManager</Name>
+                <Path>interface_t_r_c_network_reachability_manager.html</Path>
+                <Anchor>aaa465b007999e7bb7183c73df72672fa</Anchor>
+               </Node>
+               <Node>
+                <Name>managerForDomain:</Name>
+                <Path>interface_t_r_c_network_reachability_manager.html</Path>
+                <Anchor>a6d41a91f2ecca46ae845ef4577756403</Anchor>
+               </Node>
+               <Node>
+                <Name>managerForAddress:</Name>
+                <Path>interface_t_r_c_network_reachability_manager.html</Path>
+                <Anchor>a2d2fea052e7a2514299d5972556e7cb3</Anchor>
+               </Node>
+               <Node>
+                <Name>initWithReachability:</Name>
+                <Path>interface_t_r_c_network_reachability_manager.html</Path>
+                <Anchor>a8e08c1acfede22a6b40223a512db14df</Anchor>
+               </Node>
+               <Node>
+                <Name>startMonitoring</Name>
+                <Path>interface_t_r_c_network_reachability_manager.html</Path>
+                <Anchor>aea96456433ccafdc7d9b0ff680aece42</Anchor>
+               </Node>
+               <Node>
+                <Name>stopMonitoring</Name>
+                <Path>interface_t_r_c_network_reachability_manager.html</Path>
+                <Anchor>a8a6b08fa3d4dc09d88cb12d2f09d0d9b</Anchor>
+               </Node>
+               <Node>
+                <Name>localizedNetworkReachabilityStatusString</Name>
+                <Path>interface_t_r_c_network_reachability_manager.html</Path>
+                <Anchor>ac9cb91c74d8b6cec2095824d241a3e24</Anchor>
+               </Node>
+               <Node>
+                <Name>setReachabilityStatusChangeBlock:</Name>
+                <Path>interface_t_r_c_network_reachability_manager.html</Path>
+                <Anchor>adb963c51b391d856f4a3725b86137a9f</Anchor>
+               </Node>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>NS_ENUM</Name>
+              <Path>_t_r_c_network_reachability_manager_8h.html</Path>
+              <Anchor>aab95b4c658b6824757aa427a0906b666</Anchor>
+             </Node>
+             <Node>
+              <Name>TRCStringFromNetworkReachabilityStatus</Name>
+              <Path>_t_r_c_network_reachability_manager_8h.html</Path>
+              <Anchor>a32354350b0478df8e98798b9a565f434</Anchor>
+             </Node>
+             <Node>
+              <Name>TRCNetworkingReachabilityDidChangeNotification</Name>
+              <Path>_t_r_c_network_reachability_manager_8h.html</Path>
+              <Anchor>a70c5bae97f5e52d636baf32bab44d77c</Anchor>
+             </Node>
+             <Node>
+              <Name>TRCNetworkingReachabilityNotificationStatusItem</Name>
+              <Path>_t_r_c_network_reachability_manager_8h.html</Path>
+              <Anchor>a0ecdc6280c974dd23c81d6aa341b32a0</Anchor>
              </Node>
             </Subnodes>
            </Node>
@@ -1512,7 +2379,7 @@
                <Node>
                 <Name>objectFromResponseObject:error:</Name>
                 <Path>protocol_t_r_c_object_mapper-p.html</Path>
-                <Anchor>ac7136de05cd53fd7ae88c09c281178f6</Anchor>
+                <Anchor>a9667e185b795ce33c328c1ef70afbedb</Anchor>
                </Node>
                <Node>
                 <Name>requestValidationSchemaName</Name>
@@ -1522,7 +2389,7 @@
                <Node>
                 <Name>requestObjectFromObject:error:</Name>
                 <Path>protocol_t_r_c_object_mapper-p.html</Path>
-                <Anchor>a6ac5113cb00eefea8c8da3a546806a4b</Anchor>
+                <Anchor>a67523fffff20e9911167bf1e7e0f4710</Anchor>
                </Node>
               </Subnodes>
              </Node>
@@ -1539,12 +2406,39 @@
                <Node>
                 <Name>postProcessResponseObject:forRequest:postProcessError:</Name>
                 <Path>protocol_t_r_c_post_processor-p.html</Path>
-                <Anchor>aa482b3b50c11150d0da90f309700deba</Anchor>
+                <Anchor>ab7b383b4a1636f037402ee828e3ff2b6</Anchor>
                </Node>
                <Node>
                 <Name>postProcessError:forRequest:</Name>
                 <Path>protocol_t_r_c_post_processor-p.html</Path>
-                <Anchor>a92c13c5a99be31419ada9c2c8298580d</Anchor>
+                <Anchor>a0fe8b4b464c64dcd51de1b02c07d3328</Anchor>
+               </Node>
+               <Node>
+                <Name>queueType</Name>
+                <Path>protocol_t_r_c_post_processor-p.html</Path>
+                <Anchor>a992d0e24022a0946130c383d24f98f82</Anchor>
+               </Node>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>NS_OPTIONS</Name>
+              <Path>_t_r_c_post_processor_8h.html</Path>
+              <Anchor>a8747948d0bee5cdd6f0406be803b39be</Anchor>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>TRCPreProcessor.h</Name>
+            <Path>_t_r_c_pre_processor_8h.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>&lt;TRCPreProcessor&gt;</Name>
+              <Path>protocol_t_r_c_pre_processor-p.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>preProcessResponseObject:forRequest:preProcessError:</Name>
+                <Path>protocol_t_r_c_pre_processor-p.html</Path>
+                <Anchor>a54dd1ba992dca0e38b48ee68f474616d</Anchor>
                </Node>
               </Subnodes>
              </Node>
@@ -1568,71 +2462,6 @@
                 <Path>protocol_t_r_c_request-p.html</Path>
                 <Anchor>a8d179f9d670b1ea92f9d9b0faf65b314</Anchor>
                </Node>
-               <Node>
-                <Name>pathParameters</Name>
-                <Path>protocol_t_r_c_request-p.html</Path>
-                <Anchor>aa4e419f84556cc0d41dae0602c8a0f80</Anchor>
-               </Node>
-               <Node>
-                <Name>pathParametersValidationSchemaName</Name>
-                <Path>protocol_t_r_c_request-p.html</Path>
-                <Anchor>aa37c7187d908fc06114c27d66648ac85</Anchor>
-               </Node>
-               <Node>
-                <Name>requestHeaders</Name>
-                <Path>protocol_t_r_c_request-p.html</Path>
-                <Anchor>a5cc7e76abbbcf8237fab3a845effb258</Anchor>
-               </Node>
-               <Node>
-                <Name>requestBody</Name>
-                <Path>protocol_t_r_c_request-p.html</Path>
-                <Anchor>a1a76461fbf3222123aa9c4e811e061d9</Anchor>
-               </Node>
-               <Node>
-                <Name>requestBodyValidationSchemaName</Name>
-                <Path>protocol_t_r_c_request-p.html</Path>
-                <Anchor>abc3b9c9c6b2ec65f67ed74ce8a3f50ad</Anchor>
-               </Node>
-               <Node>
-                <Name>requestBodySerialization</Name>
-                <Path>protocol_t_r_c_request-p.html</Path>
-                <Anchor>a2aab7e85fc7a4d0ea92a53e0be1b72f1</Anchor>
-               </Node>
-               <Node>
-                <Name>responseBodyValidationSchemaName</Name>
-                <Path>protocol_t_r_c_request-p.html</Path>
-                <Anchor>ad4003fea5e41918229d039dcc4eca229</Anchor>
-               </Node>
-               <Node>
-                <Name>responseBodySerialization</Name>
-                <Path>protocol_t_r_c_request-p.html</Path>
-                <Anchor>a8ba19efa1b0cab2671adc417b250968d</Anchor>
-               </Node>
-               <Node>
-                <Name>responseBodyOutputStream</Name>
-                <Path>protocol_t_r_c_request-p.html</Path>
-                <Anchor>a30e070b3041f02f328364d1d759c745b</Anchor>
-               </Node>
-               <Node>
-                <Name>responseProcessedFromBody:headers:status:error:</Name>
-                <Path>protocol_t_r_c_request-p.html</Path>
-                <Anchor>add887b883c406b941fad92203b359a8f</Anchor>
-               </Node>
-               <Node>
-                <Name>respondedWithError:headers:status:</Name>
-                <Path>protocol_t_r_c_request-p.html</Path>
-                <Anchor>a54a286541590f8741bbd3917436fbbf1</Anchor>
-               </Node>
-               <Node>
-                <Name>customProperties</Name>
-                <Path>protocol_t_r_c_request-p.html</Path>
-                <Anchor>ab07c4dbb1a8e341faa6456287ad2d718</Anchor>
-               </Node>
-               <Node>
-                <Name>queuePriority</Name>
-                <Path>protocol_t_r_c_request-p.html</Path>
-                <Anchor>ae75f354a1e1a453e6ed86c6e83cdd30c</Anchor>
-               </Node>
               </Subnodes>
              </Node>
              <Node>
@@ -1654,6 +2483,11 @@
               <Name>TRCSerialization</Name>
               <Path>_t_r_c_request_8h.html</Path>
               <Anchor>a26e86d9799b2cc5a2ce4f0830f1900a3</Anchor>
+             </Node>
+             <Node>
+              <Name>NS_OPTIONS</Name>
+              <Path>_t_r_c_request_8h.html</Path>
+              <Anchor>adfbd8096d1c5892981a6c3f663ec1a78</Anchor>
              </Node>
              <Node>
               <Name>TRCRequestMethodPost</Name>
@@ -1716,9 +2550,51 @@
               <Anchor>abf9fd0b7fa7e071928c531e759631fd8</Anchor>
              </Node>
              <Node>
+              <Name>TRCSerializationRequestMultipart</Name>
+              <Path>_t_r_c_request_8h.html</Path>
+              <Anchor>a72f3cd79fdbccfcbc4975773f0501334</Anchor>
+             </Node>
+             <Node>
               <Name>TRCSerializationResponseImage</Name>
               <Path>_t_r_c_request_8h.html</Path>
               <Anchor>ae18f7e18a930f3452b8851dcf46ef078</Anchor>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>TRCResponseDelegate.h</Name>
+            <Path>_t_r_c_response_delegate_8h.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>&lt;TRCResponseDelegate &gt;</Name>
+              <Path>protocol_t_r_c_response_delegate_01-p.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>connection:shouldProcessResponse:</Name>
+                <Path>protocol_t_r_c_response_delegate_01-p.html</Path>
+                <Anchor>ac997f7d07e324bda35b0384a70d973e2</Anchor>
+               </Node>
+               <Node>
+                <Name>connection:didSendBodyData:totalBytesSent:totalBytesExpectedToSend:</Name>
+                <Path>protocol_t_r_c_response_delegate_01-p.html</Path>
+                <Anchor>a19c7804c5b4a9df158b988fed0ab9aff</Anchor>
+               </Node>
+               <Node>
+                <Name>connection:didReceiveData:</Name>
+                <Path>protocol_t_r_c_response_delegate_01-p.html</Path>
+                <Anchor>a46d2d9d60d6a43d88dd433b6aa696519</Anchor>
+               </Node>
+               <Node>
+                <Name>connection:didCompleteWithError:</Name>
+                <Path>protocol_t_r_c_response_delegate_01-p.html</Path>
+                <Anchor>aafa0ebe585debda63b4ae20b0dda04d2</Anchor>
+               </Node>
+               <Node>
+                <Name>connection:didReceiveChallenge:completionHandler:</Name>
+                <Path>protocol_t_r_c_response_delegate_01-p.html</Path>
+                <Anchor>ad4b48a4f503d1370d09e902c2c9afd4e</Anchor>
+               </Node>
+              </Subnodes>
              </Node>
             </Subnodes>
            </Node>
@@ -1727,81 +2603,102 @@
             <Path>_t_r_c_schema_data_8h.html</Path>
             <Subnodes>
              <Node>
-              <Name>&lt;TRCSchemaData&gt;</Name>
-              <Path>protocol_t_r_c_schema_data-p.html</Path>
+              <Name>&lt;TRCSchemaData &gt;</Name>
+              <Path>protocol_t_r_c_schema_data_01-p.html</Path>
               <Subnodes>
                <Node>
                 <Name>enumerate:withEnumerator:</Name>
-                <Path>protocol_t_r_c_schema_data-p.html</Path>
-                <Anchor>ac59b7973afc05d3581a9e2da7d81743b</Anchor>
+                <Path>protocol_t_r_c_schema_data_01-p.html</Path>
+                <Anchor>a04642ed6ca75fd992e2403b1553f5445</Anchor>
                </Node>
                <Node>
                 <Name>modify:withModifier:</Name>
-                <Path>protocol_t_r_c_schema_data-p.html</Path>
-                <Anchor>ae4fcd5068db4b3fe53bb90e9262a24ff</Anchor>
+                <Path>protocol_t_r_c_schema_data_01-p.html</Path>
+                <Anchor>a98f819000a072c4c9e592b2054afcb93</Anchor>
                </Node>
                <Node>
                 <Name>cancel</Name>
-                <Path>protocol_t_r_c_schema_data-p.html</Path>
-                <Anchor>aa071a3786012c29cf369adcf3148e732</Anchor>
+                <Path>protocol_t_r_c_schema_data_01-p.html</Path>
+                <Anchor>ae52dd7c22e9fd3f16d28901d6d2332f8</Anchor>
                </Node>
                <Node>
                 <Name>isCancelled</Name>
-                <Path>protocol_t_r_c_schema_data-p.html</Path>
-                <Anchor>a275e6d2c1d68c35a6433e414ef68443f</Anchor>
+                <Path>protocol_t_r_c_schema_data_01-p.html</Path>
+                <Anchor>a5eb949464655686f0cca9b9bd74a8a75</Anchor>
                </Node>
               </Subnodes>
              </Node>
              <Node>
-              <Name>&lt;TRCSchemaDataDelegate&gt;</Name>
-              <Path>protocol_t_r_c_schema_data_delegate-p.html</Path>
+              <Name>&lt;TRCSchemaDataDelegate &gt;</Name>
+              <Path>protocol_t_r_c_schema_data_delegate_01-p.html</Path>
               <Subnodes>
                <Node>
                 <Name>schemaData:typeMismatchForValue:withSchemaValue:</Name>
-                <Path>protocol_t_r_c_schema_data_delegate-p.html</Path>
-                <Anchor>ae06a3b2c34abebb1a413d0bf64221d26</Anchor>
+                <Path>protocol_t_r_c_schema_data_delegate_01-p.html</Path>
+                <Anchor>aa8459937faefc1759e2b25ec3bd1a3db</Anchor>
                </Node>
                <Node>
                 <Name>schemaData:willEnumerateItemAtIndentifier:</Name>
-                <Path>protocol_t_r_c_schema_data_delegate-p.html</Path>
-                <Anchor>afc16cc2c3b40cb6cca7d5d6204a0e189</Anchor>
+                <Path>protocol_t_r_c_schema_data_delegate_01-p.html</Path>
+                <Anchor>a663b40eee0ae92df2d062b16422133af</Anchor>
                </Node>
                <Node>
                 <Name>schemaData:didEnumerateItemAtIndentifier:</Name>
-                <Path>protocol_t_r_c_schema_data_delegate-p.html</Path>
-                <Anchor>ad65141c8eaecb30fdc63528545cf7e0d</Anchor>
+                <Path>protocol_t_r_c_schema_data_delegate_01-p.html</Path>
+                <Anchor>a8dab6d4aab61ee020c9e006106076678</Anchor>
                </Node>
               </Subnodes>
              </Node>
              <Node>
-              <Name>&lt;TRCSchemaDataEnumerator&gt;</Name>
-              <Path>protocol_t_r_c_schema_data_enumerator-p.html</Path>
+              <Name>&lt;TRCSchemaDataEnumerator &gt;</Name>
+              <Path>protocol_t_r_c_schema_data_enumerator_01-p.html</Path>
               <Subnodes>
                <Node>
                 <Name>schemaData:foundValue:withOptions:withSchemeValue:</Name>
-                <Path>protocol_t_r_c_schema_data_enumerator-p.html</Path>
-                <Anchor>a1da9171b1edf52b511a4540615bf38c1</Anchor>
+                <Path>protocol_t_r_c_schema_data_enumerator_01-p.html</Path>
+                <Anchor>aaa53ba9baf4f0e02816e0b858de7e2be</Anchor>
                </Node>
               </Subnodes>
              </Node>
              <Node>
-              <Name>&lt;TRCSchemaDataModifier&gt;</Name>
-              <Path>protocol_t_r_c_schema_data_modifier-p.html</Path>
+              <Name>&lt;TRCSchemaDataModifier &gt;</Name>
+              <Path>protocol_t_r_c_schema_data_modifier_01-p.html</Path>
               <Subnodes>
                <Node>
                 <Name>schemaData:replacementForValue:withOptions:withSchemeValue:</Name>
-                <Path>protocol_t_r_c_schema_data_modifier-p.html</Path>
-                <Anchor>a489fa526053f39d4960b609d6487fd72</Anchor>
+                <Path>protocol_t_r_c_schema_data_modifier_01-p.html</Path>
+                <Anchor>ab319a9b9612d73ea89e9830047755391</Anchor>
                </Node>
                <Node>
                 <Name>schemaData:objectFromResponse:withMapperTag:</Name>
-                <Path>protocol_t_r_c_schema_data_modifier-p.html</Path>
-                <Anchor>a4f3677d02497714817cd91489e73432f</Anchor>
+                <Path>protocol_t_r_c_schema_data_modifier_01-p.html</Path>
+                <Anchor>a183ace784d729b51ec01a19c0af85fbb</Anchor>
                </Node>
                <Node>
                 <Name>schemaData:requestFromObject:withMapperTag:</Name>
-                <Path>protocol_t_r_c_schema_data_modifier-p.html</Path>
-                <Anchor>ad311599b8b23781d3da4a22107e6308e</Anchor>
+                <Path>protocol_t_r_c_schema_data_modifier_01-p.html</Path>
+                <Anchor>a14d83f641e68625e087ba6178ccce51d</Anchor>
+               </Node>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>&lt;TRCSchemaDataProvider &gt;</Name>
+              <Path>protocol_t_r_c_schema_data_provider_01-p.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>schemaData:hasObjectMapperForTag:</Name>
+                <Path>protocol_t_r_c_schema_data_provider_01-p.html</Path>
+                <Anchor>a03cc7359bc6dd585dd65f60c3b18a901</Anchor>
+               </Node>
+               <Node>
+                <Name>schemaData:requestSchemaForMapperWithTag:</Name>
+                <Path>protocol_t_r_c_schema_data_provider_01-p.html</Path>
+                <Anchor>aee7e60fac8c583f7e7e651250db3f283</Anchor>
+               </Node>
+               <Node>
+                <Name>schemaData:responseSchemaForMapperWithTag:</Name>
+                <Path>protocol_t_r_c_schema_data_provider_01-p.html</Path>
+                <Anchor>aa98661fa46b69d111ef9303012f99613</Anchor>
                </Node>
               </Subnodes>
              </Node>
@@ -1810,31 +2707,160 @@
            <Node>
             <Name>TRCSchemaDictionaryData.h</Name>
             <Path>_t_r_c_schema_dictionary_data_8h.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>TRCSchemaDictionaryData</Name>
+              <Path>interface_t_r_c_schema_dictionary_data.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>requestData</Name>
+                <Path>interface_t_r_c_schema_dictionary_data.html</Path>
+                <Anchor>af515f7d5dba2a50ae5737e39c2129b59</Anchor>
+               </Node>
+               <Node>
+                <Name>dataProvider</Name>
+                <Path>interface_t_r_c_schema_dictionary_data.html</Path>
+                <Anchor>af42967a794885cc5cee621b756a1e34a</Anchor>
+               </Node>
+               <Node>
+                <Name>initWithArrayOrDictionary:request:dataProvider:</Name>
+                <Path>interface_t_r_c_schema_dictionary_data.html</Path>
+                <Anchor>a61bf42f687db92eaf13d006c7745612a</Anchor>
+               </Node>
+              </Subnodes>
+             </Node>
+            </Subnodes>
            </Node>
            <Node>
             <Name>TRCSerializerData.h</Name>
             <Path>_t_r_c_serializer_data_8h.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>TRCSerializerData</Name>
+              <Path>interface_t_r_c_serializer_data.html</Path>
+             </Node>
+            </Subnodes>
            </Node>
            <Node>
             <Name>TRCSerializerHttpQuery.h</Name>
             <Path>_t_r_c_serializer_http_query_8h.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>TRCSerializerHttpQuery</Name>
+              <Path>interface_t_r_c_serializer_http_query.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>options</Name>
+                <Path>interface_t_r_c_serializer_http_query.html</Path>
+                <Anchor>a20d9dd9767fcae1fa0ba33dae527bfb2</Anchor>
+               </Node>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>NS_OPTIONS</Name>
+              <Path>_t_r_c_serializer_http_query_8h.html</Path>
+              <Anchor>a49657751b4009df81d379ac084f5a1c1</Anchor>
+             </Node>
+            </Subnodes>
            </Node>
            <Node>
             <Name>TRCSerializerImage.h</Name>
             <Path>_t_r_c_serializer_image_8h.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>TRCSerializerImage</Name>
+              <Path>interface_t_r_c_serializer_image.html</Path>
+             </Node>
+            </Subnodes>
            </Node>
            <Node>
             <Name>TRCSerializerInputStream.h</Name>
             <Path>_t_r_c_serializer_input_stream_8h.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>TRCSerializerInputStream</Name>
+              <Path>interface_t_r_c_serializer_input_stream.html</Path>
+             </Node>
+            </Subnodes>
            </Node>
            <Node>
             <Name>TRCSerializerJson.h</Name>
             <Path>_t_r_c_serializer_json_8h.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>TRCSerializerJson</Name>
+              <Path>interface_t_r_c_serializer_json.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>readingOptions</Name>
+                <Path>interface_t_r_c_serializer_json.html</Path>
+                <Anchor>abaae1362ed6bdef6c4fe86ee050149fb</Anchor>
+               </Node>
+               <Node>
+                <Name>writingOptions</Name>
+                <Path>interface_t_r_c_serializer_json.html</Path>
+                <Anchor>aa3118b8c1bba0330fec376a08178ba89</Anchor>
+               </Node>
+              </Subnodes>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>TRCSerializerMultipart.h</Name>
+            <Path>_t_r_c_serializer_multipart_8h.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>TRCSerializerMultipart</Name>
+              <Path>interface_t_r_c_serializer_multipart.html</Path>
+             </Node>
+             <Node>
+              <Name>TRCMultipartFile</Name>
+              <Path>interface_t_r_c_multipart_file.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>data</Name>
+                <Path>interface_t_r_c_multipart_file.html</Path>
+                <Anchor>af51e99f6ac8bb49caa2d989ca632588f</Anchor>
+               </Node>
+               <Node>
+                <Name>filename</Name>
+                <Path>interface_t_r_c_multipart_file.html</Path>
+                <Anchor>ab87e309dcf98b239446a7f430aee64b1</Anchor>
+               </Node>
+               <Node>
+                <Name>mimeType</Name>
+                <Path>interface_t_r_c_multipart_file.html</Path>
+                <Anchor>a52fffb8f3c8d7033cc41b810483337aa</Anchor>
+               </Node>
+              </Subnodes>
+             </Node>
+            </Subnodes>
            </Node>
            <Node>
             <Name>TRCSerializerPlist.h</Name>
             <Path>_t_r_c_serializer_plist_8h.html</Path>
             <Subnodes>
+             <Node>
+              <Name>TRCSerializerPlist</Name>
+              <Path>interface_t_r_c_serializer_plist.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>readOptions</Name>
+                <Path>interface_t_r_c_serializer_plist.html</Path>
+                <Anchor>a8746432d1abed228e84c00bf5db843b7</Anchor>
+               </Node>
+               <Node>
+                <Name>writeOptions</Name>
+                <Path>interface_t_r_c_serializer_plist.html</Path>
+                <Anchor>a0060589cc9810d7b0aaaac1ec759b5f8</Anchor>
+               </Node>
+               <Node>
+                <Name>format</Name>
+                <Path>interface_t_r_c_serializer_plist.html</Path>
+                <Anchor>a31698baa56ca5391ca04104177f5ab48</Anchor>
+               </Node>
+              </Subnodes>
+             </Node>
              <Node>
               <Name>TRCValueTransformerTypeDate</Name>
               <Path>_t_r_c_serializer_plist_8h.html</Path>
@@ -1850,29 +2876,111 @@
            <Node>
             <Name>TRCSerializerString.h</Name>
             <Path>_t_r_c_serializer_string_8h.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>TRCSerializerString</Name>
+              <Path>interface_t_r_c_serializer_string.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>encoding</Name>
+                <Path>interface_t_r_c_serializer_string.html</Path>
+                <Anchor>af229f9ac2d3ca1d5b3bc08390a936f81</Anchor>
+               </Node>
+              </Subnodes>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>TRCSessionHandler.h</Name>
+            <Path>_t_r_c_session_handler_8h.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>TRCSessionHandler</Name>
+              <Path>interface_t_r_c_session_handler.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>startDataTask:withContext:</Name>
+                <Path>interface_t_r_c_session_handler.html</Path>
+                <Anchor>a85dc3b4485bd90b1b3fb5981f8b76333</Anchor>
+               </Node>
+              </Subnodes>
+             </Node>
+            </Subnodes>
+           </Node>
+           <Node>
+            <Name>TRCSessionTaskContext.h</Name>
+            <Path>_t_r_c_session_task_context_8h.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>TRCSessionTaskContext</Name>
+              <Path>interface_t_r_c_session_task_context.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>connection</Name>
+                <Path>interface_t_r_c_session_task_context.html</Path>
+                <Anchor>a91f02dc4e10f355510fefa4a7c3ec567</Anchor>
+               </Node>
+               <Node>
+                <Name>initWithTask:options:completion:</Name>
+                <Path>interface_t_r_c_session_task_context.html</Path>
+                <Anchor>ad7ec1479590d5d5fc170973195212470</Anchor>
+               </Node>
+               <Node>
+                <Name>shouldProcessResponse:</Name>
+                <Path>interface_t_r_c_session_task_context.html</Path>
+                <Anchor>a804f42dc9fccce7aefc84b4bbc44e102</Anchor>
+               </Node>
+               <Node>
+                <Name>didSendBodyData:totalBytesSent:totalBytesExpectedToSend:</Name>
+                <Path>interface_t_r_c_session_task_context.html</Path>
+                <Anchor>a96690aeefd72898ffee516ab08fba424</Anchor>
+               </Node>
+               <Node>
+                <Name>didReceiveData:</Name>
+                <Path>interface_t_r_c_session_task_context.html</Path>
+                <Anchor>a5e1508c22691af99a2fec0f8501d9c18</Anchor>
+               </Node>
+               <Node>
+                <Name>didCompleteWithError:</Name>
+                <Path>interface_t_r_c_session_task_context.html</Path>
+                <Anchor>a197868e628d8748627018a42a4036325</Anchor>
+               </Node>
+               <Node>
+                <Name>didReceiveChallenge:completionHandler:</Name>
+                <Path>interface_t_r_c_session_task_context.html</Path>
+                <Anchor>a52ace4f2c24cc5b7a3c76bf7c6c4fb00</Anchor>
+               </Node>
+               <Node>
+                <Name>state</Name>
+                <Path>interface_t_r_c_session_task_context.html</Path>
+                <Anchor>a80643248b8013c39c86547dd46430ed6</Anchor>
+               </Node>
+              </Subnodes>
+             </Node>
+            </Subnodes>
            </Node>
            <Node>
             <Name>TRCValueTransformer.h</Name>
             <Path>_t_r_c_value_transformer_8h.html</Path>
             <Subnodes>
              <Node>
-              <Name>&lt;TRCValueTransformer&gt;</Name>
-              <Path>protocol_t_r_c_value_transformer-p.html</Path>
+              <Name>&lt;TRCValueTransformer &gt;</Name>
+              <Path>protocol_t_r_c_value_transformer_01-p.html</Path>
               <Subnodes>
                <Node>
                 <Name>objectFromResponseValue:error:</Name>
-                <Path>protocol_t_r_c_value_transformer-p.html</Path>
-                <Anchor>a789f626601a7f7b7749943d478e13022</Anchor>
+                <Path>protocol_t_r_c_value_transformer_01-p.html</Path>
+                <Anchor>ae4e15fb9bac8fb2f85026b35b0108ec7</Anchor>
                </Node>
                <Node>
                 <Name>requestValueFromObject:error:</Name>
-                <Path>protocol_t_r_c_value_transformer-p.html</Path>
-                <Anchor>aeef84919027ad5dff6afd22502aeb0a1</Anchor>
+                <Path>protocol_t_r_c_value_transformer_01-p.html</Path>
+                <Anchor>a8cb78de6ebe0d69617d5d033ecb40ff7</Anchor>
                </Node>
                <Node>
                 <Name>externalTypes</Name>
-                <Path>protocol_t_r_c_value_transformer-p.html</Path>
-                <Anchor>a55f225768f4476e6122f660c5ea15734</Anchor>
+                <Path>protocol_t_r_c_value_transformer_01-p.html</Path>
+                <Anchor>a59dc460b155383b9ac04a4201c04a025</Anchor>
                </Node>
               </Subnodes>
              </Node>
@@ -1896,14 +3004,32 @@
            <Node>
             <Name>TRCValueTransformerNumber.h</Name>
             <Path>_t_r_c_value_transformer_number_8h.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>TRCValueTransformerNumber</Name>
+              <Path>interface_t_r_c_value_transformer_number.html</Path>
+             </Node>
+            </Subnodes>
            </Node>
            <Node>
             <Name>TRCValueTransformerString.h</Name>
             <Path>_t_r_c_value_transformer_string_8h.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>TRCValueTransformerString</Name>
+              <Path>interface_t_r_c_value_transformer_string.html</Path>
+             </Node>
+            </Subnodes>
            </Node>
            <Node>
             <Name>TRCValueTransformerUrl.h</Name>
             <Path>_t_r_c_value_transformer_url_8h.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>TRCValueTransformerUrl</Name>
+              <Path>interface_t_r_c_value_transformer_url.html</Path>
+             </Node>
+            </Subnodes>
            </Node>
            <Node>
             <Name>TyphoonRestClient.h</Name>
@@ -1944,24 +3070,44 @@
                 <Anchor>a8e5d753974a82c9d56f73bc0fc1df4ce</Anchor>
                </Node>
                <Node>
-                <Name>validationOptions</Name>
+                <Name>options</Name>
                 <Path>interface_typhoon_rest_client.html</Path>
-                <Anchor>a3d9b3eb367f611ed2375c8a65c40ab25</Anchor>
+                <Anchor>a629d6eb0a904275d602e9d1db8ac590e</Anchor>
+               </Node>
+               <Node>
+                <Name>querySerializationOptions</Name>
+                <Path>interface_typhoon_rest_client.html</Path>
+                <Anchor>a448470457f425706df36573ccfc2ec3e</Anchor>
+               </Node>
+               <Node>
+                <Name>callbackQueue</Name>
+                <Path>interface_typhoon_rest_client.html</Path>
+                <Anchor>a85d2a12699d86c804a2c980a1ac606aa</Anchor>
+               </Node>
+               <Node>
+                <Name>workQueue</Name>
+                <Path>interface_typhoon_rest_client.html</Path>
+                <Anchor>aee20909d2f5f0a4227d985d72f72fca3</Anchor>
                </Node>
                <Node>
                 <Name>sendRequest:completion:</Name>
                 <Path>interface_typhoon_rest_client.html</Path>
-                <Anchor>adf3bca490c3b1cc5388188bcdb1698e2</Anchor>
+                <Anchor>a0dc83d88a9fb7cbfb73610e683fceb72</Anchor>
                </Node>
                <Node>
                 <Name>registerValueTransformer:forTag:</Name>
                 <Path>interface_typhoon_rest_client.html</Path>
-                <Anchor>a53fb3aa43f666ed29c2c996f04c90653</Anchor>
+                <Anchor>a4ed973c96276f7c1ffe9fe83fee5be65</Anchor>
                </Node>
                <Node>
                 <Name>registerObjectMapper:forTag:</Name>
                 <Path>interface_typhoon_rest_client.html</Path>
-                <Anchor>a7c1f4b8b2365c583b7fa9f674b1b4958</Anchor>
+                <Anchor>ab91dcd6a309b3933444fa6b563115e0d</Anchor>
+               </Node>
+               <Node>
+                <Name>registerPreProcessor:</Name>
+                <Path>interface_typhoon_rest_client.html</Path>
+                <Anchor>ac4c54f7ab61047e97f9719d884981a22</Anchor>
                </Node>
                <Node>
                 <Name>registerPostProcessor:</Name>
@@ -1971,32 +3117,42 @@
                <Node>
                 <Name>registerDefaultRequestSerialization:forBodyObjectWithClass:</Name>
                 <Path>interface_typhoon_rest_client.html</Path>
-                <Anchor>a21d5c18aaa9c1060b31e3de33dbee494</Anchor>
+                <Anchor>af7ee2d9ec19b1c02756264271c6323c1</Anchor>
+               </Node>
+               <Node>
+                <Name>convertThenValidateRequestObject:usingSchemaTag:options:error:</Name>
+                <Path>interface_typhoon_rest_client.html</Path>
+                <Anchor>af3f07ef2f91439fbd86ba72d153c671b</Anchor>
+               </Node>
+               <Node>
+                <Name>validateThenConvertResponseObject:usingSchemaTag:options:error:</Name>
+                <Path>interface_typhoon_rest_client.html</Path>
+                <Anchor>ac7babf848aab7431e97d6d42790ebedb</Anchor>
                </Node>
                <Node>
                 <Name>registerRequestSerializer:forName:</Name>
                 <Path>interface_typhoon_rest_client.html</Path>
-                <Anchor>ae1aea80c836f4112396fcb0a2307d382</Anchor>
+                <Anchor>a32f00e6041c8c765ab2a0dd54d2f9e9f</Anchor>
                </Node>
                <Node>
                 <Name>registerResponseSerializer:forName:</Name>
                 <Path>interface_typhoon_rest_client.html</Path>
-                <Anchor>a4f983e83b61fef7dea0befea0a0e0175</Anchor>
+                <Anchor>a86b8a6662a65600ac6ab5739924159b5</Anchor>
                </Node>
                <Node>
                 <Name>registerSchemeFormat:forFileExtension:</Name>
                 <Path>interface_typhoon_rest_client.html</Path>
-                <Anchor>a9ed339e2518c12f4376c31f13d2c77ea</Anchor>
+                <Anchor>ae2239cfe912805aabd38f4f28f0df1b2</Anchor>
                </Node>
                <Node>
                 <Name>registerValidationErrorPrinter:forFormatWithFileExtension:</Name>
                 <Path>interface_typhoon_rest_client.html</Path>
-                <Anchor>a6c9dc5924bd2a5c25ccdc54503c887fa</Anchor>
+                <Anchor>a1f6f490e87782dbe531057c05349145a</Anchor>
                </Node>
                <Node>
                 <Name>registerTRCValueTransformerType:withValueClass:</Name>
                 <Path>interface_typhoon_rest_client.html</Path>
-                <Anchor>a5f932db04e479dc304785d9a3085e11d</Anchor>
+                <Anchor>a67bad34aa2b1034301a28752d199fdc1</Anchor>
                </Node>
               </Subnodes>
              </Node>
@@ -2007,34 +3163,50 @@
                <Node>
                 <Name>registerRequestSerializer:forName:</Name>
                 <Path>category_typhoon_rest_client_07_infrastructure_08.html</Path>
-                <Anchor>ae1aea80c836f4112396fcb0a2307d382</Anchor>
+                <Anchor>a32f00e6041c8c765ab2a0dd54d2f9e9f</Anchor>
                </Node>
                <Node>
                 <Name>registerResponseSerializer:forName:</Name>
                 <Path>category_typhoon_rest_client_07_infrastructure_08.html</Path>
-                <Anchor>a4f983e83b61fef7dea0befea0a0e0175</Anchor>
+                <Anchor>a86b8a6662a65600ac6ab5739924159b5</Anchor>
                </Node>
                <Node>
                 <Name>registerSchemeFormat:forFileExtension:</Name>
                 <Path>category_typhoon_rest_client_07_infrastructure_08.html</Path>
-                <Anchor>a9ed339e2518c12f4376c31f13d2c77ea</Anchor>
+                <Anchor>ae2239cfe912805aabd38f4f28f0df1b2</Anchor>
                </Node>
                <Node>
                 <Name>registerValidationErrorPrinter:forFormatWithFileExtension:</Name>
                 <Path>category_typhoon_rest_client_07_infrastructure_08.html</Path>
-                <Anchor>a6c9dc5924bd2a5c25ccdc54503c887fa</Anchor>
+                <Anchor>a1f6f490e87782dbe531057c05349145a</Anchor>
                </Node>
                <Node>
                 <Name>registerTRCValueTransformerType:withValueClass:</Name>
                 <Path>category_typhoon_rest_client_07_infrastructure_08.html</Path>
-                <Anchor>a5f932db04e479dc304785d9a3085e11d</Anchor>
+                <Anchor>a67bad34aa2b1034301a28752d199fdc1</Anchor>
+               </Node>
+              </Subnodes>
+             </Node>
+             <Node>
+              <Name>TyphoonRestClient(Extensions)</Name>
+              <Path>category_typhoon_rest_client_07_extensions_08.html</Path>
+              <Subnodes>
+               <Node>
+                <Name>convertThenValidateRequestObject:usingSchemaTag:options:error:</Name>
+                <Path>category_typhoon_rest_client_07_extensions_08.html</Path>
+                <Anchor>af3f07ef2f91439fbd86ba72d153c671b</Anchor>
+               </Node>
+               <Node>
+                <Name>validateThenConvertResponseObject:usingSchemaTag:options:error:</Name>
+                <Path>category_typhoon_rest_client_07_extensions_08.html</Path>
+                <Anchor>ac7babf848aab7431e97d6d42790ebedb</Anchor>
                </Node>
               </Subnodes>
              </Node>
              <Node>
               <Name>NS_OPTIONS</Name>
               <Path>_typhoon_rest_client_8h.html</Path>
-              <Anchor>ae31f237fbcdbd7eadfd7a827c8d93acd</Anchor>
+              <Anchor>ae8d8e101a6f0d906f0a14b6ecb27cdd7</Anchor>
              </Node>
              <Node>
               <Name>TyphoonRestClientReachabilityDidChangeNotification</Name>
@@ -2076,6 +3248,11 @@
               <Name>TyphoonRestClientErrorCodeResponseSerialization</Name>
               <Path>_typhoon_rest_client_errors_8h.html</Path>
               <Anchor>a26d472cf663bbc93584404ad3d2b6265</Anchor>
+             </Node>
+             <Node>
+              <Name>TyphoonRestClientErrorCodeBadResponse</Name>
+              <Path>_typhoon_rest_client_errors_8h.html</Path>
+              <Anchor>a37664dae626f45af86696e54621033da</Anchor>
              </Node>
              <Node>
               <Name>TyphoonRestClientErrorCodeBadResponseCode</Name>

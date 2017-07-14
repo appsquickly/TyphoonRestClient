@@ -1,5 +1,7 @@
 var searchData=
 [
+  ['trcnetworkingreachabilitydidchangenotification',['TRCNetworkingReachabilityDidChangeNotification',['../_t_r_c_network_reachability_manager_8h.html#a70c5bae97f5e52d636baf32bab44d77c',1,'TRCNetworkReachabilityManager.h']]],
+  ['trcnetworkingreachabilitynotificationstatusitem',['TRCNetworkingReachabilityNotificationStatusItem',['../_t_r_c_network_reachability_manager_8h.html#a0ecdc6280c974dd23c81d6aa341b32a0',1,'TRCNetworkReachabilityManager.h']]],
   ['trcrequestmethoddelete',['TRCRequestMethodDelete',['../_t_r_c_request_8h.html#ae4cfbd5281886ae5ae3341fb8381ecb5',1,'TRCRequest.h']]],
   ['trcrequestmethodget',['TRCRequestMethodGet',['../_t_r_c_request_8h.html#a7432f7fe1af81be169bef1074dcf155d',1,'TRCRequest.h']]],
   ['trcrequestmethodhead',['TRCRequestMethodHead',['../_t_r_c_request_8h.html#a32f750989f498ffcf6fcf4bbdba25f83',1,'TRCRequest.h']]],
@@ -11,12 +13,14 @@ var searchData=
   ['trcserializationplist',['TRCSerializationPlist',['../_t_r_c_request_8h.html#a6ff7991045c6d1e91dbfb1ca3e089139',1,'TRCRequest.h']]],
   ['trcserializationrequesthttp',['TRCSerializationRequestHttp',['../_t_r_c_request_8h.html#a273d8668ae0368f1f5dbed6697b8f342',1,'TRCRequest.h']]],
   ['trcserializationrequestinputstream',['TRCSerializationRequestInputStream',['../_t_r_c_request_8h.html#abf9fd0b7fa7e071928c531e759631fd8',1,'TRCRequest.h']]],
+  ['trcserializationrequestmultipart',['TRCSerializationRequestMultipart',['../_t_r_c_request_8h.html#a72f3cd79fdbccfcbc4975773f0501334',1,'TRCRequest.h']]],
   ['trcserializationresponseimage',['TRCSerializationResponseImage',['../_t_r_c_request_8h.html#ae18f7e18a930f3452b8851dcf46ef078',1,'TRCRequest.h']]],
   ['trcserializationstring',['TRCSerializationString',['../_t_r_c_request_8h.html#afa8ff4505ccc4151c0b9ca8332b271a9',1,'TRCRequest.h']]],
   ['trcvaluetransformertypedata',['TRCValueTransformerTypeData',['../_t_r_c_serializer_plist_8h.html#a22f2e3aa8c87ebda436d36546c72c6bc',1,'TRCSerializerPlist.h']]],
   ['trcvaluetransformertypedate',['TRCValueTransformerTypeDate',['../_t_r_c_serializer_plist_8h.html#a5cc70e4611fb9e2bc177dca8fef25a12',1,'TRCSerializerPlist.h']]],
   ['trcvaluetransformertypenumber',['TRCValueTransformerTypeNumber',['../_t_r_c_value_transformer_8h.html#aa808ea99a8fa1badf4f9712b7ea04bfb',1,'TRCValueTransformer.h']]],
   ['trcvaluetransformertypestring',['TRCValueTransformerTypeString',['../_t_r_c_value_transformer_8h.html#af348808783a3d1a7c7ae2b8050365c86',1,'TRCValueTransformer.h']]],
+  ['typhoonrestclienterrorcodebadresponse',['TyphoonRestClientErrorCodeBadResponse',['../_typhoon_rest_client_errors_8h.html#a37664dae626f45af86696e54621033da',1,'TyphoonRestClientErrors.h']]],
   ['typhoonrestclienterrorcodebadresponsecode',['TyphoonRestClientErrorCodeBadResponseCode',['../_typhoon_rest_client_errors_8h.html#a3701b6bac696a49566a9f5abef53cee3',1,'TyphoonRestClientErrors.h']]],
   ['typhoonrestclienterrorcodebadresponsemime',['TyphoonRestClientErrorCodeBadResponseMime',['../_typhoon_rest_client_errors_8h.html#ac1aeff4ec1448f9e6850483d3015cb14',1,'TyphoonRestClientErrors.h']]],
   ['typhoonrestclienterrorcodeconnectionerror',['TyphoonRestClientErrorCodeConnectionError',['../_typhoon_rest_client_errors_8h.html#aa47347e3e1bc4fc432a45e4fe6471a76',1,'TyphoonRestClientErrors.h']]],

@@ -1,9 +1,7 @@
 var searchData=
 [
-  ['path',['path',['../protocol_t_r_c_connection_request_creation_options-p.html#ac77ead3b0e05b7e3d6ffed5adb0cc42f',1,'TRCConnectionRequestCreationOptions-p::path()'],['../protocol_t_r_c_request-p.html#a81dd60b47ee31e7131046bdc4dab7875',1,'TRCRequest-p::path()']]],
-  ['pathparameters',['pathParameters',['../protocol_t_r_c_connection_request_creation_options-p.html#ace4325ee1288d31da2baee657191d27d',1,'TRCConnectionRequestCreationOptions-p::pathParameters()'],['../protocol_t_r_c_request-p.html#aa4e419f84556cc0d41dae0602c8a0f80',1,'TRCRequest-p::pathParameters()']]],
-  ['pathparametersvalidationschemaname',['pathParametersValidationSchemaName',['../protocol_t_r_c_request-p.html#aa37c7187d908fc06114c27d66648ac85',1,'TRCRequest-p']]],
-  ['pause',['pause',['../protocol_t_r_c_progress_handler-p.html#ad3cc9fb2089a41e7e1238c659904d985',1,'TRCProgressHandler-p']]],
-  ['postprocesserror_3aforrequest_3a',['postProcessError:forRequest:',['../protocol_t_r_c_post_processor-p.html#a92c13c5a99be31419ada9c2c8298580d',1,'TRCPostProcessor-p']]],
-  ['postprocessresponseobject_3aforrequest_3apostprocesserror_3a',['postProcessResponseObject:forRequest:postProcessError:',['../protocol_t_r_c_post_processor-p.html#aa482b3b50c11150d0da90f309700deba',1,'TRCPostProcessor-p']]]
+  ['networkreachabilitystatus',['networkReachabilityStatus',['../interface_t_r_c_network_reachability_manager.html#a24cf57e90ba91a1bf847f396e6523766',1,'TRCNetworkReachabilityManager']]],
+  ['ns_5favailable',['NS_AVAILABLE',['../interface_t_r_c_connection_logger.html#a90efaa5bc0d15f1f34ae8d7d1b1f6df0',1,'TRCConnectionLogger']]],
+  ['ns_5fenum',['NS_ENUM',['../_t_r_c_connection_8h.html#a871437dcfa394edb17efe9bcf0ab8827',1,'NS_ENUM(NSInteger, TRCProgressHandlerState):&#160;TRCConnection.h'],['../_t_r_c_network_reachability_manager_8h.html#aab95b4c658b6824757aa427a0906b666',1,'NS_ENUM(NSInteger, TRCNetworkReachabilityStatus):&#160;TRCNetworkReachabilityManager.h']]],
+  ['ns_5foptions',['NS_OPTIONS',['../_t_r_c_serializer_http_query_8h.html#a49657751b4009df81d379ac084f5a1c1',1,'NS_OPTIONS(NSInteger, TRCSerializerHttpQueryOptions):&#160;TRCSerializerHttpQuery.h'],['../_t_r_c_post_processor_8h.html#a8747948d0bee5cdd6f0406be803b39be',1,'NS_OPTIONS(NSInteger, TRCQueueType):&#160;TRCPostProcessor.h'],['../_t_r_c_request_8h.html#adfbd8096d1c5892981a6c3f663ec1a78',1,'NS_OPTIONS(NSInteger, TRCTransformationOptions):&#160;TRCRequest.h'],['../_typhoon_rest_client_8h.html#ae8d8e101a6f0d906f0a14b6ecb27cdd7',1,'NS_OPTIONS(NSInteger, TRCOptions):&#160;TyphoonRestClient.h']]]
 ];

@@ -7,7 +7,7 @@
       <Type>tdef</Type>
     </TokenIdentifier>
     <Path>_t_r_c_connection_8h.html</Path>
-    <Anchor>a5c24abcb8a293a3f37a3a876f3361712</Anchor>
+    <Anchor>a334d8a55bf7f43e6c6eb986b61bfb894</Anchor>
     <DeclaredIn>TRCConnection.h</DeclaredIn>
   </Token>
   <Token>
@@ -17,7 +17,7 @@
       <Type>tdef</Type>
     </TokenIdentifier>
     <Path>_t_r_c_connection_8h.html</Path>
-    <Anchor>a54107441a361e0dba8e06df1eb0b9b8d</Anchor>
+    <Anchor>a5bb4ec6bd77e2ad8808ae1ccbb9f83a7</Anchor>
     <DeclaredIn>TRCConnection.h</DeclaredIn>
   </Token>
   <Token>
@@ -27,7 +27,17 @@
       <Type>tdef</Type>
     </TokenIdentifier>
     <Path>_t_r_c_connection_8h.html</Path>
-    <Anchor>afa1d822d85388659d87f0ef61214f8f8</Anchor>
+    <Anchor>a711a53629927f35f5b4df4b7c032b2af</Anchor>
+    <DeclaredIn>TRCConnection.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>NS_ENUM</Name>
+      <APILanguage>c</APILanguage>
+      <Type>func</Type>
+    </TokenIdentifier>
+    <Path>_t_r_c_connection_8h.html</Path>
+    <Anchor>a871437dcfa394edb17efe9bcf0ab8827</Anchor>
     <DeclaredIn>TRCConnection.h</DeclaredIn>
   </Token>
   <Token>
@@ -81,7 +91,7 @@
       <Type>tdef</Type>
     </TokenIdentifier>
     <Path>_t_r_c_connection_stub_8h.html</Path>
-    <Anchor>ace28ad1aa830530114f46dba720975ce</Anchor>
+    <Anchor>aa5ddd9fb886fdd01b1d72dc461ed0a26</Anchor>
     <DeclaredIn>TRCConnectionStub.h</DeclaredIn>
   </Token>
   <Token>
@@ -94,6 +104,69 @@
     <Anchor>ad9b4161f6f2bb8aed563420c3d4dafa0</Anchor>
     <Abstract>Shorthand to load text file from NSBundle using it&amp;#39;s name. </Abstract>
     <DeclaredIn>TRCConnectionStub.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>TRCQueryStringPairsFromDictionary</Name>
+      <APILanguage>c</APILanguage>
+      <Type>func</Type>
+    </TokenIdentifier>
+    <Path>_t_r_c_http_query_composer_8h.html</Path>
+    <Anchor>a4f29e1a7ef998a613291f4c20aedfe27</Anchor>
+    <DeclaredIn>TRCHttpQueryComposer.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>NS_ENUM</Name>
+      <APILanguage>c</APILanguage>
+      <Type>func</Type>
+    </TokenIdentifier>
+    <Path>_t_r_c_network_reachability_manager_8h.html</Path>
+    <Anchor>aab95b4c658b6824757aa427a0906b666</Anchor>
+    <DeclaredIn>TRCNetworkReachabilityManager.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>TRCStringFromNetworkReachabilityStatus</Name>
+      <APILanguage>c</APILanguage>
+      <Type>func</Type>
+    </TokenIdentifier>
+    <Path>_t_r_c_network_reachability_manager_8h.html</Path>
+    <Anchor>a32354350b0478df8e98798b9a565f434</Anchor>
+    <Abstract>Returns a localized string representation of an TRCNetworkReachabilityStatus value. </Abstract>
+    <DeclaredIn>TRCNetworkReachabilityManager.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>TRCNetworkingReachabilityDidChangeNotification</Name>
+      <APILanguage>c</APILanguage>
+      <Type>data</Type>
+    </TokenIdentifier>
+    <Path>_t_r_c_network_reachability_manager_8h.html</Path>
+    <Anchor>a70c5bae97f5e52d636baf32bab44d77c</Anchor>
+    <Abstract>Posted when network reachability changes. </Abstract>
+    <DeclaredIn>TRCNetworkReachabilityManager.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>TRCNetworkingReachabilityNotificationStatusItem</Name>
+      <APILanguage>c</APILanguage>
+      <Type>data</Type>
+    </TokenIdentifier>
+    <Path>_t_r_c_network_reachability_manager_8h.html</Path>
+    <Anchor>a0ecdc6280c974dd23c81d6aa341b32a0</Anchor>
+    <DeclaredIn>TRCNetworkReachabilityManager.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>NS_OPTIONS</Name>
+      <APILanguage>c</APILanguage>
+      <Type>func</Type>
+    </TokenIdentifier>
+    <Path>_t_r_c_post_processor_8h.html</Path>
+    <Anchor>a8747948d0bee5cdd6f0406be803b39be</Anchor>
+    <Abstract>Specifies operation queue type. </Abstract>
+    <DeclaredIn>TRCPostProcessor.h</DeclaredIn>
   </Token>
   <Token>
     <TokenIdentifier>
@@ -136,6 +209,16 @@
     <Path>_t_r_c_request_8h.html</Path>
     <Anchor>a26e86d9799b2cc5a2ce4f0830f1900a3</Anchor>
     <Abstract>TRCSerialization is registered name of request/response serializer. </Abstract>
+    <DeclaredIn>TRCRequest.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>NS_OPTIONS</Name>
+      <APILanguage>c</APILanguage>
+      <Type>func</Type>
+    </TokenIdentifier>
+    <Path>_t_r_c_request_8h.html</Path>
+    <Anchor>adfbd8096d1c5892981a6c3f663ec1a78</Anchor>
     <DeclaredIn>TRCRequest.h</DeclaredIn>
   </Token>
   <Token>
@@ -272,6 +355,17 @@
   </Token>
   <Token>
     <TokenIdentifier>
+      <Name>TRCSerializationRequestMultipart</Name>
+      <APILanguage>c</APILanguage>
+      <Type>data</Type>
+    </TokenIdentifier>
+    <Path>_t_r_c_request_8h.html</Path>
+    <Anchor>a72f3cd79fdbccfcbc4975773f0501334</Anchor>
+    <Abstract>Registered for TRCSerializerMultipart. </Abstract>
+    <DeclaredIn>TRCRequest.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
       <Name>TRCSerializationResponseImage</Name>
       <APILanguage>c</APILanguage>
       <Type>data</Type>
@@ -280,6 +374,16 @@
     <Anchor>ae18f7e18a930f3452b8851dcf46ef078</Anchor>
     <Abstract>Registered for TRCSerializerImage. </Abstract>
     <DeclaredIn>TRCRequest.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>NS_OPTIONS</Name>
+      <APILanguage>c</APILanguage>
+      <Type>func</Type>
+    </TokenIdentifier>
+    <Path>_t_r_c_serializer_http_query_8h.html</Path>
+    <Anchor>a49657751b4009df81d379ac084f5a1c1</Anchor>
+    <DeclaredIn>TRCSerializerHttpQuery.h</DeclaredIn>
   </Token>
   <Token>
     <TokenIdentifier>
@@ -343,8 +447,8 @@
       <Type>func</Type>
     </TokenIdentifier>
     <Path>_typhoon_rest_client_8h.html</Path>
-    <Anchor>ae31f237fbcdbd7eadfd7a827c8d93acd</Anchor>
-    <Abstract>TRCValidationOptions is special options to validation and conversion rules </Abstract>
+    <Anchor>ae8d8e101a6f0d906f0a14b6ecb27cdd7</Anchor>
+    <Abstract>TRCOptions is special options to validation and conversion rules </Abstract>
     <DeclaredIn>TyphoonRestClient.h</DeclaredIn>
   </Token>
   <Token>
@@ -416,6 +520,16 @@
     </TokenIdentifier>
     <Path>_typhoon_rest_client_errors_8h.html</Path>
     <Anchor>a26d472cf663bbc93584404ad3d2b6265</Anchor>
+    <DeclaredIn>TyphoonRestClientErrors.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>TyphoonRestClientErrorCodeBadResponse</Name>
+      <APILanguage>c</APILanguage>
+      <Type>data</Type>
+    </TokenIdentifier>
+    <Path>_typhoon_rest_client_errors_8h.html</Path>
+    <Anchor>a37664dae626f45af86696e54621033da</Anchor>
     <DeclaredIn>TyphoonRestClientErrors.h</DeclaredIn>
   </Token>
   <Token>
@@ -517,7 +631,7 @@
       <Scope>TRCConnection-p</Scope>
     </TokenIdentifier>
     <Path>protocol_t_r_c_connection-p.html</Path>
-    <Anchor>af825ae65f5137ff497df0acc1492ea06</Anchor>
+    <Anchor>a8133a2a6d0ca3dabe4e0568cd8a53a15</Anchor>
     <Abstract>Creates NSURLRequest using information from TRCRequest. </Abstract>
     <DeclaredIn>TRCConnection.h</DeclaredIn>
   </Token>
@@ -529,122 +643,7 @@
       <Scope>TRCConnection-p</Scope>
     </TokenIdentifier>
     <Path>protocol_t_r_c_connection-p.html</Path>
-    <Anchor>aa8070dbcd4e8c682ada6338ef689532d</Anchor>
-    <Abstract>Sends NSURLRequest via network, then handles response using options.responseBodySerialization or writ...</Abstract>
-    <DeclaredIn>TRCConnection.h</DeclaredIn>
-  </Token>
-  <Token>
-    <TokenIdentifier>
-      <Name>reachabilityState</Name>
-      <APILanguage>occ</APILanguage>
-      <Type>intfm</Type>
-      <Scope>TRCConnection-p</Scope>
-    </TokenIdentifier>
-    <Path>protocol_t_r_c_connection-p.html</Path>
-    <Anchor>a1b1992638453684be4de02cf3ef04dd8</Anchor>
-    <Abstract>Returns current reachability state if implemented. </Abstract>
-    <DeclaredIn>TRCConnection.h</DeclaredIn>
-  </Token>
-  <Token>
-    <TokenIdentifier>
-      <Name>setReachabilityDelegate:</Name>
-      <APILanguage>occ</APILanguage>
-      <Type>intfm</Type>
-      <Scope>TRCConnection-p</Scope>
-    </TokenIdentifier>
-    <Path>protocol_t_r_c_connection-p.html</Path>
-    <Anchor>a1280faddbc900f1ca66c2c8cd4d5e346</Anchor>
-    <Abstract>Sets TRCConnectionReachabilityDelegate, which used to get notified about reachabilityState changes...</Abstract>
-    <DeclaredIn>TRCConnection.h</DeclaredIn>
-  </Token>
-  <Token>
-    <TokenIdentifier>
-      <Name>TRCConnectionAFNetworking</Name>
-      <APILanguage>c</APILanguage>
-      <Type>cl</Type>
-      <Scope>TRCConnectionAFNetworking</Scope>
-    </TokenIdentifier>
-    <Path>interface_t_r_c_connection_a_f_networking.html</Path>
-    <Abstract>TRCConnectionAFNetworking is default implementation of &amp;#39;real&amp;#39; network connection. ...</Abstract>
-    <DeclaredIn>TRCConnectionAFNetworking.h</DeclaredIn>
-  </Token>
-  <Token>
-    <TokenIdentifier>
-      <Name>reachabilityManager</Name>
-      <APILanguage>occ</APILanguage>
-      <Type>instp</Type>
-      <Scope>TRCConnectionAFNetworking</Scope>
-    </TokenIdentifier>
-    <Path>interface_t_r_c_connection_a_f_networking.html</Path>
-    <Anchor>abd731d364391c6f8ff71b6082035a1be</Anchor>
-    <Abstract>Current reachabilityManager, we can be used to get current networkReachabilityStatus, isReachable, etc... </Abstract>
-  </Token>
-  <Token>
-    <TokenIdentifier>
-      <Name>baseUrl</Name>
-      <APILanguage>occ</APILanguage>
-      <Type>instp</Type>
-      <Scope>TRCConnectionAFNetworking</Scope>
-    </TokenIdentifier>
-    <Path>interface_t_r_c_connection_a_f_networking.html</Path>
-    <Anchor>a1d45d04463e1ed1c190a96208f54602b</Anchor>
-  </Token>
-  <Token>
-    <TokenIdentifier>
-      <Name>initWithBaseUrl:</Name>
-      <APILanguage>occ</APILanguage>
-      <Type>instm</Type>
-      <Scope>TRCConnectionAFNetworking</Scope>
-    </TokenIdentifier>
-    <Path>interface_t_r_c_connection_a_f_networking.html</Path>
-    <Anchor>a37bb276738cbd912c68cff05dac5c404</Anchor>
-    <DeclaredIn>TRCConnectionAFNetworking.h</DeclaredIn>
-  </Token>
-  <Token>
-    <TokenIdentifier>
-      <Name>startReachabilityMonitoring</Name>
-      <APILanguage>occ</APILanguage>
-      <Type>instm</Type>
-      <Scope>TRCConnectionAFNetworking</Scope>
-    </TokenIdentifier>
-    <Path>interface_t_r_c_connection_a_f_networking.html</Path>
-    <Anchor>adc4dffa345c7ebc55ec8e386108651ec</Anchor>
-    <Abstract>Invokes startMonitoring on reachabilityManager </Abstract>
-    <DeclaredIn>TRCConnectionAFNetworking.h</DeclaredIn>
-  </Token>
-  <Token>
-    <TokenIdentifier>
-      <Name>stopReachabilityMonitoring</Name>
-      <APILanguage>occ</APILanguage>
-      <Type>instm</Type>
-      <Scope>TRCConnectionAFNetworking</Scope>
-    </TokenIdentifier>
-    <Path>interface_t_r_c_connection_a_f_networking.html</Path>
-    <Anchor>a8d97166d68a0c481ab94e5e1d59dee8a</Anchor>
-    <Abstract>Invokes stopMonitoring on reachabilityManager </Abstract>
-    <DeclaredIn>TRCConnectionAFNetworking.h</DeclaredIn>
-  </Token>
-  <Token>
-    <TokenIdentifier>
-      <Name>requestWithOptions:error:</Name>
-      <APILanguage>occ</APILanguage>
-      <Type>intfm</Type>
-      <Scope>TRCConnection-p</Scope>
-    </TokenIdentifier>
-    <Path>protocol_t_r_c_connection-p.html</Path>
-    <Anchor>af825ae65f5137ff497df0acc1492ea06</Anchor>
-    <Abstract>Creates NSURLRequest using information from TRCRequest. </Abstract>
-    <DeclaredIn>TRCConnection.h</DeclaredIn>
-  </Token>
-  <Token>
-    <TokenIdentifier>
-      <Name>sendRequest:withOptions:completion:</Name>
-      <APILanguage>occ</APILanguage>
-      <Type>intfm</Type>
-      <Scope>TRCConnection-p</Scope>
-    </TokenIdentifier>
-    <Path>protocol_t_r_c_connection-p.html</Path>
-    <Anchor>aa8070dbcd4e8c682ada6338ef689532d</Anchor>
+    <Anchor>aaee85adbcb332baf45b5045c357c2753</Anchor>
     <Abstract>Sends NSURLRequest via network, then handles response using options.responseBodySerialization or writ...</Abstract>
     <DeclaredIn>TRCConnection.h</DeclaredIn>
   </Token>
@@ -714,13 +713,55 @@
   </Token>
   <Token>
     <TokenIdentifier>
+      <Name>shouldLogInputStreamContent</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instp</Type>
+      <Scope>TRCConnectionLogger</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_connection_logger.html</Path>
+    <Anchor>aac6a4348136fcc2625e2aa1ef5932246</Anchor>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>connection</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instp</Type>
+      <Scope>TRCConnectionProxy</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_connection_proxy.html</Path>
+    <Anchor>a83ac3ebfbddc0bc1b14c47773d3f7c63</Anchor>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>NS_AVAILABLE</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instm</Type>
+      <Scope>TRCConnectionLogger</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_connection_logger.html</Path>
+    <Anchor>a90efaa5bc0d15f1f34ae8d7d1b1f6df0</Anchor>
+    <DeclaredIn>TRCConnectionLogger.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>initWithConnection:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instm</Type>
+      <Scope>TRCConnectionProxy</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_connection_proxy.html</Path>
+    <Anchor>aa476aedccd4ef5fbe9036d34954e88ac</Anchor>
+    <DeclaredIn>TRCConnectionProxy.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
       <Name>requestWithOptions:error:</Name>
       <APILanguage>occ</APILanguage>
       <Type>intfm</Type>
       <Scope>TRCConnection-p</Scope>
     </TokenIdentifier>
     <Path>protocol_t_r_c_connection-p.html</Path>
-    <Anchor>af825ae65f5137ff497df0acc1492ea06</Anchor>
+    <Anchor>a8133a2a6d0ca3dabe4e0568cd8a53a15</Anchor>
     <Abstract>Creates NSURLRequest using information from TRCRequest. </Abstract>
     <DeclaredIn>TRCConnection.h</DeclaredIn>
   </Token>
@@ -732,7 +773,7 @@
       <Scope>TRCConnection-p</Scope>
     </TokenIdentifier>
     <Path>protocol_t_r_c_connection-p.html</Path>
-    <Anchor>aa8070dbcd4e8c682ada6338ef689532d</Anchor>
+    <Anchor>aaee85adbcb332baf45b5045c357c2753</Anchor>
     <Abstract>Sends NSURLRequest via network, then handles response using options.responseBodySerialization or writ...</Abstract>
     <DeclaredIn>TRCConnection.h</DeclaredIn>
   </Token>
@@ -762,12 +803,302 @@
   </Token>
   <Token>
     <TokenIdentifier>
-      <Name>TRCConnectionReachabilityDelegate</Name>
+      <Name>TRCConnectionLoggerWriter </Name>
       <APILanguage>c</APILanguage>
       <Type>intf</Type>
-      <Scope>TRCConnectionReachabilityDelegate</Scope>
+      <Scope>TRCConnectionLoggerWriter </Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_connection_reachability_delegate-p.html</Path>
+    <Path>protocol_t_r_c_connection_logger_writer_01-p.html</Path>
+    <DeclaredIn>TRCConnectionLogger.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>writeLogString:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>intfm</Type>
+      <Scope>TRCConnectionLoggerWriter -p</Scope>
+    </TokenIdentifier>
+    <Path>protocol_t_r_c_connection_logger_writer_01-p.html</Path>
+    <Anchor>aae6d7fdc7d3a353f58d21b42c8b2ec78</Anchor>
+    <DeclaredIn>TRCConnectionLogger.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>TRCConnectionNSURLSession</Name>
+      <APILanguage>c</APILanguage>
+      <Type>cl</Type>
+      <Scope>TRCConnectionNSURLSession</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_connection_n_s_u_r_l_session.html</Path>
+    <DeclaredIn>TRCConnectionNSURLSession.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>session</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instp</Type>
+      <Scope>TRCConnectionNSURLSession</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_connection_n_s_u_r_l_session.html</Path>
+    <Anchor>a9088ea53b52d33ea3828ba4036d079f1</Anchor>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>reachabilityManager</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instp</Type>
+      <Scope>TRCConnectionNSURLSession</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_connection_n_s_u_r_l_session.html</Path>
+    <Anchor>a798319c23e319c763b46aa54754f0194</Anchor>
+    <Abstract>Current reachabilityManager, it can be used to get current networkReachabilityStatus, isReachable, etc... </Abstract>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>delegate</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instp</Type>
+      <Scope>TRCConnectionNSURLSession</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_connection_n_s_u_r_l_session.html</Path>
+    <Anchor>afbb916db03df33ee85f232907ff46c11</Anchor>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>baseUrl</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instp</Type>
+      <Scope>TRCConnectionNSURLSession</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_connection_n_s_u_r_l_session.html</Path>
+    <Anchor>a7da92a9d531096c9414fe40f794fa5e0</Anchor>
+    <Abstract>You may change baseUrl in runtime. </Abstract>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>init</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instm</Type>
+      <Scope>TRCConnectionNSURLSession</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_connection_n_s_u_r_l_session.html</Path>
+    <Anchor>a318ddc79caea1fbed72a447f8e46faf7</Anchor>
+    <Abstract>init and initWithBaseUrl will use [NSURLSessionConfiguration defaultSessionConfiguration] as configur...</Abstract>
+    <DeclaredIn>TRCConnectionNSURLSession.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>initWithBaseUrl:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instm</Type>
+      <Scope>TRCConnectionNSURLSession</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_connection_n_s_u_r_l_session.html</Path>
+    <Anchor>a59be341cde1140e5f4b57cd1959e296d</Anchor>
+    <DeclaredIn>TRCConnectionNSURLSession.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>initWithConfiguration:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instm</Type>
+      <Scope>TRCConnectionNSURLSession</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_connection_n_s_u_r_l_session.html</Path>
+    <Anchor>a8e5752ea22b036d4dfa82b27311b84cf</Anchor>
+    <DeclaredIn>TRCConnectionNSURLSession.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>initWithBaseUrl:configuration:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instm</Type>
+      <Scope>TRCConnectionNSURLSession</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_connection_n_s_u_r_l_session.html</Path>
+    <Anchor>a6c20b1a8b2f142f871f080fa99126f09</Anchor>
+    <DeclaredIn>TRCConnectionNSURLSession.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>startReachabilityMonitoring</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instm</Type>
+      <Scope>TRCConnectionNSURLSession</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_connection_n_s_u_r_l_session.html</Path>
+    <Anchor>ae8407d8ce6ad0ad8b36b73b0c6b83397</Anchor>
+    <Abstract>Invokes startMonitoring on reachabilityManager </Abstract>
+    <DeclaredIn>TRCConnectionNSURLSession.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>stopReachabilityMonitoring</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instm</Type>
+      <Scope>TRCConnectionNSURLSession</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_connection_n_s_u_r_l_session.html</Path>
+    <Anchor>afc501269440d8bac001c8f229a0289e5</Anchor>
+    <Abstract>Invokes stopMonitoring on reachabilityManager </Abstract>
+    <DeclaredIn>TRCConnectionNSURLSession.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>requestWithOptions:error:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>intfm</Type>
+      <Scope>TRCConnection-p</Scope>
+    </TokenIdentifier>
+    <Path>protocol_t_r_c_connection-p.html</Path>
+    <Anchor>a8133a2a6d0ca3dabe4e0568cd8a53a15</Anchor>
+    <Abstract>Creates NSURLRequest using information from TRCRequest. </Abstract>
+    <DeclaredIn>TRCConnection.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>sendRequest:withOptions:completion:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>intfm</Type>
+      <Scope>TRCConnection-p</Scope>
+    </TokenIdentifier>
+    <Path>protocol_t_r_c_connection-p.html</Path>
+    <Anchor>aaee85adbcb332baf45b5045c357c2753</Anchor>
+    <Abstract>Sends NSURLRequest via network, then handles response using options.responseBodySerialization or writ...</Abstract>
+    <DeclaredIn>TRCConnection.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>reachabilityState</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>intfm</Type>
+      <Scope>TRCConnection-p</Scope>
+    </TokenIdentifier>
+    <Path>protocol_t_r_c_connection-p.html</Path>
+    <Anchor>a1b1992638453684be4de02cf3ef04dd8</Anchor>
+    <Abstract>Returns current reachability state if implemented. </Abstract>
+    <DeclaredIn>TRCConnection.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>setReachabilityDelegate:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>intfm</Type>
+      <Scope>TRCConnection-p</Scope>
+    </TokenIdentifier>
+    <Path>protocol_t_r_c_connection-p.html</Path>
+    <Anchor>a1280faddbc900f1ca66c2c8cd4d5e346</Anchor>
+    <Abstract>Sets TRCConnectionReachabilityDelegate, which used to get notified about reachabilityState changes...</Abstract>
+    <DeclaredIn>TRCConnection.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>TRCConnectionNSURLSessionDelegate </Name>
+      <APILanguage>c</APILanguage>
+      <Type>intf</Type>
+      <Scope>TRCConnectionNSURLSessionDelegate </Scope>
+    </TokenIdentifier>
+    <Path>protocol_t_r_c_connection_n_s_u_r_l_session_delegate_01-p.html</Path>
+    <DeclaredIn>TRCConnectionNSURLSession.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>connection:context:didReceiveChallenge:completionHandler:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>intfm</Type>
+      <Scope>TRCConnectionNSURLSessionDelegate -p</Scope>
+    </TokenIdentifier>
+    <Path>protocol_t_r_c_connection_n_s_u_r_l_session_delegate_01-p.html</Path>
+    <Anchor>a7d75e930a38bd3f9b2a1c7dde387c560</Anchor>
+    <DeclaredIn>TRCConnectionNSURLSession.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>TRCConnectionProxy</Name>
+      <APILanguage>c</APILanguage>
+      <Type>cl</Type>
+      <Scope>TRCConnectionProxy</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_connection_proxy.html</Path>
+    <DeclaredIn>TRCConnectionProxy.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>connection</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instp</Type>
+      <Scope>TRCConnectionProxy</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_connection_proxy.html</Path>
+    <Anchor>a83ac3ebfbddc0bc1b14c47773d3f7c63</Anchor>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>initWithConnection:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instm</Type>
+      <Scope>TRCConnectionProxy</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_connection_proxy.html</Path>
+    <Anchor>aa476aedccd4ef5fbe9036d34954e88ac</Anchor>
+    <DeclaredIn>TRCConnectionProxy.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>requestWithOptions:error:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>intfm</Type>
+      <Scope>TRCConnection-p</Scope>
+    </TokenIdentifier>
+    <Path>protocol_t_r_c_connection-p.html</Path>
+    <Anchor>a8133a2a6d0ca3dabe4e0568cd8a53a15</Anchor>
+    <Abstract>Creates NSURLRequest using information from TRCRequest. </Abstract>
+    <DeclaredIn>TRCConnection.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>sendRequest:withOptions:completion:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>intfm</Type>
+      <Scope>TRCConnection-p</Scope>
+    </TokenIdentifier>
+    <Path>protocol_t_r_c_connection-p.html</Path>
+    <Anchor>aaee85adbcb332baf45b5045c357c2753</Anchor>
+    <Abstract>Sends NSURLRequest via network, then handles response using options.responseBodySerialization or writ...</Abstract>
+    <DeclaredIn>TRCConnection.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>reachabilityState</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>intfm</Type>
+      <Scope>TRCConnection-p</Scope>
+    </TokenIdentifier>
+    <Path>protocol_t_r_c_connection-p.html</Path>
+    <Anchor>a1b1992638453684be4de02cf3ef04dd8</Anchor>
+    <Abstract>Returns current reachability state if implemented. </Abstract>
+    <DeclaredIn>TRCConnection.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>setReachabilityDelegate:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>intfm</Type>
+      <Scope>TRCConnection-p</Scope>
+    </TokenIdentifier>
+    <Path>protocol_t_r_c_connection-p.html</Path>
+    <Anchor>a1280faddbc900f1ca66c2c8cd4d5e346</Anchor>
+    <Abstract>Sets TRCConnectionReachabilityDelegate, which used to get notified about reachabilityState changes...</Abstract>
+    <DeclaredIn>TRCConnection.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>TRCConnectionReachabilityDelegate </Name>
+      <APILanguage>c</APILanguage>
+      <Type>intf</Type>
+      <Scope>TRCConnectionReachabilityDelegate </Scope>
+    </TokenIdentifier>
+    <Path>protocol_t_r_c_connection_reachability_delegate_01-p.html</Path>
     <Abstract>Defines method that would be called when reachability state changed. </Abstract>
     <DeclaredIn>TRCConnection.h</DeclaredIn>
   </Token>
@@ -776,21 +1107,21 @@
       <Name>connection:didChangeReachabilityState:</Name>
       <APILanguage>occ</APILanguage>
       <Type>intfm</Type>
-      <Scope>TRCConnectionReachabilityDelegate-p</Scope>
+      <Scope>TRCConnectionReachabilityDelegate -p</Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_connection_reachability_delegate-p.html</Path>
-    <Anchor>aa348ea9cad69044efd39142c403721ca</Anchor>
+    <Path>protocol_t_r_c_connection_reachability_delegate_01-p.html</Path>
+    <Anchor>a2673cd21bace1fbe56a9ec0252438daa</Anchor>
     <Abstract>Called when reachability state of TRCConnection changed. </Abstract>
     <DeclaredIn>TRCConnection.h</DeclaredIn>
   </Token>
   <Token>
     <TokenIdentifier>
-      <Name>TRCConnectionRequestCreationOptions</Name>
+      <Name>TRCConnectionRequestCreationOptions </Name>
       <APILanguage>c</APILanguage>
       <Type>intf</Type>
-      <Scope>TRCConnectionRequestCreationOptions</Scope>
+      <Scope>TRCConnectionRequestCreationOptions </Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_connection_request_creation_options-p.html</Path>
+    <Path>protocol_t_r_c_connection_request_creation_options_01-p.html</Path>
     <Abstract>Information required to create NSURLResponse. </Abstract>
     <DeclaredIn>TRCConnection.h</DeclaredIn>
   </Token>
@@ -799,10 +1130,10 @@
       <Name>method</Name>
       <APILanguage>occ</APILanguage>
       <Type>intfp</Type>
-      <Scope>TRCConnectionRequestCreationOptions-p</Scope>
+      <Scope>TRCConnectionRequestCreationOptions -p</Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_connection_request_creation_options-p.html</Path>
-    <Anchor>a75efd133211544615ec6f748198a03eb</Anchor>
+    <Path>protocol_t_r_c_connection_request_creation_options_01-p.html</Path>
+    <Anchor>a97c158cd996ee7072d0079dd021a083b</Anchor>
     <Abstract>HTTP method string, like GET, POST, PUT, etc... See method (TRCRequest-p) </Abstract>
   </Token>
   <Token>
@@ -810,10 +1141,10 @@
       <Name>path</Name>
       <APILanguage>occ</APILanguage>
       <Type>intfp</Type>
-      <Scope>TRCConnectionRequestCreationOptions-p</Scope>
+      <Scope>TRCConnectionRequestCreationOptions -p</Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_connection_request_creation_options-p.html</Path>
-    <Anchor>ac77ead3b0e05b7e3d6ffed5adb0cc42f</Anchor>
+    <Path>protocol_t_r_c_connection_request_creation_options_01-p.html</Path>
+    <Anchor>a23ccb73411758688f4b06049abd252c5</Anchor>
     <Abstract>Part of url, used to compose absolute url, or absolute url itself (if starts from http:// or https://...</Abstract>
   </Token>
   <Token>
@@ -821,32 +1152,32 @@
       <Name>pathParameters</Name>
       <APILanguage>occ</APILanguage>
       <Type>intfp</Type>
-      <Scope>TRCConnectionRequestCreationOptions-p</Scope>
+      <Scope>TRCConnectionRequestCreationOptions -p</Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_connection_request_creation_options-p.html</Path>
-    <Anchor>ace4325ee1288d31da2baee657191d27d</Anchor>
-    <Abstract>Parameters used to compose absolute url. See pathParameters (TRCRequest-p) </Abstract>
+    <Path>protocol_t_r_c_connection_request_creation_options_01-p.html</Path>
+    <Anchor>a2f42d44d3408bcd30172c093a6500c84</Anchor>
+    <Abstract>Parameters used to compose absolute url. See TRCRequest.pathParameters </Abstract>
   </Token>
   <Token>
     <TokenIdentifier>
       <Name>body</Name>
       <APILanguage>occ</APILanguage>
       <Type>intfp</Type>
-      <Scope>TRCConnectionRequestCreationOptions-p</Scope>
+      <Scope>TRCConnectionRequestCreationOptions -p</Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_connection_request_creation_options-p.html</Path>
-    <Anchor>a4f1c36db2b3b0580cbf98d9c6b83835a</Anchor>
-    <Abstract>Request body object. See requestBody (TRCRequest-p) </Abstract>
+    <Path>protocol_t_r_c_connection_request_creation_options_01-p.html</Path>
+    <Anchor>aed829cb6bb83efdd69fde5f8593c3878</Anchor>
+    <Abstract>Request body object. See TRCRequest.requestBody </Abstract>
   </Token>
   <Token>
     <TokenIdentifier>
       <Name>serialization</Name>
       <APILanguage>occ</APILanguage>
       <Type>intfp</Type>
-      <Scope>TRCConnectionRequestCreationOptions-p</Scope>
+      <Scope>TRCConnectionRequestCreationOptions -p</Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_connection_request_creation_options-p.html</Path>
-    <Anchor>a28cd826d03977ccc10c42c716e0bbaf4</Anchor>
+    <Path>protocol_t_r_c_connection_request_creation_options_01-p.html</Path>
+    <Anchor>a423887a771863357154ce18d0043294e</Anchor>
     <Abstract>Serialization object, to transform body object into NSData. </Abstract>
   </Token>
   <Token>
@@ -854,31 +1185,52 @@
       <Name>headers</Name>
       <APILanguage>occ</APILanguage>
       <Type>intfp</Type>
-      <Scope>TRCConnectionRequestCreationOptions-p</Scope>
+      <Scope>TRCConnectionRequestCreationOptions -p</Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_connection_request_creation_options-p.html</Path>
-    <Anchor>a84a8efbb7f901e29ec9bfd511172230b</Anchor>
-    <Abstract>Custom headers to include into request, See requestHeaders (TRCRequest-p) </Abstract>
+    <Path>protocol_t_r_c_connection_request_creation_options_01-p.html</Path>
+    <Anchor>ac2f3d49ce8cc7621957c33828f7dd447</Anchor>
+    <Abstract>Custom headers to include into request, See TRCRequest.requestHeaders </Abstract>
   </Token>
   <Token>
     <TokenIdentifier>
       <Name>customProperties</Name>
       <APILanguage>occ</APILanguage>
       <Type>intfp</Type>
-      <Scope>TRCConnectionRequestCreationOptions-p</Scope>
+      <Scope>TRCConnectionRequestCreationOptions -p</Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_connection_request_creation_options-p.html</Path>
-    <Anchor>af75e3e3e664962f7209eea765966809f</Anchor>
-    <Abstract>User-defined custom properties, which can be used by connections-in-the-middle. See customProperties ...</Abstract>
+    <Path>protocol_t_r_c_connection_request_creation_options_01-p.html</Path>
+    <Anchor>a2aeb99b92aff0b917a6e0ebd29582732</Anchor>
+    <Abstract>User-defined custom properties, which can be used by connections-in-the-middle. See TRCRequest...</Abstract>
   </Token>
   <Token>
     <TokenIdentifier>
-      <Name>TRCConnectionRequestSendingOptions</Name>
+      <Name>requestPostProcessor</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>intfp</Type>
+      <Scope>TRCConnectionRequestCreationOptions -p</Scope>
+    </TokenIdentifier>
+    <Path>protocol_t_r_c_connection_request_creation_options_01-p.html</Path>
+    <Anchor>a84e07f6cf2181bf9563ef4e4bf27e937</Anchor>
+    <Abstract>Please use this property only for requestPostProcessedFromRequest call. </Abstract>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>queryOptions</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>intfp</Type>
+      <Scope>TRCConnectionRequestCreationOptions -p</Scope>
+    </TokenIdentifier>
+    <Path>protocol_t_r_c_connection_request_creation_options_01-p.html</Path>
+    <Anchor>a13420d6f985d7dd5e95f2c0bf9124b69</Anchor>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>TRCConnectionRequestSendingOptions </Name>
       <APILanguage>c</APILanguage>
       <Type>intf</Type>
-      <Scope>TRCConnectionRequestSendingOptions</Scope>
+      <Scope>TRCConnectionRequestSendingOptions </Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_connection_request_sending_options-p.html</Path>
+    <Path>protocol_t_r_c_connection_request_sending_options_01-p.html</Path>
     <Abstract>Information required to send request and handle response. </Abstract>
     <DeclaredIn>TRCConnection.h</DeclaredIn>
   </Token>
@@ -887,10 +1239,10 @@
       <Name>outputStream</Name>
       <APILanguage>occ</APILanguage>
       <Type>intfp</Type>
-      <Scope>TRCConnectionRequestSendingOptions-p</Scope>
+      <Scope>TRCConnectionRequestSendingOptions -p</Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_connection_request_sending_options-p.html</Path>
-    <Anchor>a9a25a621ec37aa377f5ab3c41b124b3a</Anchor>
+    <Path>protocol_t_r_c_connection_request_sending_options_01-p.html</Path>
+    <Anchor>ad48c67e470aa7af2f061562d18dc3192</Anchor>
     <Abstract>If set, response should be written into that stream. </Abstract>
   </Token>
   <Token>
@@ -898,10 +1250,10 @@
       <Name>responseSerialization</Name>
       <APILanguage>occ</APILanguage>
       <Type>intfp</Type>
-      <Scope>TRCConnectionRequestSendingOptions-p</Scope>
+      <Scope>TRCConnectionRequestSendingOptions -p</Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_connection_request_sending_options-p.html</Path>
-    <Anchor>a3c92196b761c77bb099d6660a9597f75</Anchor>
+    <Path>protocol_t_r_c_connection_request_sending_options_01-p.html</Path>
+    <Anchor>a78083c3c05741b4f0a640be3480f4d91</Anchor>
     <Abstract>Object which will transform response body NSData into response object. </Abstract>
   </Token>
   <Token>
@@ -909,22 +1261,33 @@
       <Name>customProperties</Name>
       <APILanguage>occ</APILanguage>
       <Type>intfp</Type>
-      <Scope>TRCConnectionRequestSendingOptions-p</Scope>
+      <Scope>TRCConnectionRequestSendingOptions -p</Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_connection_request_sending_options-p.html</Path>
-    <Anchor>ab5009dbd3e4903ba0c4319889a67a93b</Anchor>
-    <Abstract>User-defined custom properties, which can be used by connections-in-the-middle. See customProperties ...</Abstract>
+    <Path>protocol_t_r_c_connection_request_sending_options_01-p.html</Path>
+    <Anchor>a4a557042c05e28a2918c8c043e5f69ec</Anchor>
+    <Abstract>User-defined custom properties, which can be used by connections-in-the-middle. See TRCRequest...</Abstract>
   </Token>
   <Token>
     <TokenIdentifier>
       <Name>queuePriority</Name>
       <APILanguage>occ</APILanguage>
       <Type>intfp</Type>
-      <Scope>TRCConnectionRequestSendingOptions-p</Scope>
+      <Scope>TRCConnectionRequestSendingOptions -p</Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_connection_request_sending_options-p.html</Path>
-    <Anchor>a26aa391ffeebd67feab42dfaf84bb8e6</Anchor>
-    <Abstract>Queue priority in case there is limitation of concurrent requests. See queuePriority (TRCRequest-p) ...</Abstract>
+    <Path>protocol_t_r_c_connection_request_sending_options_01-p.html</Path>
+    <Anchor>a07eb2a5d2f3fade937cf05717a04db3e</Anchor>
+    <Abstract>Queue priority in case there is limitation of concurrent requests. See TRCRequest.queuePriority </Abstract>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>responseDelegate</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>intfp</Type>
+      <Scope>TRCConnectionRequestSendingOptions -p</Scope>
+    </TokenIdentifier>
+    <Path>protocol_t_r_c_connection_request_sending_options_01-p.html</Path>
+    <Anchor>aabd6dca14adeea3987aa1c4cf2036837</Anchor>
+    <Abstract>Custom response delegate. Useful to intercept all traffic, or implement custom logic. </Abstract>
   </Token>
   <Token>
     <TokenIdentifier>
@@ -944,7 +1307,7 @@
       <Scope>TRCConnectionStub</Scope>
     </TokenIdentifier>
     <Path>interface_t_r_c_connection_stub.html</Path>
-    <Anchor>a42b9871b76b8c233af85ba5075b141ad</Anchor>
+    <Anchor>ab78753538214c9f597413e71b865b20f</Anchor>
     <DeclaredIn>TRCConnectionStub.h</DeclaredIn>
   </Token>
   <Token>
@@ -988,7 +1351,7 @@
       <Scope>TRCConnectionStub</Scope>
     </TokenIdentifier>
     <Path>interface_t_r_c_connection_stub.html</Path>
-    <Anchor>afa6d57e45e3147c24251ee20fb31c6e5</Anchor>
+    <Anchor>a735c6854a26fe7102365cc07c18bf496</Anchor>
     <DeclaredIn>TRCConnectionStub.h</DeclaredIn>
   </Token>
   <Token>
@@ -1010,7 +1373,7 @@
       <Scope>TRCConnectionStub</Scope>
     </TokenIdentifier>
     <Path>interface_t_r_c_connection_stub.html</Path>
-    <Anchor>a2ab8f1b1c30c03ed1f884293da9bd835</Anchor>
+    <Anchor>a2a0820ca843663b3057d4267da3b2ffc</Anchor>
     <DeclaredIn>TRCConnectionStub.h</DeclaredIn>
   </Token>
   <Token>
@@ -1021,7 +1384,7 @@
       <Scope>TRCConnectionStub</Scope>
     </TokenIdentifier>
     <Path>interface_t_r_c_connection_stub.html</Path>
-    <Anchor>afe41000acf42f62a760cfd04fae062ae</Anchor>
+    <Anchor>a8d9f4821c0d3972a3d25fca99997886d</Anchor>
     <DeclaredIn>TRCConnectionStub.h</DeclaredIn>
   </Token>
   <Token>
@@ -1043,7 +1406,7 @@
       <Scope>TRCConnectionStub</Scope>
     </TokenIdentifier>
     <Path>interface_t_r_c_connection_stub.html</Path>
-    <Anchor>a58d7aa832b006192674ad471ac625848</Anchor>
+    <Anchor>a22c3ae70186324704f5235ac8f67893c</Anchor>
     <DeclaredIn>TRCConnectionStub.h</DeclaredIn>
   </Token>
   <Token>
@@ -1054,7 +1417,7 @@
       <Scope>TRCConnection-p</Scope>
     </TokenIdentifier>
     <Path>protocol_t_r_c_connection-p.html</Path>
-    <Anchor>af825ae65f5137ff497df0acc1492ea06</Anchor>
+    <Anchor>a8133a2a6d0ca3dabe4e0568cd8a53a15</Anchor>
     <Abstract>Creates NSURLRequest using information from TRCRequest. </Abstract>
     <DeclaredIn>TRCConnection.h</DeclaredIn>
   </Token>
@@ -1066,7 +1429,7 @@
       <Scope>TRCConnection-p</Scope>
     </TokenIdentifier>
     <Path>protocol_t_r_c_connection-p.html</Path>
-    <Anchor>aa8070dbcd4e8c682ada6338ef689532d</Anchor>
+    <Anchor>aaee85adbcb332baf45b5045c357c2753</Anchor>
     <Abstract>Sends NSURLRequest via network, then handles response using options.responseBodySerialization or writ...</Abstract>
     <DeclaredIn>TRCConnection.h</DeclaredIn>
   </Token>
@@ -1123,7 +1486,7 @@
       <Scope>TRCConnectionStub(Shorthands)</Scope>
     </TokenIdentifier>
     <Path>category_t_r_c_connection_stub_07_shorthands_08.html</Path>
-    <Anchor>afa6d57e45e3147c24251ee20fb31c6e5</Anchor>
+    <Anchor>a735c6854a26fe7102365cc07c18bf496</Anchor>
     <DeclaredIn>TRCConnectionStub.h</DeclaredIn>
   </Token>
   <Token>
@@ -1145,7 +1508,7 @@
       <Scope>TRCConnectionStub(Shorthands)</Scope>
     </TokenIdentifier>
     <Path>category_t_r_c_connection_stub_07_shorthands_08.html</Path>
-    <Anchor>a2ab8f1b1c30c03ed1f884293da9bd835</Anchor>
+    <Anchor>a2a0820ca843663b3057d4267da3b2ffc</Anchor>
     <DeclaredIn>TRCConnectionStub.h</DeclaredIn>
   </Token>
   <Token>
@@ -1156,7 +1519,7 @@
       <Scope>TRCConnectionStub(Shorthands)</Scope>
     </TokenIdentifier>
     <Path>category_t_r_c_connection_stub_07_shorthands_08.html</Path>
-    <Anchor>afe41000acf42f62a760cfd04fae062ae</Anchor>
+    <Anchor>a8d9f4821c0d3972a3d25fca99997886d</Anchor>
     <DeclaredIn>TRCConnectionStub.h</DeclaredIn>
   </Token>
   <Token>
@@ -1178,7 +1541,7 @@
       <Scope>TRCConnectionStub(Shorthands)</Scope>
     </TokenIdentifier>
     <Path>category_t_r_c_connection_stub_07_shorthands_08.html</Path>
-    <Anchor>a58d7aa832b006192674ad471ac625848</Anchor>
+    <Anchor>a22c3ae70186324704f5235ac8f67893c</Anchor>
     <DeclaredIn>TRCConnectionStub.h</DeclaredIn>
   </Token>
   <Token>
@@ -1259,7 +1622,7 @@
       <Scope>TRCConnectionStubResponse</Scope>
     </TokenIdentifier>
     <Path>interface_t_r_c_connection_stub_response.html</Path>
-    <Anchor>aeb5e98964efb338cbcfda101989292dc</Anchor>
+    <Anchor>a009f9303c9682a5bcde0d9914c62b9fe</Anchor>
     <DeclaredIn>TRCConnectionStub.h</DeclaredIn>
   </Token>
   <Token>
@@ -1303,7 +1666,7 @@
       <Scope>TRCErrorHandler-p</Scope>
     </TokenIdentifier>
     <Path>protocol_t_r_c_error_handler-p.html</Path>
-    <Anchor>a935b0decf7c5da8f02de80431e8e46b8</Anchor>
+    <Anchor>a599652a7598412ba871a277de920ea93</Anchor>
     <Abstract>This method returns custom NSError composed from response body. </Abstract>
     <DeclaredIn>TRCErrorHandler.h</DeclaredIn>
   </Token>
@@ -1327,9 +1690,200 @@
       <Scope>TRCErrorHandler-p</Scope>
     </TokenIdentifier>
     <Path>protocol_t_r_c_error_handler-p.html</Path>
-    <Anchor>a2614e120ee2a4bfe94999a80af8ad0b3</Anchor>
+    <Anchor>ae04f12eb9cfeb49d9f744b1fd6ac2236</Anchor>
     <Abstract>Implement your body checking for error. </Abstract>
     <DeclaredIn>TRCErrorHandler.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>TRCMultipartFile</Name>
+      <APILanguage>c</APILanguage>
+      <Type>cl</Type>
+      <Scope>TRCMultipartFile</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_multipart_file.html</Path>
+    <DeclaredIn>TRCSerializerMultipart.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>data</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instp</Type>
+      <Scope>TRCMultipartFile</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_multipart_file.html</Path>
+    <Anchor>af51e99f6ac8bb49caa2d989ca632588f</Anchor>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>filename</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instp</Type>
+      <Scope>TRCMultipartFile</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_multipart_file.html</Path>
+    <Anchor>ab87e309dcf98b239446a7f430aee64b1</Anchor>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>mimeType</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instp</Type>
+      <Scope>TRCMultipartFile</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_multipart_file.html</Path>
+    <Anchor>a52fffb8f3c8d7033cc41b810483337aa</Anchor>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>TRCNetworkReachabilityManager</Name>
+      <APILanguage>c</APILanguage>
+      <Type>cl</Type>
+      <Scope>TRCNetworkReachabilityManager</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_network_reachability_manager.html</Path>
+    <Abstract>TRCNetworkReachabilityManager is AFNetworkReachabilityManager copy from AFNetworking library...</Abstract>
+    <DeclaredIn>TRCNetworkReachabilityManager.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>networkReachabilityStatus</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instp</Type>
+      <Scope>TRCNetworkReachabilityManager</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_network_reachability_manager.html</Path>
+    <Anchor>a24cf57e90ba91a1bf847f396e6523766</Anchor>
+    <Abstract>The current network reachability status. </Abstract>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>reachable</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instp</Type>
+      <Scope>TRCNetworkReachabilityManager</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_network_reachability_manager.html</Path>
+    <Anchor>a2fcd60613ef21abb1cd177cb596f9203</Anchor>
+    <Abstract>Whether or not the network is currently reachable. </Abstract>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>reachableViaWWAN</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instp</Type>
+      <Scope>TRCNetworkReachabilityManager</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_network_reachability_manager.html</Path>
+    <Anchor>adf8ffc811b49608ee56134f6e681ec6d</Anchor>
+    <Abstract>Whether or not the network is currently reachable via WWAN. </Abstract>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>reachableViaWiFi</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instp</Type>
+      <Scope>TRCNetworkReachabilityManager</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_network_reachability_manager.html</Path>
+    <Anchor>a7542a331313df932e0f8bb47a05afa40</Anchor>
+    <Abstract>Whether or not the network is currently reachable via WiFi. </Abstract>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>startMonitoring</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instm</Type>
+      <Scope>TRCNetworkReachabilityManager</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_network_reachability_manager.html</Path>
+    <Anchor>aea96456433ccafdc7d9b0ff680aece42</Anchor>
+    <Abstract>Starts monitoring for changes in network reachability status. </Abstract>
+    <DeclaredIn>TRCNetworkReachabilityManager.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>stopMonitoring</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instm</Type>
+      <Scope>TRCNetworkReachabilityManager</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_network_reachability_manager.html</Path>
+    <Anchor>a8a6b08fa3d4dc09d88cb12d2f09d0d9b</Anchor>
+    <Abstract>Stops monitoring for changes in network reachability status. </Abstract>
+    <DeclaredIn>TRCNetworkReachabilityManager.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>localizedNetworkReachabilityStatusString</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instm</Type>
+      <Scope>TRCNetworkReachabilityManager</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_network_reachability_manager.html</Path>
+    <Anchor>ac9cb91c74d8b6cec2095824d241a3e24</Anchor>
+    <Abstract>Returns a localized string representation of the current network reachability status. </Abstract>
+    <DeclaredIn>TRCNetworkReachabilityManager.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>setReachabilityStatusChangeBlock:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instm</Type>
+      <Scope>TRCNetworkReachabilityManager</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_network_reachability_manager.html</Path>
+    <Anchor>adb963c51b391d856f4a3725b86137a9f</Anchor>
+    <Abstract>Sets a callback to be executed when the network availability of the baseURL host changes. </Abstract>
+    <DeclaredIn>TRCNetworkReachabilityManager.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>sharedManager</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>clm</Type>
+      <Scope>TRCNetworkReachabilityManager</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_network_reachability_manager.html</Path>
+    <Anchor>aaa465b007999e7bb7183c73df72672fa</Anchor>
+    <Abstract>Returns the shared network reachability manager. </Abstract>
+    <DeclaredIn>TRCNetworkReachabilityManager.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>managerForDomain:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>clm</Type>
+      <Scope>TRCNetworkReachabilityManager</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_network_reachability_manager.html</Path>
+    <Anchor>a6d41a91f2ecca46ae845ef4577756403</Anchor>
+    <Abstract>Creates and returns a network reachability manager for the specified domain. </Abstract>
+    <DeclaredIn>TRCNetworkReachabilityManager.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>managerForAddress:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>clm</Type>
+      <Scope>TRCNetworkReachabilityManager</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_network_reachability_manager.html</Path>
+    <Anchor>a2d2fea052e7a2514299d5972556e7cb3</Anchor>
+    <Abstract>Creates and returns a network reachability manager for the socket address. </Abstract>
+    <DeclaredIn>TRCNetworkReachabilityManager.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>initWithReachability:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instm</Type>
+      <Scope>TRCNetworkReachabilityManager</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_network_reachability_manager.html</Path>
+    <Anchor>a8e08c1acfede22a6b40223a512db14df</Anchor>
+    <Abstract>Initializes an instance of a network reachability manager from the specified reachability object...</Abstract>
+    <DeclaredIn>TRCNetworkReachabilityManager.h</DeclaredIn>
   </Token>
   <Token>
     <TokenIdentifier>
@@ -1362,7 +1916,7 @@
       <Scope>TRCObjectMapper-p</Scope>
     </TokenIdentifier>
     <Path>protocol_t_r_c_object_mapper-p.html</Path>
-    <Anchor>ac7136de05cd53fd7ae88c09c281178f6</Anchor>
+    <Anchor>a9667e185b795ce33c328c1ef70afbedb</Anchor>
     <Abstract>Creates model object and map values from responseObject into that object. </Abstract>
     <DeclaredIn>TRCObjectMapper.h</DeclaredIn>
   </Token>
@@ -1386,7 +1940,7 @@
       <Scope>TRCObjectMapper-p</Scope>
     </TokenIdentifier>
     <Path>protocol_t_r_c_object_mapper-p.html</Path>
-    <Anchor>a6ac5113cb00eefea8c8da3a546806a4b</Anchor>
+    <Anchor>a67523fffff20e9911167bf1e7e0f4710</Anchor>
     <Abstract>Creates request object, acceptable by request serialization, using object. </Abstract>
     <DeclaredIn>TRCObjectMapper.h</DeclaredIn>
   </Token>
@@ -1409,7 +1963,7 @@
       <Scope>TRCPostProcessor-p</Scope>
     </TokenIdentifier>
     <Path>protocol_t_r_c_post_processor-p.html</Path>
-    <Anchor>aa482b3b50c11150d0da90f309700deba</Anchor>
+    <Anchor>ab7b383b4a1636f037402ee828e3ff2b6</Anchor>
     <Abstract>This method invokes at the end of response processing. </Abstract>
     <DeclaredIn>TRCPostProcessor.h</DeclaredIn>
   </Token>
@@ -1421,9 +1975,44 @@
       <Scope>TRCPostProcessor-p</Scope>
     </TokenIdentifier>
     <Path>protocol_t_r_c_post_processor-p.html</Path>
-    <Anchor>a92c13c5a99be31419ada9c2c8298580d</Anchor>
+    <Anchor>a0fe8b4b464c64dcd51de1b02c07d3328</Anchor>
     <Abstract>Useful to handle all errors from RestClient in one place, and replace them with own error with own er...</Abstract>
     <DeclaredIn>TRCPostProcessor.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>queueType</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>intfm</Type>
+      <Scope>TRCPostProcessor-p</Scope>
+    </TokenIdentifier>
+    <Path>protocol_t_r_c_post_processor-p.html</Path>
+    <Anchor>a992d0e24022a0946130c383d24f98f82</Anchor>
+    <Abstract>Specify queue type to run this post processor. </Abstract>
+    <DeclaredIn>TRCPostProcessor.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>TRCPreProcessor</Name>
+      <APILanguage>c</APILanguage>
+      <Type>intf</Type>
+      <Scope>TRCPreProcessor</Scope>
+    </TokenIdentifier>
+    <Path>protocol_t_r_c_pre_processor-p.html</Path>
+    <Abstract>TRCPreProcessor is per-request pre-processor. </Abstract>
+    <DeclaredIn>TRCPreProcessor.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>preProcessResponseObject:forRequest:preProcessError:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>intfm</Type>
+      <Scope>TRCPreProcessor-p</Scope>
+    </TokenIdentifier>
+    <Path>protocol_t_r_c_pre_processor-p.html</Path>
+    <Anchor>a54dd1ba992dca0e38b48ee68f474616d</Anchor>
+    <Abstract>This method is invoked at the beginning (after checking for errors, but before validation and post-pr...</Abstract>
+    <DeclaredIn>TRCPreProcessor.h</DeclaredIn>
   </Token>
   <Token>
     <TokenIdentifier>
@@ -1433,7 +2022,7 @@
       <Scope>TRCProgressHandler</Scope>
     </TokenIdentifier>
     <Path>protocol_t_r_c_progress_handler-p.html</Path>
-    <Abstract>TRCProgressHandler describes methods of object, used to track download and upload progress TRCConnect...</Abstract>
+    <Abstract>TRCProgressHandler describes methods of object, used to track download and upload progress ...</Abstract>
     <DeclaredIn>TRCConnection.h</DeclaredIn>
   </Token>
   <Token>
@@ -1498,6 +2087,71 @@
   </Token>
   <Token>
     <TokenIdentifier>
+      <Name>state</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>intfm</Type>
+      <Scope>TRCProgressHandler-p</Scope>
+    </TokenIdentifier>
+    <Path>protocol_t_r_c_progress_handler-p.html</Path>
+    <Anchor>a18bc59c7678bb68b0532a838f840ecda</Anchor>
+    <Abstract>Returns current state of network operation. </Abstract>
+    <DeclaredIn>TRCConnection.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>TRCQueryStringPair</Name>
+      <APILanguage>c</APILanguage>
+      <Type>cl</Type>
+      <Scope>TRCQueryStringPair</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_query_string_pair.html</Path>
+    <Abstract>Http Query code was extracted from AFNetworking library. </Abstract>
+    <DeclaredIn>TRCHttpQueryComposer.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>field</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instp</Type>
+      <Scope>TRCQueryStringPair</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_query_string_pair.html</Path>
+    <Anchor>a6dbffadaa7a11d484b1285ed9bc66b5d</Anchor>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>value</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instp</Type>
+      <Scope>TRCQueryStringPair</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_query_string_pair.html</Path>
+    <Anchor>a51a09f32744e3d9509bb6b2d5516992a</Anchor>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>initWithField:value:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instm</Type>
+      <Scope>TRCQueryStringPair</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_query_string_pair.html</Path>
+    <Anchor>ad5993d865f396e622e749c6492f59c57</Anchor>
+    <DeclaredIn>TRCHttpQueryComposer.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>URLEncodedStringValueWithEncoding:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instm</Type>
+      <Scope>TRCQueryStringPair</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_query_string_pair.html</Path>
+    <Anchor>a03dd1959b0fa1077e4ac5b9c3c184cbb</Anchor>
+    <DeclaredIn>TRCHttpQueryComposer.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
       <Name>TRCRequest</Name>
       <APILanguage>c</APILanguage>
       <Type>intf</Type>
@@ -1533,192 +2187,36 @@
   </Token>
   <Token>
     <TokenIdentifier>
-      <Name>pathParameters</Name>
-      <APILanguage>occ</APILanguage>
-      <Type>intfm</Type>
-      <Scope>TRCRequest-p</Scope>
-    </TokenIdentifier>
-    <Path>protocol_t_r_c_request-p.html</Path>
-    <Anchor>aa4e419f84556cc0d41dae0602c8a0f80</Anchor>
-    <Abstract>This method should return dictionary with path arguments and variables. </Abstract>
-    <DeclaredIn>TRCRequest.h</DeclaredIn>
-  </Token>
-  <Token>
-    <TokenIdentifier>
-      <Name>pathParametersValidationSchemaName</Name>
-      <APILanguage>occ</APILanguage>
-      <Type>intfm</Type>
-      <Scope>TRCRequest-p</Scope>
-    </TokenIdentifier>
-    <Path>protocol_t_r_c_request-p.html</Path>
-    <Anchor>aa37c7187d908fc06114c27d66648ac85</Anchor>
-    <Abstract>Specify name of schema file. </Abstract>
-    <DeclaredIn>TRCRequest.h</DeclaredIn>
-  </Token>
-  <Token>
-    <TokenIdentifier>
-      <Name>requestHeaders</Name>
-      <APILanguage>occ</APILanguage>
-      <Type>intfm</Type>
-      <Scope>TRCRequest-p</Scope>
-    </TokenIdentifier>
-    <Path>protocol_t_r_c_request-p.html</Path>
-    <Anchor>a5cc7e76abbbcf8237fab3a845effb258</Anchor>
-    <Abstract>Provide custom HTTP headers here. </Abstract>
-    <DeclaredIn>TRCRequest.h</DeclaredIn>
-  </Token>
-  <Token>
-    <TokenIdentifier>
-      <Name>requestBody</Name>
-      <APILanguage>occ</APILanguage>
-      <Type>intfm</Type>
-      <Scope>TRCRequest-p</Scope>
-    </TokenIdentifier>
-    <Path>protocol_t_r_c_request-p.html</Path>
-    <Anchor>a1a76461fbf3222123aa9c4e811e061d9</Anchor>
-    <Abstract>Provide data for the request body here. </Abstract>
-    <DeclaredIn>TRCRequest.h</DeclaredIn>
-  </Token>
-  <Token>
-    <TokenIdentifier>
-      <Name>requestBodyValidationSchemaName</Name>
-      <APILanguage>occ</APILanguage>
-      <Type>intfm</Type>
-      <Scope>TRCRequest-p</Scope>
-    </TokenIdentifier>
-    <Path>protocol_t_r_c_request-p.html</Path>
-    <Anchor>abc3b9c9c6b2ec65f67ed74ce8a3f50ad</Anchor>
-    <Abstract>Specify name of schema file. </Abstract>
-    <DeclaredIn>TRCRequest.h</DeclaredIn>
-  </Token>
-  <Token>
-    <TokenIdentifier>
-      <Name>requestBodySerialization</Name>
-      <APILanguage>occ</APILanguage>
-      <Type>intfm</Type>
-      <Scope>TRCRequest-p</Scope>
-    </TokenIdentifier>
-    <Path>protocol_t_r_c_request-p.html</Path>
-    <Anchor>a2aab7e85fc7a4d0ea92a53e0be1b72f1</Anchor>
-    <Abstract>Specify kind of requestBody serialization here. </Abstract>
-    <DeclaredIn>TRCRequest.h</DeclaredIn>
-  </Token>
-  <Token>
-    <TokenIdentifier>
-      <Name>responseBodyValidationSchemaName</Name>
-      <APILanguage>occ</APILanguage>
-      <Type>intfm</Type>
-      <Scope>TRCRequest-p</Scope>
-    </TokenIdentifier>
-    <Path>protocol_t_r_c_request-p.html</Path>
-    <Anchor>ad4003fea5e41918229d039dcc4eca229</Anchor>
-    <Abstract>Specify name of schema file. </Abstract>
-    <DeclaredIn>TRCRequest.h</DeclaredIn>
-  </Token>
-  <Token>
-    <TokenIdentifier>
-      <Name>responseBodySerialization</Name>
-      <APILanguage>occ</APILanguage>
-      <Type>intfm</Type>
-      <Scope>TRCRequest-p</Scope>
-    </TokenIdentifier>
-    <Path>protocol_t_r_c_request-p.html</Path>
-    <Anchor>a8ba19efa1b0cab2671adc417b250968d</Anchor>
-    <Abstract>Specify kind of expected response here. </Abstract>
-    <DeclaredIn>TRCRequest.h</DeclaredIn>
-  </Token>
-  <Token>
-    <TokenIdentifier>
-      <Name>responseBodyOutputStream</Name>
-      <APILanguage>occ</APILanguage>
-      <Type>intfm</Type>
-      <Scope>TRCRequest-p</Scope>
-    </TokenIdentifier>
-    <Path>protocol_t_r_c_request-p.html</Path>
-    <Anchor>a30e070b3041f02f328364d1d759c745b</Anchor>
-    <Abstract>Implement this method to specify custom output stream. </Abstract>
-    <DeclaredIn>TRCRequest.h</DeclaredIn>
-  </Token>
-  <Token>
-    <TokenIdentifier>
-      <Name>responseProcessedFromBody:headers:status:error:</Name>
-      <APILanguage>occ</APILanguage>
-      <Type>intfm</Type>
-      <Scope>TRCRequest-p</Scope>
-    </TokenIdentifier>
-    <Path>protocol_t_r_c_request-p.html</Path>
-    <Anchor>add887b883c406b941fad92203b359a8f</Anchor>
-    <Abstract>Result of this method will be returned as result in the sendRequest:completion: (TyphoonRestClient). </Abstract>
-    <DeclaredIn>TRCRequest.h</DeclaredIn>
-  </Token>
-  <Token>
-    <TokenIdentifier>
-      <Name>respondedWithError:headers:status:</Name>
-      <APILanguage>occ</APILanguage>
-      <Type>intfm</Type>
-      <Scope>TRCRequest-p</Scope>
-    </TokenIdentifier>
-    <Path>protocol_t_r_c_request-p.html</Path>
-    <Anchor>a54a286541590f8741bbd3917436fbbf1</Anchor>
-    <Abstract>Error notification. </Abstract>
-    <DeclaredIn>TRCRequest.h</DeclaredIn>
-  </Token>
-  <Token>
-    <TokenIdentifier>
-      <Name>customProperties</Name>
-      <APILanguage>occ</APILanguage>
-      <Type>intfm</Type>
-      <Scope>TRCRequest-p</Scope>
-    </TokenIdentifier>
-    <Path>protocol_t_r_c_request-p.html</Path>
-    <Anchor>ab07c4dbb1a8e341faa6456287ad2d718</Anchor>
-    <Abstract>Use custom properties dictionary to pass parameters into your own TRCConnection implementation or TRC...</Abstract>
-    <DeclaredIn>TRCRequest.h</DeclaredIn>
-  </Token>
-  <Token>
-    <TokenIdentifier>
-      <Name>queuePriority</Name>
-      <APILanguage>occ</APILanguage>
-      <Type>intfm</Type>
-      <Scope>TRCRequest-p</Scope>
-    </TokenIdentifier>
-    <Path>protocol_t_r_c_request-p.html</Path>
-    <Anchor>ae75f354a1e1a453e6ed86c6e83cdd30c</Anchor>
-    <Abstract>Use queue priority for your custom TRCConnection implementation. </Abstract>
-    <DeclaredIn>TRCRequest.h</DeclaredIn>
-  </Token>
-  <Token>
-    <TokenIdentifier>
-      <Name>TRCRequestSerializer</Name>
+      <Name>TRCRequestSerializer </Name>
       <APILanguage>c</APILanguage>
       <Type>intf</Type>
-      <Scope>TRCRequestSerializer</Scope>
+      <Scope>TRCRequestSerializer </Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_request_serializer-p.html</Path>
-    <Abstract>Defines protocol for objects which converts requestBody (TRCRequest-p) object into NSData ...</Abstract>
+    <Path>protocol_t_r_c_request_serializer_01-p.html</Path>
+    <Abstract>Defines protocol for objects which converts TRCRequest.requestBody object into NSData ...</Abstract>
     <DeclaredIn>TRCInfrastructure.h</DeclaredIn>
   </Token>
   <Token>
     <TokenIdentifier>
-      <Name>dataFromRequestObject:error:</Name>
+      <Name>bodyDataFromObject:forRequest:error:</Name>
       <APILanguage>occ</APILanguage>
       <Type>intfm</Type>
-      <Scope>TRCRequestSerializer-p</Scope>
+      <Scope>TRCRequestSerializer -p</Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_request_serializer-p.html</Path>
-    <Anchor>a50b6d8d809df81d8f8b2ea29435d9fc0</Anchor>
+    <Path>protocol_t_r_c_request_serializer_01-p.html</Path>
+    <Anchor>a2d5656c65fe69b8ce9cadc1cbb27af17</Anchor>
     <Abstract>Convert your requestObject into NSData here. </Abstract>
     <DeclaredIn>TRCInfrastructure.h</DeclaredIn>
   </Token>
   <Token>
     <TokenIdentifier>
-      <Name>dataStreamFromRequestObject:error:</Name>
+      <Name>bodyStreamFromObject:forRequest:error:</Name>
       <APILanguage>occ</APILanguage>
       <Type>intfm</Type>
-      <Scope>TRCRequestSerializer-p</Scope>
+      <Scope>TRCRequestSerializer -p</Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_request_serializer-p.html</Path>
-    <Anchor>a581cb572b48ab34fc07f2d490f80b5da</Anchor>
+    <Path>protocol_t_r_c_request_serializer_01-p.html</Path>
+    <Anchor>a3aaf80c44f20271c348c6dcc5b74f4e1</Anchor>
     <Abstract>Convert your requestObject into NSInputStream here. </Abstract>
     <DeclaredIn>TRCInfrastructure.h</DeclaredIn>
   </Token>
@@ -1727,12 +2225,77 @@
       <Name>contentType</Name>
       <APILanguage>occ</APILanguage>
       <Type>intfm</Type>
-      <Scope>TRCRequestSerializer-p</Scope>
+      <Scope>TRCRequestSerializer -p</Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_request_serializer-p.html</Path>
-    <Anchor>a306d331c31d3ef4217bea86755e4ff75</Anchor>
+    <Path>protocol_t_r_c_request_serializer_01-p.html</Path>
+    <Anchor>a3f9b47196d45cb1da31e64590c44c34d</Anchor>
     <Abstract>This is string which would be used as Content-Type HTTP header value. </Abstract>
     <DeclaredIn>TRCInfrastructure.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>TRCResponseDelegate </Name>
+      <APILanguage>c</APILanguage>
+      <Type>intf</Type>
+      <Scope>TRCResponseDelegate </Scope>
+    </TokenIdentifier>
+    <Path>protocol_t_r_c_response_delegate_01-p.html</Path>
+    <DeclaredIn>TRCResponseDelegate.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>connection:shouldProcessResponse:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>intfm</Type>
+      <Scope>TRCResponseDelegate -p</Scope>
+    </TokenIdentifier>
+    <Path>protocol_t_r_c_response_delegate_01-p.html</Path>
+    <Anchor>ac997f7d07e324bda35b0384a70d973e2</Anchor>
+    <DeclaredIn>TRCResponseDelegate.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>connection:didSendBodyData:totalBytesSent:totalBytesExpectedToSend:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>intfm</Type>
+      <Scope>TRCResponseDelegate -p</Scope>
+    </TokenIdentifier>
+    <Path>protocol_t_r_c_response_delegate_01-p.html</Path>
+    <Anchor>a19c7804c5b4a9df158b988fed0ab9aff</Anchor>
+    <DeclaredIn>TRCResponseDelegate.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>connection:didReceiveData:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>intfm</Type>
+      <Scope>TRCResponseDelegate -p</Scope>
+    </TokenIdentifier>
+    <Path>protocol_t_r_c_response_delegate_01-p.html</Path>
+    <Anchor>a46d2d9d60d6a43d88dd433b6aa696519</Anchor>
+    <DeclaredIn>TRCResponseDelegate.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>connection:didCompleteWithError:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>intfm</Type>
+      <Scope>TRCResponseDelegate -p</Scope>
+    </TokenIdentifier>
+    <Path>protocol_t_r_c_response_delegate_01-p.html</Path>
+    <Anchor>aafa0ebe585debda63b4ae20b0dda04d2</Anchor>
+    <DeclaredIn>TRCResponseDelegate.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>connection:didReceiveChallenge:completionHandler:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>intfm</Type>
+      <Scope>TRCResponseDelegate -p</Scope>
+    </TokenIdentifier>
+    <Path>protocol_t_r_c_response_delegate_01-p.html</Path>
+    <Anchor>ad4b48a4f503d1370d09e902c2c9afd4e</Anchor>
+    <DeclaredIn>TRCResponseDelegate.h</DeclaredIn>
   </Token>
   <Token>
     <TokenIdentifier>
@@ -1771,12 +2334,12 @@
   </Token>
   <Token>
     <TokenIdentifier>
-      <Name>TRCResponseSerializer</Name>
+      <Name>TRCResponseSerializer </Name>
       <APILanguage>c</APILanguage>
       <Type>intf</Type>
-      <Scope>TRCResponseSerializer</Scope>
+      <Scope>TRCResponseSerializer </Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_response_serializer-p.html</Path>
+    <Path>protocol_t_r_c_response_serializer_01-p.html</Path>
     <Abstract>Defines protocol for objects which converts NSData of response body into responseObject ...</Abstract>
     <DeclaredIn>TRCInfrastructure.h</DeclaredIn>
   </Token>
@@ -1785,10 +2348,10 @@
       <Name>objectFromResponseData:error:</Name>
       <APILanguage>occ</APILanguage>
       <Type>intfm</Type>
-      <Scope>TRCResponseSerializer-p</Scope>
+      <Scope>TRCResponseSerializer -p</Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_response_serializer-p.html</Path>
-    <Anchor>a134abe9b790cbc40e61663603f1e8af8</Anchor>
+    <Path>protocol_t_r_c_response_serializer_01-p.html</Path>
+    <Anchor>aa8cb06d483f1f724f8ae614abad3e326</Anchor>
     <Abstract>Converts NSData of response body into responseObject which would be used in parsing, validation or just as result. </Abstract>
     <DeclaredIn>TRCInfrastructure.h</DeclaredIn>
   </Token>
@@ -1797,21 +2360,21 @@
       <Name>isCorrectContentType:</Name>
       <APILanguage>occ</APILanguage>
       <Type>intfm</Type>
-      <Scope>TRCResponseSerializer-p</Scope>
+      <Scope>TRCResponseSerializer -p</Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_response_serializer-p.html</Path>
-    <Anchor>a8196dc6671c28a76da317ddb16df5051</Anchor>
+    <Path>protocol_t_r_c_response_serializer_01-p.html</Path>
+    <Anchor>a8c0dbf6d40090feaadbff68f27aa168f</Anchor>
     <Abstract>Check that NSData content-type correct before processing here. </Abstract>
     <DeclaredIn>TRCInfrastructure.h</DeclaredIn>
   </Token>
   <Token>
     <TokenIdentifier>
-      <Name>TRCSchemaData</Name>
+      <Name>TRCSchemaData </Name>
       <APILanguage>c</APILanguage>
       <Type>intf</Type>
-      <Scope>TRCSchemaData</Scope>
+      <Scope>TRCSchemaData </Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_schema_data-p.html</Path>
+    <Path>protocol_t_r_c_schema_data_01-p.html</Path>
     <Abstract>TRCSchemaData is abstract data structure, used to represent schema and validate it&amp;#39;s values...</Abstract>
     <DeclaredIn>TRCSchemaData.h</DeclaredIn>
   </Token>
@@ -1820,10 +2383,10 @@
       <Name>enumerate:withEnumerator:</Name>
       <APILanguage>occ</APILanguage>
       <Type>intfm</Type>
-      <Scope>TRCSchemaData-p</Scope>
+      <Scope>TRCSchemaData -p</Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_schema_data-p.html</Path>
-    <Anchor>ac59b7973afc05d3581a9e2da7d81743b</Anchor>
+    <Path>protocol_t_r_c_schema_data_01-p.html</Path>
+    <Anchor>a04642ed6ca75fd992e2403b1553f5445</Anchor>
     <Abstract>Walk through all object structure and call appropriate methods from TRCSchemaDataEnumerator protocol ...</Abstract>
     <DeclaredIn>TRCSchemaData.h</DeclaredIn>
   </Token>
@@ -1832,10 +2395,10 @@
       <Name>modify:withModifier:</Name>
       <APILanguage>occ</APILanguage>
       <Type>intfm</Type>
-      <Scope>TRCSchemaData-p</Scope>
+      <Scope>TRCSchemaData -p</Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_schema_data-p.html</Path>
-    <Anchor>ae4fcd5068db4b3fe53bb90e9262a24ff</Anchor>
+    <Path>protocol_t_r_c_schema_data_01-p.html</Path>
+    <Anchor>a98f819000a072c4c9e592b2054afcb93</Anchor>
     <Abstract>Walk through all object structure to replace (transform, convert) some of object&amp;#39;s values...</Abstract>
     <DeclaredIn>TRCSchemaData.h</DeclaredIn>
   </Token>
@@ -1844,10 +2407,10 @@
       <Name>cancel</Name>
       <APILanguage>occ</APILanguage>
       <Type>intfm</Type>
-      <Scope>TRCSchemaData-p</Scope>
+      <Scope>TRCSchemaData -p</Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_schema_data-p.html</Path>
-    <Anchor>aa071a3786012c29cf369adcf3148e732</Anchor>
+    <Path>protocol_t_r_c_schema_data_01-p.html</Path>
+    <Anchor>ae52dd7c22e9fd3f16d28901d6d2332f8</Anchor>
     <Abstract>Cancels current process like enumeration or modifying (see methods above). </Abstract>
     <DeclaredIn>TRCSchemaData.h</DeclaredIn>
   </Token>
@@ -1856,21 +2419,21 @@
       <Name>isCancelled</Name>
       <APILanguage>occ</APILanguage>
       <Type>intfm</Type>
-      <Scope>TRCSchemaData-p</Scope>
+      <Scope>TRCSchemaData -p</Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_schema_data-p.html</Path>
-    <Anchor>a275e6d2c1d68c35a6433e414ef68443f</Anchor>
+    <Path>protocol_t_r_c_schema_data_01-p.html</Path>
+    <Anchor>a5eb949464655686f0cca9b9bd74a8a75</Anchor>
     <Abstract>Tells if current process is cancelled. </Abstract>
     <DeclaredIn>TRCSchemaData.h</DeclaredIn>
   </Token>
   <Token>
     <TokenIdentifier>
-      <Name>TRCSchemaDataDelegate</Name>
+      <Name>TRCSchemaDataDelegate </Name>
       <APILanguage>c</APILanguage>
       <Type>intf</Type>
-      <Scope>TRCSchemaDataDelegate</Scope>
+      <Scope>TRCSchemaDataDelegate </Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_schema_data_delegate-p.html</Path>
+    <Path>protocol_t_r_c_schema_data_delegate_01-p.html</Path>
     <DeclaredIn>TRCSchemaData.h</DeclaredIn>
   </Token>
   <Token>
@@ -1878,10 +2441,10 @@
       <Name>schemaData:typeMismatchForValue:withSchemaValue:</Name>
       <APILanguage>occ</APILanguage>
       <Type>intfm</Type>
-      <Scope>TRCSchemaDataDelegate-p</Scope>
+      <Scope>TRCSchemaDataDelegate -p</Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_schema_data_delegate-p.html</Path>
-    <Anchor>ae06a3b2c34abebb1a413d0bf64221d26</Anchor>
+    <Path>protocol_t_r_c_schema_data_delegate_01-p.html</Path>
+    <Anchor>aa8459937faefc1759e2b25ec3bd1a3db</Anchor>
     <Abstract>Called when TRCSchemaData can&amp;#39;t enumerate or modify object because type mismatching in schema and obj...</Abstract>
     <DeclaredIn>TRCSchemaData.h</DeclaredIn>
   </Token>
@@ -1890,10 +2453,10 @@
       <Name>schemaData:willEnumerateItemAtIndentifier:</Name>
       <APILanguage>occ</APILanguage>
       <Type>intfm</Type>
-      <Scope>TRCSchemaDataDelegate-p</Scope>
+      <Scope>TRCSchemaDataDelegate -p</Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_schema_data_delegate-p.html</Path>
-    <Anchor>afc16cc2c3b40cb6cca7d5d6204a0e189</Anchor>
+    <Path>protocol_t_r_c_schema_data_delegate_01-p.html</Path>
+    <Anchor>a663b40eee0ae92df2d062b16422133af</Anchor>
     <Abstract>These two methods calls each collection item. </Abstract>
     <DeclaredIn>TRCSchemaData.h</DeclaredIn>
   </Token>
@@ -1902,20 +2465,20 @@
       <Name>schemaData:didEnumerateItemAtIndentifier:</Name>
       <APILanguage>occ</APILanguage>
       <Type>intfm</Type>
-      <Scope>TRCSchemaDataDelegate-p</Scope>
+      <Scope>TRCSchemaDataDelegate -p</Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_schema_data_delegate-p.html</Path>
-    <Anchor>ad65141c8eaecb30fdc63528545cf7e0d</Anchor>
+    <Path>protocol_t_r_c_schema_data_delegate_01-p.html</Path>
+    <Anchor>a8dab6d4aab61ee020c9e006106076678</Anchor>
     <DeclaredIn>TRCSchemaData.h</DeclaredIn>
   </Token>
   <Token>
     <TokenIdentifier>
-      <Name>TRCSchemaDataEnumerator</Name>
+      <Name>TRCSchemaDataEnumerator </Name>
       <APILanguage>c</APILanguage>
       <Type>intf</Type>
-      <Scope>TRCSchemaDataEnumerator</Scope>
+      <Scope>TRCSchemaDataEnumerator </Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_schema_data_enumerator-p.html</Path>
+    <Path>protocol_t_r_c_schema_data_enumerator_01-p.html</Path>
     <DeclaredIn>TRCSchemaData.h</DeclaredIn>
   </Token>
   <Token>
@@ -1923,56 +2486,21 @@
       <Name>schemaData:foundValue:withOptions:withSchemeValue:</Name>
       <APILanguage>occ</APILanguage>
       <Type>intfm</Type>
-      <Scope>TRCSchemaDataEnumerator-p</Scope>
+      <Scope>TRCSchemaDataEnumerator -p</Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_schema_data_enumerator-p.html</Path>
-    <Anchor>a1da9171b1edf52b511a4540615bf38c1</Anchor>
+    <Path>protocol_t_r_c_schema_data_enumerator_01-p.html</Path>
+    <Anchor>aaa53ba9baf4f0e02816e0b858de7e2be</Anchor>
     <Abstract>Calls for each value in object. </Abstract>
     <DeclaredIn>TRCSchemaData.h</DeclaredIn>
   </Token>
   <Token>
     <TokenIdentifier>
-      <Name>schemaData:typeMismatchForValue:withSchemaValue:</Name>
-      <APILanguage>occ</APILanguage>
-      <Type>intfm</Type>
-      <Scope>TRCSchemaDataDelegate-p</Scope>
-    </TokenIdentifier>
-    <Path>protocol_t_r_c_schema_data_delegate-p.html</Path>
-    <Anchor>ae06a3b2c34abebb1a413d0bf64221d26</Anchor>
-    <Abstract>Called when TRCSchemaData can&amp;#39;t enumerate or modify object because type mismatching in schema and obj...</Abstract>
-    <DeclaredIn>TRCSchemaData.h</DeclaredIn>
-  </Token>
-  <Token>
-    <TokenIdentifier>
-      <Name>schemaData:willEnumerateItemAtIndentifier:</Name>
-      <APILanguage>occ</APILanguage>
-      <Type>intfm</Type>
-      <Scope>TRCSchemaDataDelegate-p</Scope>
-    </TokenIdentifier>
-    <Path>protocol_t_r_c_schema_data_delegate-p.html</Path>
-    <Anchor>afc16cc2c3b40cb6cca7d5d6204a0e189</Anchor>
-    <Abstract>These two methods calls each collection item. </Abstract>
-    <DeclaredIn>TRCSchemaData.h</DeclaredIn>
-  </Token>
-  <Token>
-    <TokenIdentifier>
-      <Name>schemaData:didEnumerateItemAtIndentifier:</Name>
-      <APILanguage>occ</APILanguage>
-      <Type>intfm</Type>
-      <Scope>TRCSchemaDataDelegate-p</Scope>
-    </TokenIdentifier>
-    <Path>protocol_t_r_c_schema_data_delegate-p.html</Path>
-    <Anchor>ad65141c8eaecb30fdc63528545cf7e0d</Anchor>
-    <DeclaredIn>TRCSchemaData.h</DeclaredIn>
-  </Token>
-  <Token>
-    <TokenIdentifier>
-      <Name>TRCSchemaDataModifier</Name>
+      <Name>TRCSchemaDataModifier </Name>
       <APILanguage>c</APILanguage>
       <Type>intf</Type>
-      <Scope>TRCSchemaDataModifier</Scope>
+      <Scope>TRCSchemaDataModifier </Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_schema_data_modifier-p.html</Path>
+    <Path>protocol_t_r_c_schema_data_modifier_01-p.html</Path>
     <DeclaredIn>TRCSchemaData.h</DeclaredIn>
   </Token>
   <Token>
@@ -1980,10 +2508,10 @@
       <Name>schemaData:replacementForValue:withOptions:withSchemeValue:</Name>
       <APILanguage>occ</APILanguage>
       <Type>intfm</Type>
-      <Scope>TRCSchemaDataModifier-p</Scope>
+      <Scope>TRCSchemaDataModifier -p</Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_schema_data_modifier-p.html</Path>
-    <Anchor>a489fa526053f39d4960b609d6487fd72</Anchor>
+    <Path>protocol_t_r_c_schema_data_modifier_01-p.html</Path>
+    <Anchor>ab319a9b9612d73ea89e9830047755391</Anchor>
     <Abstract>Returns replacement for value. </Abstract>
     <DeclaredIn>TRCSchemaData.h</DeclaredIn>
   </Token>
@@ -1992,10 +2520,10 @@
       <Name>schemaData:objectFromResponse:withMapperTag:</Name>
       <APILanguage>occ</APILanguage>
       <Type>intfm</Type>
-      <Scope>TRCSchemaDataModifier-p</Scope>
+      <Scope>TRCSchemaDataModifier -p</Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_schema_data_modifier-p.html</Path>
-    <Anchor>a4f3677d02497714817cd91489e73432f</Anchor>
+    <Path>protocol_t_r_c_schema_data_modifier_01-p.html</Path>
+    <Anchor>a183ace784d729b51ec01a19c0af85fbb</Anchor>
     <Abstract>Returns replacement for responseObject using TRCObjectMapper for specified tag. </Abstract>
     <DeclaredIn>TRCSchemaData.h</DeclaredIn>
   </Token>
@@ -2004,56 +2532,110 @@
       <Name>schemaData:requestFromObject:withMapperTag:</Name>
       <APILanguage>occ</APILanguage>
       <Type>intfm</Type>
-      <Scope>TRCSchemaDataModifier-p</Scope>
+      <Scope>TRCSchemaDataModifier -p</Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_schema_data_modifier-p.html</Path>
-    <Anchor>ad311599b8b23781d3da4a22107e6308e</Anchor>
+    <Path>protocol_t_r_c_schema_data_modifier_01-p.html</Path>
+    <Anchor>a14d83f641e68625e087ba6178ccce51d</Anchor>
     <Abstract>Returns replacement for requestObject using TRCObjectMapper for specified tag. </Abstract>
     <DeclaredIn>TRCSchemaData.h</DeclaredIn>
   </Token>
   <Token>
     <TokenIdentifier>
-      <Name>schemaData:typeMismatchForValue:withSchemaValue:</Name>
-      <APILanguage>occ</APILanguage>
-      <Type>intfm</Type>
-      <Scope>TRCSchemaDataDelegate-p</Scope>
-    </TokenIdentifier>
-    <Path>protocol_t_r_c_schema_data_delegate-p.html</Path>
-    <Anchor>ae06a3b2c34abebb1a413d0bf64221d26</Anchor>
-    <Abstract>Called when TRCSchemaData can&amp;#39;t enumerate or modify object because type mismatching in schema and obj...</Abstract>
-    <DeclaredIn>TRCSchemaData.h</DeclaredIn>
-  </Token>
-  <Token>
-    <TokenIdentifier>
-      <Name>schemaData:willEnumerateItemAtIndentifier:</Name>
-      <APILanguage>occ</APILanguage>
-      <Type>intfm</Type>
-      <Scope>TRCSchemaDataDelegate-p</Scope>
-    </TokenIdentifier>
-    <Path>protocol_t_r_c_schema_data_delegate-p.html</Path>
-    <Anchor>afc16cc2c3b40cb6cca7d5d6204a0e189</Anchor>
-    <Abstract>These two methods calls each collection item. </Abstract>
-    <DeclaredIn>TRCSchemaData.h</DeclaredIn>
-  </Token>
-  <Token>
-    <TokenIdentifier>
-      <Name>schemaData:didEnumerateItemAtIndentifier:</Name>
-      <APILanguage>occ</APILanguage>
-      <Type>intfm</Type>
-      <Scope>TRCSchemaDataDelegate-p</Scope>
-    </TokenIdentifier>
-    <Path>protocol_t_r_c_schema_data_delegate-p.html</Path>
-    <Anchor>ad65141c8eaecb30fdc63528545cf7e0d</Anchor>
-    <DeclaredIn>TRCSchemaData.h</DeclaredIn>
-  </Token>
-  <Token>
-    <TokenIdentifier>
-      <Name>TRCSchemaFormat</Name>
+      <Name>TRCSchemaDataProvider </Name>
       <APILanguage>c</APILanguage>
       <Type>intf</Type>
-      <Scope>TRCSchemaFormat</Scope>
+      <Scope>TRCSchemaDataProvider </Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_schema_format-p.html</Path>
+    <Path>protocol_t_r_c_schema_data_provider_01-p.html</Path>
+    <Abstract>Implementation of this protocol provides TRCSchemaData data for specified mapper tag or nil ...</Abstract>
+    <DeclaredIn>TRCSchemaData.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>schemaData:hasObjectMapperForTag:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>intfm</Type>
+      <Scope>TRCSchemaDataProvider -p</Scope>
+    </TokenIdentifier>
+    <Path>protocol_t_r_c_schema_data_provider_01-p.html</Path>
+    <Anchor>a03cc7359bc6dd585dd65f60c3b18a901</Anchor>
+    <Abstract>Returns YES, if provider has object mapper for specified tag. </Abstract>
+    <DeclaredIn>TRCSchemaData.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>schemaData:requestSchemaForMapperWithTag:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>intfm</Type>
+      <Scope>TRCSchemaDataProvider -p</Scope>
+    </TokenIdentifier>
+    <Path>protocol_t_r_c_schema_data_provider_01-p.html</Path>
+    <Anchor>aee7e60fac8c583f7e7e651250db3f283</Anchor>
+    <Abstract>Returns TRCSchemaData for specified mapperTag or nil, if not exists. </Abstract>
+    <DeclaredIn>TRCSchemaData.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>schemaData:responseSchemaForMapperWithTag:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>intfm</Type>
+      <Scope>TRCSchemaDataProvider -p</Scope>
+    </TokenIdentifier>
+    <Path>protocol_t_r_c_schema_data_provider_01-p.html</Path>
+    <Anchor>aa98661fa46b69d111ef9303012f99613</Anchor>
+    <Abstract>Returns TRCSchemaData for specified mapperTag or nil, if not exists. </Abstract>
+    <DeclaredIn>TRCSchemaData.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>TRCSchemaDictionaryData</Name>
+      <APILanguage>c</APILanguage>
+      <Type>cl</Type>
+      <Scope>TRCSchemaDictionaryData</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_schema_dictionary_data.html</Path>
+    <Abstract>Concrete implementation of TRCSchemaData protocol. </Abstract>
+    <DeclaredIn>TRCSchemaDictionaryData.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>requestData</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instp</Type>
+      <Scope>TRCSchemaDictionaryData</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_schema_dictionary_data.html</Path>
+    <Anchor>af515f7d5dba2a50ae5737e39c2129b59</Anchor>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>dataProvider</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instp</Type>
+      <Scope>TRCSchemaDictionaryData</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_schema_dictionary_data.html</Path>
+    <Anchor>af42967a794885cc5cee621b756a1e34a</Anchor>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>initWithArrayOrDictionary:request:dataProvider:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instm</Type>
+      <Scope>TRCSchemaDictionaryData</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_schema_dictionary_data.html</Path>
+    <Anchor>a61bf42f687db92eaf13d006c7745612a</Anchor>
+    <DeclaredIn>TRCSchemaDictionaryData.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>TRCSchemaFormat </Name>
+      <APILanguage>c</APILanguage>
+      <Type>intf</Type>
+      <Scope>TRCSchemaFormat </Scope>
+    </TokenIdentifier>
+    <Path>protocol_t_r_c_schema_format_01-p.html</Path>
     <Abstract>Describes schema format protocol. </Abstract>
     <DeclaredIn>TRCInfrastructure.h</DeclaredIn>
   </Token>
@@ -2062,10 +2644,10 @@
       <Name>requestSchemaDataFromData:dataProvider:error:</Name>
       <APILanguage>occ</APILanguage>
       <Type>intfm</Type>
-      <Scope>TRCSchemaFormat-p</Scope>
+      <Scope>TRCSchemaFormat -p</Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_schema_format-p.html</Path>
-    <Anchor>a93fae8b9e94a680a5b2a0db90ccbb20a</Anchor>
+    <Path>protocol_t_r_c_schema_format_01-p.html</Path>
+    <Anchor>af33ee81bc697e638c5c9705495527e05</Anchor>
     <Abstract>Creates TRCSchemaData for request from schema file&amp;#39;s NSData. </Abstract>
     <DeclaredIn>TRCInfrastructure.h</DeclaredIn>
   </Token>
@@ -2074,12 +2656,353 @@
       <Name>responseSchemaDataFromData:dataProvider:error:</Name>
       <APILanguage>occ</APILanguage>
       <Type>intfm</Type>
-      <Scope>TRCSchemaFormat-p</Scope>
+      <Scope>TRCSchemaFormat -p</Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_schema_format-p.html</Path>
-    <Anchor>a381450310c2a9996c706dd1271caf0d7</Anchor>
+    <Path>protocol_t_r_c_schema_format_01-p.html</Path>
+    <Anchor>a8e556bc48c4289c4f88b747101e85e6d</Anchor>
     <Abstract>Creates TRCSchemaData for response from schema file&amp;#39;s NSData. </Abstract>
     <DeclaredIn>TRCInfrastructure.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>TRCSerializerData</Name>
+      <APILanguage>c</APILanguage>
+      <Type>cl</Type>
+      <Scope>TRCSerializerData</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_serializer_data.html</Path>
+    <DeclaredIn>TRCSerializerData.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>TRCSerializerHttpQuery</Name>
+      <APILanguage>c</APILanguage>
+      <Type>cl</Type>
+      <Scope>TRCSerializerHttpQuery</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_serializer_http_query.html</Path>
+    <DeclaredIn>TRCSerializerHttpQuery.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>options</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instp</Type>
+      <Scope>TRCSerializerHttpQuery</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_serializer_http_query.html</Path>
+    <Anchor>a20d9dd9767fcae1fa0ba33dae527bfb2</Anchor>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>TRCSerializerImage</Name>
+      <APILanguage>c</APILanguage>
+      <Type>cl</Type>
+      <Scope>TRCSerializerImage</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_serializer_image.html</Path>
+    <DeclaredIn>TRCSerializerImage.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>TRCSerializerInputStream</Name>
+      <APILanguage>c</APILanguage>
+      <Type>cl</Type>
+      <Scope>TRCSerializerInputStream</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_serializer_input_stream.html</Path>
+    <DeclaredIn>TRCSerializerInputStream.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>TRCSerializerJson</Name>
+      <APILanguage>c</APILanguage>
+      <Type>cl</Type>
+      <Scope>TRCSerializerJson</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_serializer_json.html</Path>
+    <DeclaredIn>TRCSerializerJson.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>readingOptions</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instp</Type>
+      <Scope>TRCSerializerJson</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_serializer_json.html</Path>
+    <Anchor>abaae1362ed6bdef6c4fe86ee050149fb</Anchor>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>writingOptions</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instp</Type>
+      <Scope>TRCSerializerJson</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_serializer_json.html</Path>
+    <Anchor>aa3118b8c1bba0330fec376a08178ba89</Anchor>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>errorDescriptionForObject:errorMessage:stackTrace:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>intfm</Type>
+      <Scope>TRCValidationErrorPrinter-p</Scope>
+    </TokenIdentifier>
+    <Path>protocol_t_r_c_validation_error_printer-p.html</Path>
+    <Anchor>a636e3efe9ace47f8d552a70aeb16a70b</Anchor>
+    <Abstract>This method prints object with errorMessage string at specific path. </Abstract>
+    <DeclaredIn>TRCInfrastructure.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>TRCSerializerMultipart</Name>
+      <APILanguage>c</APILanguage>
+      <Type>cl</Type>
+      <Scope>TRCSerializerMultipart</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_serializer_multipart.html</Path>
+    <DeclaredIn>TRCSerializerMultipart.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>TRCSerializerPlist</Name>
+      <APILanguage>c</APILanguage>
+      <Type>cl</Type>
+      <Scope>TRCSerializerPlist</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_serializer_plist.html</Path>
+    <DeclaredIn>TRCSerializerPlist.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>readOptions</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instp</Type>
+      <Scope>TRCSerializerPlist</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_serializer_plist.html</Path>
+    <Anchor>a8746432d1abed228e84c00bf5db843b7</Anchor>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>writeOptions</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instp</Type>
+      <Scope>TRCSerializerPlist</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_serializer_plist.html</Path>
+    <Anchor>a0060589cc9810d7b0aaaac1ec759b5f8</Anchor>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>format</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instp</Type>
+      <Scope>TRCSerializerPlist</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_serializer_plist.html</Path>
+    <Anchor>a31698baa56ca5391ca04104177f5ab48</Anchor>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>TRCSerializerString</Name>
+      <APILanguage>c</APILanguage>
+      <Type>cl</Type>
+      <Scope>TRCSerializerString</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_serializer_string.html</Path>
+    <DeclaredIn>TRCSerializerString.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>encoding</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instp</Type>
+      <Scope>TRCSerializerString</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_serializer_string.html</Path>
+    <Anchor>af229f9ac2d3ca1d5b3bc08390a936f81</Anchor>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>TRCSessionHandler</Name>
+      <APILanguage>c</APILanguage>
+      <Type>cl</Type>
+      <Scope>TRCSessionHandler</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_session_handler.html</Path>
+    <DeclaredIn>TRCSessionHandler.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>startDataTask:withContext:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instm</Type>
+      <Scope>TRCSessionHandler</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_session_handler.html</Path>
+    <Anchor>a85dc3b4485bd90b1b3fb5981f8b76333</Anchor>
+    <DeclaredIn>TRCSessionHandler.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>TRCSessionTaskContext</Name>
+      <APILanguage>c</APILanguage>
+      <Type>cl</Type>
+      <Scope>TRCSessionTaskContext</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_session_task_context.html</Path>
+    <DeclaredIn>TRCSessionTaskContext.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>connection</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instp</Type>
+      <Scope>TRCSessionTaskContext</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_session_task_context.html</Path>
+    <Anchor>a91f02dc4e10f355510fefa4a7c3ec567</Anchor>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>initWithTask:options:completion:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instm</Type>
+      <Scope>TRCSessionTaskContext</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_session_task_context.html</Path>
+    <Anchor>ad7ec1479590d5d5fc170973195212470</Anchor>
+    <DeclaredIn>TRCSessionTaskContext.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>shouldProcessResponse:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instm</Type>
+      <Scope>TRCSessionTaskContext</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_session_task_context.html</Path>
+    <Anchor>a804f42dc9fccce7aefc84b4bbc44e102</Anchor>
+    <DeclaredIn>TRCSessionTaskContext.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>didSendBodyData:totalBytesSent:totalBytesExpectedToSend:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instm</Type>
+      <Scope>TRCSessionTaskContext</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_session_task_context.html</Path>
+    <Anchor>a96690aeefd72898ffee516ab08fba424</Anchor>
+    <DeclaredIn>TRCSessionTaskContext.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>didReceiveData:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instm</Type>
+      <Scope>TRCSessionTaskContext</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_session_task_context.html</Path>
+    <Anchor>a5e1508c22691af99a2fec0f8501d9c18</Anchor>
+    <DeclaredIn>TRCSessionTaskContext.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>didCompleteWithError:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instm</Type>
+      <Scope>TRCSessionTaskContext</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_session_task_context.html</Path>
+    <Anchor>a197868e628d8748627018a42a4036325</Anchor>
+    <DeclaredIn>TRCSessionTaskContext.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>didReceiveChallenge:completionHandler:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instm</Type>
+      <Scope>TRCSessionTaskContext</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_session_task_context.html</Path>
+    <Anchor>a52ace4f2c24cc5b7a3c76bf7c6c4fb00</Anchor>
+    <DeclaredIn>TRCSessionTaskContext.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>state</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instm</Type>
+      <Scope>TRCSessionTaskContext</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_session_task_context.html</Path>
+    <Anchor>a80643248b8013c39c86547dd46430ed6</Anchor>
+    <Abstract>Returns current state of network operation. </Abstract>
+    <DeclaredIn>TRCSessionTaskContext.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>setUploadProgressBlock:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>intfm</Type>
+      <Scope>TRCProgressHandler-p</Scope>
+    </TokenIdentifier>
+    <Path>protocol_t_r_c_progress_handler-p.html</Path>
+    <Anchor>a9db7a03a73ad3155264e7dc311014290</Anchor>
+    <Abstract>Sets upload block, which called after each upload progress change. </Abstract>
+    <DeclaredIn>TRCConnection.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>setDownloadProgressBlock:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>intfm</Type>
+      <Scope>TRCProgressHandler-p</Scope>
+    </TokenIdentifier>
+    <Path>protocol_t_r_c_progress_handler-p.html</Path>
+    <Anchor>af77d47a67047fef0e38eb82bda07d2ff</Anchor>
+    <Abstract>Sets download block, which called after each upload progress change. </Abstract>
+    <DeclaredIn>TRCConnection.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>pause</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>intfm</Type>
+      <Scope>TRCProgressHandler-p</Scope>
+    </TokenIdentifier>
+    <Path>protocol_t_r_c_progress_handler-p.html</Path>
+    <Anchor>ad3cc9fb2089a41e7e1238c659904d985</Anchor>
+    <Abstract>Pauses current upload or download progress. </Abstract>
+    <DeclaredIn>TRCConnection.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>resume</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>intfm</Type>
+      <Scope>TRCProgressHandler-p</Scope>
+    </TokenIdentifier>
+    <Path>protocol_t_r_c_progress_handler-p.html</Path>
+    <Anchor>ad9dc20e57b04218afbca393772e15bab</Anchor>
+    <Abstract>Resumes current upload or download progress. </Abstract>
+    <DeclaredIn>TRCConnection.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>cancel</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>intfm</Type>
+      <Scope>TRCProgressHandler-p</Scope>
+    </TokenIdentifier>
+    <Path>protocol_t_r_c_progress_handler-p.html</Path>
+    <Anchor>aeee381780d7cbee3b642fc4dab580f9f</Anchor>
+    <Abstract>Cancels current upload or download progress. </Abstract>
+    <DeclaredIn>TRCConnection.h</DeclaredIn>
   </Token>
   <Token>
     <TokenIdentifier>
@@ -2100,18 +3023,18 @@
       <Scope>TRCValidationErrorPrinter-p</Scope>
     </TokenIdentifier>
     <Path>protocol_t_r_c_validation_error_printer-p.html</Path>
-    <Anchor>a0865dfd7a8255c568bb57b8b2d11da64</Anchor>
+    <Anchor>a636e3efe9ace47f8d552a70aeb16a70b</Anchor>
     <Abstract>This method prints object with errorMessage string at specific path. </Abstract>
     <DeclaredIn>TRCInfrastructure.h</DeclaredIn>
   </Token>
   <Token>
     <TokenIdentifier>
-      <Name>TRCValueTransformer</Name>
+      <Name>TRCValueTransformer </Name>
       <APILanguage>c</APILanguage>
       <Type>intf</Type>
-      <Scope>TRCValueTransformer</Scope>
+      <Scope>TRCValueTransformer </Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_value_transformer-p.html</Path>
+    <Path>protocol_t_r_c_value_transformer_01-p.html</Path>
     <Abstract>TRCValueTransformer aimed to convert simple (atomic) typed objects, received as response, into objects to use inside app, and vise versa. </Abstract>
     <DeclaredIn>TRCValueTransformer.h</DeclaredIn>
   </Token>
@@ -2120,10 +3043,10 @@
       <Name>objectFromResponseValue:error:</Name>
       <APILanguage>occ</APILanguage>
       <Type>intfm</Type>
-      <Scope>TRCValueTransformer-p</Scope>
+      <Scope>TRCValueTransformer -p</Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_value_transformer-p.html</Path>
-    <Anchor>a789f626601a7f7b7749943d478e13022</Anchor>
+    <Path>protocol_t_r_c_value_transformer_01-p.html</Path>
+    <Anchor>ae4e15fb9bac8fb2f85026b35b0108ec7</Anchor>
     <Abstract>Converts received value into custom object. </Abstract>
     <DeclaredIn>TRCValueTransformer.h</DeclaredIn>
   </Token>
@@ -2132,10 +3055,10 @@
       <Name>requestValueFromObject:error:</Name>
       <APILanguage>occ</APILanguage>
       <Type>intfm</Type>
-      <Scope>TRCValueTransformer-p</Scope>
+      <Scope>TRCValueTransformer -p</Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_value_transformer-p.html</Path>
-    <Anchor>aeef84919027ad5dff6afd22502aeb0a1</Anchor>
+    <Path>protocol_t_r_c_value_transformer_01-p.html</Path>
+    <Anchor>a8cb78de6ebe0d69617d5d033ecb40ff7</Anchor>
     <Abstract>Converts object into value which can be used in request. </Abstract>
     <DeclaredIn>TRCValueTransformer.h</DeclaredIn>
   </Token>
@@ -2144,12 +3067,42 @@
       <Name>externalTypes</Name>
       <APILanguage>occ</APILanguage>
       <Type>intfm</Type>
-      <Scope>TRCValueTransformer-p</Scope>
+      <Scope>TRCValueTransformer -p</Scope>
     </TokenIdentifier>
-    <Path>protocol_t_r_c_value_transformer-p.html</Path>
-    <Anchor>a55f225768f4476e6122f660c5ea15734</Anchor>
+    <Path>protocol_t_r_c_value_transformer_01-p.html</Path>
+    <Anchor>a59dc460b155383b9ac04a4201c04a025</Anchor>
     <Abstract>BitMask of value types (TRCValueTransformerType), used in request and response. </Abstract>
     <DeclaredIn>TRCValueTransformer.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>TRCValueTransformerNumber</Name>
+      <APILanguage>c</APILanguage>
+      <Type>cl</Type>
+      <Scope>TRCValueTransformerNumber</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_value_transformer_number.html</Path>
+    <DeclaredIn>TRCValueTransformerNumber.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>TRCValueTransformerString</Name>
+      <APILanguage>c</APILanguage>
+      <Type>cl</Type>
+      <Scope>TRCValueTransformerString</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_value_transformer_string.html</Path>
+    <DeclaredIn>TRCValueTransformerString.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>TRCValueTransformerUrl</Name>
+      <APILanguage>c</APILanguage>
+      <Type>cl</Type>
+      <Scope>TRCValueTransformerUrl</Scope>
+    </TokenIdentifier>
+    <Path>interface_t_r_c_value_transformer_url.html</Path>
+    <DeclaredIn>TRCValueTransformerUrl.h</DeclaredIn>
   </Token>
   <Token>
     <TokenIdentifier>
@@ -2230,14 +3183,47 @@
   </Token>
   <Token>
     <TokenIdentifier>
-      <Name>validationOptions</Name>
+      <Name>options</Name>
       <APILanguage>occ</APILanguage>
       <Type>instp</Type>
       <Scope>TyphoonRestClient</Scope>
     </TokenIdentifier>
     <Path>interface_typhoon_rest_client.html</Path>
-    <Anchor>a3d9b3eb367f611ed2375c8a65c40ab25</Anchor>
-    <Abstract>Set validation and processing options here. Default: TRCValidationOptionsNone </Abstract>
+    <Anchor>a629d6eb0a904275d602e9d1db8ac590e</Anchor>
+    <Abstract>Set validation and processing options here. Default: TRCOptionsNone </Abstract>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>querySerializationOptions</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instp</Type>
+      <Scope>TyphoonRestClient</Scope>
+    </TokenIdentifier>
+    <Path>interface_typhoon_rest_client.html</Path>
+    <Anchor>a448470457f425706df36573ccfc2ec3e</Anchor>
+    <Abstract>This options allows you to specify specific query serialization parameters It used while generating r...</Abstract>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>callbackQueue</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instp</Type>
+      <Scope>TyphoonRestClient</Scope>
+    </TokenIdentifier>
+    <Path>interface_typhoon_rest_client.html</Path>
+    <Anchor>a85d2a12699d86c804a2c980a1ac606aa</Anchor>
+    <Abstract>This queue used to call completion blocks. Main Queue used by default. </Abstract>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>workQueue</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instp</Type>
+      <Scope>TyphoonRestClient</Scope>
+    </TokenIdentifier>
+    <Path>interface_typhoon_rest_client.html</Path>
+    <Anchor>aee20909d2f5f0a4227d985d72f72fca3</Anchor>
+    <Abstract>This queue used to do all serialization, deserialization, validations and parsing. Main Queue used by default. </Abstract>
   </Token>
   <Token>
     <TokenIdentifier>
@@ -2247,7 +3233,7 @@
       <Scope>TyphoonRestClient</Scope>
     </TokenIdentifier>
     <Path>interface_typhoon_rest_client.html</Path>
-    <Anchor>adf3bca490c3b1cc5388188bcdb1698e2</Anchor>
+    <Anchor>a0dc83d88a9fb7cbfb73610e683fceb72</Anchor>
     <Abstract>Sends your TRCRequest using connection and returns result in completion block. </Abstract>
     <DeclaredIn>TyphoonRestClient.h</DeclaredIn>
   </Token>
@@ -2259,7 +3245,7 @@
       <Scope>TyphoonRestClient</Scope>
     </TokenIdentifier>
     <Path>interface_typhoon_rest_client.html</Path>
-    <Anchor>a53fb3aa43f666ed29c2c996f04c90653</Anchor>
+    <Anchor>a4ed973c96276f7c1ffe9fe83fee5be65</Anchor>
     <Abstract>Registers TRCValueTransformer for specific tag string. </Abstract>
     <DeclaredIn>TyphoonRestClient.h</DeclaredIn>
   </Token>
@@ -2271,8 +3257,20 @@
       <Scope>TyphoonRestClient</Scope>
     </TokenIdentifier>
     <Path>interface_typhoon_rest_client.html</Path>
-    <Anchor>a7c1f4b8b2365c583b7fa9f674b1b4958</Anchor>
+    <Anchor>ab91dcd6a309b3933444fa6b563115e0d</Anchor>
     <Abstract>Registers TRCObjectMapper for specific tag string. </Abstract>
+    <DeclaredIn>TyphoonRestClient.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>registerPreProcessor:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instm</Type>
+      <Scope>TyphoonRestClient</Scope>
+    </TokenIdentifier>
+    <Path>interface_typhoon_rest_client.html</Path>
+    <Anchor>ac4c54f7ab61047e97f9719d884981a22</Anchor>
+    <Abstract>Adds your TRCPreProcessor into registry. </Abstract>
     <DeclaredIn>TyphoonRestClient.h</DeclaredIn>
   </Token>
   <Token>
@@ -2295,8 +3293,30 @@
       <Scope>TyphoonRestClient</Scope>
     </TokenIdentifier>
     <Path>interface_typhoon_rest_client.html</Path>
-    <Anchor>a21d5c18aaa9c1060b31e3de33dbee494</Anchor>
+    <Anchor>af7ee2d9ec19b1c02756264271c6323c1</Anchor>
     <Abstract>Registers TRCSerialization as default for body object class. </Abstract>
+    <DeclaredIn>TyphoonRestClient.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>convertThenValidateRequestObject:usingSchemaTag:options:error:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instm</Type>
+      <Scope>TyphoonRestClient</Scope>
+    </TokenIdentifier>
+    <Path>interface_typhoon_rest_client.html</Path>
+    <Anchor>af3f07ef2f91439fbd86ba72d153c671b</Anchor>
+    <DeclaredIn>TyphoonRestClient.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>validateThenConvertResponseObject:usingSchemaTag:options:error:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>instm</Type>
+      <Scope>TyphoonRestClient</Scope>
+    </TokenIdentifier>
+    <Path>interface_typhoon_rest_client.html</Path>
+    <Anchor>ac7babf848aab7431e97d6d42790ebedb</Anchor>
     <DeclaredIn>TyphoonRestClient.h</DeclaredIn>
   </Token>
   <Token>
@@ -2307,7 +3327,7 @@
       <Scope>TyphoonRestClient</Scope>
     </TokenIdentifier>
     <Path>interface_typhoon_rest_client.html</Path>
-    <Anchor>ae1aea80c836f4112396fcb0a2307d382</Anchor>
+    <Anchor>a32f00e6041c8c765ab2a0dd54d2f9e9f</Anchor>
     <Abstract>Registers TRCRequestSerializer for special string identifier TRCSerialization. </Abstract>
     <DeclaredIn>TyphoonRestClient.h</DeclaredIn>
   </Token>
@@ -2319,7 +3339,7 @@
       <Scope>TyphoonRestClient</Scope>
     </TokenIdentifier>
     <Path>interface_typhoon_rest_client.html</Path>
-    <Anchor>a4f983e83b61fef7dea0befea0a0e0175</Anchor>
+    <Anchor>a86b8a6662a65600ac6ab5739924159b5</Anchor>
     <Abstract>Registers TRCResponseSerializer for special string identifier TRCSerialization. </Abstract>
     <DeclaredIn>TyphoonRestClient.h</DeclaredIn>
   </Token>
@@ -2331,7 +3351,7 @@
       <Scope>TyphoonRestClient</Scope>
     </TokenIdentifier>
     <Path>interface_typhoon_rest_client.html</Path>
-    <Anchor>a9ed339e2518c12f4376c31f13d2c77ea</Anchor>
+    <Anchor>ae2239cfe912805aabd38f4f28f0df1b2</Anchor>
     <Abstract>Registers scheme file format in TyphoonRestClient. </Abstract>
     <DeclaredIn>TyphoonRestClient.h</DeclaredIn>
   </Token>
@@ -2343,7 +3363,7 @@
       <Scope>TyphoonRestClient</Scope>
     </TokenIdentifier>
     <Path>interface_typhoon_rest_client.html</Path>
-    <Anchor>a6c9dc5924bd2a5c25ccdc54503c887fa</Anchor>
+    <Anchor>a1f6f490e87782dbe531057c05349145a</Anchor>
     <Abstract>Registers validation error printer for schema file extension. </Abstract>
     <DeclaredIn>TyphoonRestClient.h</DeclaredIn>
   </Token>
@@ -2355,8 +3375,40 @@
       <Scope>TyphoonRestClient</Scope>
     </TokenIdentifier>
     <Path>interface_typhoon_rest_client.html</Path>
-    <Anchor>a5f932db04e479dc304785d9a3085e11d</Anchor>
+    <Anchor>a67bad34aa2b1034301a28752d199fdc1</Anchor>
     <Abstract>Registers TRCValueTransformerType with objective-c class. </Abstract>
+    <DeclaredIn>TyphoonRestClient.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>TyphoonRestClient(Extensions)</Name>
+      <APILanguage>c</APILanguage>
+      <Type>cat</Type>
+      <Scope>TyphoonRestClient(Extensions)</Scope>
+    </TokenIdentifier>
+    <Path>category_typhoon_rest_client_07_extensions_08.html</Path>
+    <DeclaredIn>TyphoonRestClient.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>convertThenValidateRequestObject:usingSchemaTag:options:error:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>func</Type>
+      <Scope>TyphoonRestClient(Extensions)</Scope>
+    </TokenIdentifier>
+    <Path>category_typhoon_rest_client_07_extensions_08.html</Path>
+    <Anchor>af3f07ef2f91439fbd86ba72d153c671b</Anchor>
+    <DeclaredIn>TyphoonRestClient.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>validateThenConvertResponseObject:usingSchemaTag:options:error:</Name>
+      <APILanguage>occ</APILanguage>
+      <Type>func</Type>
+      <Scope>TyphoonRestClient(Extensions)</Scope>
+    </TokenIdentifier>
+    <Path>category_typhoon_rest_client_07_extensions_08.html</Path>
+    <Anchor>ac7babf848aab7431e97d6d42790ebedb</Anchor>
     <DeclaredIn>TyphoonRestClient.h</DeclaredIn>
   </Token>
   <Token>
@@ -2378,7 +3430,7 @@
       <Scope>TyphoonRestClient(Infrastructure)</Scope>
     </TokenIdentifier>
     <Path>category_typhoon_rest_client_07_infrastructure_08.html</Path>
-    <Anchor>ae1aea80c836f4112396fcb0a2307d382</Anchor>
+    <Anchor>a32f00e6041c8c765ab2a0dd54d2f9e9f</Anchor>
     <Abstract>Registers TRCRequestSerializer for special string identifier TRCSerialization. </Abstract>
     <DeclaredIn>TyphoonRestClient.h</DeclaredIn>
   </Token>
@@ -2390,7 +3442,7 @@
       <Scope>TyphoonRestClient(Infrastructure)</Scope>
     </TokenIdentifier>
     <Path>category_typhoon_rest_client_07_infrastructure_08.html</Path>
-    <Anchor>a4f983e83b61fef7dea0befea0a0e0175</Anchor>
+    <Anchor>a86b8a6662a65600ac6ab5739924159b5</Anchor>
     <Abstract>Registers TRCResponseSerializer for special string identifier TRCSerialization. </Abstract>
     <DeclaredIn>TyphoonRestClient.h</DeclaredIn>
   </Token>
@@ -2402,7 +3454,7 @@
       <Scope>TyphoonRestClient(Infrastructure)</Scope>
     </TokenIdentifier>
     <Path>category_typhoon_rest_client_07_infrastructure_08.html</Path>
-    <Anchor>a9ed339e2518c12f4376c31f13d2c77ea</Anchor>
+    <Anchor>ae2239cfe912805aabd38f4f28f0df1b2</Anchor>
     <Abstract>Registers scheme file format in TyphoonRestClient. </Abstract>
     <DeclaredIn>TyphoonRestClient.h</DeclaredIn>
   </Token>
@@ -2414,7 +3466,7 @@
       <Scope>TyphoonRestClient(Infrastructure)</Scope>
     </TokenIdentifier>
     <Path>category_typhoon_rest_client_07_infrastructure_08.html</Path>
-    <Anchor>a6c9dc5924bd2a5c25ccdc54503c887fa</Anchor>
+    <Anchor>a1f6f490e87782dbe531057c05349145a</Anchor>
     <Abstract>Registers validation error printer for schema file extension. </Abstract>
     <DeclaredIn>TyphoonRestClient.h</DeclaredIn>
   </Token>
@@ -2426,7 +3478,7 @@
       <Scope>TyphoonRestClient(Infrastructure)</Scope>
     </TokenIdentifier>
     <Path>category_typhoon_rest_client_07_infrastructure_08.html</Path>
-    <Anchor>a5f932db04e479dc304785d9a3085e11d</Anchor>
+    <Anchor>a67bad34aa2b1034301a28752d199fdc1</Anchor>
     <Abstract>Registers TRCValueTransformerType with objective-c class. </Abstract>
     <DeclaredIn>TyphoonRestClient.h</DeclaredIn>
   </Token>

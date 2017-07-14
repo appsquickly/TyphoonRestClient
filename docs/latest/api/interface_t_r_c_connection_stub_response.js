@@ -6,7 +6,7 @@ var interface_t_r_c_connection_stub_response =
     [ "headers", "interface_t_r_c_connection_stub_response.html#a01bac86ed3d98abf210f634cb9546381", null ],
     [ "mime", "interface_t_r_c_connection_stub_response.html#ad604699dddecaf3f78cb07f3c28ca810", null ],
     [ "delayInSeconds", "interface_t_r_c_connection_stub_response.html#a86b45e35b3ea9c5272c09adbbf94f963", null ],
-    [ "initWithResponseData:mime:headers:status:", "interface_t_r_c_connection_stub_response.html#aeb5e98964efb338cbcfda101989292dc", null ],
+    [ "initWithResponseData:mime:headers:status:", "interface_t_r_c_connection_stub_response.html#a009f9303c9682a5bcde0d9914c62b9fe", null ],
     [ "initWithConnectionError", "interface_t_r_c_connection_stub_response.html#a2a6fb909e8f9cbc38754f2727e4b499d", null ],
     [ "initWithContentNotFoundError", "interface_t_r_c_connection_stub_response.html#a3bbeaea3fe131fa9a06076b536ad5938", null ]
 ];

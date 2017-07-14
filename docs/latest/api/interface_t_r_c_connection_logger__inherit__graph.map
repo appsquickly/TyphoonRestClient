@@ -1,3 +1,4 @@
 <map id="TRCConnectionLogger" name="TRCConnectionLogger">
-<area shape="rect" id="node3" href="$protocol_t_r_c_connection-p.html" title="TRCConnection provides abstraction over network connection. " alt="" coords="180,5,312,31"/>
+<area shape="rect" id="node2" href="$interface_t_r_c_connection_proxy.html" title="TRCConnectionProxy" alt="" coords="5,79,156,104"/>
+<area shape="rect" id="node4" href="$protocol_t_r_c_connection-p.html" title="TRCConnection provides abstraction over network connection. " alt="" coords="127,5,258,31"/>
 </map>

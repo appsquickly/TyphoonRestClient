@@ -1,7 +1,9 @@
 var searchData=
 [
-  ['objectfromresponsedata_3aerror_3a',['objectFromResponseData:error:',['../protocol_t_r_c_response_serializer-p.html#a134abe9b790cbc40e61663603f1e8af8',1,'TRCResponseSerializer-p']]],
-  ['objectfromresponseobject_3aerror_3a',['objectFromResponseObject:error:',['../protocol_t_r_c_object_mapper-p.html#ac7136de05cd53fd7ae88c09c281178f6',1,'TRCObjectMapper-p']]],
-  ['objectfromresponsevalue_3aerror_3a',['objectFromResponseValue:error:',['../protocol_t_r_c_value_transformer-p.html#a789f626601a7f7b7749943d478e13022',1,'TRCValueTransformer-p']]],
-  ['outputstream',['outputStream',['../protocol_t_r_c_connection_request_sending_options-p.html#a9a25a621ec37aa377f5ab3c41b124b3a',1,'TRCConnectionRequestSendingOptions-p']]]
+  ['managerforaddress_3a',['managerForAddress:',['../interface_t_r_c_network_reachability_manager.html#a2d2fea052e7a2514299d5972556e7cb3',1,'TRCNetworkReachabilityManager']]],
+  ['managerfordomain_3a',['managerForDomain:',['../interface_t_r_c_network_reachability_manager.html#a6d41a91f2ecca46ae845ef4577756403',1,'TRCNetworkReachabilityManager']]],
+  ['method',['method',['../protocol_t_r_c_connection_request_creation_options_01-p.html#a97c158cd996ee7072d0079dd021a083b',1,'TRCConnectionRequestCreationOptions -p::method()'],['../protocol_t_r_c_request-p.html#a8d179f9d670b1ea92f9d9b0faf65b314',1,'TRCRequest-p::method()']]],
+  ['mime',['mime',['../interface_t_r_c_connection_stub_response.html#ad604699dddecaf3f78cb07f3c28ca810',1,'TRCConnectionStubResponse']]],
+  ['mimetype',['mimeType',['../interface_t_r_c_multipart_file.html#a52fffb8f3c8d7033cc41b810483337aa',1,'TRCMultipartFile']]],
+  ['modify_3awithmodifier_3a',['modify:withModifier:',['../protocol_t_r_c_schema_data_01-p.html#a98f819000a072c4c9e592b2054afcb93',1,'TRCSchemaData -p']]]
 ];

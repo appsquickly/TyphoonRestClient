@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ns_5foptions',['NS_OPTIONS',['../_typhoon_rest_client_8h.html#ae31f237fbcdbd7eadfd7a827c8d93acd',1,'TyphoonRestClient.h']]]
+  ['localizednetworkreachabilitystatusstring',['localizedNetworkReachabilityStatusString',['../interface_t_r_c_network_reachability_manager.html#ac9cb91c74d8b6cec2095824d241a3e24',1,'TRCNetworkReachabilityManager']]]
 ];

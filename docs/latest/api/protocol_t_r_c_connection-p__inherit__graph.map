@@ -1,5 +1,6 @@
 <map id="&lt;TRCConnection&gt;" name="&lt;TRCConnection&gt;">
-<area shape="rect" id="node2" href="$interface_t_r_c_connection_a_f_networking.html" title="TRCConnectionAFNetworking is default implementation of &#39;real&#39; network connection. ..." alt="" coords="5,79,205,104"/>
-<area shape="rect" id="node3" href="$interface_t_r_c_connection_logger.html" title="TRCConnectionLogger" alt="" coords="229,79,387,104"/>
-<area shape="rect" id="node4" href="$interface_t_r_c_connection_stub.html" title="TRCConnectionStub" alt="" coords="411,79,554,104"/>
+<area shape="rect" id="node2" href="$interface_t_r_c_connection_logger.html" title="TRCConnectionLogger" alt="" coords="81,152,238,177"/>
+<area shape="rect" id="node3" href="$interface_t_r_c_connection_n_s_u_r_l_session.html" title="TRCConnectionNSURLSession" alt="" coords="24,79,233,104"/>
+<area shape="rect" id="node4" href="$interface_t_r_c_connection_proxy.html" title="TRCConnectionProxy" alt="" coords="258,79,408,104"/>
+<area shape="rect" id="node5" href="$interface_t_r_c_connection_stub.html" title="TRCConnectionStub" alt="" coords="432,79,575,104"/>
 </map>
