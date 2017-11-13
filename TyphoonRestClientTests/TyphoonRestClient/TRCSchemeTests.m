@@ -33,7 +33,7 @@
 
 - (TRCSchema *)schemaWithName:(NSString *)name forRequest:(BOOL)request
 {
-    NSBundle *bundle = [NSBundle bundleForClass:[TRCSchemeTests class]];
+    NSBundle *bundle = [NSBundle mainBundle];
     NSString *schemePath = [bundle pathForResource:name ofType:nil];
 
 
@@ -496,7 +496,7 @@
 
 - (void)test_plist_scheme
 {
-    NSBundle *bundle = [NSBundle bundleForClass:[TRCSchemeTests class]];
+    NSBundle *bundle = [NSBundle mainBundle];
     NSString *schemePath = [bundle pathForResource:@"PropertyListSchema" ofType:@"plist"];
     
     TRCSerializerPlist *jsonSerializer = [TRCSerializerPlist new];

@@ -134,7 +134,7 @@
 
     if (name) {
         TRCSerializerJson *jsonSerializer = [TRCSerializerJson new];
-        NSString *path = [[NSBundle bundleForClass:[self class]] pathForResource:name ofType:nil];
+        NSString *path = [[NSBundle mainBundle] pathForResource:name ofType:nil];
         result = [jsonSerializer responseSchemaDataFromData:[NSData dataWithContentsOfFile:path] dataProvider:self error:nil];
     }
     return result;

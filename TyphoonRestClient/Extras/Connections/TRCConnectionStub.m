@@ -260,7 +260,7 @@
 
 NSString *TRCBundleFile(NSString *fileName)
 {
-    NSString *path = [[NSBundle bundleForClass:[TRCConnectionStub class]] pathForResource:fileName ofType:nil];
+    NSString *path = [[NSBundle mainBundle] pathForResource:fileName ofType:nil];
     if (path) {
         return [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
     } else {
