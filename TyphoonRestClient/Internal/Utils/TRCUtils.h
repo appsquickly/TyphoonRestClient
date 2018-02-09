@@ -17,6 +17,7 @@
 #import "TRCSerializerHttpQuery.h"
 
 extern NSString *TRCRootMapperKey;
+extern NSString *TRCRootKey;
 
 NSError *TRCRequestSerializationErrorWithFormat(NSString *format, ...) NS_FORMAT_FUNCTION(1,2);
 

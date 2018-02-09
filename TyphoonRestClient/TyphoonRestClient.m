@@ -1016,6 +1016,36 @@ static inline void TRCCompleteWithError(void(^completion)(id, NSError *), NSErro
 
 @implementation TyphoonRestClient (Extensions)
 
+- (id)convertThenValidateRequestObject:(id)object usingSchemaObject:(id)schemaObject options:(TRCTransformationOptions)options error:(NSError **)pError
+{
+    TRCSchemaDictionaryData *data = [[TRCSchemaDictionaryData alloc] initWithArrayOrDictionary:@{ TRCRootKey : ValueOrNull(schemaObject) } request:YES dataProvider:self];
+    TRCSchema *schema = [_schemeFactory schemeFromData:data withName:[schemaObject description]];
+
+    NSError *error = nil;
+    id result = [self convertThenValidateObject:object withScheme:schema options:options error:&error];
+    if (error) {
+        TRCSetError(pError, error);
+        return nil;
+    } else {
+        return result;
+    }
+}
+
+- (id)validateThenConvertResponseObject:(id)object usingSchemaObject:(id)schemaObject options:(TRCTransformationOptions)options error:(NSError **)pError
+{
+    TRCSchemaDictionaryData *data = [[TRCSchemaDictionaryData alloc] initWithArrayOrDictionary:@{ TRCRootKey : ValueOrNull(schemaObject) } request:NO dataProvider:self];
+    TRCSchema *schema = [_schemeFactory schemeFromData:data withName:[schemaObject description]];
+
+    NSError *error = nil;
+    id result = [self validateThenConvertObject:object withScheme:schema options:options error:&error];
+    if (error) {
+        TRCSetError(pError, error);
+        return nil;
+    } else {
+        return result;
+    }
+}
+
 - (id)convertThenValidateRequestObject:(id)object usingSchemaTag:(NSString *)tag options:(TRCTransformationOptions)options error:(NSError **)pError
 {
     TRCSchemaDictionaryData *data = [[TRCSchemaDictionaryData alloc] initWithArrayOrDictionary:@{ @"object" : tag } request:YES dataProvider:self];

@@ -55,8 +55,8 @@
 
 @implementation TyphoonRestClientTests
 {
-    TyphoonRestClient *webService;
-    TRCConnectionTestStub *connectionStub;
+    TyphoonRestClient *_restClient;
+    TRCConnectionTestStub *_connectionStub;
 }
 
 static TyphoonRestClient *currentWebService;
@@ -86,18 +86,18 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 - (void)setUp
 {
     [super setUp];
-    webService = [self newRestClient];
-    connectionStub = [[TRCConnectionTestStub alloc] init];
-    webService.connection = connectionStub;
+    _restClient = [self newRestClient];
+    _connectionStub = [[TRCConnectionTestStub alloc] init];
+    _restClient.connection = _connectionStub;
 
-    currentWebService = webService;
+    currentWebService = _restClient;
 }
 
 - (void)tearDown
 {
     [super tearDown];
     currentWebService = nil;
-    webService = nil;
+    _restClient = nil;
 }
 
 - (TRCSchema *)schemeForName:(NSString *)name isRequest:(BOOL)isRequest
@@ -135,9 +135,24 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
     }
 
     if ([name isEqualToString:@"Person"]) {
-        schemeObject = @"{person}";
+        schemeObject = @{ @"{root}" : @"{person}"};
     }
 
+    if ([name isEqualToString:@"RootUrl"]) {
+        schemeObject = @{ @"{root}" : @"{url}"};
+    }
+
+    if ([name isEqualToString:@"RootString"]) {
+        schemeObject = @{ @"{root}" : @"string"};
+    }
+
+    if ([name isEqualToString:@"RootExtraDict"]) {
+        schemeObject = @{ @"{root_mapper}" : @{
+                @"number": @1,
+                @"string": @"NSString",
+                @"url{?}": @"{url}"
+        }};
+    }
 
     if ([name isEqualToString:@"Token"]) {
         schemeObject = @{
@@ -161,12 +176,12 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 
 - (void)test_plain_dictionary_request
 {
-    [connectionStub setResponseObject:@{ @"key": @"value" } responseError:nil];
+    [_connectionStub setResponseObject:@{ @"key": @"value" } responseError:nil];
     
     TRCRequestSpy *request = [TRCRequestSpy new];
     request.parseResult = @"result";
 
-    [webService sendRequest:request completion:^(id result, NSError *error) {
+    [_restClient sendRequest:request completion:^(id result, NSError *error) {
         XCTAssertTrue(request.parseResponseObjectCalled);
         XCTAssertEqualObjects(result, @"result");
         XCTAssertNil(error, @"Error: %@", error.localizedDescription);
@@ -175,14 +190,14 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 
 - (void)test_plain_dictionary_request_with_request_schema
 {
-    [connectionStub setResponseObject:@{ @"key": @"value" } responseError:nil];
+    [_connectionStub setResponseObject:@{ @"key": @"value" } responseError:nil];
 
     TRCRequestSpy *request = [TRCRequestSpy new];
     request.requestSchemeName = @"SimpleRequest.json";
     request.requestBody = @{ @"key": @"123"};
     request.parseResult = @"result";
 
-    [webService sendRequest:request completion:^(id result, NSError *error) {
+    [_restClient sendRequest:request completion:^(id result, NSError *error) {
         XCTAssertTrue(request.parseResponseObjectCalled);
         XCTAssertEqualObjects(result, @"result");
         XCTAssertNil(error, @"Error: %@", error.localizedDescription);
@@ -191,14 +206,14 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 
 - (void)test_plain_dictionary_request_with_request_schema_convert_error
 {
-    [connectionStub setResponseObject:@{ @"key": @"value" } responseError:nil];
+    [_connectionStub setResponseObject:@{ @"key": @"value" } responseError:nil];
 
     TRCRequestSpy *request = [TRCRequestSpy new];
     request.requestSchemeName = @"SimpleRequest.json";
     request.requestBody = @{ @"key": @123};
     request.parseResult = @"result";
 
-    [webService sendRequest:request completion:^(id result, NSError *error) {
+    [_restClient sendRequest:request completion:^(id result, NSError *error) {
         NSLog(@"** %@",error.localizedDescription);
         XCTAssertNotNil(error, @"Error: %@", error.localizedDescription);
     }];
@@ -206,14 +221,14 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 
 - (void)test_plain_dictionary_request_with_request_schema_error
 {
-    [connectionStub setResponseObject:@{ @"key": @"value" } responseError:nil];
+    [_connectionStub setResponseObject:@{ @"key": @"value" } responseError:nil];
 
     TRCRequestSpy *request = [TRCRequestSpy new];
     request.requestSchemeName = @"SimpleRequest.json";
     request.requestBody = @{ @"key2": @123};
     request.parseResult = @"result";
 
-    [webService sendRequest:request completion:^(id result, NSError *error) {
+    [_restClient sendRequest:request completion:^(id result, NSError *error) {
         NSLog(@"** %@",error.localizedDescription);
         XCTAssertNotNil(error, @"Error: %@", error.localizedDescription);
     }];
@@ -221,14 +236,14 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 
 - (void)test_plain_dictionary_request_with_error
 {
-    [connectionStub setResponseObject:@{ @"key": @"value" } responseError:nil];
+    [_connectionStub setResponseObject:@{ @"key": @"value" } responseError:nil];
     
     TRCRequestSpy *request = [TRCRequestSpy new];
     request.parseResult = @"result";
     request.parseError = [NSError errorWithDomain:@"" code:0 userInfo:@{NSLocalizedDescriptionKey:@"123"}];
     
 
-    [webService sendRequest:request completion:^(id result, NSError *error) {
+    [_restClient sendRequest:request completion:^(id result, NSError *error) {
         XCTAssertTrue(request.parseResponseObjectCalled);
         XCTAssertNil(result);
         XCTAssertNotNil(error, @"Error: %@", error.localizedDescription);
@@ -240,12 +255,12 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 {
     NSError *networkError = [[NSError alloc] initWithDomain:@"" code:0 userInfo:@{ NSLocalizedDescriptionKey: @"Network Error!"}];
 
-    [connectionStub setResponseObject:@{ @"key": @"value" } responseError:networkError];
+    [_connectionStub setResponseObject:@{ @"key": @"value" } responseError:networkError];
 
     TRCRequestSpy *request = [TRCRequestSpy new];
     request.parseResult = @"result";
 
-    [webService sendRequest:request completion:^(id result, NSError *error) {
+    [_restClient sendRequest:request completion:^(id result, NSError *error) {
         XCTAssertFalse(request.parseResponseObjectCalled);
         XCTAssertNil(result);
         XCTAssertNotNil(error);
@@ -262,14 +277,14 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 
     NSError *networkError = [[NSError alloc] initWithDomain:@"" code:0 userInfo:@{ NSLocalizedDescriptionKey: @"Network Error!"}];
 
-    [connectionStub setResponseObject:@{ @"message": @"Unknown error happens" } responseError:networkError];
+    [_connectionStub setResponseObject:@{ @"message": @"Unknown error happens" } responseError:networkError];
 
-    webService.errorHandler = errorParserSpy;
+    _restClient.errorHandler = errorParserSpy;
 
     TRCRequestSpy *request = [TRCRequestSpy new];
     request.parseResult = @"result";
 
-    [webService sendRequest:request completion:^(id result, NSError *error) {
+    [_restClient sendRequest:request completion:^(id result, NSError *error) {
         XCTAssertFalse(request.parseResponseObjectCalled);
         XCTAssertNil(result);
         XCTAssertNotNil(error);
@@ -286,14 +301,14 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 
     NSError *networkError = [[NSError alloc] initWithDomain:@"" code:0 userInfo:@{ NSLocalizedDescriptionKey: @"Network Error!"}];
 
-    [connectionStub setResponseObject:@{ @"message": @"Unknown error happens" } responseError:networkError];
+    [_connectionStub setResponseObject:@{ @"message": @"Unknown error happens" } responseError:networkError];
 
-    webService.errorHandler = errorParserSpy;
+    _restClient.errorHandler = errorParserSpy;
 
     TRCRequestSpy *request = [TRCRequestSpy new];
     request.parseResult = @"result";
 
-    [webService sendRequest:request completion:^(id result, NSError *error) {
+    [_restClient sendRequest:request completion:^(id result, NSError *error) {
         XCTAssertFalse(request.parseResponseObjectCalled);
         XCTAssertNil(result);
         XCTAssertNotNil(error);
@@ -309,14 +324,14 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 
     NSError *networkError = [[NSError alloc] initWithDomain:@"" code:0 userInfo:@{ NSLocalizedDescriptionKey: @"Network Error!"}];
 
-    [connectionStub setResponseObject:@{ @"code": @"string", @"message": @"Unknown error happens" } responseError:networkError];
+    [_connectionStub setResponseObject:@{ @"code": @"string", @"message": @"Unknown error happens" } responseError:networkError];
 
-    webService.errorHandler = errorParserSpy;
+    _restClient.errorHandler = errorParserSpy;
 
     TRCRequestSpy *request = [TRCRequestSpy new];
     request.parseResult = @"result";
 
-    [webService sendRequest:request completion:^(id result, NSError *error) {
+    [_restClient sendRequest:request completion:^(id result, NSError *error) {
         XCTAssertFalse(request.parseResponseObjectCalled);
         XCTAssertNil(result);
         XCTAssertNotNil(error);
@@ -331,14 +346,14 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 
     NSError *networkError = [[NSError alloc] initWithDomain:@"" code:0 userInfo:@{ NSLocalizedDescriptionKey: @"Network Error!"}];
 
-    [connectionStub setResponseObject:@{ @"code": @123, @"message": @"Unknown error happens", @"reason_url": @"http://google.com/"} responseError:networkError];
+    [_connectionStub setResponseObject:@{ @"code": @123, @"message": @"Unknown error happens", @"reason_url": @"http://google.com/"} responseError:networkError];
 
-    webService.errorHandler = errorParserSpy;
+    _restClient.errorHandler = errorParserSpy;
 
     TRCRequestSpy *request = [TRCRequestSpy new];
     request.parseResult = @"result";
 
-    [webService sendRequest:request completion:^(id result, NSError *error) {
+    [_restClient sendRequest:request completion:^(id result, NSError *error) {
         XCTAssertFalse(request.parseResponseObjectCalled);
         XCTAssertNil(result);
         XCTAssertNotNil(error);
@@ -349,12 +364,12 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 
 - (void)test_nsobject_pass_though
 {
-    [connectionStub setResponseObject:[NSObject new] responseError:nil];
+    [_connectionStub setResponseObject:[NSObject new] responseError:nil];
 
     TRCRequestSpy *request = [TRCRequestSpy new];
     request.parseObjectImplemented = NO;
 
-    [webService sendRequest:request completion:^(id result, NSError *error) {
+    [_restClient sendRequest:request completion:^(id result, NSError *error) {
         XCTAssertFalse(request.parseResponseObjectCalled);
         XCTAssertNil(error);
         XCTAssertTrue([result isMemberOfClass:[NSObject class]]);
@@ -366,11 +381,11 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
     TRCRequestSpy *request = [TRCRequestSpy new];
     request.responseSchemeName = @"SimpleDictionary";
 
-    [connectionStub setResponseObject:@{ @"number": @2, @"string": @"123", @"url": @"http://google.com"} responseError:nil];
+    [_connectionStub setResponseObject:@{ @"number": @2, @"string": @"123", @"url": @"http://google.com"} responseError:nil];
 
     request.parseResult = [NSObject new];
 
-    [webService sendRequest:request completion:^(id result, NSError *error) {
+    [_restClient sendRequest:request completion:^(id result, NSError *error) {
         XCTAssertTrue(request.parseResponseObjectCalled);
         XCTAssertTrue([result isMemberOfClass:[NSObject class]]);
         XCTAssertNil(error);
@@ -382,11 +397,11 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
     TRCRequestSpy *request = [TRCRequestSpy new];
     request.responseSchemeName = @"SimpleDictionary";
 
-    [connectionStub setResponseObject:@{ @"number": @"string_value", @"string": @"123", @"url": @"http://google.com"} responseError:nil];
+    [_connectionStub setResponseObject:@{ @"number": @"string_value", @"string": @"123", @"url": @"http://google.com"} responseError:nil];
 
     request.parseResult = [NSObject new];
 
-    [webService sendRequest:request completion:^(id result, NSError *error) {
+    [_restClient sendRequest:request completion:^(id result, NSError *error) {
         XCTAssertFalse(request.parseResponseObjectCalled);
         XCTAssertNil(result);
         XCTAssertNotNil(error);
@@ -399,12 +414,12 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
     TRCRequestSpy *request = [TRCRequestSpy new];
     request.responseSchemeName = @"SimpleDictionary";
 
-    [connectionStub setResponseObject:@{ @"number": @1, @"string": @"123", @"url": @"http://google.com"} responseError:nil];
+    [_connectionStub setResponseObject:@{ @"number": @1, @"string": @"123", @"url": @"http://google.com"} responseError:nil];
 
     request.parseResult = [NSObject new];
     request.parseObjectImplemented = NO;
 
-    [webService sendRequest:request completion:^(id result, NSError *error) {
+    [_restClient sendRequest:request completion:^(id result, NSError *error) {
         XCTAssertFalse(request.parseResponseObjectCalled);
         XCTAssertNil(error);
         NSDictionary *expect = @{ @"number": @1, @"string": @"123", @"url": [[NSURL alloc] initWithString:@"http://google.com"]};
@@ -417,12 +432,12 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
     TRCRequestSpy *request = [TRCRequestSpy new];
     request.responseSchemeName = @"SimpleDictionary";
 
-    [connectionStub setResponseObject:@{ @"number": @1, @"string": @"123", @"url": [NSObject new]} responseError:nil];
+    [_connectionStub setResponseObject:@{ @"number": @1, @"string": @"123", @"url": [NSObject new]} responseError:nil];
 
     request.parseResult = [NSObject new];
     request.parseObjectImplemented = NO;
 
-    [webService sendRequest:request completion:^(id result, NSError *error) {
+    [_restClient sendRequest:request completion:^(id result, NSError *error) {
         XCTAssertFalse(request.parseResponseObjectCalled);
         XCTAssertNil(result);
         XCTAssertNotNil(error);
@@ -433,12 +448,12 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 {
     TRCRequestSpy *request = [TRCRequestSpy new];
 
-    [connectionStub setResponseObject:@{ @"number": @1, @"string": @"123", @"url": @"http://google.com"} responseError:nil];
+    [_connectionStub setResponseObject:@{ @"number": @1, @"string": @"123", @"url": @"http://google.com"} responseError:nil];
 
     request.parseResult = [NSObject new];
     request.parseObjectImplemented = NO;
 
-    [webService sendRequest:request completion:^(id result, NSError *error) {
+    [_restClient sendRequest:request completion:^(id result, NSError *error) {
         XCTAssertFalse(request.parseResponseObjectCalled);
         XCTAssertNil(error);
         NSDictionary *expect = @{ @"number": @1, @"string": @"123", @"url": @"http://google.com"};
@@ -450,11 +465,11 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 {
     TRCRequestSpy *request = [TRCRequestSpy new];
 
-    [connectionStub setResponseObject:@[ @{@"number":@1, @"string":@"2", @"url": @"3"} ] responseError:nil];
+    [_connectionStub setResponseObject:@[ @{@"number":@1, @"string":@"2", @"url": @"3"} ] responseError:nil];
 
     request.parseResult = [NSObject new];
 
-    [webService sendRequest:request completion:^(id result, NSError *error) {
+    [_restClient sendRequest:request completion:^(id result, NSError *error) {
         XCTAssertTrue(request.parseResponseObjectCalled);
         XCTAssertNil(error);
         XCTAssertTrue([result isMemberOfClass:[NSObject class]]);
@@ -465,13 +480,13 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 {
     TRCRequestSpy *request = [TRCRequestSpy new];
 
-    [connectionStub setResponseObject:@[ @{@"number":@1, @"string":@"2", @"url": @"3"} ] responseError:nil];
+    [_connectionStub setResponseObject:@[ @{@"number":@1, @"string":@"2", @"url": @"3"} ] responseError:nil];
 
     request.parseResult = [NSObject new];
 
     request.parseObjectImplemented = NO;
 
-    [webService sendRequest:request completion:^(id result, NSError *error) {
+    [_restClient sendRequest:request completion:^(id result, NSError *error) {
         XCTAssertFalse(request.parseResponseObjectCalled);
         XCTAssertNil(error);
         NSArray *expect = @[@{@"number":@1, @"string":@"2", @"url": @"3"}];
@@ -483,13 +498,13 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 {
     TRCRequestSpy *request = [TRCRequestSpy new];
 
-    [connectionStub setResponseObject:@[ @{@"number":@1, @"string":@"2", @"url": @"3"} ] responseError:nil];
+    [_connectionStub setResponseObject:@[ @{@"number":@1, @"string":@"2", @"url": @"3"} ] responseError:nil];
 
     request.parseResult = [NSObject new];
     NSError *parseError = [NSError new];
     request.parseError = parseError;
 
-    [webService sendRequest:request completion:^(id result, NSError *error) {
+    [_restClient sendRequest:request completion:^(id result, NSError *error) {
         XCTAssertTrue(request.parseResponseObjectCalled);
         XCTAssertEqualObjects(error, parseError);
         XCTAssertTrue(result == nil);
@@ -500,11 +515,11 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 {
     TRCRequestSpy *request = [TRCRequestSpy new];
 
-    [connectionStub setResponseObject:@[ @1, @2, @3] responseError:nil];
+    [_connectionStub setResponseObject:@[ @1, @2, @3] responseError:nil];
 
     request.parseObjectImplemented = NO;
 
-    [webService sendRequest:request completion:^(id result, NSError *error) {
+    [_restClient sendRequest:request completion:^(id result, NSError *error) {
         XCTAssertFalse(request.parseResponseObjectCalled);
         XCTAssertNil(error);
         NSArray *expected = @[ @1, @2, @3];
@@ -516,13 +531,13 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 {
     TRCRequestSpy *request = [TRCRequestSpy new];
 
-    [connectionStub setResponseObject:@[ @{@"number":@1, @"string":@"2", @"url": @"3"} ] responseError:nil];
+    [_connectionStub setResponseObject:@[ @{@"number":@1, @"string":@"2", @"url": @"3"} ] responseError:nil];
 
     request.parseResult = [NSObject new];
     request.responseSchemeName = @"ArrayOfObjects";
     request.parseObjectImplemented = NO;
 
-    [webService sendRequest:request completion:^(id result, NSError *error) {
+    [_restClient sendRequest:request completion:^(id result, NSError *error) {
         XCTAssertFalse(request.parseResponseObjectCalled);
         XCTAssertNil(error);
         NSArray *expect = @[@{@"number":@1, @"string":@"2", @"url": [[NSURL alloc] initWithString:@"3"]}];
@@ -536,17 +551,17 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 {
     TRCRequestSpy *request = [TRCRequestSpy new];
 
-    [connectionStub setResponseObject:@[ @{@"number":@"1", @"string":@2, @"url": @"3"} ] responseError:nil];
+    [_connectionStub setResponseObject:@[ @{@"number":@"1", @"string":@2, @"url": @"3"} ] responseError:nil];
 
     request.parseResult = [NSObject new];
     request.responseSchemeName = @"ArrayOfObjects";
     request.parseObjectImplemented = NO;
 
-    webService.options = TRCOptionsConvertNumbersAutomatically;
+    _restClient.options = TRCOptionsConvertNumbersAutomatically;
 
     __block BOOL callbackCalled = NO;
     
-    [webService sendRequest:request completion:^(id result, NSError *error) {
+    [_restClient sendRequest:request completion:^(id result, NSError *error) {
         XCTAssertFalse(request.parseResponseObjectCalled);
         XCTAssertNil(error);
         NSArray *expect = @[@{@"number":@1, @"string":@"2", @"url": [[NSURL alloc] initWithString:@"3"]}];
@@ -563,13 +578,13 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 {
     TRCRequestSpy *request = [TRCRequestSpy new];
 
-    [connectionStub setResponseObject:@[ @"1", @"2", @"3" ] responseError:nil];
+    [_connectionStub setResponseObject:@[ @"1", @"2", @"3" ] responseError:nil];
 
     request.parseResult = [NSObject new];
     request.responseSchemeName = @"SimpleArray";
     request.parseObjectImplemented = NO;
 
-    [webService sendRequest:request completion:^(id result, NSError *error) {
+    [_restClient sendRequest:request completion:^(id result, NSError *error) {
         XCTAssertFalse(request.parseResponseObjectCalled);
         XCTAssertNil(error);
         NSArray *expect = @[ [[NSURL alloc] initWithString:@"1"],[[NSURL alloc] initWithString:@"2"],[[NSURL alloc] initWithString:@"3"] ];
@@ -581,13 +596,13 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 {
     TRCRequestSpy *request = [TRCRequestSpy new];
 
-    [connectionStub setResponseObject:@[ @"1", @"2", [NSObject new] ] responseError:nil];
+    [_connectionStub setResponseObject:@[ @"1", @"2", [NSObject new] ] responseError:nil];
 
     request.parseResult = [NSObject new];
     request.responseSchemeName = @"SimpleArray";
     request.parseObjectImplemented = NO;
 
-    [webService sendRequest:request completion:^(id result, NSError *error) {
+    [_restClient sendRequest:request completion:^(id result, NSError *error) {
         XCTAssertFalse(request.parseResponseObjectCalled);
         XCTAssertNotNil(error);
         XCTAssertNil(result);
@@ -599,12 +614,12 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 {
     TRCRequestSpy *request = [TRCRequestSpy new];
 
-    [connectionStub setResponseObject:@[ @[ @1, @2, @3], @[@1, @2, @3], @[@1, @2, @3]] responseError:nil];
+    [_connectionStub setResponseObject:@[ @[ @1, @2, @3], @[@1, @2, @3], @[@1, @2, @3]] responseError:nil];
 
     request.parseObjectImplemented = NO;
     request.responseSchemeName = @"ArrayOfArray";
 
-    [webService sendRequest:request completion:^(id result, NSError *error) {
+    [_restClient sendRequest:request completion:^(id result, NSError *error) {
         XCTAssertNil(error);
         XCTAssertNotNil(result);
         NSArray *expectedResult = @[ @[ @"1", @"2", @"3"], @[ @"1", @"2", @"3"], @[ @"1", @"2", @"3"]];
@@ -616,14 +631,14 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 {
     TRCRequestSpy *request = [TRCRequestSpy new];
 
-    [connectionStub setResponseObject:@{@"first_name" : @"Ivan",
+    [_connectionStub setResponseObject:@{@"first_name" : @"Ivan",
             @"last_name" : @"Ivanov",
             @"avatar_url" : @"http://google.com"} responseError:nil];
 
     request.parseObjectImplemented = NO;
     request.responseSchemeName = @"Person";
 
-    [webService sendRequest:request completion:^(id result, NSError *error) {
+    [_restClient sendRequest:request completion:^(id result, NSError *error) {
         XCTAssertNil(error);
         XCTAssertNotNil(result);
         Person *expected = [Person new];
@@ -638,7 +653,7 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 {
     TRCRequestSpy *request = [TRCRequestSpy new];
 
-    [connectionStub setResponseObject:@{
+    [_connectionStub setResponseObject:@{
             @"token_type" : @"Bearer",
             @"expires_in" : @36000,
             @"scope" : @"write read groups",
@@ -649,7 +664,7 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
     request.parseObjectImplemented = NO;
     request.responseSchemeName = @"Token";
 
-    [webService sendRequest:request completion:^(id result, NSError *error) {
+    [_restClient sendRequest:request completion:^(id result, NSError *error) {
         XCTAssertNil(error);
         XCTAssertNotNil(result);
     }];
@@ -659,13 +674,13 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 {
     TRCRequestSpy *request = [TRCRequestSpy new];
 
-    [connectionStub setResponseObject:@{@"status":@200, @"message":@"OK"} responseError:nil];
+    [_connectionStub setResponseObject:@{@"status":@200, @"message":@"OK"} responseError:nil];
 
-    webService.errorHandler = [TRCErrorParserSimple new];
+    _restClient.errorHandler = [TRCErrorParserSimple new];
 
     request.parseObjectImplemented = NO;
 
-    [webService sendRequest:request completion:^(id result, NSError *error) {
+    [_restClient sendRequest:request completion:^(id result, NSError *error) {
         XCTAssertNil(error);
         NSDictionary *expect = @{@"status":@200, @"message":@"OK"};
         XCTAssertEqualObjects(expect, result);
@@ -676,13 +691,13 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 {
     TRCRequestSpy *request = [TRCRequestSpy new];
 
-    [connectionStub setResponseObject:@{@"status":@400, @"message":@"Fail"} responseError:nil];
+    [_connectionStub setResponseObject:@{@"status":@400, @"message":@"Fail"} responseError:nil];
 
-    webService.errorHandler = [TRCErrorParserSimple new];
+    _restClient.errorHandler = [TRCErrorParserSimple new];
 
     request.parseObjectImplemented = NO;
 
-    [webService sendRequest:request completion:^(id result, NSError *error) {
+    [_restClient sendRequest:request completion:^(id result, NSError *error) {
         XCTAssertNotNil(error);
         XCTAssertNil(result);
         XCTAssertEqualObjects(error.localizedDescription, @"Fail");
@@ -691,25 +706,25 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 
 - (void)test_incorrect_object_received_for_request_with_schema
 {
-    [connectionStub setResponseObject:[NSData new] responseError:nil];
+    [_connectionStub setResponseObject:[NSData new] responseError:nil];
 
     TRCRequestSpy *request = [TRCRequestSpy new];
     request.responseSchemeName = @"SimpleArray";
 
-    [webService sendRequest:request completion:^(id result, NSError *error) {
+    [_restClient sendRequest:request completion:^(id result, NSError *error) {
         XCTAssertNotNil(error, @"Error: %@", error.localizedDescription);
     }];
 }
 
 - (void)test_incorrect_object_in_request_with_schema
 {
-    [connectionStub setResponseObject:[NSData new] responseError:nil];
+    [_connectionStub setResponseObject:[NSData new] responseError:nil];
 
     TRCRequestSpy *request = [TRCRequestSpy new];
     request.requestSchemeName = @"SimpleRequest.json";
     request.requestBody = (id)[NSData new];
 
-    [webService sendRequest:request completion:^(id result, NSError *error) {
+    [_restClient sendRequest:request completion:^(id result, NSError *error) {
         XCTAssertNotNil(error, @"Error: %@", error.localizedDescription);
     }];
 }
@@ -717,12 +732,12 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
 - (void)test_manual_mapper_method
 {
     id input = [NSURL URLWithString:@"http://google.com/"];
-    id result = [webService convertThenValidateRequestObject:input usingSchemaTag:@"{url}" options:TRCTransformationOptionsNone error:nil];
+    id result = [_restClient convertThenValidateRequestObject:input usingSchemaObject:@"{url}" options:TRCTransformationOptionsNone error:nil];
 
     XCTAssert( [result isKindOfClass:[NSString class]] );
 
     input = @"http://google.com/";
-    result = [webService validateThenConvertResponseObject:input usingSchemaTag:@"{url}" options:TRCTransformationOptionsNone error:nil];
+    result = [_restClient validateThenConvertResponseObject:input usingSchemaObject:@"{url}" options:TRCTransformationOptionsNone error:nil];
 
     XCTAssert( [result isKindOfClass:[NSURL class]] );
 
@@ -735,13 +750,80 @@ id(*originalImp)(id, SEL, NSString *, BOOL);
                     @"work": @"321"
             }
     };
-    result = [webService validateThenConvertResponseObject:input usingSchemaTag:@"{person}" options:TRCTransformationOptionsNone error:nil];
+    result = [_restClient validateThenConvertResponseObject:input usingSchemaObject:@"{person}" options:TRCTransformationOptionsNone error:nil];
 
     XCTAssert( [result isKindOfClass:[Person class]] );
     Person *person = result;
 
     XCTAssert([person.firstName isEqualToString:@"Test1"]);
     XCTAssert([person.phone.mobile isEqualToString:@"123"]);
+
+    input = @[
+            @"http://appsquick.ly",
+            @"http://google.com"
+    ];
+
+    result = [_restClient validateThenConvertResponseObject:input usingSchemaObject:@[ @"{url}" ] options:TRCTransformationOptionsNone error:nil];
+
+    XCTAssert( [result isKindOfClass:[NSArray class]] );
+    XCTAssert( [result count] == 2 );
+
+    XCTAssert([result[0] isKindOfClass:[NSURL class]]);
+    XCTAssert([result[1] isKindOfClass:[NSURL class]]);
+
+    input = @[
+            @"http://appsquick.ly",
+            @"http://google.com"
+    ];
+
+    NSError *error = nil;
+    result = [_restClient validateThenConvertResponseObject:input usingSchemaObject:@[ @{@"url": @"{url}"} ] options:TRCTransformationOptionsNone error:&error];
+    XCTAssert(error != nil);
+    XCTAssert(result == nil);
+
+    NSLog(@"Error: %@", error);
+
+
+}
+
+- (void)test_root_mapper
+{
+    TRCRequestSpy *request = [TRCRequestSpy new];
+
+    // Value Transformer
+    [_connectionStub setResponseObject:@"http://google.com" responseError:nil];
+
+    request.parseObjectImplemented = NO;
+    request.responseSchemeName = @"RootUrl";
+
+    [_restClient sendRequest:request completion:^(id result, NSError *error) {
+        XCTAssertNil(error);
+        XCTAssertNotNil(result);
+        XCTAssertEqualObjects([NSURL URLWithString:@"http://google.com"], result);
+    }];
+
+    // Text
+    [_connectionStub setResponseObject:@"text" responseError:nil];
+
+    request.responseSchemeName = @"RootString";
+
+    [_restClient sendRequest:request completion:^(id result, NSError *error) {
+        XCTAssertNil(error);
+        XCTAssertNotNil(result);
+        XCTAssertEqualObjects(@"text", result);
+    }];
+
+    //Extra Dictionary
+    [_connectionStub setResponseObject:@{ @"number": @1, @"string": @"123", @"url": @"http://google.com"} responseError:nil];
+
+    request.responseSchemeName = @"RootExtraDict";
+
+    [_restClient sendRequest:request completion:^(id result, NSError *error) {
+        XCTAssertNil(error);
+        XCTAssertNotNil(result);
+        NSDictionary *expect = @{ @"number": @1, @"string": @"123", @"url": [[NSURL alloc] initWithString:@"http://google.com"]};
+        XCTAssertEqualObjects(result, expect);
+    }];
 }
 
 - (void)test_parsing_on_background_queue

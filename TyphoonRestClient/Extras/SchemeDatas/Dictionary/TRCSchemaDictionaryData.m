@@ -30,14 +30,14 @@
             _dataProvider = dataProvider;
             _requestData = isRequest;
 
-
-            NSString *rootMapperKey = nil;
             if ([arrayOrDictionary isKindOfClass:[NSDictionary class]]) {
-                rootMapperKey = arrayOrDictionary[TRCRootMapperKey];
+                NSDictionary *rootDictionary = arrayOrDictionary;
+                if (rootDictionary[TRCRootKey] || rootDictionary[TRCRootMapperKey]) {
+                    _schemeValue = rootDictionary[TRCRootKey] ?: rootDictionary[TRCRootMapperKey];
+                }
             }
-            if (rootMapperKey.length > 0 && [self.dataProvider schemaData:self hasObjectMapperForTag:rootMapperKey]) {
-                _schemeValue = rootMapperKey;
-            } else {
+
+            if (!_schemeValue) {
                 _schemeValue = arrayOrDictionary;
             }
         }

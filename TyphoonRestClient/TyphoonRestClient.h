@@ -253,8 +253,14 @@ typedef NS_OPTIONS(NSInteger , TRCOptions)
 
 @interface TyphoonRestClient (Extensions)
 
-- (id)convertThenValidateRequestObject:(id)object usingSchemaTag:(NSString *)tag options:(TRCTransformationOptions)options error:(NSError **)pError;
+- (id)convertThenValidateRequestObject:(id)object usingSchemaObject:(id)schemaObject options:(TRCTransformationOptions)options error:(NSError **)pError;
 
-- (id)validateThenConvertResponseObject:(id)object usingSchemaTag:(NSString *)tag options:(TRCTransformationOptions)options error:(NSError **)pError;
+- (id)validateThenConvertResponseObject:(id)object usingSchemaObject:(id)schemaObject options:(TRCTransformationOptions)options error:(NSError **)pError;
+
+
+
+- (id)convertThenValidateRequestObject:(id)object usingSchemaTag:(NSString *)tag options:(TRCTransformationOptions)options error:(NSError **)pError __attribute((deprecated("Use convertThenValidateRequestObject:usingSchemaObject:options:error instead")));
+
+- (id)validateThenConvertResponseObject:(id)object usingSchemaTag:(NSString *)tag options:(TRCTransformationOptions)options error:(NSError **)pError __attribute((deprecated("Use validateThenConvertResponseObject:usingSchemaObject:options:error instead")));
 
 @end

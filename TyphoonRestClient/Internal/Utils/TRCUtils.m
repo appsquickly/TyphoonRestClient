@@ -15,6 +15,7 @@
 #import "TRCSerializerHttpQuery.h"
 
 NSString *TRCRootMapperKey = @"{root_mapper}";
+NSString *TRCRootKey = @"{root}";
 
 NSError *TRCErrorWithFormat(NSInteger code, NSString *format, ...)
 {
