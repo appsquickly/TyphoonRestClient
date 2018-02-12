@@ -98,7 +98,7 @@ TRCSerialization TRCSerializationRequestMultipart = @"TRCSerializationRequestMul
 #pragma mark - Part data
 //-------------------------------------------------------------------------------------------
 
-- (void)data:(NSMutableData *)data appendParameter:(id)param withName:(NSString *)name appendBoundaryBlock:(void(^)())appendBoundaryBlock
+- (void)data:(NSMutableData *)data appendParameter:(id)param withName:(NSString *)name appendBoundaryBlock:(void(^)(void))appendBoundaryBlock
 {
     if ([param isKindOfClass:[NSArray class]]) {
         NSString *elementName = [NSString stringWithFormat:@"%@[]", name];

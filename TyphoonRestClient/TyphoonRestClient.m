@@ -34,7 +34,7 @@
 
 @implementation NSOperationQueue (BlockWithPriority)
 
-- (void)addOperationPriority:(NSOperationQueuePriority)priority withBlock:(void(^)())block
+- (void)addOperationPriority:(NSOperationQueuePriority)priority withBlock:(void(^)(void))block
 {
     NSOperation *operation = [NSBlockOperation blockOperationWithBlock:block];
     operation.queuePriority = priority;
