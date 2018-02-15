@@ -52,7 +52,7 @@ typedef void (^TRCConnectionCompletion)(id responseObject, NSError *error, id<TR
 * @see TRCConnectionAFNetworking
 * @see TRCConnectionStub
 * */
-@protocol TRCConnection
+@protocol TRCConnection <NSObject>
 
 /**
 * Creates `NSURLRequest` using information from `TRCRequest`.
