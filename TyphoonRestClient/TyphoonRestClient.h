@@ -187,6 +187,10 @@ typedef NS_OPTIONS(NSInteger , TRCOptions)
 * */
 - (void)registerDefaultRequestSerialization:(TRCSerialization)requestSerialization forBodyObjectWithClass:(Class)clazz;
 
+#pragma mark - Extensions
+
+- (NSMutableURLRequest *)urlRequestFromRequest:(id<TRCRequest>)request error:(NSError **)error;
+
 @end
 
 //-------------------------------------------------------------------------------------------
@@ -256,8 +260,6 @@ typedef NS_OPTIONS(NSInteger , TRCOptions)
 - (id)convertThenValidateRequestObject:(id)object usingSchemaObject:(id)schemaObject options:(TRCTransformationOptions)options error:(NSError **)pError;
 
 - (id)validateThenConvertResponseObject:(id)object usingSchemaObject:(id)schemaObject options:(TRCTransformationOptions)options error:(NSError **)pError;
-
-- (NSMutableURLRequest *)urlRequestFromRequest:(id<TRCRequest>)request error:(NSError **)error;
 
 - (id)convertThenValidateRequestObject:(id)object usingSchemaTag:(NSString *)tag options:(TRCTransformationOptions)options error:(NSError **)pError __attribute((deprecated("Use convertThenValidateRequestObject:usingSchemaObject:options:error instead")));
 
