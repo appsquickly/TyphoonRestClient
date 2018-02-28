@@ -257,7 +257,7 @@ typedef NS_OPTIONS(NSInteger , TRCOptions)
 
 - (id)validateThenConvertResponseObject:(id)object usingSchemaObject:(id)schemaObject options:(TRCTransformationOptions)options error:(NSError **)pError;
 
-
+- (NSMutableURLRequest *)urlRequestFromRequest:(id<TRCRequest>)request error:(NSError **)error;
 
 - (id)convertThenValidateRequestObject:(id)object usingSchemaTag:(NSString *)tag options:(TRCTransformationOptions)options error:(NSError **)pError __attribute((deprecated("Use convertThenValidateRequestObject:usingSchemaObject:options:error instead")));
 

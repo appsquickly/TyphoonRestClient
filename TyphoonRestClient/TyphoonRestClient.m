@@ -185,15 +185,8 @@ static inline void TRCCompleteWithError(void(^completion)(id, NSError *), NSErro
     
     [workQueue addOperationPriority:priority withBlock:^{
         NSError *error = nil;
-        TRCRequestCreateOptions *createOptions = [self requestCreateOptionsFromRequest:request error:&error];
-        if (error) {
-            [callbackQueue addOperationPriority:priority withBlock:^{
-                TRCCompleteWithError(completion, error);
-            }];
-            return;
-        }
-        
-        NSMutableURLRequest *httpRequest = [self.connection requestWithOptions:createOptions error:&error];
+
+        NSMutableURLRequest *httpRequest = [self urlRequestFromRequest:request error:&error];
         if (error) {
             [callbackQueue addOperationPriority:priority withBlock:^{
                 TRCCompleteWithError(completion, error);
@@ -283,6 +276,22 @@ static inline void TRCCompleteWithError(void(^completion)(id, NSError *), NSErro
 //-------------------------------------------------------------------------------------------
 #pragma mark - Request composing
 //-------------------------------------------------------------------------------------------
+
+- (NSMutableURLRequest *)urlRequestFromRequest:(id<TRCRequest>)request error:(NSError **)pError
+{
+    NSError *error = nil;
+    TRCRequestCreateOptions *createOptions = [self requestCreateOptionsFromRequest:request error:&error];
+    if (error) {
+        TRCSetError(pError, error);
+        return nil;
+    }
+    NSMutableURLRequest *httpRequest = [self.connection requestWithOptions:createOptions error:&error];
+    if (error) {
+        TRCSetError(pError, error);
+        return nil;
+    }
+    return httpRequest;
+}
 
 - (TRCRequestSendOptions *)requestSendOptionsFromRequest:(id<TRCRequest>)request error:(NSError **)error
 {
