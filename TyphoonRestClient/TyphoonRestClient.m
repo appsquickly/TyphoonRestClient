@@ -58,13 +58,13 @@ NSString *TyphoonRestClientReachabilityDidChangeNotification = @"TyphoonRestClie
 @interface TRCRequestCreateOptions : NSObject <TRCConnectionRequestCreationOptions>
 @end
 @implementation TRCRequestCreateOptions
-@synthesize method, path, pathParameters, body, headers, serialization, customProperties, requestPostProcessor, queryOptions;
+@synthesize method, path, pathParameters, body, headers, serialization, customProperties, requestPostProcessor, queryOptions, requestType;
 @end
 
 @interface TRCRequestSendOptions : NSObject <TRCConnectionRequestSendingOptions>
 @end
 @implementation TRCRequestSendOptions
-@synthesize outputStream, responseSerialization, customProperties, queuePriority, responseDelegate;
+@synthesize outputStream, responseSerialization, customProperties, queuePriority, responseDelegate, requestType, localFileUrl;
 @end
 
 
@@ -335,6 +335,22 @@ static inline void TRCCompleteWithError(void(^completion)(id, NSError *), NSErro
         options.responseDelegate = [request responseDelegate];
     }
 
+    if ([request respondsToSelector:@selector(requestType)]) {
+        options.requestType = [request requestType];
+    }
+
+    if ([request respondsToSelector:@selector(requestLocalFileUrl)]) {
+        NSURL *localFileUrl = [request requestLocalFileUrl];
+        if (options.requestType == TRCRequestTypeDownload || options.requestType == TRCRequestTypeUpload) {
+            if (localFileUrl == nil) {
+                TRCSetError(error, TRCErrorWithFormat(TyphoonRestClientErrorCodeRequestCreation, @"For download/upload requests, requestLocalFileUrl should not be nil."));
+                return nil;
+            } else {
+                options.localFileUrl = localFileUrl;
+            }
+        }
+    }
+
     return options;
 }
 
@@ -384,6 +400,10 @@ static inline void TRCCompleteWithError(void(^completion)(id, NSError *), NSErro
 
     if ([request respondsToSelector:@selector(customProperties)]) {
         options.customProperties = [request customProperties];
+    }
+
+    if ([request respondsToSelector:@selector(requestType)]) {
+        options.requestType = [request requestType];
     }
 
     if (composingError) {

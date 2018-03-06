@@ -206,6 +206,8 @@ typedef NS_ENUM(NSInteger, TRCProgressHandlerState) {
 
 @property (nonatomic, assign) TRCSerializerHttpQueryOptions queryOptions;
 
+@property (nonatomic, assign) TRCRequestType requestType;
+
 @end
 
 /**
@@ -227,6 +229,11 @@ typedef NS_ENUM(NSInteger, TRCProgressHandlerState) {
 
 /// Custom response delegate. Useful to intercept all traffic, or implement custom logic
 @property (nonatomic, strong) id<TRCResponseDelegate> responseDelegate;
+
+@property (nonatomic, assign) TRCRequestType requestType;
+
+/// Used for download/upload tasks to/from file on disk.
+@property (nonatomic, strong) NSURL *localFileUrl;
 
 @end
 

@@ -168,6 +168,18 @@ typedef NS_OPTIONS(NSInteger, TRCTransformationOptions) {
     TRCTransformationOptionsPassNullAsIs = 1 << 0
 };
 
+
+//-------------------------------------------------------------------------------------------
+#pragma mark - Request types
+//-------------------------------------------------------------------------------------------
+
+typedef NS_ENUM(NSInteger, TRCRequestType) {
+    TRCRequestTypeData,
+    TRCRequestTypeDownload,
+    TRCRequestTypeUpload,
+};
+
+
 /**
 * The `TRCRequest` implementation manages request composing and response handling at same time. Each `TRCRequest` implementation
 * represents one API call which does one function.
@@ -317,6 +329,17 @@ typedef NS_OPTIONS(NSInteger, TRCTransformationOptions) {
  * TODO: Write doc
  * */
 - (TRCTransformationOptions)requestTransformationOptions;
+
+/**
+ * If not overridden, TRCRequestTypeData is used as default.
+ */
+- (TRCRequestType)requestType;
+
+/**
+ * Only used when requestType == TRCRequestTypeDownload or TRCRequestTypeUpload.
+ * Return path in local filesystem to file being uploaded or where to store downloaded file.
+ */
+- (NSURL *)requestLocalFileUrl;
 
 /**
  * You can modify or replace NSURLRequest, created by TRCConnection here. This method can be useful

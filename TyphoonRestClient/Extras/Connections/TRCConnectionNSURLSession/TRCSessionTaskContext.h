@@ -19,7 +19,7 @@
 
 @property (nonatomic, weak) TRCConnectionNSURLSession *connection;
 
-- (instancetype)initWithTask:(NSURLSessionDataTask *)task options:(id<TRCConnectionRequestSendingOptions>)options completion:(TRCConnectionCompletion)completion;
+- (instancetype)initWithTask:(NSURLSessionTask *)task options:(id<TRCConnectionRequestSendingOptions>)options completion:(TRCConnectionCompletion)completion;
 
 - (BOOL)shouldProcessResponse:(NSURLResponse *)response;
 

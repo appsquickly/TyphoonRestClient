@@ -33,7 +33,7 @@
     }
 }
 
-- (void)startDataTask:(NSURLSessionDataTask *)task withContext:(TRCSessionTaskContext *)context
+- (void)startTask:(NSURLSessionTask *)task withContext:(TRCSessionTaskContext *)context
 {
     @synchronized (self) {
         _taskContextRegistry[@(task.taskIdentifier)] = context;
