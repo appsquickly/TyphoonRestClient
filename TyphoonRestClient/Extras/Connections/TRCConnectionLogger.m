@@ -172,15 +172,19 @@
     [output appendFormat:@"RESPONSE | id: %lu | request time: %@", (unsigned long) request,
                          [self stringFromDuration:duration]];
     [output appendString:@"\n<======================================================================================================"];
-    [output appendFormat:@"\n%ld (%@)\n", (long) responseInfo.response.statusCode,
-                         [[NSHTTPURLResponse localizedStringForStatusCode:responseInfo.response.statusCode]
-                             capitalizedString]];
-    [output appendString:[self httpHeadersString:responseInfo.response.allHeaderFields]];
+    if (error) {
+        [output appendFormat:@"\nERROR: %@", error];
+    } else {
+        [output appendFormat:@"\n%ld (%@)\n", (long) responseInfo.response.statusCode,
+                             [[NSHTTPURLResponse localizedStringForStatusCode:responseInfo.response.statusCode]
+                                 capitalizedString]];
+        [output appendString:[self httpHeadersString:responseInfo.response.allHeaderFields]];
 
-    if ([responseInfo responseData]) {
-        NSString
-            *description = [[NSString alloc] initWithData:[responseInfo responseData] encoding:NSUTF8StringEncoding];
-        [output appendFormat:@"\n\n%@", description];
+        if ([responseInfo responseData]) {
+            NSString
+                *description = [[NSString alloc] initWithData:[responseInfo responseData] encoding:NSUTF8StringEncoding];
+            [output appendFormat:@"\n\n%@", description];
+        }
     }
     [output appendString:@"\n<======================================================================================================\n"];
 
