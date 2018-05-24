@@ -10,8 +10,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 
-
-
 #import "TyphoonRestClient.h"
 #import "TRCSchema.h"
 #import "TRCUtils.h"
@@ -117,7 +115,9 @@ static inline void TRCCompleteWithError(void(^completion)(id, NSError *), NSErro
 
         _defaultRequestSerializationsPerType = [NSMutableDictionary new];
 
-        _workQueue = [NSOperationQueue mainQueue];
+        _workQueue = [NSOperationQueue new];
+        _workQueue.maxConcurrentOperationCount = 1;
+        
         _callbackQueue = [NSOperationQueue mainQueue];
 
         [self registerDefaultSerializations];
