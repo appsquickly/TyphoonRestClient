@@ -12,25 +12,33 @@
 #import "TRCConnectionProxy.h"
 
 
-@implementation TRCConnectionProxy
+@implementation TRCConnectionProxy {
+    id<TRCConnection> _connection;
+}
 
 - (instancetype)initWithConnection:(id<TRCConnection>)connection
 {
     self = [super init];
     if (self) {
-        self.connection = connection;
+        _connection = connection;
     }
     return self;
 }
 
+- (instancetype)init
+{
+    NSAssert(NO, @"Proxy connection must be initialized with underlaying connection");
+    return nil;
+}
+
 - (NSMutableURLRequest *)requestWithOptions:(id<TRCConnectionRequestCreationOptions>)options error:(NSError **)requestComposingError
 {
-    return [self.connection requestWithOptions:options error:requestComposingError];
+    return [_connection requestWithOptions:options error:requestComposingError];
 }
 
 - (id<TRCProgressHandler>)sendRequest:(NSURLRequest *)request withOptions:(id<TRCConnectionRequestSendingOptions>)options completion:(TRCConnectionCompletion)completion
 {
-    return [self.connection sendRequest:request withOptions:options completion:completion];
+    return [_connection sendRequest:request withOptions:options completion:completion];
 }
 
 - (void)setReachabilityDelegate:(id<TRCConnectionReachabilityDelegate>)reachabilityDelegate

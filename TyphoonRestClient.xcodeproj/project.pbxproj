@@ -352,8 +352,8 @@
 		2DBA18F37FDFA3A0DC26AA99 /* TRCConnectionNSURLSession */ = {
 			isa = PBXGroup;
 			children = (
-				2DBA188F2C3799DB9C6DC55A /* TRCConnectionNSURLSession.m */,
 				2DBA12A7C3A23135DB4D27D0 /* TRCConnectionNSURLSession.h */,
+				2DBA188F2C3799DB9C6DC55A /* TRCConnectionNSURLSession.m */,
 				2DBA1E03A8FA7ED062C8376B /* TRCSessionHandler.m */,
 				2DBA1EBD1A9ADDFE7A44DD50 /* TRCSessionHandler.h */,
 				2DBA12EB780D6799AD1F8462 /* TRCSessionTaskContext.m */,
