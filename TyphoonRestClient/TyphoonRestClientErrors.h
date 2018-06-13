@@ -31,3 +31,4 @@ static NSString *TyphoonRestClientErrorKeyResponseData = @"TyphoonRestClientErro
 static NSString *TyphoonRestClientErrorKeyResponse = @"TyphoonRestClientErrorKeyResponse";
 
 static NSString *TyphoonRestClientErrorKeyOriginalError = @"TyphoonRestClientErrorKeyOriginalError";
+static NSString *TyphoonRestClientErrorKeyStatusCode = @"TyphoonRestClientErrorKeyStatusCode";

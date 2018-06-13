@@ -199,6 +199,7 @@
                     NSLocalizedDescriptionKey : [NSString stringWithFormat:@"Request failed: %@ (%ld)", [NSHTTPURLResponse localizedStringForStatusCode:httpResponse.statusCode], (long)httpResponse.statusCode],
                     NSURLErrorFailingURLErrorKey : [response URL],
                     TyphoonRestClientErrorKeyResponse : response,
+                    TyphoonRestClientErrorKeyStatusCode: @(httpResponse.statusCode)
             } mutableCopy];
             *error = [[NSError alloc] initWithDomain:TyphoonRestClientErrors code:TyphoonRestClientErrorCodeBadResponseCode userInfo:mutableUserInfo];
         }
