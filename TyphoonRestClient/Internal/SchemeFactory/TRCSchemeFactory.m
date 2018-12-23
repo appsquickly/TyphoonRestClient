@@ -92,7 +92,7 @@
                       useCache:(BOOL)useCache
 {
     NSString *filePath = nil;
-    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+    NSBundle *bundle = [self appBundle];
 
     if ([object respondsToSelector:sel]) {
         NSString *(*impl)(id, SEL) = (NSString*(*)(id, SEL))[object methodForSelector:sel];
@@ -139,7 +139,7 @@
     for (NSString *formatExtension in formats) {
         NSString *fileNameToTest = [fileName stringByAppendingPathExtension:formatExtension];
         if ([self isSchemaExistsWithFilename:fileNameToTest]) {
-            NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+            NSBundle *bundle = [self appBundle];
             return [[bundle bundlePath] stringByAppendingPathComponent:fileNameToTest];
         }
     }
@@ -227,7 +227,7 @@
     if (!_cachedFilenames || _shouldRecacheFilenames) {
         NSMutableSet *filenames = [NSMutableSet new];
 
-        NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+        NSBundle *bundle = [self appBundle];
 
         NSArray *allFiles = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[bundle bundlePath] error:nil];
 
@@ -274,5 +274,10 @@
     }
 }
 
+- (NSBundle *)appBundle
+{
+    BOOL isUnitTestRunning = (NSClassFromString(@"XCTestProbe") != nil);
+    return isUnitTestRunning ? [NSBundle bundleForClass:self.class] : [NSBundle mainBundle];
+}
 
 @end
