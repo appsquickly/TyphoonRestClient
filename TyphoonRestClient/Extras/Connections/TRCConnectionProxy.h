@@ -15,7 +15,7 @@
 
 @interface TRCConnectionProxy : NSObject <TRCConnection>
 
-@property(nonatomic, readonly) id<TRCConnection> connection;
+@property(nonatomic, strong) id<TRCConnection> connection;
 
 - (instancetype)initWithConnection:(id<TRCConnection>)connection;
 
