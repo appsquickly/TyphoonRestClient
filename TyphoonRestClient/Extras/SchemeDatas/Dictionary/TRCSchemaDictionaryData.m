@@ -175,7 +175,7 @@
     id schemeObject = [schemeArray firstObject];
 
     [array enumerateObjectsUsingBlock:^(id object, NSUInteger idx, BOOL *stop) {
-        if (_isCancelled) {
+        if (self->_isCancelled) {
             *stop = YES;
         } else {
             NSString *index = [NSString stringWithFormat:@"%lu{?}", (unsigned long)idx];

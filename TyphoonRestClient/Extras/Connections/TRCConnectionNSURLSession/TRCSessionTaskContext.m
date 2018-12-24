@@ -82,7 +82,7 @@
     _totalBytesReceived += [data length];
     if (self.downloadProgressBlock) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.downloadProgressBlock([data length], _totalBytesReceived, self.response.expectedContentLength);
+            self.downloadProgressBlock([data length], self->_totalBytesReceived, self.response.expectedContentLength);
         });
     }
 
