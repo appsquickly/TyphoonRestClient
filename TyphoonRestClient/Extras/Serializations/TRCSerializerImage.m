@@ -11,7 +11,11 @@
 
 #import "TRCSerializerImage.h"
 #import "TRCRequest.h"
-#import <UIKit/UIKit.h>
+#if TARGET_OS_IPHONE
+    #import <UIKit/UIKit.h>
+#else 
+    #import <Cocoa/Cocoa.h>
+#endif
 
 TRCSerialization TRCSerializationResponseImage = @"TRCSerializationResponseImage";
 
@@ -19,7 +23,11 @@ TRCSerialization TRCSerializationResponseImage = @"TRCSerializationResponseImage
 
 - (id)objectFromResponseData:(NSData *)data error:(NSError **)error
 {
+#if TARGET_OS_IPHONE
     return [UIImage imageWithData:data];
+#else
+    return [[NSImage alloc] initWithData:data];
+#endif
 }
 
 - (BOOL)isCorrectContentType:(NSString *)responseContentType

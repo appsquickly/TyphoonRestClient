@@ -32,6 +32,75 @@
 		2DBA1EC0738D4C1358B0A70E /* TRCValidationErrorPrinterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1FD2324DAC2AE398F276 /* TRCValidationErrorPrinterTests.m */; };
 		2DBA1EDFD218B24F2C14C317 /* TRCMapperPhone.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA11C1B532C921805BEC2F /* TRCMapperPhone.json */; };
 		2DBA1F68160807B172F425AC /* SyncOperationQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1A7F795C54D0DE12094A /* SyncOperationQueue.m */; };
+		FA17B2B92237AAA200766D4C /* TyphoonRestClientOSX.h in Headers */ = {isa = PBXBuildFile; fileRef = FA17B2B82237AAA200766D4C /* TyphoonRestClientOSX.h */; };
+		FA17B2BB2237AAA200766D4C /* TyphoonRestClientOSX.m in Sources */ = {isa = PBXBuildFile; fileRef = FA17B2BA2237AAA200766D4C /* TyphoonRestClientOSX.m */; };
+		FA17B2BF2237AAD700766D4C /* TRCConnectionLogger.h in Sources */ = {isa = PBXBuildFile; fileRef = FAE889FF1B171F5700CCADC3 /* TRCConnectionLogger.h */; };
+		FA17B2C02237AAD700766D4C /* TRCConnectionLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE88A001B171F5700CCADC3 /* TRCConnectionLogger.m */; };
+		FA17B2C12237AAD700766D4C /* TRCConnectionProxy.h in Sources */ = {isa = PBXBuildFile; fileRef = FAE88A011B171F5700CCADC3 /* TRCConnectionProxy.h */; };
+		FA17B2C22237AAD700766D4C /* TRCConnectionProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE88A021B171F5700CCADC3 /* TRCConnectionProxy.m */; };
+		FA17B2C32237AAD700766D4C /* TRCConnectionStub.h in Sources */ = {isa = PBXBuildFile; fileRef = FAE88A031B171F5700CCADC3 /* TRCConnectionStub.h */; };
+		FA17B2C42237AAD700766D4C /* TRCConnectionStub.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE88A041B171F5700CCADC3 /* TRCConnectionStub.m */; };
+		FA17B2C52237AAD700766D4C /* TRCConnectionNSURLSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA188F2C3799DB9C6DC55A /* TRCConnectionNSURLSession.m */; };
+		FA17B2C62237AAD700766D4C /* TRCConnectionNSURLSession.h in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA12A7C3A23135DB4D27D0 /* TRCConnectionNSURLSession.h */; };
+		FA17B2C72237AAD700766D4C /* TRCSessionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1E03A8FA7ED062C8376B /* TRCSessionHandler.m */; };
+		FA17B2C82237AAD700766D4C /* TRCSessionHandler.h in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1EBD1A9ADDFE7A44DD50 /* TRCSessionHandler.h */; };
+		FA17B2C92237AAD700766D4C /* TRCSessionTaskContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA12EB780D6799AD1F8462 /* TRCSessionTaskContext.m */; };
+		FA17B2CA2237AAD700766D4C /* TRCSessionTaskContext.h in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA119F94B4B1A277B51A2B /* TRCSessionTaskContext.h */; };
+		FA17B2CB2237AAD700766D4C /* TRCValueTransformerNumber.h in Sources */ = {isa = PBXBuildFile; fileRef = FAE88A061B171F5700CCADC3 /* TRCValueTransformerNumber.h */; };
+		FA17B2CC2237AAD700766D4C /* TRCValueTransformerNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE88A071B171F5700CCADC3 /* TRCValueTransformerNumber.m */; };
+		FA17B2CD2237AAD700766D4C /* TRCValueTransformerString.h in Sources */ = {isa = PBXBuildFile; fileRef = FAE88A081B171F5700CCADC3 /* TRCValueTransformerString.h */; };
+		FA17B2CE2237AAD700766D4C /* TRCValueTransformerString.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE88A091B171F5700CCADC3 /* TRCValueTransformerString.m */; };
+		FA17B2CF2237AAD700766D4C /* TRCValueTransformerUrl.h in Sources */ = {isa = PBXBuildFile; fileRef = FAE88A0A1B171F5700CCADC3 /* TRCValueTransformerUrl.h */; };
+		FA17B2D02237AAD700766D4C /* TRCValueTransformerUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE88A0B1B171F5700CCADC3 /* TRCValueTransformerUrl.m */; };
+		FA17B2D12237AAD700766D4C /* TRCSchemaDictionaryData.h in Sources */ = {isa = PBXBuildFile; fileRef = FAE88A0E1B171F5700CCADC3 /* TRCSchemaDictionaryData.h */; };
+		FA17B2D22237AAD700766D4C /* TRCSchemaDictionaryData.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE88A0F1B171F5700CCADC3 /* TRCSchemaDictionaryData.m */; };
+		FA17B2D32237AAD700766D4C /* TRCSerializerData.h in Sources */ = {isa = PBXBuildFile; fileRef = FAE88A111B171F5700CCADC3 /* TRCSerializerData.h */; };
+		FA17B2D42237AAD700766D4C /* TRCSerializerData.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE88A121B171F5700CCADC3 /* TRCSerializerData.m */; };
+		FA17B2D52237AAD700766D4C /* TRCSerializerHttpQuery.h in Sources */ = {isa = PBXBuildFile; fileRef = FAE88A131B171F5700CCADC3 /* TRCSerializerHttpQuery.h */; };
+		FA17B2D62237AAD700766D4C /* TRCSerializerHttpQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE88A141B171F5700CCADC3 /* TRCSerializerHttpQuery.m */; };
+		FA17B2D72237AAD700766D4C /* TRCSerializerImage.h in Sources */ = {isa = PBXBuildFile; fileRef = FAE88A151B171F5700CCADC3 /* TRCSerializerImage.h */; };
+		FA17B2D82237AAD700766D4C /* TRCSerializerImage.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE88A161B171F5700CCADC3 /* TRCSerializerImage.m */; };
+		FA17B2D92237AAD700766D4C /* TRCSerializerInputStream.h in Sources */ = {isa = PBXBuildFile; fileRef = FAE88A171B171F5700CCADC3 /* TRCSerializerInputStream.h */; };
+		FA17B2DA2237AAD700766D4C /* TRCSerializerInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE88A181B171F5700CCADC3 /* TRCSerializerInputStream.m */; };
+		FA17B2DB2237AAD700766D4C /* TRCSerializerJson.h in Sources */ = {isa = PBXBuildFile; fileRef = FAE88A191B171F5700CCADC3 /* TRCSerializerJson.h */; };
+		FA17B2DC2237AAD700766D4C /* TRCSerializerJson.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE88A1A1B171F5700CCADC3 /* TRCSerializerJson.m */; };
+		FA17B2DD2237AAD700766D4C /* TRCSerializerPlist.h in Sources */ = {isa = PBXBuildFile; fileRef = FAE88A1B1B171F5700CCADC3 /* TRCSerializerPlist.h */; };
+		FA17B2DE2237AAD700766D4C /* TRCSerializerPlist.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE88A1C1B171F5700CCADC3 /* TRCSerializerPlist.m */; };
+		FA17B2DF2237AAD700766D4C /* TRCSerializerString.h in Sources */ = {isa = PBXBuildFile; fileRef = FAE88A1D1B171F5700CCADC3 /* TRCSerializerString.h */; };
+		FA17B2E02237AAD700766D4C /* TRCSerializerString.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE88A1E1B171F5700CCADC3 /* TRCSerializerString.m */; };
+		FA17B2E12237AAD700766D4C /* TRCSerializerMultipart.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1B5308D0A28755F5CE2C /* TRCSerializerMultipart.m */; };
+		FA17B2E22237AAD700766D4C /* TRCSerializerMultipart.h in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA16B6CE5A86891F838F01 /* TRCSerializerMultipart.h */; };
+		FA17B2E32237AAD700766D4C /* TRCInfrastructure.h in Sources */ = {isa = PBXBuildFile; fileRef = FAE88A2F1B171FA200CCADC3 /* TRCInfrastructure.h */; };
+		FA17B2E42237AAD700766D4C /* TRCSchemaData.h in Sources */ = {isa = PBXBuildFile; fileRef = FAE88A301B171FA200CCADC3 /* TRCSchemaData.h */; };
+		FA17B2E52237AAD700766D4C /* TRCRequest.h in Sources */ = {isa = PBXBuildFile; fileRef = FAC9165C19E695020009D824 /* TRCRequest.h */; };
+		FA17B2E62237AAD700766D4C /* TRCValueTransformer.h in Sources */ = {isa = PBXBuildFile; fileRef = FAC9165E19E695020009D824 /* TRCValueTransformer.h */; };
+		FA17B2E72237AAD700766D4C /* TRCConnection.h in Sources */ = {isa = PBXBuildFile; fileRef = FAC9165F19E695020009D824 /* TRCConnection.h */; };
+		FA17B2E82237AAD700766D4C /* TRCErrorHandler.h in Sources */ = {isa = PBXBuildFile; fileRef = FAC9166019E695020009D824 /* TRCErrorHandler.h */; };
+		FA17B2E92237AAD700766D4C /* TRCObjectMapper.h in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1B8033DA8D5FA5B63C8B /* TRCObjectMapper.h */; };
+		FA17B2EA2237AAD700766D4C /* TRCPostProcessor.h in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA142DC592EB2E5622DD73 /* TRCPostProcessor.h */; };
+		FA17B2EB2237AAD700766D4C /* TRCResponseDelegate.h in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1139A068FD435CFD2C2A /* TRCResponseDelegate.h */; };
+		FA17B2EC2237AAD700766D4C /* TRCPreProcessor.h in Sources */ = {isa = PBXBuildFile; fileRef = 318211C9A0EFA05BB328BAAB /* TRCPreProcessor.h */; };
+		FA17B2ED2237AAD700766D4C /* TRCConverter.h in Sources */ = {isa = PBXBuildFile; fileRef = FAC9164819E694FA0009D824 /* TRCConverter.h */; };
+		FA17B2EE2237AAD700766D4C /* TRCConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC9164919E694FA0009D824 /* TRCConverter.m */; };
+		FA17B2EF2237AAD700766D4C /* TRCConvertersRegistry.h in Sources */ = {isa = PBXBuildFile; fileRef = FAC9164C19E694FA0009D824 /* TRCConvertersRegistry.h */; };
+		FA17B2F02237AAD700766D4C /* TRCSchemaStackTrace.h in Sources */ = {isa = PBXBuildFile; fileRef = FA5126671A96000F00EAF902 /* TRCSchemaStackTrace.h */; };
+		FA17B2F12237AAD700766D4C /* TRCSchemaStackTrace.m in Sources */ = {isa = PBXBuildFile; fileRef = FA5126681A96000F00EAF902 /* TRCSchemaStackTrace.m */; };
+		FA17B2F22237AAD700766D4C /* TRCSchema.h in Sources */ = {isa = PBXBuildFile; fileRef = FAC9164E19E694FA0009D824 /* TRCSchema.h */; };
+		FA17B2F32237AAD700766D4C /* TRCSchema.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC9164F19E694FA0009D824 /* TRCSchema.m */; };
+		FA17B2F42237AAD700766D4C /* TRCSchemaDataValueOptions.h in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA161429FAAF8C959F4B7F /* TRCSchemaDataValueOptions.h */; };
+		FA17B2F52237AAD700766D4C /* TRCSchemaDataValueOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA123B3A97A2B227BB3C5F /* TRCSchemaDataValueOptions.m */; };
+		FA17B2F62237AAD700766D4C /* TRCBuiltInObjects.h in Sources */ = {isa = PBXBuildFile; fileRef = FAA684901ABF077300EF4CB6 /* TRCBuiltInObjects.h */; };
+		FA17B2F72237AAD700766D4C /* TRCUtils.h in Sources */ = {isa = PBXBuildFile; fileRef = FAC9165119E694FA0009D824 /* TRCUtils.h */; };
+		FA17B2F82237AAD700766D4C /* TRCUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC9165219E694FA0009D824 /* TRCUtils.m */; };
+		FA17B2F92237AAD700766D4C /* TRCSchemeFactory.h in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1D51CC52855CCCAAE28D /* TRCSchemeFactory.h */; };
+		FA17B2FA2237AAD700766D4C /* TRCSchemeFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1DFAF75A7BFE623BC34C /* TRCSchemeFactory.m */; };
+		FA17B2FB2237AAD700766D4C /* TRCProxyProgressHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA10E858F4B6D010C7F9A4 /* TRCProxyProgressHandler.m */; };
+		FA17B2FC2237AAD700766D4C /* TRCProxyProgressHandler.h in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA18D3069742C6859A2DA7 /* TRCProxyProgressHandler.h */; };
+		FA17B2FD2237AAD700766D4C /* TyphoonRestClient.h in Sources */ = {isa = PBXBuildFile; fileRef = FAC9161B19E693370009D824 /* TyphoonRestClient.h */; };
+		FA17B2FE2237AAD700766D4C /* TyphoonRestClient.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC9161D19E693370009D824 /* TyphoonRestClient.m */; };
+		FA17B2FF2237AAD700766D4C /* TyphoonRestClientErrors.h in Sources */ = {isa = PBXBuildFile; fileRef = FAE889FA1B171F2300CCADC3 /* TyphoonRestClientErrors.h */; };
+		FA17B3002237AB8F00766D4C /* TRCNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1DF66E068A7D28A35396 /* TRCNetworkReachabilityManager.m */; };
+		FA17B3012237AB8F00766D4C /* TRCHttpQueryComposer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA112EEFEB1DB5EBDE0ED9 /* TRCHttpQueryComposer.m */; };
 		FA28E08C1B42941E00453FB8 /* Issue.m in Sources */ = {isa = PBXBuildFile; fileRef = FA28E0721B42941E00453FB8 /* Issue.m */; };
 		FA28E08D1B42941E00453FB8 /* TRCObjectMapperIssue.m in Sources */ = {isa = PBXBuildFile; fileRef = FA28E0751B42941E00453FB8 /* TRCObjectMapperIssue.m */; };
 		FA28E08E1B42941E00453FB8 /* TRCObjectMapperIssue.response.json in Resources */ = {isa = PBXBuildFile; fileRef = FA28E0761B42941E00453FB8 /* TRCObjectMapperIssue.response.json */; };
@@ -167,6 +236,9 @@
 		469D3C7EB63CCF077674B274 /* libPods-TyphoonRestClientTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TyphoonRestClientTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C84882D07B06327E8D9BB26 /* libPods-TyphoonRestClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TyphoonRestClient.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A14BA2DE857D4EC58948A253 /* libPods-HttpWebService.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HttpWebService.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA17B2B62237AAA200766D4C /* libTyphoonRestClientOSX.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libTyphoonRestClientOSX.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA17B2B82237AAA200766D4C /* TyphoonRestClientOSX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TyphoonRestClientOSX.h; sourceTree = "<group>"; };
+		FA17B2BA2237AAA200766D4C /* TyphoonRestClientOSX.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TyphoonRestClientOSX.m; sourceTree = "<group>"; };
 		FA28E0711B42941E00453FB8 /* Issue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Issue.h; sourceTree = "<group>"; };
 		FA28E0721B42941E00453FB8 /* Issue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Issue.m; sourceTree = "<group>"; };
 		FA28E0741B42941E00453FB8 /* TRCObjectMapperIssue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCObjectMapperIssue.h; sourceTree = "<group>"; };
@@ -272,6 +344,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		FA17B2B42237AAA200766D4C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FAC9161019E693370009D824 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -402,6 +481,15 @@
 			path = Reachability;
 			sourceTree = "<group>";
 		};
+		FA17B2B72237AAA200766D4C /* TyphoonRestClientOSX */ = {
+			isa = PBXGroup;
+			children = (
+				FA17B2B82237AAA200766D4C /* TyphoonRestClientOSX.h */,
+				FA17B2BA2237AAA200766D4C /* TyphoonRestClientOSX.m */,
+			);
+			path = TyphoonRestClientOSX;
+			sourceTree = "<group>";
+		};
 		FA28E0731B42941E00453FB8 /* ObjectMappers */ = {
 			isa = PBXGroup;
 			children = (
@@ -474,6 +562,7 @@
 				FA3329671F18DE040035456E /* .travis.yml */,
 				FAC9161819E693370009D824 /* TyphoonRestClient */,
 				FAC9162C19E693370009D824 /* TyphoonRestClientTests */,
+				FA17B2B72237AAA200766D4C /* TyphoonRestClientOSX */,
 				FAC9161519E693370009D824 /* Frameworks */,
 				FAC9161419E693370009D824 /* Products */,
 			);
@@ -484,6 +573,7 @@
 			children = (
 				FAC9161319E693370009D824 /* libTyphoonRestClient.a */,
 				FAC9162319E693370009D824 /* TyphoonRestClientTests.xctest */,
+				FA17B2B62237AAA200766D4C /* libTyphoonRestClientOSX.dylib */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -761,7 +851,35 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		FA17B2B22237AAA200766D4C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA17B2B92237AAA200766D4C /* TyphoonRestClientOSX.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
+		FA17B2B52237AAA200766D4C /* TyphoonRestClientOSX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FA17B2BE2237AAA200766D4C /* Build configuration list for PBXNativeTarget "TyphoonRestClientOSX" */;
+			buildPhases = (
+				FA17B2B22237AAA200766D4C /* Headers */,
+				FA17B2B32237AAA200766D4C /* Sources */,
+				FA17B2B42237AAA200766D4C /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TyphoonRestClientOSX;
+			productName = TyphoonRestClientOSX;
+			productReference = FA17B2B62237AAA200766D4C /* libTyphoonRestClientOSX.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
 		FAC9161219E693370009D824 /* TyphoonRestClient */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = FAC9163619E693370009D824 /* Build configuration list for PBXNativeTarget "TyphoonRestClient" */;
@@ -805,6 +923,13 @@
 			attributes = {
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Apps Quickly";
+				TargetAttributes = {
+					FA17B2B52237AAA200766D4C = {
+						CreatedOnToolsVersion = 10.1;
+						DevelopmentTeam = 5KKT4KK2FG;
+						ProvisioningStyle = Automatic;
+					};
+				};
 			};
 			buildConfigurationList = FAC9160E19E693370009D824 /* Build configuration list for PBXProject "TyphoonRestClient" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -820,6 +945,7 @@
 			targets = (
 				FAC9161219E693370009D824 /* TyphoonRestClient */,
 				FAC9162219E693370009D824 /* TyphoonRestClientTests */,
+				FA17B2B52237AAA200766D4C /* TyphoonRestClientOSX */,
 			);
 		};
 /* End PBXProject section */
@@ -852,6 +978,81 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		FA17B2B32237AAA200766D4C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA17B2BF2237AAD700766D4C /* TRCConnectionLogger.h in Sources */,
+				FA17B2C02237AAD700766D4C /* TRCConnectionLogger.m in Sources */,
+				FA17B2C12237AAD700766D4C /* TRCConnectionProxy.h in Sources */,
+				FA17B2C22237AAD700766D4C /* TRCConnectionProxy.m in Sources */,
+				FA17B2C32237AAD700766D4C /* TRCConnectionStub.h in Sources */,
+				FA17B2C42237AAD700766D4C /* TRCConnectionStub.m in Sources */,
+				FA17B2C52237AAD700766D4C /* TRCConnectionNSURLSession.m in Sources */,
+				FA17B2C62237AAD700766D4C /* TRCConnectionNSURLSession.h in Sources */,
+				FA17B2C72237AAD700766D4C /* TRCSessionHandler.m in Sources */,
+				FA17B2C82237AAD700766D4C /* TRCSessionHandler.h in Sources */,
+				FA17B2C92237AAD700766D4C /* TRCSessionTaskContext.m in Sources */,
+				FA17B2CA2237AAD700766D4C /* TRCSessionTaskContext.h in Sources */,
+				FA17B2CB2237AAD700766D4C /* TRCValueTransformerNumber.h in Sources */,
+				FA17B2CC2237AAD700766D4C /* TRCValueTransformerNumber.m in Sources */,
+				FA17B2CD2237AAD700766D4C /* TRCValueTransformerString.h in Sources */,
+				FA17B2CE2237AAD700766D4C /* TRCValueTransformerString.m in Sources */,
+				FA17B2CF2237AAD700766D4C /* TRCValueTransformerUrl.h in Sources */,
+				FA17B2D02237AAD700766D4C /* TRCValueTransformerUrl.m in Sources */,
+				FA17B2D12237AAD700766D4C /* TRCSchemaDictionaryData.h in Sources */,
+				FA17B2D22237AAD700766D4C /* TRCSchemaDictionaryData.m in Sources */,
+				FA17B2D32237AAD700766D4C /* TRCSerializerData.h in Sources */,
+				FA17B2D42237AAD700766D4C /* TRCSerializerData.m in Sources */,
+				FA17B2D52237AAD700766D4C /* TRCSerializerHttpQuery.h in Sources */,
+				FA17B2D62237AAD700766D4C /* TRCSerializerHttpQuery.m in Sources */,
+				FA17B2D72237AAD700766D4C /* TRCSerializerImage.h in Sources */,
+				FA17B2D82237AAD700766D4C /* TRCSerializerImage.m in Sources */,
+				FA17B2D92237AAD700766D4C /* TRCSerializerInputStream.h in Sources */,
+				FA17B2DA2237AAD700766D4C /* TRCSerializerInputStream.m in Sources */,
+				FA17B2DB2237AAD700766D4C /* TRCSerializerJson.h in Sources */,
+				FA17B2DC2237AAD700766D4C /* TRCSerializerJson.m in Sources */,
+				FA17B2DD2237AAD700766D4C /* TRCSerializerPlist.h in Sources */,
+				FA17B2DE2237AAD700766D4C /* TRCSerializerPlist.m in Sources */,
+				FA17B2DF2237AAD700766D4C /* TRCSerializerString.h in Sources */,
+				FA17B2E02237AAD700766D4C /* TRCSerializerString.m in Sources */,
+				FA17B2E12237AAD700766D4C /* TRCSerializerMultipart.m in Sources */,
+				FA17B2E22237AAD700766D4C /* TRCSerializerMultipart.h in Sources */,
+				FA17B2E32237AAD700766D4C /* TRCInfrastructure.h in Sources */,
+				FA17B2E42237AAD700766D4C /* TRCSchemaData.h in Sources */,
+				FA17B2E52237AAD700766D4C /* TRCRequest.h in Sources */,
+				FA17B2E62237AAD700766D4C /* TRCValueTransformer.h in Sources */,
+				FA17B2E72237AAD700766D4C /* TRCConnection.h in Sources */,
+				FA17B2E82237AAD700766D4C /* TRCErrorHandler.h in Sources */,
+				FA17B2E92237AAD700766D4C /* TRCObjectMapper.h in Sources */,
+				FA17B2EA2237AAD700766D4C /* TRCPostProcessor.h in Sources */,
+				FA17B2EB2237AAD700766D4C /* TRCResponseDelegate.h in Sources */,
+				FA17B2EC2237AAD700766D4C /* TRCPreProcessor.h in Sources */,
+				FA17B2ED2237AAD700766D4C /* TRCConverter.h in Sources */,
+				FA17B2EE2237AAD700766D4C /* TRCConverter.m in Sources */,
+				FA17B3012237AB8F00766D4C /* TRCHttpQueryComposer.m in Sources */,
+				FA17B2EF2237AAD700766D4C /* TRCConvertersRegistry.h in Sources */,
+				FA17B2F02237AAD700766D4C /* TRCSchemaStackTrace.h in Sources */,
+				FA17B2F12237AAD700766D4C /* TRCSchemaStackTrace.m in Sources */,
+				FA17B2F22237AAD700766D4C /* TRCSchema.h in Sources */,
+				FA17B2F32237AAD700766D4C /* TRCSchema.m in Sources */,
+				FA17B2F42237AAD700766D4C /* TRCSchemaDataValueOptions.h in Sources */,
+				FA17B2F52237AAD700766D4C /* TRCSchemaDataValueOptions.m in Sources */,
+				FA17B2F62237AAD700766D4C /* TRCBuiltInObjects.h in Sources */,
+				FA17B2F72237AAD700766D4C /* TRCUtils.h in Sources */,
+				FA17B2F82237AAD700766D4C /* TRCUtils.m in Sources */,
+				FA17B2F92237AAD700766D4C /* TRCSchemeFactory.h in Sources */,
+				FA17B2FA2237AAD700766D4C /* TRCSchemeFactory.m in Sources */,
+				FA17B2FB2237AAD700766D4C /* TRCProxyProgressHandler.m in Sources */,
+				FA17B2FC2237AAD700766D4C /* TRCProxyProgressHandler.h in Sources */,
+				FA17B2FD2237AAD700766D4C /* TyphoonRestClient.h in Sources */,
+				FA17B2FE2237AAD700766D4C /* TyphoonRestClient.m in Sources */,
+				FA17B2FF2237AAD700766D4C /* TyphoonRestClientErrors.h in Sources */,
+				FA17B3002237AB8F00766D4C /* TRCNetworkReachabilityManager.m in Sources */,
+				FA17B2BB2237AAA200766D4C /* TyphoonRestClientOSX.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FAC9160F19E693370009D824 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -946,6 +1147,75 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		FA17B2BC2237AAA200766D4C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 5KKT4KK2FG;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		FA17B2BD2237AAA200766D4C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 5KKT4KK2FG;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		FAC9163419E693370009D824 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1098,6 +1368,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		FA17B2BE2237AAA200766D4C /* Build configuration list for PBXNativeTarget "TyphoonRestClientOSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA17B2BC2237AAA200766D4C /* Debug */,
+				FA17B2BD2237AAA200766D4C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		FAC9160E19E693370009D824 /* Build configuration list for PBXProject "TyphoonRestClient" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
