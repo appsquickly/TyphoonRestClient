@@ -229,7 +229,13 @@
 
         NSBundle *bundle = [self appBundle];
 
-        NSArray *allFiles = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[bundle bundlePath] error:nil];
+        NSString *bundlePath = [bundle bundlePath];
+#if TARGET_OS_OSX
+        bundlePath = [[bundlePath stringByAppendingPathComponent:@"Contents"] stringByAppendingPathComponent:@"Resources"];
+#endif
+        
+        NSArray *allFiles = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:bundlePath error:nil];
+        
 
         NSSet *supportedExtensions = [NSSet setWithArray:[_formats allKeys]];
 
