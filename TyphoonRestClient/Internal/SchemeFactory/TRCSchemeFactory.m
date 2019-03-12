@@ -139,8 +139,7 @@
     for (NSString *formatExtension in formats) {
         NSString *fileNameToTest = [fileName stringByAppendingPathExtension:formatExtension];
         if ([self isSchemaExistsWithFilename:fileNameToTest]) {
-            NSBundle *bundle = [self appBundle];
-            return [[bundle bundlePath] stringByAppendingPathComponent:fileNameToTest];
+            return [[self resourcesPath] stringByAppendingPathComponent:fileNameToTest];
         }
     }
     return nil;
@@ -227,15 +226,7 @@
     if (!_cachedFilenames || _shouldRecacheFilenames) {
         NSMutableSet *filenames = [NSMutableSet new];
 
-        NSBundle *bundle = [self appBundle];
-
-        NSString *bundlePath = [bundle bundlePath];
-#if TARGET_OS_OSX
-        bundlePath = [[bundlePath stringByAppendingPathComponent:@"Contents"] stringByAppendingPathComponent:@"Resources"];
-#endif
-        
-        NSArray *allFiles = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:bundlePath error:nil];
-        
+        NSArray *allFiles = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[self resourcesPath] error:nil];
 
         NSSet *supportedExtensions = [NSSet setWithArray:[_formats allKeys]];
 
@@ -284,6 +275,15 @@
 {
     BOOL isUnitTestRunning = (NSClassFromString(@"XCTestProbe") != nil);
     return isUnitTestRunning ? [NSBundle bundleForClass:self.class] : [NSBundle mainBundle];
+}
+
+- (NSString *)resourcesPath
+{
+    NSString *bundlePath = [[self appBundle] bundlePath];
+#if TARGET_OS_OSX
+    bundlePath = [[bundlePath stringByAppendingPathComponent:@"Contents"] stringByAppendingPathComponent:@"Resources"];
+#endif
+    return bundlePath;
 }
 
 @end
