@@ -42,7 +42,11 @@
 
 - (id)responseProcessedFromBody:(NSDictionary *)bodyObject headers:(NSDictionary *)responseHeaders status:(TRCHttpStatusCode)statusCode error:(NSError **)parseError
 {
-    return bodyObject[@"issue"];
+    if (statusCode == 204) {
+        return [NSNull null];
+    } else {
+        return bodyObject[@"issue"];
+    }
 }
 
 @end

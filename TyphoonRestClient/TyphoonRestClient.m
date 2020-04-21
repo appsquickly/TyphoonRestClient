@@ -216,7 +216,7 @@ static inline void TRCCompleteWithError(void(^completion)(id, NSError *), NSErro
                             id finalResult = result;
                             NSError *finalError = handleError;
                             
-                            if (finalResult && !finalError) {
+                            if (!finalError) {
                                 finalResult = [self postProcessResponseObject:finalResult forRequest:request postProcessError:&finalError queueType:TRCQueueTypeCallback];
                             }
                             
@@ -487,11 +487,15 @@ static inline void TRCCompleteWithError(void(^completion)(id, NSError *), NSErro
         responseObject = [self preProcessResponseObject:responseObject forRequest:request preProcessError:&preprocessParseError];
         error = preprocessParseError;
 
+        BOOL isValidEmptyResponse = (!responseObject && responseInfo.response.statusCode == 204);
+        
         if (!error) {
             NSError *validationOrConversionError = nil;
-            TRCSchema *scheme = [_schemeFactory schemeForResponseWithRequest:request];
-            TRCTransformationOptions options = [self transformationOptionsFromObject:request usingSelector:@selector(responseTransformationOptions)];
-            response = [self validateThenConvertObject:responseObject withScheme:scheme options:options error:&validationOrConversionError];
+            if (!isValidEmptyResponse) {
+                TRCSchema *scheme = [_schemeFactory schemeForResponseWithRequest:request];
+                TRCTransformationOptions options = [self transformationOptionsFromObject:request usingSelector:@selector(responseTransformationOptions)];
+                response = [self validateThenConvertObject:responseObject withScheme:scheme options:options error:&validationOrConversionError];
+            }
             if (!validationOrConversionError) {
                 response = [self parseResponse:response withRequest:request responseInfo:responseInfo error:&validationOrConversionError];
             }

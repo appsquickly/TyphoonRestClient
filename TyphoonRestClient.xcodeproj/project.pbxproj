@@ -431,8 +431,8 @@
 		2DBA18F37FDFA3A0DC26AA99 /* TRCConnectionNSURLSession */ = {
 			isa = PBXGroup;
 			children = (
-				2DBA188F2C3799DB9C6DC55A /* TRCConnectionNSURLSession.m */,
 				2DBA12A7C3A23135DB4D27D0 /* TRCConnectionNSURLSession.h */,
+				2DBA188F2C3799DB9C6DC55A /* TRCConnectionNSURLSession.m */,
 				2DBA1E03A8FA7ED062C8376B /* TRCSessionHandler.m */,
 				2DBA1EBD1A9ADDFE7A44DD50 /* TRCSessionHandler.h */,
 				2DBA12EB780D6799AD1F8462 /* TRCSessionTaskContext.m */,
@@ -936,6 +936,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = FAC9160A19E693370009D824;
@@ -1322,6 +1323,7 @@
 		FAC9163A19E693370009D824 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1339,6 +1341,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.codemonastery.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = TyphoonRestClientTests;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -1347,6 +1350,7 @@
 		FAC9163B19E693370009D824 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1360,6 +1364,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.codemonastery.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = TyphoonRestClientTests;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = xctest;
 			};
