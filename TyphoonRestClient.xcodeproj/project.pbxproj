@@ -308,6 +308,7 @@
 		FAC9167319E697A60009D824 /* TRCConnectionTestStub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCConnectionTestStub.m; sourceTree = "<group>"; };
 		FAC9167419E697A60009D824 /* TRCValueTransformerStub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRCValueTransformerStub.h; sourceTree = "<group>"; };
 		FAC9167519E697A60009D824 /* TRCValueTransformerStub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRCValueTransformerStub.m; sourceTree = "<group>"; };
+		FAD5B68827241C8800B55728 /* TyphoonRestClient.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = TyphoonRestClient.podspec; sourceTree = "<group>"; };
 		FAE3B4D21ACFEA880033835A /* PropertyListSchema.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PropertyListSchema.plist; sourceTree = "<group>"; };
 		FAE889F91B171D3F00CCADC3 /* TyphoonRestClient-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TyphoonRestClient-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		FAE889FA1B171F2300CCADC3 /* TyphoonRestClientErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TyphoonRestClientErrors.h; sourceTree = "<group>"; };
@@ -559,6 +560,7 @@
 		FAC9160A19E693370009D824 = {
 			isa = PBXGroup;
 			children = (
+				FAD5B68827241C8800B55728 /* TyphoonRestClient.podspec */,
 				FA3329671F18DE040035456E /* .travis.yml */,
 				FAC9161819E693370009D824 /* TyphoonRestClient */,
 				FAC9162C19E693370009D824 /* TyphoonRestClientTests */,
