@@ -133,7 +133,7 @@ static inline void TRCCompleteWithError(void(^completion)(id, NSError *), NSErro
 
     id httpSerializer = _requestSerializers[TRCSerializationRequestHttp];
     if (httpSerializer && [httpSerializer isKindOfClass:[TRCSerializerHttpQuery class]]) {
-        [httpSerializer setOptions:self.querySerializationOptions];
+        [(TRCSerializerHttpQuery *)httpSerializer setOptions:self.querySerializationOptions];
     }
 }
 
